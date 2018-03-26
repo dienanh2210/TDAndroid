@@ -1,4 +1,4 @@
-package com.yume.tourde;
+package vn.yume.tourde;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
