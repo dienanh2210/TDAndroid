@@ -1,16 +1,9 @@
 package vn.javis.tourde.model;
-
-/**
- * Created by admin on 3/22/2018.
- */
-
 public class User {
-
     private int id;
     private String name;
     private String email;
     private String password;
-
     public int getId() {
         return id;
     }

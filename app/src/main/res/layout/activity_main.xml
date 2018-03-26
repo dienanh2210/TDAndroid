@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yume.tourde.vn.yume.tourde.MainActivity">
-
+    tools:context=".vn.javis.tourde.MainActivity">
 
     <ImageButton
         android:id="@+id/next"

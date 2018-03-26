@@ -21,7 +21,6 @@ public class InputValidation {
         } else {
             textInputLayout.setErrorEnabled(false);
         }
-
         return true;
     }
     public boolean isInputEditTextEmail(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
