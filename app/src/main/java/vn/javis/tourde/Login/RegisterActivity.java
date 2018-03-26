@@ -18,19 +18,19 @@ import vn.javis.tourde.sql.DatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity Activity = RegisterActivity.this;
-    private NestedScrollView nestedScrollView;
-    private TextInputLayout mtextInputLayoutName;
-    private TextInputLayout mtextInputLayoutEmail;
-    private TextInputLayout mtextInputLayoutPassword;
-    private TextInputLayout mtextInputLayoutConfirmPassword;
-    private TextInputEditText mtextInputEditTextName;
-    private TextInputEditText mtextInputEditTextEmail;
-    private TextInputEditText mtextInputEditTextPassword;
-    private TextInputEditText mtextInputEditTextConfirmPassword;
-    private AppCompatButton mappCompatButtonRegister;
-    private AppCompatTextView mappCompatTextViewLoginLink;
-    private InputValidation minputValidation;
-    private DatabaseHelper mdatabaseHelper;
+    private NestedScrollView mNestedScrollView;
+    private TextInputLayout mTextInputLayoutName;
+    private TextInputLayout mTextInputLayoutEmail;
+    private TextInputLayout mTextInputLayoutPassword;
+    private TextInputLayout mTextInputLayoutConfirmPassword;
+    private TextInputEditText mTextInputEditTextName;
+    private TextInputEditText mTextInputEditTextEmail;
+    private TextInputEditText mTextInputEditTextPassword;
+    private TextInputEditText mTextInputEditTextConfirmPassword;
+    private AppCompatButton mAppCompatButtonRegister;
+    private AppCompatTextView mAppCompatTextViewLoginLink;
+    private InputValidation mInputValidation;
+    private DatabaseHelper mDatabaseHelper;
     private User user;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,25 +42,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initObjects();
     }
     private void initViews() {
-        nestedScrollView = (NestedScrollView) findViewById( R.id.nestedScrollView);
-       mtextInputLayoutName = (TextInputLayout) findViewById( R.id.textInputLayoutName);
-        mtextInputLayoutEmail = (TextInputLayout) findViewById( R.id.textInputLayoutEmail);
-        mtextInputLayoutPassword = (TextInputLayout) findViewById( R.id.textInputLayoutPassword);
-        mtextInputLayoutConfirmPassword = (TextInputLayout) findViewById( R.id.textInputLayoutConfirmPassword);
-        mtextInputEditTextName = (TextInputEditText) findViewById( R.id.textInputEditTextName);
-        mtextInputEditTextEmail = (TextInputEditText) findViewById( R.id.textInputEditTextEmail);
-        mtextInputEditTextPassword = (TextInputEditText) findViewById( R.id.textInputEditTextPassword);
-        mtextInputEditTextConfirmPassword = (TextInputEditText) findViewById( R.id.textInputEditTextConfirmPassword);
-        mappCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
-        mappCompatTextViewLoginLink = (AppCompatTextView) findViewById( R.id.appCompatTextViewLoginLink);
+        mNestedScrollView = (NestedScrollView) findViewById( R.id.nestedScrollView);
+       mTextInputLayoutName = (TextInputLayout) findViewById( R.id.textInputLayoutName);
+        mTextInputLayoutEmail = (TextInputLayout) findViewById( R.id.textInputLayoutEmail);
+        mTextInputLayoutPassword = (TextInputLayout) findViewById( R.id.textInputLayoutPassword);
+        mTextInputLayoutConfirmPassword = (TextInputLayout) findViewById( R.id.textInputLayoutConfirmPassword);
+        mTextInputEditTextName = (TextInputEditText) findViewById( R.id.textInputEditTextName);
+        mTextInputEditTextEmail = (TextInputEditText) findViewById( R.id.textInputEditTextEmail);
+        mTextInputEditTextPassword = (TextInputEditText) findViewById( R.id.textInputEditTextPassword);
+        mTextInputEditTextConfirmPassword = (TextInputEditText) findViewById( R.id.textInputEditTextConfirmPassword);
+        mAppCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
+        mAppCompatTextViewLoginLink = (AppCompatTextView) findViewById( R.id.appCompatTextViewLoginLink);
     }
     private void initListeners() {
-        mappCompatButtonRegister.setOnClickListener(this);
-        mappCompatTextViewLoginLink.setOnClickListener(this);
+        mAppCompatButtonRegister.setOnClickListener(this);
+        mAppCompatTextViewLoginLink.setOnClickListener(this);
     }
     private void initObjects() {
-        minputValidation = new InputValidation(Activity);
-        mdatabaseHelper = new DatabaseHelper(Activity);
+        mInputValidation = new InputValidation(Activity);
+        mDatabaseHelper = new DatabaseHelper(Activity);
         user = new User();
     }
     @Override
@@ -75,39 +75,39 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
     private void postDataToSQLite() {
-        if (!minputValidation.isInputEditTextFilled(mtextInputEditTextName, mtextInputLayoutName, getString( R.string.error_message_name))) {
+        if (!mInputValidation.isInputEditTextFilled(mTextInputEditTextName, mTextInputLayoutName, getString( R.string.error_message_name))) {
             return;
         }
-        if (!minputValidation.isInputEditTextFilled(mtextInputEditTextEmail, mtextInputLayoutEmail, getString( R.string.error_message_email))) {
+        if (!mInputValidation.isInputEditTextFilled(mTextInputEditTextEmail, mTextInputLayoutEmail, getString( R.string.error_message_email))) {
             return;
         }
-        if (!minputValidation.isInputEditTextEmail(mtextInputEditTextEmail, mtextInputLayoutEmail, getString( R.string.error_message_email))) {
+        if (!mInputValidation.isInputEditTextEmail(mTextInputEditTextEmail, mTextInputLayoutEmail, getString( R.string.error_message_email))) {
             return;
         }
-        if (!minputValidation.isInputEditTextFilled(mtextInputEditTextPassword, mtextInputLayoutPassword, getString( R.string.error_message_password))) {
+        if (!mInputValidation.isInputEditTextFilled(mTextInputEditTextPassword, mTextInputLayoutPassword, getString( R.string.error_message_password))) {
             return;
         }
-        if (!minputValidation.isInputEditTextMatches(mtextInputEditTextPassword, mtextInputEditTextConfirmPassword,
-                mtextInputLayoutConfirmPassword, getString( R.string.error_password_match))) {
+        if (!mInputValidation.isInputEditTextMatches(mTextInputEditTextPassword, mTextInputEditTextConfirmPassword,
+                mTextInputLayoutConfirmPassword, getString( R.string.error_password_match))) {
             return;
         }
-        if (!mdatabaseHelper.checkUser(mtextInputEditTextEmail.getText().toString().trim())) {
-            user.setName(mtextInputEditTextName.getText().toString().trim());
-            user.setEmail(mtextInputEditTextEmail.getText().toString().trim());
-            user.setPassword(mtextInputEditTextPassword.getText().toString().trim());
-            mdatabaseHelper.addUser(user);
+        if (!mDatabaseHelper.checkUser(mTextInputEditTextEmail.getText().toString().trim())) {
+            user.setName(mTextInputEditTextName.getText().toString().trim());
+            user.setEmail(mTextInputEditTextEmail.getText().toString().trim());
+            user.setPassword(mTextInputEditTextPassword.getText().toString().trim());
+            mDatabaseHelper.addUser(user);
             // Snack Bar to show success message that record saved successfully
-            Snackbar.make(nestedScrollView, getString( R.string.success_message), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mNestedScrollView, getString( R.string.success_message), Snackbar.LENGTH_LONG).show();
             emptyInputEditText();
         } else {
             // Snack Bar to show error message that record already exists
-            Snackbar.make(nestedScrollView, getString( R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mNestedScrollView, getString( R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
         }
     }
     private void emptyInputEditText() {
-        mtextInputEditTextName.setText(null);
-        mtextInputEditTextEmail.setText(null);
-        mtextInputEditTextPassword.setText(null);
-        mtextInputEditTextConfirmPassword.setText(null);
+        mTextInputEditTextName.setText(null);
+        mTextInputEditTextEmail.setText(null);
+        mTextInputEditTextPassword.setText(null);
+        mTextInputEditTextConfirmPassword.setText(null);
     }
 }

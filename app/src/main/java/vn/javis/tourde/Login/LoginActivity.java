@@ -29,15 +29,15 @@ import java.util.concurrent.Callable;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = LoginActivity.this;
-    private NestedScrollView mnestedScrollView;
-    private TextInputLayout mtextInputLayoutEmail;
-    private TextInputLayout mtextInputLayoutPassword;
-    private TextInputEditText mtextInputEditTextEmail;
-    private TextInputEditText mtextInputEditTextPassword;
-    private AppCompatButton mappCompatButtonLogin;
-    private AppCompatTextView mtextViewLinkRegister;
-    private InputValidation minputValidation;
-    private DatabaseHelper mdatabaseHelper;
+    private NestedScrollView mNestedScrollView;
+    private TextInputLayout mTextInputLayoutEmail;
+    private TextInputLayout mTextInputLayoutPassword;
+    private TextInputEditText mTextInputEditTextEmail;
+    private TextInputEditText mTextInputEditTextPassword;
+    private AppCompatButton mAppCompatButtonLogin;
+    private AppCompatTextView mTextViewLinkRegister;
+    private InputValidation mInputValidation;
+    private DatabaseHelper mDatabaseHelper;
     //Facebook
     private LoginButton mFacebookSignInButton;
     private CallbackManager mFacebookCallbackManager;
@@ -83,21 +83,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initObjects();
     }
     private void initViews() {
-        mnestedScrollView = (NestedScrollView) findViewById( vn.javis.tourde.R.id.nestedScrollView );
-        mtextInputLayoutEmail = (TextInputLayout) findViewById( vn.javis.tourde.R.id.textInputLayoutEmail );
-        mtextInputLayoutPassword = (TextInputLayout) findViewById( vn.javis.tourde.R.id.textInputLayoutPassword );
-        mtextInputEditTextEmail = (TextInputEditText) findViewById( vn.javis.tourde.R.id.textInputEditTextEmail );
-        mtextInputEditTextPassword = (TextInputEditText) findViewById( vn.javis.tourde.R.id.textInputEditTextPassword );
-        mappCompatButtonLogin = (AppCompatButton) findViewById( vn.javis.tourde.R.id.appCompatButtonLogin );
-        mtextViewLinkRegister = (AppCompatTextView) findViewById( vn.javis.tourde.R.id.textViewLinkRegister );
+        mNestedScrollView = (NestedScrollView) findViewById( vn.javis.tourde.R.id.nestedScrollView );
+        mTextInputLayoutEmail = (TextInputLayout) findViewById( vn.javis.tourde.R.id.textInputLayoutEmail );
+        mTextInputLayoutPassword = (TextInputLayout) findViewById( vn.javis.tourde.R.id.textInputLayoutPassword );
+        mTextInputEditTextEmail = (TextInputEditText) findViewById( vn.javis.tourde.R.id.textInputEditTextEmail );
+        mTextInputEditTextPassword = (TextInputEditText) findViewById( vn.javis.tourde.R.id.textInputEditTextPassword );
+        mAppCompatButtonLogin = (AppCompatButton) findViewById( vn.javis.tourde.R.id.appCompatButtonLogin );
+        mTextViewLinkRegister = (AppCompatTextView) findViewById( vn.javis.tourde.R.id.textViewLinkRegister );
     }
     private void initListeners() {
-        mappCompatButtonLogin.setOnClickListener( this );
-        mtextViewLinkRegister.setOnClickListener( this );
+        mAppCompatButtonLogin.setOnClickListener( this );
+        mTextViewLinkRegister.setOnClickListener( this );
     }
     private void initObjects() {
-        mdatabaseHelper = new DatabaseHelper( activity );
-        minputValidation = new InputValidation( activity );
+        mDatabaseHelper = new DatabaseHelper( activity );
+        mInputValidation = new InputValidation( activity );
     }
     @Override
     public void onClick(View v) {
@@ -113,17 +113,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void verifyFromSQLite() {
-        if (!minputValidation.isInputEditTextFilled( mtextInputEditTextEmail, mtextInputLayoutEmail, getString( vn.javis.tourde.R.string.error_message_email ) )) {
+        if (!mInputValidation.isInputEditTextFilled( mTextInputEditTextEmail, mTextInputLayoutEmail, getString( vn.javis.tourde.R.string.error_message_email ) )) {
             return;
         }
-        if (!minputValidation.isInputEditTextEmail( mtextInputEditTextEmail, mtextInputLayoutEmail, getString( vn.javis.tourde.R.string.error_message_email ) )) {
+        if (!mInputValidation.isInputEditTextEmail( mTextInputEditTextEmail, mTextInputLayoutEmail, getString( vn.javis.tourde.R.string.error_message_email ) )) {
             return;
         }
-        if (!minputValidation.isInputEditTextFilled( mtextInputEditTextPassword, mtextInputLayoutPassword, getString( vn.javis.tourde.R.string.error_message_email ) )) {
+        if (!mInputValidation.isInputEditTextFilled( mTextInputEditTextPassword, mTextInputLayoutPassword, getString( vn.javis.tourde.R.string.error_message_email ) )) {
             return;
         }
-        if (mdatabaseHelper.checkUser( mtextInputEditTextEmail.getText().toString().trim()
-                , mtextInputEditTextPassword.getText().toString().trim() )) {
+        if (mDatabaseHelper.checkUser( mTextInputEditTextEmail.getText().toString().trim()
+                , mTextInputEditTextPassword.getText().toString().trim() )) {
             //  Intent accountsIntent = new Intent(activity, UsersListActivity.class);
             Intent accountsIntent = new Intent( activity, MainActivity.class );
             //  accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
@@ -132,12 +132,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         } else {
             // Snack Bar to show success message that record is wrong
-            Snackbar.make( mnestedScrollView, getString( vn.javis.tourde.R.string.error_valid_email_password ), Snackbar.LENGTH_LONG ).show();
+            Snackbar.make( mNestedScrollView, getString( vn.javis.tourde.R.string.error_valid_email_password ), Snackbar.LENGTH_LONG ).show();
         }
     }
     private void emptyInputEditText() {
-        mtextInputEditTextEmail.setText( null );
-        mtextInputEditTextPassword.setText( null );
+        mTextInputEditTextEmail.setText( null );
+        mTextInputEditTextPassword.setText( null );
     }
 
 }
