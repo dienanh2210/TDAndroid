@@ -43,18 +43,14 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
             }
         }
     }
-
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-
 
     public SQLiteDatabase getMyDatabase() {
         return myDatabase;
