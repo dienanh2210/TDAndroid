@@ -1,4 +1,4 @@
-package vn.javis.tourde.ViewTutorial.model;
+package vn.javis.tourde.model;
 
 public class User {
     private int id;

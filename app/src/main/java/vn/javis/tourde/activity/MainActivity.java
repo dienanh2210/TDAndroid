@@ -1,4 +1,4 @@
-package vn.javis.tourde.ViewTutorial;
+package vn.javis.tourde.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,12 +6,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
-import android.app.Activity;
+
 import android.view.Window;
 import vn.javis.tourde.R;
 
@@ -28,11 +27,12 @@ public class MainActivity extends Activity {
        btn_Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,ViewPage.class);
+                Intent intent=new Intent(MainActivity.this,ViewPageActivity.class);
                 startActivity(intent);
             }
         });
     }
+
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();

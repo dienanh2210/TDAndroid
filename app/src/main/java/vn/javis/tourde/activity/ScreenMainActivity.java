@@ -1,4 +1,4 @@
-package vn.javis.tourde.ScreenMain;
+package vn.javis.tourde.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import vn.javis.tourde.R;
 import android.app.Activity;
 import android.view.Window;
 
-public class ScreenMain extends Activity {
+public class ScreenMainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

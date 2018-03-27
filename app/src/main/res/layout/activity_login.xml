@@ -9,7 +9,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="120dp"
-    tools:context="vn.javis.tourde.ViewTutorial.ViewPage">
+    tools:context="vn.javis.tourde.activity.ViewPageActivity">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"

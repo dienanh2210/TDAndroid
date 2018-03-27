@@ -1,4 +1,4 @@
-package vn.javis.tourde.ViewTutorial;
+package vn.javis.tourde.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +11,9 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import vn.javis.tourde.R;
-import vn.javis.tourde.ViewTutorial.helpers.InputValidation;
-import vn.javis.tourde.ViewTutorial.model.User;
-import vn.javis.tourde.ViewTutorial.sql.DatabaseHelper;
+import vn.javis.tourde.utils.InputValidation;
+import vn.javis.tourde.model.User;
+import vn.javis.tourde.database.DatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initListeners();
         initObjects();
     }
+
     private void initViews() {
         mNestedScrollView = (NestedScrollView) findViewById( R.id.nestedScrollView);
         mTextInputLayoutName = (TextInputLayout) findViewById( R.id.textInputLayoutName);
@@ -55,15 +56,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mAppCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
         mAppCompatTextViewLoginLink = (AppCompatTextView) findViewById( R.id.appCompatTextViewLoginLink);
     }
+
     private void initListeners() {
         mAppCompatButtonRegister.setOnClickListener(this);
         mAppCompatTextViewLoginLink.setOnClickListener(this);
     }
+
     private void initObjects() {
         mInputValidation = new InputValidation(Activity);
         mDatabaseHelper = new DatabaseHelper(Activity);
         user = new User();
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -75,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+
     private void postDataToSQLite() {
         if (!mInputValidation.isInputEditTextFilled(mTextInputEditTextName, mTextInputLayoutName, getString( R.string.error_message_name))) {
             return;
@@ -103,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Snackbar.make(mNestedScrollView, getString( R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
         }
     }
+
     private void emptyInputEditText() {
         mTextInputEditTextName.setText(null);
         mTextInputEditTextEmail.setText(null);
