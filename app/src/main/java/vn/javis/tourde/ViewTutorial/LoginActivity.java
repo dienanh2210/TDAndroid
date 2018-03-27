@@ -48,13 +48,13 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
         return view;
     }
     private void initViews() {
-        mNestedScrollView = (NestedScrollView) view.findViewById( vn.javis.tourde.R.id.nestedScrollView );
-        mTextInputLayoutEmail = (TextInputLayout) view. findViewById( vn.javis.tourde.R.id.textInputLayoutEmail );
-        mTextInputLayoutPassword = (TextInputLayout)  view.findViewById( vn.javis.tourde.R.id.textInputLayoutPassword );
-        mTextInputEditTextEmail = (TextInputEditText)  view.findViewById( vn.javis.tourde.R.id.textInputEditTextEmail );
-        mTextInputEditTextPassword = (TextInputEditText)  view.findViewById( vn.javis.tourde.R.id.textInputEditTextPassword );
-        mAppCompatButtonLogin = (AppCompatButton)  view.findViewById( vn.javis.tourde.R.id.appCompatButtonLogin );
-        mTextViewLinkRegister = (AppCompatTextView)  view.findViewById( vn.javis.tourde.R.id.textViewLinkRegister );
+        mNestedScrollView = (NestedScrollView) view.findViewById( R.id.nestedScrollView );
+        mTextInputLayoutEmail = (TextInputLayout) view. findViewById( R.id.textInputLayoutEmail );
+        mTextInputLayoutPassword = (TextInputLayout)  view.findViewById( R.id.textInputLayoutPassword );
+        mTextInputEditTextEmail = (TextInputEditText)  view.findViewById(R.id.textInputEditTextEmail );
+        mTextInputEditTextPassword = (TextInputEditText)  view.findViewById( R.id.textInputEditTextPassword );
+        mAppCompatButtonLogin = (AppCompatButton)  view.findViewById(R.id.appCompatButtonLogin );
+        mTextViewLinkRegister = (AppCompatTextView)  view.findViewById( R.id.textViewLinkRegister );
     }
     private void initListeners() {
         mAppCompatButtonLogin.setOnClickListener( this );

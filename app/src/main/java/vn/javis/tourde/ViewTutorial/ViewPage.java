@@ -22,7 +22,7 @@ public class ViewPage extends AppCompatActivity {
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
     Button btnSkip;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
