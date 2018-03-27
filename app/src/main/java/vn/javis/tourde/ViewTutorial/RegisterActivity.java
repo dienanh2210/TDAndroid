@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-
 import vn.javis.tourde.R;
 import vn.javis.tourde.ViewTutorial.helpers.InputValidation;
 import vn.javis.tourde.ViewTutorial.model.User;

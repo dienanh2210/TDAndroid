@@ -9,12 +9,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
-
 import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
 import android.view.Window;
-
 import vn.javis.tourde.R;
 
 public class MainActivity extends Activity {

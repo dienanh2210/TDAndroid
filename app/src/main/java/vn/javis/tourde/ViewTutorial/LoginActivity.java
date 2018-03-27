@@ -20,6 +20,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.ScreenMain.ScreenMain;
 import vn.javis.tourde.ViewTutorial.sql.DatabaseHelper;
 import vn.javis.tourde.ViewTutorial.helpers.InputValidation;
+
 public class LoginActivity extends Fragment implements View.OnClickListener {
     //private final AppCompatActivity activity = LoginActivity.this;
     private NestedScrollView mNestedScrollView;
