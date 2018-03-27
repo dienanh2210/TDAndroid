@@ -16,6 +16,7 @@ import vn.javis.tourde.ViewTutorial.model.User;
 import vn.javis.tourde.ViewTutorial.sql.DatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
     private final AppCompatActivity Activity = RegisterActivity.this;
     private NestedScrollView mNestedScrollView;
     private TextInputLayout mTextInputLayoutName;
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private InputValidation mInputValidation;
     private DatabaseHelper mDatabaseHelper;
     private User user;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

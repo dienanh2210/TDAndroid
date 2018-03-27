@@ -16,7 +16,9 @@ import android.view.Window;
 import vn.javis.tourde.R;
 
 public class MainActivity extends Activity {
+
     ImageButton btn_Next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

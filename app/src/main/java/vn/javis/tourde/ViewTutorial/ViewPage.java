@@ -16,11 +16,13 @@ import android.app.Activity;
 import android.view.Window;
 
 public class ViewPage extends AppCompatActivity {
+
     ViewPager viewPager;
     private int dotscount;
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
     Button btnSkip;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );

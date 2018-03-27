@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.view.Window;
 
 public class ScreenMain extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );

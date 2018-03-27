@@ -22,7 +22,7 @@ import vn.javis.tourde.ViewTutorial.sql.DatabaseHelper;
 import vn.javis.tourde.ViewTutorial.helpers.InputValidation;
 
 public class LoginActivity extends Fragment implements View.OnClickListener {
-    //private final AppCompatActivity activity = LoginActivity.this;
+
     private NestedScrollView mNestedScrollView;
     private TextInputLayout mTextInputLayoutEmail;
     private TextInputLayout mTextInputLayoutPassword;
@@ -33,6 +33,7 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
     private InputValidation mInputValidation;
     private DatabaseHelper mDatabaseHelper;
     private View view;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );

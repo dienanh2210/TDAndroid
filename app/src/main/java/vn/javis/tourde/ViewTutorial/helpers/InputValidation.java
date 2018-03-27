@@ -9,10 +9,12 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 public class InputValidation {
+
     private Context context;
     public InputValidation(Context context) {
         this.context = context;
     }
+
     public boolean isInputEditTextFilled(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
         String value = textInputEditText.getText().toString().trim();
         if (value.isEmpty()) {
