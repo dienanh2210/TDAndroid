@@ -1,4 +1,4 @@
-package vn.javis.tourde.Login;
+package vn.javis.tourde.ViewTutorial;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,13 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-
 import vn.javis.tourde.R;
-import vn.javis.tourde.helpers.InputValidation;
-import vn.javis.tourde.model.User;
-import vn.javis.tourde.sql.DatabaseHelper;
+import vn.javis.tourde.ViewTutorial.helpers.InputValidation;
+import vn.javis.tourde.ViewTutorial.model.User;
+import vn.javis.tourde.ViewTutorial.sql.DatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
     private final AppCompatActivity Activity = RegisterActivity.this;
     private NestedScrollView mNestedScrollView;
     private TextInputLayout mTextInputLayoutName;
@@ -32,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private InputValidation mInputValidation;
     private DatabaseHelper mDatabaseHelper;
     private User user;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
     private void initViews() {
         mNestedScrollView = (NestedScrollView) findViewById( R.id.nestedScrollView);
-       mTextInputLayoutName = (TextInputLayout) findViewById( R.id.textInputLayoutName);
+        mTextInputLayoutName = (TextInputLayout) findViewById( R.id.textInputLayoutName);
         mTextInputLayoutEmail = (TextInputLayout) findViewById( R.id.textInputLayoutEmail);
         mTextInputLayoutPassword = (TextInputLayout) findViewById( R.id.textInputLayoutPassword);
         mTextInputLayoutConfirmPassword = (TextInputLayout) findViewById( R.id.textInputLayoutConfirmPassword);
@@ -96,11 +97,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             user.setEmail(mTextInputEditTextEmail.getText().toString().trim());
             user.setPassword(mTextInputEditTextPassword.getText().toString().trim());
             mDatabaseHelper.addUser(user);
-            // Snack Bar to show success message that record saved successfully
             Snackbar.make(mNestedScrollView, getString( R.string.success_message), Snackbar.LENGTH_LONG).show();
             emptyInputEditText();
         } else {
-            // Snack Bar to show error message that record already exists
             Snackbar.make(mNestedScrollView, getString( R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
         }
     }

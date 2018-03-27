@@ -1,46 +1,54 @@
-package vn.javis.tourde;
+package vn.javis.tourde.ViewTutorial;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import vn.javis.tourde.R;
+import vn.javis.tourde.ScreenMain.ScreenMain;
+import android.app.Activity;
+import android.view.Window;
 
-import vn.javis.tourde.Login.LoginActivity;
+public class ViewPage extends AppCompatActivity {
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class ViewTutorial extends AppCompatActivity {
     ViewPager viewPager;
-    LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
-    Button btn_Skip;
+    LinearLayout sliderDotspanel;
+    Button btnSkip;
+    MainActivity.ViewPagerAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_view_tutorial);
+        super.onCreate( savedInstanceState );
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView( R.layout.activity_view_page );
         //Button skip
-        btn_Skip=findViewById( R.id.skip);
+        btnSkip=findViewById( R.id.skip);
         //button skip on click
-        btn_Skip.setOnClickListener(new View.OnClickListener() {
+        btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent intent = new Intent(View_tutorial.this,LoginActivity.class);
-                Intent intent = new Intent(ViewTutorial.this, LoginActivity.class);
-                startActivity(intent);
+
+                if(viewPager.getCurrentItem() != 3){
+                    viewPager.setCurrentItem( 3, true );
+                } else {
+                    Intent intent = new Intent(ViewPage.this,ScreenMain.class);
+                     startActivity(intent);
+                    Log.d( "aaaaa", "alooooooo" );
+            }
             }
         });
-        viewPager = (ViewPager) findViewById( vn.javis.tourde.R.id.viewPager);
+        viewPager = (ViewPager) findViewById( R.id.viewpager );
+        setupViewPager( viewPager );
         sliderDotspanel = (LinearLayout) findViewById( vn.javis.tourde.R.id.SliderDots);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-        viewPager.setAdapter(viewPagerAdapter);
-        dotscount = viewPagerAdapter.getCount();
+        dotscount = adapter.getCount();
         dots = new ImageView[dotscount];
         for(int i = 0; i < dotscount; i++){
             dots[i] = new ImageView(this);
@@ -49,7 +57,8 @@ public class ViewTutorial extends AppCompatActivity {
             params.setMargins(8, 0, 8, 0);
             sliderDotspanel.addView(dots[i], params);
         }
-        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), vn.javis.tourde.R.drawable.active_dot));
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -65,6 +74,15 @@ public class ViewTutorial extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-        Timer timer = new Timer();
+    }
+    private void setupViewPager(ViewPager viewPager) {
+
+        adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new OneFragment(), "One");
+        adapter.addFragment(new TwoFragment(), "Two");
+        adapter.addFragment(new ThreeFragment(), "Three");
+        adapter.addFragment( new LoginActivity(),"Four" );
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(4);
     }
 }
