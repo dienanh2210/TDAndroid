@@ -10,9 +10,9 @@ import android.view.inputmethod.InputMethodManager;
 
 public class InputValidation {
 
-    private Context context;
+    private Context mCcontext;
     public InputValidation(Context context) {
-        this.context = context;
+        this.mCcontext = context;
     }
 
     public boolean isInputEditTextFilled(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
@@ -50,7 +50,7 @@ public class InputValidation {
         return true;
     }
     private void hideKeyboardFrom(View view) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) mCcontext.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 }

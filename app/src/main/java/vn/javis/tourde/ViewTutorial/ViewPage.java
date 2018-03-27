@@ -22,6 +22,7 @@ public class ViewPage extends AppCompatActivity {
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
     Button btnSkip;
+    MainActivity.ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,6 @@ public class ViewPage extends AppCompatActivity {
         viewPager = (ViewPager) findViewById( R.id.viewpager );
         setupViewPager( viewPager );
         sliderDotspanel = (LinearLayout) findViewById( vn.javis.tourde.R.id.SliderDots);
-        MainActivity.ViewPagerAdapter adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "One");
-        adapter.addFragment(new TwoFragment(), "Two");
-        adapter.addFragment(new ThreeFragment(), "Three");
-        adapter.addFragment( new LoginActivity(),"Four" );
-        viewPager.setAdapter(adapter);
         dotscount = adapter.getCount();
         dots = new ImageView[dotscount];
         for(int i = 0; i < dotscount; i++){
@@ -82,7 +77,7 @@ public class ViewPage extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
 
-        MainActivity.ViewPagerAdapter adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "One");
         adapter.addFragment(new TwoFragment(), "Two");
         adapter.addFragment(new ThreeFragment(), "Three");
