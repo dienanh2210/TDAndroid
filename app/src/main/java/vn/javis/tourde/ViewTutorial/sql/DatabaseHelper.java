@@ -1,4 +1,4 @@
-package vn.javis.tourde.sql;
+package vn.javis.tourde.ViewTutorial.sql;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import vn.javis.tourde.model.User;
+import vn.javis.tourde.ViewTutorial.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
