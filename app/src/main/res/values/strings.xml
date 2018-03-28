@@ -44,4 +44,7 @@
     <string name="Twitter">Login With Twitter</string>
     <string name="Line">Login With Line</string>
     <string name="btnSkip">Skip</string>
+    <string name="TextOne">One</string>
+    <string name="TextTwo">Two</string>
+    <string name="TextThree">Three</string>
 </resources>

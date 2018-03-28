@@ -10,7 +10,7 @@
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="One"
+        android:text="@string/TextOne"
         android:textAlignment="center"
         android:textSize="35dp"
         android:textStyle="bold" />
