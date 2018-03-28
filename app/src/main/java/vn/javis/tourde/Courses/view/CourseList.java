@@ -1,4 +1,4 @@
-package vn.javis.tourde;
+package vn.javis.tourde.Courses.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,9 +12,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import vn.javis.tourde.Adapters.DatabaseAdapter;
-import vn.javis.tourde.Adapters.ListCourseViewAdapter;
-import vn.javis.tourde.Models.Course;
+import vn.javis.tourde.Courses.adapters.DatabaseAdapter;
+import vn.javis.tourde.Courses.adapters.ListCourseViewAdapter;
+import vn.javis.tourde.Courses.models.Course;
+import vn.javis.tourde.R;
 
 /**
  * Created by admin on 3/23/2018.

@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import vn.javis.tourde.MainActivity;
 import vn.javis.tourde.R;
 import vn.javis.tourde.ScreenMain.ScreenMain;
-import android.app.Activity;
+
 import android.view.Window;
 
 public class ViewPage extends AppCompatActivity {

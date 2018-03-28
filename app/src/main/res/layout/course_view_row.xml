@@ -1,149 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-  >
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_course_title"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:text="Course 1 title"
-        android:layout_alignParentLeft="true"
-        />
-
-    <ImageButton
-        android:id="@+id/btn_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:maxWidth="50dp"
-        android:background="@drawable/favorite_button" />
-
-    <TextView
-        android:id="@+id/txt_course_area"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/txt_course_length"
-        android:layout_alignBottom="@+id/txt_course_length"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="area name"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txt_course_length"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignLeft="@+id/img_icon_comment"
-        android:layout_alignStart="@+id/img_icon_comment"
-        android:layout_below="@+id/txt_course_title"
-        android:text="length of course"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/img_stars"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txt_course_area"
-        android:layout_marginRight="20dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-      />
-
-    <ImageView
-        android:id="@+id/img_icon_comment"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/txt_course_area"
-        android:layout_toRightOf="@+id/img_stars"
-        android:src="@drawable/icon_comment" />
-
-    <TextView
-        android:id="@+id/txt_num_comment"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/txt_course_area"
-        android:layout_toRightOf="@+id/img_icon_comment"
-        android:text="212"
-        android:textAlignment="center"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/img_icon_spot"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/txt_course_area"
-        android:layout_toEndOf="@+id/txt_num_comment"
-        android:layout_toRightOf="@+id/txt_num_comment"
-        android:src="@drawable/icon_num_spot" />
-
-    <TextView
-        android:id="@+id/txt_num_spot"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/txt_course_length"
-        android:layout_toEndOf="@+id/img_icon_spot"
-        android:layout_toRightOf="@+id/img_icon_spot"
-        android:text="212"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/img_course"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/img_stars"
-        android:paddingRight="10dp" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview_tags"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_below="@+id/txt_num_spot"
-        android:layout_toRightOf="@+id/img_course">
-    </android.support.v7.widget.RecyclerView>
     <RelativeLayout
-        android:id="@+id/tag_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_below="@+id/txt_num_spot"
-        android:layout_toRightOf="@+id/img_course"
-        >
+        android:id="@+id/first_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/txt_course_title"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Course 1 title"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btn_favorite"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/favorite_button" />
     </RelativeLayout>
-    <ImageView
-        android:id="@+id/ic_pen_creator"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/recycleview_tags"
-        android:layout_toRightOf="@+id/img_course"
-        android:background="@drawable/icon_pen_creator"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp" />
-    <TextView
-        android:id="@+id/txt_creater"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_below="@+id/recycleview_tags"
-        android:layout_toRightOf="@+id/ic_pen_creator"
-        android:text="user creater"
-        android:textStyle="bold"
-        />
+
+    <RelativeLayout
+        android:id="@+id/second_row"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/txt_course_area"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:minWidth="100dp"
+            android:text="area name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_course_length"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/txt_course_area"
+            android:layout_marginLeft="20dp"
+            android:text="length of course"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/third_row"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageView
+            android:id="@+id/img_stars"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false" />
+
+        <ImageView
+            android:id="@+id/img_icon_comment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/img_stars"
+            android:src="@drawable/icon_comment" />
+
+        <TextView
+            android:id="@+id/txt_num_comment"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/img_icon_comment"
+            android:text="212"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_icon_spot"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/txt_num_comment"
+            android:src="@drawable/icon_num_spot" />
+
+        <TextView
+            android:id="@+id/txt_num_spot"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/img_icon_spot"
+            android:text="212"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fourth_row"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/img_course"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_toRightOf="@+id/img_course">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/ic_pen_creator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/recycleview_tags"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_course"
+            android:background="@drawable/icon_pen_creator" />
+
+        <TextView
+            android:id="@+id/txt_creater"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/recycleview_tags"
+            android:layout_toRightOf="@+id/ic_pen_creator"
+            android:text="user creater"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/txt_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_course"
         android:layout_alignParentLeft="true"
         android:text="last comments"
         android:textStyle="bold" />
 
-</RelativeLayout>
+</LinearLayout>

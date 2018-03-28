@@ -1,4 +1,4 @@
-package vn.javis.tourde.Adapters;
+package vn.javis.tourde.Courses.adapters;
 
 /**
  * Created by admin on 3/23/2018.
@@ -17,9 +17,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
-import vn.javis.tourde.Models.Course;
+import vn.javis.tourde.Courses.models.Course;
 
 public class DatabaseAdapter extends SQLiteOpenHelper {
     private String DB_PATH = "data/data/vn.javis.tourde/";
