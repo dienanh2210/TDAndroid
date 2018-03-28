@@ -1,4 +1,4 @@
-package com.yume.tourde;
+package vn.yume.tourde;
 
 import org.junit.Test;
 
