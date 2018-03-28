@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBackground"
-            android:text="Login With FaceBook"
+            android:text="@string/Facebook"
             android:textAlignment="center" />
 
         <Button
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/White"
-            android:text="Login With Google"
+            android:text="@string/Google"
             android:textAlignment="center" />
 
         <Button
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimar"
-            android:text="Login With Twitter"
+            android:text="@string/Twitter"
             android:textAlignment="center" />
 
         <Button
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/Green"
-            android:text="Login With Line"
+            android:text="@string/Line"
             android:textAlignment="center" />
 
         <android.support.design.widget.TextInputLayout

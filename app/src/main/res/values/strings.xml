@@ -39,5 +39,9 @@
     <!--face-->
     <string name="Facebook_app_id">201940590394167</string>
     <string name="fb_login_protocol_scheme">fb333482987023021</string>
-
+    <string name="Facebook">Login With Facebook</string>
+    <string name="Google">Login With Google</string>
+    <string name="Twitter">Login With Twitter</string>
+    <string name="Line">Login With Line</string>
+    <string name="btnSkip">Skip</string>
 </resources>
