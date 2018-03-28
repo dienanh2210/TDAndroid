@@ -1,4 +1,4 @@
-package vn.javis.tourde.ViewTutorial.sql;
+package vn.javis.tourde.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import vn.javis.tourde.ViewTutorial.model.User;
+import vn.javis.tourde.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Drop User Table if exist
@@ -43,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
+
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -53,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_USER, null, values);
         db.close();
     }
+
     public List<User> getAllUser() {
         // array of columns to fetch
         String[] columns = {
@@ -91,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // return user list
         return userList;
     }
+
     public void updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -103,6 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(user.getId())});
         db.close();
     }
+
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete user record by id
@@ -110,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(user.getId())});
         db.close();
     }
+
     public boolean checkUser(String email) {
         // array of columns to fetch
         String[] columns = {
@@ -135,6 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
     public boolean checkUser(String email, String password) {
         // array of columns to fetch
         String[] columns = {

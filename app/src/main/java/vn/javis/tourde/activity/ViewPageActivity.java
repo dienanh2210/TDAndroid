@@ -1,11 +1,10 @@
-package vn.javis.tourde.ViewTutorial;
+package vn.javis.tourde.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,11 +12,18 @@ import android.widget.LinearLayout;
 
 import vn.javis.tourde.MainActivity;
 import vn.javis.tourde.R;
+<<<<<<< HEAD:app/src/main/java/vn/javis/tourde/ViewTutorial/ViewPage.java
 import vn.javis.tourde.ScreenMain.ScreenMain;
+=======
+import vn.javis.tourde.common.DebugLogger;
+import vn.javis.tourde.fragment.TwoFragment;
+import vn.javis.tourde.fragment.OneFragment;
+import vn.javis.tourde.fragment.ThreeFragment;
+>>>>>>> dcee9d9c872d035e119b5b8a57d4d78586415699:app/src/main/java/vn/javis/tourde/activity/ViewPageActivity.java
 
 import android.view.Window;
 
-public class ViewPage extends AppCompatActivity {
+public class ViewPageActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     private int dotscount;
@@ -41,9 +47,9 @@ public class ViewPage extends AppCompatActivity {
                 if(viewPager.getCurrentItem() != 3){
                     viewPager.setCurrentItem( 3, true );
                 } else {
-                    Intent intent = new Intent(ViewPage.this,ScreenMain.class);
+                    Intent intent = new Intent(ViewPageActivity.this,ScreenMainActivity.class);
                      startActivity(intent);
-                    Log.d( "aaaaa", "alooooooo" );
+                    DebugLogger.logDebug( "aaaaa", "alooooooo" );
             }
             }
         });
