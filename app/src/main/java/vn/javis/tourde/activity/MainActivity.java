@@ -32,15 +32,6 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
-        try {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-
-            Intent intent = new Intent(this, CourseListActivity.class);
-            startActivity(intent);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
