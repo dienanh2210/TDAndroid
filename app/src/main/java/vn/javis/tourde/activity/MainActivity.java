@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.view.Window;
+
 import vn.javis.tourde.R;
 
 public class MainActivity extends Activity {
@@ -24,13 +25,22 @@ public class MainActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView( R.layout.activity_main);
         btn_Next=findViewById(R.id.next );
-       btn_Next.setOnClickListener(new View.OnClickListener() {
+        btn_Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,ViewPageActivity.class);
                 startActivity(intent);
             }
         });
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            Intent intent = new Intent(this, CourseListActivity.class);
+            startActivity(intent);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {

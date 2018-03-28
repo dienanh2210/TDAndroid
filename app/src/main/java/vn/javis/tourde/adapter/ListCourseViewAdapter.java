@@ -1,4 +1,4 @@
-package vn.javis.tourde.Courses.adapters;
+package vn.javis.tourde.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import vn.javis.tourde.Courses.models.Course;
+import vn.javis.tourde.model.Course;
 import vn.javis.tourde.R;
 
 /**
@@ -37,7 +37,7 @@ public class ListCourseViewAdapter extends ArrayAdapter<Course> {
 
         LayoutInflater inflater = context.getLayoutInflater();
         convertView = inflater.inflate(layoutId, null);
-        DatabaseAdapter db = new DatabaseAdapter(context);
+        CourseDatabaseAdapter db = new CourseDatabaseAdapter(context);
 
         TextView txt_title = (TextView) convertView.findViewById(R.id.txt_course_title);
         TextView txt_area = (TextView) convertView.findViewById(R.id.txt_course_area);
@@ -61,11 +61,13 @@ public class ListCourseViewAdapter extends ArrayAdapter<Course> {
         setListTagsView(tags_view, listCourses.get(position).getTags());
 
         try {
+            System.out.println(listCourses.get(position).getImg_link());
             int id_img_course = convertView.getResources().getIdentifier(listCourses.get(position).getImg_link(), "drawable", context.getPackageName());
             int id_img_star_rate = convertView.getResources().getIdentifier("star_rate_" + listCourses.get(position).getStar(), "drawable", context.getPackageName());
 
             img_star.setImageResource(id_img_star_rate);
             img_course.setImageResource(id_img_course);
+            System.out.println(id_img_course);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

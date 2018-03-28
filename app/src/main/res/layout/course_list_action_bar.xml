@@ -33,5 +33,6 @@
         android:background="@drawable/down_arrow"
         android:maxWidth="40dp"
         android:maxHeight="40dp"
+
          />
 </LinearLayout>

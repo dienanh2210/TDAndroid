@@ -1,4 +1,4 @@
-package vn.javis.tourde.Courses.adapters;
+package vn.javis.tourde.adapter;
 
 /**
  * Created by admin on 3/23/2018.
@@ -18,15 +18,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import vn.javis.tourde.Courses.models.Course;
+import vn.javis.tourde.model.Course;
 
-public class DatabaseAdapter extends SQLiteOpenHelper {
+public class CourseDatabaseAdapter extends SQLiteOpenHelper {
     private String DB_PATH = "data/data/vn.javis.tourde/";
     private static String DB_NAME = "tour_demo_db.s3db";
     Context context;
     private SQLiteDatabase myDatabase;
 
-    public DatabaseAdapter(Context context) {
+    public CourseDatabaseAdapter(Context context) {
         super(context, DB_NAME, null, 1);
         this.context = context;
         boolean dbexist = checkDatabse();
@@ -122,13 +122,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         if (myDatabase == null || !myDatabase.isOpen())
             return null;
         Course this_course = null;
-        // openDatabase();
-        //  Cursor cursor = myDatabase.rawQuery("SELECT * FROM lop WHERE malop ="+index, null);
-
-        //   cursor.moveToFirst();
-        //   this_course = new this_course(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
-        //  cursor.close();
-        //   closeDatabase();
         return this_course;
     }
 

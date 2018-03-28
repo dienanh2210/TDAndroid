@@ -33,6 +33,7 @@
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.ScreenMainActivity"></activity>
+        <activity android:name=".activity.CourseListActivity"></activity>
     </application>
 
 </manifest>

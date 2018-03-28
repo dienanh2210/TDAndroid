@@ -1,4 +1,4 @@
-package vn.javis.tourde.Courses.adapters;
+package vn.javis.tourde.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;

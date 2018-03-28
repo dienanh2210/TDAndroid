@@ -1,4 +1,4 @@
-package vn.javis.tourde.Courses.models;
+package vn.javis.tourde.model;
 
 /**
  * Created by admin on 3/23/2018.

@@ -1,4 +1,4 @@
-package vn.javis.tourde.Courses.view;
+package vn.javis.tourde.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,17 +12,17 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import vn.javis.tourde.Courses.adapters.DatabaseAdapter;
-import vn.javis.tourde.Courses.adapters.ListCourseViewAdapter;
-import vn.javis.tourde.Courses.models.Course;
+import vn.javis.tourde.adapter.CourseDatabaseAdapter;
+import vn.javis.tourde.adapter.ListCourseViewAdapter;
+import vn.javis.tourde.model.Course;
 import vn.javis.tourde.R;
 
 /**
  * Created by admin on 3/23/2018.
  */
 
-public class CourseList extends AppCompatActivity {
-    DatabaseAdapter databaseAdapter;
+public class CourseListActivity extends AppCompatActivity {
+    CourseDatabaseAdapter databaseAdapter;
     ListCourseViewAdapter listCourseViewAdapter;
     private boolean show_search_part;
 
@@ -77,7 +77,7 @@ public class CourseList extends AppCompatActivity {
     }
 
     private void showCourses() {
-        databaseAdapter = new DatabaseAdapter(this);
+        databaseAdapter = new CourseDatabaseAdapter(this);
         ListView list_view = (ListView) findViewById(R.id.lst_courses);
         ArrayList<Course> list_courses = databaseAdapter.getAllCourses();
         listCourseViewAdapter = new ListCourseViewAdapter(this, R.layout.course_view_row, list_courses);
