@@ -31,21 +31,22 @@ public class CourseDatabaseAdapter extends SQLiteOpenHelper {
         this.context = context;
         boolean dbexist = checkDatabse();
 
-        if (!dbexist) {
+        if (dbexist) {
             openDatabase();
         } else {
             try {
-                System.out.println("Databse  copyDatabase!");
                 copyDatabase();
             } catch (IOException e) {
                 throw new RuntimeException("Error creating source database", e);
             }
         }
     }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
@@ -73,8 +74,6 @@ public class CourseDatabaseAdapter extends SQLiteOpenHelper {
 
     public void openDatabase() {
         String myPath = DB_PATH + DB_NAME;
-        System.out.println("open database: " + myPath);
-
         if (myDatabase != null && myDatabase.isOpen()) {
             return;
         }
@@ -92,7 +91,6 @@ public class CourseDatabaseAdapter extends SQLiteOpenHelper {
 
     private void copyDatabase() throws IOException {
         try {
-
             AssetManager dirPath = context.getAssets();
 
             InputStream myinput = context.getAssets().open(DB_NAME);
@@ -111,10 +109,9 @@ public class CourseDatabaseAdapter extends SQLiteOpenHelper {
             myOutput.flush();
             myOutput.close();
             myinput.close();
-            System.out.println("win create databse");
             openDatabase();
-        } catch (Exception e) {
-            System.out.println("fail to create databse");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -126,30 +123,28 @@ public class CourseDatabaseAdapter extends SQLiteOpenHelper {
     }
 
     public ArrayList<Course> getAllCourses() {
-        try
-        {
+        try {
             ArrayList<Course> list_course = new ArrayList<Course>();
             Cursor cursor = myDatabase.query("tblCourses", null, null, null, null, null, null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 Course mod = new Course(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
                         cursor.getFloat(3), cursor.getInt(4), cursor.getInt(5),
-                        cursor.getString(6), cursor.getString(7),cursor.getString(8), cursor.getString(9));
+                        cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
                 list_course.add(mod);
                 cursor.moveToNext();
             }
             cursor.close();
             closeDatabase();
             return list_course;
-        }
-        catch (Exception e)
-        {
-            System.out.println("getAllCourses"+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("getAllCourses" + e.getMessage());
         }
         return null;
     }
-    public int getCommentByIdCourse(int course_id){
-        Cursor cursor = myDatabase.rawQuery("SELECT * FROM tblComment WHERE id_course="+course_id,null);
+
+    public int getCommentByIdCourse(int course_id) {
+        Cursor cursor = myDatabase.rawQuery("SELECT * FROM tblComment WHERE id_course=" + course_id, null);
         return cursor.getCount();
     }
 }

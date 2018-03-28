@@ -24,7 +24,7 @@ import vn.javis.tourde.R;
 public class CourseListActivity extends AppCompatActivity {
     CourseDatabaseAdapter databaseAdapter;
     ListCourseViewAdapter listCourseViewAdapter;
-    private boolean show_search_part;
+    private boolean mShowSearchPart;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,36 +39,29 @@ public class CourseListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        // LinearLayout menuLayout = (LinearLayout) findViewById(R.id.course_list_actionbar);
-        //  getMenuInflater().inflate(R.menu.course_list_menu_bar,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     private void setHearder() {
         ActionBar actionBar = getSupportActionBar();
-        //  actionBar.setTitle("List Courses");
-
-        //   actionBar.setDisplayShowHomeEnabled(true);
-        //   actionBar.setLogo(R.mipmap.ic_launcher_round);
-        //  getSupportActionBar().setDisplayUseLogoEnabled(true);
         LinearLayout menuLayout = (LinearLayout) findViewById(R.id.course_list_actionbar);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setCustomView(R.layout.course_list_action_bar);
 
-        final ImageButton btn_seach = (ImageButton) findViewById(R.id.ic_right);
+        final ImageButton btnSearch = (ImageButton) findViewById(R.id.ic_right);
 
-        btn_seach.setOnClickListener(new View.OnClickListener() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //
-                show_search_part = !show_search_part;
-                if (show_search_part) {
-                    btn_seach.setBackgroundResource(R.drawable.up_arrow);
+                mShowSearchPart = !mShowSearchPart;
+                if (mShowSearchPart) {
+                    btnSearch.setBackgroundResource(R.drawable.up_arrow);
                     //show searching part
 
                 } else {
-                    btn_seach.setBackgroundResource(R.drawable.down_arrow);
+                    btnSearch.setBackgroundResource(R.drawable.down_arrow);
                     //hide searching part
                 }
             }

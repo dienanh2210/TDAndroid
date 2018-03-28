@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight=".3"
-        android:text="Course List"
+        android:text="@string/title_course_list"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"

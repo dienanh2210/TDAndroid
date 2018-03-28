@@ -16,7 +16,6 @@
             android:id="@+id/txt_course_title"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Course 1 title"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -39,7 +38,6 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:minWidth="100dp"
-            android:text="area name"
             android:textStyle="bold" />
 
         <TextView
@@ -48,7 +46,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/txt_course_area"
             android:layout_marginLeft="20dp"
-            android:text="length of course"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -78,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/img_icon_comment"
-            android:text="212"
             android:gravity="center"
             android:layout_marginLeft="5dp"
             android:textAlignment="center"
@@ -97,7 +93,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/img_icon_spot"
-            android:text="212"
             android:textStyle="bold"
             android:gravity="center"/>
     </RelativeLayout>
@@ -138,7 +133,6 @@
             android:layout_height="50dp"
             android:layout_below="@+id/recycleview_tags"
             android:layout_toRightOf="@+id/ic_pen_creator"
-            android:text="user creater"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -147,7 +141,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:text="last comments"
         android:textStyle="bold" />
 
 </LinearLayout>

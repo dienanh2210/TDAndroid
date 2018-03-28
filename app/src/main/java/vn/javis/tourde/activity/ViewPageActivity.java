@@ -51,12 +51,12 @@ public class ViewPageActivity extends AppCompatActivity {
         });
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        sliderDotspanel = (LinearLayout) findViewById(vn.javis.tourde.R.id.SliderDots);
+        sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
         dotscount = adapter.getCount();
         dots = new ImageView[dotscount];
         for (int i = 0; i < dotscount; i++) {
             dots[i] = new ImageView(this);
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), vn.javis.tourde.R.drawable.nonactive_dot));
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(8, 0, 8, 0);
             sliderDotspanel.addView(dots[i], params);
@@ -71,9 +71,9 @@ public class ViewPageActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 for (int i = 0; i < dotscount; i++) {
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), vn.javis.tourde.R.drawable.nonactive_dot));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
                 }
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), vn.javis.tourde.R.drawable.active_dot));
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
             }
 
             @Override
