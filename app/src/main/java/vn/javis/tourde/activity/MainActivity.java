@@ -14,6 +14,7 @@ import java.util.List;
 import android.view.Window;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.database.ListCourseAPI;
 
 public class MainActivity extends Activity {
 
@@ -28,10 +29,13 @@ public class MainActivity extends Activity {
         btn_Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,ViewPageActivity.class);
+               // Intent intent=new Intent(MainActivity.this,ViewPageActivity.class);
+                Intent intent=new Intent(MainActivity.this,CourseListActivity.class);
                 startActivity(intent);
             }
         });
+
+        ListCourseAPI api = new ListCourseAPI(this);
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
