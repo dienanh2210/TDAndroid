@@ -17,10 +17,10 @@
     <!--  login  -->
     <string name="text_accounts">All Accounts</string>
     <string name="hint_name">Name</string>
-    <string name="hint_email">Login ID (or mail address)</string>
-    <string name="hint_password">Password</string>
+    <string name="hint_email">xxxxxxx.co.jp</string>
+    <string name="hint_password">半角英数字◯文字以上</string>
     <string name="hint_confirm_password">Confirm Password</string>
-    <string name="text_login">Login</string>
+    <string name="text_login">ログイン</string>
     <string name="text_register">Register</string>
     <string name="error_message_name">Enter Full Name</string>
     <string name="error_message_email">Enter Valid Email</string>
@@ -39,12 +39,40 @@
     <!--face-->
     <string name="Facebook_app_id">201940590394167</string>
     <string name="fb_login_protocol_scheme">fb333482987023021</string>
-    <string name="Facebook">Login With Facebook</string>
-    <string name="Google">Login With Google</string>
-    <string name="Twitter">Login With Twitter</string>
-    <string name="Line">Login With Line</string>
     <string name="btnSkip">Skip</string>
     <string name="TextOne">One</string>
     <string name="TextTwo">Two</string>
     <string name="TextThree">Three</string>
+    <string name="TextCheckIn">Sample spot 1</string>
+
+
+    <!--menulogin-->
+    <string name="Close">閉じる</string>
+    <string name="UserInfo">ユーザー情報</string>
+    <string name="BasicInfo">基本情報</string>
+    <string name="BadgeCollection">バッジコレクション</string>
+    <string name="NewUserRegisretion">新規登録</string>
+    <string name="Login">ログイン</string>
+    <string name="Logout">ログアウト</string>
+    <string name="AppInfo">アプリ情報</string>
+    <string name="HowToUse">使い方</string>
+    <string name="PrivacyPolicy">プライバシーポリシー</string>
+    <string name="Inquiry">お問い合わせ</string>
+    <string name="RateInApp">アプリを評価する</string>
+    <string name="Version">バージョン</string>
+    <string name="versiontwo">1.0</string>
+    <string name="MenuPage">メニュー</string>
+    <!--login-->
+    <string name="LoginGmail">メールアドレスでログイン</string>
+    <string name="PassWord">パスワード</string>
+    <string name="Back">戻る</string>
+    <string name="LoginView">ログイン</string>
+    <string name="SNS">SNSアカウントでログイン</string>
+    <string name="CreateOne">パスワードをお忘れの方</string>
+    <string name="LoginFacebook">Facebookアカウント</string>
+    <string name="LoginTwitter">Twitterアカウント</string>
+    <string name="LoginGoogle">Google+アカウント</string>
+    <string name="LoginLine">LINEアカウントで登録</string>
+
+
 </resources>
