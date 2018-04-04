@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import vn.javis.tourde.activity.MainActivity;
 import vn.javis.tourde.adapter.VolleySingleton;
 import vn.javis.tourde.model.Course;
 
@@ -28,13 +29,14 @@ public class ListCourseAPI {
     private String DB_PATH = "data/data/vn.javis.tourde/";
     private static String DB_NAME = "tour_demo_db.s3db";
     Context context;
-    private String mUrl = "http://www.app-tour-de-nippon.jp/api/get/getCourseList/?prefecture%5B%5D=13";
+    private String mUrl = "http://www.app-tour-de-nippon.jp/api/get/getCourseList/?prefecture%5B%5D=0";
     private JSONObject mJsonObject;
-    private ArrayList<Course> mAllCourses = new ArrayList<Course>();
+    private List<Course> mAllCourses = new ArrayList<Course>();
 
     public static ListCourseAPI getInstance() {
         return instance;
     }
+
     public ListCourseAPI(Context context) {
 
         instance = this;
@@ -42,16 +44,6 @@ public class ListCourseAPI {
         jsonObjectRequest();
     }
 
-    public int getCourseSize() {
-        try {
-            if (mJsonObject != null) {
-                return mJsonObject.getInt("total_count");
-            }
-        } catch (JSONException e) {
-
-        }
-        return 0;
-    }
     void jsonObjectRequest() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, mUrl, null, new Response.Listener<JSONObject>() {
@@ -59,8 +51,8 @@ public class ListCourseAPI {
                     @Override
                     public void onResponse(JSONObject response) {
                         mJsonObject = response;
-                        getCourseById(mJsonObject, 29);
-                        setmAllCourses(mJsonObject);
+                        setAllCourses(mJsonObject);
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -70,43 +62,10 @@ public class ListCourseAPI {
                     }
                 });
         VolleySingleton.getInstance(context).getRequestQueue().add(jsonObjectRequest);
-
-    }
-    public void getCourseById(int id) {
-        try {
-            if (mJsonObject != null) {
-                JSONObject jsonObject = mJsonObject.getJSONObject("list").getJSONObject(String.format("" + id)).getJSONObject("data");
-                Gson gson = new GsonBuilder().create();
-                String vl = gson.toJson(jsonObject);
-                Course thisCourse = gson.fromJson(vl, Course.class);
-            }
-        } catch (JSONException e) {
-            System.out.println("error_" + e.getMessage());
-        }
-    }
-    public void getCourseById(JSONObject mJsonObject1, int id) {
-        try {
-            if (mJsonObject1 != null) {
-
-                JSONObject jsonObject = mJsonObject1.getJSONObject("list").getJSONObject(String.format("" + id)).getJSONObject("data");
-
-                Gson gson = new GsonBuilder().create();
-                String vl = jsonObject.toString();
-                JsonParser jsonParser = new JsonParser();
-                Course thisCourse = gson.fromJson(vl, Course.class);
-            } else {
-            }
-
-        } catch (JSONException e) {
-            System.out.println("error_" + e.getMessage());
-        }
-    }
-    public ArrayList<Course> getAllCourses() {
-
-        return mAllCourses;
     }
 
-    public void setmAllCourses(JSONObject jsonObject) {
+
+    void setAllCourses(JSONObject jsonObject) {
         try {
             if (mJsonObject != null) {
 
@@ -118,16 +77,41 @@ public class ListCourseAPI {
                     Gson gson = new GsonBuilder().serializeNulls().create();
                     String vl = singleJsonObject.toString();
                     JsonParser jsonParser = new JsonParser();
-                    Course thisCourse = gson.fromJson(vl, Course.class);
+                    Course thisCourse = Course.getData(vl);
                     System.out.println(thisCourse.toString());
                     if (thisCourse != null) {
                         mAllCourses.add(thisCourse);
                     }
                 }
+                MainActivity.getInstance().loadCourseList();
             }
         } catch (JSONException e) {
             System.out.println("error_" + e.getMessage());
         }
 
     }
+
+    public int getCourseSize() {
+        return mAllCourses.size();
+
+    }
+
+    public List<Course> getAllCourses() {
+
+        return mAllCourses;
+    }
+
+    public Course getCouseById(int id) {
+        Course model = null;
+        for (Course course : mAllCourses) {
+            if(course.getCourseId() == id)
+            {
+                model = course;
+                break;
+            }
+        }
+        return model;
+    }
+
+
 }

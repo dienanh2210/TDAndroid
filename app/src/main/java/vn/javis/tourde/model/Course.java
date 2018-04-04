@@ -1,5 +1,9 @@
 package vn.javis.tourde.model;
 
+import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -7,104 +11,145 @@ import java.util.Date;
  */
 
 public class Course {
-    private int course_id;
-    private int spot_id;
+    @SerializedName("course_id")
+    @Expose
+    private int courseId;
+    @SerializedName("spot_id")
+    @Expose
+    private int spotId;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("catch_phrase")
+    @Expose
     private String catchPhrase;
-    private String  introduction;
+    @SerializedName("introduction")
+    @Expose
+    private String introduction;
+    @SerializedName("area")
+    @Expose
     private String area;
+    @SerializedName("distance")
+    @Expose
     private String distance;
+    @SerializedName("top_image")
+    @Expose
     private String topImage;
-    private Date displayDate;
+    @SerializedName("display_date")
+    @Expose
+    private String displayDate;
+    @SerializedName("post_user_name")
+    @Expose
     private String postUserName;
+    @SerializedName("post_user_image")
+    @Expose
     private String postUserImage;
+    @SerializedName("season")
+    @Expose
     private String season;
+    @SerializedName("average_slope")
+    @Expose
     private String averageSlope;
-    private int elevation;
-    private int courseType;
+    @SerializedName("elevation")
+    @Expose
+    private String elevation;
+    @SerializedName("course_type")
+    @Expose
+    private String courseType;
+    @SerializedName("finish_time")
+    @Expose
     private String finishTime;
-    private int averagePace;
+    @SerializedName("average_pace")
+    @Expose
+    private String averagePace;
+    @SerializedName("start_address")
+    @Expose
     private String startAddress;
+    @SerializedName("start_google_map_url")
+    @Expose
     private String startGoogleMapUrl;
+    @SerializedName("start_latitude")
+    @Expose
     private String startLatitude;
+    @SerializedName("start_longitude")
+    @Expose
     private String startLongitude;
+    @SerializedName("route_url")
+    @Expose
     private String routeUrl;
+    @SerializedName("route_image")
+    @Expose
     private String routeImage;
-    private int status;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("insert_datetime")
+    @Expose
     private String insertDatetime;
-    private int prefecture;
+    @SerializedName("prefecture")
+    @Expose
+    private String prefecture;
+    @SerializedName("tag")
+    @Expose
     private String tag;
+    @SerializedName("spot_distance")
+    @Expose
     private String spotDistance;
-    private int orderNumber;
+    @SerializedName("order_number")
+    @Expose
+    private String orderNumber;
+    @SerializedName("zip_code")
+    @Expose
     private String zipCode;
+    @SerializedName("address")
+    @Expose
     private String address;
+    @SerializedName("site_url")
+    @Expose
     private String siteUrl;
+    @SerializedName("tel")
+    @Expose
     private String tel;
+    @SerializedName("google_map_url")
+    @Expose
     private String googleMapUrl;
-    private Double latitude;
-    private Double longitude;
-    private int reviewCount;
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+    @SerializedName("review_count")
+    @Expose
+    private String reviewCount;
+    @SerializedName("rating_average")
+    @Expose
     private String ratingAverage;
-    private int ratingTotal;
-    private int spotCount;
+    @SerializedName("rating_total")
+    @Expose
+    private String ratingTotal;
+    @SerializedName("spot_count")
+    @Expose
+    private String spotCount;
 
-    public Course(int course_id, int spot_id, String title, String catchPhrase, String introduction, String area, String distance, String topImage, Date displayDate, String postUserName, String postUserImage, String season, String averageSlope, int elevation, int courseType, String finishTime, int averagePace, String startAddress, String startGoogleMapUrl, String startLatitude, String startLongitude, String routeUrl, String routeImage, int status, String insertDatetime, int prefecture, String tag, String spotDistance, int orderNumber, String zipCode, String address, String siteUrl, String tel, String googleMapUrl, Double latitude, Double longitude, int reviewCount, String ratingAverage, int ratingTotal, int spotCount) {
-        this.course_id = course_id;
-        this.spot_id = spot_id;
-        this.title = title;
-        this.catchPhrase = catchPhrase;
-        this.introduction = introduction;
-        this.area = area;
-        this.distance = distance;
-        this.topImage = topImage;
-        this.displayDate = displayDate;
-        this.postUserName = postUserName;
-        this.postUserImage = postUserImage;
-        this.season = season;
-        this.averageSlope = averageSlope;
-        this.elevation = elevation;
-        this.courseType = courseType;
-        this.finishTime = finishTime;
-        this.averagePace = averagePace;
-        this.startAddress = startAddress;
-        this.startGoogleMapUrl = startGoogleMapUrl;
-        this.startLatitude = startLatitude;
-        this.startLongitude = startLongitude;
-        this.routeUrl = routeUrl;
-        this.routeImage = routeImage;
-        this.status = status;
-        this.insertDatetime = insertDatetime;
-        this.prefecture = prefecture;
-        this.tag = tag;
-        this.spotDistance = spotDistance;
-        this.orderNumber = orderNumber;
-        this.zipCode = zipCode;
-        this.address = address;
-        this.siteUrl = siteUrl;
-        this.tel = tel;
-        this.googleMapUrl = googleMapUrl;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.reviewCount = reviewCount;
-        this.ratingAverage = ratingAverage;
-        this.ratingTotal = ratingTotal;
-        this.spotCount = spotCount;
+    public static Course getData(String data) {
+        return new Gson().fromJson(data, Course.class);
     }
 
-    public int getCourse_id() {
-        return course_id;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
-    public int getSpot_id() {
-        return spot_id;
+    public int getSpotId() {
+        return spotId;
     }
 
-    public void setSpot_id(int spot_id) {
-        this.spot_id = spot_id;
+    public void setSpotId(int spotId) {
+        this.spotId = spotId;
     }
 
     public String getTitle() {
@@ -155,11 +200,11 @@ public class Course {
         this.topImage = topImage;
     }
 
-    public Date getDisplayDate() {
+    public String getDisplayDate() {
         return displayDate;
     }
 
-    public void setDisplayDate(Date displayDate) {
+    public void setDisplayDate(String displayDate) {
         this.displayDate = displayDate;
     }
 
@@ -195,19 +240,19 @@ public class Course {
         this.averageSlope = averageSlope;
     }
 
-    public int getElevation() {
+    public String getElevation() {
         return elevation;
     }
 
-    public void setElevation(int elevation) {
+    public void setElevation(String elevation) {
         this.elevation = elevation;
     }
 
-    public int getCourseType() {
+    public String getCourseType() {
         return courseType;
     }
 
-    public void setCourseType(int courseType) {
+    public void setCourseType(String courseType) {
         this.courseType = courseType;
     }
 
@@ -219,11 +264,11 @@ public class Course {
         this.finishTime = finishTime;
     }
 
-    public int getAveragePace() {
+    public String getAveragePace() {
         return averagePace;
     }
 
-    public void setAveragePace(int averagePace) {
+    public void setAveragePace(String averagePace) {
         this.averagePace = averagePace;
     }
 
@@ -275,11 +320,11 @@ public class Course {
         this.routeImage = routeImage;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -291,11 +336,11 @@ public class Course {
         this.insertDatetime = insertDatetime;
     }
 
-    public int getPrefecture() {
+    public String getPrefecture() {
         return prefecture;
     }
 
-    public void setPrefecture(int prefecture) {
+    public void setPrefecture(String prefecture) {
         this.prefecture = prefecture;
     }
 
@@ -315,11 +360,11 @@ public class Course {
         this.spotDistance = spotDistance;
     }
 
-    public int getOrderNumber() {
+    public String getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
 
@@ -363,27 +408,27 @@ public class Course {
         this.googleMapUrl = googleMapUrl;
     }
 
-    public Double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public int getReviewCount() {
+    public String getReviewCount() {
         return reviewCount;
     }
 
-    public void setReviewCount(int reviewCount) {
+    public void setReviewCount(String reviewCount) {
         this.reviewCount = reviewCount;
     }
 
@@ -395,65 +440,19 @@ public class Course {
         this.ratingAverage = ratingAverage;
     }
 
-    public int getRatingTotal() {
+    public String getRatingTotal() {
         return ratingTotal;
     }
 
-    public void setRatingTotal(int ratingTotal) {
+    public void setRatingTotal(String ratingTotal) {
         this.ratingTotal = ratingTotal;
     }
 
-    public int getSpotCount() {
+    public String getSpotCount() {
         return spotCount;
     }
 
-    public void setSpotCount(int spotCount) {
+    public void setSpotCount(String spotCount) {
         this.spotCount = spotCount;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "course_id=" + course_id +
-                ", spot_id=" + spot_id +
-                ", title='" + title + '\'' +
-                ", catchPhrase='" + catchPhrase + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", area='" + area + '\'' +
-                ", distance='" + distance + '\'' +
-                ", topImage='" + topImage + '\'' +
-                ", displayDate='" + displayDate + '\'' +
-                ", postUserName='" + postUserName + '\'' +
-                ", postUserImage='" + postUserImage + '\'' +
-                ", season='" + season + '\'' +
-                ", averageSlope='" + averageSlope + '\'' +
-                ", elevation=" + elevation +
-                ", courseType=" + courseType +
-                ", finishTime='" + finishTime + '\'' +
-                ", averagePace=" + averagePace +
-                ", startAddress='" + startAddress + '\'' +
-                ", startGoogleMapUrl='" + startGoogleMapUrl + '\'' +
-                ", startLatitude='" + startLatitude + '\'' +
-                ", startLongitude='" + startLongitude + '\'' +
-                ", routeUrl='" + routeUrl + '\'' +
-                ", routeImage='" + routeImage + '\'' +
-                ", status=" + status +
-                ", insertDatetime='" + insertDatetime + '\'' +
-                ", prefecture=" + prefecture +
-                ", tag='" + tag + '\'' +
-                ", spotDistance='" + spotDistance + '\'' +
-                ", orderNumber=" + orderNumber +
-                ", zipCode='" + zipCode + '\'' +
-                ", address='" + address + '\'' +
-                ", siteUrl='" + siteUrl + '\'' +
-                ", tel='" + tel + '\'' +
-                ", googleMapUrl='" + googleMapUrl + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", reviewCount=" + reviewCount +
-                ", ratingAverage='" + ratingAverage + '\'' +
-                ", ratingTotal=" + ratingTotal +
-                ", spotCount=" + spotCount +
-                '}';
     }
 }
