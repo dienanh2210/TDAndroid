@@ -21,10 +21,11 @@ import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.Course;
 
-public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder>{
+public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder> {
 
-    List<Course> listCourse= new ArrayList<Course>();
+    List<Course> listCourse = new ArrayList<Course>();
     Context context;
+    View mView;
 
     public ListCourseAdapter(List<Course> listCourse, Context context) {
         this.listCourse = listCourse;
@@ -34,7 +35,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
     @Override
     public CourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View mView = inflater.inflate(R.layout.course_view_row,parent,false);
+        mView = inflater.inflate(R.layout.course_view_row, parent, false);
         return new CourseViewHolder(mView);
     }
 
@@ -44,7 +45,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
         holder.txtTag.setText(model.getTag());
-        holder.txtDistance.setText(model.getDistance()+"km");
+        holder.txtDistance.setText(model.getDistance() + "km");
         holder.txtCatchPhrase.setText(model.getCatchPhrase());
         holder.txtReviewCount.setText(model.getReviewCount());
         holder.txtSpotCount.setText(model.getSpotCount());
@@ -52,15 +53,40 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(context));
         imageLoader.getMemoryCache();
-        imageLoader.getInstance().displayImage(model.getTopImage(),holder.imgCourse);
-        imageLoader.getInstance().displayImage(model.getPostUserImage(),holder.imgPostUser);
+        imageLoader.getInstance().displayImage(model.getTopImage(), holder.imgCourse);
+        imageLoader.getInstance().displayImage(model.getPostUserImage(), holder.imgPostUser);
+
+        int rate = Math.round(model.getRatingAverage());
+
+        if (rate == 1) {
+            holder.imgStar1.setImageResource(R.drawable.star_yellow);
+        } else if (rate == 2) {
+            holder.imgStar1.setImageResource(R.drawable.star_yellow);
+            holder.imgStar2.setImageResource(R.drawable.star_yellow);
+        } else if (rate == 3) {
+            holder.imgStar1.setImageResource(R.drawable.star_yellow);
+            holder.imgStar3.setImageResource(R.drawable.star_yellow);
+            holder.imgStar2.setImageResource(R.drawable.star_yellow);
+        } else if (rate == 4) {
+            holder.imgStar1.setImageResource(R.drawable.star_yellow);
+            holder.imgStar2.setImageResource(R.drawable.star_yellow);
+            holder.imgStar3.setImageResource(R.drawable.star_yellow);
+            holder.imgStar4.setImageResource(R.drawable.star_yellow);
+        } else if (rate == 5) {
+            holder.imgStar1.setImageResource(R.drawable.star_yellow);
+            holder.imgStar2.setImageResource(R.drawable.star_yellow);
+            holder.imgStar3.setImageResource(R.drawable.star_yellow);
+            holder.imgStar4.setImageResource(R.drawable.star_yellow);
+            holder.imgStar5.setImageResource(R.drawable.star_yellow);
+        }
     }
 
     @Override
     public int getItemCount() {
         return listCourse.size();
     }
-    public class CourseViewHolder extends RecyclerView.ViewHolder{
+
+    public class CourseViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.txt_course_title)
         TextView txtTitle;
@@ -78,8 +104,16 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         TextView txtPostUser;
         @BindView(R.id.img_course)
         ImageView imgCourse;
-        @BindView(R.id.img_stars)
-        ImageView imgStar;
+        @BindView(R.id.star_1)
+        ImageView imgStar1;
+        @BindView(R.id.star_2)
+        ImageView imgStar2;
+        @BindView(R.id.star_3)
+        ImageView imgStar3;
+        @BindView(R.id.star_4)
+        ImageView imgStar4;
+        @BindView(R.id.star_5)
+        ImageView imgStar5;
         @BindView(R.id.txt_tags)
         TextView txtTag;
         @BindView(R.id.img_post_user)
@@ -87,7 +121,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
 
         public CourseViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

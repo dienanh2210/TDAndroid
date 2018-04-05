@@ -124,7 +124,7 @@ public class Course {
     private String reviewCount;
     @SerializedName("rating_average")
     @Expose
-    private String ratingAverage;
+    private float ratingAverage;
     @SerializedName("rating_total")
     @Expose
     private String ratingTotal;
@@ -432,11 +432,11 @@ public class Course {
         this.reviewCount = reviewCount;
     }
 
-    public String getRatingAverage() {
+    public float getRatingAverage() {
         return ratingAverage;
     }
 
-    public void setRatingAverage(String ratingAverage) {
+    public void setRatingAverage(float ratingAverage) {
         this.ratingAverage = ratingAverage;
     }
 

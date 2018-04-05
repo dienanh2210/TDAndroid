@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true">
 
         <ImageButton
-            android:id="@+id/ic_left"
+            android:id="@+id/btn_menu"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"

@@ -32,18 +32,15 @@ public class ListCourseAPI {
     private String mUrl = "http://www.app-tour-de-nippon.jp/api/get/getCourseList/?prefecture%5B%5D=0";
     private JSONObject mJsonObject;
     private List<Course> mAllCourses = new ArrayList<Course>();
-
     public static ListCourseAPI getInstance() {
         return instance;
     }
-
     public ListCourseAPI(Context context) {
 
         instance = this;
         this.context = context;
         jsonObjectRequest();
     }
-
     void jsonObjectRequest() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, mUrl, null, new Response.Listener<JSONObject>() {
@@ -63,8 +60,6 @@ public class ListCourseAPI {
                 });
         VolleySingleton.getInstance(context).getRequestQueue().add(jsonObjectRequest);
     }
-
-
     void setAllCourses(JSONObject jsonObject) {
         try {
             if (mJsonObject != null) {
@@ -83,35 +78,39 @@ public class ListCourseAPI {
                         mAllCourses.add(thisCourse);
                     }
                 }
-                MainActivity.getInstance().loadCourseList();
             }
         } catch (JSONException e) {
             System.out.println("error_" + e.getMessage());
         }
 
     }
-
     public int getCourseSize() {
         return mAllCourses.size();
 
     }
-
     public List<Course> getAllCourses() {
 
         return mAllCourses;
     }
-
     public Course getCouseById(int id) {
         Course model = null;
         for (Course course : mAllCourses) {
-            if(course.getCourseId() == id)
-            {
+            if (course.getCourseId() == id) {
                 model = course;
                 break;
             }
         }
         return model;
     }
+    public List<Course> getCourseByPage(int page) {
 
+        int firstValue = (page - 1) * 3;
+        int secondValue = page * 3;
+        int maxIndex = mAllCourses.size();
+        if (firstValue > maxIndex)
+            return null;
+        secondValue = secondValue > maxIndex ? maxIndex : secondValue;
+        return mAllCourses.subList(firstValue, secondValue);
+    }
 
 }

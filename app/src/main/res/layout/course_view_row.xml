@@ -151,16 +151,45 @@
                 android:text="8"
                 android:paddingLeft="2dp"
                 android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/lst_star_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="5dp"
+                >
+                <ImageView
+                    android:id="@+id/star_1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/star_gray"
+                 />
+                <ImageView
+                    android:id="@+id/star_2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/star_gray"
+                    />
+                <ImageView
+                    android:id="@+id/star_3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/star_gray"
+                    />
+                <ImageView
+                    android:id="@+id/star_4"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/star_gray"
+                    />
+                <ImageView
+                    android:id="@+id/star_5"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/star_gray"
+                    />
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/img_stars"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:adjustViewBounds="false"
-                android:background="@drawable/star_rate_4"
-                android:cropToPadding="false"
-                android:maxHeight="10dp" />
         </LinearLayout>
 
     </RelativeLayout>
