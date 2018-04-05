@@ -46,6 +46,8 @@ public class CourseListFragment extends BaseFragment {
     ImageButton btnNextPage;
     @BindView(R.id.btn_previous_page)
     ImageButton btnPreviousPage;
+    @BindView(R.id.btn_search)
+    ImageButton btnSearch;
     private int mCurrentPage;
 
     @Override
@@ -57,6 +59,7 @@ public class CourseListFragment extends BaseFragment {
         lstCourseRecycleView.setItemAnimator(new DefaultItemAnimator());
         lstCourseRecycleView.addItemDecoration(new DividerItemDecoration(activity, LinearLayoutManager.VERTICAL));
         lstCourseRecycleView.setLayoutManager(layoutManager);
+        lstCourseRecycleView.addItemDecoration(new DividerItemDecoration(activity,0));
         setFooter();
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +67,12 @@ public class CourseListFragment extends BaseFragment {
             public void onClick(View view) {
                 Intent menuPage = new Intent(activity, MenuPage.class);
                 activity.startActivity(menuPage);
+            }
+        });
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              CourseListActivity.getInstance().showSearchPage();
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {

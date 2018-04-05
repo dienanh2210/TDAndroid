@@ -7,6 +7,9 @@
     android:orientation="vertical"
     android:paddingRight="5dp"
     android:paddingLeft="5dp"
+    android:background="@color/White"
+    android:layout_marginBottom="15dp"
+    android:layout_marginTop="10dp"
     >
 
     <TextView
@@ -23,8 +26,6 @@
         android:textSize="14dp"
         android:layout_marginTop="5dp"
         />
-
-
     <RelativeLayout
         android:id="@+id/third_row"
         android:layout_width="match_parent"
@@ -32,7 +33,6 @@
         android:minHeight="30dp"
         android:layout_marginTop="5dp"
         >
-
         <ImageView
             android:id="@+id/img_ic_area"
             android:layout_width="69dp"
@@ -197,7 +197,9 @@
     <TextView
         android:id="@+id/txt_tags"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/SkyBlue"
+        />
 
     <RelativeLayout
         android:id="@+id/layout_creator"
@@ -206,8 +208,6 @@
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp"
         >
-
-
         <TextView
             android:id="@+id/txt_post_user"
             android:layout_width="wrap_content"
@@ -215,13 +215,14 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:layout_centerVertical="true"
-            android:textStyle="bold" />
+            android:paddingTop="5dp"
+            android:textStyle="bold"
+            />
 
         <ImageView
             android:id="@+id/img_post_user"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"

@@ -44,7 +44,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         Course model = listCourse.get(position);
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
-        holder.txtTag.setText(model.getTag());
+        holder.txtTag.setText("# "+model.getTag());
         holder.txtDistance.setText(model.getDistance() + "km");
         holder.txtCatchPhrase.setText(model.getCatchPhrase());
         holder.txtReviewCount.setText(model.getReviewCount());
