@@ -46,7 +46,7 @@ public class CourseListFragment extends BaseFragment {
     ImageButton btnNextPage;
     @BindView(R.id.btn_previous_page)
     ImageButton btnPreviousPage;
-    int mCurrentPage;
+    private int mCurrentPage;
 
     @Override
     public void onStart() {
@@ -69,18 +69,19 @@ public class CourseListFragment extends BaseFragment {
         btnNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               changePage(1);
+                changePage(1);
             }
         });
         btnPreviousPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             changePage(-1);
+                changePage(-1);
             }
         });
         mCurrentPage = 1;
         changePage(0);
     }
+
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.fragment_course_list_view, container, false);
@@ -98,25 +99,29 @@ public class CourseListFragment extends BaseFragment {
                     //  layoutFooter.setVisibility(View.INVISIBLE);
                 }
             }
+
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
     }
+
     void changePage(int nextPage) {
         int totalCourse = ListCourseAPI.getInstance().getCourseSize();
         int totalPage = totalCourse / 3 + 1;
         int currentValue = mCurrentPage;
+
         mCurrentPage += nextPage;
-        if(mCurrentPage>totalPage) mCurrentPage =totalPage;
-        if(mCurrentPage<1) mCurrentPage=1;
-        if(mCurrentPage != currentValue || nextPage==0){
+        if (mCurrentPage > totalPage) mCurrentPage = totalPage;
+        if (mCurrentPage < 1) mCurrentPage = 1;
+        if (mCurrentPage != currentValue || nextPage == 0) {
             txtPageNumber.setText(mCurrentPage + "/" + totalPage);
             setRecycle();
         }
     }
-    void setRecycle(){
+
+    void setRecycle() {
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
         listCourseAdapter = new ListCourseAdapter(list_courses, activity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);

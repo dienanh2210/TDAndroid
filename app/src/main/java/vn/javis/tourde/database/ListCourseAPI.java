@@ -35,12 +35,13 @@ public class ListCourseAPI {
     public static ListCourseAPI getInstance() {
         return instance;
     }
-    public ListCourseAPI(Context context) {
 
+    public ListCourseAPI(Context context) {
         instance = this;
         this.context = context;
         jsonObjectRequest();
     }
+
     void jsonObjectRequest() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, mUrl, null, new Response.Listener<JSONObject>() {
@@ -60,10 +61,10 @@ public class ListCourseAPI {
                 });
         VolleySingleton.getInstance(context).getRequestQueue().add(jsonObjectRequest);
     }
+
     void setAllCourses(JSONObject jsonObject) {
         try {
             if (mJsonObject != null) {
-
                 JSONObject allJsonObject = mJsonObject.getJSONObject("list");
                 Iterator<String> key = allJsonObject.keys();
                 while (key.hasNext()) {
@@ -82,18 +83,19 @@ public class ListCourseAPI {
         } catch (JSONException e) {
             System.out.println("error_" + e.getMessage());
         }
-
     }
+
     public int getCourseSize() {
         return mAllCourses.size();
-
     }
-    public List<Course> getAllCourses() {
 
+    public List<Course> getAllCourses() {
         return mAllCourses;
     }
+
     public Course getCouseById(int id) {
         Course model = null;
+
         for (Course course : mAllCourses) {
             if (course.getCourseId() == id) {
                 model = course;
@@ -102,11 +104,14 @@ public class ListCourseAPI {
         }
         return model;
     }
-    public List<Course> getCourseByPage(int page) {
 
+    public List<Course> getCourseByPage(int page) {
         int firstValue = (page - 1) * 3;
+
         int secondValue = page * 3;
+
         int maxIndex = mAllCourses.size();
+
         if (firstValue > maxIndex)
             return null;
         secondValue = secondValue > maxIndex ? maxIndex : secondValue;

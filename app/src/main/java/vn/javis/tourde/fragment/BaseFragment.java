@@ -16,7 +16,7 @@ import vn.javis.tourde.activity.MainActivity;
 public abstract class BaseFragment extends Fragment {
     private View mView;
     private Unbinder mUnbind;
-    Activity activity;
+    private Activity mActivity;
 
     @Nullable
     @Override
