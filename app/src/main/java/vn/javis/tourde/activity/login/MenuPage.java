@@ -13,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MainActivity;
 
 public class MenuPage extends Activity {
