@@ -21,19 +21,21 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
         mView = getView(inflater,container);
         mUnbind = ButterKnife.bind(this,mView);
         return mView;
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         mUnbind.unbind();
     }

@@ -10,9 +10,12 @@
     <dimen name="dimen60">60.00dp</dimen>
     <dimen name="dimen20">20.00dp</dimen>
     <dimen name="dimen25">25.00dp</dimen>
+    <dimen name="dimen30">30.00dp</dimen>
     <dimen name="dimen40">40.00dp</dimen>
     <dimen name="dimen45">45.00dp</dimen>
+    <dimen name="dimen75">75.00dp</dimen>
     <dimen name="dimen100">100.00dp</dimen>
+    <dimen name="dimen120">100.00dp</dimen>
     <dimen name="dimen200">200.00dp</dimen>
     <dimen name="dimen280">280.00dp</dimen>
     <dimen name="dimen13">13.00dp</dimen>
@@ -25,4 +28,17 @@
     <dimen name="dimen450">450.00dp</dimen>
     <dimen name="dimen150">150.00dp</dimen>
     <dimen name="dimen350">350.00dp</dimen>
+    <dimen name="dimenminus40">-40.00dp</dimen>
+    <dimen name="title_size">18sp</dimen>
+    <dimen name="button_title">17sp</dimen>
+    <dimen name="course_list_margin_row">5dp</dimen>
+    <dimen name="icon_area_width">70dp</dimen>
+    <dimen name="icon_area_height">30dp</dimen>
+    <dimen name="max_width_area_text">140dp</dimen>
+    <dimen name="image_course_bottom_margin">50dp</dimen>
+    <dimen name="background_button_favorite_size">100dp</dimen>
+    <dimen name="btn_favorite_margin_right">20dp</dimen>
+    <dimen name="btn_favorite_margin_bottom">-50dp</dimen>
+
+
 </resources>
