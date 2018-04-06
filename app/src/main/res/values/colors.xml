@@ -7,9 +7,13 @@
     <color name="colorText">#150101</color>
     <color name="colorTextHint">#e68037</color>
     <color name="colorPrimar">#62c6ea</color>
-    <color name="White">#bec7c9</color>
+    <color name="White">#ffffff</color>
     <color name="Green">#13f408</color>
     <color name="Red">#ff0000</color>
+    <color name="SkyBlue">#0795e0</color>
+    <color name="Gray">#808080</color>
+    <color name="lightGray">#D3D3D3</color>
+    <color name="Black">#000000</color>
 
     <!-- search course -->
     <color name="search_course_color_search_button_background">#FD6D6D</color>

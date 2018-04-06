@@ -1,6 +1,9 @@
 package vn.javis.tourde.activity;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -17,6 +20,8 @@ import java.util.ArrayList;
 
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.database.ListCourseAPI;
+import vn.javis.tourde.fragment.CourseListFragment;
+import vn.javis.tourde.fragment.CourseSearchFragment;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.R;
 
@@ -26,8 +31,10 @@ import vn.javis.tourde.R;
 
 public class CourseListActivity extends AppCompatActivity {
 
-    ListCourseAdapter listCourseAdapter;
-    private boolean mShowSearchPart;
+
+    private static CourseListActivity instance;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,33 +42,50 @@ public class CourseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
+        instance =this;
+        fragmentManager = getFragmentManager();
+        fragmentTransaction =fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.container_fragment,new CourseListFragment());
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        instance=null;
+        super.onDestroy();
+    }
+
+    public static CourseListActivity getInstance(){
+        return instance;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         return super.onCreateOptionsMenu(menu);
     }
 
     private void setHearder() {
+
         ActionBar actionBar = getSupportActionBar();
-        RelativeLayout menuLayout = (RelativeLayout) findViewById(R.id.course_list_actionbar);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.hide();
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setCustomView(R.layout.course_list_action_bar);
-        final ImageButton btnSearch = (ImageButton) findViewById(R.id.ic_right);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
-                mShowSearchPart = !mShowSearchPart;
-                if (mShowSearchPart) {
-                    //show searching part
-                } else {
-                    //hide searching part
-                }
-            }
-        });
     }
+
+    public void showSearchPage(){
+
+        fragmentTransaction =fragmentManager.beginTransaction();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
+        fragmentTransaction.remove(currentFragment);
+        fragmentTransaction.add(R.id.container_fragment,new CourseSearchFragment());
+        fragmentTransaction.commit();
+    }
+
+    public void showCourseListPage(){
+
+        fragmentTransaction =fragmentManager.beginTransaction();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
+        fragmentTransaction.remove(currentFragment);
+        fragmentTransaction.add(R.id.container_fragment,new CourseListFragment());
+        fragmentTransaction.commit();
+    }
+
 }

@@ -28,12 +28,14 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
     View mView;
 
     public ListCourseAdapter(List<Course> listCourse, Context context) {
+
         this.listCourse = listCourse;
         this.context = context;
     }
 
     @Override
     public CourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         mView = inflater.inflate(R.layout.course_view_row, parent, false);
         return new CourseViewHolder(mView);
@@ -44,7 +46,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         Course model = listCourse.get(position);
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
-        holder.txtTag.setText(model.getTag());
+        holder.txtTag.setText("# "+model.getTag());
         holder.txtDistance.setText(model.getDistance() + "km");
         holder.txtCatchPhrase.setText(model.getCatchPhrase());
         holder.txtReviewCount.setText(model.getReviewCount());

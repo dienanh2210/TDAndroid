@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
@@ -42,10 +43,13 @@ public class MainActivity extends Activity {
         startActivity(intent);
 
     }
-    public void loadCourseList(){
-        Intent intent=new Intent(MainActivity.this,CourseListActivity.class);
+
+    public void loadCourseList() {
+
+        Intent intent = new Intent(MainActivity.this, CourseListActivity.class);
         startActivity(intent);
     }
+
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();
