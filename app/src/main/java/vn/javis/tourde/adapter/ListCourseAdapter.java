@@ -28,12 +28,14 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
     View mView;
 
     public ListCourseAdapter(List<Course> listCourse, Context context) {
+
         this.listCourse = listCourse;
         this.context = context;
     }
 
     @Override
     public CourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         mView = inflater.inflate(R.layout.course_view_row, parent, false);
         return new CourseViewHolder(mView);

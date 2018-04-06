@@ -57,7 +57,6 @@ public class CourseListFragment extends BaseFragment {
         activity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         lstCourseRecycleView.setItemAnimator(new DefaultItemAnimator());
-        lstCourseRecycleView.addItemDecoration(new DividerItemDecoration(activity, LinearLayoutManager.VERTICAL));
         lstCourseRecycleView.setLayoutManager(layoutManager);
         lstCourseRecycleView.addItemDecoration(new DividerItemDecoration(activity,0));
         setFooter();
@@ -117,10 +116,10 @@ public class CourseListFragment extends BaseFragment {
     }
 
     void changePage(int nextPage) {
+
         int totalCourse = ListCourseAPI.getInstance().getCourseSize();
         int totalPage = totalCourse / 3 + 1;
         int currentValue = mCurrentPage;
-
         mCurrentPage += nextPage;
         if (mCurrentPage > totalPage) mCurrentPage = totalPage;
         if (mCurrentPage < 1) mCurrentPage = 1;
@@ -131,10 +130,10 @@ public class CourseListFragment extends BaseFragment {
     }
 
     void setRecycle() {
+
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
         listCourseAdapter = new ListCourseAdapter(list_courses, activity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
-
     }
 }
 

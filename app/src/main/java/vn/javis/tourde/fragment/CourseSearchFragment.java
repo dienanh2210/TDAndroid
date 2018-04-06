@@ -16,9 +16,11 @@ public class CourseSearchFragment extends BaseFragment{
     @BindView(R.id.btn_close_seach_page)
     TextView btnClose;
     Activity activity;
+
     @Override
     public void onStart() {
         super.onStart();
+
         activity = (CourseListActivity) getActivity();
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +29,7 @@ public class CourseSearchFragment extends BaseFragment{
             }
         });
     }
+
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.search_page, container, false);

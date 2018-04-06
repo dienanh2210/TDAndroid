@@ -37,6 +37,7 @@ public class CourseListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
@@ -46,11 +47,13 @@ public class CourseListActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.container_fragment,new CourseListFragment());
         fragmentTransaction.commit();
     }
+
     @Override
     protected void onDestroy() {
         instance=null;
         super.onDestroy();
     }
+
     public static CourseListActivity getInstance(){
         return instance;
     }
@@ -61,17 +64,22 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     private void setHearder() {
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
     }
+
     public void showSearchPage(){
+
         fragmentTransaction =fragmentManager.beginTransaction();
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
         fragmentTransaction.remove(currentFragment);
         fragmentTransaction.add(R.id.container_fragment,new CourseSearchFragment());
         fragmentTransaction.commit();
     }
+
     public void showCourseListPage(){
+
         fragmentTransaction =fragmentManager.beginTransaction();
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
         fragmentTransaction.remove(currentFragment);

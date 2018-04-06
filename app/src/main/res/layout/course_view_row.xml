@@ -4,141 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dimen15"
+    android:layout_marginTop="@dimen/dimen10"
+    android:background="@drawable/course_border"
     android:orientation="vertical"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp"
-    android:background="@color/White"
-    android:layout_marginBottom="15dp"
-    android:layout_marginTop="10dp"
+    android:paddingLeft="@dimen/dimen5"
+    android:paddingRight="@dimen/dimen5"
+
     >
 
     <TextView
         android:id="@+id/txt_course_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-    <TextView
+        android:textSize="@dimen/title_size"
+        android:textStyle="bold"
+        android:textColor="@color/Black"
+        />
 
+    <TextView
         android:id="@+id/txt_catch_phrase"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textSize="14dp"
-        android:layout_marginTop="5dp"
-        />
+        android:layout_marginTop="@dimen/course_list_margin_row" />
+
     <RelativeLayout
         android:id="@+id/third_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="30dp"
-        android:layout_marginTop="5dp"
-        >
+        android:layout_marginTop="@dimen/course_list_margin_row"
+        android:minHeight="@dimen/dimen30">
+
         <ImageView
             android:id="@+id/img_ic_area"
-            android:layout_width="69dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/icon_area_width"
+            android:layout_height="@dimen/icon_area_height"
             android:layout_alignParentLeft="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/course_list_margin_row"
             android:background="@drawable/ic_area" />
+
         <TextView
             android:id="@+id/txt_course_area"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:maxWidth="150dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/course_list_margin_row"
             android:layout_toRightOf="@+id/img_ic_area"
-            android:minWidth="100dp"
+            android:maxWidth="@dimen/max_width_area_text"
             android:textColor="@color/Red"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
 
         <ImageView
 
             android:id="@+id/img_ic_distance"
-            android:layout_width="67dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
+            android:layout_width="@dimen/icon_area_width"
+            android:layout_height="@dimen/icon_area_height"
+            android:layout_marginLeft="@dimen/course_list_margin_row"
+            android:layout_marginRight="@dimen/course_list_margin_row"
             android:layout_toRightOf="@+id/txt_course_area"
             android:background="@drawable/ic_distance" />
+
         <TextView
             android:id="@+id/txt_distance"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/img_ic_distance"
             android:textColor="@color/Red"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/fourth_row"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/img_course"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="@dimen/dimen10"
+            android:layout_marginRight="@dimen/dimen10"
+            android:layout_marginStart="@dimen/dimen10"
+            android:layout_marginTop="@dimen/dimen10"
+            android:layout_marginBottom="@dimen/image_course_bottom_margin"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />
-       <RelativeLayout
-           android:layout_alignParentRight="true"
-           android:layout_marginRight="20dp"
-           android:layout_width="100dp"
-           android:layout_height="100dp"
-           android:background="@drawable/circle"
-           android:layout_alignBottom="@+id/img_course"
-           android:layout_marginBottom="-50dp"
-           >
-           <ImageButton
-               android:id="@+id/btn_favorite"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:adjustViewBounds="true"
-               android:background="@drawable/icon_bicycle"
-               android:layout_margin="25dp"
-               android:scaleType="fitCenter"
-              android:layout_centerInParent="true"
-               />
-       </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/background_button_favorite_size"
+            android:layout_height="@dimen/background_button_favorite_size"
+            android:layout_alignBottom="@+id/img_course"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/btn_favorite_margin_bottom"
+            android:layout_marginRight="@dimen/btn_favorite_margin_right"
+            android:background="@drawable/circle">
+
+            <ImageButton
+                android:id="@+id/btn_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/dimen25"
+                android:adjustViewBounds="true"
+                android:background="@drawable/icon_bicycle"
+                android:scaleType="fitCenter" />
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/fifth_row"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
             android:layout_alignBottom="@+id/img_course"
-            android:orientation="horizontal"
-            android:layout_marginBottom="-40dp"
-            >
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="@dimen/dimenminus40"
+            android:layout_marginLeft="@dimen/dimen10"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/img_icon_comment"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/dimen20"
+                android:layout_height="@dimen/dimen20"
                 android:src="@drawable/icon_comment1"
 
                 />
+
             <TextView
                 android:id="@+id/txt_review_count"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="15"
-                android:paddingLeft="2dp"
+                android:paddingLeft="@dimen/dimen5"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/img_icon_spot"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_width="@dimen/dimen20"
+                android:layout_height="@dimen/dimen20"
+                android:layout_marginLeft="@dimen/dimen20"
                 android:layout_toRightOf="@+id/txt_review_count"
                 android:src="@drawable/ic_spot" />
 
@@ -148,46 +153,45 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/img_icon_spot"
                 android:gravity="center"
-                android:text="8"
-                android:paddingLeft="2dp"
+                android:paddingLeft="@dimen/dimen5"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:id="@+id/lst_star_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                >
+                android:layout_marginLeft="@dimen/dimen5"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:id="@+id/star_1"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/star_gray"
-                 />
+                    android:layout_width="@dimen/dimen25"
+                    android:layout_height="@dimen/dimen25"
+                    android:background="@drawable/star_gray" />
+
                 <ImageView
                     android:id="@+id/star_2"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/star_gray"
-                    />
+                    android:layout_width="@dimen/dimen25"
+                    android:layout_height="@dimen/dimen25"
+                    android:background="@drawable/star_gray" />
+
                 <ImageView
                     android:id="@+id/star_3"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/star_gray"
-                    />
+                    android:layout_width="@dimen/dimen25"
+                    android:layout_height="@dimen/dimen25"
+                    android:background="@drawable/star_gray" />
+
                 <ImageView
                     android:id="@+id/star_4"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/star_gray"
-                    />
+                    android:layout_width="@dimen/dimen25"
+                    android:layout_height="@dimen/dimen25"
+                    android:background="@drawable/star_gray" />
+
                 <ImageView
                     android:id="@+id/star_5"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/star_gray"
-                    />
+                    android:layout_width="@dimen/dimen25"
+                    android:layout_height="@dimen/dimen25"
+                    android:background="@drawable/star_gray" />
             </LinearLayout>
 
         </LinearLayout>
@@ -198,34 +202,32 @@
         android:id="@+id/txt_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/SkyBlue"
-        />
+        android:textColor="@color/SkyBlue" />
 
     <RelativeLayout
         android:id="@+id/layout_creator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
-        >
+        android:layout_marginBottom="@dimen/dimen15"
+        android:layout_marginTop="@dimen/dimen15">
+
         <TextView
             android:id="@+id/txt_post_user"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/dimen50"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:paddingTop="5dp"
-            android:textStyle="bold"
-            />
+            android:layout_marginRight="@dimen/dimen5"
+            android:layout_marginTop="@dimen/dimen5"
+            android:paddingTop="@dimen/dimen5"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/img_post_user"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="@dimen/dimen25"
+            android:layout_height="@dimen/dimen25"
+            android:layout_marginLeft="@dimen/dimen5"
+            android:layout_marginRight="@dimen/dimen5"
+            android:layout_marginTop="@dimen/dimen5"
             android:layout_toLeftOf="@id/txt_post_user"
             android:background="@drawable/icon_pen_creator" />
     </RelativeLayout>

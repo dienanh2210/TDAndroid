@@ -13,5 +13,6 @@
     <color name="SkyBlue">#0795e0</color>
     <color name="Gray">#808080</color>
     <color name="lightGray">#D3D3D3</color>
+    <color name="Black">#000000</color>
 
 </resources>

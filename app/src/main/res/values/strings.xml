@@ -81,4 +81,7 @@
     <string name="CourseType">コース形態</string>
     <string name="MoreSearching">こだわり条件</string>
     <string name="FreeWord">フリーワード</string>
+    <string name="Home">ホーム</string>
+    <string name="Register">コース登録</string>
+    <string name="MyCourse">マイコース</string>
 </resources>
