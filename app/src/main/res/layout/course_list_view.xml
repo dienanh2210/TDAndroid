@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<fragment
-    android:id="@+id/frag_course_list"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    class="vn.javis.tourde.fragment.CourseListFragment"
-    >
-</fragment>
+
+    <fragment
+        android:id="@+id/frag_course_list"
+        class="vn.javis.tourde.fragment.CourseListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></fragment>
 </LinearLayout>

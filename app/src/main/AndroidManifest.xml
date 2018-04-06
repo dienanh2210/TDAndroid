@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="vn.javis.tourde"
-    android:installLocation="preferExternal"
-    >
+    android:installLocation="preferExternal">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +28,12 @@
         </activity>
         <activity android:name=".activity.login.MenuPage" />
         <activity android:name=".activity.CourseListActivity" />
-        <activity android:name=".activity.login.LoginView"></activity>
+        <activity android:name=".activity.login.LoginView" />
+        <activity android:name=".activity.BaseActivity" />
+        <activity
+            android:name=".activity.SearchCourseActivity"
+            android:label="@string/title_activity_course_search"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

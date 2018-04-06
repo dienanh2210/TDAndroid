@@ -1,9 +1,8 @@
 package vn.javis.tourde.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,18 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.activity.login.MenuPage;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.database.ListCourseAPI;
@@ -38,15 +35,18 @@ public class CourseListFragment extends BaseFragment {
     LinearLayout layoutFooter;
     @BindView(R.id.btn_menu)
     ImageButton btnMenu;
-    ListCourseAdapter listCourseAdapter;
-    Activity activity;
     @BindView(R.id.txt_page_number)
     TextView txtPageNumber;
     @BindView(R.id.btn_next_page)
     ImageButton btnNextPage;
     @BindView(R.id.btn_previous_page)
     ImageButton btnPreviousPage;
+    @BindView(R.id.ic_right)
+    ImageButton btnSearch;
+
     private int mCurrentPage;
+    ListCourseAdapter listCourseAdapter;
+    Activity activity;
 
     @Override
     public void onStart() {
@@ -54,8 +54,7 @@ public class CourseListFragment extends BaseFragment {
 
         activity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
-        lstCourseRecycleView.setItemAnimator(new DefaultItemAnimator());
-        lstCourseRecycleView.addItemDecoration(new DividerItemDecoration(activity, LinearLayoutManager.VERTICAL));
+        lstCourseRecycleView.addItemDecoration(new DividerItemDecoration(activity, 0));
         lstCourseRecycleView.setLayoutManager(layoutManager);
         setFooter();
 
@@ -64,6 +63,12 @@ public class CourseListFragment extends BaseFragment {
             public void onClick(View view) {
                 Intent menuPage = new Intent(activity, MenuPage.class);
                 activity.startActivity(menuPage);
+            }
+        });
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(activity, SearchCourseActivity.class));
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {

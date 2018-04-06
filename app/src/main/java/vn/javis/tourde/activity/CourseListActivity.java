@@ -25,8 +25,10 @@ import vn.javis.tourde.R;
  */
 
 public class CourseListActivity extends AppCompatActivity {
+
     ListCourseAdapter listCourseAdapter;
     private boolean mShowSearchPart;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 

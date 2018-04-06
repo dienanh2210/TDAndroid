@@ -25,4 +25,5 @@
     <dimen name="dimen450">450.00dp</dimen>
     <dimen name="dimen150">150.00dp</dimen>
     <dimen name="dimen350">350.00dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

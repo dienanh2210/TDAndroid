@@ -11,4 +11,12 @@
     <color name="Green">#13f408</color>
     <color name="Red">#ff0000</color>
 
+    <!-- search course -->
+    <color name="search_course_color_search_button_background">#FD6D6D</color>
+    <color name="search_course_color_title_background">#F4F6F8</color>
+    <color name="search_course_color_close_text">#0795E0</color>
+    <color name="search_course_color_description_text">#C8CDD0</color>
+    <color name="search_course_color_divider_background">#C8CDD0</color>
+    <color name="search_course_color_row">#0795E0</color>
+
 </resources>
