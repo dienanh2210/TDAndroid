@@ -33,7 +33,7 @@
         <activity
             android:name=".activity.SearchCourseActivity"
             android:label="@string/title_activity_course_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
