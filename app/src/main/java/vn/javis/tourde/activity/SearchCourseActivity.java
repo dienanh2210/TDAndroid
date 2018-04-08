@@ -1,7 +1,6 @@
 package vn.javis.tourde.activity;
 
 import android.os.Bundle;
-
 import vn.javis.tourde.R;
 
 public class SearchCourseActivity extends BaseActivity {

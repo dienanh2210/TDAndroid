@@ -31,7 +31,6 @@ import vn.javis.tourde.R;
 
 public class CourseListActivity extends AppCompatActivity {
 
-
     private static CourseListActivity instance;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
