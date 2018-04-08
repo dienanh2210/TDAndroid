@@ -73,6 +73,35 @@
     <string name="LoginTwitter">Twitterアカウント</string>
     <string name="LoginGoogle">Google+アカウント</string>
     <string name="LoginLine">LINEアカウントで登録</string>
+    <string name="title_activity_course_search">CourseSearchActivity</string>
+
+    <!-- search course text -->
+    <string name="search_course_title">検索条件</string>
+    <string name="search_course_close">閉じる</string>
+    <string name="search_course_area">エリア</string>
+    <string name="search_course_select_area">エリアを選択</string>
+    <string name="search_course_distance_type">距離</string>
+    <string name="search_course_km">km</string>
+    <string name="search_course_elevation">獲得標高</string>
+    <string name="search_course_elevation_over">激坂</string>
+    <string name="search_course_elevation_less">坂少</string>
+    <string name="search_course_course_type">コース形態</string>
+    <string name="search_course_course_type_one">片道</string>
+    <string name="search_course_course_type_two">往復</string>
+    <string name="search_course_course_type_three">1周</string>
+    <string name="search_course_more_searching">こだわり条件</string>
+    <string name="search_course_more_searching_description">こだわり条件を指定</string>
+    <string name="search_course_free_text">フリーワード</string>
+    <string name="search_course_free_text_description">例：初心者</string>
+    <string name="search_course_text_button">検索する</string>
+    <string name="search_course_text_row">&gt;</string>
+    <string name="search_course_20_km">〜20km</string>
+    <string name="search_course_50_km">〜50km</string>
+    <string name="search_course_100_km">〜100km</string>
+    <string name="search_course_over_100_km">100km〜</string>
+    <string name="search_course_divider_image_description">divider</string>
+    <string name="search_course_choose_image_description">choose</string>
+    <!-- end -->
     <string name="TitleSearchPage">検索条件</string>
     <string name="CloseSearchPage">閉じる</string>
     <string name="Area">エリア</string>
@@ -85,3 +114,4 @@
     <string name="Register">コース登録</string>
     <string name="MyCourse">マイコース</string>
 </resources>
+
