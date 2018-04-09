@@ -7,17 +7,17 @@
     <RelativeLayout
         android:id="@+id/course_list_header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen50"
+        android:layout_height="@dimen/_40sdp"
         android:layout_alignParentTop="true"
-        android:background="@color/White">
-
+        android:background="@drawable/header_border"
+        >
         <ImageButton
             android:id="@+id/btn_menu"
-            android:layout_width="@dimen/dimen35"
-            android:layout_height="@dimen/dimen35"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/dimen10"
             android:background="@drawable/ic_menu_option" />
 
         <TextView
@@ -30,20 +30,18 @@
             android:text="@string/title_course_list"
             android:textAlignment="center"
             android:textColor="@color/Black"
-            android:textSize="@dimen/title_size"
+            android:textSize="@dimen/_18ssp"
             android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/btn_search"
-            android:layout_width="@dimen/dimen40"
-            android:layout_height="@dimen/dimen40"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="right"
-            android:layout_marginRight="@dimen/dimen10"
-            android:background="@drawable/icon_search"
-            android:maxHeight="@dimen/dimen40"
-            android:maxWidth="@dimen/dimen40" />
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/icon_search" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -51,37 +49,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/course_list_header"
-        android:layout_marginLeft="@dimen/dimen5"
-        android:layout_marginRight="@dimen/dimen5"
-        android:layout_marginTop="@dimen/dimen50"
-        android:paddingBottom="@dimen/dimen120"></android.support.v7.widget.RecyclerView>
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:paddingBottom="@dimen/_100sdp">
+    </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/course_list_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-
-        >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen5"
-            android:paddingTop="@dimen/dimen10"
-            >
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp">
 
             <ImageButton
                 android:id="@+id/btn_previous_page"
-                android:layout_width="@dimen/dimen50"
-                android:layout_height="@dimen/dimen50"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/dimen10"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_previous_page"
-                android:foregroundGravity="center" />
-
+               />
             <TextView
                 android:id="@+id/txt_page_number"
                 android:layout_width="wrap_content"
@@ -91,87 +86,81 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/dimen25" />
-
-
+                android:textSize="@dimen/_18ssp" />
             <ImageButton
                 android:id="@+id/btn_next_page"
-                android:layout_width="@dimen/dimen50"
-                android:layout_height="@dimen/dimen50"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dimen10"
                 android:layout_weight="1"
                 android:background="@drawable/btn_next_page"
-                android:foregroundGravity="center"
-                android:paddingRight="@dimen/dimen10" />
+                android:paddingRight="@dimen/_10sdp" />
         </RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen10"
-            android:background="@color/White"
-            android:weightSum="3">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/header_border"
+            android:weightSum="3"
+            android:paddingTop="@dimen/_5sdp">
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/dimen50"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_weight="1">
 
                 <ImageButton
                     android:id="@+id/btn_home_footer"
-                    android:layout_width="@dimen/dimen25"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/icon_home" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignTop="@id/btn_home_footer"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/dimen25"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
+                    android:textSize="@dimen/_11ssp"
                     android:text="@string/Home"
-
                     />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/dimen50"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_weight="1">
-
                 <ImageButton
                     android:id="@+id/btn_register_footer"
-                    android:layout_width="@dimen/dimen25"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/icon_resignter" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignTop="@id/btn_register_footer"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/dimen25"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
+                    android:textSize="@dimen/_11ssp"
                     android:text="@string/Register" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/dimen50"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_weight="1">
-
                 <ImageButton
                     android:id="@+id/btn_my_course_footer"
-                    android:layout_width="@dimen/dimen35"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/icon_course" />
@@ -182,8 +171,9 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignTop="@id/btn_my_course_footer"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/dimen25"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
+                    android:textSize="@dimen/_11ssp"
                     android:text="@string/MyCourse" />
             </RelativeLayout>
         </LinearLayout>

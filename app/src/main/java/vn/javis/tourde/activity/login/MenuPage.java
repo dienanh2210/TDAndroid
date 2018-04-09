@@ -13,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.BadgeCollectionActivity;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MainActivity;
 
@@ -56,8 +57,15 @@ public class MenuPage extends Activity {
         privacy=findViewById( R.id.privacy );
         rateInApp=findViewById( R.id.rateInApp );
         version=findViewById( R.id.version );
-
+        btn_Badge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuPage.this, BadgeCollectionActivity.class);
+                startActivity( intent );
+            }
+        });
     }
+
     View.OnClickListener onClickLogin = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

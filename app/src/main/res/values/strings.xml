@@ -113,5 +113,11 @@
     <string name="Home">ホーム</string>
     <string name="Register">コース登録</string>
     <string name="MyCourse">マイコース</string>
+
+    <string name="AchivementBadges">達成バッジ</string>
+    <string name="SpotBadges">ご当地バッジ</string>
+    <string name="BadgeTitile">バッジコレクション</string>
+    <string name="BtnBackBadge">戻る</string>
+    <string name="BtnCloseBadge">閉じる</string>
 </resources>
 
