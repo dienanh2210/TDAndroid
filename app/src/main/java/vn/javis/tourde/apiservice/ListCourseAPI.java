@@ -1,7 +1,6 @@
-package vn.javis.tourde.database;
+package vn.javis.tourde.apiservice;
 
 import android.content.Context;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -9,7 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.json.JSONException;
@@ -19,8 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import vn.javis.tourde.activity.MainActivity;
-import vn.javis.tourde.adapter.VolleySingleton;
+import vn.javis.tourde.volley.VolleySingleton;
 import vn.javis.tourde.model.Course;
 
 public class ListCourseAPI {

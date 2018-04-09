@@ -2,9 +2,7 @@ package vn.javis.tourde.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +21,7 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.activity.login.MenuPage;
 import vn.javis.tourde.adapter.ListCourseAdapter;
-import vn.javis.tourde.database.ListCourseAPI;
+import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
 
 
@@ -53,7 +51,6 @@ public class CourseListFragment extends BaseFragment {
 
         activity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
-        lstCourseRecycleView.addItemDecoration(new DividerItemDecoration(activity,0));
         lstCourseRecycleView.setLayoutManager(layoutManager);
         setFooter();
 
