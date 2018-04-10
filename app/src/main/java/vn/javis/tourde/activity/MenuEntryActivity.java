@@ -13,16 +13,16 @@ import vn.javis.tourde.activity.UserRegistration.RegisterFragment.RegisterActivi
 import vn.javis.tourde.activity.UserRegistration.RegisterFragment.RegisterFragment;
 
 public class MenuEntryActivity extends BaseActivity {
-    RelativeLayout btn_UserMailRegister;
-    TextView btn_Back_Menu_Entry;
+    RelativeLayout rlt_usermailrigister;
+    TextView tv_back_menu_entry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_menu_entry );
-        btn_UserMailRegister=findViewById( R.id.btn_UserMailRigister );
-        btn_UserMailRegister.setOnClickListener( onClickNewUserMail );
-        btn_Back_Menu_Entry=findViewById( R.id.btn_Back_Menu_Entry );
-        btn_Back_Menu_Entry.setOnClickListener(onClickBackMenuPage  );
+        rlt_usermailrigister=findViewById( R.id.rlt_usermailrigister);
+        rlt_usermailrigister.setOnClickListener( onClickNewUserMail );
+        tv_back_menu_entry=findViewById( R.id.tv_back_menu_entry );
+        tv_back_menu_entry.setOnClickListener(onClickBackMenuPage  );
     }
     View.OnClickListener onClickNewUserMail = new View.OnClickListener() {
         @Override

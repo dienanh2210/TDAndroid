@@ -7,21 +7,21 @@ import android.view.View;
 import android.view.Window;
 import android.app.Activity;
 import android.widget.TextView;
-
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.BaseActivity;
 import vn.javis.tourde.activity.BasicInfomation.BasicInfoActivity;
 
-
 public class LoginActivity extends BaseActivity {
-    TextView btn_Back_BasicInfo;
+
+    TextView tv_back_basicinfo_login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         //  this.requestWindowFeature( Window.FEATURE_NO_TITLE );
         setContentView( R.layout.activity_login_view );
-        btn_Back_BasicInfo=findViewById( R.id.btn_Back_BasicInfo_Login );
-        btn_Back_BasicInfo.setOnClickListener( onClickBackBasicInfoLogin );
+        tv_back_basicinfo_login=findViewById( R.id.tv_back_basicinfo_login );
+        tv_back_basicinfo_login.setOnClickListener( onClickBackBasicInfoLogin );
     }
     View.OnClickListener onClickBackBasicInfoLogin = new View.OnClickListener() {
         @Override

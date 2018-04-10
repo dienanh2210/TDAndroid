@@ -14,7 +14,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#C8CDD0" />
+            android:background="@color/search_course_color_description_text" />
 
         <RelativeLayout
             android:id="@+id/rlt_mark"
@@ -29,7 +29,6 @@
                 android:paddingLeft="15dp"
                 android:textSize="@dimen/_15ssp"
                 android:text="グルメが充実" />
-
 
             <ImageView
                 android:id="@+id/imv_mark"

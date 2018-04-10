@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp">
         <TextView
-            android:id="@+id/btn_Tutorial"
+            android:id="@+id/tv_tutorial"
             android:layout_width="@dimen/_100ssp"
             android:layout_height="@dimen/_50ssp"
             android:gravity="center_horizontal"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_Basic"
+                    android:id="@+id/tv_basic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_UserRegistration"
+                    android:id="@+id/tv_userregistration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

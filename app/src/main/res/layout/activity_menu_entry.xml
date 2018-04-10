@@ -22,7 +22,7 @@
             android:layout_height="@dimen/_30sdp">
 
             <TextView
-                android:id="@+id/btn_Back_Menu_Entry"
+                android:id="@+id/tv_back_menu_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -75,7 +75,7 @@
             android:background="@color/Gray">
         </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/btn_UserMailRigister"
+            android:id="@+id/rlt_usermailrigister"
             android:layout_width="match_parent"
             android:background="@color/backgroud"
             android:layout_height="@dimen/_45sdp">

@@ -43,7 +43,6 @@ public class BadgeCollectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.badge_collection);
         setHearder();
         ButterKnife.bind(this);
@@ -93,14 +92,12 @@ public class BadgeCollectionActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
     }
-
     void onArchivementClick() {
         imgRedLineAchivement.setVisibility(View.VISIBLE);
         imgRedLineSpot.setVisibility(View.INVISIBLE);
         btnArchivement.setTextColor(Color.BLACK);
         btnSpotBarge.setTextColor(Color.GRAY);
     }
-
     void onSpotClick() {
         imgRedLineAchivement.setVisibility(View.INVISIBLE);
         imgRedLineSpot.setVisibility(View.VISIBLE);

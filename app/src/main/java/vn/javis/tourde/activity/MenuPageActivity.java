@@ -12,29 +12,27 @@ import vn.javis.tourde.activity.BasicInfomation.BasicInfoActivity;
 
 public class MenuPageActivity extends BaseActivity {
 
-    TextView btn_Close,btn_Tutorial,btn_basic,btn_UserRegistration;
-    RelativeLayout btn_Login;
-
-    RelativeLayout basic_Info,badge_Cllection,new_User,login,logout,app_Info,how_To,inquiry,privacy,rateInApp,version;
+    TextView tv_close,tv_tutorial,tv_basic,tv_userregistration;
+    RelativeLayout tv_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_menu_page);
-        btn_Login=findViewById( R.id.login );
-        btn_Login.setOnClickListener( onClickLogin );
+        tv_login=findViewById( R.id.login );
+        tv_login.setOnClickListener( onClickLogin );
 
-        btn_Close=findViewById( R.id.tv_close );
-        btn_Close.setOnClickListener( onClick );
+        tv_close=findViewById( R.id.tv_close );
+        tv_close.setOnClickListener( onClick );
 
-        btn_Tutorial=findViewById( R.id.btn_Tutorial );
-        btn_Tutorial.setOnClickListener( onClickTutorial );
+        tv_tutorial=findViewById( R.id.tv_tutorial );
+        tv_tutorial.setOnClickListener( onClickTutorial );
 
-        btn_basic=findViewById( R.id.btn_Basic );
-        btn_basic.setOnClickListener( onClickBasicInfo );
+        tv_basic=findViewById( R.id.tv_basic );
+        tv_basic.setOnClickListener( onClickBasicInfo );
 
-        btn_UserRegistration=findViewById( R.id.btn_UserRegistration );
-        btn_UserRegistration.setOnClickListener( onClickNewUser );
+        tv_userregistration=findViewById( R.id.tv_userregistration );
+        tv_userregistration.setOnClickListener( onClickNewUser );
     }
     View.OnClickListener onClickLogin = new View.OnClickListener() {
         @Override

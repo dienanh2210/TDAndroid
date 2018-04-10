@@ -6,7 +6,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#C8CDD0" />
+        android:background="@color/search_course_color_description_text" />
     <TextView
         android:id="@+id/tv_header"
         android:layout_width="match_parent"
