@@ -18,7 +18,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.login.MenuPage;
 import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.model.Badge;
@@ -80,7 +79,7 @@ public class BadgeCollectionActivity extends AppCompatActivity {
     }
 
     void gotoMenuPage() {
-        Intent intent = new Intent(this, MenuPage.class);
+        Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
     }
 

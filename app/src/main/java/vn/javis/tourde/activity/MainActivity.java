@@ -14,7 +14,6 @@ import java.util.List;
 import android.view.Window;
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.login.MenuPage;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 
 public class MainActivity extends Activity {
@@ -37,7 +36,7 @@ public class MainActivity extends Activity {
 
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
-        Intent intent = new Intent(this, MenuPage.class);
+        Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
 
     }

@@ -17,6 +17,7 @@
     <color name="BadgeBackground">#F4F6F8</color>
     <color name="colorTextF4F6F8">#F4F6F8</color>
     <color name="colorButton">#FD6D6D</color>
+    <color name="backgroud">#FFFFFF</color>
     <!-- search course -->
     <color name="search_course_color_search_button_background">#FD6D6D</color>
     <color name="search_course_color_title_background">#F4F6F8</color>
