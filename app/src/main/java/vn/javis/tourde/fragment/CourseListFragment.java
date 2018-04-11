@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -117,7 +118,7 @@ public class CourseListFragment extends BaseFragment {
         if (mCurrentPage > totalPage) mCurrentPage = totalPage;
         if (mCurrentPage < 1) mCurrentPage = 1;
         if (mCurrentPage != currentValue || nextPage == 0) {
-            txtPageNumber.setText(mCurrentPage + "/" + totalPage);
+            txtPageNumber.setTexgit at(mCurrentPage + "/" + totalPage);
             setRecycle();
         }
     }
@@ -127,6 +128,12 @@ public class CourseListFragment extends BaseFragment {
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
         listCourseAdapter = new ListCourseAdapter(list_courses, activity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
+        listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(activity,"toast "+position,Toast.LENGTH_LONG);
+            }
+        });
     }
 }
 

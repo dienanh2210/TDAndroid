@@ -119,5 +119,10 @@
     <string name="BadgeTitile">バッジコレクション</string>
     <string name="BtnBackBadge">戻る</string>
     <string name="BtnCloseBadge">閉じる</string>
+
+    <!--course detail -->
+    <string name="tabCourse">コース</string>
+    <string name="tabVideo">投稿動画</string>
+    <string name="tabComment">コメント</string>
 </resources>
 

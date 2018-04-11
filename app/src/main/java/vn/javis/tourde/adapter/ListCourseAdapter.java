@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -42,7 +43,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CourseViewHolder holder, final int position) {
         Course model = listCourse.get(position);
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
@@ -81,6 +82,15 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
             holder.imgStar4.setImageResource(R.drawable.star_yellow);
             holder.imgStar5.setImageResource(R.drawable.star_yellow);
         }
+        holder.txtTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onItemClickedListener !=null){
+                    onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -125,5 +135,13 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemClickedListener{
+        void onItemClick(int position);
+    }
+    private OnItemClickedListener  onItemClickedListener;
+    public void setOnItemClickListener(OnItemClickedListener onItemClickedListener){
+        this.onItemClickedListener = onItemClickedListener;
     }
 }

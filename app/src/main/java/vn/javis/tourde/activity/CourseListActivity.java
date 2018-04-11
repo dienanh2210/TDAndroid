@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
+import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
 
@@ -61,6 +62,13 @@ public class CourseListActivity extends AppCompatActivity {
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
         fragmentTransaction.remove(currentFragment);
         fragmentTransaction.add(R.id.container_fragment,new CourseListFragment());
+        fragmentTransaction.commit();
+    }
+    public void ShowCourseDetail(){
+        fragmentTransaction =fragmentManager.beginTransaction();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
+        fragmentTransaction.remove(currentFragment);
+        fragmentTransaction.add(R.id.container_fragment,new CourseDetailFragment());
         fragmentTransaction.commit();
     }
 
