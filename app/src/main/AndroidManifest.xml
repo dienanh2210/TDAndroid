@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".TourDeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -43,7 +44,12 @@
             android:name=".activity.BasicInfomation.BasicInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.UserRegistration.RegisterFragment.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"
+
+            />
         <activity android:name=".activity.MenuEntryActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 

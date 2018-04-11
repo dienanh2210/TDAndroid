@@ -53,7 +53,7 @@
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:layout_marginTop="@dimen/dimen10"
                 android:background="@color/Gray">
             </RelativeLayout>
@@ -74,7 +74,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -106,11 +106,11 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/badge_Collection"
+                android:id="@+id/badge_collection"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
@@ -135,7 +135,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -165,7 +165,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -194,7 +194,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -213,7 +213,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -234,7 +234,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -263,7 +263,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -282,7 +282,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -301,7 +301,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -320,7 +320,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -341,7 +341,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
             <RelativeLayout
@@ -359,7 +359,7 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1px"
                 android:background="@color/Gray">
             </RelativeLayout>
 

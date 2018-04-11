@@ -6,12 +6,23 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.widget.ImageButton;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import android.view.Window;
+
+import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.ListCourseAPI;
+import vn.javis.tourde.volley.TourDeService;
+import vn.javis.tourde.volley.callback.ServiceCallback;
+import vn.javis.tourde.volley.common.ServiceResult;
+import vn.javis.tourde.volley.endpoint.ApiEndpoint;
 
 public class MainActivity extends Activity {
 
@@ -30,11 +41,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
         Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
+
     }
 
     public void loadCourseList() {
@@ -72,6 +83,8 @@ public class MainActivity extends Activity {
         }
 
     }
+
+
 
 }
 
