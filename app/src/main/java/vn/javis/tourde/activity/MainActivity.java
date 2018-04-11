@@ -7,14 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.ImageButton;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import android.view.Window;
-
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.login.MenuPage;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 
 public class MainActivity extends Activity {
@@ -37,9 +33,8 @@ public class MainActivity extends Activity {
 
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
-        Intent intent = new Intent(this, MenuPage.class);
+        Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
-
     }
 
     public void loadCourseList() {
@@ -71,7 +66,6 @@ public class MainActivity extends Activity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);

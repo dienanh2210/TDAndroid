@@ -3,7 +3,6 @@ package vn.javis.tourde.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +18,7 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
-import vn.javis.tourde.activity.login.MenuPage;
+import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
@@ -57,7 +56,7 @@ public class CourseListFragment extends BaseFragment {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent menuPage = new Intent(activity, MenuPage.class);
+                Intent menuPage = new Intent(activity, MenuPageActivity.class);
                 activity.startActivity(menuPage);
             }
         });

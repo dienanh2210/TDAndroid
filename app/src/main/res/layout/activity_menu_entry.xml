@@ -5,26 +5,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/backgroud"
     tools:context="vn.javis.tourde.activity.LoginActivity">
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp">
+
             <TextView
-                android:id="@+id/tv_back_basicinfo_login"
+                android:id="@+id/tv_back_menu_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Back"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10ssp"
-                android:textSize="@dimen/_16ssp"
-                android:textColor="@color/search_course_color_close_text" />
+                android:text="@string/Back"
+                android:textColor="@color/search_course_color_close_text"
+                android:textSize="@dimen/_16ssp" />
             <TextView
                 android:id="@+id/tv_close"
                 android:layout_width="wrap_content"
@@ -42,111 +47,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/LoginView"
+                android:text="@string/TextUser"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/Gray">
+
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:background="@color/search_course_color_title_background">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/_16sdp"
-                android:text="@string/LoginGmail"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/Gray">
-        </RelativeLayout>
-        <EditText
-            android:id="@+id/edt_email"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_36sdp"
-            android:background="@color/backgroud"
-            android:hint="@string/hint_email"
-            android:textColorHint="@color/Gray"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:textSize="@dimen/_15sdp" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/Gray">
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:background="@color/search_course_color_title_background">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/_16sdp"
-                android:text="@string/PassWord"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/Gray">
-        </RelativeLayout>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen60"
-            android:background="@color/backgroud"
-            android:hint="@string/hint_password"
-            android:textColorHint="@color/Gray"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:textSize="@dimen/_15sdp" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/Gray">
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/appCompatButtonLogin"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/custom_frame"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/text_login"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:textColor="@color/backgroud"
-            android:textSize="@dimen/_15sdp"
-            android:textAlignment="center" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textViewLinkRegister"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="center"
-            android:textColor="@color/colorPrimar"
-            android:text="@string/CreateOne"
-            android:textSize="@dimen/_15sdp" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/dimen10"
-            android:background="@color/Gray">
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
@@ -157,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_16sdp"
-                android:text="@string/SNS"
+                android:text="@string/TextNewEntry"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold" />
@@ -167,12 +74,50 @@
             android:layout_height="1dp"
             android:background="@color/Gray">
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rlt_usermailrigister"
+            android:layout_width="match_parent"
+            android:background="@color/backgroud"
+            android:layout_height="@dimen/_45sdp">
 
+            <ImageView
+                android:layout_width="@dimen/_35ssp"
+                android:layout_height="@dimen/_35ssp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center_vertical|center_horizontal"
+                android:src="@drawable/icon_mail" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_55sdp"
+                android:text="@string/TextMailNewEntry"
+                android:paddingLeft="@dimen/_15sdp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/dimen25"
+                android:textColor="@color/colorText"/>
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/_16sdp"
+                android:text="@string/search_course_text_row"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16ssp"
+                app:srcCompat="@drawable/icon_next" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Gray">
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
-
+            android:layout_height="@dimen/_45sdp">
             <ImageView
                 android:layout_width="@dimen/_35ssp"
                 android:layout_height="@dimen/_35ssp"
@@ -208,8 +153,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
-
+            android:layout_height="@dimen/_45sdp">
             <ImageView
                 android:layout_width="@dimen/_35ssp"
                 android:layout_height="@dimen/_35ssp"
@@ -245,8 +189,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
-
+            android:layout_height="@dimen/_45sdp">
             <ImageView
                 android:layout_width="@dimen/_35ssp"
                 android:layout_height="@dimen/_35ssp"
@@ -282,8 +225,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
-
+            android:layout_height="@dimen/_45sdp">
             <ImageView
                 android:layout_width="@dimen/_35ssp"
                 android:layout_height="@dimen/_35ssp"
