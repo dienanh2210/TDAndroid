@@ -13,14 +13,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
-
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
-import vn.javis.tourde.activity.login.MenuPage;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
@@ -58,7 +56,7 @@ public class CourseListFragment extends BaseFragment {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent menuPage = new Intent(activity, MenuPage.class);
+                Intent menuPage = new Intent(activity, MenuPageActivity.class);
                 activity.startActivity(menuPage);
             }
         });
@@ -118,7 +116,7 @@ public class CourseListFragment extends BaseFragment {
         if (mCurrentPage > totalPage) mCurrentPage = totalPage;
         if (mCurrentPage < 1) mCurrentPage = 1;
         if (mCurrentPage != currentValue || nextPage == 0) {
-            txtPageNumber.setTexgit at(mCurrentPage + "/" + totalPage);
+            txtPageNumber.setText(mCurrentPage + "/" + totalPage);
             setRecycle();
         }
     }

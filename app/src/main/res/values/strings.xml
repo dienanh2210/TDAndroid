@@ -124,5 +124,27 @@
     <string name="tabCourse">コース</string>
     <string name="tabVideo">投稿動画</string>
     <string name="tabComment">コメント</string>
+    <!--BasicInfomation-->
+    <string name="TextNameBasic">ユーザーネーム</string>
+    <string name="UserName">週末ライダー</string>
+    <string name="UserEmail">メールアドレス</string>
+    <string name="ButtonBasic">登録情報を変更</string>
+    <string name="hint_email_basicinfo">xxxxxxxxxxxxxxxxxxxxxxx.xxxxxx.co.jp</string>
+    <string name="hint_name_basicinfo">週末ライダー</string>
+    <!--UserRegistration-->
+    <string name="TextNewEntry">登録方法を選んでください</string>
+    <string name="TextMailNewEntry">メールアドレスで登録</string>
+    <string name="TextUser">新規登録</string>
+    <string name="TextHelpUser">アンケートにご協力ください</string>
+    <string name="TextGender">性別</string>
+    <string name="TextMan">男性</string>
+    <string name="TextWoman">女性</string>
+    <string name="TextAge">年齢</string>
+    <string name="Age">10代</string>
+    <string name="TextPrefecture">お住いの地域</string>
+    <string name="TextShowSelected">北海道</string>
+    <string name="ButtonToRegister">新規登録</string>
+    <string name="TextemailUser">メールアドレス</string>
+>>>>>>> 6164e60cbc70f3471a1089f06c13c4745bb8f1ec
 </resources>
 

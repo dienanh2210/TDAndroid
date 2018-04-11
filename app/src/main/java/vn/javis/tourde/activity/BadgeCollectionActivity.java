@@ -18,7 +18,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.login.MenuPage;
 import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.model.Badge;
@@ -44,7 +43,6 @@ public class BadgeCollectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.badge_collection);
         setHearder();
         ButterKnife.bind(this);
@@ -80,7 +78,7 @@ public class BadgeCollectionActivity extends AppCompatActivity {
     }
 
     void gotoMenuPage() {
-        Intent intent = new Intent(this, MenuPage.class);
+        Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
     }
 
@@ -94,14 +92,12 @@ public class BadgeCollectionActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
     }
-
     void onArchivementClick() {
         imgRedLineAchivement.setVisibility(View.VISIBLE);
         imgRedLineSpot.setVisibility(View.INVISIBLE);
         btnArchivement.setTextColor(Color.BLACK);
         btnSpotBarge.setTextColor(Color.GRAY);
     }
-
     void onSpotClick() {
         imgRedLineAchivement.setVisibility(View.INVISIBLE);
         imgRedLineSpot.setVisibility(View.VISIBLE);
