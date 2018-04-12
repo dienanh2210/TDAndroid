@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 import android.view.Window;
+
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 
@@ -30,11 +31,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
         Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
+
     }
 
     public void loadCourseList() {
@@ -72,6 +73,8 @@ public class MainActivity extends Activity {
         }
 
     }
+
+
 
 }
 

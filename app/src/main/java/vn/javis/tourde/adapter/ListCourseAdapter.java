@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +54,15 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         holder.txtReviewCount.setText(model.getReviewCount());
         holder.txtSpotCount.setText(model.getSpotCount());
         holder.txtPostUser.setText(model.getPostUserName());
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-        imageLoader.getMemoryCache();
-        imageLoader.getInstance().displayImage(model.getTopImage(), holder.imgCourse);
-        imageLoader.getInstance().displayImage(model.getPostUserImage(), holder.imgPostUser);
+
+     //   ImageLoader imageLoader = ImageLoader.getInstance();
+     //   imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+     //   imageLoader.getMemoryCache();
+     //   imageLoader.getInstance().displayImage(model.getTopImage(), holder.imgCourse);
+     //   imageLoader.getInstance().displayImage(model.getPostUserImage(), holder.imgPostUser);
+
+        Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
+        Picasso.with(context).load(model.getPostUserImage()).into(holder.imgPostUser);
 
         int rate = Math.round(model.getRatingAverage());
 

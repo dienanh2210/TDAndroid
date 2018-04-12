@@ -13,7 +13,7 @@ import vn.javis.tourde.activity.BasicInfomation.BasicInfoActivity;
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close,tv_tutorial,tv_basic,tv_userregistration;
-    RelativeLayout tv_login;
+    RelativeLayout tv_login,badge_collection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,9 @@ public class MenuPageActivity extends BaseActivity {
 
         tv_userregistration=findViewById( R.id.tv_userregistration );
         tv_userregistration.setOnClickListener( onClickNewUser );
+
+        badge_collection=findViewById( R.id.badge_collection );
+        badge_collection.setOnClickListener( onClickBadge  );
     }
     View.OnClickListener onClickLogin = new View.OnClickListener() {
         @Override
@@ -67,6 +70,13 @@ public class MenuPageActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent( MenuPageActivity.this, MenuEntryActivity.class );
+            startActivity( intent );
+        }
+    };
+    View.OnClickListener onClickBadge = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent( MenuPageActivity.this, BadgeCollectionActivity.class );
             startActivity( intent );
         }
     };

@@ -2,6 +2,7 @@ package vn.javis.tourde.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,4 +42,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public abstract View getView(LayoutInflater inflater, @Nullable ViewGroup container);
+
+
+
 }

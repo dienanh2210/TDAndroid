@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.List;
+
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
@@ -42,28 +45,27 @@ public class CourseListFragment extends BaseFragment {
     ImageButton btnSearch;
     private int mCurrentPage;
     ListCourseAdapter listCourseAdapter;
-    Activity activity;
+    CourseListActivity mActivity;
 
     @Override
     public void onStart() {
         super.onStart();
 
-        activity = (CourseListActivity) getActivity();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
+        mActivity = (CourseListActivity) getActivity();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
         setFooter();
-
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent menuPage = new Intent(activity, MenuPageActivity.class);
-                activity.startActivity(menuPage);
+                Intent menuPage = new Intent(mActivity, MenuPageActivity.class);
+                mActivity.startActivity(menuPage);
             }
         });
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(activity, SearchCourseActivity.class));
+                startActivity(new Intent(mActivity, SearchCourseActivity.class));
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -124,12 +126,12 @@ public class CourseListFragment extends BaseFragment {
     void setRecycle() {
 
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
-        listCourseAdapter = new ListCourseAdapter(list_courses, activity);
+        listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(activity,"toast "+position,Toast.LENGTH_LONG);
+                mActivity.ShowCourseDetail();
             }
         });
     }

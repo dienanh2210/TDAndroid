@@ -19,7 +19,6 @@ import vn.javis.tourde.R;
 
 public class CourseListActivity extends AppCompatActivity {
 
-    private static CourseListActivity instance;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
@@ -29,7 +28,6 @@ public class CourseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        instance =this;
         fragmentManager = getFragmentManager();
         fragmentTransaction =fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container_fragment,new CourseListFragment());
@@ -38,12 +36,7 @@ public class CourseListActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        instance=null;
         super.onDestroy();
-    }
-
-    public static CourseListActivity getInstance(){
-        return instance;
     }
 
     @Override
@@ -58,18 +51,18 @@ public class CourseListActivity extends AppCompatActivity {
     }
     public void showCourseListPage(){
 
-        fragmentTransaction =fragmentManager.beginTransaction();
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
-        fragmentTransaction.remove(currentFragment);
-        fragmentTransaction.add(R.id.container_fragment,new CourseListFragment());
-        fragmentTransaction.commit();
+        openPage(new CourseListFragment());
     }
     public void ShowCourseDetail(){
-        fragmentTransaction =fragmentManager.beginTransaction();
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container_fragment);
-        fragmentTransaction.remove(currentFragment);
-        fragmentTransaction.add(R.id.container_fragment,new CourseDetailFragment());
+      openPage(new CourseDetailFragment());
+    }
+     void openPage(Fragment fragment) {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, fragment, fragment.getClass().getSimpleName());
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
 
 }

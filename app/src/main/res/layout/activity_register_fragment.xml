@@ -16,7 +16,7 @@
             android:layout_height="@dimen/_30sdp">
 
             <TextView
-                android:id="@+id/btn_Back_BasicInfo_Login"
+                android:id="@+id/tv_back_resgister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Back"
