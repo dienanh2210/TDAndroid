@@ -1,11 +1,8 @@
 package vn.javis.tourde.activity.UserRegistration.RegisterFragment;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +11,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.Response.Listener;
+
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import vn.javis.tourde.R;
-import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.apiservice.ApiEndpoint;
+import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.volley.VolleyCustomRequest;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
@@ -128,10 +137,40 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             case R.id.appCompatButtonLogin:
 
 //                LoginAPI loginAPI = new LoginAPI();
-                LoginAPI.login("abcde@gmail.com","123456");
-                LoginAPI.register( "testandroid1", "123456",gender,10,"Tokyo");
+//                LoginAPI.login("abcde@gmail.com","123456");
+ //               LoginAPI.register( "testandroid1", "123456",gender,10,"Tokyo");
+                registerAccount( "test@gmail.com", "123456");
                 break;
         }
+    }
+
+    private void registerAccount(String email, String password) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("email",email);
+        params.put("password",password);
+        String url = ApiEndpoint.BASE_URL + ApiEndpoint.POST_CREATE_ACCOUNT;
+        VolleyCustomRequest jsObjRequest = new VolleyCustomRequest(Request.Method.POST, url, params, successListener(), this.errorListener());
+        TourDeApplication.getInstance().addToRequestQueue(jsObjRequest, ApiEndpoint.POST_CREATE_ACCOUNT);
+}
+
+
+    private Listener<JSONObject> successListener() {
+       return new Response.Listener<JSONObject>() {
+           @Override
+           public void onResponse(JSONObject response) {
+                Log.d("register account", response.toString());
+           }
+       };
+
+    }
+
+    private Response.ErrorListener errorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("register account error", error.getMessage());
+            }
+        };
     }
 
 
