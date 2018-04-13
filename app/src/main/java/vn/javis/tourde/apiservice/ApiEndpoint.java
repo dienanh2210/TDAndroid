@@ -10,5 +10,6 @@ public class ApiEndpoint {
     public static String GET_COURSE_LIST = "/get/getCourseList";
     public static String POST_CREATE_ACCOUNT = "/post/createAccount/";
     public static String POST_LOGIN_ACCOUNT = "/post/loginAccountEmail/";
+    public static String POST_LOGIN_SNS = "/post/loginAccountSNS/";
 
 }

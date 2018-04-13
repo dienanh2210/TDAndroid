@@ -54,8 +54,9 @@ dependencies {
         transitive = true
     }
 //line
+    implementation (name:'line-sdk-4.0.8', ext:'aar')
     implementation 'com.android.support:customtabs:27.1.0'
-    implementation ('line-sdk-4.0.8', ext:'aar')
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.google.android.gms:play-services-auth:11.8.0'
 }

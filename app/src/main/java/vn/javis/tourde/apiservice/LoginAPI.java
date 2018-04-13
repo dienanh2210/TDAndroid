@@ -39,5 +39,11 @@ public class LoginAPI {
         VolleyCustomRequest jsObjRequest = new VolleyCustomRequest(Request.Method.POST, url, params, successListener,errorListener);
         TourDeApplication.getInstance().addToRequestQueue(jsObjRequest, ApiEndpoint.POST_CREATE_ACCOUNT);
     }
+    public static void loginSNS(final String sns_id, final String sns_kind,ServiceCallback callback) {
+        HashMap<String, String> param = new HashMap<>();
+        param.put("sns_id", sns_id);
+        param.put("sns_kind", sns_kind);
+        TourDeService.postWithAuth(ApiEndpoint.POST_LOGIN_SNS, param,callback);
+    }
 
 }

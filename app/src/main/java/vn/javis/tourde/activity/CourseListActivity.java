@@ -19,8 +19,8 @@ import vn.javis.tourde.R;
 
 public class CourseListActivity extends AppCompatActivity {
 
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+    android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,9 +28,10 @@ public class CourseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentTransaction =fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container_fragment,new CourseListFragment());
+        CourseListFragment courseListFragment = new CourseListFragment();
+        fragmentTransaction.replace(R.id.container_fragment, courseListFragment);
         fragmentTransaction.commit();
     }
 
@@ -56,7 +57,7 @@ public class CourseListActivity extends AppCompatActivity {
     public void ShowCourseDetail(){
       openPage(new CourseDetailFragment());
     }
-     void openPage(Fragment fragment) {
+     void openPage(android.support.v4.app.Fragment fragment) {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_fragment, fragment, fragment.getClass().getSimpleName());
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
