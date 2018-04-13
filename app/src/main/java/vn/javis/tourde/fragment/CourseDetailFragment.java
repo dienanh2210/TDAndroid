@@ -22,7 +22,6 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.UserRegistration.RegisterFragment.Data;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
