@@ -14,22 +14,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:src="@drawable/icon_classic"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/_30sdp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_classic" />
 
         <!--<com.makeramen.roundedimageview.RoundedImageView-->
-            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-            <!--android:id="@+id/imageView1"-->
-            <!--android:src="@drawable/icon_classic"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:scaleType="fitCenter"-->
-            <!--app:riv_mutate_background="true"-->
-            <!--app:riv_tile_mode="clamp"-->
-            <!--app:riv_oval="true" />-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/imageView1"-->
+        <!--android:src="@drawable/icon_classic"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--app:riv_mutate_background="true"-->
+        <!--app:riv_tile_mode="clamp"-->
+        <!--app:riv_oval="true" />-->
 
         <ImageButton
             android:id="@+id/btn_back_to_list"
@@ -76,17 +76,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/img_post_user_detail"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            android:background="@drawable/icon_pen_creator"
-            android:paddingLeft="@dimen/_15sdp" />
+            android:src="@drawable/icon_classic"
+            app:riv_border_color="@color/SkyBlue"
+            app:riv_border_width=".5dp"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"
+            app:riv_tile_mode="clamp" />
 
         <TextView
-
             android:id="@+id/title_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -235,10 +238,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:background="@drawable/ic_area" />
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/_50sdp"-->
+            <!--android:layout_height="@dimen/_18sdp"-->
+            <!--android:background="@drawable/ic_area" />-->
+            <TextView
+                android:text="@string/Area"
+                android:background="@drawable/text_border"
+                android:textColor="@color/Red"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:textSize="@dimen/_11ssp"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/txt_area_detail"
@@ -252,10 +263,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:background="@drawable/ic_distance" />
+            <TextView
+                android:text="@string/DistanceType"
+                android:background="@drawable/text_border"
+                android:textColor="@color/Red"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:textSize="@dimen/_11ssp"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/txt_distance_detail"
@@ -269,11 +284,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:background="@drawable/ic_area" />
+            <TextView
+                android:text="@string/Season"
+                android:background="@drawable/text_border"
+                android:textColor="@color/Red"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:textSize="@dimen/_11ssp"
+                android:gravity="center"
 
+                />
             <TextView
                 android:id="@+id/txt_season"
                 android:layout_width="match_parent"
@@ -295,10 +315,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:background="@drawable/ic_area" />
+            <TextView
+                android:text="@string/AvarageSlope"
+                android:background="@drawable/text_border"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_11ssp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:gravity="center"
+                />
 
             <TextView
                 android:id="@+id/txt_average_slope"
@@ -312,10 +337,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:background="@drawable/ic_distance" />
+            <TextView
+                android:gravity="center"
+                android:text="@string/search_course_elevation"
+                android:background="@drawable/text_border"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_11ssp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_20sdp" />
 
             <TextView
                 android:id="@+id/txt_elevation"
@@ -329,10 +358,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:background="@drawable/ic_area" />
+            <TextView
+                android:text="@string/CourseType"
+                android:background="@drawable/text_border"
+                android:textColor="@color/Red"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+
+                android:textSize="@dimen/_11ssp"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/txt_course_type"
@@ -365,6 +399,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"></android.support.v4.view.ViewPager>
+        android:layout_marginRight="@dimen/_10sdp">
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

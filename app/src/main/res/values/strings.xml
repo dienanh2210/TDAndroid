@@ -113,6 +113,9 @@
     <string name="Home">ホーム</string>
     <string name="Register">コース登録</string>
     <string name="MyCourse">マイコース</string>
+    <string name="Season">旬の季節</string>
+    <string name="AvarageSlope">平均勾配</string>
+
 
     <string name="AchivementBadges">達成バッジ</string>
     <string name="SpotBadges">ご当地バッジ</string>
