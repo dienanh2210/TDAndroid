@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">Tour De</string>
+    <string name="facebook_app_id">203346416927583</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">E9SgLRW6z3YDe1tkZjA8gWNdu</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc
+</string>
+    <string name="desc_google_icon">Google Logo</string>
+    <string name="title_text">Google Sign-In\nQuickstart</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="signed_in">Signed in</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="signed_out">Signed out</string>
+    <string name="signed_in_err">"Error: please check logs."</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+
     <string name="title_activity_login">Sign in</string>
     <string name="title_course_list">Course List</string>
     <!-- Strings related to login -->
