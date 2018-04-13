@@ -1,35 +1,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.login.MenuPage">
+    android:background="@color/backgroud"
+    tools:context=".activity.MenuPageActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen50">
+        android:layout_height="@dimen/_30sdp">
         <TextView
-            android:id="@+id/btn_Close"
-            android:layout_width="@dimen/dimen100"
-            android:layout_height="@dimen/dimen45"
-            android:text="@string/Close"
-            android:textColor="@color/colorPrimar"
-            android:textSize="@dimen/dimen25"
+            android:id="@+id/tv_tutorial"
+            android:layout_width="@dimen/_100ssp"
+            android:layout_height="@dimen/_50ssp"
             android:gravity="center_horizontal"
-            android:layout_marginLeft="@dimen/dimen400"/>
+            android:paddingTop="@dimen/dimen5"
+            android:text="Tutorial"
+            android:layout_marginTop="@dimen/dimen5"
+            android:textSize="@dimen/dimen20"
+            android:textColor="@color/colorText"
+            android:textStyle="bold" />
         <TextView
-            android:layout_width="@dimen/dimen200"
-            android:layout_height="@dimen/dimen50"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/topic_title"
+            android:gravity="right"
+            android:paddingRight="@dimen/_11sdp"
+            android:text="@string/search_course_close"
+            android:textColor="@color/search_course_color_close_text"
+            android:textSize="@dimen/_16ssp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/MenuPage"
-            android:gravity="center_horizontal"
-            android:textSize="@dimen/dimen25"
-            android:textColor="@color/colorText"/>
-
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen35"
+        android:layout_marginTop="@dimen/dimen40"
         android:layout_alignParentTop="true"
         android:scrollbars="vertical">
         <LinearLayout
@@ -37,253 +52,315 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/dimen10"
+                android:background="@color/Gray">
+            </RelativeLayout>
+            <RelativeLayout
                 android:id="@+id/user_Info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
                 <TextView
-                    android:id="@+id/btn_User"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen9"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:onClick="clickMe"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/UserInfo"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/basic_Info"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_Basic"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_basic"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:onClick="clickMe"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/BasicInfo"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
+
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen25"
-                    android:layout_marginLeft="@dimen/dimen450"
-                    android:layout_marginTop="@dimen/dimen15"
-                    android:src="@drawable/icon_continue" />
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/_16sdp"
+                    android:text="@string/search_course_text_row"
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_16ssp"
+                    app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
-
             <RelativeLayout
-                android:id="@+id/badge_Collection"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/badge_collection"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_Badge"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:onClick="clickMe"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/BadgeCollection"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen25"
-                    android:layout_marginLeft="@dimen/dimen450"
-                    android:layout_marginTop="@dimen/dimen15"
-                    android:src="@drawable/icon_continue" />
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/_16sdp"
+                    android:text="@string/search_course_text_row"
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_16ssp"
+                    app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
-
             <RelativeLayout
-                android:id="@+id/new_User"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_NewUser"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:onClick="clickMe"
-                    android:text="@string/NewUserRegisretion"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
-                <ImageView
+                    android:id="@+id/tv_userregistration"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen25"
-                    android:layout_marginLeft="@dimen/dimen450"
-                    android:layout_marginTop="@dimen/dimen15"
-                    android:src="@drawable/icon_continue" />
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:text="@string/NewUserRegisretion"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
 
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/_16sdp"
+                    android:text="@string/search_course_text_row"
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_16ssp"
+                    app:srcCompat="@drawable/icon_next" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_Login"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:text="@string/Login"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
-                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen25"
-                    android:layout_marginLeft="@dimen/dimen450"
-                    android:layout_marginTop="@dimen/dimen15"
-                    android:src="@drawable/icon_continue" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:text="@string/Login"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/_16sdp"
+                    android:text="@string/search_course_text_row"
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_16ssp"
+                    app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_Logout"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/Logout"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/app_Info"
+                android:background="@color/search_course_color_title_background"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
-                <TextView
-                    android:id="@+id/btn_AppInfo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:text="@string/AppInfo"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
-            </RelativeLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:text="@string/AppInfo"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/how_To"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_HowTo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:text="@string/HowToUse"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
-                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen25"
-                    android:layout_marginLeft="@dimen/dimen450"
-                    android:layout_marginTop="@dimen/dimen15"
-                    android:src="@drawable/icon_continue" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:text="@string/HowToUse"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/_16sdp"
+                    android:text="@string/search_course_text_row"
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_16ssp"
+                    app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/privacy"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_Privacy"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:onClick="clickMe"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/PrivacyPolicy"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/inquiry"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_Inquiry"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/Inquiry"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/rateInApp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:id="@+id/btn_RateInApp"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/RateInApp"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/version"
                 android:layout_width="match_parent"
+                android:background="@color/search_course_color_title_background"
                 android:layout_height="@dimen/dimen60">
-                <TextView
-                    android:id="@+id/btn_Version"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen10"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:text="@string/Version"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25"/>
-            </RelativeLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:text="@string/Version"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen5"
-                    android:layout_marginTop="@dimen/dimen10"
-                    android:layout_marginLeft="@dimen/dimen10"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:text="@string/versiontwo"
-                    android:onClick="clickMe"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen25" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/Gray">
             </RelativeLayout>
 
         </LinearLayout>

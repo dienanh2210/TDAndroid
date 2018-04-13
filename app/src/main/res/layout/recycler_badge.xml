@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_200sdp"
+    android:orientation="vertical"
+    android:background="@drawable/course_border"
+    android:layout_margin="@dimen/_5sdp"
+    android:minWidth="@dimen/_120sdp"
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/img_badge"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/icon_classic"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/txt_date_get"
+        android:text="2018 03 03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/lightGray"
+        />
+    <TextView
+        android:text="classic badge"
+        android:id="@+id/txt_badge_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/_13ssp"
+        android:gravity="center"/>
+</LinearLayout>

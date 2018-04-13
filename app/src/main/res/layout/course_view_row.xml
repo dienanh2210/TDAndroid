@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dimen15"
-    android:layout_marginTop="@dimen/dimen10"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
     android:background="@drawable/course_border"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/dimen5"
-    android:paddingRight="@dimen/dimen5"
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingRight="@dimen/_5sdp"
 
     >
-
     <TextView
         android:id="@+id/txt_course_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/title_size"
+        android:textSize="@dimen/_15ssp"
         android:textStyle="bold"
         android:textColor="@color/Black"
         />
@@ -26,52 +25,53 @@
         android:id="@+id/txt_catch_phrase"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/course_list_margin_row" />
-
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/_13ssp"
+        />
     <RelativeLayout
         android:id="@+id/third_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/course_list_margin_row"
-        android:minHeight="@dimen/dimen30">
-
+        android:layout_marginTop="@dimen/_5sdp"
+        >
         <ImageView
             android:id="@+id/img_ic_area"
-            android:layout_width="@dimen/icon_area_width"
-            android:layout_height="@dimen/icon_area_height"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginRight="@dimen/course_list_margin_row"
+            android:layout_marginRight="@dimen/_5sdp"
             android:background="@drawable/ic_area" />
-
         <TextView
             android:id="@+id/txt_course_area"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/course_list_margin_row"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:maxWidth="@dimen/_100sdp"
             android:layout_toRightOf="@+id/img_ic_area"
-            android:maxWidth="@dimen/max_width_area_text"
-            android:textColor="@color/Red"
-            android:textStyle="bold" />
-
+            android:textColor="@color/colorButton"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            />
         <ImageView
-
             android:id="@+id/img_ic_distance"
-            android:layout_width="@dimen/icon_area_width"
-            android:layout_height="@dimen/icon_area_height"
-            android:layout_marginLeft="@dimen/course_list_margin_row"
-            android:layout_marginRight="@dimen/course_list_margin_row"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/txt_course_area"
             android:background="@drawable/ic_distance" />
-
         <TextView
             android:id="@+id/txt_distance"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/img_ic_distance"
-            android:textColor="@color/Red"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/colorButton"
+            />
     </RelativeLayout>
 
     <RelativeLayout
@@ -84,66 +84,63 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/dimen10"
-            android:layout_marginRight="@dimen/dimen10"
-            android:layout_marginStart="@dimen/dimen10"
-            android:layout_marginTop="@dimen/dimen10"
-            android:layout_marginBottom="@dimen/image_course_bottom_margin"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />
 
         <RelativeLayout
-            android:layout_width="@dimen/background_button_favorite_size"
-            android:layout_height="@dimen/background_button_favorite_size"
-            android:layout_alignBottom="@+id/img_course"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="@dimen/btn_favorite_margin_bottom"
-            android:layout_marginRight="@dimen/btn_favorite_margin_right"
+            android:layout_marginRight="@dimen/_20sdp"
             android:background="@drawable/circle">
 
             <ImageButton
-                android:id="@+id/btn_favorite"
+                android:id="@+id/btn_favorifte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="@dimen/dimen25"
+                android:layout_margin="@dimen/_15sdp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/icon_bicycle"
                 android:scaleType="fitCenter" />
         </RelativeLayout>
-
         <LinearLayout
             android:id="@+id/fifth_row"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img_course"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="@dimen/dimenminus40"
-            android:layout_marginLeft="@dimen/dimen10"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="@dimen/_10sdp"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/img_icon_comment"
-                android:layout_width="@dimen/dimen20"
-                android:layout_height="@dimen/dimen20"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:src="@drawable/icon_comment1"
-
                 />
-
             <TextView
                 android:id="@+id/txt_review_count"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="@dimen/dimen5"
-                android:textStyle="bold" />
+                android:paddingLeft="@dimen/_5sdp"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13ssp"
+                />
 
             <ImageView
                 android:id="@+id/img_icon_spot"
-                android:layout_width="@dimen/dimen20"
-                android:layout_height="@dimen/dimen20"
-                android:layout_marginLeft="@dimen/dimen20"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_toRightOf="@+id/txt_review_count"
                 android:src="@drawable/ic_spot" />
 
@@ -153,83 +150,85 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/img_icon_spot"
                 android:gravity="center"
-                android:paddingLeft="@dimen/dimen5"
+                android:paddingLeft="@dimen/_5sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/lst_star_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen5"
+                android:layout_marginLeft="@dimen/_15sdp"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/star_1"
-                    android:layout_width="@dimen/dimen25"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/star_gray" />
 
                 <ImageView
                     android:id="@+id/star_2"
-                    android:layout_width="@dimen/dimen25"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/star_gray" />
 
                 <ImageView
                     android:id="@+id/star_3"
-                    android:layout_width="@dimen/dimen25"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/star_gray" />
 
                 <ImageView
                     android:id="@+id/star_4"
-                    android:layout_width="@dimen/dimen25"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/star_gray" />
 
                 <ImageView
                     android:id="@+id/star_5"
-                    android:layout_width="@dimen/dimen25"
-                    android:layout_height="@dimen/dimen25"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/star_gray" />
             </LinearLayout>
 
         </LinearLayout>
-
     </RelativeLayout>
 
     <TextView
         android:id="@+id/txt_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/_13ssp"
         android:textColor="@color/SkyBlue" />
 
     <RelativeLayout
         android:id="@+id/layout_creator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen15"
-        android:layout_marginTop="@dimen/dimen15">
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp">
 
         <TextView
             android:id="@+id/txt_post_user"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen50"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dimen5"
-            android:layout_marginTop="@dimen/dimen5"
-            android:paddingTop="@dimen/dimen5"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:textSize="@dimen/_13ssp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/img_post_user"
-            android:layout_width="@dimen/dimen25"
-            android:layout_height="@dimen/dimen25"
-            android:layout_marginLeft="@dimen/dimen5"
-            android:layout_marginRight="@dimen/dimen5"
-            android:layout_marginTop="@dimen/dimen5"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_toLeftOf="@id/txt_post_user"
-            android:background="@drawable/icon_pen_creator" />
+             />
     </RelativeLayout>
 
 </LinearLayout>

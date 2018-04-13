@@ -16,10 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import vn.javis.tourde.R;
-
-import vn.javis.tourde.activity.login.MenuPage;
-import vn.javis.tourde.database.ListCourseAPI;
-import vn.javis.tourde.activity.LoginFragment;
+import vn.javis.tourde.apiservice.ListCourseAPI;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,19 +35,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-//        openPage(LoginFragment.newInstance());
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
-        Intent intent = new Intent(this, MenuPage.class);
+        Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
-        //openPage(new LoginFragment());
 
     }
 
     public void loadCourseList() {
 
-      //  Intent intent = new Intent(MainActivity.this, CourseListActivity.class);
-       // startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, CourseListActivity.class);
+        startActivity(intent);
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -76,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
