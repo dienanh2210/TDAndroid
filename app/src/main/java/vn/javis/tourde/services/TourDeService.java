@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import vn.javis.tourde.apiservice.ApiEndpoint;
+import vn.javis.tourde.volley.VolleyCustomRequest;
 import vn.javis.tourde.volley.VolleySingleton;
 
 import static vn.javis.tourde.services.ServiceResult.*;
@@ -49,8 +50,6 @@ public abstract class TourDeService {
         return ApiEndpoint.BASE_URL + url;
     }
 
-    public abstract void parseResponse(JSONObject response);
-
     public static void getWithAuth(String url, HashMap<String, String> params, final ServiceCallback serviceCallback) {
         StringRequest mRequest = new StringRequest(Request.Method.GET, generateURL(url, params), new Response.Listener<String>() {
             @Override
@@ -58,11 +57,6 @@ public abstract class TourDeService {
                 JSONObject response = null;
                 try {
                     response = new JSONObject(responseStr);
-//                    if (response.has("resultCode") && response.getInt("resultCode") == ServiceResult.RESULT_SUCCESS.getValue()) {
-//                        serviceCallback.onSuccess(ServiceResult.RESULT_SUCCESS, response.get("data"));
-//                    } else {
-//                        serviceCallback.onSuccess(ServiceResult.fromInteger(response.getInt("resultCode")), response);
-//                    }
                     serviceCallback.onSuccess(RESULT_SUCCESS, response);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -79,7 +73,6 @@ public abstract class TourDeService {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json");
-//                headers.put("authorization", "Bearer dsfsdgdsgs;");
                 return headers;
             }
         };
@@ -87,7 +80,7 @@ public abstract class TourDeService {
         TourDeApplication.getInstance().addToRequestQueue(mRequest, url);
     }
 
-    public static void postWithAuth(String api, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
+    /*public static void postWithAuth(String api, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
         JSONObject jsonObject = null;
         if (params != null) {
             jsonObject = new JSONObject(params);
@@ -106,70 +99,28 @@ public abstract class TourDeService {
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-            //    Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","application/x-www-form-urlencoded");
+                //    Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
                 return params;
             }
         };
 
-     //   int initialTimeoutMs = 60000;
-      //  int maxNumRetries = 0;
-     //   float backoffMultiplier = 1.0f;
-    //    mJsonObject.setRetryPolicy(new DefaultRetryPolicy(initialTimeoutMs, maxNumRetries, backoffMultiplier));
-
+        int initialTimeoutMs = 60000;
+        int maxNumRetries = 0;
+        float backoffMultiplier = 1.0f;
+        mJsonObject.setRetryPolicy(new DefaultRetryPolicy(initialTimeoutMs, maxNumRetries, backoffMultiplier));
         TourDeApplication.getInstance().addToRequestQueue(mJsonObject, api);
-    }
-    public static void postWithAuthString(String api, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
+    }*/
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,ApiEndpoint.BASE_URL + api, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                serviceCallback.onSuccess(RESULT_SUCCESS, response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                serviceCallback.onError(error);
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                return params;
-            }
+    public static void postWithAuth(String api, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiEndpoint.BASE_URL + api, new Response.Listener<String>() {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-
-        TourDeApplication.getInstance().addToRequestQueue(stringRequest, api);
-    }
-    public static void postWithAuthObject(String api, HashMap<String, Object> params, final ServiceCallback serviceCallback) {
-        JSONObject jsonObject = null;
-        if (params != null) {
-//            AccessToken accessToken = SMOApplication.getInstance().getAccessToken();
-//            if(accessToken != null){
-//                params.put("access_token", accessToken.getAccessToken());
-//                params.put("aes_key", accessToken.getAesKey());
-//                params.put("rsa_public_key", accessToken.getRsaPublicKey());
-//            }
-            jsonObject = new JSONObject(params);
-
-        }
-
-        JsonObjectRequest mJsonObject = new JsonObjectRequest(
-                Request.Method.POST, ApiEndpoint.BASE_URL + api, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String responseStr) {
+                JSONObject response = null;
                 try {
-                    if (response.has("resultCode") && response.getInt("resultCode") == RESULT_SUCCESS.getValue()) {
-                        serviceCallback.onSuccess(RESULT_SUCCESS, response.get("data"));
-                    } else {
-                        serviceCallback.onSuccess(fromInteger(response.getInt("resultCode")), response);
-                    }
+                    response = new JSONObject(responseStr);
+                    serviceCallback.onSuccess(RESULT_SUCCESS, response);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     serviceCallback.onSuccess(RESULT_ERROR, response);
@@ -182,21 +133,18 @@ public abstract class TourDeService {
             }
         }) {
             @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+
+            @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
-//                headers.put("Content-Type", "application/json");
-                headers.put("authorization", "Bearer adadad");
-//                headers.put("authorization", "Bearer dsfsdgdsgs;");
-                return headers;
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
             }
         };
-
-        int initialTimeoutMs = 60000;
-        int maxNumRetries = 0;
-        float backoffMultiplier = 1.0f;
-        mJsonObject.setRetryPolicy(new DefaultRetryPolicy(initialTimeoutMs, maxNumRetries, backoffMultiplier));
-
-        TourDeApplication.getInstance().addToRequestQueue(mJsonObject, api);
+        TourDeApplication.getInstance().addToRequestQueue(stringRequest, api);
     }
 
 }
