@@ -4,13 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.widget.TextView;
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.UserRegistration.RegisterFragment.RegisterActivity;
-import vn.javis.tourde.activity.UserRegistration.RegisterFragment.RegisterFragment;
 
 public class MenuEntryActivity extends BaseActivity {
     RelativeLayout rlt_usermailrigister;

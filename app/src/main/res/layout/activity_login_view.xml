@@ -49,7 +49,7 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
 
@@ -69,12 +69,12 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
         <EditText
-            android:id="@+id/edt_email"
-            android:layout_width="wrap_content"
+            android:id="@+id/edt_emaillogin"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/_36sdp"
             android:background="@color/backgroud"
             android:hint="@string/hint_email"
@@ -83,7 +83,7 @@
             android:textSize="@dimen/_15sdp" />
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
         <RelativeLayout
@@ -102,10 +102,11 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
         <EditText
+            android:id="@+id/edt_passwordlogin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen60"
             android:background="@color/backgroud"
@@ -115,12 +116,12 @@
             android:textSize="@dimen/_15sdp" />
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
 
         <Button
-            android:id="@+id/appCompatButtonLogin"
+            android:id="@+id/bt_login"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:background="@drawable/custom_frame"
@@ -143,7 +144,7 @@
             android:textSize="@dimen/_15sdp" />
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_marginTop="@dimen/dimen10"
             android:background="@color/Gray">
         </RelativeLayout>
@@ -164,21 +165,20 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/btnLoginFacebook"
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
+            android:layout_height="@dimen/_44sdp">
 
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_facebook" />
             <TextView
@@ -188,8 +188,8 @@
                 android:text="@string/LoginFacebook"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -203,19 +203,19 @@
                 app:srcCompat="@drawable/icon_next" /> </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
+            android:layout_height="@dimen/_44sdp">
 
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_twitter" />
             <TextView
@@ -225,8 +225,8 @@
                 android:text="@string/LoginTwitter"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -240,19 +240,19 @@
                 app:srcCompat="@drawable/icon_next" /> </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
+            android:layout_height="@dimen/_44sdp">
 
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_google" />
             <TextView
@@ -262,8 +262,8 @@
                 android:text="@string/LoginGoogle"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -277,19 +277,20 @@
                 app:srcCompat="@drawable/icon_next" /> </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rlt_line"
             android:layout_width="match_parent"
             android:background="@color/backgroud"
-            android:layout_height="@dimen/_43sdp">
+            android:layout_height="@dimen/_44sdp">
 
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_line" />
             <TextView
@@ -299,8 +300,8 @@
                 android:text="@string/LoginLine"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -314,7 +315,7 @@
                 app:srcCompat="@drawable/icon_next" /> </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:background="@color/Gray">
         </RelativeLayout>
     </android.support.v7.widget.LinearLayoutCompat>

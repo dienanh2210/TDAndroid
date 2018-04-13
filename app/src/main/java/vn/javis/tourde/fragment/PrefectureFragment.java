@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity.UserRegistration.RegisterFragment;
+package vn.javis.tourde.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,24 +8,46 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.RegisterActivity;
+import vn.javis.tourde.activity.databasetest.Data;
+import vn.javis.tourde.adapter.ListAdapter;
 
 public class PrefectureFragment extends Fragment {
 
     private RecyclerView rcv_list;
     private List<Data> dataList;
+    private Button btn_choose;
+    private OnFragmentInteractionListener listener;
+
+    public static PrefectureFragment newInstance(OnFragmentInteractionListener listener) {
+        PrefectureFragment fragment = new PrefectureFragment();
+        fragment.listener = listener;
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate( R.layout.activity_prefecture_fragment, container, false);
         rcv_list = view.findViewById(R.id.rcv_list);
+        btn_choose = view.findViewById(R.id.btn_choose);
         createData();
+        btn_choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onFragmentInteraction("1234abc");
+                    ((RegisterActivity)getActivity()).onBackPressed();
+                }
+            }
+        });
         return view;
     }
     private void createData() {
@@ -73,4 +95,9 @@ public class PrefectureFragment extends Fragment {
         rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
         rcv_list.setAdapter(new ListAdapter(getContext(), dataList));
     }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(String content);
+    }
+
 }

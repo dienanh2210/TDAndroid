@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity.UserRegistration.RegisterFragment;
+package vn.javis.tourde.activity.databasetest;
 
 import java.io.Serializable;
 import java.util.List;
