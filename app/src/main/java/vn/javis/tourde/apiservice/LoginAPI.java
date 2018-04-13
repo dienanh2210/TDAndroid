@@ -18,10 +18,10 @@ public class LoginAPI {
         HashMap<String, String> param = new HashMap<>();
         param.put("email",email);
         param.put("password",password);
-        TourDeService.postWithAuth( ApiEndpoint.POST_LOGIN_ACCOUNT, param, new ServiceCallback() {
+        TourDeService.postWithAuthString( ApiEndpoint.POST_LOGIN_ACCOUNT, param, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) {
-                Log.i( "Login ACCOUNT: ", ((JSONObject) response).toString() +email +"-"+password );
+                Log.i( "Login ACCOUNT: ", ( response).toString() +email +"-"+password );
             }
 
             @Override
@@ -34,10 +34,10 @@ public class LoginAPI {
         HashMap<String, String> param = new HashMap<>();
         param.put("email",email);
         param.put("password",password);
-        TourDeService.postWithAuth( ApiEndpoint.POST_CREATE_ACCOUNT, param, new ServiceCallback() {
+        TourDeService.postWithAuthString( ApiEndpoint.POST_CREATE_ACCOUNT, param, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) {
-                Log.i( "CREATE ACCOUNT: ", ((JSONObject) response).toString() +email +"-"+password );
+                Log.i( "CREATE ACCOUNT: ", (response).toString() +email +"-"+password );
             }
 
             @Override
