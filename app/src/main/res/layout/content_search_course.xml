@@ -59,14 +59,14 @@
                 android:textSize="@dimen/_16ssp" />
 
 
-            <TextView
+            <ImageView
+                android:id="@+id/im_select_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:paddingRight="@dimen/_16sdp"
-                android:text="@string/search_course_text_row"
-                android:textColor="@color/search_course_color_row"
+                android:src="@drawable/icon_next"
                 android:textSize="@dimen/_16ssp" />
 
 
@@ -145,7 +145,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -173,7 +174,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -201,7 +203,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -229,7 +232,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -294,7 +298,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -321,7 +326,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -405,7 +411,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -433,7 +440,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -461,7 +469,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:contentDescription="@string/search_course_choose_image_description"
-                    android:src="@drawable/up_arrow"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mark_red"
                     android:visibility="invisible" />
             </RelativeLayout>
 
@@ -512,14 +521,14 @@
                 android:textSize="@dimen/_16ssp" />
 
 
-            <TextView
+            <ImageView
+                android:id="@+id/im_more_searching"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:paddingRight="@dimen/_16sdp"
-                android:text="@string/search_course_text_row"
-                android:textColor="@color/search_course_color_row"
+                android:src="@drawable/icon_next"
                 android:textSize="@dimen/_16ssp" />
 
 
@@ -590,7 +599,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_30sdp"
-                android:background="@color/search_course_color_search_button_background"
+                android:background="@drawable/course_search_btn_bg"
                 android:text="@string/search_course_text_button"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_14ssp"
