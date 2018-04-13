@@ -60,7 +60,7 @@
             android:background="@color/search_course_color_title_background">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_16sdp"
@@ -81,10 +81,10 @@
             android:layout_height="@dimen/_45sdp">
 
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_mail" />
             <TextView
@@ -94,8 +94,8 @@
                 android:text="@string/TextMailNewEntry"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
 
             <ImageView
@@ -119,21 +119,21 @@
             android:background="@color/backgroud"
             android:layout_height="@dimen/_45sdp">
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_27ssp"
+                android:layout_height="@dimen/_27ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_facebook" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_55sdp"
-                android:text="@string/LoginFacebook"
+                android:text="@string/LoginFacebookMenuEntry"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -155,21 +155,21 @@
             android:background="@color/backgroud"
             android:layout_height="@dimen/_45sdp">
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_twitter" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_55sdp"
-                android:text="@string/LoginTwitter"
+                android:text="@string/LoginTwitterMenuEntry"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -191,21 +191,21 @@
             android:background="@color/backgroud"
             android:layout_height="@dimen/_45sdp">
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_google" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_55sdp"
-                android:text="@string/LoginGoogle"
+                android:text="@string/LoginGoogleMenuEntry"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -227,10 +227,10 @@
             android:background="@color/backgroud"
             android:layout_height="@dimen/_45sdp">
             <ImageView
-                android:layout_width="@dimen/_35ssp"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_width="@dimen/_26ssp"
+                android:layout_height="@dimen/_26ssp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_9sdp"
                 android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/icon_line" />
             <TextView
@@ -240,8 +240,8 @@
                 android:text="@string/LoginLine"
                 android:paddingLeft="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/dimen25"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:textSize="@dimen/_13ssp"
                 android:textColor="@color/colorText"/>
             <ImageView
                 android:layout_width="@dimen/_25sdp"

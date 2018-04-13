@@ -43,7 +43,7 @@
         <activity
             android:name=".activity.BasicInfomation.BasicInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.UserRegistration.RegisterFragment.RegisterActivity"
+        <activity android:name=".activity.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"
 
             android:screenOrientation="portrait"

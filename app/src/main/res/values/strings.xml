@@ -73,6 +73,9 @@
     <string name="LoginTwitter">Twitterアカウント</string>
     <string name="LoginGoogle">Google+アカウント</string>
     <string name="LoginLine">LINEアカウントで登録</string>
+    <string name="LoginFacebookMenuEntry">Facebookアカウントで登録</string>
+    <string name="LoginTwitterMenuEntry">Twitterアカウントで登録</string>
+    <string name="LoginGoogleMenuEntry">Google+アカウントで登録</string>
     <string name="title_activity_course_search">CourseSearchActivity</string>
 
     <!-- search course text -->
