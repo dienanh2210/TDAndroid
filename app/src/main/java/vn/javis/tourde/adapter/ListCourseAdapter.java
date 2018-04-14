@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CourseViewHolder holder, final int position) {
         Course model = listCourse.get(position);
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
@@ -52,11 +54,15 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         holder.txtReviewCount.setText(model.getReviewCount());
         holder.txtSpotCount.setText(model.getSpotCount());
         holder.txtPostUser.setText(model.getPostUserName());
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-        imageLoader.getMemoryCache();
-        imageLoader.getInstance().displayImage(model.getTopImage(), holder.imgCourse);
-        imageLoader.getInstance().displayImage(model.getPostUserImage(), holder.imgPostUser);
+
+     //   ImageLoader imageLoader = ImageLoader.getInstance();
+     //   imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+     //   imageLoader.getMemoryCache();
+     //   imageLoader.getInstance().displayImage(model.getTopImage(), holder.imgCourse);
+     //   imageLoader.getInstance().displayImage(model.getPostUserImage(), holder.imgPostUser);
+
+        Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
+        Picasso.with(context).load(model.getPostUserImage()).into(holder.imgPostUser);
 
         int rate = Math.round(model.getRatingAverage());
 
@@ -81,6 +87,15 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
             holder.imgStar4.setImageResource(R.drawable.star_yellow);
             holder.imgStar5.setImageResource(R.drawable.star_yellow);
         }
+        holder.txtTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onItemClickedListener !=null){
+                    onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -125,5 +140,13 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemClickedListener{
+        void onItemClick(int position);
+    }
+    private OnItemClickedListener  onItemClickedListener;
+    public void setOnItemClickListener(OnItemClickedListener onItemClickedListener){
+        this.onItemClickedListener = onItemClickedListener;
     }
 }

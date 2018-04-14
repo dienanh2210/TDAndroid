@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".activity.UserRegistration.RegisterFragment.RegisterFragment">
+    tools:context=".fragment.RegisterFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,7 @@
             android:layout_height="@dimen/_30sdp">
 
             <TextView
-                android:id="@+id/btn_Back_BasicInfo_Login"
+                android:id="@+id/tv_back_resgister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Back"
@@ -314,6 +314,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp">
                 <TextView
+                    android:id="@+id/tv_prefecture"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
