@@ -16,7 +16,7 @@ import java.util.List;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.RegisterActivity;
-import vn.javis.tourde.activity.databasetest.Data;
+import vn.javis.tourde.model.Data;
 import vn.javis.tourde.adapter.ListAdapter;
 
 public class PrefectureFragment extends Fragment {

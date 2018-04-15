@@ -9,25 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:layout_alignParentTop="true"
-        android:background="@drawable/header_border"
-        >
+        android:background="@drawable/header_border">
+
         <ImageButton
             android:id="@+id/btn_menu"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimen10"
-            android:background="@drawable/ic_menu_option" />
+            android:layout_marginStart="@dimen/dimen10"
+            android:background="@drawable/ic_menu_option"
+            android:contentDescription="@string/button_description" />
 
-        <TextView
+        <ImageView
             android:id="@+id/actionbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
-            android:layout_gravity="center"
+            android:layout_toEndOf="@+id/btn_menu"
+            android:layout_toStartOf="@+id/btn_search"
             android:gravity="center"
-            android:text="@string/title_course_list"
+            android:src="@drawable/course_list_title"
             android:textAlignment="center"
             android:textColor="@color/Black"
             android:textSize="@dimen/_18ssp"
@@ -37,11 +40,12 @@
             android:id="@+id/btn_search"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_gravity="right"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:background="@drawable/icon_search" />
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/icon_search"
+            android:contentDescription="@string/button_description" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -52,8 +56,7 @@
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_40sdp"
-        android:paddingBottom="@dimen/_100sdp">
-    </android.support.v7.widget.RecyclerView>
+        android:paddingBottom="@dimen/_100sdp" />
 
     <LinearLayout
         android:id="@+id/course_list_footer"
@@ -72,11 +75,11 @@
                 android:id="@+id/btn_previous_page"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_weight="1"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:background="@drawable/btn_previous_page"
-               />
+                android:contentDescription="@string/button_description" />
+
             <TextView
                 android:id="@+id/txt_page_number"
                 android:layout_width="wrap_content"
@@ -84,26 +87,32 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_toEndOf="@+id/btn_previous_page"
+                android:layout_toStartOf="@+id/btn_next_page"
                 android:gravity="center"
-                android:textSize="@dimen/_18ssp" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_16ssp" />
+
             <ImageButton
                 android:id="@+id/btn_next_page"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dimen10"
-                android:layout_weight="1"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/dimen10"
                 android:background="@drawable/btn_next_page"
-                android:paddingRight="@dimen/_10sdp" />
+                android:contentDescription="@string/button_description"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_1sdp" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/header_border"
-            android:weightSum="3"
-            android:paddingTop="@dimen/_5sdp">
+            android:baselineAligned="false"
+            android:paddingTop="@dimen/_5sdp"
+            android:weightSum="3">
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -116,7 +125,9 @@
                     android:layout_height="@dimen/_18sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/icon_home" />
+                    android:background="@drawable/icon_homeclick"
+                    android:contentDescription="@string/button_description" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,22 +136,24 @@
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
-                    android:textSize="@dimen/_11ssp"
                     android:text="@string/Home"
-                    />
+                    android:textSize="@dimen/_11ssp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_weight="1">
+
                 <ImageButton
                     android:id="@+id/btn_register_footer"
                     android:layout_width="@dimen/_18sdp"
                     android:layout_height="@dimen/_18sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/icon_resignter" />
+                    android:background="@drawable/icon_resignter"
+                    android:contentDescription="@string/button_description" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -149,21 +162,23 @@
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
-                    android:textSize="@dimen/_11ssp"
-                    android:text="@string/Register" />
+                    android:text="@string/Register"
+                    android:textSize="@dimen/_11ssp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_weight="1">
+
                 <ImageButton
                     android:id="@+id/btn_my_course_footer"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_18sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/icon_course" />
+                    android:background="@drawable/icon_course"
+                    android:contentDescription="@string/button_description" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -173,8 +188,8 @@
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="center"
-                    android:textSize="@dimen/_11ssp"
-                    android:text="@string/MyCourse" />
+                    android:text="@string/MyCourse"
+                    android:textSize="@dimen/_11ssp" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

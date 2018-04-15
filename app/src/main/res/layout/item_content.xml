@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/_50sdp"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -26,17 +26,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40ssp"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="@dimen/_1sdp"
                 android:textSize="@dimen/_15ssp"
-                android:text="グルメが充実" />
+                android:text="@string/item_text" />
 
             <ImageView
                 android:id="@+id/imv_mark"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/item_text"
                 android:src="@drawable/ic_mark_red"
                 android:visibility="gone" />
 

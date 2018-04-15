@@ -97,7 +97,6 @@ public class CourseDetailFragment extends BaseFragment {
 
     }
     void showCourseDetail(){
-
         Course model = ListCourseAPI.getInstance().getCouseByIndex(mPosition);
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());

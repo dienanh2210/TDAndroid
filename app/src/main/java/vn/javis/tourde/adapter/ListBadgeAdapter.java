@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,16 +21,17 @@ import vn.javis.tourde.model.Badge;
 
 public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.BadgeViewHolder>{
 
-    List<Badge> listBadge = new ArrayList<>();
-    Context context;
-    View mView;
+    private List<Badge> listBadge;
+    private Context context;
+    private View mView;
     public ListBadgeAdapter(List<Badge> listBadge, Context context) {
         this.listBadge = listBadge;
         this.context = context;
     }
 
     @Override
-    public BadgeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public BadgeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
          mView = inflater.inflate(R.layout.recycler_badge, parent, false);
         return new BadgeViewHolder(mView);
@@ -69,7 +69,7 @@ public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.Badg
         @BindView(R.id.img_badge)
         ImageView imgBadge;
 
-        public BadgeViewHolder(View itemView) {
+        private BadgeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
