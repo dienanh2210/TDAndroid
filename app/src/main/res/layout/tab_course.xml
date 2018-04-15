@@ -8,7 +8,7 @@
         android:id="@+id/course_overview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="コース概要" />
+        android:text="@string/course_outline" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="想定平均走行ペース" />
+            android:text="@string/course_average" />
 
         <TextView
 
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1000" />
+            android:text="@string/course_1000" />
     </LinearLayout>
 
     <LinearLayout
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="スタート地点" />
+            android:text="@string/course_start_point" />
 
         <TextView
 
@@ -53,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1000" />
+            android:text="@string/course_1000" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,20 +68,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:text="スタート地点までのアクセス" />
+            android:text="@string/course_access_start_point" />
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5">
+
             <ImageView
                 android:id="@+id/course_overview42"
                 android:layout_width="@dimen/_10sdp"
                 android:layout_height="@dimen/_10sdp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:contentDescription="@string/image_description"
                 android:background="@drawable/up_arrow"
-                android:gravity="right" />
+                android:gravity="end" />
         </RelativeLayout>
 
     </LinearLayout>

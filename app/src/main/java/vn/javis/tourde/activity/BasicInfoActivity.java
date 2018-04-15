@@ -1,14 +1,10 @@
-package vn.javis.tourde.activity.BasicInfomation;
+package vn.javis.tourde.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.BaseActivity;
-import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.MenuPageActivity;
 
 public class BasicInfoActivity extends BaseActivity {
 

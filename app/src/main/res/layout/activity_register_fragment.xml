@@ -6,355 +6,409 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".fragment.RegisterFragment">
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp">
-
-            <TextView
-                android:id="@+id/tv_back_resgister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Back"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/_10ssp"
-                android:textSize="@dimen/_16ssp"
-                android:textColor="@color/search_course_color_close_text" />
-            <TextView
-                android:id="@+id/tv_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/topic_title"
-                android:gravity="right"
-                android:paddingRight="@dimen/_11sdp"
-                android:text="@string/search_course_close"
-                android:textColor="@color/search_course_color_close_text"
-                android:textSize="@dimen/_16ssp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/LoginView"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_17ssp"
-                android:textStyle="bold"/>
-        </RelativeLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:background="@color/search_course_color_title_background">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:text="@string/TextemailUser"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:background="@color/backgroud"
-                android:hint="@string/hint_email"
-                android:textColorHint="@color/Gray"
-                android:paddingLeft="@dimen/_15sdp"
-                android:textSize="@dimen/_15sdp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:background="@color/search_course_color_title_background">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:text="@string/PassWord"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-
-            <EditText
-                android:id="@+id/edt_password"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:background="@color/backgroud"
-                android:hint="@string/hint_password"
-                android:textColorHint="@color/Gray"
-                android:paddingLeft="@dimen/_15sdp"
-                android:textSize="@dimen/_15sdp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-        </LinearLayout>
+        android:layout_height="@dimen/_30sdp">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:text="@string/TextHelpUser"
+            android:id="@+id/tv_back_resgister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:text="@string/Back"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_15ssp">
-        </TextView>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#C8CDD0" />
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/register_title"
+            android:gravity="end"
+            android:paddingEnd="@dimen/_11sdp"
+            android:paddingStart="@dimen/_1sdp"
+            android:text="@string/search_course_close"
+            android:textColor="@color/search_course_color_close_text"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/register_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/LoginView"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:background="@color/search_course_color_title_background">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:text="@string/TextGender"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:id="@+id/rlt_man"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/_15sdp"
-                        android:text="@string/TextMan"
-                        android:textSize="@dimen/_15ssp"/>
-                    <ImageView
-                        android:id="@+id/imv_mark_man"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/ic_mark_red" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                </RelativeLayout>
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:background="#C8CDD0" />
 
                 <RelativeLayout
-                    android:id="@+id/rlt_woman"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/search_course_color_title_background">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/TextemailUser"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@color/backgroud"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    android:paddingEnd="@dimen/_1sdp"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:textColorHint="@color/Gray"
+                    android:textSize="@dimen/_15sdp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/search_course_color_title_background">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/PassWord"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+                <EditText
+                    android:id="@+id/edt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@color/backgroud"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:paddingEnd="@dimen/_1sdp"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:textColorHint="@color/Gray"
+                    android:textSize="@dimen/_15sdp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="@string/TextHelpUser"
+                android:textColor="@color/search_course_color_close_text"
+                android:textSize="@dimen/_15ssp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#C8CDD0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/search_course_color_title_background">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/TextGender"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rlt_man"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@+id/imv_mark_man"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="@dimen/_1sdp"
+                            android:paddingStart="@dimen/_15sdp"
+                            android:text="@string/TextMan"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:id="@+id/imv_mark_man"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/image_description"
+                            android:src="@drawable/ic_mark_red" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#C8CDD0" />
+
+                    <RelativeLayout
+                        android:id="@+id/rlt_woman"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingEnd="@dimen/_1sdp"
+                            android:paddingStart="15dp"
+                            android:text="@string/TextWoman"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:id="@+id/imv_mark_woman"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/image_description"
+                            android:src="@drawable/ic_mark_red"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/search_course_color_title_background">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/TextAge"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:paddingLeft="15dp"
-                        android:text="@string/TextWoman"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/im_10t"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="@dimen/_1sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:text="@string/register_10t"
+                        android:textSize="@dimen/_15ssp" />
 
                     <ImageView
-                        android:id="@+id/imv_mark_woman"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:id="@+id/im_10t"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
+                        android:contentDescription="@string/image_description"
+                        android:paddingEnd="@dimen/_16sdp"
+                        android:paddingStart="@dimen/_1sdp"
+                        android:textColor="@color/search_course_color_row"
+                        android:textSize="@dimen/_16ssp"
+                        app:srcCompat="@drawable/icon_next" />
 
+                </RelativeLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/search_course_color_title_background">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/TextPrefecture"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+
+                <RelativeLayout
+                    android:id="@+id/rlt_prefecture"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp">
+
+                    <TextView
+                        android:id="@+id/tv_prefecture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/im_choose"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="@dimen/_1sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:text="@string/register_hok"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <ImageView
+                        android:id="@+id/im_choose"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/image_description"
+                        android:paddingEnd="@dimen/_16sdp"
+                        android:paddingStart="@dimen/_1sdp"
+                        android:text="@string/search_course_text_row"
+                        android:textColor="@color/search_course_color_row"
+                        android:textSize="@dimen/_16ssp"
+                        app:srcCompat="@drawable/icon_next" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C8CDD0" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/appCompatButtonLogin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/custom_frame"
+                android:text="@string/text_login"
+                android:textAlignment="center"
+                android:textColor="@color/backgroud"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:textSize="@dimen/_15sdp" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:background="@color/search_course_color_title_background">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:text="@string/TextAge"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="@dimen/_15ssp"
-                    android:text="10t" />
-
-                <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="@dimen/_16sdp"
-                    android:text="@string/search_course_text_row"
-                    android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16ssp"
-                    app:srcCompat="@drawable/icon_next" />/>
-
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:background="@color/search_course_color_title_background">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:text="@string/TextPrefecture"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-            <RelativeLayout
-                android:id="@+id/rlt_prefecture"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp">
-                <TextView
-                    android:id="@+id/tv_prefecture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/_15sdp"
-                    android:text="北海道"
-                    android:textSize="@dimen/_15ssp"/>
-
-                <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="@dimen/_16sdp"
-                    android:text="@string/search_course_text_row"
-                    android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16ssp"
-                    app:srcCompat="@drawable/icon_next" /> />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-        </LinearLayout>
-        <Button
-            android:id="@+id/appCompatButtonLogin"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/custom_frame"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/text_login"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:textColor="@color/backgroud"
-            android:textSize="@dimen/_15sdp"
-            android:textAlignment="center" />
-    </LinearLayout>
-
-
-
-
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
+
