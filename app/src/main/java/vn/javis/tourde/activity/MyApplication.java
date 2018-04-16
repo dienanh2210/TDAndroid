@@ -39,10 +39,6 @@ public class MyApplication extends Application{
                 .debug(true)
                 .build();
         Twitter.initialize(config);
-//        TwitterAuthConfig authConfig = new TwitterAuthConfig(CONSUMER_KEY, CONSUMER_SECRET);
-//        Fabric.with(this, authConfig);
-//        final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         final OkHttpClient customClient = new OkHttpClient.Builder().build();
 
         final TwitterSession activeSession = TwitterCore.getInstance()
@@ -58,16 +54,11 @@ public class MyApplication extends Application{
         }
     }
 
-    /**
-     * @return ApplicationController singleton instance
-     */
     public static synchronized MyApplication getInstance() {
         return sInstance;
     }
 
     public RequestQueue getRequestQueue() {
-        // lazy initialize the request queue, the queue instance will be
-        // created when it is accessed for the first time
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }

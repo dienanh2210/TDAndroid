@@ -13,19 +13,24 @@ import android.widget.Button;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.tasks.Task;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -70,10 +75,10 @@ public class LoginFragment extends BaseFragment implements LoginView {
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String LINE_CHANEL_ID = "1573462307";
+    private static final String LINE_CHANEL_ID = "1574725654";
     public static final int RC_LN_SIGN_IN = 006;
     private static LineApiClient lineApiClient;
+
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
@@ -95,10 +100,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
                                 if (response.getError() != null) {
                                     // handle error
                                 } else {
-                                    String user_lastname = me.optString("last_name");
-                                    String user_firstname = me.optString("first_name");
-                                    String user_email = response.getJSONObject().optString("email");
-                                    Logger.i("GraphRequest", user_lastname + "-" + user_firstname + "-" + user_email);
+                                    Log.i("face", me.optString("id"));
+                                    callPostAPISNS(me.optString("id"), "2");
                                 }
                             }
                         });
@@ -110,7 +113,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
             }
 
             @Override
-            public void onCancel() {}
+            public void onCancel() {
+            }
 
             @Override
             public void onError(FacebookException e) {
@@ -124,15 +128,12 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-        //line
-
-
     }
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         onInit();
-        View mView =inflater.inflate(R.layout.activity_login_view, container, false);
+        View mView = inflater.inflate(R.layout.activity_login_view, container, false);
 
         return mView;
     }
@@ -144,25 +145,18 @@ public class LoginFragment extends BaseFragment implements LoginView {
         twitterAuthClient.onActivityResult(requestCode, resultCode, data);// twitter
         //googleplus
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-
             handleSignInResult(task);
         }
         //line
-        if (requestCode == RC_LN_SIGN_IN)
-        {
+        if (requestCode == RC_LN_SIGN_IN) {
             handleLoginResult(data);
-        }else
-        {
-            Log.e(TAG, "onActivityResult: Unknown Request response");
         }
     }
 
     @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line})
     public void onClickView(View view) {
-        Log.d(TAG, "onClickView: "+view);
+
         switch (view.getId()) {
             case R.id.rl_facebook:
                 LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList(PUBLIC_PROFILE, EMAIL));
@@ -174,12 +168,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
                         // Success
                         TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
                         TwitterAuthToken authToken = session.getAuthToken();
-                     //   String token = authToken.token;
-                      //  String secret = authToken.secret;
-                        callPostAPISNS(""+session.getUserId(),"1");
-                        Toast.makeText(getContext(), "Login success " +session.getUserId(), Toast.LENGTH_SHORT).show();
+                        callPostAPISNS("" + session.getUserId(), "1");
+                        Toast.makeText(getContext(), "Login success " + session.getUserId(), Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void failure(TwitterException e) {
                         e.printStackTrace();
@@ -201,34 +192,43 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     private void signInLine() {
-                Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LINE_CHANEL_ID);
-                startActivityForResult(loginIntent,RC_LN_SIGN_IN);
+        Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LINE_CHANEL_ID);
+        startActivityForResult(loginIntent, RC_LN_SIGN_IN);
     }
-
 
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            callPostAPISNS(account.getId().toString(), "3");
+            Log.i("GooglePlus", "success: " + account.getId());
 
-            // Signed in successfully, show authenticated UI.
-//            updateUI(account);/
-            Log.i("GooglePlus", "success");
         } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("GooglePlus", "signInResult:failed code=" + e.getStatusCode());
-//            updateUI(null);
+            Log.w("GooglePlus", "signInResult:failed code=" + e.getMessage());
         }
     }
 
-    private void handleLoginResult(Intent data){
+    private void handleLoginResult(Intent data) {
+
         //Todo Handling the login result
         LineLoginResult loginResult = LineLoginApi.getLoginResultFromIntent(data);
-        switch (loginResult.getResponseCode())
-        {
+
+        switch (loginResult.getResponseCode()) {
             case SUCCESS: //Todo example Get Username
-                Toast.makeText(getActivity(),"Login success: " + loginResult.getLineProfile().getDisplayName() ,Toast.LENGTH_SHORT).show();
+                String accessToken = loginResult.getLineCredential().getAccessToken().getAccessToken();
+                callPostAPISNS(loginResult.getLineProfile().getUserId().toString(), "4");
+                Toast.makeText(getActivity(), "Login success: " + accessToken, Toast.LENGTH_SHORT).show();
+                break;
+            case SERVER_ERROR:
+                Log.e("ERROR", "SERVER ERROR!!");
+                break;
+            case NETWORK_ERROR:
+                Log.e("ERROR", "NETWORK_ERROR!!");
+                break;
+            case INTERNAL_ERROR:
+                Log.e("ERROR", "INTERNAL_ERROR!!");
+                break;
+            case AUTHENTICATION_AGENT_ERROR:
                 break;
             case CANCEL:
                 Log.e("ERROR", "LINE Login Canceled by user!!");
@@ -236,6 +236,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
             default:
                 Log.e("ERROR", "Login FAILED!");
         }
+
     }
 
 
@@ -244,17 +245,20 @@ public class LoginFragment extends BaseFragment implements LoginView {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig("E9SgLRW6z3YDe1tkZjA8gWNdu",
                 "Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc");
-        TwitterConfig.Builder builder=new TwitterConfig.Builder(getActivity());
+        TwitterConfig.Builder builder = new TwitterConfig.Builder(getActivity());
         builder.twitterAuthConfig(authConfig);
         Twitter.initialize(builder.build());
         twitterAuthClient = new TwitterAuthClient();
+        LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
+        lineApiClient = apiClientBuilder.build();
 
     }
-    void callPostAPISNS(String sns_id,String sns_kind){
+
+    void callPostAPISNS(String sns_id, String sns_kind) {
         LoginAPI.loginSNS(sns_id, sns_kind, new vn.javis.tourde.services.ServiceCallback() {
             @Override
             public void onSuccess(vn.javis.tourde.services.ServiceResult resultCode, Object response) {
-                Log.i("login sns",response.toString());
+                Log.i("login sns", response.toString());
             }
 
             @Override

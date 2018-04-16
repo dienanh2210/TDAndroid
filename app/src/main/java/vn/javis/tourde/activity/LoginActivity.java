@@ -19,23 +19,10 @@ import static vn.javis.tourde.activity.LoginFragment.RC_LN_SIGN_IN;
 
 public class LoginActivity extends BaseActivity {
 
-    //TextView tv_back_basicinfo_login;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //  this.requestWindowFeature( Window.FEATURE_NO_TITLE );
         setContentView(R.layout.course_list_view);
-       /* tv_back_basicinfo_login=findViewById( R.id.tv_back_basicinfo_login );
-        tv_back_basicinfo_login.setOnClickListener( onClickBackBasicInfoLogin );
-    }
-    View.OnClickListener onClickBackBasicInfoLogin = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent( LoginActivity.this, MenuPageActivity.class );
-            startActivity( intent );
-        }
-    };*/
     }
     @Override
     protected void onResume() {
