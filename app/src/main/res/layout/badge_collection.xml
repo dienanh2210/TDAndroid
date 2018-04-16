@@ -7,55 +7,56 @@
     <RelativeLayout
         android:id="@+id/badge_collection_header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        >
+        android:layout_height="@dimen/_40sdp">
+
         <TextView
             android:id="@+id/btn_back_badge"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_10sdp"
             android:gravity="center"
             android:text="@string/BtnBackBadge"
             android:textColor="@color/SkyBlue"
-            android:textSize="@dimen/_16ssp"
-             />
+            android:textSize="@dimen/_16ssp" />
 
         <TextView
             android:id="@+id/badge_collection_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:layout_toStartOf="@+id/btn_close_badge_collection"
+            android:layout_toEndOf="@+id/btn_back_badge"
             android:gravity="center"
             android:text="@string/BadgeTitile"
+            android:textColor="@color/Black"
             android:textSize="@dimen/_17ssp"
-           android:textColor="@color/Black"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/btn_close_badge_collection"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:gravity="center"
             android:text="@string/BtnCloseBadge"
-
             android:textColor="@color/SkyBlue"
-            android:textSize="@dimen/_16ssp"
-             />
+            android:textSize="@dimen/_16ssp" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/header_border"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
             <TextView
                 android:id="@+id/btn_archivement_badge"
                 android:layout_width="match_parent"
@@ -63,16 +64,16 @@
                 android:gravity="center"
                 android:text="@string/AchivementBadges"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_13ssp"
-                />
+                android:textSize="@dimen/_13ssp" />
 
             <ImageView
                 android:id="@+id/redline_archivement"
-                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_3sdp"
-                android:textSize="@dimen/_15ssp"
-                android:background="@color/Red" />
+                android:layout_alignParentBottom="true"
+                android:background="@color/Red"
+                android:contentDescription="@string/AchivementBadges"
+                android:textSize="@dimen/_15ssp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -85,16 +86,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textSize="@dimen/_13ssp"
-                android:text="@string/SpotBadges" />
+                android:text="@string/SpotBadges"
+                android:textSize="@dimen/_13ssp" />
+
             <ImageView
                 android:id="@+id/redline_spot"
-                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_3sdp"
+                android:layout_alignParentBottom="true"
                 android:background="@color/Red"
-                android:visibility="gone"
-                />
+                android:contentDescription="@string/SpotBadges"
+                android:visibility="gone" />
         </RelativeLayout>
 
 
@@ -109,8 +111,11 @@
             android:id="@+id/recycler_barge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_15sdp">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            />
     </RelativeLayout>
 
 </LinearLayout>

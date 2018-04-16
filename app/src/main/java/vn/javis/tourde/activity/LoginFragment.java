@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +44,6 @@ import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
-
 import com.linecorp.linesdk.api.LineApiClient;
 import com.linecorp.linesdk.api.LineApiClientBuilder;
 import com.linecorp.linesdk.auth.LineLoginApi;
@@ -78,6 +79,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     private static final String LINE_CHANEL_ID = "1574725654";
     public static final int RC_LN_SIGN_IN = 006;
     private static LineApiClient lineApiClient;
+
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
@@ -131,6 +133,27 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        TextView txbackBasicinfoLogin = getView().findViewById(R.id.tv_back_basicinfo_login);
+        TextView txclose = getView().findViewById(R.id.tv_close);
+        txbackBasicinfoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MenuPageActivity.class);
+                startActivity(intent);
+            }
+        });
+        txclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MenuPageActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         onInit();
         View mView = inflater.inflate(R.layout.activity_login_view, container, false);
@@ -171,6 +194,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
                         callPostAPISNS("" + session.getUserId(), "1");
                         Toast.makeText(getContext(), "Login success " + session.getUserId(), Toast.LENGTH_SHORT).show();
                     }
+
                     @Override
                     public void failure(TwitterException e) {
                         e.printStackTrace();
@@ -251,6 +275,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
+
 
     }
 

@@ -40,7 +40,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:paddingTop="@dimen/_8sdp"
-            android:layout_marginHorizontal="@dimen/dimen150"
             android:text="@string/btnSkip"
             android:textColor="@android:color/background_dark"
             android:textSize="@dimen/_25sdp" />

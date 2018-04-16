@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.view.CircleTransform;
 
 public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder> {
 
@@ -62,7 +63,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
      //   imageLoader.getInstance().displayImage(model.getPostUserImage(), holder.imgPostUser);
 
         Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
-        Picasso.with(context).load(model.getPostUserImage()).into(holder.imgPostUser);
+        Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
 
         int rate = Math.round(model.getRatingAverage());
 

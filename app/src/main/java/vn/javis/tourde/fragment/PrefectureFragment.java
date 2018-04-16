@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity.UserRegistration.RegisterFragment;
+package vn.javis.tourde.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,24 +8,46 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.RegisterActivity;
+import vn.javis.tourde.model.Data;
+import vn.javis.tourde.adapter.ListAdapter;
 
 public class PrefectureFragment extends Fragment {
 
     private RecyclerView rcv_list;
-    private List<DataRegisterTest> dataList;
+    private List<Data> dataList;
+    private Button btn_choose;
+    private OnFragmentInteractionListener listener;
+
+    public static PrefectureFragment newInstance(OnFragmentInteractionListener listener) {
+        PrefectureFragment fragment = new PrefectureFragment();
+        fragment.listener = listener;
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate( R.layout.activity_prefecture_fragment, container, false);
         rcv_list = view.findViewById(R.id.rcv_list);
+        btn_choose = view.findViewById(R.id.btn_choose);
         createData();
+        btn_choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onFragmentInteraction("1234abc");
+                    ((RegisterActivity)getActivity()).onBackPressed();
+                }
+            }
+        });
         return view;
     }
     private void createData() {
@@ -38,39 +60,44 @@ public class PrefectureFragment extends Fragment {
         String[] contentList7 = new String[]{"徳島県", "香川県", "愛媛県", "愛媛県", "高知県"};
         String[] contentList8 = new String[]{"福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県","沖縄県"};
         dataList = new ArrayList<>();
-        DataRegisterTest data1 = new DataRegisterTest();
+        Data data1 = new Data();
         data1.setTitle("北海道地方");
         data1.setContent(Arrays.asList(contentList1));
         dataList.add(data1);
-        DataRegisterTest data2 = new DataRegisterTest();
+        Data data2 = new Data();
         data2.setTitle("東北地方");
         data2.setContent(Arrays.asList(contentList2));
         dataList.add(data2);
-        DataRegisterTest data3 = new DataRegisterTest();
+        Data data3 = new Data();
         data3.setTitle("関東地方");
         data3.setContent(Arrays.asList(contentList3));
         dataList.add(data3);
-        DataRegisterTest data4 = new DataRegisterTest();
+        Data data4 = new Data();
         data4.setTitle("中部地方");
         data4.setContent(Arrays.asList(contentList4));
         dataList.add(data4);
-        DataRegisterTest data5 = new DataRegisterTest();
+        Data data5 = new Data();
         data5.setTitle("近畿地方");
         data5.setContent(Arrays.asList(contentList5));
         dataList.add(data5);
-        DataRegisterTest data6 = new DataRegisterTest();
+        Data data6 = new Data();
         data6.setTitle("中国地方");
         data6.setContent(Arrays.asList(contentList6));
         dataList.add(data6);
-        DataRegisterTest data7 = new DataRegisterTest();
+        Data data7 = new Data();
         data7.setTitle("四国地方");
         data7.setContent(Arrays.asList(contentList7));
         dataList.add(data7);
-        DataRegisterTest data8 = new DataRegisterTest();
+        Data data8 = new Data();
         data8.setTitle("四国地方");
         data8.setContent(Arrays.asList(contentList8));
         dataList.add(data7);
         rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
         rcv_list.setAdapter(new ListAdapter(getContext(), dataList));
     }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(String content);
+    }
+
 }

@@ -39,26 +39,33 @@
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.BadgeCollectionActivity" />
+        <activity android:name=".activity.LoginSNSActivity"/>
+        <activity android:name=".activity.BaseActivity" />
+        <activity
+            android:name=".activity.BadgeCollectionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.SearchCourseActivity"
             android:label="@string/title_activity_course_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.BasicInfomation.BasicInfoActivity"
+            android:name=".activity.BasicInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.UserRegistration.RegisterFragment.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-
+        <activity
+            android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
+
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden"
 
             />
-        <activity android:name=".activity.MenuEntryActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.MenuEntryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".activity.ViewPageActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.ViewPageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

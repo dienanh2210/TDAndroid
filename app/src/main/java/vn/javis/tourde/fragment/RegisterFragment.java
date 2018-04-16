@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity.UserRegistration.RegisterFragment;
+package vn.javis.tourde.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,28 +11,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.android.volley.Response;
-import com.android.volley.Response.Listener;
 
-import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
-
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.apiservice.ApiEndpoint;
+import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
-import vn.javis.tourde.services.TourDeApplication;
-import vn.javis.tourde.volley.VolleyCustomRequest;
 
-public class RegisterFragment extends Fragment implements View.OnClickListener, ServiceCallback {
+public class RegisterFragment extends Fragment implements View.OnClickListener, ServiceCallback, PrefectureFragment.OnFragmentInteractionListener {
 
     private EditText edt_email;
     private EditText edt_password;
@@ -43,6 +39,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     private RelativeLayout rlt_man;
     private Button appCompatButtonLogin;
     public int refreshRate;
+    private View tv_back_resgister;
+    String prefecture = "北海道";
+    TextView tv_prefecture;
 
     private RegisterActivity activity;
 
@@ -75,6 +74,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         rlt_man = view.findViewById(R.id.rlt_man);
         rlt_woman = view.findViewById(R.id.rlt_woman);
         appCompatButtonLogin = view.findViewById(R.id.appCompatButtonLogin);
+        tv_back_resgister = view.findViewById(R.id.tv_back_resgister);
+        tv_prefecture = view.findViewById(R.id.tv_prefecture);
+        tv_prefecture.setText(prefecture);
 
         edt_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -101,6 +103,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         rlt_man.setOnClickListener(this);
         rlt_woman.setOnClickListener(this);
         appCompatButtonLogin.setOnClickListener(this);
+        tv_back_resgister.setOnClickListener(this);
         return view;
     }
 
@@ -131,7 +134,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         boolean gender = false;
         switch (v.getId()) {
             case R.id.rlt_prefecture:
-                activity.openPage(new PrefectureFragment());
+                activity.openPage(PrefectureFragment.newInstance(this), true);
                 break;
             case R.id.rlt_man:
                 gender = chooseGender(true);
@@ -140,8 +143,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                 gender = chooseGender(false);
                 break;
             case R.id.appCompatButtonLogin:
-             //   LoginAPI.register(edt_email.toString(), edt_password.toString(), gender, 10, "Tokyo", this);
-                LoginAPI.registerAccount( edt_email.toString(), edt_password.toString(),successListener(),errorListener());
+                //   LoginAPI.register(edt_email.toString(), edt_password.toString(), gender, 10, "Tokyo", this);
+                LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), successListener(), errorListener());
+                Toast.makeText(getContext(), "Register Sucessflly", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.tv_back_resgister:
+                activity.onBackPressed();
                 break;
         }
     }
@@ -151,14 +158,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("register account", response.toString());
-                if(response.has("success"))
-                {
-
+                if (response.has("success")) {
+                    Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes");
+                } else {
+                    Log.d(edt_email.toString(), edt_password.toString() + "error");
                 }
-                else {
-
-                }
-
             }
         };
 
@@ -180,6 +184,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onError(VolleyError error) {
+        
+    }
 
+    @Override
+    public void onFragmentInteraction(String content) {
+        prefecture = content;
+        tv_prefecture.setText(content);
     }
 }

@@ -1,6 +1,7 @@
-package vn.javis.tourde.activity.UserRegistration.RegisterFragment;
+package vn.javis.tourde.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,14 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.model.Data;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
-    private List<DataRegisterTest> dataList;
+    private List<Data> dataList;
     private Context context;
     private HashMap<Integer, RecyclerView> mapRecyclerView = new HashMap<>();
 
-    public ListAdapter(Context context, List<DataRegisterTest> dataList) {
+    public ListAdapter(Context context, List<Data> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
@@ -32,9 +34,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
-        DataRegisterTest data = dataList.get(position);
+        Data data = dataList.get(position);
         holder.tv_header.setText(data.getTitle());
-        holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
+        holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
         holder.rcv_content.setAdapter(new ContentAdapter(data.getContent(), new ContentAdapter.OnClickItem() {
             @Override
             public void onClick(int position, View view) {
@@ -54,6 +56,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         mapRecyclerView.put(position, holder.rcv_content);
         if (position == 0) {
             ((ContentAdapter) holder.rcv_content.getAdapter()).setShowMark(true);
+        }
+        if(position == 1) {
+            holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
         }
     }
     @Override

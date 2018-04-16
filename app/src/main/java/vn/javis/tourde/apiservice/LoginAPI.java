@@ -18,7 +18,7 @@ import vn.javis.tourde.volley.VolleyCustomRequest;
 
 public class LoginAPI {
 
-    public static void login(final String email, final String password,ServiceCallback callback) {
+    public static void loginEmail(final String email, final String password,ServiceCallback callback) {
         HashMap<String, String> param = new HashMap<>();
         param.put("email", email);
         param.put("password", password);
