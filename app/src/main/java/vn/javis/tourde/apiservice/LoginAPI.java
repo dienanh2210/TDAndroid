@@ -41,8 +41,8 @@ public class LoginAPI {
     }
     public static void loginSNS(final String sns_id, final String sns_kind,ServiceCallback callback) {
         HashMap<String, String> param = new HashMap<>();
-        param.put("sns_id", sns_id);
-        param.put("sns_kind", sns_kind);
+        param.put(ApiEndpoint.SNS_ID, sns_id);
+        param.put(ApiEndpoint.SNS_KIND, sns_kind);
         TourDeService.postWithAuth(ApiEndpoint.POST_LOGIN_SNS, param,callback);
     }
 

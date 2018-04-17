@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity;
+package vn.javis.tourde.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;

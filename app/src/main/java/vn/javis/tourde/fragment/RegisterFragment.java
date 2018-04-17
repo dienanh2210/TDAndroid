@@ -184,7 +184,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onError(VolleyError error) {
-        
+
     }
 
     @Override

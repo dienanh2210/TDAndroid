@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity;
+package vn.javis.tourde.utils;
 
 public interface BaseView {
     void onInit();

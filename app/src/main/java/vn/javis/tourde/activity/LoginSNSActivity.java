@@ -2,14 +2,9 @@ package vn.javis.tourde.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import butterknife.BindView;
+
 import vn.javis.tourde.R;
-import static vn.javis.tourde.activity.LoginFragment.RC_LN_SIGN_IN;
+import vn.javis.tourde.fragment.LoginFragment;
 
 public class LoginSNSActivity extends BaseActivity {
 

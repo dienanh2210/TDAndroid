@@ -1,8 +1,9 @@
-package vn.javis.tourde.activity;
+package vn.javis.tourde.utils;
 
 import android.util.Log;
 
-public class Logger {
+public class
+Logger {
     static String pri_log = "TourDe::";
     public static final boolean DEVELOPER_MODE = true;
 

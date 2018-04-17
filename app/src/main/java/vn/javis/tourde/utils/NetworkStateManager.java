@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity;
+package vn.javis.tourde.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity;
+package vn.javis.tourde.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,32 +7,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Button;
-import android.support.v7.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.tasks.Task;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -48,21 +38,16 @@ import com.linecorp.linesdk.api.LineApiClient;
 import com.linecorp.linesdk.api.LineApiClientBuilder;
 import com.linecorp.linesdk.auth.LineLoginApi;
 import com.linecorp.linesdk.auth.LineLoginResult;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.concurrent.ExecutorService;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
+import vn.javis.tourde.utils.LoginView;
+import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
-import vn.javis.tourde.fragment.BaseFragment;
-import vn.javis.tourde.service.ServiceCallback;
-import vn.javis.tourde.service.ServiceResult;
 
 
 public class LoginFragment extends BaseFragment implements LoginView {

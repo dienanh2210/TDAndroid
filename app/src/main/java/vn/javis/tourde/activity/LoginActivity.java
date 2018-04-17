@@ -4,23 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.app.Activity;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.linecorp.linesdk.auth.LineLoginApi;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
 import com.android.volley.VolleyError;
 import org.json.JSONObject;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
-
-
-import static vn.javis.tourde.activity.LoginFragment.RC_LN_SIGN_IN;
 
 public class LoginActivity extends BaseActivity  implements ServiceCallback{
 
