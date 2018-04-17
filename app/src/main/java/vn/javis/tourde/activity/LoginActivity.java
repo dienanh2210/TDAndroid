@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-
 import org.json.JSONObject;
-
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.services.ServiceCallback;
@@ -53,13 +51,11 @@ public class LoginActivity extends BaseActivity  implements ServiceCallback{
         public void onClick(View view) {
             Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString());
             LoginAPI.loginEmail( edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString(),LoginActivity.this);
-//abc();
+
         }
 
     };
-  //  void abc(){
-     //   LoginAPI.loginEmail( edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString(),this);
-  //  }
+
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) {
         JSONObject jsonObject = (JSONObject) response;

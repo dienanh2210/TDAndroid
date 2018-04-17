@@ -21,7 +21,7 @@
             android:layout_centerInParent="true"
             android:text="@string/search_course_title"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_17sdp"
             android:textStyle="bold" />
 
 
@@ -37,7 +37,7 @@
             android:paddingStart="@dimen/_1sdp"
             android:text="@string/search_course_close"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_16sdp" />
     </RelativeLayout>
 
 

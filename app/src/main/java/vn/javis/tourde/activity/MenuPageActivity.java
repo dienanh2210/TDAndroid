@@ -40,7 +40,7 @@ public class MenuPageActivity extends BaseActivity {
     View.OnClickListener onClickLogin = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(MenuPageActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MenuPageActivity.this, LoginSNSActivity.class);
             startActivity(intent);
         }
     };

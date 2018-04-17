@@ -161,6 +161,7 @@
         <include layout="@layout/item_divider"/>
 
         <RelativeLayout
+            android:id="@+id/rl_facebook"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_44sdp"
             android:background="@color/backgroud">
@@ -204,6 +205,7 @@
         <include layout="@layout/item_divider"/>
 
         <RelativeLayout
+            android:id="@+id/rl_twitter"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_44sdp"
             android:background="@color/backgroud">
@@ -246,6 +248,7 @@
         <include layout="@layout/item_divider"/>
 
         <RelativeLayout
+            android:id="@+id/rl_googleplus"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_44sdp"
             android:background="@color/backgroud">
@@ -289,7 +292,7 @@
         <include layout="@layout/item_divider"/>
 
         <RelativeLayout
-            android:id="@+id/rlt_line"
+            android:id="@+id/rl_line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_44sdp"
             android:background="@color/backgroud">
