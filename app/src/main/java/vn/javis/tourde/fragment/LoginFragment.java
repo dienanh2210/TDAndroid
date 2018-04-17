@@ -3,10 +3,12 @@ package vn.javis.tourde.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,18 +41,26 @@ import com.linecorp.linesdk.api.LineApiClientBuilder;
 import com.linecorp.linesdk.auth.LineLoginApi;
 import com.linecorp.linesdk.auth.LineLoginResult;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.LoginView;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
 
 
 public class LoginFragment extends BaseFragment implements LoginView {
+    @BindView(R.id.edt_emaillogin)
+    EditText edt_emaillogin;
+    @BindView(R.id.edt_passwordlogin)
+    EditText edt_passwordlogin;
 
     private static final String EMAIL = "email";
     private static final String USER_POSTS = "user_posts";
@@ -276,6 +286,52 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
             }
         });
+    }
+
+    @OnClick(R.id.bt_login)
+    void loginToApp() {
+        String email = edt_emaillogin.getText().toString();
+        String password = edt_passwordlogin.getText().toString();
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            LoginAPI.loginEmail(email, password, new ServiceCallback() {
+                @Override
+                public void onSuccess(ServiceResult resultCode, Object response) {
+                    JSONObject jsonObject = (JSONObject) response;
+                    if (jsonObject.has("success")) {
+                        Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
+                        if (jsonObject.has("token")) {
+                            try {
+                                LoginAPI.pushToken(jsonObject.getString("token"), new ServiceCallback() {
+                                    @Override
+                                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                        JSONObject jsonObject = (JSONObject) response;
+                                        if (jsonObject.has("account_id")) {
+                                            Toast.makeText(getContext(), "Welcome: " + jsonObject.getString("account_id"), Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(VolleyError error) {
+
+                                    }
+                                });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    } else {
+                        Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
+                    }
+
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+                }
+            });
+        }
     }
 
 
