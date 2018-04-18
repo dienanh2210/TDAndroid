@@ -187,6 +187,12 @@
     <string name="course_access_start_point">想定平均走行ペース</string>
     <string name="selection_decision">選択決定</string>
     <string name="tutorial">Tutorial</string>
+    <!--detailcomment-->
+    <string name="headercommet">コメント投稿</string>
+    <string name="item_text_header">コースを評価する</string>
+    <string name="item_text_detail">コメントを入力</string>
+    <string name="item_button_detail">コメントを投稿</string>
+    <string name="hint_detail">こちらにコメントを入力してください。</string>
 
 </resources>
 

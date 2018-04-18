@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.VolleyError;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -49,18 +49,19 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.MenuEntryActivity;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.LoginView;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
 
-
 public class LoginFragment extends BaseFragment implements LoginView {
     @BindView(R.id.edt_emaillogin)
     EditText edt_emaillogin;
     @BindView(R.id.edt_passwordlogin)
     EditText edt_passwordlogin;
+    private MenuPageActivity activity;
 
     private static final String EMAIL = "email";
     private static final String USER_POSTS = "user_posts";
@@ -74,7 +75,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
     private static final String LINE_CHANEL_ID = "1574725654";
     public static final int RC_LN_SIGN_IN = 006;
     private static LineApiClient lineApiClient;
-
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
@@ -147,7 +147,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
             }
         });
     }
-
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         onInit();
@@ -257,8 +256,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
         }
 
     }
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -270,7 +267,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
-
+        activity= (MenuPageActivity) getActivity();
 
     }
 
@@ -290,6 +287,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @OnClick(R.id.bt_login)
     void loginToApp() {
+        final boolean gender = false;
         String email = edt_emaillogin.getText().toString();
         String password = edt_passwordlogin.getText().toString();
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
@@ -299,6 +297,11 @@ public class LoginFragment extends BaseFragment implements LoginView {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
+
+                        Intent intent = new Intent( getActivity(), MenuPageActivity.class );
+                        startActivity( intent );
+                      //  gender=activity.chooseGender( true );
+
                         if (jsonObject.has("token")) {
                             try {
                                 LoginAPI.pushToken(jsonObject.getString("token"), new ServiceCallback() {
@@ -323,7 +326,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
                     }
-
                 }
 
                 @Override

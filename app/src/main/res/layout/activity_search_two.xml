@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.SearchCourseActivity">
+    tools:context=".activity.SearchTwoActivity">
     <FrameLayout
-        android:id="@+id/container"
+        android:id="@+id/containertt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible" />
-
 </android.support.constraint.ConstraintLayout>

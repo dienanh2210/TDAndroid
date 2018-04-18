@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.SearchCourseFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white">
+
+
+        <TextView
+            android:id="@+id/topic_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/search_course_title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/topic_title"
+            android:gravity="right"
+            android:paddingRight="@dimen/_11sdp"
+            android:text="@string/search_course_close"
+            android:textColor="@color/search_course_color_close_text"
+            android:textSize="@dimen/_16ssp" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/search_course_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/search_course_area"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlt_prefecture"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/tv_prefecture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_toStartOf="@+id/im_choose"
+                    android:text="@string/search_course_select_area"
+                    android:textColor="@color/search_course_color_description_text"
+                    android:textSize="@dimen/_16ssp"
+                    tools:ignore="RtlCompat" />
+
+
+                <ImageView
+                    android:id="@+id/im_select_area"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/image_description"
+                    android:paddingEnd="@dimen/_16sdp"
+                    android:paddingStart="@dimen/_1sdp"
+                    android:src="@drawable/icon_next"
+                    android:textSize="@dimen/_16ssp"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/search_course_distance_type"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:id="@+id/distance_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp">
+
+                <ImageView
+                    android:id="@+id/divider_center_vertical"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/search_course_color_divider_background"
+                    android:contentDescription="@string/image_description" />
+
+                <ImageView
+                    android:id="@+id/divider_center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/search_course_color_divider_background"
+                    android:contentDescription="@string/image_description" />
+
+                <RelativeLayout
+                    android:id="@+id/twenty_km"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/divider_center_horizontal"
+                    android:layout_alignEnd="@+id/divider_center_vertical"
+                    android:layout_alignParentTop="true"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_20_km"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp"
+                        tools:ignore="RtlCompat" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/fifty_km"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/divider_center_horizontal"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignStart="@+id/divider_center_vertical"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_50_km"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_one"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/one_hundred_km"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignEnd="@+id/divider_center_vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/divider_center_horizontal"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_100_km"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_two"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/over_one_hundred_km"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/divider_center_vertical"
+                    android:layout_below="@+id/divider_center_horizontal"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_over_100_km"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_three"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <include layout="@layout/item_divider" />
+
+            <include layout="@layout/item_divider" />
+
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/search_course_elevation"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+
+                >
+
+                <ImageView
+                    android:id="@+id/divider_elevator_center_vertical"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/search_course_color_divider_background"
+                    android:contentDescription="@string/image_description" />
+
+                <RelativeLayout
+                    android:id="@+id/over_elevator"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignEnd="@+id/divider_elevator_center_vertical"
+                    android:layout_alignParentTop="true"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_elevation_over"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_four"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/less_elevator_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignStart="@+id/divider_elevator_center_vertical"
+                    android:layout_centerVertical="true"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_elevation_less"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_fire"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <include layout="@layout/item_divider" />
+            </RelativeLayout>
+
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/search_course_course_type"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:id="@+id/course_type_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/course_type_divider_center_vertical"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/search_course_color_divider_background"
+                    android:contentDescription="@string/image_description" />
+
+                <ImageView
+                    android:id="@+id/course_type_divider_center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/search_course_color_divider_background"
+                    android:contentDescription="@string/image_description" />
+
+                <RelativeLayout
+                    android:id="@+id/course_type_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/course_type_divider_center_horizontal"
+                    android:layout_alignEnd="@+id/course_type_divider_center_vertical"
+                    android:layout_alignParentTop="true"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_course_type_one"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_six"
+                        android:layout_width="14dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/course_type_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/course_type_divider_center_horizontal"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignStart="@+id/course_type_divider_center_vertical"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_course_type_two"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_seven"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/course_type_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignEnd="@+id/course_type_divider_center_vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/course_type_divider_center_horizontal"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/search_course_course_type_three"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_eight"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/course_type_four"
+                    android:layout_width="@dimen/_160sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    tools:ignore="RtlCompat">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="empty"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <ImageView
+                        android:id="@+id/imv_mark_night"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_mark_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/search_course_more_searching"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:id="@+id/more_searching_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/tv_searchtwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_toStartOf="@+id/im_more_searching"
+                    android:text="@string/search_course_more_searching_description"
+                    android:textColor="@color/search_course_color_description_text"
+                    android:textSize="@dimen/_16ssp"
+                    tools:ignore="RtlCompat" />
+
+
+                <ImageView
+                    android:id="@+id/im_more_searching"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/image_description"
+                    android:paddingEnd="@dimen/_16sdp"
+                    android:paddingStart="@dimen/_1sdp"
+                    android:src="@drawable/icon_next"
+                    android:textSize="@dimen/_16ssp"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/search_course_free_text"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:id="@+id/free_word_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@android:color/white">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/search_course_free_text_description"
+                    android:inputType="text"
+                    android:maxLines="@android:integer/config_mediumAnimTime"
+                    android:textColor="@color/search_course_color_description_text"
+                    android:textSize="@dimen/_16ssp"
+                    tools:ignore="RtlCompat" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/search_course_color_title_background">
+
+                <Button
+                    android:id="@+id/appCompatButtonLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginLeft="@dimen/_50sdp"
+                    android:layout_marginRight="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/custom_frame"
+                    android:text="@string/search_course_text_button"
+                    android:textAlignment="center"
+                    android:textColor="@color/backgroud"
+                    android:layout_marginBottom="@dimen/_30sdp"
+                    android:textSize="@dimen/_15sdp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

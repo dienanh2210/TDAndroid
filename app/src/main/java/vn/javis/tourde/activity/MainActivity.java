@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
         Intent intent = new Intent(this, MenuPageActivity.class);
+       // Intent intent = new Intent(this, DetailCommentActivity.class);
         startActivity(intent);
 
     }
