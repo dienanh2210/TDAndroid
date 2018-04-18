@@ -2,6 +2,7 @@
     <string name="app_name">Tour De</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_course_list">Course List</string>
+    <string name="line_description">Line</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -104,6 +105,7 @@
     <string name="search_course_over_100_km">100km〜</string>
     <string name="search_course_divider_image_description">divider</string>
     <string name="search_course_choose_image_description">choose</string>
+    <string name="button_description">image button</string>
     <!-- end -->
     <string name="TitleSearchPage">検索条件</string>
     <string name="CloseSearchPage">閉じる</string>
@@ -130,13 +132,21 @@
     <string name="tabCourse">コース</string>
     <string name="tabVideo">投稿動画</string>
     <string name="tabComment">コメント</string>
+    <string name="course_detail_title">万田発酵Prezentsグランツールせとうち</string>
+    <string name="course_detail_user_detail">週末ライダー</string>
+    <string name="course_detail_phrase_detail">せとうちをぐるっとまるごと1周する達成感。せとうちをぐるっとまるごと1周する達成感</string>
+    <string name="course_detail_212">212</string>
+    <string name="course_detail_3">3</string>
+    <string name="course_detail_date">2018.01.16</string>
     <!--BasicInfomation-->
+    <string name="basic_info_title">基本情報</string>
     <string name="TextNameBasic">ユーザーネーム</string>
     <string name="UserName">週末ライダー</string>
     <string name="UserEmail">メールアドレス</string>
     <string name="ButtonBasic">登録情報を変更</string>
     <string name="hint_email_basicinfo">xxxxxxxxxxxxxxxxxxxxxxx.xxxxxx.co.jp</string>
     <string name="hint_name_basicinfo">週末ライダー</string>
+    <string name="image_description">icon</string>
     <!--UserRegistration-->
     <string name="TextNewEntry">登録方法を選んでください</string>
     <string name="TextMailNewEntry">メールアドレスで登録</string>
@@ -147,9 +157,56 @@
     <string name="TextWoman">女性</string>
     <string name="TextAge">年齢</string>
     <string name="Age">10代</string>
+    <string name="register_hok">北海道</string>
+    <string name="register_10t">10t</string>
     <string name="TextPrefecture">お住いの地域</string>
     <string name="TextShowSelected">北海道</string>
     <string name="ButtonToRegister">新規登録</string>
     <string name="TextemailUser">メールアドレス</string>
+    <string name="item_text">グルメが充実</string>
+    <string name="item_header_text">おすすめの月</string>
+    <string name="item_comment_text">comment</string>
+
+    <!--tab -->
+    <string name="video">video</string>
+    <string name="course_1000">1000</string>
+    <string name="course_outline">コース概要</string>
+    <string name="course_average">想定平均走行ペース</string>
+    <string name="course_start_point">想定平均走行ペース</string>
+    <string name="course_access_start_point">想定平均走行ペース</string>
+    <string name="selection_decision">選択決定</string>
+    <string name="tutorial">Tutorial</string>
+
+    <array name="title_test">
+        <item>コース</item>
+        <item>コメント</item>
+    </array>
+
+    <string name="finish_guide_time">完走目安時間</string>
+    <string name="average_pace">想定平均走行ペース</string>
+    <string name="start_point">スタート地点</string>
+    <string name="access_to_start">スタート地点までのアクセス</string>
+
+    <!--detail course -->
+    <string name="GoogleMap">Google Mapで コース確認</string>
+    <string name="NAVITIME">NAVITIMEで コース確認</string>
+    <string name="CourseStory">コースストーリー</string>
+    <!--for detail view  test -->
+    <string name="finish_guide_time_txt">1時間30分</string>
+    <string name="average_pace_txt">10.00km/h</string>
+    <string name="start_point_txt">1時間30分</string>
+
+    <string name="StoryTitle1">鵜方駅</string>
+    <string name="Story1ImageDes">駅の目の前に公営の駐車場</string>
+    <string name="Story1Content">志摩周遊の拠点となる近鉄志摩線「鵜方」駅。特急電車の停車駅である、アクセスの上でも利便性が高いのに加え、観光案内所やコンビニも駅構内に設置されており、情報収集や補給物の調達にも</string>
+    <string name="Story1Tag"># 初心者向き　# グルメ豊富　# 女性向け</string>
+
+    <string name="distance_story">3km</string>
+
+    <string name="StoryTitle2">横山展望台</string>
+    <string name="Story2ImageDes">万田発酵Prezentsグランツールせとうち</string>
+    <string name="Story2Content">志摩周遊の拠点となる近鉄志摩線「鵜方」駅。特急電車の停車駅である、アクセスの上でも利便性が高いのに加え、観光案内所やコンビニも駅構内に設置されており、情報収集や補給物の調達にも</string>
+    <string name="Story2Tag"># 初心者向き　# グルメ豊富　# 女性向け</string>
+
 </resources>
 

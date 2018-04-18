@@ -41,7 +41,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btn_background"
-                android:text="選択決定"
+                android:text="@string/selection_decision"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 

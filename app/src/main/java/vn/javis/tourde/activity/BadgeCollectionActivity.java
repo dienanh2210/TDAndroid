@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -22,7 +20,7 @@ import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.model.Badge;
 
-public class BadgeCollectionActivity extends AppCompatActivity {
+public class BadgeCollectionActivity extends BaseActivity {
 
     @BindView(R.id.recycler_barge)
     RecyclerView badgeRecycler;
@@ -44,7 +42,6 @@ public class BadgeCollectionActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.badge_collection);
-        setHearder();
         ButterKnife.bind(this);
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1);
         badgeRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -88,10 +85,6 @@ public class BadgeCollectionActivity extends AppCompatActivity {
         badgeRecycler.setAdapter(listBadgeAdapter);
     }
 
-    private void setHearder() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-    }
     void onArchivementClick() {
         imgRedLineAchivement.setVisibility(View.VISIBLE);
         imgRedLineSpot.setVisibility(View.INVISIBLE);

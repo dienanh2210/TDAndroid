@@ -1,4 +1,4 @@
-package vn.javis.tourde.activity.databasetest;
+package vn.javis.tourde.model;
 
 import java.io.Serializable;
 import java.util.List;

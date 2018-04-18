@@ -47,6 +47,11 @@ public class CourseListFragment extends BaseFragment {
     ListCourseAdapter listCourseAdapter;
     CourseListActivity mActivity;
 
+    private int mTotalPage = 1;
+
+    private static final int NUMBER_COURSE_ON_PAGE = 5;
+    private static final int DEFAULT_PAGE = 1;
+
     @Override
     public void onStart() {
         super.onStart();
@@ -80,12 +85,12 @@ public class CourseListFragment extends BaseFragment {
                 changePage(-1);
             }
         });
-        mCurrentPage = 1;
+        mCurrentPage = DEFAULT_PAGE;
         changePage(0);
     }
 
     @Override
-    public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
+    public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_course_list_view, container, false);
     }
 
@@ -112,28 +117,44 @@ public class CourseListFragment extends BaseFragment {
     void changePage(int nextPage) {
 
         int totalCourse = ListCourseAPI.getInstance().getCourseSize();
-        int totalPage = totalCourse / 3 + 1;
+        mTotalPage = totalCourse == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
         int currentValue = mCurrentPage;
         mCurrentPage += nextPage;
-        if (mCurrentPage > totalPage) mCurrentPage = totalPage;
+        if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
         if (mCurrentPage < 1) mCurrentPage = 1;
         if (mCurrentPage != currentValue || nextPage == 0) {
-            txtPageNumber.setText(mCurrentPage + "/" + totalPage);
+            txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
             setRecycle();
         }
+
+        changeButtonBackground();
     }
 
     void setRecycle() {
-
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
             @Override
             public void onItemClick(int position) {
-                mActivity.ShowCourseDetail();
+                mActivity.ShowCourseDetail(position);
             }
         });
+    }
+
+    private void changeButtonBackground() {
+        if (mCurrentPage == 1) {
+            btnPreviousPage.setBackgroundResource(R.drawable.btn_previous_page);
+        } else {
+            btnPreviousPage.setBackgroundResource(R.drawable.btn_previous_red);
+        }
+
+        if (mCurrentPage == mTotalPage) {
+            btnNextPage.setBackgroundResource(R.drawable.btn_next_page_gray);
+        } else {
+            btnNextPage.setBackgroundResource(R.drawable.btn_next_page);
+        }
+
     }
 }
 

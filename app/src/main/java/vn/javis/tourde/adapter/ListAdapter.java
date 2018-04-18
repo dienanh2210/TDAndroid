@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.databasetest.Data;
+import vn.javis.tourde.model.Data;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 

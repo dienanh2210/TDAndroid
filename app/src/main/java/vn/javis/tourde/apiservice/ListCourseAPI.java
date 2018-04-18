@@ -97,9 +97,9 @@ public class ListCourseAPI {
         return model;
     }
     public List<Course> getCourseByPage(int page) {
-        int firstValue = (page - 1) * 3;
+        int firstValue = (page - 1) * 5;
 
-        int secondValue = page * 3;
+        int secondValue = page * 5;
 
         int maxIndex = mAllCourses.size();
 

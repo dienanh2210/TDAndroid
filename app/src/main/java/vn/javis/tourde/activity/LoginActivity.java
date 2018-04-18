@@ -1,25 +1,18 @@
 package vn.javis.tourde.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.app.Activity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.twitter.sdk.android.core.services.SearchService;
 
 import org.json.JSONObject;
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.BaseActivity;
-import vn.javis.tourde.activity.BasicInfomation.BasicInfoActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;

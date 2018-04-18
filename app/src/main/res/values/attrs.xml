@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TourDeTabLayout">
+        <attr name="tabMarginLeft" format="dimension" />
+        <attr name="tabMarginRight" format="dimension" />
+        <attr name="tabSpacing" format="dimension" />
+        <attr name="tabHeight" format="dimension" />
+        <attr name="tabIndicatorHeight" format="dimension" />
+        <attr name="tabTextColor" format="color" />
+        <attr name="tabTextActiveColor" format="color" />
+        <attr name="tabActiveColor" format="color" />
+        <attr name="tabNormalColor" format="color" />
+        <attr name="tabTextSize" format="dimension" />
+        <attr name="tabSelectIndex" format="integer" />
+        <attr name="tabItems" format="reference" />
+        <attr name="hasBadge" format="boolean" />
+
+    </declare-styleable>
+
+</resources>

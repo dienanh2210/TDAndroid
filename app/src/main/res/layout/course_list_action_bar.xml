@@ -9,9 +9,10 @@
 
     <ImageButton
         android:id="@+id/ic_left"
+        android:contentDescription="@string/image_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:background="@mipmap/ic_launcher"
         android:layout_centerVertical="true"
         />
@@ -23,6 +24,8 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_toStartOf="@+id/ic_right"
+        android:layout_toEndOf="@+id/ic_left"
         android:text="@string/title_course_list"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -32,11 +35,12 @@
         android:id="@+id/ic_right"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="right"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
         android:background="@drawable/icon_search"
         android:maxHeight="40dp"
         android:maxWidth="40dp"
+        android:contentDescription="@string/image_description"
         android:layout_centerVertical="true"
         />
 </RelativeLayout>
