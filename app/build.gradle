@@ -54,7 +54,7 @@ dependencies {
         transitive = true
     }
 //line
-    implementation (name:'line-sdk-4.0.8', ext:'aar')
+    implementation(name: 'line-sdk-4.0.8', ext: 'aar')
     implementation 'com.android.support:customtabs:27.1.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
