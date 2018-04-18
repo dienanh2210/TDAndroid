@@ -194,5 +194,8 @@
     <string name="item_button_detail">コメントを投稿</string>
     <string name="hint_detail">こちらにコメントを入力してください。</string>
 
+    <string name="searcharea_text">エリア選択</string>
+    <string name="searchkodawari">こだわり条件</string>
+
 </resources>
 

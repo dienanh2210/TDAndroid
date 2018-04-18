@@ -15,7 +15,46 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/backgroud"
+                android:layout_height="@dimen/_35sdp">
 
+                <TextView
+                    android:id="@+id/tv_back_menu_entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:text="@string/Back"
+                    android:textColor="@color/search_course_color_close_text"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:id="@+id/tv_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/topic_title"
+                    android:gravity="end"
+                    android:paddingEnd="@dimen/_11sdp"
+                    android:paddingStart="@dimen/_1sdp"
+                    android:text="@string/search_course_close"
+                    android:textColor="@color/search_course_color_close_text"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:id="@+id/topic_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/searcharea_text"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_17ssp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcv_list"
                 android:layout_width="match_parent"

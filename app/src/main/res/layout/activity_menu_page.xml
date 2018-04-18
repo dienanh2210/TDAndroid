@@ -10,7 +10,7 @@
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp">
-
+<!-->
         <TextView
             android:id="@+id/tv_tutorial"
             android:layout_width="@dimen/_100ssp"
@@ -21,7 +21,7 @@
             android:text="@string/tutorial"
             android:textColor="@color/colorText"
             android:textSize="@dimen/dimen20"
-            android:textStyle="bold" />
+            android:textStyle="bold" /><!-->
 
         <TextView
             android:id="@+id/tv_close"
@@ -147,6 +147,7 @@
             <include layout="@layout/item_divider"/>
 
             <RelativeLayout
+                android:id="@+id/rlt_newuserregister"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
 
@@ -248,7 +249,7 @@
             <include layout="@layout/item_divider"/>
 
             <RelativeLayout
-                android:id="@+id/how_To"
+                android:id="@+id/rlt_tutorial"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
 

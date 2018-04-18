@@ -11,8 +11,8 @@ import vn.javis.tourde.R;
 
 public class MenuPageActivity extends BaseActivity {
 
-    TextView tv_close, tv_tutorial, tv_basic, tv_userregistration;
-    RelativeLayout tv_login, badge_collection;
+    TextView tv_close, tv_basic, tv_userregistration;
+    RelativeLayout tv_login,tv_tutorial, logout,rlt_newuserregister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MenuPageActivity extends BaseActivity {
         tv_close = findViewById(R.id.tv_close);
         tv_close.setOnClickListener(onClick);
 
-        tv_tutorial = findViewById(R.id.tv_tutorial);
+        tv_tutorial = findViewById(R.id.rlt_tutorial);
         tv_tutorial.setOnClickListener(onClickTutorial);
 
         tv_basic = findViewById(R.id.tv_basic);
@@ -32,6 +32,10 @@ public class MenuPageActivity extends BaseActivity {
 
         tv_userregistration = findViewById(R.id.tv_userregistration);
         tv_userregistration.setOnClickListener(onClickNewUser);
+
+      //  logout=findViewById( R.id.logout );
+     //   rlt_newuserregister=findViewById( R.id.rlt_newuserregister );
+
 
     }
 
@@ -78,6 +82,17 @@ public class MenuPageActivity extends BaseActivity {
             startActivity(intent);
         }
     };
+
+  /* public boolean chooseGender(boolean isMan) {
+        if (isMan) {
+            logout.setVisibility( View.VISIBLE );
+           rlt_newuserregister.setVisibility( View.GONE );
+        } else {
+            logout.setVisibility( View.GONE );
+           rlt_newuserregister.setVisibility( View.VISIBLE );
+        }
+        return isMan;
+    }*/
 }
 
 
