@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.LoginSNSActivity;
+import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.model.Data;
@@ -28,6 +33,8 @@ public class PrefectureOneFragment extends Fragment {
     private Button btn_choose;
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
+    TextView tv_close,tv_back_menu_entry;
+    private SearchCourseActivity activity;
 
     public static PrefectureOneFragment newInstance(View.OnClickListener listener) {
         PrefectureOneFragment fragment = new PrefectureOneFragment();
@@ -41,6 +48,13 @@ public class PrefectureOneFragment extends Fragment {
         View view = inflater.inflate( R.layout.prefecture_one_fragment, container, false );
         rcv_list = view.findViewById( R.id.rcv_list );
         btn_choose = view.findViewById( R.id.btn_choose );
+
+        tv_close=view.findViewById( R.id.tv_close );
+        tv_close.setOnClickListener( onClickClose );
+        tv_back_menu_entry=view.findViewById( R.id.tv_back_menu_entry );
+        tv_back_menu_entry.setOnClickListener( onClickBack );
+        activity= (SearchCourseActivity) getActivity();
+
         createData();
         btn_choose.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -53,7 +67,22 @@ public class PrefectureOneFragment extends Fragment {
             }
         } );
         return view;
+
+
     }
+    View.OnClickListener onClickClose = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent( getActivity(), CourseListActivity.class );
+            startActivity( intent );
+        }
+    };
+    View.OnClickListener onClickBack = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+               activity.onBackPressed();
+        }
+    };
 
     private void createData() {
         String[] contentList1 = new String[]{"北海道"};

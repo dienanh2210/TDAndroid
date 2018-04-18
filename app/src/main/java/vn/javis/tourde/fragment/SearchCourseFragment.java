@@ -1,8 +1,10 @@
 package vn.javis.tourde.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.volley.VolleyError;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.activity.SearchActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
@@ -24,7 +28,7 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
     private SearchCourseActivity activity;
     String prefecture = "エリアを選択";
     String prefecturetext = "こだわり条件を指定";
-    TextView tv_prefecture,tv_searchtwo;
+    TextView tv_prefecture,tv_searchtwo,tv_close;
     LinearLayout ln_prefecture_one;
 
     private ImageView imv_mark,imv_mark_one,imv_mark_two,imv_mark_three,imv_mark_four,imv_mark_fire,imv_mark_six,imv_mark_seven,imv_mark_eight,imv_mark_night;
@@ -77,6 +81,8 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         course_type_three=view.findViewById( R.id.course_type_three );
         course_type_four=view.findViewById( R.id.course_type_four );
 
+        tv_close=view.findViewById( R.id.tv_close );
+
         im_select_area.setOnClickListener( this );
         im_more_searching.setOnClickListener( this );
         twenty_km.setOnClickListener( this );
@@ -90,6 +96,7 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         course_type_two.setOnClickListener( this );
         course_type_three.setOnClickListener( this );
         course_type_four.setOnClickListener( this );
+        tv_close.setOnClickListener( this );
         return view;
     }
     private boolean chooseGender(boolean isRun) {
@@ -203,6 +210,10 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
             case R.id.course_type_four:
                 gender = chooseGenderfire( false);
                 break;
+            case R.id.tv_close:
+                Intent intent = new Intent( getActivity(), CourseListActivity.class );
+                startActivity( intent );
+                break;
         }
     }
 
@@ -225,5 +236,6 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         prefecturetext=content;
         tv_searchtwo.setText( content );
     }
+
 
 }
