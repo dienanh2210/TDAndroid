@@ -20,6 +20,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.adapter.ListAdapter;
+import vn.javis.tourde.adapter.ListSearchAdapter;
 import vn.javis.tourde.model.Data;
 
 public class PrefectureSearchFragment extends Fragment {
@@ -127,7 +128,7 @@ public class PrefectureSearchFragment extends Fragment {
         data9.setContent(Arrays.asList(contentList9));
         dataList.add(data9);
         rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        rcv_list.setAdapter( new ListAdapter( getContext(), dataList, new ListAdapter.OnClickItem() {
+        rcv_list.setAdapter( new ListSearchAdapter( getContext(), dataList, new ListSearchAdapter.OnClickItem() {
             @Override
             public void onClick(String content) {
                 contentArea = content;
