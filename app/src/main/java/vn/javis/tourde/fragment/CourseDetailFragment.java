@@ -1,6 +1,7 @@
 package vn.javis.tourde.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -22,6 +24,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.BadgeCollectionActivity;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.customlayout.TourDeTabLayout;
@@ -88,11 +91,18 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     YourScrollableViewPager view_pager;
     @BindView(R.id.tab_layout)
     TourDeTabLayout tab_layout;
-
+    @BindView(R.id.btn_badge_collection)
+    RelativeLayout btnBadge;
+    @BindView(R.id.btn_home_footer)
+    RelativeLayout btnHome;
+    @BindView(R.id.img_home)
+    ImageView imgHomeBtn;
+    @BindView(R.id.txt_home)
+    TextView txtHomeBtn;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mActivity = (CourseListActivity)getActivity();
+        mActivity = (CourseListActivity) getActivity();
         testAPI();
         //GetCourseDataAPI.getCourseData(1,this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
@@ -128,10 +138,26 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 getActivity().onBackPressed();
             }
         });
+
+        btnBadge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BadgeCollectionActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+        imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
+        txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
     }
 
     void testAPI() {
-        mPosition =mActivity.getmCoursePosition();
+        mPosition = mActivity.getmCoursePosition();
         Course model = ListCourseAPI.getInstance().getCouseByIndex(mPosition);
         showCourseDetail(model);
     }

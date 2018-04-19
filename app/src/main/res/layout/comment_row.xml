@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
     >
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,21 +29,23 @@
             android:layout_height="wrap_content"
             android:text="@string/course_detail_title"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_13ssp"
-            android:maxWidth="@dimen/_150sdp"
-
+            android:textSize="@dimen/_15ssp"
+            android:maxWidth="@dimen/_140sdp"
+            android:layout_centerVertical="true"
             />
         <ImageView
             android:id="@+id/img_star_rating"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_98sdp"
+            android:layout_height="@dimen/_18sdp"
             android:background="@drawable/icon_star5"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+
             />
     </RelativeLayout>
     <TextView
         android:id="@+id/txt_comment_content"
+        android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/Black"
         android:textSize="@dimen/_11ssp"
         android:layout_width="match_parent"
@@ -51,5 +56,12 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/_10ssp"
         android:gravity="right"
+        android:layout_marginTop="@dimen/_10sdp"
         android:text="1990.200.10"/>
+
+    <View
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/search_course_color_divider_background" />
 </LinearLayout>

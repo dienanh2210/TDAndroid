@@ -4,31 +4,31 @@ import java.util.Date;
 
 public class Comment {
 
-    private String userName;
-    private String userAvatar;
-    private String content;
-    private Date postDate;
+    private String token;
+    private int course_id;
+    private int rating;
+    private String comment;
 
-    public Comment(String userName, String userAvatar, String content, Date postDate) {
-        this.userName = userName;
-        this.userAvatar = userAvatar;
-        this.content = content;
-        this.postDate = postDate;
+    public Comment(String token, int course_id, int rating, String comment) {
+        this.token = token;
+        this.course_id = course_id;
+        this.rating = rating;
+        this.comment = comment;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getToken() {
+        return token;
     }
 
-    public String getUserAvatar() {
-        return userAvatar;
+    public int getCourse_id() {
+        return course_id;
     }
 
-    public String getContent() {
-        return content;
+    public int getRating() {
+        return rating;
     }
 
-    public Date getPostDate() {
-        return postDate;
+    public String getComment() {
+        return comment;
     }
 }

@@ -230,6 +230,8 @@
 
     <string name="searcharea_text">エリア選択</string>
     <string name="searchkodawari">こだわり条件</string>
+    <string name="first_story_num">1</string>
+    <string name="second_story_num">2</string>
 
 </resources>
 

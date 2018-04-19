@@ -36,17 +36,29 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     public ListCommentAdapter.CommentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        mView = inflater.inflate(R.layout.course_view_row, parent, false);
+        mView = inflater.inflate(R.layout.comment_row, parent, false);
         return new ListCommentAdapter.CommentViewHolder(mView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListCommentAdapter.CommentViewHolder holder, final int position) {
         Comment model = listComments.get(position);
-        holder.txtUserName.setText(model.getUserName());
-        holder.txtCommentContent.setText(model.getContent());
-        holder.txtPostDate.setText(model.getPostDate().toString());
-        Picasso.with(context).load(model.getUserAvatar()).into(holder.imgUserAvata);
+        holder.txtUserName.setText(model.getToken());
+        holder.txtCommentContent.setText(model.getComment());
+      //  holder.txtPostDate.setText(model.getPostDate().toString());
+        holder.txtPostDate.setText("2018.01.02");
+        int rate = model.getRating();
+        if (rate == 1)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star1);
+        else if (rate == 2)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star2);
+        else if (rate == 3)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star3);
+        else if (rate == 4)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star4);
+        else if (rate == 5)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star5);
+        //Picasso.with(context).load(model.getUserAvatar()).into(holder.imgUserAvata);
     }
 
     @Override
@@ -62,8 +74,10 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
         TextView txtCommentContent;
         @BindView(R.id.txt_post_date)
         TextView txtPostDate;
-        @BindView(R.id.img_post_user)
+        @BindView(R.id.img_avata)
         ImageView imgUserAvata;
+        @BindView(R.id.img_star_rating)
+        ImageView imgStarRate;
 
         public CommentViewHolder(View itemView) {
             super(itemView);

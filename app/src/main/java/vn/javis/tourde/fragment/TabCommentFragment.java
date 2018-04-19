@@ -19,6 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.adapter.ListCommentAdapter;
+import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.model.Comment;
 
 public class TabCommentFragment extends BaseFragment{
@@ -37,8 +38,8 @@ public class TabCommentFragment extends BaseFragment{
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         lstCommentRecyleView.setLayoutManager(layoutManager);
 
-        List<Comment> list_courses =new ArrayList<>();
-        listCommentAdapter = new ListCommentAdapter(list_courses, getActivity());
+        List<Comment> list_comments = CommentsAPI.getInstance().getCommentsForTest();
+        listCommentAdapter = new ListCommentAdapter(list_comments, getActivity());
         lstCommentRecyleView.setAdapter(listCommentAdapter);
 
         btnPostComment.setOnClickListener(new View.OnClickListener() {
