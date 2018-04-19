@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.SearchCourseFragment">
-
-
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white">
-
-
         <TextView
             android:id="@+id/topic_title"
             android:layout_width="wrap_content"
@@ -25,19 +20,18 @@
             android:textSize="@dimen/_17ssp"
             android:textStyle="bold" />
 
-
         <TextView
             android:id="@+id/tv_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/topic_title"
             android:gravity="right"
-            android:paddingRight="@dimen/_11sdp"
+            android:paddingEnd="@dimen/_11sdp"
             android:text="@string/search_course_close"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_16sdp"
+            tools:ignore="RelativeOverlap,RtlHardcoded,RtlSymmetry" />
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -47,7 +41,8 @@
             android:id="@+id/search_course_body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="ScrollViewSize">
 
             <include layout="@layout/item_divider" />
 
@@ -63,7 +58,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_area"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlCompat" />
 
@@ -85,8 +80,8 @@
                     android:layout_toStartOf="@+id/im_choose"
                     android:text="@string/search_course_select_area"
                     android:textColor="@color/search_course_color_description_text"
-                    android:textSize="@dimen/_16ssp"
-                    tools:ignore="RtlCompat" />
+                    android:textSize="@dimen/_16sdp"
+                    tools:ignore="RelativeOverlap,RtlCompat,UnknownIdInLayout" />
 
 
                 <ImageView
@@ -99,7 +94,7 @@
                     android:paddingEnd="@dimen/_16sdp"
                     android:paddingStart="@dimen/_1sdp"
                     android:src="@drawable/icon_next"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_16sdp"
                     tools:ignore="RtlCompat" />
 
 
@@ -116,7 +111,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_distance_type"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlCompat" />
 
@@ -163,8 +158,8 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_20_km"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp"
-                        tools:ignore="RtlCompat" />
+                        android:textSize="@dimen/_16sdp"
+                        tools:ignore="RelativeOverlap,RtlCompat" />
 
                     <ImageView
                         android:id="@+id/imv_mark"
@@ -193,7 +188,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_50_km"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:id="@+id/imv_mark_one"
@@ -223,7 +218,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_100_km"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:id="@+id/imv_mark_two"
@@ -253,7 +248,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_over_100_km"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:id="@+id/imv_mark_three"
@@ -287,7 +282,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_elevation"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlCompat" />
 
@@ -323,7 +318,8 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_elevation_over"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp"
+                        tools:ignore="RelativeOverlap" />
 
                     <ImageView
                         android:id="@+id/imv_mark_four"
@@ -352,7 +348,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_elevation_less"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:id="@+id/imv_mark_fire"
@@ -384,7 +380,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_course_type"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlCompat" />
 
@@ -431,7 +427,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_course_type_one"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:id="@+id/imv_mark_six"
@@ -461,7 +457,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_course_type_two"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:id="@+id/imv_mark_seven"
@@ -491,7 +487,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_course_type_three"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:id="@+id/imv_mark_eight"
@@ -520,7 +516,8 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="empty"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16sdp"
+                        tools:ignore="HardcodedText" />
 
                     <ImageView
                         android:id="@+id/imv_mark_night"
@@ -551,7 +548,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_more_searching"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlCompat" />
 
@@ -576,7 +573,7 @@
                     android:layout_toStartOf="@+id/im_more_searching"
                     android:text="@string/search_course_more_searching_description"
                     android:textColor="@color/search_course_color_description_text"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_16sdp"
                     tools:ignore="RtlCompat" />
 
 
@@ -590,7 +587,7 @@
                     android:paddingEnd="@dimen/_16sdp"
                     android:paddingStart="@dimen/_1sdp"
                     android:src="@drawable/icon_next"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_16sdp"
                     tools:ignore="RtlCompat" />
 
 
@@ -611,8 +608,9 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_free_text"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
 
 
             </RelativeLayout>
@@ -635,7 +633,7 @@
                     android:inputType="text"
                     android:maxLines="@android:integer/config_mediumAnimTime"
                     android:textColor="@color/search_course_color_description_text"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_16sdp"
                     tools:ignore="RtlCompat" />
 
             </RelativeLayout>
@@ -648,7 +646,7 @@
                 android:background="@color/search_course_color_title_background">
 
                 <Button
-                    android:id="@+id/appCompatButtonLogin"
+                    android:id="@+id/bt_search_course"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_60sdp"
                     android:layout_marginLeft="@dimen/_50sdp"

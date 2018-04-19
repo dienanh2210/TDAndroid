@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.VolleyError;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -56,6 +57,7 @@ import vn.javis.tourde.utils.LoginView;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
 
+
 public class LoginFragment extends BaseFragment implements LoginView {
     @BindView(R.id.edt_emaillogin)
     EditText edt_emaillogin;
@@ -75,6 +77,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     private static final String LINE_CHANEL_ID = "1574725654";
     public static final int RC_LN_SIGN_IN = 006;
     private static LineApiClient lineApiClient;
+
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
@@ -147,6 +150,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
             }
         });
     }
+
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         onInit();
@@ -256,6 +260,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
         }
 
     }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -267,7 +273,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
-
     }
 
     void callPostAPISNS(String sns_id, String sns_kind) {
@@ -297,9 +302,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
                     if (jsonObject.has("success")) {
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
 
-                        Intent intent = new Intent( getActivity(), MenuPageActivity.class );
-                        startActivity( intent );
-                      //  gender=activity.chooseGender( true );
+                        Intent intent = new Intent(getActivity(), MenuPageActivity.class);
+                        startActivity(intent);
+
 
                         if (jsonObject.has("token")) {
                             try {
@@ -325,6 +330,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
                     }
+
                 }
 
                 @Override

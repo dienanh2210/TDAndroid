@@ -1,11 +1,14 @@
 package vn.javis.tourde.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,6 +19,8 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.activity.SearchActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
@@ -28,14 +33,17 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     private SearchCourseActivity activity;
     String prefecture = "エリアを選択";
     String prefecturetext = "こだわり条件を指定";
-    TextView tv_prefecture, tv_searchtwo;
+
+    TextView tv_prefecture, tv_searchtwo, tv_close;
     LinearLayout ln_prefecture_one;
+
+    Button bt_search_course;
 
     private ImageView imv_mark, imv_mark_one, imv_mark_two, imv_mark_three, imv_mark_four, imv_mark_fire, imv_mark_six, imv_mark_seven, imv_mark_eight, imv_mark_night;
     private RelativeLayout twenty_km, fifty_km, one_hundred_km, over_one_hundred_km;
     private RelativeLayout over_elevator, less_elevator_layout, course_type_one, course_type_two, course_type_three, course_type_four;
 
-    private String areaSelect, distanceSelect, elevatorSelect,courseTypeSelect,moreCondition,freeWord;
+    private String areaSelect, distanceSelect, elevatorSelect, courseTypeSelect, moreCondition, freeWord;
 
     public static RegisterFragment newInstance() {
         RegisterFragment fragment = new RegisterFragment();
@@ -52,6 +60,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.search_course_fragment, container, false);
         im_select_area = view.findViewById(R.id.im_select_area);
         im_more_searching = view.findViewById(R.id.im_more_searching);
@@ -60,6 +69,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         tv_searchtwo = view.findViewById(R.id.tv_searchtwo);
         tv_searchtwo.setText(prefecturetext);
         ln_prefecture_one = view.findViewById(R.id.ln_prefecture_one);
+
+        bt_search_course = view.findViewById(R.id.bt_search_course);
+        bt_search_course.setOnClickListener(this);
 
         imv_mark = view.findViewById(R.id.imv_mark);
         imv_mark_one = view.findViewById(R.id.imv_mark_one);
@@ -84,6 +96,8 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         course_type_three = view.findViewById(R.id.course_type_three);
         course_type_four = view.findViewById(R.id.course_type_four);
 
+        tv_close = view.findViewById(R.id.tv_close);
+
         im_select_area.setOnClickListener(this);
         im_more_searching.setOnClickListener(this);
         twenty_km.setOnClickListener(this);
@@ -97,6 +111,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         course_type_two.setOnClickListener(this);
         course_type_three.setOnClickListener(this);
         course_type_four.setOnClickListener(this);
+        tv_close.setOnClickListener(this);
         return view;
     }
 
@@ -176,6 +191,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+
         boolean gender = false;
         switch (v.getId()) {
             case R.id.im_select_area:
@@ -214,6 +230,14 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
             case R.id.course_type_four:
                 gender = chooseGenderfire(false);
                 break;
+            case R.id.tv_close:
+                Intent intent = new Intent(getActivity(), CourseListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_search_course:
+                Log.d("", tv_prefecture.getContext().toString());
+
+                break;
         }
     }
 
@@ -239,13 +263,15 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         prefecturetext = content;
         tv_searchtwo.setText(content);
     }
-    void onSearchButtonClick(){
-        HashMap<String,String> searchInfo = new HashMap<>();
-        searchInfo.put("area",tv_prefecture.getText().toString());
-        searchInfo.put("distance",distanceSelect);
-        searchInfo.put("elevator",elevatorSelect);
-        searchInfo.put("course_type",courseTypeSelect);
+
+    void onSearchButtonClick() {
+        HashMap<String, String> searchInfo = new HashMap<>();
+        searchInfo.put("area", tv_prefecture.getText().toString());
+        searchInfo.put("distance", distanceSelect);
+        searchInfo.put("elevator", elevatorSelect);
+        searchInfo.put("course_type", courseTypeSelect);
 
     }
+
 
 }

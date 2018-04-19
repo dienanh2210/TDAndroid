@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/backgroud"
-    tools:context="vn.javis.tourde.activity.LoginActivity">
+    tools:context="vn.javis.tourde.activity.LoginSNSActivity">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_marginStart="@dimen/_10ssp"
                 android:text="@string/Back"
                 android:textColor="@color/search_course_color_close_text"
-                android:textSize="@dimen/_16ssp" />
+                android:textSize="@dimen/_16sdp" />
 
             <TextView
                 android:id="@+id/tv_close"
@@ -40,7 +40,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="@string/search_course_close"
                 android:textColor="@color/search_course_color_close_text"
-                android:textSize="@dimen/_16ssp" />
+                android:textSize="@dimen/_16sdp" />
 
             <TextView
                 android:id="@+id/topic_title"
@@ -67,7 +67,7 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="@string/LoginGmail"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_13ssp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -98,7 +98,7 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="@string/PassWord"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_13ssp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -154,7 +154,7 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="@string/SNS"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_13ssp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -186,7 +186,7 @@
                 android:layout_toStartOf="@+id/iv_choose_facebook"
                 android:text="@string/LoginFacebook"
                 android:textColor="@color/colorText"
-                android:textSize="@dimen/_13ssp" />
+                android:textSize="@dimen/_13sdp" />
 
             <ImageView
                 android:id="@+id/iv_choose_facebook"
@@ -198,7 +198,7 @@
                 android:contentDescription="@string/image_description"
                 android:text="@string/search_course_text_row"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_16sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -230,7 +230,7 @@
                 android:layout_toStartOf="@+id/iv_choose_twitter"
                 android:text="@string/LoginTwitter"
                 android:textColor="@color/colorText"
-                android:textSize="@dimen/_13ssp" />
+                android:textSize="@dimen/_13sdp" />
 
             <ImageView
                 android:id="@+id/iv_choose_twitter"
@@ -241,7 +241,7 @@
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:contentDescription="@string/image_description"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_16sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -273,7 +273,7 @@
                 android:layout_toStartOf="@+id/iv_choose_google"
                 android:text="@string/LoginGoogle"
                 android:textColor="@color/colorText"
-                android:textSize="@dimen/_13ssp" />
+                android:textSize="@dimen/_13sdp" />
 
             <ImageView
                 android:id="@+id/iv_choose_google"
@@ -285,7 +285,7 @@
                 android:contentDescription="@string/image_description"
                 android:text="@string/search_course_text_row"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_16sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -317,7 +317,7 @@
                 android:layout_toStartOf="@+id/iv_choose_line"
                 android:text="@string/LoginLine"
                 android:textColor="@color/colorText"
-                android:textSize="@dimen/_13ssp" />
+                android:textSize="@dimen/_13sdp" />
 
             <ImageView
                 android:id="@+id/iv_choose_line"
@@ -329,7 +329,7 @@
                 android:contentDescription="@string/image_description"
                 android:text="@string/search_course_text_row"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_16sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 

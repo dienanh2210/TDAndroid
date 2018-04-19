@@ -228,5 +228,8 @@
     <string name="Story2Content">志摩周遊の拠点となる近鉄志摩線「鵜方」駅。特急電車の停車駅である、アクセスの上でも利便性が高いのに加え、観光案内所やコンビニも駅構内に設置されており、情報収集や補給物の調達にも</string>
     <string name="Story2Tag"># 初心者向き　# グルメ豊富　# 女性向け</string>
 
+    <string name="searcharea_text">エリア選択</string>
+    <string name="searchkodawari">こだわり条件</string>
+
 </resources>
 

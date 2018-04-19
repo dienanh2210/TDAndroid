@@ -19,7 +19,7 @@
             android:layout_marginStart="@dimen/_10ssp"
             android:text="@string/Back"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_16sdp" />
 
         <TextView
             android:id="@+id/tv_close"
@@ -33,7 +33,7 @@
             android:paddingStart="@dimen/_1sdp"
             android:text="@string/search_course_close"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_16sdp" />
 
         <TextView
             android:id="@+id/register_title"
@@ -78,7 +78,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextemailUser"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -123,7 +123,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/PassWord"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -180,7 +180,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextGender"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -283,7 +283,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextAge"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -319,7 +319,7 @@
                         android:paddingEnd="@dimen/_16sdp"
                         android:paddingStart="@dimen/_1sdp"
                         android:textColor="@color/search_course_color_row"
-                        android:textSize="@dimen/_16ssp"
+                        android:textSize="@dimen/_16sdp"
                         app:srcCompat="@drawable/icon_next" />
 
                 </RelativeLayout>
@@ -347,7 +347,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextPrefecture"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -385,7 +385,7 @@
                         android:paddingStart="@dimen/_1sdp"
                         android:text="@string/search_course_text_row"
                         android:textColor="@color/search_course_color_row"
-                        android:textSize="@dimen/_16ssp"
+                        android:textSize="@dimen/_16sdp"
                         app:srcCompat="@drawable/icon_next" />
                 </RelativeLayout>
 
