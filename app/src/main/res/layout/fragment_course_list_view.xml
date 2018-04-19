@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -34,7 +35,8 @@
             android:textAlignment="center"
             android:textColor="@color/Black"
             android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/btn_search"
@@ -91,7 +93,7 @@
                 android:layout_toStartOf="@+id/btn_next_page"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_16ssp" />
+                android:textSize="@dimen/_16sdp" />
 
             <ImageButton
                 android:id="@+id/btn_next_page"
