@@ -109,4 +109,14 @@ public class ListCourseAPI {
         return mAllCourses.subList(firstValue, secondValue);
     }
 
+    public List<Course> getCoursesByKeys(HashMap map){
+
+        List<Course> list = new ArrayList<>();
+        int maxIndex = mAllCourses.size();
+
+
+        return list;
+    }
+
+
 }

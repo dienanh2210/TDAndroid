@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <vn.javis.tourde.customlayout.TourDeTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        app:tabActiveColor="@android:color/white"
+        app:tabHeight="60dp"
+        app:tabItems="@array/title_test"
+        app:tabNormalColor="#DCE0E2"
+        app:tabTextActiveColor="@color/color_text_tab"
+        app:tabTextColor="@color/Black"
+        app:tabTextSize="14sp"></vn.javis.tourde.customlayout.TourDeTabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/course_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+</LinearLayout>

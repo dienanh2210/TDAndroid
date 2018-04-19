@@ -63,7 +63,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     EditText edt_emaillogin;
     @BindView(R.id.edt_passwordlogin)
     EditText edt_passwordlogin;
-private RelativeLayout logout,rlt_newuserregister;
+
 
     private static final String EMAIL = "email";
     private static final String USER_POSTS = "user_posts";
@@ -273,8 +273,6 @@ private RelativeLayout logout,rlt_newuserregister;
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
-
-
     }
 
     void callPostAPISNS(String sns_id, String sns_kind) {
@@ -304,8 +302,8 @@ private RelativeLayout logout,rlt_newuserregister;
                     if (jsonObject.has("success")) {
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
 
-                        Intent intent = new Intent( getActivity(), MenuPageActivity.class );
-                        startActivity( intent );
+                        Intent intent = new Intent(getActivity(), MenuPageActivity.class);
+                        startActivity(intent);
 
 
                         if (jsonObject.has("token")) {

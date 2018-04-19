@@ -49,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void openPage(Fragment fragment) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.container_fragment, fragment, fragment.getClass().getSimpleName());
+        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         tx.addToBackStack(null);
         tx.commit();

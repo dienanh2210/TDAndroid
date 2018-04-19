@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,7 +38,12 @@ public class BadgeCollectionActivity extends BaseActivity {
     TextView btnClose;
     @BindView(R.id.btn_back_badge)
     TextView btnBack;
-
+    @BindView(R.id.btn_home_footer)
+    RelativeLayout btnHome;
+    @BindView(R.id.img_badge_collect)
+    ImageView imgBadgeBtn;
+    @BindView(R.id.txt_badge)
+    TextView txtBadgeBtn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +77,15 @@ public class BadgeCollectionActivity extends BaseActivity {
                 gotoMenuPage();
             }
         });
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CourseListActivity.class);
+                startActivity(intent);
+            }
+        });
+       // imgBadgeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
+        txtBadgeBtn.setTextColor(getResources().getColor( R.color.SkyBlue));
         onArchivementClick();
     }
 

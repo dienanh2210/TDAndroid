@@ -132,6 +132,9 @@
     <string name="Home">ホーム</string>
     <string name="Register">コース登録</string>
     <string name="MyCourse">マイコース</string>
+    <string name="Season">旬の季節</string>
+    <string name="AvarageSlope">平均勾配</string>
+
 
     <string name="AchivementBadges">達成バッジ</string>
     <string name="SpotBadges">ご当地バッジ</string>
@@ -194,8 +197,41 @@
     <string name="item_button_detail">コメントを投稿</string>
     <string name="hint_detail">こちらにコメントを入力してください。</string>
 
+    <array name="title_test">
+        <item>コース</item>
+        <item>コメント</item>
+    </array>
+
+    <string name="finish_guide_time">完走目安時間</string>
+    <string name="average_pace">想定平均走行ペース</string>
+    <string name="start_point">スタート地点</string>
+    <string name="access_to_start">スタート地点までのアクセス</string>
+
+    <!--detail course -->
+    <string name="GoogleMap">Google Mapで コース確認</string>
+    <string name="NAVITIME">NAVITIMEで コース確認</string>
+    <string name="CourseStory">コースストーリー</string>
+    <!--for detail view  test -->
+    <string name="finish_guide_time_txt">1時間30分</string>
+    <string name="average_pace_txt">10.00km/h</string>
+    <string name="start_point_txt">1時間30分</string>
+
+    <string name="StoryTitle1">鵜方駅</string>
+    <string name="Story1ImageDes">駅の目の前に公営の駐車場</string>
+    <string name="Story1Content">志摩周遊の拠点となる近鉄志摩線「鵜方」駅。特急電車の停車駅である、アクセスの上でも利便性が高いのに加え、観光案内所やコンビニも駅構内に設置されており、情報収集や補給物の調達にも</string>
+    <string name="Story1Tag"># 初心者向き　# グルメ豊富　# 女性向け</string>
+
+    <string name="distance_story">3km</string>
+
+    <string name="StoryTitle2">横山展望台</string>
+    <string name="Story2ImageDes">万田発酵Prezentsグランツールせとうち</string>
+    <string name="Story2Content">志摩周遊の拠点となる近鉄志摩線「鵜方」駅。特急電車の停車駅である、アクセスの上でも利便性が高いのに加え、観光案内所やコンビニも駅構内に設置されており、情報収集や補給物の調達にも</string>
+    <string name="Story2Tag"># 初心者向き　# グルメ豊富　# 女性向け</string>
+
     <string name="searcharea_text">エリア選択</string>
     <string name="searchkodawari">こだわり条件</string>
+    <string name="first_story_num">1</string>
+    <string name="second_story_num">2</string>
 
 </resources>
 

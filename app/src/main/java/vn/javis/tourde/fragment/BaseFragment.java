@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.content.Context;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
