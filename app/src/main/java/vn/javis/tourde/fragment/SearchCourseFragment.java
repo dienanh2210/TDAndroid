@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,6 +31,8 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
     String prefecturetext = "こだわり条件を指定";
     TextView tv_prefecture,tv_searchtwo,tv_close;
     LinearLayout ln_prefecture_one;
+
+    Button bt_search_course;
 
     private ImageView imv_mark,imv_mark_one,imv_mark_two,imv_mark_three,imv_mark_four,imv_mark_fire,imv_mark_six,imv_mark_seven,imv_mark_eight,imv_mark_night;
     private RelativeLayout twenty_km, fifty_km,one_hundred_km,over_one_hundred_km;
@@ -57,6 +60,9 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         tv_searchtwo=view.findViewById( R.id.tv_searchtwo );
         tv_searchtwo.setText(prefecturetext );
         ln_prefecture_one=view.findViewById( R.id.ln_prefecture_one );
+
+        bt_search_course=view.findViewById( R.id.bt_search_course );
+        bt_search_course.setOnClickListener( this );
 
         imv_mark=view.findViewById( R.id.imv_mark );
         imv_mark_one=view.findViewById( R.id.imv_mark_one );
@@ -172,6 +178,7 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
         boolean gender = false;
         switch (v.getId()) {
             case R.id.im_select_area:
@@ -213,6 +220,10 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
             case R.id.tv_close:
                 Intent intent = new Intent( getActivity(), CourseListActivity.class );
                 startActivity( intent );
+                break;
+            case R.id.bt_search_course:
+                Log.d("", tv_prefecture.getContext().toString());
+
                 break;
         }
     }
