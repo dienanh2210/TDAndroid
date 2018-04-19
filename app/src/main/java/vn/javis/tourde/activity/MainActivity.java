@@ -6,15 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.ImageButton;
+import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     ImageButton btn_Next;
 
@@ -34,6 +38,7 @@ public class MainActivity extends Activity {
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
         Intent intent = new Intent(this, MenuPageActivity.class);
+       // Intent intent = new Intent(this, DetailCommentActivity.class);
         startActivity(intent);
 
     }
@@ -71,6 +76,14 @@ public class MainActivity extends Activity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+
+    }
+    public void openPage(Fragment fragment) {
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        tx.addToBackStack(null);
+        tx.commit();
 
     }
 

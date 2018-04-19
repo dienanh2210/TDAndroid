@@ -113,7 +113,7 @@
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
-
+<!-->
             <RelativeLayout
                 android:id="@+id/badge_collection"
                 android:layout_width="match_parent"
@@ -143,7 +143,7 @@
                     android:textSize="@dimen/_16ssp"
                     app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
-
+<!-->
             <include layout="@layout/item_divider"/>
 
             <RelativeLayout
@@ -212,6 +212,7 @@
 
             <RelativeLayout
                 android:id="@+id/logout"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen60">
 

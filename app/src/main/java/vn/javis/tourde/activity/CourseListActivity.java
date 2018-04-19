@@ -29,8 +29,8 @@ public class CourseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        showCourseListPage();
 
+        showCourseListPage();
     }
 
     @Override
@@ -55,9 +55,10 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     public void ShowCourseDetail(int position) {
-        mCoursePosition =position;
+        mCoursePosition = position;
         openPage(new CourseDetailFragment(), true);
     }
+
 
     public int getmCoursePosition() {
         return mCoursePosition;

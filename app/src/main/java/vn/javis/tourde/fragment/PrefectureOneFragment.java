@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +17,11 @@ import java.util.List;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.RegisterActivity;
+import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.model.Data;
 import vn.javis.tourde.adapter.ListAdapter;
 
-public class PrefectureFragment extends Fragment {
+public class PrefectureOneFragment extends Fragment {
 
     private RecyclerView rcv_list;
     private List<Data> dataList;
@@ -27,8 +29,8 @@ public class PrefectureFragment extends Fragment {
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
 
-    public static PrefectureFragment newInstance(View.OnClickListener listener) {
-        PrefectureFragment fragment = new PrefectureFragment();
+    public static PrefectureOneFragment newInstance(View.OnClickListener listener) {
+        PrefectureOneFragment fragment = new PrefectureOneFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;
         return fragment;
     }
@@ -36,16 +38,17 @@ public class PrefectureFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.activity_prefecture_fragment, container, false );
+        View view = inflater.inflate( R.layout.prefecture_one_fragment, container, false );
         rcv_list = view.findViewById( R.id.rcv_list );
         btn_choose = view.findViewById( R.id.btn_choose );
         createData();
         btn_choose.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (listener != null) {
                     listener.onFragmentInteraction( contentArea );
-                    ((RegisterActivity) getActivity()).onBackPressed();
+                    ((SearchCourseActivity) getActivity()).onBackPressed();
                 }
             }
         } );

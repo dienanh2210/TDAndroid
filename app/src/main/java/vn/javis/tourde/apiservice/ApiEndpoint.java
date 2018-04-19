@@ -11,5 +11,9 @@ public class ApiEndpoint {
     public static String GET_COURSE_DATA = "/get/getCourseData/";
     public static String POST_CREATE_ACCOUNT = "/post/createAccount/";
     public static String POST_LOGIN_ACCOUNT = "/post/loginAccountEmail/";
+    public static String POST_LOGIN_SNS = "/post/loginAccountSNS/";
+    public  static String POST_GET_ACCOUNT ="/get/getAccount";
+    public static String SNS_ID = "sns_id";
+    public static String SNS_KIND = "sns_kind";
 
 }

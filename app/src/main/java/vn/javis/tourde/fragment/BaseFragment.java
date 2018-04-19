@@ -17,7 +17,7 @@ public abstract class BaseFragment extends Fragment {
     private View mView;
     private Unbinder mUnbind;
     private Activity mActivity;
-
+    protected MainActivity activity;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 

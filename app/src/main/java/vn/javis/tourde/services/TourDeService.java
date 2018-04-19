@@ -60,7 +60,6 @@ public abstract class TourDeService {
                     serviceCallback.onSuccess(RESULT_SUCCESS, response);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    serviceCallback.onSuccess(RESULT_ERROR, response);
                 }
             }
         }, new Response.ErrorListener() {
@@ -123,7 +122,6 @@ public abstract class TourDeService {
                     serviceCallback.onSuccess(RESULT_SUCCESS, response);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    serviceCallback.onSuccess(RESULT_ERROR, response);
                 }
             }
         }, new Response.ErrorListener() {

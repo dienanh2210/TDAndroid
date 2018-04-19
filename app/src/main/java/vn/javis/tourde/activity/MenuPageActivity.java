@@ -33,14 +33,12 @@ public class MenuPageActivity extends BaseActivity {
         tv_userregistration = findViewById(R.id.tv_userregistration);
         tv_userregistration.setOnClickListener(onClickNewUser);
 
-        badge_collection = findViewById(R.id.badge_collection);
-        badge_collection.setOnClickListener(onClickBadge);
     }
 
     View.OnClickListener onClickLogin = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(MenuPageActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MenuPageActivity.this, LoginSNSActivity.class);
             startActivity(intent);
         }
     };
