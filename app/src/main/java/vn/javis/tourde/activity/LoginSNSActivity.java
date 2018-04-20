@@ -17,7 +17,7 @@ public class LoginSNSActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        openPage(new LoginFragment());
+        openPage(new LoginFragment(), false);
         super.onResume();
     }
 
