@@ -107,7 +107,7 @@
                 android:paddingStart="@dimen/_1sdp" />
         </RelativeLayout>
 
-        <include layout="@layout/footer_layout"></include>
+        <include layout="@layout/footer_layout"/>
     </LinearLayout>
 
 </RelativeLayout>
