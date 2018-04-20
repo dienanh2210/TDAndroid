@@ -235,7 +235,8 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
                 startActivity(intent);
                 break;
             case R.id.bt_search_course:
-                Log.d("", tv_prefecture.getContext().toString());
+
+                onSearchButtonClick();
 
                 break;
         }

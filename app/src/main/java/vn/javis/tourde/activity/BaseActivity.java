@@ -28,15 +28,19 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import vn.javis.tourde.BuildConfig;
 import vn.javis.tourde.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    Unbinder unbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        unbinder = ButterKnife.bind( this );
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (Build.VERSION.SDK_INT >= 23) {
             Window window = getWindow();
@@ -47,14 +51,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void openPage(Fragment fragment) {
+    public void openPage(Fragment fragment, boolean isAddToBackStack) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        tx.addToBackStack(null);
+        if(isAddToBackStack)
+            tx.addToBackStack(null);
         tx.commit();
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
 }

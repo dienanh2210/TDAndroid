@@ -427,7 +427,8 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/search_course_course_type_one"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp" />
+                        android:textSize="@dimen/_16sdp"
+                        tools:ignore="RelativeOverlap" />
 
                     <ImageView
                         android:id="@+id/imv_mark_six"
