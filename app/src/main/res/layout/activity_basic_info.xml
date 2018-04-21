@@ -8,7 +8,7 @@
     android:background="@color/search_course_color_title_background"
     tools:context="vn.javis.tourde.activity.BasicInfoActivity">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/search_course_color_title_background"
@@ -80,40 +80,45 @@
             android:contentDescription="@string/image_description"
             android:background="@color/Gray"/>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@color/backgroud">
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp">
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/icon_smile" />
 
-                <ImageView
-                    android:id="@+id/sun_icon"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:contentDescription="@string/image_description"
-                    android:src="@drawable/icon_smile" />
-
-                <TextView
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="match_parent"
-                    android:text="@string/hint_name_basicinfo"
-                    android:textColor="@color/colorText"
-                    android:layout_toEndOf="@+id/sun_icon"
-                    android:layout_marginStart="@dimen/_22sdp"
-                    android:textSize="@dimen/_14ssp"
-                    android:paddingTop="@dimen/_33sdp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="85dp"
+                android:paddingTop="@dimen/_33sdp"
+                android:text="@string/hint_name_basicinfo"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_Username"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="195dp"
+                android:paddingTop="@dimen/_33sdp"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
             <include layout="@layout/item_divider" />
-        </android.support.design.widget.TextInputLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -133,14 +138,13 @@
 
         <include layout="@layout/item_divider" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutPassword"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backgroud">
 
             <TextView
-                android:id="@+id/textInputEditTextPassword"
+                android:id="@+id/tv_UserEmail"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:paddingStart="@dimen/_20sdp"
@@ -149,7 +153,7 @@
                 android:text="@string/hint_email_basicinfo"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/dimen25" />
-        </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
 
         <include layout="@layout/item_divider" />
 
@@ -165,7 +169,7 @@
             android:textAlignment="center"
             android:textColor="@color/backgroud"
             android:textSize="@dimen/dimen25" />
-    </android.support.v7.widget.LinearLayoutCompat>
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

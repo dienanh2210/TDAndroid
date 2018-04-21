@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.VolleyError;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -41,21 +40,18 @@ import com.linecorp.linesdk.api.LineApiClient;
 import com.linecorp.linesdk.api.LineApiClientBuilder;
 import com.linecorp.linesdk.auth.LineLoginApi;
 import com.linecorp.linesdk.auth.LineLoginResult;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Arrays;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.MenuEntryActivity;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.LoginView;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
 public class LoginFragment extends BaseFragment implements LoginView {
@@ -149,6 +145,8 @@ private RelativeLayout logout,rlt_newuserregister;
                 startActivity(intent);
             }
         });
+        edt_emaillogin.setText(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Email"));
+        edt_passwordlogin.setText(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Pass"));
     }
 
     @Override
@@ -223,6 +221,7 @@ private RelativeLayout logout,rlt_newuserregister;
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             callPostAPISNS(account.getId().toString(), "3");
+
             Log.i("GooglePlus", "success: " + account.getId());
 
         } catch (ApiException e) {
