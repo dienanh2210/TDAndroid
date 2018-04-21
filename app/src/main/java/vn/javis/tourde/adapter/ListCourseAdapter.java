@@ -49,19 +49,12 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         Course model = listCourse.get(position);
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
-        holder.txtTag.setText("# "+model.getTag());
+        holder.txtTag.setText("# " + model.getTag());
         holder.txtDistance.setText(model.getDistance() + "km");
         holder.txtCatchPhrase.setText(model.getCatchPhrase());
         holder.txtReviewCount.setText(model.getReviewCount());
         holder.txtSpotCount.setText(model.getSpotCount());
         holder.txtPostUser.setText(model.getPostUserName());
-
-     //   ImageLoader imageLoader = ImageLoader.getInstance();
-     //   imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-     //   imageLoader.getMemoryCache();
-     //   imageLoader.getInstance().displayImage(model.getTopImage(), holder.imgCourse);
-     //   imageLoader.getInstance().displayImage(model.getPostUserImage(), holder.imgPostUser);
-
         Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
         Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
 
@@ -91,7 +84,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         holder.txtTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(onItemClickedListener !=null){
+                if (onItemClickedListener != null) {
                     onItemClickedListener.onItemClick(position);
                 }
             }
@@ -143,11 +136,13 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         }
     }
 
-    public interface OnItemClickedListener{
+    public interface OnItemClickedListener {
         void onItemClick(int position);
     }
-    private OnItemClickedListener  onItemClickedListener;
-    public void setOnItemClickListener(OnItemClickedListener onItemClickedListener){
+
+    private OnItemClickedListener onItemClickedListener;
+
+    public void setOnItemClickListener(OnItemClickedListener onItemClickedListener) {
         this.onItemClickedListener = onItemClickedListener;
     }
 }

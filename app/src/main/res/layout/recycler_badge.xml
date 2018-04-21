@@ -16,6 +16,7 @@
             android:layout_width="@dimen/_110sdp"
             android:layout_height="@dimen/_110sdp"
             android:layout_centerHorizontal="true"
+            android:src="@drawable/icon_classic"
             android:layout_centerInParent="true"
             android:layout_margin="@dimen/_5sdp"
             android:contentDescription="@string/image_description" />
@@ -36,5 +37,5 @@
         android:layout_marginBottom="@dimen/_2sdp"
         android:gravity="center"
         android:textColor="@color/Black"
-        android:textSize="@dimen/_13ssp" />
+        android:textSize="@dimen/_13sdp" />
 </LinearLayout>

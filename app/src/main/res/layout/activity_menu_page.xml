@@ -10,18 +10,18 @@
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp">
-<!-->
-        <TextView
-            android:id="@+id/tv_tutorial"
-            android:layout_width="@dimen/_100ssp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:gravity="center_vertical"
-            android:layout_centerVertical="true"
-            android:text="@string/tutorial"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/dimen20"
-            android:textStyle="bold" /><!-->
+        <!-->
+                <TextView
+                    android:id="@+id/tv_tutorial"
+                    android:layout_width="@dimen/_100ssp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:text="@string/tutorial"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/dimen20"
+                    android:textStyle="bold" /><!-->
 
         <TextView
             android:id="@+id/tv_close"
@@ -35,7 +35,7 @@
             android:paddingStart="@dimen/_1sdp"
             android:text="@string/search_course_close"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_16sdp" />
 
         <TextView
             android:id="@+id/topic_title"
@@ -74,7 +74,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/UserInfo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -83,7 +83,7 @@
             <RelativeLayout
                 android:id="@+id/basic_Info"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_50sdp">
 
                 <TextView
                     android:id="@+id/tv_basic"
@@ -95,7 +95,7 @@
                     android:layout_alignParentStart="true"
                     android:text="@string/BasicInfo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13sdp" />
 
 
                 <ImageView
@@ -108,81 +108,84 @@
                     android:paddingStart="@dimen/_1sdp"
                     android:contentDescription="@string/search_course_text_row"
                     android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_16sdp"
                     app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
+            <!-->
+                        <RelativeLayout
+                            android:id="@+id/badge_collection"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen60">
 
-            <include layout="@layout/item_divider"/>
-<!-->
-            <RelativeLayout
-                android:id="@+id/badge_collection"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_16sdp"
+                                android:layout_toStartOf="@+id/collection"
+                                android:layout_alignParentStart="true"
+                                android:text="@string/BadgeCollection"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/_13ssp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_toStartOf="@+id/collection"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/BadgeCollection"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                            <ImageView
+                                android:id="@+id/collection"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:paddingEnd="@dimen/_16sdp"
+                                android:paddingStart="@dimen/_1sdp"
+                                android:contentDescription="@string/search_course_text_row"
+                                android:textColor="@color/search_course_color_row"
+                                android:textSize="@dimen/_16ssp"
+                                app:srcCompat="@drawable/icon_next" />
+                        </RelativeLayout>
+            <!-->
 
-                <ImageView
-                    android:id="@+id/collection"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:paddingEnd="@dimen/_16sdp"
-                    android:paddingStart="@dimen/_1sdp"
-                    android:contentDescription="@string/search_course_text_row"
-                    android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16ssp"
-                    app:srcCompat="@drawable/icon_next" />
-            </RelativeLayout>
-<!-->
-            <include layout="@layout/item_divider"/>
-
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rlt_newuserregister"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="vertical">
+                <include layout="@layout/item_divider"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp">
 
-                <TextView
-                    android:id="@+id/tv_userregistration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_toStartOf="@+id/register"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/NewUserRegisretion"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    <TextView
+                        android:id="@+id/tv_userregistration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_toStartOf="@+id/register"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/NewUserRegisretion"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13sdp" />
 
-                <ImageView
-                    android:id="@+id/register"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:paddingEnd="@dimen/_16sdp"
-                    android:paddingStart="@dimen/_1sdp"
-                    android:contentDescription="@string/search_course_text_row"
-                    android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16ssp"
-                    app:srcCompat="@drawable/icon_next" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/register"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingEnd="@dimen/_16sdp"
+                        android:paddingStart="@dimen/_1sdp"
+                        android:contentDescription="@string/search_course_text_row"
+                        android:textColor="@color/search_course_color_row"
+                        android:textSize="@dimen/_16sdp"
+                        app:srcCompat="@drawable/icon_next" />
+                </RelativeLayout></LinearLayout>
 
             <include layout="@layout/item_divider"/>
 
             <RelativeLayout
                 android:id="@+id/login"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_50sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -193,7 +196,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/Login"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13sdp" />
 
                 <ImageView
                     android:id="@+id/iv_login"
@@ -205,34 +208,41 @@
                     android:paddingStart="@dimen/_1sdp"
                     android:contentDescription="@string/search_course_text_row"
                     android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_16sdp"
                     app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
 
-            <include layout="@layout/item_divider"/>
-
-            <RelativeLayout
-                android:id="@+id/logout"
-                android:visibility="visible"
+            <LinearLayout
+                android:id="@+id/ll_logout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <include layout="@layout/item_divider"/>
+                <RelativeLayout
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen60">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:text="@string/Logout"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:text="@string/Logout"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13sdp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
 
             <include layout="@layout/item_divider"/>
 
             <RelativeLayout
                 android:id="@+id/app_Info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60"
+                android:layout_height="@dimen/_36sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -242,7 +252,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/AppInfo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -251,7 +261,7 @@
             <RelativeLayout
                 android:id="@+id/rlt_tutorial"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_50sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -262,7 +272,7 @@
                     android:layout_toStartOf="@+id/im_how"
                     android:layout_alignParentStart="true"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13sdp" />
 
                 <ImageView
                     android:id="@+id/im_how"
@@ -274,7 +284,7 @@
                     android:paddingStart="@dimen/_1sdp"
                     android:contentDescription="@string/search_course_text_row"
                     android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_16sdp"
                     app:srcCompat="@drawable/icon_next" />
             </RelativeLayout>
 
@@ -283,7 +293,7 @@
             <RelativeLayout
                 android:id="@+id/privacy"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_50sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -292,7 +302,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/PrivacyPolicy"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
@@ -300,7 +310,7 @@
             <RelativeLayout
                 android:id="@+id/inquiry"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_50sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -309,7 +319,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/Inquiry"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
@@ -317,7 +327,7 @@
             <RelativeLayout
                 android:id="@+id/rateInApp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_50sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -326,7 +336,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/RateInApp"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
@@ -334,7 +344,7 @@
             <RelativeLayout
                 android:id="@+id/version"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60"
+                android:layout_height="@dimen/_36sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -344,7 +354,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/Version"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -352,7 +362,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen60">
+                android:layout_height="@dimen/_50sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -361,7 +371,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/versiontwo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>

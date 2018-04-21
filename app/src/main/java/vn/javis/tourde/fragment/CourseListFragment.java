@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.BadgeCollectionActivity;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
@@ -43,9 +46,16 @@ public class CourseListFragment extends BaseFragment {
     ImageButton btnPreviousPage;
     @BindView(R.id.btn_search)
     ImageButton btnSearch;
+    @BindView(R.id.btn_badge_collection)
+    RelativeLayout btnBadge;
     private int mCurrentPage;
     ListCourseAdapter listCourseAdapter;
     CourseListActivity mActivity;
+
+    @BindView(R.id.img_home)
+    ImageView imgHomeBtn;
+    @BindView(R.id.txt_home)
+    TextView txtHomeBtn;
 
     private int mTotalPage = 1;
 
@@ -87,10 +97,19 @@ public class CourseListFragment extends BaseFragment {
         });
         mCurrentPage = DEFAULT_PAGE;
         changePage(0);
+        btnBadge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BadgeCollectionActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
+        txtHomeBtn.setTextColor(getResources().getColor( R.color.SkyBlue));
     }
 
     @Override
-    public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
+    public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_course_list_view, container, false);
     }
 
@@ -137,7 +156,7 @@ public class CourseListFragment extends BaseFragment {
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
             @Override
             public void onItemClick(int position) {
-                mActivity.ShowCourseDetail();
+                mActivity.ShowCourseDetail(position);
             }
         });
     }
