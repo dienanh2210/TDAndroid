@@ -97,7 +97,7 @@
                 android:paddingTop="@dimen/_33sdp"
                 android:text="@string/hint_name_basicinfo"
                 android:textColor="@color/colorText"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -109,7 +109,7 @@
                 android:layout_marginStart="195dp"
                 android:paddingTop="@dimen/_33sdp"
                 android:textColor="@color/colorText"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
