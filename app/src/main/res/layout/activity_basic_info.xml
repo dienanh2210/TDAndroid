@@ -16,8 +16,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@color/backgroud"
-            android:layout_height="@dimen/_40sdp">
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/backgroud">
 
             <TextView
                 android:id="@+id/tv_back_basicInfo"
@@ -76,9 +76,8 @@
         <include layout="@layout/item_divider" />
 
         <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp">
-
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp">
 
             <ImageView
                 android:id="@+id/avatar"
@@ -100,6 +99,7 @@
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_Username"
                 android:layout_width="wrap_content"
@@ -113,9 +113,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-
-            <include layout="@layout/item_divider" />
-
+        <include layout="@layout/item_divider" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -144,8 +142,8 @@
                 android:id="@+id/tv_UserEmail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_65sdp"
-                android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_1sdp"
+                android:paddingStart="@dimen/_20sdp"
                 android:paddingTop="@dimen/_15sdp"
                 android:text="@string/hint_email_basicinfo"
                 android:textColor="@android:color/black"
