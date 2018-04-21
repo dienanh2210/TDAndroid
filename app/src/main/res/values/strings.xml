@@ -176,7 +176,9 @@
     <string name="TextPrefecture">お住いの地域</string>
     <string name="TextShowSelected">北海道</string>
     <string name="ButtonToRegister">新規登録</string>
-    <string name="TextemailUser">メールアドレス</string>
+    <string name="TextEmailUser">メールアドレス</string>
+    <string name="TextUsername">ユーザー名</string>
+    <string name="TextUserIcon">ユーザーアイコン</string>
     <string name="item_text">グルメが充実</string>
     <string name="item_header_text">おすすめの月</string>
     <string name="item_comment_text">comment</string>
