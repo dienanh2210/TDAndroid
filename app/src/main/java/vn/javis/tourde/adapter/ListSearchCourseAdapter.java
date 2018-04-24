@@ -17,62 +17,58 @@ import java.util.Map;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.Data;
 
-public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.ViewHolder> {
+public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCourseAdapter.ViewHolder> {
 
     private List<Data> dataList;
     private Context context;
     private HashMap<Integer, RecyclerView> mapRecyclerView = new HashMap<>();
-    private OnClickItem onClickItem;
-    private HashMap<String, Boolean> mapContent = new HashMap<>();
 
-    public ListSearchAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
+    private OnClickItem onClickItem;
+
+
+    public ListSearchCourseAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
         this.onClickItem = onClickItem;
     }
 
     @Override
-    public ListSearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListSearchCourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.item_list, parent, false );
         ViewHolder viewHolder = new ViewHolder( view );
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ListSearchAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ListSearchCourseAdapter.ViewHolder holder, int position) {
         final Data data = dataList.get( position );
         holder.tv_header.setText( data.getTitle() );
-
-        holder.rcv_content.setAdapter( new ContentSearchAdapter( data.getContent(), new ContentSearchAdapter.OnClickItem() {
+        holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
+        // holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
+        holder.rcv_content.setAdapter( new ContentSearchCourseAdapter( data.getContent(), new  ContentSearchCourseAdapter.OnClickItem() {
             @Override
-            public void onClick(int position, boolean isPick, View view) {
+            public void onClick(int position, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
                     //to get key
                     e1.getKey();
                     //and to get value
-                    for (Map.Entry<Integer, View> eItem : ((ContentSearchAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
+                    for (Map.Entry<Integer, View> eItem : ((ContentSearchCourseAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
                         //to get key
                         eItem.getKey();
                         //and to get value, 1
-                        //  eItem.getValue().setVisibility( View.GONE );
+                        eItem.getValue().setVisibility( View.GONE );
                     }
                 }
                 if (onClickItem != null) {
-                    String s =data.getContent().get( position );
-                    mapContent.put( s, isPick);
+                    onClickItem.onClick( data.getContent().get( position ) );
                     Log.i( "Content", data.getContent().get( position ) );
-//                    onClickItem.onClick( data.getContent().get( position ));
-
                 }
             }
         } ) );
         mapRecyclerView.put( position, holder.rcv_content );
         if (position == 0) {
-            ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
-            holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
-        }else {
-
-            holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
+            //  ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
+            //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
         }
         //0ne ...
         //  if(position == 1) {
@@ -102,11 +98,8 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
         }
     }
     public interface OnClickItem {
-        void onClick(Map content);
+        void onClick(String content);
     }
 
-    public HashMap<String, Boolean> getMapContent() {
-        return mapContent;
-    }
 }
 

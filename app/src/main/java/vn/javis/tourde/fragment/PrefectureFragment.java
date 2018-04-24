@@ -17,7 +17,7 @@ import java.util.List;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.model.Data;
-import vn.javis.tourde.adapter.ListAdapter;
+import vn.javis.tourde.adapter.ListRegisterAdapter;
 
 public class PrefectureFragment extends Fragment {
 
@@ -95,7 +95,7 @@ public class PrefectureFragment extends Fragment {
         data8.setContent( Arrays.asList( contentList8 ) );
         dataList.add( data7 );
         rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
-        rcv_list.setAdapter( new ListAdapter( getContext(), dataList, new ListAdapter.OnClickItem() {
+        rcv_list.setAdapter( new ListRegisterAdapter( getContext(), dataList, new ListRegisterAdapter.OnClickItem() {
             @Override
             public void onClick(String content) {
                 contentArea = content;
