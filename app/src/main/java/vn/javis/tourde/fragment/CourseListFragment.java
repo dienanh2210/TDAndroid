@@ -53,7 +53,6 @@ public class CourseListFragment extends BaseFragment {
     private int mCurrentPage;
     ListCourseAdapter listCourseAdapter;
     CourseListActivity mActivity;
-
     @BindView(R.id.img_home)
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)

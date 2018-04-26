@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+
 import android.content.Context;
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import vn.javis.tourde.activity.MainActivity;
 public abstract class BaseFragment extends Fragment {
     private View mView;
     private Unbinder mUnbind;
-    private Activity mActivity;
     protected MainActivity activity;
     @Nullable
     @Override

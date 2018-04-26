@@ -6,22 +6,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.LoginSNSActivity;
-import vn.javis.tourde.activity.MenuPageActivity;
-import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.model.Data;
 import vn.javis.tourde.adapter.ListAdapter;
@@ -30,11 +28,14 @@ public class PrefectureOneFragment extends Fragment {
 
     private RecyclerView rcv_list;
     private List<Data> dataList;
+    List<String> listContent = new ArrayList<>();
+
     private Button btn_choose;
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
-    TextView tv_close,tv_back_menu_entry;
+    TextView tv_close, tv_back_menu_entry;
     private SearchCourseActivity activity;
+    ListAdapter listAdapter;
 
     public static PrefectureOneFragment newInstance(View.OnClickListener listener) {
         PrefectureOneFragment fragment = new PrefectureOneFragment();
@@ -49,11 +50,11 @@ public class PrefectureOneFragment extends Fragment {
         rcv_list = view.findViewById( R.id.rcv_list );
         btn_choose = view.findViewById( R.id.btn_choose );
 
-        tv_close=view.findViewById( R.id.tv_close );
+        tv_close = view.findViewById( R.id.tv_close );
         tv_close.setOnClickListener( onClickClose );
-        tv_back_menu_entry=view.findViewById( R.id.tv_back_menu_entry );
+        tv_back_menu_entry = view.findViewById( R.id.tv_back_menu_entry );
         tv_back_menu_entry.setOnClickListener( onClickBack );
-        activity= (SearchCourseActivity) getActivity();
+        activity = (SearchCourseActivity) getActivity();
 
         createData();
         btn_choose.setOnClickListener( new View.OnClickListener() {
@@ -61,15 +62,16 @@ public class PrefectureOneFragment extends Fragment {
             public void onClick(View v) {
 
                 if (listener != null) {
-                    listener.onFragmentInteraction( contentArea );
-                    ((SearchCourseActivity) getActivity()).onBackPressed();
+                    getAllContent();
+                    listener.onFragmentInteraction( listContent.toString() );
+                    activity.setmLstContent( listContent );
+                    activity.onBackPressed();
                 }
             }
         } );
         return view;
-
-
     }
+
     View.OnClickListener onClickClose = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -80,7 +82,7 @@ public class PrefectureOneFragment extends Fragment {
     View.OnClickListener onClickBack = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-               activity.onBackPressed();
+            activity.onBackPressed();
         }
     };
 
@@ -91,7 +93,7 @@ public class PrefectureOneFragment extends Fragment {
         String[] contentList4 = new String[]{"新潟県", "富山県", "石川県", "福井県", "長野県", "山梨県", "岐阜県", "静岡県", "愛知県"};
         String[] contentList5 = new String[]{"三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"};
         String[] contentList6 = new String[]{"鳥取県", "島根県", "岡山県", "広島県", "山口県"};
-        String[] contentList7 = new String[]{"徳島県", "香川県", "愛媛県", "愛媛県", "高知県"};
+        String[] contentList7 = new String[]{"徳島県", "香川県", "愛媛県", "高知県"};
         String[] contentList8 = new String[]{"福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"};
         dataList = new ArrayList<>();
         Data data1 = new Data();
@@ -125,20 +127,30 @@ public class PrefectureOneFragment extends Fragment {
         Data data8 = new Data();
         data8.setTitle( "四国地方" );
         data8.setContent( Arrays.asList( contentList8 ) );
-        dataList.add( data7 );
+        dataList.add( data8 );
         rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
-        rcv_list.setAdapter( new ListAdapter( getContext(), dataList, new ListAdapter.OnClickItem() {
+        listAdapter = new ListAdapter( getContext(), dataList, new ListAdapter.OnClickItem() {
             @Override
-            public void onClick(String content) {
-                contentArea = content;
+            public void onClick(Map content) {
             }
-        } ) );
+        } );
+        rcv_list.setAdapter( listAdapter );
     }
 
     public interface OnFragmentInteractionListener extends View.OnClickListener {
         void onFragmentInteraction(String content);
+
         @Override
         void onClick(View v);
+    }
+
+    private void getAllContent() {
+        for (Map.Entry<String, Boolean> entry : listAdapter.getMapContent().entrySet()) {
+            String content = entry.getKey();
+            Boolean isPick = entry.getValue();
+            if (isPick) listContent.add( content );
+
+        }
     }
 
 }

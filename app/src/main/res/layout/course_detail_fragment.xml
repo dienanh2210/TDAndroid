@@ -215,6 +215,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:src="@drawable/icon_star0" />
 
+
             <TextView
                 android:id="@+id/txt_date"
                 android:layout_width="match_parent"
@@ -223,7 +224,6 @@
                 android:text="@string/course_detail_date"
                 android:textSize="@dimen/_10ssp" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -233,10 +233,12 @@
             android:baselineAligned="false"
             android:weightSum="3">
 
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
 
                 <View
                     android:layout_width="@dimen/_1sdp"
@@ -440,6 +442,7 @@
         <include layout="@layout/footer_layout"></include>
     </LinearLayout>
 </ScrollView>
+
 
 
 

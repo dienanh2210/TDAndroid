@@ -59,7 +59,7 @@ public class ListSpotsDetailAdapter extends ArrayAdapter<Spot> {
                // txtTag.setText(spot.getTag().toString());
               //  Picasso.with(context).load(spot.getTopImage()).into(imgCourse);
                 if(order == myArray.size())
-                    lnDistance.setVisibility(View.INVISIBLE);
+                    lnDistance.setVisibility(View.GONE);
             }
         }
         return convertView;

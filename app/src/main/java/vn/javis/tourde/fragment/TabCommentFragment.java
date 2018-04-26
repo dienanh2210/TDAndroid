@@ -31,24 +31,18 @@ public class TabCommentFragment extends BaseFragment {
 
     @BindView(R.id.comment_recylerview)
     RecyclerView lstCommentRecyleView;
-
     @BindView(R.id.btn_post_comment)
     ImageButton btnPostComment;
-
     ListCommentAdapter listCommentAdapter;
-
     CourseListActivity mActivity;
-
-
-
     List<Review> listReview;
 
-    public static TabCommentFragment instance(List<Review> listReview)
-    {
+    public static TabCommentFragment instance(List<Review> listReview) {
         TabCommentFragment fragment = new TabCommentFragment();
         fragment.listReview = listReview;
         return fragment;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -61,7 +55,6 @@ public class TabCommentFragment extends BaseFragment {
             }
         });
         setRecyler();
-        Log.i("onViewCreated: ","onViewCreated");
     }
 
 
@@ -69,19 +62,13 @@ public class TabCommentFragment extends BaseFragment {
     public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.tab_comment, container, false);
     }
+
     public void setListReview(List<Review> listReview) {
         this.listReview = listReview;
     }
+
     public void setRecyler() {
-        try {
-
-                listCommentAdapter = new ListCommentAdapter(listReview, getActivity());
-                lstCommentRecyleView.setAdapter(listCommentAdapter);
-
-        }
-        catch (Exception e)
-        {
-            Log.i("ex: ",e.getMessage() +""+(lstCommentRecyleView));
-        }
+        listCommentAdapter = new ListCommentAdapter(listReview, getActivity());
+        lstCommentRecyleView.setAdapter(listCommentAdapter);
     }
 }

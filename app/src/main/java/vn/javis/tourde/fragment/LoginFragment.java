@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,9 +55,11 @@ import vn.javis.tourde.model.Account;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginView;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
 public class LoginFragment extends BaseFragment implements LoginView {
@@ -110,6 +112,13 @@ public class LoginFragment extends BaseFragment implements LoginView {
                                 } else {
                                     Log.i("face", me.optString("id"));
                                     callPostAPISNS(me.optString("id"), "2");
+
+                                    Intent intent = new Intent();
+                                    intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                                    getActivity().setResult(Activity.RESULT_OK, intent);
+                                    getActivity().finish();
+                                    getActivity().onBackPressed();
+
                                 }
                             }
                         });
@@ -157,6 +166,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 startActivity(intent);
             }
         });
+        edt_emaillogin.setText(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Email"));
+        edt_passwordlogin.setText(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Pass"));
     }
 
     @Override
@@ -199,6 +210,13 @@ public class LoginFragment extends BaseFragment implements LoginView {
                         TwitterAuthToken authToken = session.getAuthToken();
                         callPostAPISNS("" + session.getUserId(), "1");
                         Toast.makeText(getContext(), "Login success " + session.getUserId(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent();
+                        intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                        getActivity().setResult(Activity.RESULT_OK, intent);
+                        getActivity().finish();
+
+
                     }
 
                     @Override
@@ -229,9 +247,15 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
+
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             callPostAPISNS(account.getId().toString(), "3");
             Log.i("GooglePlus", "success: " + account.getId());
+
+            Intent intent = new Intent();
+            intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+            getActivity().setResult(Activity.RESULT_OK, intent);
+            getActivity().finish();
 
         } catch (ApiException e) {
             Log.w("GooglePlus", "signInResult:failed code=" + e.getMessage());
@@ -248,6 +272,12 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 String accessToken = loginResult.getLineCredential().getAccessToken().getAccessToken();
                 callPostAPISNS(loginResult.getLineProfile().getUserId().toString(), "4");
                 Toast.makeText(getActivity(), "Login success: " + accessToken, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                getActivity().setResult(Activity.RESULT_OK, intent);
+                getActivity().finish();
+
                 break;
             case SERVER_ERROR:
                 Log.e("ERROR", "SERVER ERROR!!");
@@ -281,6 +311,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
+
+
     }
 
     void callPostAPISNS(String sns_id, String sns_kind) {
@@ -307,18 +339,27 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
-                    if (jsonObject.has("success")) {
-                        Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + " yes " + response.toString());
-                        if (jsonObject.has("token")) {
+                    if (jsonObject.has("success"))
+                    {
+                        Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
+//                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
+//                        startActivity( intent );
+                        Intent intent = new Intent();
+                        intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                        getActivity().setResult(Activity.RESULT_OK, intent);
+                        getActivity().finish();
+                        if (jsonObject.has("token"))
+                        {
                             try {
                                 mUserToken = jsonObject.getString("token");
                                 getAccount();
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                        Intent intent = new Intent(getActivity(), MenuPageActivity.class);
-                        startActivity(intent);
+                        Intent intent1 = new Intent(getActivity(), MenuPageActivity.class);
+                        startActivity(intent1);
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
                     }
@@ -343,6 +384,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
                     mAccount = Account.getData(jsonObject.toString());
                 }
             }
+
             @Override
             public void onError(VolleyError error) {
             }

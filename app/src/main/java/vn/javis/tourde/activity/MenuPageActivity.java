@@ -2,22 +2,30 @@ package vn.javis.tourde.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import vn.javis.tourde.R;
+import vn.javis.tourde.utils.Constant;
 
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
-    RelativeLayout tv_login, tv_tutorial, logout, rlt_newuserregister;
+
+    RelativeLayout tv_login,tv_tutorial,logout;
+    @BindView( R.id.rlt_newuserregister )
+    View rlt_newuserregisterl;
+    @BindView( R.id.ll_logout )
+    View ll_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_page);
+        super.onCreate(savedInstanceState);
         tv_login = findViewById(R.id.login);
         tv_login.setOnClickListener(onClickLogin);
 
@@ -33,8 +41,7 @@ public class MenuPageActivity extends BaseActivity {
         tv_userregistration = findViewById(R.id.tv_userregistration);
         tv_userregistration.setOnClickListener(onClickNewUser);
 
-        //  logout=findViewById( R.id.logout );
-        //   rlt_newuserregister=findViewById( R.id.rlt_newuserregister );
+        ll_logout.setOnClickListener( onClickLogout );
 
 
     }
@@ -43,7 +50,7 @@ public class MenuPageActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MenuPageActivity.this, LoginSNSActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
     };
     View.OnClickListener onClick = new View.OnClickListener() {
@@ -51,6 +58,7 @@ public class MenuPageActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MenuPageActivity.this, CourseListActivity.class);
             startActivity(intent);
+
         }
     };
 
@@ -75,18 +83,33 @@ public class MenuPageActivity extends BaseActivity {
             startActivity(intent);
         }
     };
-
-
-  /* public boolean chooseGender(boolean isMan) {
-        if (isMan) {
-            logout.setVisibility( View.VISIBLE );
-           rlt_newuserregister.setVisibility( View.GONE );
-        } else {
-            logout.setVisibility( View.GONE );
-           rlt_newuserregister.setVisibility( View.VISIBLE );
+    View.OnClickListener onClickLogout = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            rlt_newuserregisterl.setVisibility( View.VISIBLE );
+            ll_logout.setVisibility( View.GONE );
         }
-        return isMan;
-    }*/
+    };
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.i("onBackPressed", "true");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                boolean str = data.getBooleanExtra( Constant.KEY_LOGIN_SUCCESS, false);
+                rlt_newuserregisterl.setVisibility( View.GONE );
+                ll_logout.setVisibility( View.VISIBLE );
+                Log.i("onActivityResult",""+ str);
+            }
+        }
+    }
 }
 
 

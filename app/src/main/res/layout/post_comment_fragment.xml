@@ -76,11 +76,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_70sdp">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true">
 
                     <RatingBar
                         android:id="@+id/ratingBar"
@@ -93,10 +88,6 @@
                         android:rating="5"
                         style="@style/CustomRatingBar"
                         android:stepSize="1" />
-
-
-
-                </RelativeLayout>
 
             </RelativeLayout>
 
