@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/search_course_color_title_background"
     tools:context="vn.javis.tourde.activity.BasicInfoActivity">
-
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -48,6 +48,6 @@ public class LoginAPI {
     public static void pushToken(final String token,ServiceCallback callback) {
         HashMap<String, String> param = new HashMap<>();
         param.put("token", token);
-        TourDeService.postWithAuth(ApiEndpoint.POST_GET_ACCOUNT, param,callback);
+        TourDeService.getWithAuth(ApiEndpoint.GET_GET_ACCOUNT, param,callback);
     }
 }

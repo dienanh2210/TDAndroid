@@ -36,7 +36,6 @@ import vn.javis.tourde.R;
 public abstract class BaseActivity extends AppCompatActivity {
 
     Unbinder unbinder;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

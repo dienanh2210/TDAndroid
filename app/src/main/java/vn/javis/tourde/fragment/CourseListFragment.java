@@ -2,6 +2,8 @@ package vn.javis.tourde.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,7 +53,6 @@ public class CourseListFragment extends BaseFragment {
     private int mCurrentPage;
     ListCourseAdapter listCourseAdapter;
     CourseListActivity mActivity;
-
     @BindView(R.id.img_home)
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
@@ -63,9 +64,7 @@ public class CourseListFragment extends BaseFragment {
     private static final int DEFAULT_PAGE = 1;
 
     @Override
-    public void onStart() {
-        super.onStart();
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
@@ -100,12 +99,12 @@ public class CourseListFragment extends BaseFragment {
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), BadgeCollectionActivity.class);
+                Intent intent = new Intent(mActivity, BadgeCollectionActivity.class);
                 startActivity(intent);
             }
         });
         imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
-        txtHomeBtn.setTextColor(getResources().getColor( R.color.SkyBlue));
+        txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
     }
 
     @Override

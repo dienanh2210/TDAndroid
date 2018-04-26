@@ -1,22 +1,12 @@
 package vn.javis.tourde.model;
-
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+public class CourseData {
 
-import java.util.Date;
-
-/**
- * Created by admin on 3/23/2018.
- */
-
-public class Course {
     @SerializedName("course_id")
     @Expose
     private int courseId;
-    @SerializedName("spot_id")
-    @Expose
-    private int spotId;
     @SerializedName("title")
     @Expose
     private String title;
@@ -86,70 +76,16 @@ public class Course {
     @SerializedName("insert_datetime")
     @Expose
     private String insertDatetime;
-    @SerializedName("prefecture")
-    @Expose
-    private String prefecture;
-    @SerializedName("tag")
-    @Expose
-    private String tag;
-    @SerializedName("spot_distance")
-    @Expose
-    private String spotDistance;
-    @SerializedName("order_number")
-    @Expose
-    private String orderNumber;
-    @SerializedName("zip_code")
-    @Expose
-    private String zipCode;
-    @SerializedName("address")
-    @Expose
-    private String address;
-    @SerializedName("site_url")
-    @Expose
-    private String siteUrl;
-    @SerializedName("tel")
-    @Expose
-    private String tel;
-    @SerializedName("google_map_url")
-    @Expose
-    private String googleMapUrl;
-    @SerializedName("latitude")
-    @Expose
-    private String latitude;
-    @SerializedName("longitude")
-    @Expose
-    private String longitude;
-    @SerializedName("review_count")
-    @Expose
-    private String reviewCount;
-    @SerializedName("rating_average")
-    @Expose
-    private float ratingAverage;
-    @SerializedName("rating_total")
-    @Expose
-    private String ratingTotal;
-    @SerializedName("spot_count")
-    @Expose
-    private String spotCount;
 
-    public static Course getData(String data) {
-        return new Gson().fromJson(data, Course.class);
+    public static CourseData getData(String data) {
+        return new Gson().fromJson(data, CourseData.class);
     }
-
     public int getCourseId() {
         return courseId;
     }
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
-    }
-
-    public int getSpotId() {
-        return spotId;
-    }
-
-    public void setSpotId(int spotId) {
-        this.spotId = spotId;
     }
 
     public String getTitle() {
@@ -336,123 +272,4 @@ public class Course {
         this.insertDatetime = insertDatetime;
     }
 
-    public String getPrefecture() {
-        return prefecture;
-    }
-
-    public void setPrefecture(String prefecture) {
-        this.prefecture = prefecture;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public String getSpotDistance() {
-        return spotDistance;
-    }
-
-    public void setSpotDistance(String spotDistance) {
-        this.spotDistance = spotDistance;
-    }
-
-    public String getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getSiteUrl() {
-        return siteUrl;
-    }
-
-    public void setSiteUrl(String siteUrl) {
-        this.siteUrl = siteUrl;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getGoogleMapUrl() {
-        return googleMapUrl;
-    }
-
-    public void setGoogleMapUrl(String googleMapUrl) {
-        this.googleMapUrl = googleMapUrl;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getReviewCount() {
-        return reviewCount;
-    }
-
-    public void setReviewCount(String reviewCount) {
-        this.reviewCount = reviewCount;
-    }
-
-    public float getRatingAverage() {
-        return ratingAverage;
-    }
-
-    public void setRatingAverage(float ratingAverage) {
-        this.ratingAverage = ratingAverage;
-    }
-
-    public String getRatingTotal() {
-        return ratingTotal;
-    }
-
-    public void setRatingTotal(String ratingTotal) {
-        this.ratingTotal = ratingTotal;
-    }
-
-    public String getSpotCount() {
-        return spotCount;
-    }
-
-    public void setSpotCount(String spotCount) {
-        this.spotCount = spotCount;
-    }
 }
