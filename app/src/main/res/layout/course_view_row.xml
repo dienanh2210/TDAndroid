@@ -94,25 +94,15 @@
             android:contentDescription="@string/image_description"
             android:scaleType="fitCenter" />
 
-        <RelativeLayout
+        <ImageButton
+            android:id="@+id/btn_favorite_list"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@drawable/circle">
-
-            <ImageButton
-                android:id="@+id/btn_favorifte"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/_15sdp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/icon_bicycle"
-                android:contentDescription="@string/image_description"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
+            android:background="@drawable/icon_bicycle_gray">
+        </ImageButton>
 
         <LinearLayout
             android:id="@+id/fifth_row"
@@ -156,50 +146,13 @@
                 android:paddingStart="@dimen/_5sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/star_rate"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:src="@drawable/icon_star0" />
 
-            <LinearLayout
-                android:id="@+id/lst_star_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/star_1"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:background="@drawable/star_gray"
-                    android:contentDescription="@string/image_description" />
-
-                <ImageView
-                    android:id="@+id/star_2"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:background="@drawable/star_gray"
-                    android:contentDescription="@string/image_description" />
-
-                <ImageView
-                    android:id="@+id/star_3"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:background="@drawable/star_gray"
-                    android:contentDescription="@string/image_description" />
-
-                <ImageView
-                    android:id="@+id/star_4"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:background="@drawable/star_gray"
-                    android:contentDescription="@string/image_description" />
-
-                <ImageView
-                    android:id="@+id/star_5"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:background="@drawable/star_gray"
-                    android:contentDescription="@string/image_description" />
-
-            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 

@@ -51,6 +51,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.MenuEntryActivity;
+import vn.javis.tourde.model.Account;
+import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.LoginView;
@@ -64,6 +66,12 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @BindView(R.id.edt_passwordlogin)
     EditText edt_passwordlogin;
 
+    public static String getmUserToken() {
+        return mUserToken;
+    }
+
+    private static String mUserToken;
+    private static Account mAccount;
 
     private static final String EMAIL = "email";
     private static final String USER_POSTS = "user_posts";
@@ -300,33 +308,17 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
-
-                        Intent intent = new Intent(getActivity(), MenuPageActivity.class);
-                        startActivity(intent);
-
-
+                        Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + " yes " + response.toString());
                         if (jsonObject.has("token")) {
                             try {
-                                LoginAPI.pushToken(jsonObject.getString("token"), new ServiceCallback() {
-                                    @Override
-                                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                                        JSONObject jsonObject = (JSONObject) response;
-                                        if (jsonObject.has("account_id")) {
-                                            Toast.makeText(getContext(), "Welcome: " + jsonObject.getString("account_id"), Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(VolleyError error) {
-
-                                    }
-                                });
+                                mUserToken = jsonObject.getString("token");
+                                getAccount();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-
+                        Intent intent = new Intent(getActivity(), MenuPageActivity.class);
+                        startActivity(intent);
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
                     }
@@ -341,5 +333,27 @@ public class LoginFragment extends BaseFragment implements LoginView {
         }
     }
 
+    public void getAccount() {
 
+        LoginAPI.pushToken(mUserToken, new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                if (jsonObject.has("account_id")) {
+                    mAccount = Account.getData(jsonObject.toString());
+                }
+            }
+            @Override
+            public void onError(VolleyError error) {
+            }
+        });
+    }
+
+    public static Account getmAccount() {
+        return mAccount;
+    }
+
+    public static void setmAccount(Account mAccount) {
+        LoginFragment.mAccount = mAccount;
+    }
 }

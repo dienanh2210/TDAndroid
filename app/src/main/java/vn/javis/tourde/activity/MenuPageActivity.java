@@ -12,7 +12,7 @@ import vn.javis.tourde.R;
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
-    RelativeLayout tv_login,tv_tutorial, logout,rlt_newuserregister;
+    RelativeLayout tv_login, tv_tutorial, logout, rlt_newuserregister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class MenuPageActivity extends BaseActivity {
         tv_userregistration = findViewById(R.id.tv_userregistration);
         tv_userregistration.setOnClickListener(onClickNewUser);
 
-      //  logout=findViewById( R.id.logout );
-     //   rlt_newuserregister=findViewById( R.id.rlt_newuserregister );
+        //  logout=findViewById( R.id.logout );
+        //   rlt_newuserregister=findViewById( R.id.rlt_newuserregister );
 
 
     }
@@ -75,13 +75,7 @@ public class MenuPageActivity extends BaseActivity {
             startActivity(intent);
         }
     };
-    View.OnClickListener onClickBadge = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(MenuPageActivity.this, BadgeCollectionActivity.class);
-            startActivity(intent);
-        }
-    };
+
 
   /* public boolean chooseGender(boolean isMan) {
         if (isMan) {
