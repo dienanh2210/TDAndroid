@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ public class TabCourseFragment extends BaseFragment {
 
     @BindView(R.id.lv_list_spots)
     ListView lvSpot;
-
+    @BindView(R.id.btn_signup_favorite)
+    RelativeLayout btnSignUp;
     ListSpotsDetailAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
@@ -47,8 +49,11 @@ public class TabCourseFragment extends BaseFragment {
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.tab_course, container, false);
     }
-    public void setListSpotAdapter(){
-
+    public void changeButtonColor(boolean isFavor){
+        if(isFavor)
+           btnSignUp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame_gray));
+        else
+            btnSignUp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame));
     }
 
 }

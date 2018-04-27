@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import vn.javis.tourde.R;
@@ -48,10 +49,12 @@ public class SearchCourseActivity extends BaseActivity {
         Log.i( "xxx: ", this.mListContent.toString() );
     }
 
-    public void onBackCLickToList() {
+    public void onBackCLickToList(HashMap map) {
 
         Intent intent = new Intent( this, CourseListActivity.class );
         intent.putExtra( "listContent", mListContent.toArray() );
+        intent.putExtra("searchValue",map);
+        intent.putExtra("searching","true");
         startActivity( intent );
     }
 

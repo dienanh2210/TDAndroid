@@ -60,15 +60,26 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
         }
         @Override
         public void onClick(View v) {
-            if (onClickItem != null) onClickItem.onClick( getAdapterPosition(), v );
-            mapItemView.put( getAdapterPosition(), imv_mark );
-            imv_mark.setVisibility( View.VISIBLE);
+            if(imv_mark.getVisibility() == View.VISIBLE )
+            {
+               // mapItemView.put( getAdapterPosition(), imv_mark );
+                imv_mark.setVisibility(View.GONE);
+                if (onClickItem != null) onClickItem.onClick( getAdapterPosition(),false, v );
+
+            }
+            else if (imv_mark.getVisibility() == View.GONE )
+            {
+                if (onClickItem != null) onClickItem.onClick( getAdapterPosition(),true, v );
+               // mapItemView.put( getAdapterPosition(), imv_mark );
+                imv_mark.setVisibility( View.VISIBLE);
+
+            }
 
         }
     }
 
     public interface OnClickItem {
-        void onClick(int position, View view);
+        void onClick(int position, boolean isPick, View view);
     }
 
     public boolean isShowMark() {

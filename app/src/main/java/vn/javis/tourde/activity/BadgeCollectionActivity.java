@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -21,7 +22,7 @@ import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.model.Badge;
 
-public class BadgeCollectionActivity extends BaseActivity {
+public class BadgeCollectionActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_barge)
     RecyclerView badgeRecycler;

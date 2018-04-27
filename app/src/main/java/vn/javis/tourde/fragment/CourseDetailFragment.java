@@ -245,6 +245,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             tabCommentFragment.setListReview(mCourseDetail.getReview());
             tabCommentFragment.setRecyler();
         }
+        if (tabCourseFragment != null) {
+            tabCourseFragment.changeButtonColor(isFavourite);
+        }
     }
 
     @Override
@@ -262,7 +265,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return  TabCourseFragment.instance(mCourseDetail.getSpot());
+                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getSpot());
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());
                 default:
@@ -278,13 +281,23 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     private void btnFavoriteClick() {
         isFavourite = !isFavourite;
-        String token = "";
-        int course_id = 1;
+        String token = LoginFragment.getmUserToken();
+        int course_id = mCourseID;
         if (isFavourite) {
             FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                    btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                    JSONObject jsonObject = (JSONObject) response;
+                    if (jsonObject.has("success")) {
+                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                        if (tabCourseFragment != null) {
+                            tabCourseFragment.changeButtonColor(isFavourite);
+                        }
+                    }
+                    else {
+                        isFavourite = !isFavourite;
+                        Log.i("is: ","false");
+                    }
                 }
 
                 @Override
@@ -296,7 +309,17 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                    btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_gray));
+                    JSONObject jsonObject = (JSONObject) response;
+                    if (jsonObject.has("success")) {
+                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_gray));
+                        if (tabCourseFragment != null) {
+                            tabCourseFragment.changeButtonColor(isFavourite);
+                        }
+                    }
+                    else {
+                        Log.i("is: ","true");
+                        isFavourite = !isFavourite;
+                    }
                 }
 
                 @Override
@@ -305,6 +328,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 }
             });
         }
+
     }
 
 }

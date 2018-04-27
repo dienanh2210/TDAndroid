@@ -235,5 +235,12 @@
     <string name="first_story_num">1</string>
     <string name="second_story_num">2</string>
 
+    <string name="txtRedButtonDetail">お気に入りに登録する</string>
+    <string name="txtBlueButtonDetail">このコースを走行する
+
+</string>
+
+
+
 </resources>
 

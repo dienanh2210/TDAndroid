@@ -69,6 +69,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
     EditText edt_passwordlogin;
 
     public static String getmUserToken() {
+        if(mUserToken ==null)
+            mUserToken="must be log in";
         return mUserToken;
     }
 

@@ -24,7 +24,7 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
     private HashMap<Integer, RecyclerView> mapRecyclerView = new HashMap<>();
 
     private OnClickItem onClickItem;
-
+    private HashMap<String, Boolean> mapContent = new HashMap<>();
 
     public ListSearchCourseAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
         this.context = context;
@@ -47,7 +47,7 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         // holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
         holder.rcv_content.setAdapter( new ContentSearchCourseAdapter( data.getContent(), new  ContentSearchCourseAdapter.OnClickItem() {
             @Override
-            public void onClick(int position, View view) {
+            public void onClick(int position,boolean isPick, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
                     //to get key
                     e1.getKey();
@@ -56,11 +56,12 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
                         //to get key
                         eItem.getKey();
                         //and to get value, 1
-                        eItem.getValue().setVisibility( View.GONE );
+                       // eItem.getValue().setVisibility( View.GONE );
                     }
                 }
                 if (onClickItem != null) {
-                    onClickItem.onClick( data.getContent().get( position ) );
+                    String s =data.getContent().get( position );
+                    mapContent.put( s, isPick);
                     Log.i( "Content", data.getContent().get( position ) );
                 }
             }
@@ -98,8 +99,10 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         }
     }
     public interface OnClickItem {
-        void onClick(String content);
+        void onClick(Map content);
     }
-
+    public HashMap<String, Boolean> getMapContent() {
+        return mapContent;
+    }
 }
 

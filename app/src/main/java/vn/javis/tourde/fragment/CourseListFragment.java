@@ -95,7 +95,9 @@ public class CourseListFragment extends BaseFragment {
             }
         });
         mCurrentPage = DEFAULT_PAGE;
+
         changePage(0);
+
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,7 +136,9 @@ public class CourseListFragment extends BaseFragment {
 
     void changePage(int nextPage) {
 
+
         int totalCourse = ListCourseAPI.getInstance().getCourseSize();
+
         mTotalPage = totalCourse == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
         int currentValue = mCurrentPage;
         mCurrentPage += nextPage;
@@ -150,6 +154,7 @@ public class CourseListFragment extends BaseFragment {
 
     void setRecycle() {
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
+
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
