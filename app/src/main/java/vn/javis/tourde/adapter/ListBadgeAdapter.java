@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,11 +43,7 @@ public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.Badg
         holder.txtBadgeName.setText(model.getBadgeName());
         holder.txtBadgeDateGet.setText(model.getDateGet());
 
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-        imageLoader.getMemoryCache();
-        //set image from url
-       // imageLoader.getInstance().displayImage(model.getImageUrl(), holder.imgBadge);
+      //  Picasso.with(context).load(model.getImageUrl()).into(holder.imgBadge);
 
         //load local for test
         int idImgBadge = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());

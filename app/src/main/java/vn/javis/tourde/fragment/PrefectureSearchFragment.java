@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
@@ -31,8 +33,10 @@ public class PrefectureSearchFragment extends Fragment {
     private OnFragmentInteractionListener listener;
     TextView tv_close,tv_back_menu_entry;
     private SearchCourseActivity activity;
+    List<String> listContent = new ArrayList<>();
 
     private String contentArea = "北海道";
+    ListSearchAdapter listSearchAdapter;
 
     public static PrefectureSearchFragment newInstance(View.OnClickListener listener) {
         PrefectureSearchFragment fragment = new PrefectureSearchFragment();
@@ -57,10 +61,12 @@ public class PrefectureSearchFragment extends Fragment {
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (listener != null) {
-                    //listener.onFragmentInteraction(contentArea);
-                    listener.onFragment(contentArea);
-                    ((SearchCourseActivity)getActivity()).onBackPressed();
+                    getAllContent();
+                    listener.onFragment( listContent.toString() );
+                    activity.setmLstContent( listContent );
+                    activity.onBackPressed();
                 }
             }
         });
@@ -127,17 +133,35 @@ public class PrefectureSearchFragment extends Fragment {
         data9.setTitle("特殊コース");
         data9.setContent(Arrays.asList(contentList9));
         dataList.add(data9);
-        rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        rcv_list.setAdapter( new ListSearchAdapter( getContext(), dataList, new ListSearchAdapter.OnClickItem() {
+        rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
+        listSearchAdapter = new ListSearchAdapter( getContext(), dataList, new ListSearchAdapter.OnClickItem() {
+            @Override
+            public void onClick(Map content) {
+
+            }
+        } );
+        rcv_list.setAdapter( listSearchAdapter );
+      /*  rcv_list.setAdapter( new ListSearchAdapter( getContext(), dataList, new ListSearchAdapter.OnClickItem() {
             @Override
             public void onClick(String content) {
-                contentArea = content;
+                if (!listContent.contains( content ))
+                    listContent.add( content );
+               contentArea = listContent.toString();
+               Log.i( "abcxxx: ", contentArea );
             }
-        } ) );
+        }  ));*/
+
     }
     public interface OnFragmentInteractionListener {
         // void onFragmentInteraction(String content);
         void onFragment(String content);
     }
+    private void getAllContent() {
+        for (Map.Entry<String, Boolean> entry : listSearchAdapter.getMapContent().entrySet()) {
+            String content = entry.getKey();
+            Boolean isPick = entry.getValue();
+            if (isPick) listContent.add( content );
 
+        }
+    }
 }

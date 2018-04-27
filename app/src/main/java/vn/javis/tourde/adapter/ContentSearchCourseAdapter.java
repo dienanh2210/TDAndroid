@@ -13,25 +13,25 @@ import java.util.List;
 import vn.javis.tourde.R;
 
 
-public class ContentSearchAdapter extends RecyclerView.Adapter<ContentSearchAdapter.ViewHolder> {
+public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSearchCourseAdapter.ViewHolder> {
 
     private List<String> contentList;
     private OnClickItem onClickItem;
     public HashMap<Integer, View> mapItemView = new HashMap<>();
     private boolean isShowMark;
 
-    public ContentSearchAdapter(List<String> contentList, OnClickItem onClickItem) {
+    public ContentSearchCourseAdapter(List<String> contentList, OnClickItem onClickItem) {
         this.contentList = contentList;
         this.onClickItem = onClickItem;
     }
     @Override
-    public ContentSearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ContentSearchCourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_content, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
     @Override
-    public void onBindViewHolder(ContentSearchAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ContentSearchCourseAdapter.ViewHolder holder, int position) {
 
         String content = contentList.get(position);
 
@@ -62,7 +62,7 @@ public class ContentSearchAdapter extends RecyclerView.Adapter<ContentSearchAdap
         public void onClick(View v) {
             if(imv_mark.getVisibility() == View.VISIBLE )
             {
-                mapItemView.put( getAdapterPosition(), imv_mark );
+               // mapItemView.put( getAdapterPosition(), imv_mark );
                 imv_mark.setVisibility(View.GONE);
                 if (onClickItem != null) onClickItem.onClick( getAdapterPosition(),false, v );
 
@@ -70,10 +70,11 @@ public class ContentSearchAdapter extends RecyclerView.Adapter<ContentSearchAdap
             else if (imv_mark.getVisibility() == View.GONE )
             {
                 if (onClickItem != null) onClickItem.onClick( getAdapterPosition(),true, v );
-                mapItemView.put( getAdapterPosition(), imv_mark );
+               // mapItemView.put( getAdapterPosition(), imv_mark );
                 imv_mark.setVisibility( View.VISIBLE);
 
             }
+
         }
     }
 

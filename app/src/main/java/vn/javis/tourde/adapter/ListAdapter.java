@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<Data> dataList;
     private Context context;
     private HashMap<Integer, RecyclerView> mapRecyclerView = new HashMap<>();
-
+    private HashMap<String, Boolean> mapContent = new HashMap<>();
     private OnClickItem onClickItem;
 
     public ListAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
@@ -46,7 +47,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
         holder.rcv_content.setAdapter( new ContentAdapter( data.getContent(), new ContentAdapter.OnClickItem() {
             @Override
-            public void onClick(int position, View view) {
+            public void onClick(int position, boolean isPick, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
                     //to get key
                     e1.getKey();
@@ -54,22 +55,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     for (Map.Entry<Integer, View> eItem : ((ContentAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
                         //to get key
                         eItem.getKey();
-                        //and to get value
-                        eItem.getValue().setVisibility( View.GONE );
+                        //and to get value, 1
+                        //  eItem.getValue().setVisibility( View.GONE );
                     }
                 }
-                if (onClickItem != null) onClickItem.onClick( data.getContent().get( position ) );
-                Log.i( "Content", data.getContent().get( position ) );
+
+                if (onClickItem != null) {
+                    String s =data.getContent().get( position );
+                    mapContent.put( s, isPick);
+                    Log.i( "Content", data.getContent().get( position ) );
+//                    onClickItem.onClick( data.getContent().get( position ));
+                }
             }
         } ) );
         mapRecyclerView.put( position, holder.rcv_content );
         if (position == 0) {
-            ((ContentAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
+            //  ((ContentAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
         }
-        //0ne ...
-        //  if(position == 1) {
-        //   holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
-        // }
     }
 
     @Override
@@ -95,8 +97,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     public interface OnClickItem {
-        void onClick(String content);
+        void onClick(Map content);
     }
 
+    public HashMap<String, Boolean> getMapContent() {
+        return mapContent;
+    }
 }
 

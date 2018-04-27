@@ -16,6 +16,7 @@ import vn.javis.tourde.utils.Constant;
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
+
     RelativeLayout tv_login,tv_tutorial,logout;
     @BindView( R.id.rlt_newuserregister )
     View rlt_newuserregisterl;
@@ -90,6 +91,7 @@ public class MenuPageActivity extends BaseActivity {
             ll_logout.setVisibility( View.GONE );
         }
     };
+
 
     @Override
     public void onBackPressed() {

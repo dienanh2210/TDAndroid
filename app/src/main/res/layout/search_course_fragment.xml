@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ln_course_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -64,6 +65,7 @@
 
 
             </RelativeLayout>
+            <include layout="@layout/item_divider" />
             <RelativeLayout
                 android:id="@+id/rlt_prefecture"
                 android:layout_width="match_parent"
@@ -99,441 +101,38 @@
 
 
             </RelativeLayout>
-            <RelativeLayout
+
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
-                android:background="@color/search_course_color_title_background">
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:text="@string/search_course_distance_type"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlCompat" />
-
-
-            </RelativeLayout>
-
-
-            <include layout="@layout/item_divider" />
-
-            <RelativeLayout
-                android:id="@+id/distance_layout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp">
-
-                <ImageView
-                    android:id="@+id/divider_center_vertical"
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@color/search_course_color_divider_background"
-                    android:contentDescription="@string/image_description" />
-
-                <ImageView
-                    android:id="@+id/divider_center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_centerVertical="true"
-                    android:background="@color/search_course_color_divider_background"
-                    android:contentDescription="@string/image_description" />
-
-                <RelativeLayout
-                    android:id="@+id/twenty_km"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@+id/divider_center_horizontal"
-                    android:layout_alignEnd="@+id/divider_center_vertical"
-                    android:layout_alignParentTop="true"
-                    tools:ignore="RtlCompat">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rcv_list"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_20_km"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp"
-                        tools:ignore="RelativeOverlap,RtlCompat" />
+                        android:background="@android:color/white"
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
-                    <ImageView
-                        android:id="@+id/imv_mark"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/fifty_km"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/divider_center_horizontal"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/divider_center_vertical"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_50_km"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_one"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/one_hundred_km"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignEnd="@+id/divider_center_vertical"
-                    android:layout_alignParentBottom="true"
-                    android:layout_below="@+id/divider_center_horizontal"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_100_km"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_two"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/over_one_hundred_km"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignStart="@+id/divider_center_vertical"
-                    android:layout_below="@+id/divider_center_horizontal"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_over_100_km"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_three"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-            </RelativeLayout>
-            <include layout="@layout/item_divider" />
-
-            <include layout="@layout/item_divider" />
+                    </android.support.v7.widget.RecyclerView>
 
 
-            <include layout="@layout/item_divider" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
-                android:background="@color/search_course_color_title_background">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:text="@string/search_course_elevation"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlCompat" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#C8CDD0" />
 
 
-            </RelativeLayout>
+                </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
+            </android.support.v4.widget.NestedScrollView>
 
-                >
-
-                <ImageView
-                    android:id="@+id/divider_elevator_center_vertical"
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@color/search_course_color_divider_background"
-                    android:contentDescription="@string/image_description" />
-
-                <RelativeLayout
-                    android:id="@+id/over_elevator"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignEnd="@+id/divider_elevator_center_vertical"
-                    android:layout_alignParentTop="true"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_elevation_over"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp"
-                        tools:ignore="RelativeOverlap" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_four"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="visible" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/less_elevator_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignStart="@+id/divider_elevator_center_vertical"
-                    android:layout_centerVertical="true"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_elevation_less"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_fire"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-                <include layout="@layout/item_divider" />
-            </RelativeLayout>
-
-
-            <include layout="@layout/item_divider" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
-                android:background="@color/search_course_color_title_background">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:text="@string/search_course_course_type"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlCompat" />
-
-
-            </RelativeLayout>
-
-            <include layout="@layout/item_divider" />
-
-            <RelativeLayout
-                android:id="@+id/course_type_layout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
-                >
-
-                <ImageView
-                    android:id="@+id/course_type_divider_center_vertical"
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@color/search_course_color_divider_background"
-                    android:contentDescription="@string/image_description" />
-
-                <ImageView
-                    android:id="@+id/course_type_divider_center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_centerVertical="true"
-                    android:background="@color/search_course_color_divider_background"
-                    android:contentDescription="@string/image_description" />
-
-                <RelativeLayout
-                    android:id="@+id/course_type_one"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/course_type_divider_center_horizontal"
-                    android:layout_alignEnd="@+id/course_type_divider_center_vertical"
-                    android:layout_alignParentTop="true"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_course_type_one"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp"
-                        tools:ignore="RelativeOverlap" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_six"
-                        android:layout_width="14dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="visible" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/course_type_two"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/course_type_divider_center_horizontal"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/course_type_divider_center_vertical"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_course_type_two"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_seven"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/course_type_three"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignEnd="@+id/course_type_divider_center_vertical"
-                    android:layout_alignParentBottom="true"
-                    android:layout_below="@+id/course_type_divider_center_horizontal"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="@string/search_course_course_type_three"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_eight"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/course_type_four"
-                    android:layout_width="@dimen/_160sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    tools:ignore="RtlCompat">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:text="empty"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp"
-                        tools:ignore="HardcodedText" />
-
-                    <ImageView
-                        android:id="@+id/imv_mark_night"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:contentDescription="@string/image_description"
-                        android:src="@drawable/ic_mark_red"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-
-            </RelativeLayout>
 
             <include layout="@layout/item_divider" />
 
@@ -625,6 +224,7 @@
                 android:background="@android:color/white">
 
                 <EditText
+                    android:id="@+id/edt_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

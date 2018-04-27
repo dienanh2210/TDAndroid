@@ -244,5 +244,8 @@
     <string name="finish_date">コース完走日</string>
     <string name="title_activity_tab">TabActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="txtRedButtonDetail">お気に入りに登録する</string>
+    <string name="txtBlueButtonDetail">このコースを走行する</string>
 </resources>
 

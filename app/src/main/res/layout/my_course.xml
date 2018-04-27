@@ -29,8 +29,6 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
-
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
