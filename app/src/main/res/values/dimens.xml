@@ -53,8 +53,10 @@
     <dimen name="background_button_favorite_size">100dp</dimen>
     <dimen name="btn_favorite_margin_right">20dp</dimen>
     <dimen name="btn_favorite_margin_bottom">-50dp</dimen>
-    <dimen name="_13ssp"> 13dp </dimen>
-    <dimen name="_16ssp"> 16dp </dimen>
-    <dimen name="_14ssp"> 14dp </dimen>
+    <dimen name="_13ssp">13dp</dimen>
+    <dimen name="_16ssp">16dp</dimen>
+    <dimen name="_14ssp">14dp</dimen>
     <dimen name="g_top_margin">100dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

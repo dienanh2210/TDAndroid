@@ -76,7 +76,7 @@
                 android:layout_height="@dimen/_18sdp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/icon_resignter"
+                android:background="@drawable/icon_badge"
                 android:contentDescription="@string/button_description" />
 
             <TextView

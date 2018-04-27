@@ -235,5 +235,14 @@
     <string name="first_story_num">1</string>
     <string name="second_story_num">2</string>
 
+    <!--my course-->
+    <string name="favorites_course">お気に入りコース</string>
+    <string name="running_course">走行済コース</string>
+    <string name="running_now">今すぐ走行</string>
+    <string name="traveling_time">走行時間</string>
+    <string name="average_speed">平均速度</string>
+    <string name="finish_date">コース完走日</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
 

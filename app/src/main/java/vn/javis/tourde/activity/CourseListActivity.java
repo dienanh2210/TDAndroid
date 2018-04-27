@@ -12,6 +12,7 @@ import android.view.Menu;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 
 /**
  * Created by admin on 3/23/2018.
@@ -59,6 +60,9 @@ public class CourseListActivity extends AppCompatActivity {
         openPage(new CourseDetailFragment(), true);
     }
 
+    public void ShowMyCourse() {
+        openPage(new FragmentTabLayoutMyCourse(), true);
+    }
 
     public int getmCoursePosition() {
         return mCoursePosition;

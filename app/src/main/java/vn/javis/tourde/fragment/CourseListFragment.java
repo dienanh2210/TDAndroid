@@ -56,6 +56,8 @@ public class CourseListFragment extends BaseFragment {
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
     TextView txtHomeBtn;
+    @BindView(R.id.btn_my_course_footer)
+    RelativeLayout btnMyCourse;
 
     private int mTotalPage = 1;
 
@@ -102,6 +104,12 @@ public class CourseListFragment extends BaseFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), BadgeCollectionActivity.class);
                 startActivity(intent);
+            }
+        });
+        btnMyCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              mActivity.ShowMyCourse();
             }
         });
         imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));

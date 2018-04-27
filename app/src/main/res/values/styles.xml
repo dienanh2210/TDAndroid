@@ -21,6 +21,7 @@
         <item name="android:progressDrawable">@drawable/ratingbar</item>
         <item name="android:minHeight">@dimen/_4sdp</item>
         <item name="android:maxHeight">@dimen/_120sdp</item>
-    </style>s
+    </style>
+    s
 
 </resources>
