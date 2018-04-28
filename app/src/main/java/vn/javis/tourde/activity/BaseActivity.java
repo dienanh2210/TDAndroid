@@ -36,10 +36,11 @@ import vn.javis.tourde.R;
 public abstract class BaseActivity extends AppCompatActivity {
 
     Unbinder unbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        unbinder = ButterKnife.bind( this );
+        unbinder = ButterKnife.bind(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (Build.VERSION.SDK_INT >= 23) {
             Window window = getWindow();
@@ -54,7 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        if(isAddToBackStack)
+        if (isAddToBackStack)
             tx.addToBackStack(null);
         tx.commit();
 

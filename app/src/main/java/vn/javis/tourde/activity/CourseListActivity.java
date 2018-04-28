@@ -29,6 +29,7 @@ import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+
 /**
  * Created by admin on 3/23/2018.
  */
@@ -56,10 +57,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         if (params != null) {
             Log.i("params", params.toString());
         }
-            if (!searching)
-                ListCourseAPI.getJsonValues(this);
-            else
-                ListCourseAPI.getJsonValueSearch(params, this);
+        if (!searching)
+            ListCourseAPI.getJsonValues(this);
+        else
+            ListCourseAPI.getJsonValueSearch(params, this);
 
 
     }

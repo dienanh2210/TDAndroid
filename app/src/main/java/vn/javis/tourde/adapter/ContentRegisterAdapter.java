@@ -1,4 +1,5 @@
 package vn.javis.tourde.adapter;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +25,14 @@ public class ContentRegisterAdapter extends RecyclerView.Adapter<ContentRegister
         this.contentList = contentList;
         this.onClickItem = onClickItem;
     }
+
     @Override
     public ContentRegisterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
+
     @Override
     public void onBindViewHolder(ContentRegisterAdapter.ViewHolder holder, int position) {
 
@@ -41,6 +44,7 @@ public class ContentRegisterAdapter extends RecyclerView.Adapter<ContentRegister
         mapItemView.put(position, holder.imv_mark);
         if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
     }
+
     @Override
     public int getItemCount() {
         return contentList.size();
@@ -53,11 +57,12 @@ public class ContentRegisterAdapter extends RecyclerView.Adapter<ContentRegister
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_content = itemView.findViewById( R.id.tv_content);
+            tv_content = itemView.findViewById(R.id.tv_content);
             imv_mark = itemView.findViewById(R.id.imv_mark);
             rlt_mark = itemView.findViewById(R.id.rlt_mark);
             itemView.setOnClickListener(this);
         }
+
         @Override
         public void onClick(View v) {
             if (onClickItem != null) onClickItem.onClick(getAdapterPosition(), v);

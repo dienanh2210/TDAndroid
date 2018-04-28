@@ -15,10 +15,11 @@ public class SearchTwoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_search_two );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_two);
         openPage(new PrefectureSearchFragment(), false);
     }
+
     public void openPage(Fragment fragment, boolean isBackStack) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.containertt, fragment, fragment.getClass().getSimpleName());
@@ -27,6 +28,7 @@ public class SearchTwoActivity extends AppCompatActivity {
             tx.addToBackStack(null);
         tx.commit();
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

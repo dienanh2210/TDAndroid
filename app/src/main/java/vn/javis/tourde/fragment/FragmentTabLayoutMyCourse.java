@@ -1,29 +1,22 @@
 package vn.javis.tourde.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.BadgeCollectionActivity;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.MenuPageActivity;
-import vn.javis.tourde.activity.SearchCourseActivity;
-import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 
 public class FragmentTabLayoutMyCourse  extends BaseFragment{
