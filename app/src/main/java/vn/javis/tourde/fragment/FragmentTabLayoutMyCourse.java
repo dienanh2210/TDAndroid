@@ -1,35 +1,82 @@
 package vn.javis.tourde.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import butterknife.BindView;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.MainActivity;
+import vn.javis.tourde.activity.BadgeCollectionActivity;
+import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.MenuPageActivity;
+import vn.javis.tourde.activity.SearchCourseActivity;
+import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 
-public class FragmentTabLayoutMyCourse extends android.support.v4.app.Fragment {
+public class FragmentTabLayoutMyCourse  extends BaseFragment{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private Context context;
-    private MainActivity mainActivity;
     private View mView;
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.my_course,container,false);
-        return mView;
 
+    @BindView(R.id.btn_badge_collection)
+    RelativeLayout btnBadge;
+    CourseListActivity mActivity;
+    @BindView(R.id.img_home)
+    ImageView imgHomeBtn;
+    @BindView(R.id.txt_home)
+    TextView txtHomeBtn;
+    @BindView(R.id.btn_home_footer)
+    RelativeLayout btnHome;
+    @BindView(R.id.img_mycourse)
+    ImageView imgMyCourse;
+    @BindView(R.id.txt_mycourse)
+    TextView txtMyCourse;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mActivity = (CourseListActivity) getActivity();
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              mActivity.showCourseListPage();
+            }
+        });
+
+
+        btnBadge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mActivity, BadgeCollectionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        imgMyCourse.setBackground(getResources().getDrawable(R.drawable.icon_courseclick));
+        txtMyCourse.setTextColor(getResources().getColor(R.color.SkyBlue));
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
+        mView = inflater.inflate(R.layout.my_course,container,false);
+        return mView;
     }
 
     @Override

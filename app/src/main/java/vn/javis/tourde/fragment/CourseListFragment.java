@@ -60,6 +60,7 @@ public class CourseListFragment extends BaseFragment {
     @BindView(R.id.btn_my_course_footer)
     RelativeLayout btnMyCourse;
 
+
     private int mTotalPage = 1;
 
     private static final int NUMBER_COURSE_ON_PAGE = 5;

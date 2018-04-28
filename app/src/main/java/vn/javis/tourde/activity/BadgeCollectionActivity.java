@@ -45,6 +45,8 @@ public class BadgeCollectionActivity extends AppCompatActivity {
     ImageView imgBadgeBtn;
     @BindView(R.id.txt_badge)
     TextView txtBadgeBtn;
+    @BindView(R.id.btn_my_course_footer)
+    RelativeLayout btnMyCourse;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +87,8 @@ public class BadgeCollectionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       // imgBadgeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
+
+        imgBadgeBtn.setBackground(getResources().getDrawable(R.drawable.icon_badge_blue));
         txtBadgeBtn.setTextColor(getResources().getColor( R.color.SkyBlue));
         onArchivementClick();
     }
