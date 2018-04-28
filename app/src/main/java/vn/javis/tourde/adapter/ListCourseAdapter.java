@@ -65,6 +65,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
         Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
         holder.isFavorite = model.getStatus() == 1 ? true : false;
+        holder.isFavorite =false;
         if (holder.isFavorite) {
             holder.btnFavorite.setBackground( mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }

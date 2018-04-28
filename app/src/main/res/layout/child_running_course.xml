@@ -11,12 +11,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/img_show"
             android:layout_width="@dimen/_110sdp"
             android:layout_height="@dimen/_80sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:src="@drawable/image1" />
 
         <TextView
+            android:id="@+id/txt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
@@ -35,6 +37,7 @@
         android:weightSum="3">
 
         <TextView
+            android:id="@+id/txt_travel_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -42,6 +45,7 @@
             android:text="@string/traveling_time" />
 
         <TextView
+            android:id="@+id/txt_average_speed"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -49,6 +53,7 @@
             android:text="@string/average_speed" />
 
         <TextView
+            android:id="@+id/txt_finish_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -63,21 +68,21 @@
         android:weightSum="3">
 
         <TextView
-            android:id="@+id/travel_time"
+            android:id="@+id/value_travel_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/average_speed"
+            android:id="@+id/value_average_speed"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/finish_date"
+            android:id="@+id/value_finish_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

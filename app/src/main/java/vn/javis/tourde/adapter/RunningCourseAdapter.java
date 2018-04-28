@@ -6,14 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +17,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
-import vn.javis.tourde.apiservice.FavoriteCourseAPI;
-import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
-import vn.javis.tourde.services.ServiceCallback;
-import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.view.CircleTransform;
 
-public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAdapter.FavoriteCourseViewHolder> {
+public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdapter.FavoriteCourseViewHolder> {
 
     List<FavoriteCourse> listCourse = new ArrayList<FavoriteCourse>();
     Context context;
     View mView;
 
-    public FavoriteCourseAdapter(List<FavoriteCourse> listCourse, Context context) {
+    public RunningCourseAdapter(List<FavoriteCourse> listCourse, Context context) {
 
         this.listCourse = listCourse;
         this.context = context;
@@ -44,7 +36,7 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
     public FavoriteCourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        mView = inflater.inflate(R.layout.child_favorites_course, parent, false);
+        mView = inflater.inflate(R.layout.child_running_course, parent, false);
         return new FavoriteCourseViewHolder(mView);
     }
 
@@ -53,9 +45,7 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
         FavoriteCourse model = listCourse.get(position);
 
         holder.txtTitle.setText(model.getTitle());
-        holder.txtPostUsername.setText(model.getPostUserName());
         Picasso.with(context).load(model.getTopImage()).into(holder.imgShow);
-        Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
         if (holder.isRunning) {
             //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
@@ -114,22 +104,20 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
         ImageView imgShow;
         @BindView(R.id.txt_title)
         TextView txtTitle;
-        @BindView(R.id.img_post_user)
-        ImageView imgPostUser;
-        @BindView(R.id.txt_post_username)
-        TextView txtPostUsername;
-        @BindView(R.id.running)
-        TextView txtRunning;
+        @BindView(R.id.txt_travel_time)
+        TextView txtTravelTime;
+   /*     @BindView(R.id.txt_average_speed)
+        TextView txtAverageSpeed;
+        @BindView(R.id.txt_finish_date)
+        TextView txtFinishDate;
+        @BindView(R.id.value_travel_time)
+        TextView travelTime;
+        @BindView(R.id.value_average_speed)
+        TextView averageSpeed;
+        @BindView(R.id.value_finish_date)
+        ImageView finishDate;*/
 
-       /* @BindView(R.id.txt_spot_count)
-        TextView txtSpotCount;
-        @BindView(R.id.txt_post_user)
-        TextView txtPostUser;
-        @BindView(R.id.img_course)
-        ImageView imgCourse;
-        @BindView(R.id.star_rate)
-        ImageView imgStarRate;
-
+        /*
         @BindView(R.id.txt_tags)
         TextView txtTag;
         @BindView(R.id.img_post_user)
