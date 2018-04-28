@@ -40,6 +40,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     String prefecture = "エリアを選択";
     String prefecturetext = "こだわり条件を指定";
+    String seasonSelected = "";
+    String tagSelected = "";
+
     TextView tv_prefecture, tv_searchtwo, tv_close;
     EditText edt_search;
     ImageView im_select_area, im_more_searching;
@@ -77,7 +80,6 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         tv_searchtwo = view.findViewById(R.id.tv_searchtwo);
         tv_searchtwo.setText(prefecturetext);
         edt_search = view.findViewById(R.id.edt_search);
-
         tv_close = view.findViewById(R.id.tv_close);
         tv_close.setOnClickListener(this);
         return view;
@@ -163,25 +165,76 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         tv_searchtwo.setText(content);
     }
 
+    @Override
+    public void onFragment(String season, String tag) {
+        seasonSelected = season;
+        tagSelected = tag;
+    }
 
     private void getAllContent() {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("prefecture", "abc,xxx");
-        map.put("distance_type", "1");
-        map.put("over_elevation", "0");
-        map.put("less_elevation", "0");
-        map.put("course_type", "0");
-        map.put("freeword", "0");
-        map.put("season", "0");
-        map.put("tag", "0");
 
-        for (Map.Entry<String, Boolean> entry : listSearchCourseAdapter.getMapContent().entrySet()) {
-            String content = entry.getKey();
-            Boolean isPick = entry.getValue();
-            if (isPick) listContent.add(content);
-            Log.d(listContent.toString(), "text");
 
+//        for (Map.Entry<String, Boolean> entry : listSearchCourseAdapter.getMapContent().entrySet()) {
+//            String content = entry.getKey();
+//            Boolean isPick = entry.getValue();
+//            if (isPick) listContent.add(content);
+//            Log.d(listContent.toString(), "text");
+//
+//        }
+        String listCourseType = listSearchCourseAdapter.getListCourseType().toString();
+        String evelation = listSearchCourseAdapter.getTxtElevation();
+        String distance = listSearchCourseAdapter.getTxtDistance();
+
+        if(distance =="〜20km") distance="1";
+        else if(distance =="〜50km") distance="2";
+        else if(distance =="〜100km") distance="3";
+        else distance="4";
+        String isOver ="0";
+        String isLess="0";
+        if(evelation =="激坂")
+        {
+            isOver ="1";
         }
+        else isLess ="1";
+        List<String> type=new ArrayList<>();
+        if(listCourseType.contains("片道"))
+        {
+            type.add("1");
+        }
+        if(listCourseType.contains("往復"))
+        {
+            type.add("2");
+        }
+        if(listCourseType.contains("1周"))
+        {
+            type.add("3");
+        }
+        List<String> seasonValue=new ArrayList<>();
+        if(seasonSelected.contains("1月")) seasonValue.add("1");
+        if(seasonSelected.contains("2月")) seasonValue.add("2");
+        if(seasonSelected.contains("3月")) seasonValue.add("4");
+        if(seasonSelected.contains("4月")) seasonValue.add("8");
+        if(seasonSelected.contains("5月")) seasonValue.add("16");
+        if(seasonSelected.contains("6月")) seasonValue.add("32");
+        if(seasonSelected.contains("7月")) seasonValue.add("64");
+        if(seasonSelected.contains("8月")) seasonValue.add("128");
+        if(seasonSelected.contains("9月")) seasonValue.add("256");
+        if(seasonSelected.contains("10月")) seasonValue.add("512");
+        if(seasonSelected.contains("11月")) seasonValue.add("1024");
+        if(seasonSelected.contains("12月")) seasonValue.add("2048");
+
+
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("prefecture", tv_prefecture.getText().toString());
+        map.put("distance_type", distance);
+        map.put("over_elevation", isOver);
+        map.put("less_elevation", isLess);
+        map.put("course_type", type.toString());
+        map.put("freeword", edt_search.getText().toString());
+        map.put("season", seasonValue.toString());
+        map.put("tag", tagSelected.toString());
+        Log.i("map", map.toString());
         mActivity.onBackCLickToList(map);
     }
 

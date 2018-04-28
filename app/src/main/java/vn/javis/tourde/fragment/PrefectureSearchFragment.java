@@ -65,6 +65,7 @@ public class PrefectureSearchFragment extends Fragment {
                 if (listener != null) {
                     getAllContent();
                     listener.onFragment( listContent.toString() );
+                    listener.onFragment( listSearchAdapter.getListSeason().toString(),listSearchAdapter.getListTag().toString() );
                     activity.setmLstContent( listContent );
                     activity.onBackPressed();
                 }
@@ -155,13 +156,10 @@ public class PrefectureSearchFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // void onFragmentInteraction(String content);
         void onFragment(String content);
+        void onFragment(String season,String tag);
     }
     private void getAllContent() {
-        for (Map.Entry<String, Boolean> entry : listSearchAdapter.getMapContent().entrySet()) {
-            String content = entry.getKey();
-            Boolean isPick = entry.getValue();
-            if (isPick) listContent.add( content );
-
-        }
+        listContent.add(listSearchAdapter.getListTag().toString()+","+listSearchAdapter.getListSeason().toString());
+       // listContent.add(listSearchAdapter.getListSeason().toString());
     }
 }

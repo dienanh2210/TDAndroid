@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,17 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
     private OnClickItem onClickItem;
     private HashMap<String, Boolean> mapContent = new HashMap<>();
 
+    public List<String> getListSeason() {
+        return listSeason;
+    }
+
+    public List<String> getListTag() {
+        return listTag;
+    }
+
+    private List<String> listSeason = new ArrayList<>();
+    private List<String> listTag = new ArrayList<>();
+
     public ListSearchAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
@@ -33,17 +45,17 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
 
     @Override
     public ListSearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.item_list, parent, false );
-        ViewHolder viewHolder = new ViewHolder( view );
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ListSearchAdapter.ViewHolder holder, int position) {
-        final Data data = dataList.get( position );
-        holder.tv_header.setText( data.getTitle() );
+        final Data data = dataList.get(position);
+        holder.tv_header.setText(data.getTitle());
 
-        holder.rcv_content.setAdapter( new ContentSearchAdapter( data.getContent(), new ContentSearchAdapter.OnClickItem() {
+        holder.rcv_content.setAdapter(new ContentSearchAdapter(data.getContent(), new ContentSearchAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
@@ -58,21 +70,34 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
                     }
                 }
                 if (onClickItem != null) {
-                    String s =data.getContent().get( position );
-                    mapContent.put( s, isPick);
-                    Log.i( "Content", data.getContent().get( position ) );
+                    String s = data.getContent().get(position);
+                    mapContent.put(s, isPick);
+                    Log.i("Content", data.getContent().get(position));
+
+                    if (data.getTitle() == "おすすめの月") //area
+                    {
+                        if (!listSeason.contains(s)) {
+                            listSeason.add(s);
+                        } else listSeason.remove(s);
+                    } else {
+                        if (!listTag.contains(s)) {
+                            listTag.add(s);
+                        } else listTag.remove(s);
+                    }
+                    Log.i( "listSeason", listSeason.toString() );
+                    Log.i( "listTag", listTag.toString() );
 //                    onClickItem.onClick( data.getContent().get( position ));
 
                 }
             }
-        } ) );
-        mapRecyclerView.put( position, holder.rcv_content );
+        }));
+        mapRecyclerView.put(position, holder.rcv_content);
         if (position == 0) {
-            ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
-            holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
-        }else {
+            ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark(true);
+            holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
+        } else {
 
-            holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
+            holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
         }
         //0ne ...
         //  if(position == 1) {
@@ -90,10 +115,10 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
         RecyclerView rcv_content;
 
         public ViewHolder(View itemView) {
-            super( itemView );
-            tv_header = itemView.findViewById( R.id.tv_header );
-            rcv_content = itemView.findViewById( R.id.rcv_content );
-            itemView.setOnClickListener( this );
+            super(itemView);
+            tv_header = itemView.findViewById(R.id.tv_header);
+            rcv_content = itemView.findViewById(R.id.rcv_content);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -101,6 +126,7 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
 
         }
     }
+
     public interface OnClickItem {
         void onClick(Map content);
     }
@@ -108,5 +134,6 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
     public HashMap<String, Boolean> getMapContent() {
         return mapContent;
     }
+
 }
 
