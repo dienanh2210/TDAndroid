@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,13 +26,28 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
 
     private OnClickItem onClickItem;
     private HashMap<String, Boolean> mapContent = new HashMap<>();
+    private String txtDistance="";
 
+
+
+    private String txtElevation="";
+    private List<String> listCourseType = new ArrayList<>();
     public ListSearchCourseAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
         this.onClickItem = onClickItem;
     }
+    public String getTxtDistance() {
+        return txtDistance;
+    }
 
+    public String getTxtElevation() {
+        return txtElevation;
+    }
+
+    public List<String> getListCourseType() {
+        return listCourseType;
+    }
     @Override
     public ListSearchCourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.item_list, parent, false );
@@ -62,7 +78,30 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
                 if (onClickItem != null) {
                     String s =data.getContent().get( position );
                     mapContent.put( s, isPick);
-                    Log.i( "Content", data.getContent().get( position ) );
+                    if(data.getTitle() =="距離") //area
+                    {
+                        if(txtDistance != s)
+                        {
+                            txtDistance =s;
+                        }
+                        else txtDistance="";
+                    }
+                    if(data.getTitle() =="獲得標高") //area
+                    {
+                        if(txtElevation != s)
+                        {
+                            txtElevation =s;
+                        }
+                        else txtElevation="";
+                    }
+                    if(data.getTitle() =="コース形態") //area
+                    {
+                        if(!listCourseType.contains(s))
+                        {
+                            listCourseType.add(s);
+                        }
+                        else listCourseType.remove(s);
+                    }
                 }
             }
         } ) );

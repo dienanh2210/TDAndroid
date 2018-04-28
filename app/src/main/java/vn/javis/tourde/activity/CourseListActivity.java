@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 
 import com.android.volley.VolleyError;
@@ -36,6 +37,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+
     public int getmCourseID() {
         return mCourseID;
     }
@@ -48,13 +50,17 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        Intent intent =getIntent();
-        boolean searching = intent.getStringExtra("searching") == "true"?true:false;
-        HashMap<String, String> params = (HashMap<String, String>)intent.getSerializableExtra("searchValue");
-        if(!searching)
-            ListCourseAPI.getJsonValues(this);
-        else
-            ListCourseAPI.getJsonValueSearch(params,this);
+        Intent intent = getIntent();
+        boolean searching = intent.getStringExtra("searching") == "true" ? true : false;
+        HashMap<String, String> params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
+        if (params != null) {
+            Log.i("params", params.toString());
+        }
+            if (!searching)
+                ListCourseAPI.getJsonValues(this);
+            else
+                ListCourseAPI.getJsonValueSearch(params, this);
+
 
     }
 
@@ -94,7 +100,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
 
-
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
@@ -111,7 +116,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-        ListCourseAPI.setAllCourses((JSONObject)response);
+        ListCourseAPI.setAllCourses((JSONObject) response);
         showCourseListPage();
     }
 
