@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.android.volley.VolleyError;
 import com.squareup.picasso.Picasso;
@@ -25,62 +23,41 @@ import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
-import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.view.CircleTransform;
 
-public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder> {
+public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAdapter.FavoriteCourseViewHolder> {
 
-    List<Course> listCourse = new ArrayList<Course>();
+    List<FavoriteCourse> listCourse = new ArrayList<FavoriteCourse>();
     Context context;
     View mView;
 
-    public ListCourseAdapter(List<Course> listCourse, Context context) {
+    public FavoriteCourseAdapter(List<FavoriteCourse> listCourse, Context context) {
 
         this.listCourse = listCourse;
         this.context = context;
     }
 
     @Override
-    public CourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FavoriteCourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        mView = inflater.inflate(R.layout.course_view_row, parent, false);
-        return new CourseViewHolder(mView);
+        mView = inflater.inflate(R.layout.child_favorites_course, parent, false);
+        return new FavoriteCourseViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
-        Course model = listCourse.get(position);
+    public void onBindViewHolder(@NonNull final FavoriteCourseViewHolder holder, final int position) {
+        FavoriteCourse model = listCourse.get(position);
 
         holder.txtTitle.setText(model.getTitle());
-        holder.txtArea.setText(model.getArea());
-        holder.txtTag.setText("# " + model.getTag());
-        holder.txtDistance.setText(model.getDistance() + "km");
-        holder.txtCatchPhrase.setText(model.getCatchPhrase());
-        holder.txtReviewCount.setText(model.getReviewCount());
-        holder.txtSpotCount.setText(model.getSpotCount());
-        holder.txtPostUser.setText(model.getPostUserName());
-        Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
+        holder.txtPostUsername.setText(model.getPostUserName());
+        Picasso.with(context).load(model.getTopImage()).into(holder.imgShow);
         Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
-        holder.isFavorite = model.getStatus() == 1 ? true : false;
-        holder.isFavorite =false;
-        if (holder.isFavorite) {
-            holder.btnFavorite.setBackground( mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
-        }
-        int rate = Math.round(model.getRatingAverage());
-
-        if (rate == 1) {
-            holder.imgStarRate.setImageResource(R.drawable.icon_star1);
-        } else if (rate == 2) {
-            holder.imgStarRate.setImageResource(R.drawable.icon_star2);
-        } else if (rate == 3) {
-            holder.imgStarRate.setImageResource(R.drawable.icon_star3);
-        } else if (rate == 4) {
-            holder.imgStarRate.setImageResource(R.drawable.icon_star4);
-        } else if (rate == 5) {
-            holder.imgStarRate.setImageResource(R.drawable.icon_star5);
+        if (holder.isRunning) {
+            //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
         holder.txtTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +67,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
                 }
             }
         });
-
-        holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
+       /* holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 holder.isFavorite = !holder.isFavorite;
@@ -123,7 +99,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
                     });
                 }
             }
-        });
+        });*/
 
     }
 
@@ -132,19 +108,20 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         return listCourse.size();
     }
 
-    public class CourseViewHolder extends RecyclerView.ViewHolder {
+    public class FavoriteCourseViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.txt_course_title)
+        @BindView(R.id.img_show)
+        ImageView imgShow;
+        @BindView(R.id.txt_title)
         TextView txtTitle;
-        @BindView(R.id.txt_catch_phrase)
-        TextView txtCatchPhrase;
-        @BindView(R.id.txt_course_area)
-        TextView txtArea;
-        @BindView(R.id.txt_distance)
-        TextView txtDistance;
-        @BindView(R.id.txt_review_count)
-        TextView txtReviewCount;
-        @BindView(R.id.txt_spot_count)
+        @BindView(R.id.img_post_user)
+        ImageView imgPostUser;
+        @BindView(R.id.txt_post_username)
+        TextView txtPostUsername;
+        @BindView(R.id.running)
+        TextView txtRunning;
+
+       /* @BindView(R.id.txt_spot_count)
         TextView txtSpotCount;
         @BindView(R.id.txt_post_user)
         TextView txtPostUser;
@@ -159,11 +136,11 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         ImageView imgPostUser;
 
         @BindView(R.id.btn_favorite_list)
-        ImageButton btnFavorite;
+        ImageButton btnFavorite;*/
 
-        boolean isFavorite;
+        boolean isRunning;
 
-        public CourseViewHolder(View itemView) {
+        public FavoriteCourseViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

@@ -257,29 +257,59 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></ListView>
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/btn_signup_favorite"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/custom_frame"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/image_description"
-            android:scaleType="fitCenter"
-            android:src="@drawable/bt_add_favorites" />
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:gravity="center"
+                android:text="@string/txtRedButtonDetail"
+                android:textColor="@color/White"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
 
-        <ImageView
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:src="@drawable/icon_bicycle" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/btn_running_app"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/custom_frame_blue"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/image_description"
-            android:scaleType="fitCenter"
-            android:src="@drawable/bt_drive_course" />
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:gravity="center"
+                android:text="@string/txtBlueButtonDetail"
+                android:textColor="@color/White"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:src="@drawable/icon_bicycle" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

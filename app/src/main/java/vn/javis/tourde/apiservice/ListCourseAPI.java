@@ -35,7 +35,7 @@ public class ListCourseAPI {
             instance = this;
             this.context = context;
             //  jsonObjectRequest();
-            getJsonValues();
+            //getJsonValues();
         }
     }
 
@@ -55,7 +55,15 @@ public class ListCourseAPI {
         });
     }
 
-    void setAllCourses(JSONObject jsonObject) {
+    public static void getJsonValues(ServiceCallback callback) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("prefecture", "13");
+        TourDeService.getWithAuth(ApiEndpoint.GET_COURSE_LIST, params, callback);
+    }
+    public static void getJsonValueSearch(HashMap params, ServiceCallback callback) {
+        TourDeService.getWithAuth(ApiEndpoint.GET_COURSE_LIST, params, callback);
+    }
+   public static void setAllCourses(JSONObject jsonObject) {
         try {
             System.out.println("sdfsdf" + jsonObject);
             JSONObject allJsonObject = jsonObject.getJSONObject("list");
@@ -67,9 +75,9 @@ public class ListCourseAPI {
                 String vl = singleJsonObject.toString();
                 JsonParser jsonParser = new JsonParser();
                 Course thisCourse = Course.getData(vl);
-                System.out.println(thisCourse.toString());
                 if (thisCourse != null) {
-                    mAllCourses.add(thisCourse);
+                    instance.mAllCourses.clear();
+                    instance.mAllCourses.add(thisCourse);
                 }
             }
         } catch (JSONException e) {
@@ -121,13 +129,17 @@ public class ListCourseAPI {
         int maxIndex = mAllCourses.size();
         return list;
     }
-    public Course getCourseByPosition(int position){
-        return  mAllCourses.get(position);
-    }
-    public int getCourseIdByPosition(int position)
-    {
-        return  mAllCourses.get(position).getCourseId();
+
+    public Course getCourseByPosition(int position) {
+        return mAllCourses.get(position);
     }
 
+    public int getCourseIdByPosition(int position) {
+        return mAllCourses.get(position).getCourseId();
+    }
 
+    public List<Course> getSearchCourse(ServiceCallback callback) {
+        List<Course> listSearch = new ArrayList<>();
+        return mAllCourses;
+    }
 }

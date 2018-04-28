@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.utils.Constant;
 
 public class MenuPageActivity extends BaseActivity {

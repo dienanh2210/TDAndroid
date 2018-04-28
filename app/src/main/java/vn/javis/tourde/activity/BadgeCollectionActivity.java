@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -21,7 +22,7 @@ import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.model.Badge;
 
-public class BadgeCollectionActivity extends BaseActivity {
+public class BadgeCollectionActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_barge)
     RecyclerView badgeRecycler;
@@ -44,6 +45,9 @@ public class BadgeCollectionActivity extends BaseActivity {
     ImageView imgBadgeBtn;
     @BindView(R.id.txt_badge)
     TextView txtBadgeBtn;
+    @BindView(R.id.btn_my_course_footer)
+    RelativeLayout btnMyCourse;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +88,9 @@ public class BadgeCollectionActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-       // imgBadgeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
-        txtBadgeBtn.setTextColor(getResources().getColor( R.color.SkyBlue));
+
+        imgBadgeBtn.setBackground(getResources().getDrawable(R.drawable.icon_badge_blue));
+        txtBadgeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
         onArchivementClick();
     }
 
@@ -106,6 +111,7 @@ public class BadgeCollectionActivity extends BaseActivity {
         btnArchivement.setTextColor(Color.BLACK);
         btnSpotBarge.setTextColor(Color.GRAY);
     }
+
     void onSpotClick() {
         imgRedLineAchivement.setVisibility(View.INVISIBLE);
         imgRedLineSpot.setVisibility(View.VISIBLE);
