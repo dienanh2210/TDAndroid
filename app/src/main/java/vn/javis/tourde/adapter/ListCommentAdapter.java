@@ -18,17 +18,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.Comment;
+import vn.javis.tourde.model.Review;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.CommentViewHolder> {
 
-    List<Comment> listComments = new ArrayList<Comment>();
+    List<Review> listReview = new ArrayList<Review>();
     Context context;
     View mView;
 
-    public ListCommentAdapter(List<Comment> listComment, Context context) {
+    public ListCommentAdapter(List<Review> listReview, Context context) {
 
-        this.listComments = listComment;
+        this.listReview = listReview;
         this.context = context;
     }
 
@@ -42,11 +43,11 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ListCommentAdapter.CommentViewHolder holder, final int position) {
-        Comment model = listComments.get(position);
-        holder.txtUserName.setText(model.getToken());
+        Review model = listReview.get(position);
+        holder.txtUserName.setText(model.getEmail());
         holder.txtCommentContent.setText(model.getComment());
       //  holder.txtPostDate.setText(model.getPostDate().toString());
-        holder.txtPostDate.setText("2018.01.02");
+        holder.txtPostDate.setText(model.getReviewInsertDatetime());
         int rate = model.getRating();
         if (rate == 1)
             holder.imgStarRate.setImageResource(R.drawable.icon_star1);
@@ -63,7 +64,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
 
     @Override
     public int getItemCount() {
-        return listComments.size();
+        return listReview.size();
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {

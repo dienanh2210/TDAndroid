@@ -9,9 +9,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
+import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.PostCommentFragment;
 
 /**
  * Created by admin on 3/23/2018.
@@ -21,7 +23,12 @@ public class CourseListActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    private int mCoursePosition;
+
+    public int getmCourseID() {
+        return mCourseID;
+    }
+
+    private int mCourseID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,14 +62,15 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     public void ShowCourseDetail(int position) {
-        mCoursePosition = position;
+        mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         openPage(new CourseDetailFragment(), true);
     }
 
-
-    public int getmCoursePosition() {
-        return mCoursePosition;
+    public void showCommentPost() {
+        openPage(new PostCommentFragment(), true);
     }
+
+
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();

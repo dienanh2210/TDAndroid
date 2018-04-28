@@ -6,14 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.android.volley.VolleyError;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
+import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder> {
@@ -45,8 +51,9 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
         Course model = listCourse.get(position);
+
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
         holder.txtTag.setText("# " + model.getTag());
@@ -57,35 +64,62 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         holder.txtPostUser.setText(model.getPostUserName());
         Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
         Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
-
+        holder.isFavorite = model.getStatus() == 1 ? true : false;
+        if (holder.isFavorite) {
+            holder.btnFavorite.setBackground( mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
+        }
         int rate = Math.round(model.getRatingAverage());
 
         if (rate == 1) {
-            holder.imgStar1.setImageResource(R.drawable.star_yellow);
+            holder.imgStarRate.setImageResource(R.drawable.icon_star1);
         } else if (rate == 2) {
-            holder.imgStar1.setImageResource(R.drawable.star_yellow);
-            holder.imgStar2.setImageResource(R.drawable.star_yellow);
+            holder.imgStarRate.setImageResource(R.drawable.icon_star2);
         } else if (rate == 3) {
-            holder.imgStar1.setImageResource(R.drawable.star_yellow);
-            holder.imgStar3.setImageResource(R.drawable.star_yellow);
-            holder.imgStar2.setImageResource(R.drawable.star_yellow);
+            holder.imgStarRate.setImageResource(R.drawable.icon_star3);
         } else if (rate == 4) {
-            holder.imgStar1.setImageResource(R.drawable.star_yellow);
-            holder.imgStar2.setImageResource(R.drawable.star_yellow);
-            holder.imgStar3.setImageResource(R.drawable.star_yellow);
-            holder.imgStar4.setImageResource(R.drawable.star_yellow);
+            holder.imgStarRate.setImageResource(R.drawable.icon_star4);
         } else if (rate == 5) {
-            holder.imgStar1.setImageResource(R.drawable.star_yellow);
-            holder.imgStar2.setImageResource(R.drawable.star_yellow);
-            holder.imgStar3.setImageResource(R.drawable.star_yellow);
-            holder.imgStar4.setImageResource(R.drawable.star_yellow);
-            holder.imgStar5.setImageResource(R.drawable.star_yellow);
+            holder.imgStarRate.setImageResource(R.drawable.icon_star5);
         }
         holder.txtTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
                     onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
+
+        holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                holder.isFavorite = !holder.isFavorite;
+                String token = "";
+                int course_id = 1;
+                if (holder.isFavorite) {
+                    FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
+                        @Override
+                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
+                        }
+                    });
+                } else {
+                    FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
+                        @Override
+                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
+                        }
+                    });
                 }
             }
         });
@@ -115,20 +149,18 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         TextView txtPostUser;
         @BindView(R.id.img_course)
         ImageView imgCourse;
-        @BindView(R.id.star_1)
-        ImageView imgStar1;
-        @BindView(R.id.star_2)
-        ImageView imgStar2;
-        @BindView(R.id.star_3)
-        ImageView imgStar3;
-        @BindView(R.id.star_4)
-        ImageView imgStar4;
-        @BindView(R.id.star_5)
-        ImageView imgStar5;
+        @BindView(R.id.star_rate)
+        ImageView imgStarRate;
+
         @BindView(R.id.txt_tags)
         TextView txtTag;
         @BindView(R.id.img_post_user)
         ImageView imgPostUser;
+
+        @BindView(R.id.btn_favorite_list)
+        ImageButton btnFavorite;
+
+        boolean isFavorite;
 
         public CourseViewHolder(View itemView) {
             super(itemView);

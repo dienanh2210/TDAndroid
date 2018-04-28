@@ -27,5 +27,6 @@
     <color name="search_course_color_row">#0795E0</color>
     <color name="color_text_tab">#0795E0</color>
     <color name="strong_gray">#dce0e2</color>
+    <color name="green">#50E070</color>
 
 </resources>
