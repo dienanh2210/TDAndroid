@@ -48,9 +48,9 @@
     </LinearLayout>
 
     <View
-        android:layout_width="1dp"
+        android:layout_width="1sp"
         android:layout_height="match_parent"
-        android:background="@android:color/background_dark"
+        android:background="@color/search_course_color_divider_background"
         android:visibility="visible" />
 
 </LinearLayout>
