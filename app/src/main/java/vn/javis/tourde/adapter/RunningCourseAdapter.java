@@ -57,39 +57,6 @@ public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdap
                 }
             }
         });
-       /* holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                holder.isFavorite = !holder.isFavorite;
-                String token = "";
-                int course_id = 1;
-                if (holder.isFavorite) {
-                    FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
-                        @Override
-                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_blue));
-                        }
-
-                        @Override
-                        public void onError(VolleyError error) {
-
-                        }
-                    });
-                } else {
-                    FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
-                        @Override
-                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
-                        }
-
-                        @Override
-                        public void onError(VolleyError error) {
-
-                        }
-                    });
-                }
-            }
-        });*/
 
     }
 
@@ -106,25 +73,6 @@ public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdap
         TextView txtTitle;
         @BindView(R.id.txt_travel_time)
         TextView txtTravelTime;
-   /*     @BindView(R.id.txt_average_speed)
-        TextView txtAverageSpeed;
-        @BindView(R.id.txt_finish_date)
-        TextView txtFinishDate;
-        @BindView(R.id.value_travel_time)
-        TextView travelTime;
-        @BindView(R.id.value_average_speed)
-        TextView averageSpeed;
-        @BindView(R.id.value_finish_date)
-        ImageView finishDate;*/
-
-        /*
-        @BindView(R.id.txt_tags)
-        TextView txtTag;
-        @BindView(R.id.img_post_user)
-        ImageView imgPostUser;
-
-        @BindView(R.id.btn_favorite_list)
-        ImageButton btnFavorite;*/
 
         boolean isRunning;
 
