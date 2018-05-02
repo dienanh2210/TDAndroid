@@ -77,6 +77,8 @@
     <string name="Version">バージョン</string>
     <string name="versiontwo">1.0</string>
     <string name="MenuPage">メニュー</string>
+    <string name="MenuPageWeb">WEBサイト</string>
+    <string name="MenuPageWebText">ツール・ド・ニッポン</string>
     <!--login-->
     <string name="LoginGmail">メールアドレスでログイン</string>
     <string name="PassWord">パスワード</string>
