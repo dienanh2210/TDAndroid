@@ -26,17 +26,18 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
 
     private OnClickItem onClickItem;
     private HashMap<String, Boolean> mapContent = new HashMap<>();
-    private String txtDistance="";
+    private String txtDistance = "";
 
 
-
-    private String txtElevation="";
+    private String txtElevation = "";
     private List<String> listCourseType = new ArrayList<>();
+
     public ListSearchCourseAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
         this.onClickItem = onClickItem;
     }
+
     public String getTxtDistance() {
         return txtDistance;
     }
@@ -48,22 +49,23 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
     public List<String> getListCourseType() {
         return listCourseType;
     }
+
     @Override
     public ListSearchCourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.item_list, parent, false );
-        ViewHolder viewHolder = new ViewHolder( view );
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ListSearchCourseAdapter.ViewHolder holder, int position) {
-        final Data data = dataList.get( position );
-        holder.tv_header.setText( data.getTitle() );
-        holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
+        final Data data = dataList.get(position);
+        holder.tv_header.setText(data.getTitle());
+        holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
         // holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
-        holder.rcv_content.setAdapter( new ContentSearchCourseAdapter( data.getContent(), new  ContentSearchCourseAdapter.OnClickItem() {
+        holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(), new ContentSearchCourseAdapter.OnClickItem() {
             @Override
-            public void onClick(int position,boolean isPick, View view) {
+            public void onClick(int position, boolean isPick, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
                     //to get key
                     e1.getKey();
@@ -72,48 +74,72 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
                         //to get key
                         eItem.getKey();
                         //and to get value, 1
-                       // eItem.getValue().setVisibility( View.GONE );
+                        //  eItem.getValue().setVisibility( View.GONE );
                     }
                 }
                 if (onClickItem != null) {
-                    String s =data.getContent().get( position );
-                    mapContent.put( s, isPick);
-                    if(data.getTitle() =="距離") //area
+                    String s = data.getContent().get(position);
+                    mapContent.put(s, isPick);
+                    if (data.getTitle() == "距離") //area
                     {
-                        if(txtDistance != s)
-                        {
-                            txtDistance =s;
-                        }
-                        else txtDistance="";
+                        if (txtDistance != s) {
+                            txtDistance = s;
+                        } else txtDistance = "";
                     }
-                    if(data.getTitle() =="獲得標高") //area
+                    if (data.getTitle() == "獲得標高") //area
                     {
-                        if(txtElevation != s)
-                        {
-                            txtElevation =s;
-                        }
-                        else txtElevation="";
+                        if (txtElevation != s) {
+                            txtElevation = s;
+                        } else txtElevation = "";
                     }
-                    if(data.getTitle() =="コース形態") //area
+                    if (data.getTitle() == "コース形態") //area
                     {
-                        if(!listCourseType.contains(s))
-                        {
+                        if (!listCourseType.contains(s)) {
                             listCourseType.add(s);
-                        }
-                        else listCourseType.remove(s);
+                        } else listCourseType.remove(s);
                     }
                 }
             }
-        } ) );
-        mapRecyclerView.put( position, holder.rcv_content );
-        if (position == 0) {
-            //  ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
-            //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
+        }));
+        mapRecyclerView.put(position, holder.rcv_content);
+        if (position == 2) {
+
+            holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(), new ContentSearchCourseAdapter.OnClickItem() {
+                @Override
+                public void onClick(int position, boolean isPick, View view) {
+                    for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
+                        //to get key
+                        e1.getKey();
+                        //and to get value
+                        for (Map.Entry<Integer, View> eItem : ((ContentSearchCourseAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
+                            //to get key
+                            eItem.getKey();
+                            // eItem.getValue().setVisibility( View.GONE );
+                        }
+                    }
+
+                }
+            }));
+
+        } else {
+            holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(), new ContentSearchCourseAdapter.OnClickItem() {
+                @Override
+                public void onClick(int position, boolean isPick, View view) {
+                    for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
+                        //to get key
+                        e1.getKey();
+                        //and to get value
+                        for (Map.Entry<Integer, View> eItem : ((ContentSearchCourseAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
+                            //to get key
+                            eItem.getKey();
+                            eItem.getValue().setVisibility(View.GONE);
+                        }
+                    }
+
+                }
+            }));
+
         }
-        //0ne ...
-        //  if(position == 1) {
-        //   holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
-        // }
     }
 
     @Override
@@ -126,10 +152,10 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         RecyclerView rcv_content;
 
         public ViewHolder(View itemView) {
-            super( itemView );
-            tv_header = itemView.findViewById( R.id.tv_header );
-            rcv_content = itemView.findViewById( R.id.rcv_content );
-            itemView.setOnClickListener( this );
+            super(itemView);
+            tv_header = itemView.findViewById(R.id.tv_header);
+            rcv_content = itemView.findViewById(R.id.rcv_content);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -137,9 +163,11 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
 
         }
     }
+
     public interface OnClickItem {
         void onClick(Map content);
     }
+
     public HashMap<String, Boolean> getMapContent() {
         return mapContent;
     }
