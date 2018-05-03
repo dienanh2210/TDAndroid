@@ -8,6 +8,7 @@
     android:background="@color/BG_countDown">
 
     <TextView
+
         android:gravity="center"
         android:id="@+id/countDownText"
         android:layout_width="match_parent"
