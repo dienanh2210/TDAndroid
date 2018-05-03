@@ -65,6 +65,7 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
               action.onOkClick();
+                dialog.hide();
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {

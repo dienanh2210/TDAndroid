@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,9 +26,14 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.utils.ProcessDialog;
 
 public class CourseDriveFragment extends BaseFragment {
-    @BindView(R.id.btn_course_start)
-    Button btnStart;
-
+    @BindView(R.id.btn_start)
+    ImageView btnStart;
+    @BindView(R.id.btn_back_drive)
+    ImageButton btnBack;
+    @BindView(R.id.btn_back_detail)
+    Button getBtnBackDetail;
+    @BindView(R.id.btn_show_map)
+    Button btnMapWay;
     CourseListActivity mAcitivity;
 
     @Override
@@ -38,11 +45,24 @@ public class CourseDriveFragment extends BaseFragment {
                 ProcessDialog.showDialogConfirm(getContext(), "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-                        Log.i("ok: ", "clicked");
+                       mAcitivity.ShowCountDown();
                     }
                 });
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAcitivity.onBackPressed();
+            }
+        });
+        getBtnBackDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAcitivity.onBackPressed();
+            }
+        });
+
     }
 
     @Override

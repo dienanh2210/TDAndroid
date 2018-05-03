@@ -30,4 +30,6 @@
     <color name="strong_gray">#dce0e2</color>
     <color name="green">#50E070</color>
 
+    <color name="BG_countDown">#12476f</color>
+
 </resources>

@@ -375,7 +375,38 @@
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@color/search_course_color_title_background">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/MenuPageWeb"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/MenuPageWebText"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13sdp" />
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider"/>
         </LinearLayout>
 
     </ScrollView>
