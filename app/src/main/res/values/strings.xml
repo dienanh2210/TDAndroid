@@ -249,5 +249,15 @@
 
     <string name="txtRedButtonDetail">お気に入りに登録する</string>
     <string name="txtBlueButtonDetail">このコースを走行する</string>
+
+    <!--course drive-->
+    <string name="txtRedCourseDrive">※スタート地点で『START』を押してください</string>
+    <string name="btnFirst">コース画面へ</string>
+    <string name="btnSecond">スタート地点までのアクセス</string>
+    <string name="cancel">いいえ</string>
+    <string name="ok">はい</string>
+
+
+
 </resources>
 

@@ -39,8 +39,6 @@
             android:weightSum="2">
 
             <TextView
-
-                android:id="@+id/finish_guide_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -49,7 +47,7 @@
                 android:textSize="@dimen/_13sdp" />
 
             <TextView
-                android:id="@+id/txt_finish_guide_time"
+                android:id="@+id/txt_finish_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -72,8 +70,6 @@
             android:weightSum="2">
 
             <TextView
-
-                android:id="@+id/average_pace"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -106,8 +102,6 @@
             android:weightSum="2">
 
             <TextView
-
-                android:id="@+id/start_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -117,7 +111,7 @@
 
             <TextView
 
-                android:id="@+id/txt_start_point"
+                android:id="@+id/txt_start_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -134,13 +128,13 @@
             android:background="@color/Gray" />
 
         <LinearLayout
+            android:id="@+id/course_access_start_point"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/course_access_start_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
@@ -154,7 +148,6 @@
                 android:layout_weight="0.5">
 
                 <ImageView
-                    android:id="@+id/course_overview52"
                     android:layout_width="@dimen/_8sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_alignParentEnd="true"
@@ -179,20 +172,21 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_70sdp"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/_10sdp"
-            android:paddingTop="@dimen/_10sdp">
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_42sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/image_description"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginTop="-5dp"
                     android:src="@drawable/icon_googlemap" />
 
                 <TextView
@@ -201,16 +195,18 @@
                     android:gravity="center"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:text="@string/GoogleMap"
-                    android:textSize="@dimen/_13sdp" />
-            </LinearLayout>
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
 
             <View
                 android:layout_width="@dimen/_1sdp"
                 android:layout_height="match_parent"
                 android:background="@color/search_course_color_description_text" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -218,20 +214,24 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_42sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:contentDescription="@string/image_description"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginTop="-5dp"
                     android:src="@drawable/icon_navitime" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_centerHorizontal="true"
                     android:text="@string/NAVITIME"
-                    android:textSize="@dimen/_13sdp" />
-            </LinearLayout>
+                    android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

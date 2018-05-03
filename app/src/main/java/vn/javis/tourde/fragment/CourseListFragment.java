@@ -19,6 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,7 +33,11 @@ import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
+import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.model.SpotData;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
 
 
 public class CourseListFragment extends BaseFragment {
@@ -111,11 +119,12 @@ public class CourseListFragment extends BaseFragment {
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              mActivity.ShowMyCourse();
+                mActivity.ShowMyCourse();
             }
         });
         imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
         txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
+        testSpotDataAPI();
     }
 
     @Override
@@ -187,6 +196,21 @@ public class CourseListFragment extends BaseFragment {
             btnNextPage.setBackgroundResource(R.drawable.btn_next_page);
         }
 
+    }
+
+    private void testSpotDataAPI() {
+        int spotId = 1;
+        SpotDataAPI.getCourseData(spotId, new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                SpotData spotData = SpotData.getSpotData(response.toString());
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
     }
 }
 
