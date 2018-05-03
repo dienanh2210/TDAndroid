@@ -49,16 +49,16 @@ public class ListSpotsDetailAdapter extends ArrayAdapter<Spot> {
                 TextView txtIntro = (TextView) convertView.findViewById(R.id.content_story_1);
                 TextView txtTag = (TextView) convertView.findViewById(R.id.tag_story_1);
                 ImageView btn_story_1_viewmore = (ImageView) convertView.findViewById(R.id.btn_story_1_viewmore);
-                ImageView imgCourse = (ImageView)convertView.findViewById(R.id.img_story_1) ;
-                LinearLayout lnDistance = (LinearLayout)convertView.findViewById(R.id.ln_distance_between_spot);
-                int order = spot.getOrderNumber()+1;
+                ImageView imgCourse = (ImageView) convertView.findViewById(R.id.img_story_1);
+                LinearLayout lnDistance = (LinearLayout) convertView.findViewById(R.id.ln_distance_between_spot);
+                int order = spot.getOrderNumber() + 1;
                 txtTitle.setText(spot.getTitle());
                 txtIndex.setText(String.valueOf(order));
                 txtCatchPhrase.setText(spot.getCatchPhrase());
                 txtIntro.setText(spot.getIntroduction());
-               // txtTag.setText(spot.getTag().toString());
-              //  Picasso.with(context).load(spot.getTopImage()).into(imgCourse);
-                if(order == myArray.size())
+                // txtTag.setText(spot.getTag().toString());
+                //  Picasso.with(context).load(spot.getTopImage()).into(imgCourse);
+                if (order == myArray.size())
                     lnDistance.setVisibility(View.GONE);
             }
         }

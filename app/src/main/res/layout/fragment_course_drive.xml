@@ -2,34 +2,34 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BadgeBackground"
     android:fillViewport="true"
+    android:background="@color/White"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_main"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp">
+            android:layout_height="@dimen/_220sdp">
 
             <ImageView
-                android:id="@+id/img_course_detail"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:id="@+id/btn_start"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_centerInParent="true"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/image_description"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_classic" />
+                android:src="@drawable/btn_start" />
 
             <ImageButton
                 android:id="@+id/btn_back_to_list"
-                android:layout_width="@dimen/_15sdp"
+                android:layout_width="@dimen/_16sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -48,8 +48,8 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
             android:text="@string/course_detail_title"
-            android:textColor="@color/Black"
-            android:textSize="@dimen/_18sdp" />
+            android:textColor="@color/White"
+            android:textSize="@dimen/_16sdp" />
 
         <TextView
             android:id="@+id/txt2"
@@ -59,18 +59,19 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
-            android:text="@string/course_detail_title"
-            android:textColor="@color/Red"
-            android:textSize="@dimen/_14sdp" />
+            android:text="@string/txtRedCourseDrive"
+            android:textColor="@color/SoftRed"
+            android:textSize="@dimen/_13sdp" />
 
         <Button
+            android:id="@+id/btn_course_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/basicinfo"
-            android:text="@string/course_outline" />
+            android:background="@drawable/custom_frame_blue"
+            android:text="@string/btnFirst" />
 
         <Button
             android:layout_width="match_parent"
@@ -78,76 +79,75 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/custom_frame"
-            android:text="@string/course_outline" />
+            android:background="@drawable/custom_frame_blue"
+            android:text="@string/btnSecond" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_70sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
             android:background="@color/White"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/_10sdp"
-            android:paddingTop="@dimen/_10sdp">
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_42sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginTop="-5dp"
                     android:contentDescription="@string/image_description"
                     android:src="@drawable/icon_googlemap" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:gravity="center"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:text="@string/GoogleMap"
-                    android:textSize="@dimen/_13sdp" />
-            </LinearLayout>
+                    android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
 
             <View
                 android:layout_width="@dimen/_1sdp"
                 android:layout_height="match_parent"
                 android:background="@color/search_course_color_description_text" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_42sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginTop="-5dp"
                     android:contentDescription="@string/image_description"
                     android:src="@drawable/icon_navitime" />
-
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:gravity="center"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:text="@string/NAVITIME"
-                    android:textSize="@dimen/_13sdp" />
-            </LinearLayout>
+                    android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@color/green"
-            android:gravity="center"
-            android:text="@string/course_outline" />
     </LinearLayout>
 
 

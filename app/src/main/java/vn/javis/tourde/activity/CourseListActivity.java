@@ -22,8 +22,10 @@ import java.util.List;
 
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.fragment.CourseDetailFragment;
+import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
@@ -56,10 +58,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         if (params != null) {
             Log.i("params", params.toString());
         }
-            if (!searching)
-                ListCourseAPI.getJsonValues(this);
-            else
-                ListCourseAPI.getJsonValueSearch(params, this);
+        if (!searching)
+            ListCourseAPI.getJsonValues(this);
+        else
+            ListCourseAPI.getJsonValueSearch(params, this);
 
 
     }
@@ -90,10 +92,17 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new CourseDetailFragment(), true);
     }
 
-    public void showCommentPost() {
-        openPage(new PostCommentFragment(), true);
+    public void ShowMyCourse() {
+        openPage(new FragmentTabLayoutMyCourse(), true);
     }
 
+    public void showCommentPost() {
+        openPage(new PostCommentFragment(), true);
+
+    }
+    public void showCourseDrive(){
+        openPage(new CourseDriveFragment(), true);
+    }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
@@ -119,4 +128,5 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void onError(VolleyError error) {
 
     }
+
 }

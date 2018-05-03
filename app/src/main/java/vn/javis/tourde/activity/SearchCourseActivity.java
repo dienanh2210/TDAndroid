@@ -24,38 +24,38 @@ public class SearchCourseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_search_course );
-        openPage( new SearchCourseFragment(), false );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_course);
+        openPage(new SearchCourseFragment(), false);
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace( R.id.container, fragment, fragment.getClass().getSimpleName() );
-        tx.setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN );
+        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         if (isBackStack)
-            tx.addToBackStack( null );
+            tx.addToBackStack(null);
         tx.commit();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.i( "onBackPressed", "true" );
+        Log.i("onBackPressed", "true");
     }
 
     public void setmLstContent(List<String> mLstContent) {
         this.mListContent = mLstContent;
-        Log.i( "xxx: ", this.mListContent.toString() );
+        Log.i("xxx: ", this.mListContent.toString());
     }
 
     public void onBackCLickToList(HashMap map) {
 
-        Intent intent = new Intent( this, CourseListActivity.class );
-        intent.putExtra( "listContent", mListContent.toArray() );
-        intent.putExtra("searchValue",map);
-        intent.putExtra("searching","true");
-        startActivity( intent );
+        Intent intent = new Intent(this, CourseListActivity.class);
+        intent.putExtra("listContent", mListContent.toArray());
+        intent.putExtra("searchValue", map);
+        intent.putExtra("searching", "true");
+        startActivity(intent);
     }
 
 }

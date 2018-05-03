@@ -265,7 +265,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getSpot());
+                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getSpot());
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());
                 default:
@@ -293,10 +293,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
                         }
-                    }
-                    else {
+                    } else {
                         isFavourite = !isFavourite;
-                        Log.i("is: ","false");
+                        Log.i("is: ", "false");
                     }
                 }
 
@@ -315,9 +314,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
                         }
-                    }
-                    else {
-                        Log.i("is: ","true");
+                    } else {
+                        Log.i("is: ", "true");
                         isFavourite = !isFavourite;
                     }
                 }

@@ -1,7 +1,18 @@
 package vn.javis.tourde.utils;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import vn.javis.tourde.R;
 
 public class ProcessDialog {
     public Context context;
@@ -31,4 +42,42 @@ public class ProcessDialog {
             dialog1.dismiss();
         }
     }
+    public static void showDialogConfirm(final Context context, String content, final  OnActionDialogClickOk action) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setContentView(R.layout.dialog_confirm);
+        dialog.setCancelable(false);
+        TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
+        tvTitle.setVisibility(View.GONE);
+        TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
+        tvMessage.setText(content);
+        //tuanpd
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
+        final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              action.onOkClick();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.hide();
+            }
+        });
+
+        dialog.show();
+    }
+    public interface OnActionDialogClickOk{
+         void onOkClick();
+    }
+
 }

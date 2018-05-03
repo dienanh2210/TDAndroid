@@ -74,7 +74,7 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
                     mapContent.put(s, isPick);
                     Log.i("Content", data.getContent().get(position));
 
-                    if (data.getTitle() == "おすすめの月") //area
+                    if ("おすすめの月".equals(data.getTitle())) //area
                     {
                         if (!listSeason.contains(s)) {
                             listSeason.add(s);
@@ -84,8 +84,8 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
                             listTag.add(s);
                         } else listTag.remove(s);
                     }
-                    Log.i( "listSeason", listSeason.toString() );
-                    Log.i( "listTag", listTag.toString() );
+                    Log.i("listSeason", listSeason.toString());
+                    Log.i("listTag", listTag.toString());
 //                    onClickItem.onClick( data.getContent().get( position ));
 
                 }
