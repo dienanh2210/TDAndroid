@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
-        Intent intent = new Intent(this, MenuPageActivity.class);
-       // Intent intent = new Intent(this, DetailCommentActivity.class);
+        //Intent intent = new Intent(this, MenuPageActivity.class);
+        Intent intent = new Intent(this, DetailSpotActivity.class);
         startActivity(intent);
 
     }

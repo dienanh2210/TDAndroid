@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp">
+
+            <ImageView
+                android:id="@+id/img_course_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/image2" />
+
+            <ImageButton
+                android:id="@+id/btn_back_to_list"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/icon_back"
+                android:contentDescription="@string/image_description" />
+
+            <ImageButton
+                android:id="@+id/btn_share"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/icon_upload"
+                android:contentDescription="@string/image_description" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="横山展望台"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_285sdp"
+            android:layout_height="@dimen/_1ssp"
+            android:layout_marginLeft="@dimen/_17sdp"
+            android:background="@color/search_course_color_divider_background"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:src="@drawable/ic_spot" />
+            <TextView
+                android:id="@+id/tv_basic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_toStartOf="@+id/im_basic_info"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentStart="true"
+                android:text="〒436-0011 静岡県掛川市満水2000"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+            <ImageView
+                android:id="@+id/im_basic_info"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:paddingEnd="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:contentDescription="@string/search_course_text_row"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_285sdp"
+            android:layout_height="@dimen/_1ssp"
+            android:layout_marginLeft="@dimen/_17sdp"
+            android:background="@color/search_course_color_divider_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:src="@drawable/icon_website" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_toStartOf="@+id/im_basic_info"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentStart="true"
+                android:text="tsumaoi.net"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+            <ImageView
+
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:paddingEnd="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_175sdp"
+
+                android:paddingStart="@dimen/_1sdp"
+                android:contentDescription="@string/search_course_text_row"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_285sdp"
+            android:layout_height="@dimen/_1ssp"
+            android:layout_marginLeft="@dimen/_17sdp"
+            android:background="@color/search_course_color_divider_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:src="@drawable/icon_phone" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_toStartOf="@+id/im_basic_info"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentStart="true"
+                android:text="0537-24-1111"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_285sdp"
+            android:layout_height="@dimen/_1ssp"
+            android:layout_marginLeft="@dimen/_17sdp"
+            android:background="@color/search_course_color_divider_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_toStartOf="@+id/im_basic_info"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentStart="true"
+                android:text="# 初心者向き　# グルメ豊富　# 女性向け"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="@dimen/_13sdp" />
+
+        </LinearLayout>
+        <vn.javis.tourde.customlayout.TourDeTabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:visibility="visible"
+            app:tabActiveColor="@android:color/white"
+            app:tabHeight="@dimen/_50sdp"
+            app:tabItems="@array/title_coursedetail"
+            app:tabNormalColor="#DCE0E2"
+            app:tabTextActiveColor="@color/color_text_tab"
+            app:tabTextColor="@color/Black"
+            app:tabTextSize="@dimen/_14ssp"/>
+
+        <vn.javis.tourde.view.YourScrollableViewPager
+            android:id="@+id/course_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <include layout="@layout/footer_layout"/>
+    </LinearLayout>
+</ScrollView>
+
+
+
