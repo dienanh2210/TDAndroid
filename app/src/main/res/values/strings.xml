@@ -205,7 +205,10 @@
         <item>コース</item>
         <item>コメント</item>
     </array>
-
+    <array name="title_coursedetail">
+        <item>スポット写真</item>
+        <item>スポット設備</item>
+    </array>
     <string name="finish_guide_time">完走目安時間</string>
     <string name="average_pace">想定平均走行ペース</string>
     <string name="start_point">スタート地点</string>
@@ -256,7 +259,6 @@
     <string name="btnSecond">スタート地点までのアクセス</string>
     <string name="cancel">いいえ</string>
     <string name="ok">はい</string>
-
 
 
 </resources>

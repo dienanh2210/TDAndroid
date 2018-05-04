@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/user_Info"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:background="@color/White">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="設備名"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_16sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="なし"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_65sdp"
+                android:text="あり"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/basic_Info"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:id="@+id/tv_basic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_toStartOf="@+id/im_basic_info"
+                android:layout_alignParentStart="true"
+                android:text="トイレ"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="22"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="0"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </RelativeLayout>
+        <!-->
+                    <RelativeLayout
+                        android:id="@+id/badge_collection"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen60">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:layout_toStartOf="@+id/collection"
+                            android:layout_alignParentStart="true"
+                            android:text="@string/BadgeCollection"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13ssp" />
+
+                        <ImageView
+                            android:id="@+id/collection"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:paddingEnd="@dimen/_16sdp"
+                            android:paddingStart="@dimen/_1sdp"
+                            android:contentDescription="@string/search_course_text_row"
+                            android:textColor="@color/search_course_color_row"
+                            android:textSize="@dimen/_16ssp"
+                            app:srcCompat="@drawable/icon_next" />
+                    </RelativeLayout>
+        <!-->
+
+        <LinearLayout
+            android:id="@+id/rlt_newuserregister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:orientation="vertical">
+            <include layout="@layout/item_divider"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+
+                <TextView
+                    android:id="@+id/tv_userregistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_toStartOf="@+id/register"
+                    android:layout_alignParentStart="true"
+                    android:text="駐車場"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/search_course_text_row"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:paddingStart="@dimen/_1sdp"
+                    android:text="2"
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_16sdp"
+                    app:srcCompat="@drawable/icon_next" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/search_course_text_row"
+                    android:paddingEnd="@dimen/_75sdp"
+                    android:text="24"
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_16sdp"
+                    app:srcCompat="@drawable/icon_next" />
+            </RelativeLayout></LinearLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/iv_login"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="宿泊設備"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="0"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="1"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <include layout="@layout/item_divider"/>
+            <RelativeLayout
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen60">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/Logout"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13sdp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/app_Info"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="入浴設備"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="2"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="20"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rlt_tutorial"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="シャワー"
+                android:layout_toStartOf="@+id/im_how"
+                android:layout_alignParentStart="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="2"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="2"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="50"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/privacy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="ロッカー"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="2"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="40"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp"
+                app:srcCompat="@drawable/icon_next" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/inquiry"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="更衣室"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="28"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="2"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rateInApp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="自転車配送（受取/発送）"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="27"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="2"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="観光案内"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="14"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="0"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="サイクルラック"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="30"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text="20"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_16sdp" />
+
+        </RelativeLayout>
+        <Button
+            android:id="@+id/bt_search_course"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/custom_frame"
+            android:text="設備情報を投稿"
+            android:textAlignment="center"
+            android:textColor="@color/backgroud"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:textSize="@dimen/_15sdp" />
+
+        <include layout="@layout/item_divider"/>
+
+    </LinearLayout>
+</LinearLayout>

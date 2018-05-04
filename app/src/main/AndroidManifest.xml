@@ -64,9 +64,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SearchTwoActivity" />
-        <activity
-            android:name=".activity.DetailCommentActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activity.DetailSpotActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>
