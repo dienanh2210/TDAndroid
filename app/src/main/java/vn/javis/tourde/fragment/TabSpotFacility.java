@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import vn.javis.tourde.R;
 
-public class CourseDetailSpotFourFragment  extends BaseFragment{
+public class TabSpotFacility extends BaseFragment{
 
     //Overriden method onCreateView
     @Override
@@ -16,7 +16,7 @@ public class CourseDetailSpotFourFragment  extends BaseFragment{
 
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
-        return inflater.inflate(R.layout.course_detail_spot_four_fragment, container, false);
+        return inflater.inflate(R.layout.tab_spot_facility, container, false);
     }
 
     @Override

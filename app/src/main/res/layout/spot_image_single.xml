@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 <ImageView
     android:id="@+id/img_single_spot"
-    android:src="@drawable/icon_classic"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
 </LinearLayout>

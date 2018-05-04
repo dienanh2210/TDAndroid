@@ -141,7 +141,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:src="@drawable/select_image"
+                    android:src="@drawable/plus_button"
                     android:textColorHint="@color/Gray" />
             </LinearLayout>
 

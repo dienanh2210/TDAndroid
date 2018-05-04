@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.fragment.CourseDetailSpotFragment;
+import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.LoginFragment;
 
 public class DetailSpotActivity extends BaseActivity{
@@ -15,7 +15,7 @@ public class DetailSpotActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_detail_spot );
-        openPage(new CourseDetailSpotFragment(), false);
+        openPage(new CourseDetailSpotImagesFragment(), false);
     }
     public void openPage(Fragment fragment, boolean isBackStack) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();

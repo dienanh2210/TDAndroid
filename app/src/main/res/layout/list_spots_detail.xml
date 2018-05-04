@@ -84,7 +84,7 @@
             android:textSize="@dimen/_13sdp" />
 
         <ImageView
-            android:id="@+id/btn_story_1_viewmore"
+            android:id="@+id/btn_spot_images"
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
