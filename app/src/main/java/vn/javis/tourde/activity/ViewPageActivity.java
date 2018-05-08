@@ -40,7 +40,7 @@ public class ViewPageActivity extends AppCompatActivity {
                 if(viewPager.getCurrentItem() != 2){
                     viewPager.setCurrentItem( 2, true );
                 } else {
-                    Intent intent = new Intent(ViewPageActivity.this,MenuPageActivity.class);
+                    Intent intent = new Intent(ViewPageActivity.this,MenuEntryActivity.class);
                     startActivity(intent);
                 }
             }
