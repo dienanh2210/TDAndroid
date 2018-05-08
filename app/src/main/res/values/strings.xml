@@ -98,6 +98,7 @@
     <!-- search course text -->
     <string name="search_course_title">検索条件</string>
     <string name="search_course_close">閉じる</string>
+    <string name="search_course_skip">スキップ</string>
     <string name="search_course_area">エリア</string>
     <string name="search_course_select_area">エリアを選択</string>
     <string name="search_course_distance_type">距離</string>
