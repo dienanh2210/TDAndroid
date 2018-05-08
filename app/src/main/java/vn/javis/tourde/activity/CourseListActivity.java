@@ -52,18 +52,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        Intent intent = getIntent();
-        boolean searching = intent.getStringExtra("searching") == "true" ? true : false;
-        HashMap<String, String> params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
-        if (params != null) {
-            Log.i("params", params.toString());
-        }
-        if (!searching)
-            ListCourseAPI.getJsonValues(this);
-        else
-            ListCourseAPI.getJsonValueSearch(params, this);
-
-
+        fetchData();
     }
 
     @Override
@@ -77,9 +66,28 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     private void setHearder() {
+        if (getSupportActionBar() != null) {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.hide();
+        }
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+    }
+
+    private void fetchData() {
+        Intent intent = getIntent();
+        boolean searching = "true".equals(intent.getStringExtra("searching"));
+        HashMap<String, String> params = new HashMap<>();
+        if(intent.getSerializableExtra("searchValue") instanceof HashMap) {
+           params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
+            if (params != null) {
+                Log.i("params", params.toString());
+            }
+        }
+        if (!searching) {
+            ListCourseAPI.getJsonValues(this);
+        } else {
+            ListCourseAPI.getJsonValueSearch(params, this);
+        }
     }
 
     public void showCourseListPage() {

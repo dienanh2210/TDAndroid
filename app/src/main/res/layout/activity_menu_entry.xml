@@ -5,7 +5,7 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
+    android:background="@color/search_course_color_title_background"
     tools:context="vn.javis.tourde.activity.MenuEntryActivity">
 
     <FrameLayout
@@ -21,277 +21,295 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp">
-
-            <TextView
-                android:id="@+id/tv_back_menu_entry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:text="@string/Back"
-                android:textColor="@color/search_course_color_close_text"
-                android:textSize="@dimen/_16sdp" />
-
-            <TextView
-                android:id="@+id/tv_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/topic_title"
-                android:gravity="end"
-                android:paddingEnd="@dimen/_11sdp"
-                android:paddingStart="@dimen/_1sdp"
-                android:text="@string/search_course_close"
-                android:textColor="@color/search_course_color_close_text"
-                android:textSize="@dimen/_16sdp" />
-
-            <TextView
-                android:id="@+id/topic_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/TextUser"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_17ssp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:background="@color/search_course_color_title_background">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:text="@string/TextNewEntry"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <include layout="@layout/item_divider"/>
-
-        <RelativeLayout
-            android:id="@+id/rlt_usermailrigister"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_30sdp"
             android:background="@color/backgroud">
+            <!-->
+                        <TextView
+                            android:id="@+id/tv_back_menu_entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_10ssp"
+                            android:text="@string/Back"
+                            android:textColor="@color/search_course_color_close_text"
+                            android:textSize="@dimen/_16sdp" /><!-->
 
-            <ImageView
-                android:id="@+id/im_email"
-                android:layout_width="@dimen/_26ssp"
-                android:layout_height="@dimen/_26ssp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_9sdp"
-                android:contentDescription="@string/image_description"
-                android:gravity="center_vertical|center_horizontal"
-                android:src="@drawable/icon_mail" />
+                        <TextView
+                            android:id="@+id/tv_searchskip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/topic_title"
+                            android:gravity="end"
+                            android:paddingEnd="@dimen/_11sdp"
+                            android:paddingStart="@dimen/_1sdp"
+                            android:text="@string/search_course_skip"
+                            android:textColor="@color/search_course_color_close_text"
+                            android:textSize="@dimen/_16sdp" />
 
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_toEndOf="@+id/im_email"
-                android:layout_toStartOf="@+id/iv_choose_email"
-                android:text="@string/TextMailNewEntry"
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/_13sdp" />
+                        <TextView
+                            android:id="@+id/topic_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/TextUser"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_17ssp"
+                            android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/iv_choose_email"
-                android:layout_width="@dimen/_9sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:contentDescription="@string/image_description"
-                android:text="@string/search_course_text_row"
-                android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
-                app:srcCompat="@drawable/icon_next" />
-        </RelativeLayout>
+                    </RelativeLayout>
 
-        <include layout="@layout/item_divider"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@color/search_course_color_title_background">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@color/backgroud">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:text="@string/TextNewEntry"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/im_facebook"
-                android:layout_width="@dimen/_26ssp"
-                android:layout_height="@dimen/_26ssp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_9sdp"
-                android:contentDescription="@string/image_description"
-                android:gravity="center_vertical|center_horizontal"
-                android:src="@drawable/icon_facebook" />
+                    <include layout="@layout/item_divider"/>
 
-            <TextView
-                android:id="@+id/tv_facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_toEndOf="@+id/im_facebook"
-                android:layout_toStartOf="@+id/iv_choose_facebook"
-                android:text="@string/LoginFacebookMenuEntry"
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/_13sdp" />
+                    <RelativeLayout
+                        android:id="@+id/rlt_usermailrigister"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp"
+                        android:background="@color/backgroud">
 
-            <ImageView
-                android:id="@+id/iv_choose_facebook"
-                android:layout_width="@dimen/_9sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:contentDescription="@string/image_description"
-                android:text="@string/search_course_text_row"
-                android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
-                app:srcCompat="@drawable/icon_next" />
-        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/im_email"
+                            android:layout_width="@dimen/_26ssp"
+                            android:layout_height="@dimen/_26ssp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_9sdp"
+                            android:contentDescription="@string/image_description"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/icon_mail" />
 
-        <include layout="@layout/item_divider"/>
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_toEndOf="@+id/im_email"
+                            android:layout_toStartOf="@+id/iv_choose_email"
+                            android:text="@string/TextMailNewEntry"
+                            android:textColor="@color/colorText"
+                            android:textSize="@dimen/_13sdp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@color/backgroud">
+                        <ImageView
+                            android:id="@+id/iv_choose_email"
+                            android:layout_width="@dimen/_9sdp"
+                            android:layout_height="@dimen/_14sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            android:contentDescription="@string/image_description"
+                            android:text="@string/search_course_text_row"
+                            android:textColor="@color/search_course_color_row"
+                            android:textSize="@dimen/_16sdp"
+                            app:srcCompat="@drawable/icon_next" />
+                    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/im_twitter"
-                android:layout_width="@dimen/_26ssp"
-                android:layout_height="@dimen/_26ssp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_9sdp"
-                android:contentDescription="@string/image_description"
-                android:gravity="center_vertical|center_horizontal"
-                android:src="@drawable/icon_twitter" />
+                    <include layout="@layout/item_divider"/>
 
-            <TextView
-                android:id="@+id/tv_twitter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_toEndOf="@+id/im_twitter"
-                android:layout_toStartOf="@+id/iv_choose_twitter"
-                android:text="@string/LoginTwitterMenuEntry"
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/_13sdp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp"
+                        android:background="@color/backgroud">
 
-            <ImageView
-                android:id="@+id/iv_choose_twitter"
-                android:layout_width="@dimen/_9sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:contentDescription="@string/image_description"
-                android:text="@string/search_course_text_row"
-                android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
-                app:srcCompat="@drawable/icon_next" />
-        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/im_facebook"
+                            android:layout_width="@dimen/_26ssp"
+                            android:layout_height="@dimen/_26ssp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_9sdp"
+                            android:contentDescription="@string/image_description"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/icon_facebook" />
 
-        <include layout="@layout/item_divider"/>
+                        <TextView
+                            android:id="@+id/tv_facebook"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_toEndOf="@+id/im_facebook"
+                            android:layout_toStartOf="@+id/iv_choose_facebook"
+                            android:text="@string/LoginFacebookMenuEntry"
+                            android:textColor="@color/colorText"
+                            android:textSize="@dimen/_13sdp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@color/backgroud">
+                        <ImageView
+                            android:id="@+id/iv_choose_facebook"
+                            android:layout_width="@dimen/_9sdp"
+                            android:layout_height="@dimen/_14sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            android:contentDescription="@string/image_description"
+                            android:text="@string/search_course_text_row"
+                            android:textColor="@color/search_course_color_row"
+                            android:textSize="@dimen/_16sdp"
+                            app:srcCompat="@drawable/icon_next" />
+                    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/im_google"
-                android:layout_width="@dimen/_26ssp"
-                android:layout_height="@dimen/_26ssp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_9sdp"
-                android:contentDescription="@string/image_description"
-                android:gravity="center_vertical|center_horizontal"
-                android:src="@drawable/icon_google" />
+                    <include layout="@layout/item_divider"/>
 
-            <TextView
-                android:id="@+id/tv_google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_toEndOf="@+id/im_google"
-                android:layout_toStartOf="@+id/iv_choose_google"
-                android:text="@string/LoginGoogleMenuEntry"
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/_13sdp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp"
+                        android:background="@color/backgroud">
 
-            <ImageView
-                android:id="@+id/iv_choose_google"
-                android:layout_width="@dimen/_9sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:contentDescription="@string/image_description"
-                android:text="@string/search_course_text_row"
-                android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
-                app:srcCompat="@drawable/icon_next" />
-        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/im_twitter"
+                            android:layout_width="@dimen/_26ssp"
+                            android:layout_height="@dimen/_26ssp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_9sdp"
+                            android:contentDescription="@string/image_description"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/icon_twitter" />
 
-        <include layout="@layout/item_divider"/>
+                        <TextView
+                            android:id="@+id/tv_twitter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_toEndOf="@+id/im_twitter"
+                            android:layout_toStartOf="@+id/iv_choose_twitter"
+                            android:text="@string/LoginTwitterMenuEntry"
+                            android:textColor="@color/colorText"
+                            android:textSize="@dimen/_13sdp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@color/backgroud">
+                        <ImageView
+                            android:id="@+id/iv_choose_twitter"
+                            android:layout_width="@dimen/_9sdp"
+                            android:layout_height="@dimen/_14sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            android:contentDescription="@string/image_description"
+                            android:text="@string/search_course_text_row"
+                            android:textColor="@color/search_course_color_row"
+                            android:textSize="@dimen/_16sdp"
+                            app:srcCompat="@drawable/icon_next" />
+                    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/im_line"
-                android:layout_width="@dimen/_26ssp"
-                android:layout_height="@dimen/_26ssp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_9sdp"
-                android:contentDescription="@string/image_description"
-                android:gravity="center_vertical|center_horizontal"
-                android:src="@drawable/icon_line" />
+                    <include layout="@layout/item_divider"/>
 
-            <TextView
-                android:id="@+id/tv_line"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_toEndOf="@+id/im_line"
-                android:layout_toStartOf="@+id/iv_choose_line"
-                android:text="@string/LoginLine"
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/_13sdp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp"
+                        android:background="@color/backgroud">
 
-            <ImageView
-                android:id="@+id/iv_choose_line"
-                android:layout_width="@dimen/_9sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:contentDescription="@string/image_description"
-                android:text="@string/search_course_text_row"
-                android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
-                app:srcCompat="@drawable/icon_next" />
+                        <ImageView
+                            android:id="@+id/im_google"
+                            android:layout_width="@dimen/_26ssp"
+                            android:layout_height="@dimen/_26ssp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_9sdp"
+                            android:contentDescription="@string/image_description"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/icon_google" />
 
-        </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tv_google"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_toEndOf="@+id/im_google"
+                            android:layout_toStartOf="@+id/iv_choose_google"
+                            android:text="@string/LoginGoogleMenuEntry"
+                            android:textColor="@color/colorText"
+                            android:textSize="@dimen/_13sdp" />
 
-        <include layout="@layout/item_divider"/>
-    </android.support.v7.widget.LinearLayoutCompat>
-</android.support.design.widget.CoordinatorLayout>
+                        <ImageView
+                            android:id="@+id/iv_choose_google"
+                            android:layout_width="@dimen/_9sdp"
+                            android:layout_height="@dimen/_14sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            android:contentDescription="@string/image_description"
+                            android:text="@string/search_course_text_row"
+                            android:textColor="@color/search_course_color_row"
+                            android:textSize="@dimen/_16sdp"
+                            app:srcCompat="@drawable/icon_next" />
+                    </RelativeLayout>
+
+                    <include layout="@layout/item_divider"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp"
+                        android:background="@color/backgroud">
+
+                        <ImageView
+                            android:id="@+id/im_line"
+                            android:layout_width="@dimen/_26ssp"
+                            android:layout_height="@dimen/_26ssp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_9sdp"
+                            android:contentDescription="@string/image_description"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:src="@drawable/icon_line" />
+
+                        <TextView
+                            android:id="@+id/tv_line"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_toEndOf="@+id/im_line"
+                            android:layout_toStartOf="@+id/iv_choose_line"
+                            android:text="@string/LoginLine"
+                            android:textColor="@color/colorText"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <ImageView
+                            android:id="@+id/iv_choose_line"
+                            android:layout_width="@dimen/_9sdp"
+                            android:layout_height="@dimen/_14sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            android:contentDescription="@string/image_description"
+                            android:text="@string/search_course_text_row"
+                            android:textColor="@color/search_course_color_row"
+                            android:textSize="@dimen/_16sdp"
+                            app:srcCompat="@drawable/icon_next" />
+
+                    </RelativeLayout>
+
+                    <include layout="@layout/item_divider"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp">
+                        <TextView
+                            android:id="@+id/tv_loginEntry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="@string/btn_add_contact"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorText"
+                            android:textSize="@dimen/_13sdp"
+                            style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.design.widget.CoordinatorLayout>

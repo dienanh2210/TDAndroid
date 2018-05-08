@@ -1,19 +1,17 @@
 package vn.javis.tourde.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.widget.ImageButton;
-import android.content.Intent;
-import java.util.ArrayList;
-import java.util.List;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
+import android.widget.ImageButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.ListCourseAPI;
@@ -22,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton btn_Next;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -30,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         ListCourseAPI api = new ListCourseAPI(this);
-        Intent intent = new Intent(this, MenuPageActivity.class);
-       // Intent intent = new Intent(this, DetailSpotActivity.class);
-          startActivity(intent);
+
+        Intent intent = new Intent(this, ViewPageActivity.class);
+        //Intent intent = new Intent(this, DetailSpotActivity.class);
+        startActivity(intent);
 
     }
 
