@@ -5,7 +5,7 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
+    android:background="@color/search_course_color_title_background"
     tools:context="vn.javis.tourde.activity.MenuEntryActivity">
 
     <FrameLayout
@@ -293,5 +293,22 @@
         </RelativeLayout>
 
         <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+            <TextView
+                android:id="@+id/tv_loginEntry"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/btn_add_contact"
+                android:textAllCaps="false"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_13sdp"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+        </RelativeLayout>
+
     </android.support.v7.widget.LinearLayoutCompat>
 </android.support.design.widget.CoordinatorLayout>

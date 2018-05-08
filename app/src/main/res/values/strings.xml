@@ -260,6 +260,6 @@
     <string name="cancel">いいえ</string>
     <string name="ok">はい</string>
 
-
+    <string name="btn_add_contact"><u>ログイン</u></string>
 </resources>
 
