@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 
 import vn.javis.tourde.R;
 
-public class CourseDetailSpotThreeFragment  extends BaseFragment{
-
+public class TabSpotFacility extends BaseFragment{
 
     //Overriden method onCreateView
     @Override
@@ -18,11 +17,12 @@ public class CourseDetailSpotThreeFragment  extends BaseFragment{
 
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
-        return inflater.inflate(R.layout.course_detail_spot_three_fragment, container, false);
+        return inflater.inflate(R.layout.tab_spot_facility, container, false);
     }
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return null;
     }
+
 }

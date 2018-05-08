@@ -27,7 +27,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.BadgeCollectionActivity;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
@@ -112,14 +111,13 @@ public class CourseListFragment extends BaseFragment {
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mActivity, BadgeCollectionActivity.class);
-                startActivity(intent);
+                mActivity.showBadgeCollection();
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.ShowMyCourse();
+                mActivity.showMyCourse();
             }
         });
         imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));

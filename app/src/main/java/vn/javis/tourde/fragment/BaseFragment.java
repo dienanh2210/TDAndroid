@@ -19,12 +19,13 @@ public abstract class BaseFragment extends Fragment {
     private View mView;
     private Unbinder mUnbind;
     protected MainActivity activity;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        mView = getView(inflater,container);
-        mUnbind = ButterKnife.bind(this,mView);
+        mView = getView(inflater, container);
+        mUnbind = ButterKnife.bind(this, mView);
         return mView;
     }
 
@@ -35,11 +36,11 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-
-        super.onDestroyView();
         if (mUnbind != null) {
             mUnbind.unbind();
+            mUnbind = null;
         }
+        super.onDestroyView();
 
     }
 

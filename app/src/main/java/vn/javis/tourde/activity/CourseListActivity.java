@@ -18,7 +18,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import vn.javis.tourde.apiservice.ListCourseAPI;
+import vn.javis.tourde.fragment.BadgeCollectionFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
+import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
@@ -42,6 +44,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     private int mCourseID;
+    private int mSpotID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,17 +100,22 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new CourseDetailFragment(), true);
     }
 
-    public void ShowMyCourse() {
+    public void showMyCourse() {
         openPage(new FragmentTabLayoutMyCourse(), true);
+    }
+    public void showBadgeCollection() {
+        openPage(new BadgeCollectionFragment(), true);
     }
     public void ShowCountDown() {
         openPage(new CountDownTimesFragment(), true);
     }
+
     public void showCommentPost() {
         openPage(new PostCommentFragment(), true);
 
     }
-    public void showCourseDrive(){
+
+    public void showCourseDrive() {
         openPage(new CourseDriveFragment(), true);
     }
 
@@ -120,10 +128,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         tx.commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -136,4 +144,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     }
 
+    public int getmSpotID() {
+        return mSpotID;
+    }
+
+    public void showSpotImages(int spotID) {
+        mSpotID = spotID;
+        openPage(new CourseDetailSpotImagesFragment(), true);
+    }
 }

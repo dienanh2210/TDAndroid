@@ -41,16 +41,16 @@ public class ListSpotsDetailAdapter extends ArrayAdapter<Spot> {
         convertView = inflater.inflate(layoutId, null);
         if (convertView != null) {
             if (myArray.size() > 0 && position >= 0) {
-                Spot spot = myArray.get(position);
+                final Spot spot = myArray.get(position);
 
                 TextView txtTitle = (TextView) convertView.findViewById(R.id.title_story_1);
                 TextView txtIndex = (TextView) convertView.findViewById(R.id.ic_story_1);
                 TextView txtCatchPhrase = (TextView) convertView.findViewById(R.id.story_1_image_des);
                 TextView txtIntro = (TextView) convertView.findViewById(R.id.content_story_1);
                 TextView txtTag = (TextView) convertView.findViewById(R.id.tag_story_1);
-                ImageView btn_story_1_viewmore = (ImageView) convertView.findViewById(R.id.btn_story_1_viewmore);
                 ImageView imgCourse = (ImageView) convertView.findViewById(R.id.img_story_1);
                 LinearLayout lnDistance = (LinearLayout) convertView.findViewById(R.id.ln_distance_between_spot);
+                ImageView btnSpotImages = (ImageView) convertView.findViewById(R.id.btn_spot_images);
                 int order = spot.getOrderNumber() + 1;
                 txtTitle.setText(spot.getTitle());
                 txtIndex.setText(String.valueOf(order));
@@ -60,9 +60,27 @@ public class ListSpotsDetailAdapter extends ArrayAdapter<Spot> {
                 //  Picasso.with(context).load(spot.getTopImage()).into(imgCourse);
                 if (order == myArray.size())
                     lnDistance.setVisibility(View.GONE);
+
+                btnSpotImages.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (onSpotImageClick != null) {
+                            onSpotImageClick.onItemClick(spot.getSpotId());
+                        }
+                    }
+                });
             }
         }
         return convertView;
+    }
+    public interface OnSpotImageClick {
+        void onItemClick(int position);
+    }
+
+    private OnSpotImageClick onSpotImageClick;
+
+    public void setOnSpotImageClick(OnSpotImageClick onSpotImageClick) {
+        this.onSpotImageClick = onSpotImageClick;
     }
 
 }

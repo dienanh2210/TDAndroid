@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         ListCourseAPI api = new ListCourseAPI(this);
+
         Intent intent = new Intent(this, ViewPageActivity.class);
         //Intent intent = new Intent(this, DetailSpotActivity.class);
         startActivity(intent);

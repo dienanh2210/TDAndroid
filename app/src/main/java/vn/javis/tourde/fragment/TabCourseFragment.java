@@ -64,6 +64,12 @@ public class TabCourseFragment extends BaseFragment {
             Log.i("listSpot: ", "" + listSpot.size());
             listSpotAdapter = new ListSpotsDetailAdapter(mActivity, R.layout.list_spots_detail, listSpot);
             lvSpot.setAdapter(listSpotAdapter);
+            listSpotAdapter.setOnSpotImageClick(new ListSpotsDetailAdapter.OnSpotImageClick() {
+                @Override
+                public void onItemClick(int spotID) {
+                    mActivity.showSpotImages(spotID);
+                }
+            });
         }
         btnStartPoint.setOnClickListener(new View.OnClickListener() {
             @Override
