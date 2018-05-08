@@ -22,12 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton btn_Next;
 
-    public static MainActivity getInstance() {
-
-        return instance;
-    }
-
-    private static MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        instance = this;
         ListCourseAPI api = new ListCourseAPI(this);
         Intent intent = new Intent(this, MenuPageActivity.class);
        // Intent intent = new Intent(this, DetailSpotActivity.class);

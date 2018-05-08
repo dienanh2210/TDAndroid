@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
     CourseListActivity mActivity;
 
     private TabLayout tabLayout;
-    private YourScrollableViewPager viewPager;
+    private ViewPager viewPager;
     List<String> listImgUrl = new ArrayList<>();
     List<String> myListImgUrl = new ArrayList<>();
 
@@ -44,38 +45,21 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        //GetCourseDataAPI.getCourseData(1,this);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
-        //  activity.setSupportActionBar(toolbar);
-
-        //Initializing the tablayout
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-
-        //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("ユーザー投稿写真"));
-        tabLayout.addTab(tabLayout.newTab().setText("自分の投稿写真"));
-
-
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-
-        //Initializing viewPager
-        viewPager = (YourScrollableViewPager) view.findViewById(R.id.pager);
-
-        //Creating our pager adapter
         myListImgUrl.add("plus_button");
-        for(int i=0;i<20;i++){
+        //this is for test
+        for (int i = 0; i < 20; i++) {
             myListImgUrl.add("plus_button");
             listImgUrl.add("plus_button");
         }
-        Pager adapter = new Pager(mActivity.getSupportFragmentManager(), tabLayout.getTabCount());
-        ImageView abc;
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
 
-        //Adding adapter to pager
+        tabLayout.addTab(tabLayout.newTab().setText("ユーザー投稿写真"));
+        tabLayout.addTab(tabLayout.newTab().setText("自分の投稿写真"));
+        viewPager = view.findViewById(R.id.pager);
+
+        Pager adapter = new Pager(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-
-        //Adding onTabSelectedListener to swipe views
+        viewPager.setOffscreenPageLimit(2);
         tabLayout.setOnTabSelectedListener(this);
     }
 
@@ -97,20 +81,16 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
 
     public class Pager extends FragmentStatePagerAdapter {
 
-        //integer to count number of tabs
         int tabCount;
 
-        //Constructor to the class
         public Pager(FragmentManager fm, int tabCount) {
             super(fm);
             //Initializing tab count
             this.tabCount = tabCount;
         }
 
-        //Overriding method getItem
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
-            //Returning the current tabs
             switch (position) {
                 case 0:
                     TabSpotUploadedImages tab1 = TabSpotUploadedImages.intansce(listImgUrl);
@@ -122,8 +102,6 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
                     return null;
             }
         }
-
-        //Overriden method getCount to get the number of tabs
         @Override
         public int getCount() {
             return tabCount;

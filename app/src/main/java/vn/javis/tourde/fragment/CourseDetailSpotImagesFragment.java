@@ -10,9 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
@@ -20,6 +24,7 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.DetailSpotActivity;
+import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.SpotData;
@@ -27,7 +32,7 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
-public class CourseDetailSpotImagesFragment extends BaseFragment implements ServiceCallback{
+public class CourseDetailSpotImagesFragment extends BaseFragment implements ServiceCallback {
     @BindView(R.id.tab_layout)
     TourDeTabLayout tab_layout;
     @BindView(R.id.course_view_pager)
@@ -42,8 +47,20 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     TextView txtTel;
     @BindView(R.id.tv_tag)
     TextView txtTag;
+
     CourseListActivity mActivity;
 
+    @BindView(R.id.btn_back_to_list)
+    ImageButton btnBack;
+    @BindView(R.id.img_course_detail)
+    ImageView imgCourse;
+
+    @BindView(R.id.btn_badge_collection)
+    RelativeLayout btnBadge;
+    @BindView(R.id.btn_my_course_footer)
+    RelativeLayout btnMyCourse;
+    @BindView(R.id.btn_home_footer)
+    RelativeLayout btnHome;
 
     @Nullable
     @Override
@@ -78,7 +95,30 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
 
             }
         });
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActivity.onBackPressed();
+            }
+        });
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActivity.showCourseListPage();
+            }
+        });
+        btnBadge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActivity.showBadgeCollection();
+            }
+        });
+        btnMyCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActivity.showMyCourse();
+            }
+        });
         int spotId = mActivity.getmSpotID();
         SpotDataAPI.getCourseData(spotId, this);
     }
@@ -87,23 +127,20 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         SpotData spotData = SpotData.getSpotData(response.toString());
-        Log.i("spot json",response.toString());
+        Log.i("spot json", response.toString());
         txtTitle.setText(spotData.getData().getTitle());
         txtAddress.setText(spotData.getData().getAddress());
         txtSiteURL.setText(spotData.getData().getSiteUrl());
         txtTel.setText(spotData.getData().getTel());
         txtTag.setText(spotData.getTag().toString());
+      //  Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
+
 
     }
 
     @Override
     public void onError(VolleyError error) {
 
-    }
-    @Override
-    public void onStart() {
-
-        super.onStart();
     }
 
     @Override
@@ -128,7 +165,6 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                     return null;
             }
         }
-
         @Override
         public int getCount() {
             return 2;

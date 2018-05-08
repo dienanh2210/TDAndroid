@@ -6,17 +6,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_my_spot_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/_300sdp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <GridView
-            android:id="@+id/grv_spot_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="3" />
-
-    </LinearLayout>
 </LinearLayout>

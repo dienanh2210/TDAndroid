@@ -19,6 +19,10 @@ public class ApiEndpoint {
     public  static String POST_INSERT_FAVORITE_COURSE_APP ="/post/insertFavoriteCourseApp/";
     public  static String POST_DELETE_FAVORITE_COURSE_APP ="/post/deleteFavoriteCourseApp/";
     public  static String GET_SPOT_DATA ="/get/getSpotData/";
+    public  static String POST_IMAGE ="/post/postImage/";
+    public  static String POST_COURSE_IMAGE ="/post/postCourseImage/";
+    public  static String POST_COURSE_LOG ="/post/postCourseLog/";
+    public  static String POST_CHECK_IN_STAMP ="/post/checkInStamp/";
 
     public static String SNS_ID = "sns_id";
     public static String SNS_KIND = "sns_kind";

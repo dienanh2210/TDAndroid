@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import vn.javis.tourde.apiservice.ListCourseAPI;
+import vn.javis.tourde.fragment.BadgeCollectionFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.CourseDriveFragment;
@@ -91,10 +92,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new CourseDetailFragment(), true);
     }
 
-    public void ShowMyCourse() {
+    public void showMyCourse() {
         openPage(new FragmentTabLayoutMyCourse(), true);
     }
-
+    public void showBadgeCollection() {
+        openPage(new BadgeCollectionFragment(), true);
+    }
     public void ShowCountDown() {
         openPage(new CountDownTimesFragment(), true);
     }
@@ -117,10 +120,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         tx.commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {

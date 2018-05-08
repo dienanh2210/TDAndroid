@@ -3,11 +3,12 @@ package vn.javis.tourde.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,20 +16,19 @@ import java.util.List;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.adapter.ListMySpotsImageAdapter;
-import vn.javis.tourde.adapter.ListSpotsImageAdapter;
-
-public class TabMySpotUploadedImages extends BaseFragment{
+import vn.javis.tourde.adapter.ListMySpotUploadedImageAdapter;
 
 
-    @BindView(R.id.grv_spot_img)
-    GridView GrvSpotImage;
+public class TabMySpotUploadedImages extends BaseFragment {
 
-    ListMySpotsImageAdapter listSpotImageAdapter;
+
+    @BindView(R.id.rcv_my_spot_img)
+    RecyclerView rcvMySpotImage;
+
+    ListMySpotUploadedImageAdapter listSpotImageAdapter;
     CourseListActivity mActivity;
     List<String> listSpotImg = new ArrayList<>();
-    String avagePace,finishTIme,startAddress;
-
+    String avagePace, finishTIme, startAddress;
 
 
     public static TabMySpotUploadedImages intansce(List<String> listSpotImg) {
@@ -39,11 +39,13 @@ public class TabMySpotUploadedImages extends BaseFragment{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        mActivity = (CourseListActivity) getActivity();
+        mActivity = (CourseListActivity) getActivity();
         if (listSpotImg.size() > 0) {
             Log.i("listSpot: ", "" + listSpotImg.size());
-            listSpotImageAdapter = new ListMySpotsImageAdapter(getActivity(), R.layout.spot_image_single, listSpotImg);
-            GrvSpotImage.setAdapter(listSpotImageAdapter);
+            RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1);;
+            rcvMySpotImage.setLayoutManager(layoutManager);
+            listSpotImageAdapter = new ListMySpotUploadedImageAdapter( listSpotImg,mActivity);
+            rcvMySpotImage.setAdapter(listSpotImageAdapter);
         }
 
     }

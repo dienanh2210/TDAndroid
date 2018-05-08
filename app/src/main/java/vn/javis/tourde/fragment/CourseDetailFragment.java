@@ -27,9 +27,11 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.BadgeCollectionActivity;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
@@ -47,7 +49,7 @@ import vn.javis.tourde.view.YourScrollableViewPager;
 public class CourseDetailFragment extends BaseFragment implements ServiceCallback {
     private int mCourseID;
     private CourseListActivity mActivity;
-
+List<String> listImgUrl = new ArrayList<>();
     @BindView(R.id.btn_back_to_list)
     ImageButton btnBackToList;
     @BindView(R.id.btn_share)
@@ -96,6 +98,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     RelativeLayout btnBadge;
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
+    @BindView(R.id.btn_my_course_footer)
+    RelativeLayout btnMyCourse;
     @BindView(R.id.img_home)
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
@@ -155,8 +159,13 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mActivity, BadgeCollectionActivity.class);
-                startActivity(intent);
+               mActivity.showBadgeCollection();
+            }
+        });
+        btnMyCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActivity.showMyCourse();
             }
         });
         btnHome.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +182,11 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 btnFavoriteClick();
             }
         });
+
+        for(int i=0;i<20;i++){
+
+            listImgUrl.add("plus_button");
+        }
     }
 
     @Override
@@ -266,8 +280,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             switch (position) {
                 case 0:
                     return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getSpot());
+//                    return TabSpotUploadedImages.intansce(listImgUrl);
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());
+//                    return TabSpotUploadedImages.intansce(listImgUrl);
                 default:
                     return null;
             }

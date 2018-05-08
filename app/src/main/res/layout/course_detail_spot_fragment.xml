@@ -209,7 +209,7 @@
         <vn.javis.tourde.view.YourScrollableViewPager
             android:id="@+id/course_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"></vn.javis.tourde.view.YourScrollableViewPager>
 
         <include layout="@layout/footer_layout"/>
     </LinearLayout>
