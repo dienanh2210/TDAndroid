@@ -249,5 +249,11 @@
 
     <string name="txtRedButtonDetail">お気に入りに登録する</string>
     <string name="txtBlueButtonDetail">このコースを走行する</string>
+
+    <!--running-->
+    <string name="txt_running">走行中</string>
+    <string name="txt_map">MAP</string>
+    <string name="txt_log">ログ</string>
+    <string name="txt_stop_at_one_time">一時停止</string>
 </resources>
 
