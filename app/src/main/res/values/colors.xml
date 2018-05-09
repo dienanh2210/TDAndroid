@@ -31,5 +31,6 @@
     <color name="green">#50E070</color>
 
     <color name="BG_countDown">#12476f</color>
+    <color name="BG_courseDetail">#f3f5f7</color>
 
 </resources>
