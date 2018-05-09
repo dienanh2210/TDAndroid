@@ -20,6 +20,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListSpotsDetailAdapter;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public class TabCourseFragment extends BaseFragment {
 
@@ -36,12 +37,14 @@ public class TabCourseFragment extends BaseFragment {
     TextView txtAvaragePace;
     @BindView(R.id.txt_start_address)
     TextView txtStartAddress;
-
+    @BindView(R.id.btn_running_app)
+    RelativeLayout btnRunningApp;
 
     ListSpotsDetailAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
-    String avagePace,finishTIme,startAddress;
+    String avagePace, finishTIme, startAddress;
+
     public static TabCourseFragment instance(List<Spot> lstSpot) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
@@ -52,7 +55,7 @@ public class TabCourseFragment extends BaseFragment {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
         fragment.finishTIme = finishTime;
-        fragment.avagePace =averagePace;
+        fragment.avagePace = averagePace;
         fragment.startAddress = startAddress;
         return fragment;
     }
@@ -80,6 +83,22 @@ public class TabCourseFragment extends BaseFragment {
         txtAvaragePace.setText(avagePace);
         txtFinishTime.setText(finishTIme);
         txtStartAddress.setText(startAddress);
+        btnRunningApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
+                        "\n" +
+                        " \n" +
+                        "\n" +
+                        "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
+                ProcessDialog.showDialogConfirm(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
+                    @Override
+                    public void onOkClick() {
+                        mActivity.ShowCountDown();
+                    }
+                });
+            }
+        });
     }
 
     @Override

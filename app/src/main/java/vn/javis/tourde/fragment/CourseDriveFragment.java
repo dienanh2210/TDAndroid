@@ -42,7 +42,7 @@ public class CourseDriveFragment extends BaseFragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProcessDialog.showDialogConfirm(getContext(), "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                ProcessDialog.showDialogConfirm(getContext(), "","走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
                        mAcitivity.ShowCountDown();
