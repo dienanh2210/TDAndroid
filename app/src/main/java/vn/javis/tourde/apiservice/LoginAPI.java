@@ -1,5 +1,6 @@
 package vn.javis.tourde.apiservice;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.util.Log;
 
@@ -39,6 +40,17 @@ public class LoginAPI {
         String url = ApiEndpoint.BASE_URL + ApiEndpoint.POST_CREATE_ACCOUNT;
         VolleyCustomRequest jsObjRequest = new VolleyCustomRequest(Request.Method.POST, url, params, successListener,errorListener);
         TourDeApplication.getInstance().addToRequestQueue(jsObjRequest, ApiEndpoint.POST_CREATE_ACCOUNT);
+
+    }
+    public static void registerAccount(Activity activity, String email, String password, String nickname, Bitmap bitmap, int sex, int age, int area, ServiceCallback callback ) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("email", email);
+        params.put("password", password);
+        params.put("nickname", nickname);
+        params.put("sex", String.valueOf(sex));
+        params.put("age", String.valueOf(age));
+        params.put("area", String.valueOf(area));
+        TourDeService.uploadImageBitmap(activity, ApiEndpoint.POST_CREATE_ACCOUNT, bitmap, params, callback);
     }
     public static void loginSNS(final String sns_id, final String sns_kind,ServiceCallback callback) {
         HashMap<String, String> param = new HashMap<>();

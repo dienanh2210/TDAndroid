@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.BadgeCollectionActivity;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 
@@ -35,8 +34,8 @@ public class FragmentTabLayoutRunning extends BaseFragment{
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mActivity, BadgeCollectionActivity.class);
-                startActivity(intent);
+             //   Intent intent = new Intent(mActivity, BadgeCollectionActivity.class);
+             //   startActivity(intent);
             }
         });
 

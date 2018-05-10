@@ -57,8 +57,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private ImageView imv_mark_woman;
     int prefecture = 1;
     int age = 10;
-    String txtAge="10代";
-    String txtArea="北海道";
+    String txtAge = "10代";
+    String txtArea = "北海道";
     TextView tv_prefecture;
     TextView tv_age;
     Bitmap bitmapIcon;
@@ -99,7 +99,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         View tv_back_resgister = view.findViewById(R.id.tv_back_resgister);
         tv_prefecture = view.findViewById(R.id.tv_prefecture);
         tv_prefecture.setText(txtArea);
-        Log.i("aaaaa1",""+txtArea);
+        Log.i("aaaaa1", "" + txtArea);
         tv_age = view.findViewById(R.id.tv_age);
         tv_age.setText(txtAge);
         edt_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -158,7 +158,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        int sex =1;
+        int sex = 1;
         switch (v.getId()) {
             case R.id.rlt_prefecture:
                 activity.openPage(PrefectureFragment.newInstance(this), true);
@@ -167,14 +167,17 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 activity.openPage(AgeFragment.newInstance(this), true);
                 break;
             case R.id.rlt_man:
-                sex = chooseGender(true)?1:2;
+                sex = chooseGender(true) ? 1 : 2;
                 break;
             case R.id.rlt_woman:
-                sex = chooseGender(false)?2:1;
+                sex = chooseGender(false) ? 2 : 1;
                 break;
             case R.id.appCompatButtonLogin:
                 //   LoginAPI.register(edt_email.toString(), edt_password.toString(), gender, 10, "Tokyo", this);
-                LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, successListener(), errorListener());
+                if (bitmapIcon == null)
+                    LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, successListener(), errorListener());
+                else
+                    LoginAPI.registerAccount(activity,edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
 
                 break;
             case R.id.tv_back_resgister:
@@ -240,7 +243,17 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) {
         Log.i("Register ACCOUNT: ", response.toString());
-
+        JSONObject jsonObject = (JSONObject)response;
+        if (jsonObject.has("success")) {
+            Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes");
+            SharedPreferencesUtils.getInstance(getContext()).setStringValue("Username", edt_username.getText().toString());
+            //SharedPreferencesUtils.getInstance(getContext()).setIntValue("UserIcon", select_userIcon.getDrawable());
+            SharedPreferencesUtils.getInstance(getContext()).setStringValue("Email", edt_email.getText().toString());
+            SharedPreferencesUtils.getInstance(getContext()).setStringValue("Pass", edt_password.getText().toString());
+            Toast.makeText(getContext(), "Register Sucessflly", Toast.LENGTH_LONG).show();
+        } else {
+            Log.d(edt_email.toString(), edt_password.toString() + "error");
+        }
     }
 
     @Override
@@ -254,8 +267,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         txtArea = content;
         tv_prefecture.setText(content);
     }
+
     @Override
-    public void onAgeFragmentInteraction(int valueAge,String content) {
+    public void onAgeFragmentInteraction(int valueAge, String content) {
         age = valueAge;
         txtAge = content;
         tv_age.setText(content);
