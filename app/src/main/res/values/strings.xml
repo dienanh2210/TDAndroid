@@ -262,5 +262,8 @@
     <string name="ok">はい</string>
 
     <string name="btn_add_contact"><u>ログイン</u></string>
+    //spot facilities
+    <string name="text_spot_facilities">スポット設備</string>
+    <string name="btn_spot_facilities">投稿</string>
 </resources>
 
