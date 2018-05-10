@@ -42,7 +42,7 @@ public class ProcessDialog {
             dialog1.dismiss();
         }
     }
-    public static void showDialogConfirm(final Context context, String content, final  OnActionDialogClickOk action) {
+    public static void showDialogConfirm(final Context context,String title, String content, final  OnActionDialogClickOk action) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
@@ -51,7 +51,8 @@ public class ProcessDialog {
         dialog.setContentView(R.layout.dialog_confirm);
         dialog.setCancelable(false);
         TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
-        tvTitle.setVisibility(View.GONE);
+       // tvTitle.setVisibility(View.GONE);
+        tvTitle.setText(title);
         TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
         tvMessage.setText(content);
         //tuanpd
