@@ -8,12 +8,12 @@
     android:background="@color/BG_countDown">
 
     <TextView
+
+        android:gravity="center"
         android:id="@+id/countDownText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:text=""
-        android:textAlignment="viewStart"
         android:textColor="@color/White"
         android:textSize="@dimen/_120sdp"
         android:textStyle="bold"

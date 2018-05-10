@@ -1,6 +1,5 @@
 package vn.javis.tourde.activity;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -16,19 +15,20 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import vn.javis.tourde.apiservice.ListCourseAPI;
+import vn.javis.tourde.fragment.BadgeCollectionFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
+import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
+import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.PostCommentFragment;
-import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.fragment.CountDownTimesFragment;
 
 /**
  * Created by admin on 3/23/2018.
@@ -44,6 +44,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     private int mCourseID;
+    private int mSpotID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,18 +52,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        Intent intent = getIntent();
-        boolean searching = intent.getStringExtra("searching") == "true" ? true : false;
-        HashMap<String, String> params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
-        if (params != null) {
-            Log.i("params", params.toString());
-        }
-        if (!searching)
-            ListCourseAPI.getJsonValues(this);
-        else
-            ListCourseAPI.getJsonValueSearch(params, this);
-
-
+        fetchData();
     }
 
     @Override
@@ -76,9 +66,28 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     private void setHearder() {
+        if (getSupportActionBar() != null) {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.hide();
+        }
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+    }
+
+    private void fetchData() {
+        Intent intent = getIntent();
+        boolean searching = "true".equals(intent.getStringExtra("searching"));
+        HashMap<String, String> params = new HashMap<>();
+        if(intent.getSerializableExtra("searchValue") instanceof HashMap) {
+           params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
+            if (params != null) {
+                Log.i("params", params.toString());
+            }
+        }
+        if (!searching) {
+            ListCourseAPI.getJsonValues(this);
+        } else {
+            ListCourseAPI.getJsonValueSearch(params, this);
+        }
     }
 
     public void showCourseListPage() {
@@ -91,8 +100,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new CourseDetailFragment(), true);
     }
 
-    public void ShowMyCourse() {
+    public void showMyCourse() {
         openPage(new FragmentTabLayoutMyCourse(), true);
+    }
+    public void showBadgeCollection() {
+        openPage(new BadgeCollectionFragment(), true);
+    }
+    public void ShowCountDown() {
+        openPage(new CountDownTimesFragment(), true);
     }
 
     public void showCommentPost() {
@@ -100,6 +115,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     }
 
+    public void showCourseDrive() {
+        openPage(new CourseDriveFragment(), true);
+    }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
@@ -110,10 +128,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         tx.commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -124,5 +142,19 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     @Override
     public void onError(VolleyError error) {
 
+    }
+
+    public int getmSpotID() {
+        return mSpotID;
+    }
+
+    public void showSpotImages(int spotID) {
+        mSpotID = spotID;
+        openPage(new CourseDetailSpotImagesFragment(), true);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.i("onBackPressed", "true");
     }
 }

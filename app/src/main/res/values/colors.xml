@@ -10,6 +10,7 @@
     <color name="White">#ffffff</color>
     <color name="Green">#13f408</color>
     <color name="Red">#ff0000</color>
+    <color name="SoftRed">#FD6D6D</color>
     <color name="SkyBlue">#0795e0</color>
     <color name="Gray">#C8CDD0</color>
     <color name="lightGray">#D3D3D3</color>
@@ -30,5 +31,6 @@
     <color name="green">#50E070</color>
 
     <color name="BG_countDown">#12476f</color>
+    <color name="BG_courseDetail">#f3f5f7</color>
 
 </resources>

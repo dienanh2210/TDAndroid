@@ -50,6 +50,7 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MenuEntryActivity;
 import vn.javis.tourde.model.Account;
 import vn.javis.tourde.model.Course;
@@ -152,19 +153,19 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Override
     public void onStart() {
         super.onStart();
-        TextView txbackBasicinfoLogin = getView().findViewById(R.id.tv_back_basicinfo_login);
+      //  TextView txbackBasicinfoLogin = getView().findViewById(R.id.tv_back_basicinfo_login);
         TextView txclose = getView().findViewById(R.id.tv_close);
-        txbackBasicinfoLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MenuPageActivity.class);
-                startActivity(intent);
-            }
-        });
+//        txbackBasicinfoLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), MenuPageActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         txclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MenuPageActivity.class);
+                Intent intent = new Intent(getContext(), CourseListActivity.class);
                 startActivity(intent);
             }
         });

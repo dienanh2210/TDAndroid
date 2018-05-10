@@ -54,6 +54,7 @@
         android:id="@+id/lst_courses_recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/course_list_footer"
         android:layout_alignTop="@+id/course_list_header"
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_5sdp"

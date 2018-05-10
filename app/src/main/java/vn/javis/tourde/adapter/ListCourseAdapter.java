@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.android.volley.VolleyError;
@@ -27,7 +26,6 @@ import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
-import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder> {
@@ -65,9 +63,9 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
         Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
         Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
         holder.isFavorite = model.getStatus() == 1 ? true : false;
-        holder.isFavorite =false;
+        holder.isFavorite = false;
         if (holder.isFavorite) {
-            holder.btnFavorite.setBackground( mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
+            holder.btnFavorite.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
         int rate = Math.round(model.getRatingAverage());
 
@@ -90,7 +88,22 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
                 }
             }
         });
-
+        holder.txtCatchPhrase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickedListener != null) {
+                    onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
+        holder.imgCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickedListener != null) {
+                    onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
         holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
