@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ListCourseAPI api = new ListCourseAPI(this);
 
       //  Intent intent = new Intent(this, TestUploadImage.class);
-        Intent intent = new Intent(this, MenuPageActivity.class);
+        Intent intent = new Intent(this, ViewPageActivity.class);
         startActivity(intent);
 
     }
