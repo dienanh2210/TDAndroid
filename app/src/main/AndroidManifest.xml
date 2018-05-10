@@ -41,7 +41,6 @@
             android:name=".activity.LoginSNSActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.BaseActivity" />
-
         <activity
             android:name=".activity.SearchCourseActivity"
             android:label="@string/title_activity_course_search"
@@ -62,10 +61,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SearchTwoActivity" />
-
-        <activity android:name=".activity.DetailSpotActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity
+            android:name=".activity.DetailSpotActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".fragment.SpotFacilitiesFragment"></activity>
     </application>
 
 </manifest>

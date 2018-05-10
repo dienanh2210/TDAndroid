@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_50sdp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/search_course_color_description_text" />
+
+        <RelativeLayout
+            android:id="@+id/rlt_mark"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50ssp"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="@dimen/_1sdp"
+                android:textSize="@dimen/_15ssp"
+                android:text="@string/item_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50ssp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="148dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_1sdp"
+                android:paddingStart="15dp"
+                android:text="あり"
+                android:textSize="@dimen/_15ssp" />
+
+            <ImageView
+                android:id="@+id/imv_mark1"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="108dp"
+                android:contentDescription="@string/item_text"
+                android:src="@drawable/image_gray_circle"
+                android:visibility="visible" />
+            <ImageView
+                android:id="@+id/imv_mark2"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="108dp"
+                android:contentDescription="@string/item_text"
+                android:src="@drawable/icon_check_circle_blue"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50ssp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="42dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_1sdp"
+                android:paddingStart="15dp"
+                android:text="なし"
+                android:textSize="@dimen/_15ssp" />
+
+            <ImageView
+                android:id="@+id/imv_mark"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/item_text"
+                android:src="@drawable/icon_check_circle_blue"
+                android:visibility="visible"
+                 />
+            <ImageView
+                android:id="@+id/imv_mark3"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/item_text"
+                android:src="@drawable/image_gray_circle"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/search_course_color_divider_background"
+        android:visibility="gone" />
+
+</LinearLayout>
+
+

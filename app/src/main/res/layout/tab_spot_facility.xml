@@ -535,7 +535,7 @@
 
         </RelativeLayout>
         <Button
-            android:id="@+id/bt_search_course"
+            android:id="@+id/bt_spot_page"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
             android:layout_marginLeft="@dimen/_50sdp"
@@ -548,7 +548,7 @@
             android:layout_marginBottom="@dimen/_30sdp"
             android:textSize="@dimen/_15sdp" />
 
-        <include layout="@layout/item_divider"/>
+
 
     </LinearLayout>
 </LinearLayout>
