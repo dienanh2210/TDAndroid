@@ -534,6 +534,7 @@
                 android:textSize="@dimen/_16sdp" />
 
         </RelativeLayout>
+        <include layout="@layout/item_divider"/>
         <Button
             android:id="@+id/bt_spot_page"
             android:layout_width="match_parent"

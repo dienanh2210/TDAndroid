@@ -195,8 +195,8 @@ List<String> listImgUrl = new ArrayList<>();
                 String shareBody =txtTitle.getText().toString();
                 String shareSub =txtTitle.getText().toString();
                 String share=url;
-                myIntent.putExtra( Intent.EXTRA_SUBJECT,shareSub+"."+share );
-                myIntent.putExtra( Intent.EXTRA_TEXT,shareBody +"."+share);
+                myIntent.putExtra( Intent.EXTRA_SUBJECT,shareSub+"\n"+share );
+                myIntent.putExtra( Intent.EXTRA_TEXT,shareBody +"\n"+share);
 
                 startActivity( Intent.createChooser( myIntent,"" ) );
             }

@@ -9,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListSpotFacilitiesAdapter;
 import vn.javis.tourde.model.Data;
@@ -27,6 +29,7 @@ public class SpotFacilitiesFragment extends Fragment {
     private Button btn_choose;
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
+    TextView tv_back_sppot_faclities;
 
     public static SpotFacilitiesFragment newInstance(View.OnClickListener listener) {
         SpotFacilitiesFragment fragment = new SpotFacilitiesFragment();
@@ -40,16 +43,27 @@ public class SpotFacilitiesFragment extends Fragment {
         View view = inflater.inflate( R.layout.spot_facilities_fragment, container, false );
         rcv_list = view.findViewById( R.id.rcv_list );
         btn_choose = view.findViewById( R.id.btn_choose );
+        tv_back_sppot_faclities=view.findViewById( R.id.tv_back_sppot_faclities );
+
         createData();
         btn_choose.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
                     listener.onFragmentInteraction( contentArea );
-                    ((RegisterActivity) getActivity()).onBackPressed();
+                   // ((RegisterActivity) getActivity()).onBackPressed();
                 }
             }
         } );
+        tv_back_sppot_faclities.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                     ((CourseListActivity) getActivity()).onBackPressed();
+
+            }
+        } );
+
         return view;
     }
 

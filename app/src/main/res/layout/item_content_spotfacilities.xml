@@ -37,10 +37,10 @@
                 android:layout_height="@dimen/_50ssp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="148dp"
+                android:layout_marginEnd="@dimen/_100sdp"
                 android:gravity="center_vertical"
                 android:paddingEnd="@dimen/_1sdp"
-                android:paddingStart="15dp"
+                android:paddingStart="@dimen/_1sdp"
                 android:text="あり"
                 android:textSize="@dimen/_15ssp" />
 
@@ -50,7 +50,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="108dp"
+                android:layout_marginEnd="@dimen/_75sdp"
                 android:contentDescription="@string/item_text"
                 android:src="@drawable/image_gray_circle"
                 android:visibility="visible" />
@@ -60,7 +60,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="108dp"
+                android:layout_marginEnd="@dimen/_75sdp"
                 android:contentDescription="@string/item_text"
                 android:src="@drawable/icon_check_circle_blue"
                 android:visibility="gone" />
@@ -70,10 +70,10 @@
                 android:layout_height="@dimen/_50ssp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="42dp"
+                android:layout_marginEnd="@dimen/_35sdp"
                 android:gravity="center_vertical"
                 android:paddingEnd="@dimen/_1sdp"
-                android:paddingStart="15dp"
+                android:paddingStart="@dimen/_1sdp"
                 android:text="なし"
                 android:textSize="@dimen/_15ssp" />
 
@@ -83,11 +83,10 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/_9sdp"
                 android:contentDescription="@string/item_text"
                 android:src="@drawable/icon_check_circle_blue"
-                android:visibility="visible"
-                 />
+                android:visibility="visible" />
             <ImageView
                 android:id="@+id/imv_mark3"
                 android:layout_width="@dimen/_20sdp"
