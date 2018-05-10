@@ -391,15 +391,17 @@
                     android:background="#C8CDD0" />
 
                 <RelativeLayout
+                    android:id="@+id/rlt_age"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp">
 
                     <TextView
+                        android:id="@+id/tv_age"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/im_10t"
+                        android:layout_toStartOf="@+id/select_age"
                         android:gravity="center_vertical"
                         android:paddingEnd="@dimen/_1sdp"
                         android:paddingStart="@dimen/_15sdp"
@@ -407,7 +409,7 @@
                         android:textSize="@dimen/_15ssp" />
 
                     <ImageView
-                        android:id="@+id/im_10t"
+                        android:id="@+id/select_age"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"

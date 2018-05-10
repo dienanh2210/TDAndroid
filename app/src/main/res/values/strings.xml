@@ -174,7 +174,7 @@
     <string name="TextAge">年齢</string>
     <string name="Age">10代</string>
     <string name="register_hok">北海道</string>
-    <string name="register_10t">10t</string>
+    <string name="register_10t">10代</string>
     <string name="TextPrefecture">お住いの地域</string>
     <string name="TextShowSelected">北海道</string>
     <string name="ButtonToRegister">新規登録</string>
@@ -255,5 +255,7 @@
     <string name="txt_map">MAP</string>
     <string name="txt_log">ログ</string>
     <string name="txt_stop_at_one_time">一時停止</string>
+
+    <string name="select_age">年齢選択</string>
 </resources>
 

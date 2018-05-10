@@ -1,5 +1,6 @@
 package vn.javis.tourde.apiservice;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -31,7 +32,7 @@ public class LoginAPI {
         TourDeService.postWithAuth(ApiEndpoint.POST_CREATE_ACCOUNT, param, callback);
     }
 
-    public static void registerAccount(String email, String password, Response.Listener<JSONObject> successListener,Response.ErrorListener errorListener ) {
+    public static void registerAccount(String email, String password, String nickname, Bitmap bitmap, int sex, int age,int area,Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener ) {
         HashMap<String, String> params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);
