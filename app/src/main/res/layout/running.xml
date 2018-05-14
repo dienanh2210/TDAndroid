@@ -53,8 +53,37 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_80sdp">
 
-    <TextView
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/icon_clock" />
+
+        <Chronometer
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_85sdp"
+            android:gravity="center"
+            android:text="@string/timing"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_25sdp"
+            android:textStyle="bold"
+            android:format="00:00:00">
+
+        </Chronometer>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/stop_time"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:layout_alignParentBottom="true"
@@ -64,6 +93,38 @@
         android:textColor="@color/White"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/finish_resume"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/SkyBlue"
+            android:gravity="center"
+            android:text="@string/finish"
+            android:textColor="@color/White"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/resume"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/green"
+            android:gravity="center"
+            android:text="@string/resume"
+            android:textColor="@color/White"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </RelativeLayout>

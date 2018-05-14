@@ -1,21 +1,29 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.MainActivity;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 
 public class FragmentTabLayoutRunning extends BaseFragment{
@@ -23,28 +31,57 @@ public class FragmentTabLayoutRunning extends BaseFragment{
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private View mView;
+    private long pauseOffset;
+   // private boolean running;
 
-    @BindView(R.id.btn_badge_collection)
-    RelativeLayout btnBadge;
+    @BindView(R.id.tv_time)
+    android.widget.Chronometer chronometer;
+    @BindView( R.id.finish_resume)
+    LinearLayout finishResume;
+    @BindView( R.id.stop_time)
+    Button stopTime;
+    @SuppressLint("SetTextI18n")
+
     CourseListActivity mActivity;
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-
-        btnBadge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-             //   Intent intent = new Intent(mActivity, BadgeCollectionActivity.class);
-             //   startActivity(intent);
-            }
-        });
-
+            chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                @Override
+                public void onChronometerTick(Chronometer chronometer) {
+                    long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    int h = (int) (time / 3600000);
+                    int m = (int) (time - h * 3600000) / 60000;
+                    int s = (int) (time - h * 3600000 - m * 60000) / 1000;
+                    String t = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+                    chronometer.setText(t);
+                }
+            });
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.setText("00:00:00");
+            chronometer.start();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                mActivity.openPage(new CourseDetailFragment(),true);
+                break;
+            case R.id.stop_time:
+                chronometer.stop();
+                pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                stopTime.setVisibility(View.GONE);
+                break;
+            case R.id.resume:
+
+                chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+                chronometer.start();
+                stopTime.setVisibility(View.VISIBLE);
+                break;
+        }
     }
+
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -90,8 +127,8 @@ public class FragmentTabLayoutRunning extends BaseFragment{
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new FragmentFavorites(),"MAP");
-        adapter.addFragment(new FragmentRunning(),"ログ");
+        adapter.addFragment(new FragmentMap(),"MAP");
+        adapter.addFragment(new FragmentLog(),"ログ");
 
         viewPager.setAdapter(adapter);
     }

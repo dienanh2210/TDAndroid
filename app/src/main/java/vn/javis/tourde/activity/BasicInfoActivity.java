@@ -37,7 +37,7 @@ public class BasicInfoActivity extends BaseActivity {
         super.onResume();
         tv_Username.setText(SharedPreferencesUtils.getInstance(getBaseContext()).getStringValue("Username"));
         tv_UserEmail.setText(SharedPreferencesUtils.getInstance(getBaseContext()).getStringValue("Email"));
-        if(LoginFragment.getmAccount() !=null)
+        if(LoginFragment.getmAccount() !=null && LoginFragment.getmAccount().getImage() !="" && LoginFragment.getmAccount().getImage() !=null)
         {
             Log.i("avatar",LoginFragment.getmAccount().getImage());
             Picasso.with(this).load(LoginFragment.getmAccount().getImage()).transform(new CircleTransform()).into(img_avatar);

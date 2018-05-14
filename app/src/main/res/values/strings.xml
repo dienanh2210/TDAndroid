@@ -167,7 +167,7 @@
     <!--UserRegistration-->
     <string name="TextNewEntry">登録方法を選んでください</string>
     <string name="TextMailNewEntry">メールアドレスで登録</string>
-    <string name="TextUser">新規登録</string>
+    <string name="SignUp">新規登録</string>
     <string name="TextHelpUser">アンケートにご協力ください</string>
     <string name="TextGender">性別</string>
     <string name="TextMan">男性</string>
@@ -259,7 +259,8 @@
     <string name="txt_map">MAP</string>
     <string name="txt_log">ログ</string>
     <string name="txt_stop_at_one_time">一時停止</string>
-
+    <string name="resume">再開</string>
+    <string name="finish">終了</string>
     <string name="select_age">年齢選択</string>
 
     <!--course drive-->
@@ -273,6 +274,18 @@
     //spot facilities
     <string name="text_spot_facilities">スポット設備</string>
     <string name="btn_spot_facilities">投稿</string>
+
+    <!--course logging-->
+    <string name="prezents">万田発酵Prezentsグランツールせとうち</string>
+    <string name="timing">00:00:00</string>
+    <string name="one">1</string>
+    <string name="place1">鵜方駅</string>
+    <string name="two">2</string>
+    <string name="place2">横山展望台</string>
+    <string name="three">3</string>
+    <string name="place3">瀬戸田町観光案内所</string>
+    <string name="four">4</string>
+    <string name="place4">尾道港</string>
 
 </resources>
 

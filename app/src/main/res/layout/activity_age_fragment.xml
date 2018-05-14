@@ -25,7 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:text="@string/Back"
                     android:textColor="@color/search_course_color_close_text"
                     android:textSize="@dimen/_16sdp" />
@@ -51,7 +51,7 @@
                     android:layout_centerInParent="true"
                     android:text="@string/select_age"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_17ssp"
+                    android:textSize="@dimen/_17sdp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -69,16 +69,16 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#C8CDD0" />
+                android:background="@color/Gray" />
 
             <Button
                 android:id="@+id/btn_choose"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/btn_background"
                 android:text="@string/selection_decision"
                 android:textColor="@android:color/white"
