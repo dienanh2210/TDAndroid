@@ -145,7 +145,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             case R.id.appCompatButtonLogin:
                 //   LoginAPI.register(edt_email.toString(), edt_password.toString(), gender, 10, "Tokyo", this);
                 LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), successListener(), errorListener());
-                Toast.makeText(getContext(), "Register Sucessflly", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getContext(), "Register Sucessflly", Toast.LENGTH_LONG).show();
                 break;
             case R.id.tv_back_resgister:
                 activity.onBackPressed();
@@ -159,6 +159,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             public void onResponse(JSONObject response) {
                 Log.d("register account", response.toString());
                 if (response.has("success")) {
+                    activity.openPage(LoginFragment.newInstance(), true);
+
                     Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes");
                 } else {
                     Log.d(edt_email.toString(), edt_password.toString() + "error");

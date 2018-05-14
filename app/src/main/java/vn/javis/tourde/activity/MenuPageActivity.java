@@ -8,15 +8,24 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import vn.javis.tourde.R;
-import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
+import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.apiservice.LogoutAccount;
+import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
 
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
-
     RelativeLayout tv_login,tv_tutorial,logout;
     @BindView( R.id.rlt_newuserregister )
     View rlt_newuserregisterl;
@@ -44,7 +53,6 @@ public class MenuPageActivity extends BaseActivity {
 
         ll_logout.setOnClickListener( onClickLogout );
 
-
     }
 
     View.OnClickListener onClickLogin = new View.OnClickListener() {
@@ -59,7 +67,6 @@ public class MenuPageActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MenuPageActivity.this, CourseListActivity.class);
             startActivity(intent);
-
         }
     };
 
@@ -89,9 +96,32 @@ public class MenuPageActivity extends BaseActivity {
         public void onClick(View view) {
             rlt_newuserregisterl.setVisibility( View.VISIBLE );
             ll_logout.setVisibility( View.GONE );
+            final String token = LoginFragment.getmUserToken();
+            LogoutAccount.logOut( token, new ServiceCallback() {
+                @Override
+                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                    JSONObject jsonObject = (JSONObject)response;
+                   // Log.d("logout", jsonObject.toString());
+                    Log.d("logout", token+jsonObject);
+                    if (jsonObject.has("success")) {
+
+
+                    } else {
+
+                    }
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+                }
+            } );
+
+
+
+
         }
     };
-
 
     @Override
     public void onBackPressed() {
@@ -111,6 +141,29 @@ public class MenuPageActivity extends BaseActivity {
             }
         }
     }
+//    private Response.Listener<JSONObject> successListener() {
+//        return new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Log.d("logout", response.toString());
+//                if (response.has("success")) {
+//
+//
+//                } else {
+//
+//                }
+//            }
+//        };
+//
+//    }
+//    private Response.ErrorListener errorListener() {
+//        return new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("logout error", error.getMessage());
+//            }
+//        };
+//    }
 }
 
 
