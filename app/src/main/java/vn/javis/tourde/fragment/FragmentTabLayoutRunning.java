@@ -27,9 +27,10 @@ import vn.javis.tourde.activity.MainActivity;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 
 public class FragmentTabLayoutRunning extends BaseFragment{
-
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    @BindView( R.id.tabs)
+     TabLayout tabLayout;
+    @BindView( R.id.viewpager)
+     ViewPager viewPager;
     private View mView;
     private long pauseOffset;
    // private boolean running;
@@ -60,6 +61,10 @@ public class FragmentTabLayoutRunning extends BaseFragment{
             chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.setText("00:00:00");
             chronometer.start();
+
+        initTabControl();
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
@@ -74,7 +79,6 @@ public class FragmentTabLayoutRunning extends BaseFragment{
                 stopTime.setVisibility(View.GONE);
                 break;
             case R.id.resume:
-
                 chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);
@@ -92,11 +96,7 @@ public class FragmentTabLayoutRunning extends BaseFragment{
     @Override
     public void onResume() {
         super.onResume();
-        tabLayout = (TabLayout) mView.findViewById(R.id.tabs);
-        viewPager = (ViewPager) mView.findViewById(R.id.viewpager);
-        initTabControl();
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+
 
     }
     private void initTabControl() {
@@ -129,7 +129,7 @@ public class FragmentTabLayoutRunning extends BaseFragment{
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         adapter.addFragment(new FragmentMap(),"MAP");
         adapter.addFragment(new FragmentLog(),"ログ");
-
+        Log.i("1111","asdjyfn");
         viewPager.setAdapter(adapter);
     }
 }
