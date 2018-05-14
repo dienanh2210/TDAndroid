@@ -217,6 +217,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             public void onResponse(JSONObject response) {
                 Log.d("register account", response.toString());
                 if (response.has("success")) {
+                    activity.openPage(LoginFragment.newInstance(), true);
+
                     Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes");
                     SharedPreferencesUtils.getInstance(getContext()).setStringValue("Username", edt_username.getText().toString());
                     //SharedPreferencesUtils.getInstance(getContext()).setIntValue("UserIcon", select_userIcon.getDrawable());

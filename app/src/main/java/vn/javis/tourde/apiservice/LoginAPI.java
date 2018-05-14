@@ -63,4 +63,5 @@ public class LoginAPI {
         param.put("token", token);
         TourDeService.getWithAuth(ApiEndpoint.GET_GET_ACCOUNT, param,callback);
     }
+
 }

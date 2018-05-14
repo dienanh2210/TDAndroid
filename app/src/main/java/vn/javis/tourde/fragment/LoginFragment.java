@@ -363,8 +363,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
                                 e.printStackTrace();
                             }
                         }
-                        Intent intent1 = new Intent(getActivity(), MenuPageActivity.class);
-                        startActivity(intent1);
+
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
                     }
