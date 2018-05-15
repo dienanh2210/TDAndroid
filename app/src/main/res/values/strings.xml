@@ -265,5 +265,13 @@
     //spot facilities
     <string name="text_spot_facilities">スポット設備</string>
     <string name="btn_spot_facilities">投稿</string>
+    //Renew Password Page
+    <string name="text_head">バスワード変更用サイトのURLをお送りいたしますので</string>
+    <string name="text_headtwo">アカウントのメールアドレスをご入力ください</string>
+    <string name="hint">xxxxxxx.co.jp</string>
+    <string name="text_button">メール送信 </string>
+    <string name="text_forget">メールアドレスを入力</string>
+
+
 </resources>
 
