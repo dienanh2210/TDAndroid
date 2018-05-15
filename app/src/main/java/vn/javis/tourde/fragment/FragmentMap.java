@@ -35,9 +35,12 @@ public class FragmentMap extends BaseFragment{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.navitime:
-                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                final String appPackageName = "com.navitime.local.navitime&hl=ja"; 
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
                 break;
             case R.id.googleMap:
 
