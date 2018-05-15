@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/badge_collection_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/White">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/icon_back_black" />
+
+            <TextView
+                android:id="@+id/txtRunning"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/txt_running"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_80sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/icon_clock" />
+
+        <Chronometer
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_85sdp"
+            android:gravity="center"
+            android:text="@string/timing"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_25sdp"
+            android:textStyle="bold"
+            android:format="00:00:00">
+
+        </Chronometer>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/stop_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/green"
+        android:gravity="center"
+        android:text="@string/txt_stop_at_one_time"
+        android:textColor="@color/White"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/finish_resume"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/SkyBlue"
+            android:gravity="center"
+            android:text="@string/finish"
+            android:textColor="@color/White"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/resume"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/green"
+            android:gravity="center"
+            android:text="@string/resume"
+            android:textColor="@color/White"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</RelativeLayout>
