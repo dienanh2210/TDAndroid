@@ -26,7 +26,7 @@ import vn.javis.tourde.utils.Constant;
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
-    RelativeLayout tv_login,tv_tutorial,logout;
+    RelativeLayout tv_login,tv_tutorial,logout, rlt_register;
     @BindView( R.id.rlt_newuserregister )
     View rlt_newuserregisterl;
     @BindView( R.id.ll_logout )
@@ -39,6 +39,8 @@ public class MenuPageActivity extends BaseActivity {
         tv_login = findViewById(R.id.login);
         tv_login.setOnClickListener(onClickLogin);
 
+        rlt_register=findViewById(R.id.rlt_register);
+        rlt_register.setOnClickListener(onClickNewUser);
         tv_close = findViewById(R.id.tv_close);
         tv_close.setOnClickListener(onClick);
 
@@ -52,6 +54,13 @@ public class MenuPageActivity extends BaseActivity {
         tv_userregistration.setOnClickListener(onClickNewUser);
 
         ll_logout.setOnClickListener( onClickLogout );
+
+        String token = LoginFragment.getmUserToken();
+        if(token != ""){
+            ll_logout.setVisibility( View.VISIBLE );
+            tv_login.setVisibility(View.GONE);
+            rlt_register.setVisibility(View.GONE);
+        }
 
     }
 
@@ -94,8 +103,7 @@ public class MenuPageActivity extends BaseActivity {
     View.OnClickListener onClickLogout = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            rlt_newuserregisterl.setVisibility( View.VISIBLE );
-            ll_logout.setVisibility( View.GONE );
+
             final String token = LoginFragment.getmUserToken();
             LogoutAccount.logOut( token, new ServiceCallback() {
                 @Override
@@ -104,8 +112,11 @@ public class MenuPageActivity extends BaseActivity {
                    // Log.d("logout", jsonObject.toString());
                     Log.d("logout", token+jsonObject);
                     if (jsonObject.has("success")) {
-
-
+                        rlt_register.setVisibility( View.VISIBLE );
+                        tv_login.setVisibility(View.VISIBLE);
+                        ll_logout.setVisibility( View.GONE );
+                        LoginFragment.setmAccount(null);
+                        LoginFragment.setmUserToken("");
                     } else {
 
                     }
@@ -137,6 +148,11 @@ public class MenuPageActivity extends BaseActivity {
                 boolean str = data.getBooleanExtra( Constant.KEY_LOGIN_SUCCESS, false);
                 rlt_newuserregisterl.setVisibility( View.GONE );
                 ll_logout.setVisibility( View.VISIBLE );
+                String token = LoginFragment.getmUserToken();
+                if(token != ""){
+                    ll_logout.setVisibility( View.VISIBLE );
+                    tv_login.setVisibility(View.GONE);
+                }
                 Log.i("onActivityResult",""+ str);
             }
         }

@@ -126,9 +126,11 @@ public class FragmentTabLayoutRunning extends BaseFragment{
         });
     }
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new FragmentMap(),"MAP");
         adapter.addFragment(new FragmentLog(),"ログ");
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
+
     }
 }
