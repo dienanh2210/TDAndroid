@@ -75,12 +75,15 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
     LoginSNSActivity activity;
 
 
-    public static String getmUserToken() {
-        if (mUserToken == null)
-            mUserToken = "must be log in";
-        return mUserToken;
+    public static void setmUserToken(String mUserToken) {
+        LoginFragment.mUserToken = mUserToken;
     }
 
+    public static String getmUserToken() {
+        if (mUserToken == null)
+            mUserToken = "";
+        return mUserToken;
+    }
     private static String mUserToken;
     private static Account mAccount;
 
@@ -362,10 +365,11 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(getActivity(),CourseListActivity.class);
+                        startActivity(intent);
                         intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                         getActivity().setResult(Activity.RESULT_OK, intent);
-                        getActivity().finish();
+                   //     getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
                                 mUserToken = jsonObject.getString("token");
