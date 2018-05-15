@@ -62,14 +62,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SearchTwoActivity" />
-
-        <activity android:name=".activity.DetailSpotActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.DetailSpotActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.TestUploadImage"
             android:label="@string/title_activity_course_search"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity android:name=".fragment.RenewPasswordPageFragment"></activity>
     </application>
 
 </manifest>

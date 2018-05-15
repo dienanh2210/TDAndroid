@@ -51,7 +51,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.MenuEntryActivity;
+import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.model.Account;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
@@ -63,11 +65,15 @@ import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
-public class LoginFragment extends BaseFragment implements LoginView {
+public class LoginFragment extends BaseFragment implements LoginView,RenewPasswordPageFragment.OnFragmentInteractionListener {
     @BindView(R.id.edt_emaillogin)
     EditText edt_emaillogin;
     @BindView(R.id.edt_passwordlogin)
     EditText edt_passwordlogin;
+   // @BindView( R.id.textView_forget )
+   // TextView textView_forget;
+    LoginSNSActivity activity;
+
 
     public static String getmUserToken() {
         if (mUserToken == null)
@@ -96,6 +102,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
+
 
     @Override
     public void onInit() {
@@ -197,7 +204,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         }
     }
 
-    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line})
+    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line,R.id.textView_forget})
     public void onClickView(View view) {
 
         switch (view.getId()) {
@@ -233,6 +240,11 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 break;
             case R.id.rl_line:
                 signInLine();
+                break;
+            case R.id.textView_forget:
+             activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
+                Log.i( "qq","qqqq" );
+
                 break;
         }
     }
@@ -318,7 +330,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
-
+        activity = (LoginSNSActivity) getActivity();
 
     }
 
@@ -401,5 +413,10 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     public static void setmAccount(Account mAccount) {
         LoginFragment.mAccount = mAccount;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

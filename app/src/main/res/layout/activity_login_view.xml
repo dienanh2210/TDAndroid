@@ -134,7 +134,7 @@
                 android:textSize="@dimen/_15sdp" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/textViewLinkRegister"
+                android:id="@+id/textView_forget"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/_55sdp"
                 android:gravity="center"
