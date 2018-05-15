@@ -59,7 +59,7 @@
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_40sdp"
-        android:paddingBottom="@dimen/_100sdp" />
+        android:paddingBottom="@dimen/_2sdp" />
 
     <LinearLayout
         android:id="@+id/course_list_footer"
