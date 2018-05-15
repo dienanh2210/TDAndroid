@@ -58,7 +58,8 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
                         eItem.getValue().setVisibility( View.GONE );
                     }
                 }
-                if (onClickItem != null) onClickItem.onClick( data.getContent().get( position ) );
+                if (onClickItem != null) onClickItem.onClick( position );
+                if (onClickItem != null) onClickItem.onClick( data.getContent().get(position) );
                 Log.i( "Content", data.getContent().get( position ) );
             }
         } ) );
@@ -82,6 +83,7 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
         RecyclerView rcv_content;
 
         public ViewHolder(View itemView) {
+
             super( itemView );
             tv_header = itemView.findViewById( R.id.tv_header );
             rcv_content = itemView.findViewById( R.id.rcv_content );
@@ -95,6 +97,7 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
     }
 
     public interface OnClickItem {
+        void onClick(int position);
         void onClick(String content);
     }
 

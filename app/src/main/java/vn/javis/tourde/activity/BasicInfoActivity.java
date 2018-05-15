@@ -2,12 +2,17 @@ package vn.javis.tourde.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
+import vn.javis.tourde.view.CircleTransform;
 
 public class BasicInfoActivity extends BaseActivity {
 
@@ -32,7 +37,11 @@ public class BasicInfoActivity extends BaseActivity {
         super.onResume();
         tv_Username.setText(SharedPreferencesUtils.getInstance(getBaseContext()).getStringValue("Username"));
         tv_UserEmail.setText(SharedPreferencesUtils.getInstance(getBaseContext()).getStringValue("Email"));
-
+        if(LoginFragment.getmAccount() !=null && LoginFragment.getmAccount().getImage() !="" && LoginFragment.getmAccount().getImage() !=null)
+        {
+            Log.i("avatar",LoginFragment.getmAccount().getImage());
+            Picasso.with(this).load(LoginFragment.getmAccount().getImage()).transform(new CircleTransform()).into(img_avatar);
+        }
     }
 
     View.OnClickListener onClickCloseBasicInfo = new View.OnClickListener() {

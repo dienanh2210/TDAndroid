@@ -3,6 +3,7 @@ package vn.javis.tourde.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
+import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -50,7 +53,7 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
 
     @Override
     public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
-        Course model = listCourse.get(position);
+        final Course model = listCourse.get(position);
 
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
@@ -108,13 +111,21 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
             @Override
             public void onClick(final View view) {
                 holder.isFavorite = !holder.isFavorite;
-                String token = "";
-                int course_id = 1;
+                String token = LoginFragment.getmUserToken();
+                int course_id = model.getCourseId();
                 if (holder.isFavorite) {
                     FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                            Log.i("insert favorite",response.toString());
+
+                            JSONObject jsonObject = (JSONObject) response;
+                            if (jsonObject.has("success")) {
+                                holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                            } else {
+                                holder.isFavorite = !holder.isFavorite;
+                                Log.i("is: ", "false");
+                            }
                         }
 
                         @Override
@@ -126,7 +137,16 @@ public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.Co
                     FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                            Log.i("delete favorite",response.toString());
                             holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
+
+                            JSONObject jsonObject = (JSONObject) response;
+                            if (jsonObject.has("success")) {
+                                holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
+
+                            } else {
+                                holder.isFavorite = !holder.isFavorite;
+                            }
                         }
 
                         @Override

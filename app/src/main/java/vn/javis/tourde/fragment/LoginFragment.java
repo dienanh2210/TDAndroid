@@ -76,8 +76,8 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
 
 
     public static String getmUserToken() {
-        if(mUserToken ==null)
-            mUserToken="must be log in";
+        if (mUserToken == null)
+            mUserToken = "must be log in";
         return mUserToken;
     }
 
@@ -255,8 +255,11 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
     }
 
     private void signInLine() {
-        Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LINE_CHANEL_ID);
-        startActivityForResult(loginIntent, RC_LN_SIGN_IN);
+        if (getActivity() != null) {
+            Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LINE_CHANEL_ID);
+            startActivityForResult(loginIntent, RC_LN_SIGN_IN);
+        }
+
     }
 
 
@@ -278,6 +281,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
     }
 
     private void handleLoginResult(Intent data) {
+
 
         //Todo Handling the login result
         LineLoginResult loginResult = LineLoginApi.getLoginResultFromIntent(data);
@@ -354,8 +358,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
-                    if (jsonObject.has("success"))
-                    {
+                    if (jsonObject.has("success")) {
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
@@ -363,8 +366,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                         intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         getActivity().finish();
-                        if (jsonObject.has("token"))
-                        {
+                        if (jsonObject.has("token")) {
                             try {
                                 mUserToken = jsonObject.getString("token");
                                 getAccount();
