@@ -50,4 +50,9 @@ public class LoginAPI {
         param.put("token", token);
         TourDeService.getWithAuth(ApiEndpoint.GET_GET_ACCOUNT, param,callback);
     }
+    public  static void logOut(String token,ServiceCallback callback){
+        HashMap<String, String> param = new HashMap<>();
+        param.put("token", token);
+        TourDeService.getWithAuth(ApiEndpoint.POST_LOGOUT_ACCOUNT, param,callback);
+    }
 }
