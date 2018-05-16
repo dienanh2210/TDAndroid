@@ -113,7 +113,7 @@ List<String> listImgUrl = new ArrayList<>();
 
     TabCourseFragment tabCourseFragment;
     TabCommentFragment tabCommentFragment;
-
+    String url ="";
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -187,6 +187,20 @@ List<String> listImgUrl = new ArrayList<>();
 
             listImgUrl.add("plus_button");
         }
+        btnShare.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent= new Intent( Intent.ACTION_SEND );
+                myIntent.setType( "text/plain" );
+                String shareBody =txtTitle.getText().toString();
+                String shareSub =txtTitle.getText().toString();
+                String share=url;
+                myIntent.putExtra( Intent.EXTRA_SUBJECT,shareSub+"\n"+share );
+                myIntent.putExtra( Intent.EXTRA_TEXT,shareBody +"\n"+share);
+
+                startActivity( Intent.createChooser( myIntent,"" ) );
+            }
+        } );
     }
 
     @Override
@@ -239,6 +253,7 @@ List<String> listImgUrl = new ArrayList<>();
         if (isFavourite) {
             btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
+        url = model.getRouteUrl();
     }
 
     @Override

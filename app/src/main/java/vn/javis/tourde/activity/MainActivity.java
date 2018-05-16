@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -51,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ListCourseAPI api = new ListCourseAPI(this);
 
+
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
 
+      //  Intent intent = new Intent(this, TestUploadImage.class);
         fn_permission();
 
     }
@@ -150,10 +153,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), GoogleService.class);
         startService(intent);
+        Log.i("gps","turn on");
     }
 
     void changeActivity() {
-        Intent intent = new Intent(this, MenuPageActivity.class);
+        Intent intent = new Intent(this, ViewPageActivity.class);
         startActivity(intent);
     }
 

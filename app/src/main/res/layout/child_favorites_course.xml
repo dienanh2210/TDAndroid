@@ -52,7 +52,7 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_40sdp"
             android:gravity="center"
-            android:background="@drawable/running_now"
+            android:background="@drawable/boder_blue"
             android:layout_alignParentEnd="true"
             android:text="@string/running_now"/>
 

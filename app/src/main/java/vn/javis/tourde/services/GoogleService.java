@@ -128,8 +128,8 @@ public class GoogleService extends Service implements LocationListener {
                     location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     if (location != null) {
 
-                        Log.e("latitude", location.getLatitude() + "");
-                        Log.e("longitude", location.getLongitude() + "");
+                        Log.e("gps_latitude", location.getLatitude() + "");
+                        Log.e("gps_longitude", location.getLongitude() + "");
 
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();

@@ -152,4 +152,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         mSpotID = spotID;
         openPage(new CourseDetailSpotImagesFragment(), true);
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.i("onBackPressed", "true");
+    }
 }

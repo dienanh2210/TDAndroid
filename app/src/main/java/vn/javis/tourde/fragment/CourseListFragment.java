@@ -171,7 +171,6 @@ public class CourseListFragment extends BaseFragment {
 
     void setRecycle() {
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
-        list_courses.addAll(list_courses);
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {

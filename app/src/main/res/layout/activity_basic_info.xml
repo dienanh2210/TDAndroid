@@ -81,6 +81,7 @@
 
             <ImageView
                 android:id="@+id/avatar"
+                android:layout_alignParentStart="true"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_centerVertical="true"
@@ -89,11 +90,11 @@
                 android:src="@drawable/icon_smile" />
 
             <TextView
+                android:id="@+id/txt_1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="85dp"
+                android:layout_toEndOf="@+id/avatar"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_33sdp"
                 android:text="@string/hint_name_basicinfo"
                 android:textColor="@color/colorText"
@@ -104,9 +105,8 @@
                 android:id="@+id/tv_Username"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="195dp"
+                android:layout_toEndOf="@+id/txt_1"
+                android:layout_marginStart="10dp"
                 android:paddingTop="@dimen/_33sdp"
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/_14sdp"

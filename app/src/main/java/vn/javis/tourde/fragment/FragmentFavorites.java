@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class FragmentFavorites extends BaseFragment {
         FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                Log.i("favorite",response.toString());
                List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                // List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                 favoriteCourseAdapter = new FavoriteCourseAdapter(listFavorCourse, getActivity());

@@ -51,7 +51,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.MenuEntryActivity;
+import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.model.Account;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
@@ -63,18 +65,25 @@ import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
-public class LoginFragment extends BaseFragment implements LoginView {
+public class LoginFragment extends BaseFragment implements LoginView,RenewPasswordPageFragment.OnFragmentInteractionListener {
     @BindView(R.id.edt_emaillogin)
     EditText edt_emaillogin;
     @BindView(R.id.edt_passwordlogin)
     EditText edt_passwordlogin;
+   // @BindView( R.id.textView_forget )
+   // TextView textView_forget;
+    LoginSNSActivity activity;
 
-    public static String getmUserToken() {
-        if(mUserToken ==null)
-            mUserToken="must be log in";
-        return mUserToken;
+
+    public static void setmUserToken(String mUserToken) {
+        LoginFragment.mUserToken = mUserToken;
     }
 
+    public static String getmUserToken() {
+        if (mUserToken == null)
+            mUserToken = "";
+        return mUserToken;
+    }
     private static String mUserToken;
     private static Account mAccount;
 
@@ -96,6 +105,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
+
 
     @Override
     public void onInit() {
@@ -197,7 +207,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         }
     }
 
-    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line})
+    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line,R.id.textView_forget})
     public void onClickView(View view) {
 
         switch (view.getId()) {
@@ -234,6 +244,11 @@ public class LoginFragment extends BaseFragment implements LoginView {
             case R.id.rl_line:
                 signInLine();
                 break;
+            case R.id.textView_forget:
+             activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
+                Log.i( "qq","qqqq" );
+
+                break;
         }
     }
 
@@ -243,8 +258,11 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     private void signInLine() {
-        Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LINE_CHANEL_ID);
-        startActivityForResult(loginIntent, RC_LN_SIGN_IN);
+        if (getActivity() != null) {
+            Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LINE_CHANEL_ID);
+            startActivityForResult(loginIntent, RC_LN_SIGN_IN);
+        }
+
     }
 
 
@@ -266,6 +284,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     private void handleLoginResult(Intent data) {
+
 
         //Todo Handling the login result
         LineLoginResult loginResult = LineLoginApi.getLoginResultFromIntent(data);
@@ -314,7 +333,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
-
+        activity = (LoginSNSActivity) getActivity();
 
     }
 
@@ -342,17 +361,16 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
-                    if (jsonObject.has("success"))
-                    {
+                    if (jsonObject.has("success")) {
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(getActivity(),CourseListActivity.class);
+                        startActivity(intent);
                         intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                         getActivity().setResult(Activity.RESULT_OK, intent);
-                        getActivity().finish();
-                        if (jsonObject.has("token"))
-                        {
+                   //     getActivity().finish();
+                        if (jsonObject.has("token")) {
                             try {
                                 mUserToken = jsonObject.getString("token");
                                 getAccount();
@@ -361,8 +379,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
                                 e.printStackTrace();
                             }
                         }
-                        Intent intent1 = new Intent(getActivity(), MenuPageActivity.class);
-                        startActivity(intent1);
+
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
                     }
@@ -400,5 +417,10 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     public static void setmAccount(Account mAccount) {
         LoginFragment.mAccount = mAccount;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

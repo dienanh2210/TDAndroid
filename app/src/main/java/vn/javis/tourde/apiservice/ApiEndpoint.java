@@ -24,7 +24,6 @@ public class ApiEndpoint {
     public  static String POST_COURSE_IMAGE ="/post/postCourseImage/";
     public  static String POST_COURSE_LOG ="/post/postCourseLog/";
     public  static String POST_CHECK_IN_STAMP ="/post/checkInStamp/";
-
     public static String SNS_ID = "sns_id";
     public static String SNS_KIND = "sns_kind";
 

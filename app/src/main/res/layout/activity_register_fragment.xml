@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/LoginView"
+            android:text="@string/SignUp"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_17ssp"
             android:textStyle="bold" />
@@ -56,6 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <include layout="@layout/item_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -144,8 +146,6 @@
                     android:src="@drawable/plus_button"
                     android:textColorHint="@color/Gray" />
             </LinearLayout>
-
-            <include layout="@layout/item_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -391,15 +391,17 @@
                     android:background="#C8CDD0" />
 
                 <RelativeLayout
+                    android:id="@+id/rlt_age"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp">
 
                     <TextView
+                        android:id="@+id/tv_age"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/im_10t"
+                        android:layout_toStartOf="@+id/select_age"
                         android:gravity="center_vertical"
                         android:paddingEnd="@dimen/_1sdp"
                         android:paddingStart="@dimen/_15sdp"
@@ -407,7 +409,7 @@
                         android:textSize="@dimen/_15ssp" />
 
                     <ImageView
-                        android:id="@+id/im_10t"
+                        android:id="@+id/select_age"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
@@ -504,7 +506,7 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/custom_frame"
-                android:text="@string/text_login"
+                android:text="@string/SignUp"
                 android:textAlignment="center"
                 android:textColor="@color/backgroud"
                 android:layout_marginBottom="@dimen/_30sdp"

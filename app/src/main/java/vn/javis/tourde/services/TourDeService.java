@@ -92,38 +92,6 @@ public abstract class TourDeService {
         TourDeApplication.getInstance().addToRequestQueue(mRequest, url);
     }
 
-    /*public static void postWithAuth(String api, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
-        JSONObject jsonObject = null;
-        if (params != null) {
-            jsonObject = new JSONObject(params);
-        }
-        JsonObjectRequest mJsonObject = new JsonObjectRequest(
-                Request.Method.POST, "http://www.app-tour-de-nippon.jp/api/post/createAccount/", jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                serviceCallback.onSuccess(RESULT_SUCCESS, response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                serviceCallback.onError(error);
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                //    Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-
-        int initialTimeoutMs = 60000;
-        int maxNumRetries = 0;
-        float backoffMultiplier = 1.0f;
-        mJsonObject.setRetryPolicy(new DefaultRetryPolicy(initialTimeoutMs, maxNumRetries, backoffMultiplier));
-        TourDeApplication.getInstance().addToRequestQueue(mJsonObject, api);
-    }*/
-
     public static void postWithAuth(String api, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiEndpoint.BASE_URL + api, new Response.Listener<String>() {

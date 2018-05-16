@@ -45,7 +45,6 @@
             android:name=".activity.LoginSNSActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.BaseActivity" />
-
         <activity
             android:name=".activity.SearchCourseActivity"
             android:label="@string/title_activity_course_search"
@@ -66,14 +65,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SearchTwoActivity" />
-
-        <activity android:name=".activity.DetailSpotActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.DetailSpotActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.TestUploadImage"
             android:label="@string/title_activity_course_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <service android:name=".services.GoogleService"></service>
+
     </application>
 
 </manifest>

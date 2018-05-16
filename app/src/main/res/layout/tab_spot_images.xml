@@ -13,29 +13,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-               <android.support.design.widget.TabLayout
-                   android:id="@+id/tabLayout"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:minHeight="?attr/actionBarSize"
-                   android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                   app:tabSelectedTextColor="@color/colorText"
-                   app:tabTextColor="@color/Gray" />
-
-               <!--<vn.javis.tourde.customlayout.TourDeTabLayout-->
-                   <!--android:id="@+id/tabLayout"-->
-                   <!--android:layout_width="match_parent"-->
-                   <!--android:layout_height="@dimen/_50sdp"-->
-                   <!--android:layout_marginTop="@dimen/_10sdp"-->
-                   <!--android:visibility="visible"-->
-                   <!--app:tabActiveColor="@android:color/white"-->
-                   <!--app:tabHeight="@dimen/_50sdp"-->
-                   <!--app:tabItems="@array/title_test"-->
-                   <!--app:tabNormalColor="#DCE0E2"-->
-                   <!--app:tabTextActiveColor="@color/color_text_tab"-->
-                   <!--app:tabTextColor="@color/Black"-->
-                   <!--app:tabTextSize="@dimen/_14ssp"></vn.javis.tourde.customlayout.TourDeTabLayout>-->
-
+     <android.support.design.widget.TabLayout
+         android:id="@+id/tabLayout"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_50sdp"
+         android:minHeight="?attr/actionBarSize"
+         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+         app:tabSelectedTextColor="@color/colorText"
+         app:tabTextColor="@color/Gray" />
         <!-- View pager to swipe views -->
         <vn.javis.tourde.view.YourScrollableViewPager
             android:id="@+id/pager"
