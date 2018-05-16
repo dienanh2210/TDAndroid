@@ -69,7 +69,8 @@
             android:name=".activity.TestUploadImage"
             android:label="@string/title_activity_course_search"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".fragment.RenewPasswordPageFragment"></activity>
+        <activity android:name=".fragment.RenewPasswordPageFragment" />
+        <activity android:name=".fragment.CheckPointFragment"></activity>
     </application>
 
 </manifest>

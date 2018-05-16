@@ -281,7 +281,7 @@
     <string name="hint">xxxxxxx.co.jp</string>
     <string name="text_button">メール送信 </string>
     <string name="text_forget">メールアドレスを入力</string>
-    
+
     <!--course logging-->
     <string name="prezents">万田発酵Prezentsグランツールせとうち</string>
     <string name="timing">00:00:00</string>
@@ -296,6 +296,12 @@
     <string name="sumTime">走行時間-</string>
     <string name="averageSpeed">平均速度-</string>
     <string name="kmh">10.00km/h</string>
+    //checkpoint
+    <string name="text_head_checkpoint">チェックポイント通過</string>
+    <string name="text_bottom">チェックポイント通過！</string>
+    <string name="text_button_checkpoint">写真を撮影</string>
+    <string name="text_bottom_left">設備情報を投稿</string>
+    <string name="text_bottom_right">スポット詳細</string>
 
 </resources>
 
