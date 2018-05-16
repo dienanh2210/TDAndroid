@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 
     <application
         android:name=".services.TourDeApplication"
@@ -69,7 +72,8 @@
             android:name=".activity.TestUploadImage"
             android:label="@string/title_activity_course_search"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".fragment.RenewPasswordPageFragment"></activity>
+        <service android:name=".services.GoogleService"></service>
+
     </application>
 
 </manifest>

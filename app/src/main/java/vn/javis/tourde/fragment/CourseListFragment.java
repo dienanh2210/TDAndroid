@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -170,7 +171,6 @@ public class CourseListFragment extends BaseFragment {
 
     void setRecycle() {
         List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
-
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
