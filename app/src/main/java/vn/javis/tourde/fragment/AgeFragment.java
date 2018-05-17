@@ -77,7 +77,7 @@ public class AgeFragment extends Fragment {
         data.setContent( Arrays.asList( contentList) );
         dataList.add(data);
         rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
-        rcv_list.setAdapter( new ListRegisterAdapter( getContext(), dataList, new ListRegisterAdapter.OnClickItem() {
+        rcv_list.setAdapter( new ListRegisterAdapter( getContext(), dataList,true, new ListRegisterAdapter.OnClickItem() {
             @Override
             public void onClick(int position) {
                 contentAge =contentList[position];

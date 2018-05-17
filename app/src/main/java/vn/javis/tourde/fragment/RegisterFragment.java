@@ -34,6 +34,7 @@ import java.io.IOException;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.RegisterActivity;
+import vn.javis.tourde.adapter.ListRegisterAdapter;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -51,6 +52,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     ImageView select_userIcon;
     @BindView(R.id.rlt_age)
     RelativeLayout rlt_age;
+    ListRegisterAdapter listRegisterAdapter;
     private EditText edt_email;
     private EditText edt_password;
     private ImageView imv_mark_man;
@@ -99,7 +101,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         View tv_back_resgister = view.findViewById(R.id.tv_back_resgister);
         tv_prefecture = view.findViewById(R.id.tv_prefecture);
         tv_prefecture.setText(txtArea);
-        Log.i("aaaaa1", "" + txtArea);
         tv_age = view.findViewById(R.id.tv_age);
         tv_age.setText(txtAge);
         edt_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -154,7 +155,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         }
         return isMan;
     }
-
 
     @Override
     public void onClick(View v) {

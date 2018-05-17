@@ -19,7 +19,7 @@
         android:paddingEnd="@dimen/_1sdp"
         android:text="@string/item_header_text"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/_15ssp" />
+        android:textSize="@dimen/_15ssp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcv_content"

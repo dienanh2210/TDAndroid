@@ -24,11 +24,12 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
     private HashMap<Integer, RecyclerView> mapRecyclerView = new HashMap<>();
 
     private OnClickItem onClickItem;
-
-    public ListRegisterAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
+    private boolean isAgeSelection;
+    public ListRegisterAdapter(Context context, List<Data> dataList,boolean isAgeSelection, OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
         this.onClickItem = onClickItem;
+        this.isAgeSelection = isAgeSelection;
     }
 
     @Override
@@ -42,6 +43,8 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
     public void onBindViewHolder(ListRegisterAdapter.ViewHolder holder, int position) {
         final Data data = dataList.get( position );
         holder.tv_header.setText( data.getTitle() );
+        if(isAgeSelection)
+            holder.tv_header.setVisibility(View.GONE);
         //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
         holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
         holder.rcv_content.setAdapter( new ContentRegisterAdapter( data.getContent(), new  ContentRegisterAdapter.OnClickItem() {
