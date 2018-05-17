@@ -121,26 +121,27 @@ public class CheckPointFragment extends BaseFragment {
                 if (imgView.getTag() != null && imgView.getTag().equals(R.drawable.icon_fishing))
                 {
                     ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",imgView,R.drawable.icon_check_star);
+
                 }else
                     ImageViewAnimatedChange(getApplicationContext(),txtView,"Image 2",imgView,R.drawable.icon_fishing);
             }
 
         };
-        runnabletwo = new Runnable() {
-            @Override
-            public void run() {
-                if (img.getTag() != null && img.getTag().equals(R.drawable.backgound_check)) {
-                    ImageViewAnimatedChange( getApplicationContext(), txtView, "", img, R.drawable.backgound_check );
-
-        RotateAnimation anim = new RotateAnimation(0.0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
-        anim.setInterpolator(new LinearInterpolator());
-        anim.setRepeatCount(Animation.INFINITE); //Repeat animation indefinitely
-        anim.setDuration(1000); //Put desired duration per anim cycle here, in milliseconds
-        img.startAnimation(anim);
-                }
-            }
-
-        };
+//        runnabletwo = new Runnable() {
+//            @Override
+//            public void run() {
+//                if (img.getTag() != null && img.getTag().equals(R.drawable.backgound_check)) {
+//                    ImageViewAnimatedChange( getApplicationContext(), txtView, "", img, R.drawable.backgound_check );
+//
+//        RotateAnimation anim = new RotateAnimation(0.0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
+//        anim.setInterpolator(new LinearInterpolator());
+//        anim.setRepeatCount(Animation.INFINITE); //Repeat animation indefinitely
+//        anim.setDuration(1000); //Put desired duration per anim cycle here, in milliseconds
+//        img.startAnimation(anim);
+//                }
+//            }
+//
+//        };
       //  btnStartDemo.setOnClickListener(new View.OnClickListener() {
           //  @Override
           //  public void onClick(View view) {
@@ -148,9 +149,11 @@ public class CheckPointFragment extends BaseFragment {
                 handler = new Handler();
                 handler.postDelayed(runnable,1000);
 
-        ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",img,R.drawable.backgound_check);
-        handler = new Handler();
-        handler.postDelayed(runnabletwo,1000);
+//        ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",img,R.drawable.backgound_check);
+//        handler = new Handler();
+//        handler.postDelayed(runnabletwo,1000);
+
+
             //}
        // });
 

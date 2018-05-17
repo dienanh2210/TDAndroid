@@ -242,8 +242,8 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                 signInLine();
                 break;
             case R.id.textView_forget:
-             activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
-              //  activity.openPage(CheckPointFragment.newInstance(this), true);
+            // activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
+                activity.openPage(CheckPointFragment.newInstance(this), true);
                 Log.i( "qq","qqqq" );
 
                 break;
