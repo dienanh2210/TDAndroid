@@ -1,19 +1,10 @@
 package vn.javis.tourde.fragment;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,25 +13,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.facebook.login.LoginManager;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-
-import java.util.Arrays;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
-import vn.javis.tourde.utils.Constant;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -49,16 +27,15 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     ImageView imgView,img;
     TextView txtView;
     @BindView( R.id.tv_back_password )
-     ImageView tv_back_password;
+    ImageView tv_back_password;
     @BindView( R.id.txtDesctwo )
     TextView    txtDesctwo;
     @BindView( R.id.txtDescthree )
-     TextView txtDescthree;
+    TextView txtDescthree;
     Button btnStartDemo;
     Runnable runnable,runnabletwo;
     Handler handler;
     CourseListActivity mActivity;
-   // LoginSNSActivity mAcitivity;
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
@@ -192,7 +169,8 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         switch (view.getId()) {
 
             case R.id.tv_back_password:
-                mActivity.openPage( FragmentTabLayoutRunning.newInstance(this), true);
+                //mActivity.openPage(new FragmentTabLayoutRunning(), true);
+                mActivity.onBackPressed();
                 break;
         }
     }
