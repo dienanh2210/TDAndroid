@@ -34,27 +34,48 @@ public class FavoriteCourseAPI {
     }
 
     public static void getListFavoriteCourse(String token, ServiceCallback callback) {
-        List<Course> listCourse = new ArrayList<>();
         HashMap<String, String> map = new HashMap<>();
         map.put("token", token);
         TourDeService.getWithAuth(ApiEndpoint.GET_FAVORITE_COURSE_APP, map, callback);
     }
-    public static List<FavoriteCourse> getFavorites(Object response)
-    {
+
+    public static List<FavoriteCourse> getFavorites(Object response) {
 
         List<FavoriteCourse> listCourse = new ArrayList<>();
-        JSONObject jsonObject = (JSONObject)response;
+        JSONObject jsonObject = (JSONObject) response;
         try {
             JSONArray jsonArray = (JSONArray) jsonObject.get("list");
-            for(int i=0;i<jsonArray.length();i++)
-            {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 FavoriteCourse course = FavoriteCourse.getData(jsonArray.get(i).toString());
                 listCourse.add(course);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  listCourse;
+        return listCourse;
+    }
+
+    public static boolean isFavorite(String token, int id) {
+        final boolean[] isFavor = {false};
+        final int id1 = id;
+        getListFavoriteCourse(token, new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
+                for (int i = 0; i < listFavorCourse.size(); i++) {
+                    if (listFavorCourse.get(i).getCourseId() == id1) {
+                        isFavor[0] = true;
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+        return isFavor[0];
     }
 
 }

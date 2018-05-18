@@ -46,19 +46,21 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class CheckPointFragment extends BaseFragment implements ListSpotCheckinAdapter.OnItemClickedListener {
     GifImageView gitImgView;
-    ImageView imgView,img;
+    ImageView imgView, img;
     TextView txtView;
-    @BindView( R.id.tv_back_password )
-     ImageView tv_back_password;
-    @BindView( R.id.txtDesctwo )
-    TextView    txtDesctwo;
-    @BindView( R.id.txtDescthree )
-     TextView txtDescthree;
+    @BindView(R.id.tv_back_password)
+    ImageView tv_back_password;
+    @BindView(R.id.txtDesctwo)
+    TextView txtDesctwo;
+    @BindView(R.id.txtDescthree)
+    TextView txtDescthree;
     Button btnStartDemo;
-    Runnable runnable,runnabletwo;
+    @BindView(R.id.take_photo)
+    Button takePhoto;
+    Runnable runnable, runnabletwo;
     Handler handler;
     CourseListActivity mActivity;
-   // LoginSNSActivity mAcitivity;
+    // LoginSNSActivity mAcitivity;
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
@@ -69,13 +71,14 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 //        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
         return fragment;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         imgView = view.findViewById(R.id.imgMain);
         img = view.findViewById(R.id.image_im);
         txtView = view.findViewById(R.id.txtDesc);
         gitImgView = view.findViewById(R.id.gifImageView);
-      //  btnStartDemo = (Button)view.findViewById(R.id.btnStartDemo);
+        //  btnStartDemo = (Button)view.findViewById(R.id.btnStartDemo);
         gitImgView.setBackgroundResource(R.drawable.backgound_check);
         mActivity = (CourseListActivity) getActivity();
 
@@ -85,7 +88,12 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 //        anim.setRepeatCount(Animation.INFINITE); //Repeat animation indefinitely
 //        anim.setDuration(10000); //Put desired duration per anim cycle here, in milliseconds
 //        vie.startAnimation(anim);
-
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActivity.showTakePhoto();
+            }
+        });
 
     }
 
@@ -105,21 +113,35 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         @Override
         void onClick(View v);
     }
-    public static void ImageViewAnimatedChange(Context c, final TextView textView,final String s, final ImageView v, final int new_image) {
+
+    public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, final int new_image) {
         final Animation anim_out = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
-        final Animation anim_in  = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
-        anim_out.setAnimationListener(new Animation.AnimationListener()
-        {
-            @Override public void onAnimationStart(Animation animation) {}
-            @Override public void onAnimationRepeat(Animation animation) {}
-            @Override public void onAnimationEnd(Animation animation)
-            {   v.setBackgroundResource(new_image);
+        final Animation anim_in = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
+        anim_out.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                v.setBackgroundResource(new_image);
                 v.setTag(new_image);
                 textView.setText(s);
                 anim_in.setAnimationListener(new Animation.AnimationListener() {
-                    @Override public void onAnimationStart(Animation animation) {}
-                    @Override public void onAnimationRepeat(Animation animation) {}
-                    @Override public void onAnimationEnd(Animation animation) {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
 
                     }
                 });
@@ -139,18 +161,17 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         runnable = new Runnable() {
             @Override
             public void run() {
-                if (imgView.getTag() != null && imgView.getTag().equals(R.drawable.icon_fishing))
-                {
-                    ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",imgView,R.drawable.icon_check_star);
-                   // Animation rotation = AnimationUtils.loadAnimation(this,R.anim.rotation);
-                   // imgView.startAnimation(rotation);
+                if (imgView.getTag() != null && imgView.getTag().equals(R.drawable.icon_fishing)) {
+                    ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+                    // Animation rotation = AnimationUtils.loadAnimation(this,R.anim.rotation);
+                    // imgView.startAnimation(rotation);
 
-                }else
+                } else
                     // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
                     //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
                     txtView.setVisibility(View.GONE);
-                    ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
-                    ImageViewAnimatedChange( getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
+                ImageViewAnimatedChange(getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing);
+                ImageViewAnimatedChange(getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing);
 
             }
 
@@ -170,29 +191,30 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 //            }
 //
 //        };
-      //  btnStartDemo.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-          //  public void onClick(View view) {
-              ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",imgView,R.drawable.icon_check_star);
-                handler = new Handler();
-                handler.postDelayed(runnable,1000);
+        //  btnStartDemo.setOnClickListener(new View.OnClickListener() {
+        //  @Override
+        //  public void onClick(View view) {
+        ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+        handler = new Handler();
+        handler.postDelayed(runnable, 1000);
 
 //        ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",img,R.drawable.backgound_check);
 //        handler = new Handler();
 //        handler.postDelayed(runnabletwo,1000);
 
 
-            //}
-       // });
+        //}
+        // });
 
     }
+
     @OnClick({R.id.tv_back_password})
     public void onClickView(View view) {
 
         switch (view.getId()) {
 
             case R.id.tv_back_password:
-                mActivity.openPage( FragmentTabLayoutRunning.newInstance(this), true);
+                mActivity.openPage(FragmentTabLayoutRunning.newInstance(this), true);
                 break;
         }
     }

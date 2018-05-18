@@ -107,6 +107,7 @@
                     android:textStyle="bold" />
 
                 <Button
+                    android:id="@+id/take_photo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginLeft="@dimen/_15sdp"

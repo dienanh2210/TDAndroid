@@ -259,6 +259,8 @@
                     android:id="@+id/txt_area_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Red"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -286,6 +288,8 @@
                     android:id="@+id/txt_distance_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Red"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -314,6 +318,8 @@
                     android:id="@+id/txt_season"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Red"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
         </LinearLayout>
@@ -350,6 +356,8 @@
                     android:id="@+id/txt_average_slope"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Red"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -377,6 +385,8 @@
                     android:id="@+id/txt_elevation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Red"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -404,6 +414,8 @@
                     android:id="@+id/txt_course_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/Red"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
         </LinearLayout>

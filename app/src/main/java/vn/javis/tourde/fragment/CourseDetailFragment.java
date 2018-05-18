@@ -40,6 +40,7 @@ import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.CourseData;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeService;
@@ -219,7 +220,7 @@ List<String> listImgUrl = new ArrayList<>();
 
     void showCourseDetail(CourseDetail courseDetail) {
 
-        CourseData model = courseDetail.getmCourseData();
+        final CourseData model = courseDetail.getmCourseData();
 
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
@@ -233,7 +234,34 @@ List<String> listImgUrl = new ArrayList<>();
         txtElevation.setText(model.getElevation() + "m");
         txtCourseType.setText(model.getCourseType());
         // txtTag.setText("#" + model.getTag());
-        isFavourite = model.getStatus() == 1 ? true : false;
+
+        isFavourite = false;
+        FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
+                for (int i = 0; i < listFavorCourse.size(); i++) {
+                    if (listFavorCourse.get(i).getCourseId() == model.getCourseId()) {
+                        isFavourite = true;
+                        break;
+                    }
+                }
+                if (isFavourite) {
+                    btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
+
+                    if (tabCourseFragment != null) {
+                        tabCourseFragment.changeButtonColor(isFavourite);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+
+        Log.i("FavoriteCourseAPI",""+isFavourite);
         Picasso.with(activity).load(model.getTopImage())
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(imgCourse);
@@ -250,9 +278,7 @@ List<String> listImgUrl = new ArrayList<>();
         } else if (rate >= 5) {
             imgStarRate.setImageResource(R.drawable.icon_star5);
         }
-        if (isFavourite) {
-            btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
-        }
+
         url = model.getRouteUrl();
     }
 
@@ -263,20 +289,17 @@ List<String> listImgUrl = new ArrayList<>();
         mCourseDetail = new CourseDetail((JSONObject) response);
         showCourseDetail(mCourseDetail);
         view_pager.setAdapter(pagerAdapter);
-
+        if (tabCommentFragment != null) {
+            tabCommentFragment.setListReview(mCourseDetail.getReview());
+            tabCommentFragment.setRecyler();
+        }
         // TabCourseFragment tabCourseFragment = (TabCourseFragment) pagerAdapter.getItem(0);
 //
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
 
-        if (tabCommentFragment != null) {
-            tabCommentFragment.setListReview(mCourseDetail.getReview());
-            tabCommentFragment.setRecyler();
-        }
-        if (tabCourseFragment != null) {
-            tabCourseFragment.changeButtonColor(isFavourite);
-        }
+
     }
 
     @Override
@@ -320,7 +343,7 @@ List<String> listImgUrl = new ArrayList<>();
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
                         }
