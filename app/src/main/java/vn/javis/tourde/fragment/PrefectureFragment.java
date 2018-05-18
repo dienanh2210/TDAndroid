@@ -125,7 +125,7 @@ public class PrefectureFragment extends Fragment {
         data8.setContent( Arrays.asList( contentList8 ) );
         dataList.add( data8 );
         rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
-        rcv_list.setAdapter( new ListRegisterAdapter( getContext(), dataList, new ListRegisterAdapter.OnClickItem() {
+        rcv_list.setAdapter( new ListRegisterAdapter( getContext(), dataList,false, new ListRegisterAdapter.OnClickItem() {
 
             @Override
             public void onClick(int position) {

@@ -182,7 +182,8 @@
                         app:srcCompat="@drawable/icon_next" />
                 </RelativeLayout></LinearLayout>
 
-            <include layout="@layout/item_divider"/>
+            <include layout="@layout/item_divider"
+                android:id="@+id/line_register"/>
 
             <RelativeLayout
                 android:id="@+id/login"

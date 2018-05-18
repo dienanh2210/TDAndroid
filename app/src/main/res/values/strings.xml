@@ -301,5 +301,8 @@
     <string name="Spot">SPOT</string>
     <string name="Distance">DISTANCE</string>
 
+    <string name="spotNumber">スポット</string>
+    <string name="spotName">瀬戸田町観光案内所</string>
+    <string name="selectSpotToCheckin">チェックインするスポットを 選択してください</string>
 </resources>
 
