@@ -1,6 +1,7 @@
 package vn.javis.tourde.fragment;
 
 import android.annotation.SuppressLint;;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 import vn.javis.tourde.apiservice.SpotCheckInAPI;
 import vn.javis.tourde.model.SpotCheckIn;
+import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.view.CircleTransform;
 
 public class FragmentTabLayoutRunning extends BaseFragment{
@@ -113,12 +115,16 @@ public class FragmentTabLayoutRunning extends BaseFragment{
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
                 show_select_spot.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(mActivity, GoogleService.class);
+                mActivity.stopService(intent);
                 break;
             case R.id.resume:
                 chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);
                 show_select_spot.setVisibility(View.GONE);
+                Intent intent2 = new Intent(mActivity, GoogleService.class);
+                mActivity.startService(intent2);
                 break;
 
         }
