@@ -58,8 +58,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        //  fetchData();
-        showTakePhoto();
+          fetchData();
+     //   showTakePhoto();
     }
 
     @Override

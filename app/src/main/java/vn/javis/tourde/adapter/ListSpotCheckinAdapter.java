@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -37,7 +38,7 @@ public class ListSpotCheckinAdapter extends RecyclerView.Adapter<ListSpotCheckin
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SpotViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SpotViewHolder holder, final int position) {
 
         SpotCheckIn model = listSpot.get(position);
         holder.tv_spotNumber.setText(model.getSportNumber());
@@ -47,6 +48,14 @@ public class ListSpotCheckinAdapter extends RecyclerView.Adapter<ListSpotCheckin
         //load local for test
         int idImgSpot = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());
         holder.imgSpot.setImageResource(idImgSpot);
+        holder.btnSpot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickedListener != null) {
+                    onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -62,10 +71,21 @@ public class ListSpotCheckinAdapter extends RecyclerView.Adapter<ListSpotCheckin
         TextView tv_spotName;
         @BindView(R.id.image_checkin_spot)
         ImageView imgSpot;
-
+        @BindView(R.id.ln_select_checkin_spot)
+        LinearLayout btnSpot;
         private SpotViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemClickedListener {
+        void onItemClick(int position);
+    }
+
+    private OnItemClickedListener onItemClickedListener;
+
+    public void setOnItemClickListener(OnItemClickedListener onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
     }
 }
