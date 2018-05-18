@@ -201,6 +201,7 @@ public class GoogleService extends Service implements LocationListener {
         Log.i("latutide", "" + location.getLatitude());
         Log.i("longitude", "" + location.getLongitude());
         sendBroadcast(intent);
+//        stopService(new Intent(GoogleService.this, GoogleService.class));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -232,6 +233,12 @@ public class GoogleService extends Service implements LocationListener {
 //                // Set the intent that will fire when the user taps the notification
 //                .setContentIntent(pendingIntent)
 //                .setAutoCancel(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mTimer.cancel();
     }
 
 }

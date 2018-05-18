@@ -35,8 +35,8 @@ public class BasicInfoActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        tv_Username.setText(SharedPreferencesUtils.getInstance(getBaseContext()).getStringValue("Username"));
-        tv_UserEmail.setText(SharedPreferencesUtils.getInstance(getBaseContext()).getStringValue("Email"));
+        tv_Username.setText(LoginFragment.getmAccount().getNickname());
+        tv_UserEmail.setText(LoginFragment.getmAccount().getEmail());
         if(LoginFragment.getmAccount() !=null && LoginFragment.getmAccount().getImage() !="" && LoginFragment.getmAccount().getImage() !=null)
         {
             Log.i("avatar",LoginFragment.getmAccount().getImage());

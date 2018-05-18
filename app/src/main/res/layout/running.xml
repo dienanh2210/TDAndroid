@@ -131,6 +131,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/show_select_spot"
+        android:layout_marginBottom="@dimen/_50sdp"
         android:visibility="gone">
 
         <TextView

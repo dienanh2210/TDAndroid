@@ -52,7 +52,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     ImageView select_userIcon;
     @BindView(R.id.rlt_age)
     RelativeLayout rlt_age;
-    ListRegisterAdapter listRegisterAdapter;
     private EditText edt_email;
     private EditText edt_password;
     private ImageView imv_mark_man;
@@ -178,7 +177,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, successListener(), errorListener());
                 else
                     LoginAPI.registerAccount(activity,edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
-
                 break;
             case R.id.tv_back_resgister:
                 activity.onBackPressed();

@@ -49,7 +49,7 @@ import vn.javis.tourde.view.YourScrollableViewPager;
 public class CourseDetailFragment extends BaseFragment implements ServiceCallback {
     private int mCourseID;
     private CourseListActivity mActivity;
-List<String> listImgUrl = new ArrayList<>();
+    List<String> listImgUrl = new ArrayList<>();
     @BindView(R.id.btn_back_to_list)
     ImageButton btnBackToList;
     @BindView(R.id.btn_share)
@@ -113,7 +113,8 @@ List<String> listImgUrl = new ArrayList<>();
 
     TabCourseFragment tabCourseFragment;
     TabCommentFragment tabCommentFragment;
-    String url ="";
+    String url = "";
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -159,7 +160,7 @@ List<String> listImgUrl = new ArrayList<>();
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               mActivity.showBadgeCollection();
+                mActivity.showBadgeCollection();
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
@@ -183,24 +184,24 @@ List<String> listImgUrl = new ArrayList<>();
             }
         });
 
-        for(int i=0;i<20;i++){
+        for (int i = 0; i < 20; i++) {
 
             listImgUrl.add("plus_button");
         }
-        btnShare.setOnClickListener( new View.OnClickListener() {
+        btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent= new Intent( Intent.ACTION_SEND );
-                myIntent.setType( "text/plain" );
-                String shareBody =txtTitle.getText().toString();
-                String shareSub =txtTitle.getText().toString();
-                String share=url;
-                myIntent.putExtra( Intent.EXTRA_SUBJECT,shareSub+"\n"+share );
-                myIntent.putExtra( Intent.EXTRA_TEXT,shareBody +"\n"+share);
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = txtTitle.getText().toString();
+                String shareSub = txtTitle.getText().toString();
+                String share = url;
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody + "\n" + share);
 
-                startActivity( Intent.createChooser( myIntent,"" ) );
+                startActivity(Intent.createChooser(myIntent, ""));
             }
-        } );
+        });
     }
 
     @Override
@@ -220,7 +221,8 @@ List<String> listImgUrl = new ArrayList<>();
     void showCourseDetail(CourseDetail courseDetail) {
 
         CourseData model = courseDetail.getmCourseData();
-
+        if (model == null)
+            return;
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());

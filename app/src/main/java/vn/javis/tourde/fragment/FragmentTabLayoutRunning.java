@@ -86,6 +86,8 @@ public class FragmentTabLayoutRunning extends BaseFragment{
 
         listSpotCheckinAdapter = new ListSpotCheckinAdapter(list_courses, mActivity);
         spotRecycler.setAdapter(listSpotCheckinAdapter);
+
+        mActivity.fn_permission();
     }
 
     @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
@@ -100,16 +102,16 @@ public class FragmentTabLayoutRunning extends BaseFragment{
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
                 show_select_spot.setVisibility(View.VISIBLE);
-                Intent intent = new Intent(mActivity, GoogleService.class);
-                mActivity.stopService(intent);
+
+                mActivity.turnOffGPS();
                 break;
             case R.id.resume:
                 chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);
                 show_select_spot.setVisibility(View.GONE);
-                Intent intent2 = new Intent(mActivity, GoogleService.class);
-                mActivity.startService(intent2);
+
+                mActivity.turnOnGPS();
                 break;
         }
     }
