@@ -296,6 +296,10 @@
     <string name="sumTime">走行時間-</string>
     <string name="averageSpeed">平均速度-</string>
     <string name="kmh">10.00km/h</string>
+    <string name="englishCourse">COURSE</string>
+    <string name="englishTime">TIME</string>
+    <string name="Spot">SPOT</string>
+    <string name="Distance">DISTANCE</string>
 
 </resources>
 

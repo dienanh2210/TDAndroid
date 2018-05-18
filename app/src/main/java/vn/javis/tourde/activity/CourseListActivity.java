@@ -3,12 +3,16 @@ package vn.javis.tourde.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
@@ -26,6 +30,7 @@ import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.PostCommentFragment;
+import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
@@ -45,6 +50,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     private int mCourseID;
     private int mSpotID;
+    public static final int MY_CAMERA_PERMISSION_CODE = 100;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +58,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
         setHearder();
-        fetchData();
+        //  fetchData();
+        showTakePhoto();
     }
 
     @Override
@@ -77,8 +84,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         Intent intent = getIntent();
         boolean searching = "true".equals(intent.getStringExtra("searching"));
         HashMap<String, String> params = new HashMap<>();
-        if(intent.getSerializableExtra("searchValue") instanceof HashMap) {
-           params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
+        if (intent.getSerializableExtra("searchValue") instanceof HashMap) {
+            params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
             if (params != null) {
                 Log.i("params", params.toString());
             }
@@ -103,9 +110,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showMyCourse() {
         openPage(new FragmentTabLayoutMyCourse(), true);
     }
+
     public void showBadgeCollection() {
         openPage(new BadgeCollectionFragment(), true);
     }
+
     public void ShowCountDown() {
         openPage(new CountDownTimesFragment(), true);
     }
@@ -139,6 +148,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         showCourseListPage();
     }
 
+    public void showTakePhoto() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
+        } else {
+            openPage(new TakePhotoFragment(), true);
+        }
+    }
+
     @Override
     public void onError(VolleyError error) {
 
@@ -152,9 +169,26 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         mSpotID = spotID;
         openPage(new CourseDetailSpotImagesFragment(), true);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Log.i("onBackPressed", "true");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_CAMERA_PERMISSION_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openPage(new TakePhotoFragment(), true);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please allow the permission", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        }
+
     }
 }
