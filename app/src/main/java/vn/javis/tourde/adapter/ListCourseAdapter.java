@@ -31,7 +31,8 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.view.CircleTransform;
 
-public class ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder> {
+public class
+ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolder> {
 
     List<Course> listCourse = new ArrayList<Course>();
     Context context;

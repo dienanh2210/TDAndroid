@@ -150,7 +150,9 @@
                 android:visibility="visible"
                 android:orientation="vertical">
                 <include layout="@layout/item_divider"/>
+
                 <RelativeLayout
+                    android:id="@+id/rlt_register"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp">
 

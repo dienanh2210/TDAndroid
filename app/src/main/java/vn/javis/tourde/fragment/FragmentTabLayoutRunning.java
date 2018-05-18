@@ -1,37 +1,44 @@
 package vn.javis.tourde.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.annotation.SuppressLint;;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.MainActivity;
+import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
+import vn.javis.tourde.apiservice.SpotCheckInAPI;
+import vn.javis.tourde.model.SpotCheckIn;
+import vn.javis.tourde.view.CircleTransform;
 
 public class FragmentTabLayoutRunning extends BaseFragment{
     @BindView( R.id.tabs)
      TabLayout tabLayout;
     @BindView( R.id.viewpager)
      ViewPager viewPager;
-    private View mView;
+    @BindView(R.id.show_select_spot)
+    LinearLayout show_select_spot;
+
     private long pauseOffset;
    // private boolean running;
 
@@ -42,9 +49,19 @@ public class FragmentTabLayoutRunning extends BaseFragment{
     @BindView( R.id.stop_time)
     Button stopTime;
     @SuppressLint("SetTextI18n")
-
     CourseListActivity mActivity;
+    @BindView(R.id.select_spot)
+    RecyclerView spotRecycler;
+    ListSpotCheckinAdapter listSpotCheckinAdapter;
+    private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
+    //  TextView tv_back_password;
 
+
+    public static FragmentTabLayoutRunning newInstance(ListSpotCheckinAdapter.OnItemClickedListener listener) {
+        FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
+//        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
+        return fragment;
+    }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
             chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -65,6 +82,23 @@ public class FragmentTabLayoutRunning extends BaseFragment{
         initTabControl();
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+       // Picasso.with(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        spotRecycler.setItemAnimator(new DefaultItemAnimator());
+        spotRecycler.setLayoutManager(layoutManager);
+        SpotCheckInAPI spot = new SpotCheckInAPI();
+
+        List<SpotCheckIn> list_courses = spot.getListSpot();
+
+        listSpotCheckinAdapter = new ListSpotCheckinAdapter(list_courses, mActivity);
+        listSpotCheckinAdapter.setOnItemClickListener( new ListSpotCheckinAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClick(int position) {
+                mActivity.openPage(CheckPointFragment.newInstance(this), true);
+            }
+        } );
+
+        spotRecycler.setAdapter(listSpotCheckinAdapter);
     }
 
     @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
@@ -77,19 +111,23 @@ public class FragmentTabLayoutRunning extends BaseFragment{
                 chronometer.stop();
                 pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
                 stopTime.setVisibility(View.GONE);
+                //temporary open select spot to checkin
+                show_select_spot.setVisibility(View.VISIBLE);
                 break;
             case R.id.resume:
                 chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);
+                show_select_spot.setVisibility(View.GONE);
                 break;
+
         }
     }
 
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
-        mView = inflater.inflate(R.layout.running,container,false);
+        View mView = inflater.inflate(R.layout.running, container, false);
         return mView;
     }
 
@@ -126,9 +164,17 @@ public class FragmentTabLayoutRunning extends BaseFragment{
         });
     }
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new FragmentMap(),"MAP");
         adapter.addFragment(new FragmentLog(),"ログ");
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
+
+    }
+
+
+    public interface OnFragmentInteractionListener extends View.OnClickListener {
+        @Override
+        void onClick(View v);
     }
 }

@@ -35,7 +35,7 @@ public class FragmentMap extends BaseFragment{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.navitime:
-                final String appPackageName = "com.navitime.local.navitime&hl=ja"; 
+                final String appPackageName = "com.navitime.local.navitime&hl=ja";
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                 } catch (android.content.ActivityNotFoundException anfe) {
