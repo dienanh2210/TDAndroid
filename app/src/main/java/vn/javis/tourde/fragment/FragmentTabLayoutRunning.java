@@ -40,6 +40,7 @@ public class FragmentTabLayoutRunning extends BaseFragment{
      ViewPager viewPager;
     @BindView(R.id.show_select_spot)
     LinearLayout show_select_spot;
+
     private long pauseOffset;
    // private boolean running;
 
@@ -54,8 +55,15 @@ public class FragmentTabLayoutRunning extends BaseFragment{
     @BindView(R.id.select_spot)
     RecyclerView spotRecycler;
     ListSpotCheckinAdapter listSpotCheckinAdapter;
+    private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
+    //  TextView tv_back_password;
 
-    @SuppressLint("SetTextI18n")
+
+    public static FragmentTabLayoutRunning newInstance(ListSpotCheckinAdapter.OnItemClickedListener listener) {
+        FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
+//        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
+        return fragment;
+    }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
             chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -85,6 +93,13 @@ public class FragmentTabLayoutRunning extends BaseFragment{
         List<SpotCheckIn> list_courses = spot.getListSpot();
 
         listSpotCheckinAdapter = new ListSpotCheckinAdapter(list_courses, mActivity);
+        listSpotCheckinAdapter.setOnItemClickListener( new ListSpotCheckinAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClick(int position) {
+                mActivity.openPage(CheckPointFragment.newInstance(this), true);
+            }
+        } );
+
         spotRecycler.setAdapter(listSpotCheckinAdapter);
 
         mActivity.fn_permission();
@@ -113,6 +128,7 @@ public class FragmentTabLayoutRunning extends BaseFragment{
 
                 mActivity.turnOnGPS();
                 break;
+
         }
     }
 
@@ -164,4 +180,9 @@ public class FragmentTabLayoutRunning extends BaseFragment{
 
     }
 
+
+    public interface OnFragmentInteractionListener extends View.OnClickListener {
+        @Override
+        void onClick(View v);
+    }
 }

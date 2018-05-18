@@ -246,8 +246,6 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
             case R.id.textView_forget:
                 LoginSNSActivity activity =  (LoginSNSActivity) getActivity();
                 activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
-                Log.i( "qq","qqqq" );
-
                 break;
         }
     }

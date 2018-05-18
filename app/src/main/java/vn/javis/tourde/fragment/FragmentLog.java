@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
 
 
 public class FragmentLog extends BaseFragment{
     View mView;
     CourseListActivity mActivity;
-
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         mView = inflater.inflate(R.layout.log_fragment, container, false);
