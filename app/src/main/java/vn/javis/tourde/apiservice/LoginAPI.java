@@ -37,6 +37,10 @@ public class LoginAPI {
         HashMap<String, String> params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);
+        params.put("nickname", nickname);
+        params.put("sex", String.valueOf(sex));
+        params.put("age", String.valueOf(age));
+        params.put("area", String.valueOf(area));
         String url = ApiEndpoint.BASE_URL + ApiEndpoint.POST_CREATE_ACCOUNT;
         VolleyCustomRequest jsObjRequest = new VolleyCustomRequest(Request.Method.POST, url, params, successListener,errorListener);
         TourDeApplication.getInstance().addToRequestQueue(jsObjRequest, ApiEndpoint.POST_CREATE_ACCOUNT);
