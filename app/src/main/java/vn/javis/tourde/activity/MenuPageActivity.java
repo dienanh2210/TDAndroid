@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,12 +27,13 @@ import vn.javis.tourde.utils.Constant;
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
-    RelativeLayout tv_login,tv_tutorial,logout, rlt_register;
+    RelativeLayout tv_login,tv_tutorial,logout, rlt_register, basic_Info;
     @BindView( R.id.rlt_newuserregister )
     View rlt_newuserregisterl;
     @BindView( R.id.ll_logout )
     View ll_logout;
-
+    @BindView(R.id.line_register)
+    ImageView lineRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_menu_page);
@@ -54,12 +56,15 @@ public class MenuPageActivity extends BaseActivity {
         tv_userregistration.setOnClickListener(onClickNewUser);
 
         ll_logout.setOnClickListener( onClickLogout );
-
+        basic_Info=findViewById(R.id.basic_Info);
+        basic_Info.setVisibility(View.GONE);
         String token = LoginFragment.getmUserToken();
         if(token != ""){
             ll_logout.setVisibility( View.VISIBLE );
             tv_login.setVisibility(View.GONE);
             rlt_register.setVisibility(View.GONE);
+            lineRegister.setVisibility(View.GONE);
+            basic_Info.setVisibility(View.VISIBLE);
         }
 
     }
@@ -68,6 +73,7 @@ public class MenuPageActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MenuPageActivity.this, LoginSNSActivity.class);
+            //basic_Info.setVisibility(View.VISIBLE);
             startActivityForResult(intent, 1);
         }
     };
@@ -113,8 +119,10 @@ public class MenuPageActivity extends BaseActivity {
                     Log.d("logout", token+jsonObject);
                     if (jsonObject.has("success")) {
                         rlt_register.setVisibility( View.VISIBLE );
+                        lineRegister.setVisibility(View.VISIBLE);
                         tv_login.setVisibility(View.VISIBLE);
                         ll_logout.setVisibility( View.GONE );
+                        basic_Info.setVisibility(View.GONE);
                         LoginFragment.setmAccount(null);
                         LoginFragment.setmUserToken("");
                     } else {
