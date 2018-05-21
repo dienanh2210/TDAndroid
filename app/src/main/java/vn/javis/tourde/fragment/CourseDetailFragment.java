@@ -40,6 +40,7 @@ import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.CourseData;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeService;
@@ -49,7 +50,7 @@ import vn.javis.tourde.view.YourScrollableViewPager;
 public class CourseDetailFragment extends BaseFragment implements ServiceCallback {
     private int mCourseID;
     private CourseListActivity mActivity;
-List<String> listImgUrl = new ArrayList<>();
+    List<String> listImgUrl = new ArrayList<>();
     @BindView(R.id.btn_back_to_list)
     ImageButton btnBackToList;
     @BindView(R.id.btn_share)
@@ -113,7 +114,8 @@ List<String> listImgUrl = new ArrayList<>();
 
     TabCourseFragment tabCourseFragment;
     TabCommentFragment tabCommentFragment;
-    String url ="";
+    String url = "";
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -159,7 +161,7 @@ List<String> listImgUrl = new ArrayList<>();
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               mActivity.showBadgeCollection();
+                mActivity.showBadgeCollection();
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
@@ -183,24 +185,24 @@ List<String> listImgUrl = new ArrayList<>();
             }
         });
 
-        for(int i=0;i<20;i++){
+        for (int i = 0; i < 20; i++) {
 
             listImgUrl.add("plus_button");
         }
-        btnShare.setOnClickListener( new View.OnClickListener() {
+        btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent= new Intent( Intent.ACTION_SEND );
-                myIntent.setType( "text/plain" );
-                String shareBody =txtTitle.getText().toString();
-                String shareSub =txtTitle.getText().toString();
-                String share=url;
-                myIntent.putExtra( Intent.EXTRA_SUBJECT,shareSub+"\n"+share );
-                myIntent.putExtra( Intent.EXTRA_TEXT,shareBody +"\n"+share);
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = txtTitle.getText().toString();
+                String shareSub = txtTitle.getText().toString();
+                String share = url;
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody + "\n" + share);
 
-                startActivity( Intent.createChooser( myIntent,"" ) );
+                startActivity(Intent.createChooser(myIntent, ""));
             }
-        } );
+        });
     }
 
     @Override
@@ -218,8 +220,9 @@ List<String> listImgUrl = new ArrayList<>();
     }
 
     void showCourseDetail(CourseDetail courseDetail) {
-
-        CourseData model = courseDetail.getmCourseData();
+        final CourseData model = courseDetail.getmCourseData();
+        if (model == null)
+            return;
 
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
@@ -233,7 +236,34 @@ List<String> listImgUrl = new ArrayList<>();
         txtElevation.setText(model.getElevation() + "m");
         txtCourseType.setText(model.getCourseType());
         // txtTag.setText("#" + model.getTag());
-        isFavourite = model.getStatus() == 1 ? true : false;
+
+        isFavourite = false;
+        FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
+                for (int i = 0; i < listFavorCourse.size(); i++) {
+                    if (listFavorCourse.get(i).getCourseId() == model.getCourseId()) {
+                        isFavourite = true;
+                        break;
+                    }
+                }
+                if (isFavourite) {
+                    btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
+
+                    if (tabCourseFragment != null) {
+                        tabCourseFragment.changeButtonColor(isFavourite);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+
+        Log.i("FavoriteCourseAPI",""+isFavourite);
         Picasso.with(activity).load(model.getTopImage())
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(imgCourse);
@@ -250,9 +280,7 @@ List<String> listImgUrl = new ArrayList<>();
         } else if (rate >= 5) {
             imgStarRate.setImageResource(R.drawable.icon_star5);
         }
-        if (isFavourite) {
-            btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
-        }
+
         url = model.getRouteUrl();
     }
 
@@ -263,20 +291,17 @@ List<String> listImgUrl = new ArrayList<>();
         mCourseDetail = new CourseDetail((JSONObject) response);
         showCourseDetail(mCourseDetail);
         view_pager.setAdapter(pagerAdapter);
-
+        if (tabCommentFragment != null) {
+            tabCommentFragment.setListReview(mCourseDetail.getReview());
+            tabCommentFragment.setRecyler();
+        }
         // TabCourseFragment tabCourseFragment = (TabCourseFragment) pagerAdapter.getItem(0);
 //
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
 
-        if (tabCommentFragment != null) {
-            tabCommentFragment.setListReview(mCourseDetail.getReview());
-            tabCommentFragment.setRecyler();
-        }
-        if (tabCourseFragment != null) {
-            tabCourseFragment.changeButtonColor(isFavourite);
-        }
+
     }
 
     @Override
@@ -320,7 +345,7 @@ List<String> listImgUrl = new ArrayList<>();
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
                         }

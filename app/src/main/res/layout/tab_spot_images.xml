@@ -18,6 +18,9 @@
          android:layout_width="match_parent"
          android:layout_height="@dimen/_50sdp"
          android:minHeight="?attr/actionBarSize"
+         app:tabMaxWidth="0dp"
+         app:tabGravity="fill"
+         app:tabMode="fixed"
          android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
          app:tabSelectedTextColor="@color/colorText"
          app:tabTextColor="@color/Gray" />

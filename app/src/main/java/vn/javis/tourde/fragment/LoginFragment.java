@@ -71,8 +71,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
     @BindView(R.id.edt_passwordlogin)
     EditText edt_passwordlogin;
    // @BindView( R.id.textView_forget )
-   // TextView textView_forget;
-    LoginSNSActivity activity;
+
 
 
     public static void setmUserToken(String mUserToken) {
@@ -245,9 +244,8 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                 signInLine();
                 break;
             case R.id.textView_forget:
-             activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
-                Log.i( "qq","qqqq" );
-
+                LoginSNSActivity activity =  (LoginSNSActivity) getActivity();
+                activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
                 break;
         }
     }
@@ -333,7 +331,6 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
         twitterAuthClient = new TwitterAuthClient();
         LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(getActivity(), LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
-        activity = (LoginSNSActivity) getActivity();
 
     }
 

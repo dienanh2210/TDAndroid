@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/search_course_color_title_background"
+    tools:context="vn.javis.tourde.activity.BasicInfoActivity">
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/search_course_color_title_background"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_anchor="@+id/linearLayout"
+        app:layout_anchorGravity="bottom|center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@color/backgroud">
+
+            <ImageView
+                android:id="@+id/tv_back_password"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10ssp"
+                android:src="@drawable/icon_back_black" />
+
+            <TextView
+                android:id="@+id/topic_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:text="@string/text_head_checkpoint"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroud">
+
+            <ImageView
+                android:id="@+id/image_im"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backgound_check" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgMain"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_130sdp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_65sdp"
+                    android:background="@drawable/icon_check_star" />
+
+
+                <TextView
+                android:id="@+id/txtDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_210sdp"
+                android:text=""
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtDesctwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_210sdp"
+                    android:text=""
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtDescthree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_225sdp"
+                    android:text=""
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/take_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_260sdp"
+                    android:background="@drawable/custom_frame_blue"
+                    android:text="@string/text_button_checkpoint"
+                    android:textAlignment="center"
+                    android:textColor="@color/backgroud"
+                    android:textSize="@dimen/_15sdp" />
+                <Button
+                    android:layout_width="@dimen/_140sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_320sdp"
+                    android:background="@drawable/custom_frame"
+                    android:text="@string/text_bottom_left"
+                    android:textAlignment="center"
+                    android:textColor="@color/backgroud"
+                    android:textSize="@dimen/_13sdp" />
+                <Button
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginLeft="@dimen/_160sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_320sdp"
+                    android:background="@drawable/custom_frame"
+                    android:text="@string/text_bottom_right"
+                    android:textAlignment="center"
+                    android:textColor="@color/backgroud"
+                    android:textSize="@dimen/_13sdp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <include layout="@layout/item_divider" />
+
+
+    </LinearLayout>
+    <!--> <Button
+         android:layout_below="@id/txtDesc"
+         android:id="@+id/btnStartDemo"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerInParent="true"
+         android:text="Start Demo"
+         />
+ <!-->
+</android.support.design.widget.CoordinatorLayout>
