@@ -76,7 +76,6 @@ public class ListCourseAPI {
                 JsonParser jsonParser = new JsonParser();
                 Course thisCourse = Course.getData(vl);
                 if (thisCourse != null) {
-                    instance.mAllCourses.clear();
                     instance.mAllCourses.add(thisCourse);
                 }
             }

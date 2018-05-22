@@ -91,6 +91,7 @@ public class TabCourseFragment extends BaseFragment {
                         " \n" +
                         "\n" +
                         "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
+
                 ProcessDialog.showDialogConfirm(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {

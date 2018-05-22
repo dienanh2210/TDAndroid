@@ -307,6 +307,6 @@
     <string name="spotNumber">スポット</string>
     <string name="spotName">瀬戸田町観光案内所</string>
     <string name="selectSpotToCheckin">チェックインするスポットを 選択してください</string>
-
+    <string name="new_account"><u>新規登録</u></string>
 </resources>
 
