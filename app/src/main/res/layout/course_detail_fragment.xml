@@ -25,7 +25,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/image_description"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_classic" />
+                />
 
             <!--<com.makeramen.roundedimageview.RoundedImageView-->
             <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
@@ -40,8 +40,8 @@
 
             <ImageButton
                 android:id="@+id/btn_back_to_list"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_21sdp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -51,21 +51,21 @@
 
             <ImageButton
                 android:id="@+id/btn_share"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/icon_upload"
                 android:contentDescription="@string/image_description" />
 
             <ImageButton
                 android:id="@+id/btn_bicyle"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_21sdp"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_toLeftOf="@id/btn_share"
                 android:background="@drawable/icon_bicycle_white"
@@ -77,7 +77,7 @@
                 android:layout_height="@dimen/_60sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:background="@drawable/icon_bicycle_gray">
             </ImageButton>
         </RelativeLayout>
@@ -86,14 +86,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:orientation="horizontal">
 
             <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/img_post_user_detail"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_5sdp"
                 android:src="@drawable/icon_classic"
                 app:riv_border_color="@color/SkyBlue"
                 app:riv_border_width=".5dp"
@@ -107,21 +107,23 @@
                 android:visibility="gone" />
 
             <TextView
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:id="@+id/title_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:text="@string/course_detail_title"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_17sdp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:paddingEnd="@dimen/_1sdp"
-            android:paddingStart="@dimen/_45sdp">
+            android:paddingStart="@dimen/_40sdp">
 
             <View
                 android:layout_width="@dimen/_1sdp"
@@ -140,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/course_detail_user_detail"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_9sdp" />
         </LinearLayout>
 
         <TextView
@@ -148,17 +150,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:paddingLeft="@dimen/_10sdp"
-            android:paddingRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:text="@string/course_detail_phrase_detail"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_13sdp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/SkyBlue"
             android:contentDescription="@string/image_description" />
@@ -168,8 +170,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_7sdp"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/_10sdp"
-            android:paddingRight="@dimen/_10sdp">
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp">
 
             <ImageView
                 android:id="@+id/img_icon_comment"
@@ -186,7 +188,8 @@
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:text="@string/course_detail_212"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/Gray"
                 android:textStyle="bold" />
 
             <ImageView
@@ -205,7 +208,8 @@
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:text="@string/course_detail_3"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/Gray"
                 android:textStyle="bold" />
 
             <ImageView
@@ -222,13 +226,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:text="@string/course_detail_date"
-                android:textSize="@dimen/_10ssp" />
+                android:textColor="@color/Gray"
+                android:textSize="@dimen/_9ssp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:baselineAligned="false"
             android:weightSum="3">
@@ -260,7 +265,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -289,7 +294,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -319,7 +324,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
         </LinearLayout>
@@ -327,8 +332,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:baselineAligned="false"
             android:weightSum="3">
@@ -357,7 +362,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -378,7 +383,7 @@
                     android:gravity="center"
                     android:text="@string/search_course_elevation"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textSize="@dimen/_11sdp" />
 
 
                 <TextView
@@ -386,7 +391,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -414,7 +419,7 @@
                     android:id="@+id/txt_course_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_11sdp"
                     android:textColor="@color/Red"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
@@ -424,11 +429,11 @@
             android:id="@+id/txt_tag_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:textColor="@color/SkyBlue"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_11sdp" />
 
         <!--<include layout="@layout/course_tab_container"></include>-->
 
@@ -444,7 +449,7 @@
             app:tabNormalColor="#DCE0E2"
             app:tabTextActiveColor="@color/color_text_tab"
             app:tabTextColor="@color/Black"
-            app:tabTextSize="@dimen/_14ssp"></vn.javis.tourde.customlayout.TourDeTabLayout>
+            app:tabTextSize="@dimen/_13sdp"></vn.javis.tourde.customlayout.TourDeTabLayout>
 
         <vn.javis.tourde.view.YourScrollableViewPager
             android:id="@+id/course_view_pager"

@@ -27,7 +27,11 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -84,6 +88,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     ImageView imgCourse;
     @BindView(R.id.star_rate)
     ImageView imgStarRate;
+    @BindView(R.id.txt_date)
+    TextView txtDate;
+
     @BindView(R.id.txt_tag_detail)
     TextView txtTag;
     @BindView(R.id.img_post_user_detail)
@@ -115,13 +122,13 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     TabCourseFragment tabCourseFragment;
     TabCommentFragment tabCommentFragment;
     String url = "";
-
+    String[] strCourseType = new String[]{"片道","往復","1周"};
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         // testAPI();
-        mCourseID = mActivity.getmCourseID();
-
+   //     mCourseID = mActivity.getmCourseID();
+        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -221,6 +228,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     void showCourseDetail(CourseDetail courseDetail) {
         final CourseData model = courseDetail.getmCourseData();
+        Log.i("coursedetail",model.toString());
         if (model == null)
             return;
 
@@ -234,8 +242,22 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtSeason.setText(model.getSeason());
         txtAverageSlope.setText(model.getAverageSlope());
         txtElevation.setText(model.getElevation() + "m");
-        txtCourseType.setText(model.getCourseType());
-        // txtTag.setText("#" + model.getTag());
+        int courseType = model.getCourseType();
+        txtCourseType.setText(strCourseType[courseType-1]);
+
+        String dateGet = model.getDisplayDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
+        try {
+            Date date = dateFormat.parse(dateGet);
+
+            String out = dateFormat2.format(date).toString();
+            txtDate.setText(out);
+        } catch (ParseException e) {
+        }
+
+
+      //   txtTag.setText("#" + model.getTag());
 
         isFavourite = false;
         FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {

@@ -45,7 +45,7 @@ public class CourseData {
     private String elevation;
     @SerializedName("course_type")
     @Expose
-    private String courseType;
+    private int courseType;
     @SerializedName("finish_time")
     @Expose
     private String finishTime;
@@ -184,11 +184,11 @@ public class CourseData {
         this.elevation = elevation;
     }
 
-    public String getCourseType() {
+    public int getCourseType() {
         return courseType;
     }
 
-    public void setCourseType(String courseType) {
+    public void setCourseType(int courseType) {
         this.courseType = courseType;
     }
 
