@@ -56,7 +56,12 @@ public class BadgeCollectionFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         // testAPI();
-        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1);
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         badgeRecycler.setItemAnimator(new DefaultItemAnimator());
         badgeRecycler.setLayoutManager(layoutManager);
         setBadgeData();

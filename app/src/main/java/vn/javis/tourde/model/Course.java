@@ -13,10 +13,10 @@ import java.util.Date;
 public class Course {
     @SerializedName("course_id")
     @Expose
-    private int courseId;
+    private String courseId;
     @SerializedName("spot_id")
     @Expose
-    private int spotId;
+    private String spotId;
     @SerializedName("title")
     @Expose
     private String title;
@@ -82,7 +82,7 @@ public class Course {
     private String routeImage;
     @SerializedName("status")
     @Expose
-    private int status;
+    private String status;
     @SerializedName("insert_datetime")
     @Expose
     private String insertDatetime;
@@ -95,6 +95,9 @@ public class Course {
     @SerializedName("spot_distance")
     @Expose
     private String spotDistance;
+    @SerializedName("spot_introduction")
+    @Expose
+    private String spotIntroduction;
     @SerializedName("order_number")
     @Expose
     private String orderNumber;
@@ -124,7 +127,7 @@ public class Course {
     private String reviewCount;
     @SerializedName("rating_average")
     @Expose
-    private float ratingAverage;
+    private String ratingAverage;
     @SerializedName("rating_total")
     @Expose
     private String ratingTotal;
@@ -135,20 +138,19 @@ public class Course {
     public static Course getData(String data) {
         return new Gson().fromJson(data, Course.class);
     }
-
-    public int getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 
-    public int getSpotId() {
+    public String getSpotId() {
         return spotId;
     }
 
-    public void setSpotId(int spotId) {
+    public void setSpotId(String spotId) {
         this.spotId = spotId;
     }
 
@@ -320,11 +322,11 @@ public class Course {
         this.routeImage = routeImage;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -358,6 +360,14 @@ public class Course {
 
     public void setSpotDistance(String spotDistance) {
         this.spotDistance = spotDistance;
+    }
+
+    public String getSpotIntroduction() {
+        return spotIntroduction;
+    }
+
+    public void setSpotIntroduction(String spotIntroduction) {
+        this.spotIntroduction = spotIntroduction;
     }
 
     public String getOrderNumber() {
@@ -432,11 +442,11 @@ public class Course {
         this.reviewCount = reviewCount;
     }
 
-    public float getRatingAverage() {
+    public String getRatingAverage() {
         return ratingAverage;
     }
 
-    public void setRatingAverage(float ratingAverage) {
+    public void setRatingAverage(String ratingAverage) {
         this.ratingAverage = ratingAverage;
     }
 

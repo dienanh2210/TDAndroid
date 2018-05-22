@@ -3,6 +3,10 @@ package vn.javis.tourde.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +16,22 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.adapter.ListCourseAdapter;
+import vn.javis.tourde.adapter.ListSpotDetailCircleAdapter;
 import vn.javis.tourde.adapter.ListSpotsDetailAdapter;
+import vn.javis.tourde.apiservice.ListCourseAPI;
+import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.utils.ProcessDialog;
 
@@ -27,6 +40,9 @@ public class TabCourseFragment extends BaseFragment {
 
     @BindView(R.id.lv_list_spots)
     ListView lvSpot;
+    @BindView(R.id.rcl_list_spots)
+    RecyclerView rcllistspots;
+
     @BindView(R.id.btn_signup_favorite)
     RelativeLayout btnSignUp;
     @BindView(R.id.course_access_start_point)
@@ -40,7 +56,7 @@ public class TabCourseFragment extends BaseFragment {
     @BindView(R.id.btn_running_app)
     RelativeLayout btnRunningApp;
 
-    ListSpotsDetailAdapter listSpotAdapter;
+    ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
     String avagePace, finishTIme, startAddress;
@@ -64,15 +80,27 @@ public class TabCourseFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         if (listSpot.size() > 0) {
-            Log.i("listSpot: ", "" + listSpot.size());
-            listSpotAdapter = new ListSpotsDetailAdapter(mActivity, R.layout.list_spots_detail, listSpot);
-            lvSpot.setAdapter(listSpotAdapter);
-            listSpotAdapter.setOnSpotImageClick(new ListSpotsDetailAdapter.OnSpotImageClick() {
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity){
+                @Override
+                public boolean canScrollVertically() {
+                    return false;
+                }
+            };
+            rcllistspots.setItemAnimator(new DefaultItemAnimator());
+            rcllistspots.setLayoutManager(layoutManager);
+
+
+            listSpotAdapter = new ListSpotDetailCircleAdapter(listSpot, mActivity);
+            rcllistspots.setAdapter(listSpotAdapter);
+            listSpotAdapter.setOnItemClickListener(new ListSpotDetailCircleAdapter.OnItemClickedListener() {
                 @Override
                 public void onItemClick(int spotID) {
                     mActivity.showSpotImages(spotID);
                 }
             });
+            // rcllistspots.setOn
+
         }
         btnStartPoint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +108,22 @@ public class TabCourseFragment extends BaseFragment {
                 mActivity.showCourseDrive();
             }
         });
-        txtAvaragePace.setText(avagePace);
-        txtFinishTime.setText(finishTIme);
+        txtAvaragePace.setText(avagePace + "km/h");
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+
+        try {
+            Date date = dateFormat.parse(finishTIme);
+            Calendar timeConvert = Calendar.getInstance();
+            timeConvert.setTime(date);
+            String out = timeConvert.get(Calendar.HOUR) + "時間" + timeConvert.get(Calendar.MINUTE) + "分";
+            Log.e("Time", out);
+            txtFinishTime.setText(out);
+        } catch (ParseException e) {
+        }
+
+
         txtStartAddress.setText(startAddress);
         btnRunningApp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +136,7 @@ public class TabCourseFragment extends BaseFragment {
                 ProcessDialog.showDialogConfirm(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-                        mActivity.ShowCountDown();
+                        mActivity.showCourseDrive();
                     }
                 });
             }

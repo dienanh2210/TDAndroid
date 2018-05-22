@@ -37,7 +37,7 @@ public class PostCommentFragment extends BaseFragment {
     TextView tvBackToDetail;
 
     CourseListActivity mActivity;
-
+    int courseID=0;
 
     private boolean isReached = false;
 
@@ -45,6 +45,7 @@ public class PostCommentFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         mActivity = (CourseListActivity) getActivity();
+        courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         mRatingBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,11 +94,10 @@ public class PostCommentFragment extends BaseFragment {
 
     void postComment() {
         String token = LoginFragment.getmUserToken();
-        int course_id = mActivity.getmCourseID();
         int rating = mRatingBar.getNumStars();
         String comment = edt_text.getText().toString();
         if (comment != null) {
-            CommentsAPI.postReviewCourse(token, course_id, rating, comment, new ServiceCallback() {
+            CommentsAPI.postReviewCourse(token, courseID, rating, comment, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                     //post comment success return to current page

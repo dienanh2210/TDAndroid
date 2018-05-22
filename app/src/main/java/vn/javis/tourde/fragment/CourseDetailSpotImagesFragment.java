@@ -119,7 +119,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 mActivity.showMyCourse();
             }
         });
-        int spotId = mActivity.getmSpotID();
+        int spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
         SpotDataAPI.getCourseData(spotId, this);
     }
 

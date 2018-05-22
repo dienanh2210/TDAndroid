@@ -56,23 +56,23 @@ import vn.javis.tourde.fragment.CountDownTimesFragment;
 
 public class CourseListActivity extends AppCompatActivity implements ServiceCallback {
 
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
 
-    public int getmCourseID() {
-        return mCourseID;
-    }
+    public static final int MY_CAMERA_PERMISSION_CODE = 100;
+    public static final String COURSE_DETAIL_ID = "COURSE_ID";
+    public static final String SPOT_ID = "SPOT_ID";
+    private static final int REQUEST_PERMISSIONS = 50;
+
 
     private int mCourseID;
     private int mSpotID;
-    public static final int MY_CAMERA_PERMISSION_CODE = 100;
+
     Intent intentGPS;
-    private static final int REQUEST_PERMISSIONS = 50;
     boolean boolean_permission;
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
     Double latitude, longitude;
     Geocoder geocoder;
+    Bundle dataBundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         ListCourseAPI api = new ListCourseAPI(this);
         setHearder();
         fetchData();
+        dataBundle = new Bundle();
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
@@ -130,6 +131,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         openPage(new CourseDetailFragment(), true);
     }
 
@@ -155,6 +157,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
+        fragment.setArguments(dataBundle);
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -182,12 +185,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     }
 
-    public int getmSpotID() {
-        return mSpotID;
-    }
-
     public void showSpotImages(int spotID) {
         mSpotID = spotID;
+        dataBundle.putInt(SPOT_ID, mSpotID);
         openPage(new CourseDetailSpotImagesFragment(), true);
     }
 
@@ -257,9 +257,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         stopService(intentGPS);
 
     }
-
-
-
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override

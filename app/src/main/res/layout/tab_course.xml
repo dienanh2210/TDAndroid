@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,154 +21,162 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/_10sdp">
 
-                <TextView
-                    android:id="@+id/course_overview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/course_outline"
-                    android:textColor="@color/Black"
-                    android:textSize="@dimen/_15ssp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/Gray" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/course_overview"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/finish_guide_time"
+                        android:text="@string/course_outline"
                         android:textColor="@color/Black"
-                        android:textSize="@dimen/_13sdp" />
+                        android:textSize="@dimen/_16sdp" />
 
-                    <TextView
-                        android:id="@+id/txt_finish_time"
-                        android:layout_width="0dp"
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/course_1000"
-                        android:textColor="@color/Black"
-                        android:textSize="@dimen/_13sdp" />
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/finish_guide_time"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <TextView
+                            android:id="@+id/txt_finish_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/course_1000"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/average_pace"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <TextView
+
+                            android:id="@+id/txt_average_pace"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/average_pace_txt"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/start_point"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <TextView
+
+                            android:id="@+id/txt_start_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/start_point_txt"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:id="@+id/course_access_start_point"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="@string/access_to_start"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5">
+
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:background="@drawable/icon_goto"
+                                android:contentDescription="@string/image_description"
+                                android:gravity="end" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/Gray" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/average_pace"
-                        android:textColor="@color/Black"
-                        android:textSize="@dimen/_13sdp" />
-
-                    <TextView
-
-                        android:id="@+id/txt_average_pace"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/average_pace_txt"
-                        android:textColor="@color/Black"
-                        android:textSize="@dimen/_13sdp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/Gray" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/start_point"
-                        android:textColor="@color/Black"
-                        android:textSize="@dimen/_13sdp" />
-
-                    <TextView
-
-                        android:id="@+id/txt_start_address"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/start_point_txt"
-                        android:textColor="@color/Black"
-                        android:textSize="@dimen/_13sdp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/Gray" />
-
-                <LinearLayout
-                    android:id="@+id/course_access_start_point"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="@string/access_to_start"
-                        android:textColor="@color/Black"
-                        android:textSize="@dimen/_13sdp" />
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5">
-
-                        <ImageView
-                            android:layout_width="@dimen/_8sdp"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@drawable/icon_goto"
-                            android:contentDescription="@string/image_description"
-                            android:gravity="end" />
-                    </RelativeLayout>
-
-                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/img_map"
@@ -183,64 +191,65 @@
                     android:layout_height="@dimen/_70sdp"
                     android:orientation="horizontal"
                     android:paddingBottom="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_5sdp">
+                    android:paddingTop="@dimen/_5sdp"
+                    android:weightSum="2.1">
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="@dimen/_42sdp"
                             android:layout_height="@dimen/_35sdp"
+                            android:layout_marginStart="@dimen/_42sdp"
                             android:contentDescription="@string/image_description"
-                            android:layout_marginStart="@dimen/_40sdp"
-                            android:layout_marginTop="-5dp"
                             android:src="@drawable/icon_googlemap" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/_90sdp"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:paddingRight="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_25sdp"
-                            android:text="@string/GoogleMap"
                             android:layout_centerHorizontal="true"
-                            android:textSize="@dimen/_15sdp" />
+                            android:layout_marginTop="@dimen/_30sdp"
+                            android:gravity="center"
+                            android:text="@string/GoogleMap"
+                            android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
 
-                    <View
-                        android:layout_width="@dimen/_1sdp"
+                    <RelativeLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:background="@color/search_course_color_description_text" />
+                        android:layout_weight=".1">
+
+                        <View
+                            android:layout_width="@dimen/_1sdp"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/search_course_color_description_text" />
+                    </RelativeLayout>
+
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="@dimen/_42sdp"
+                            android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_35sdp"
-                            android:contentDescription="@string/image_description"
                             android:layout_marginStart="@dimen/_40sdp"
-                            android:layout_marginTop="-5dp"
+                            android:contentDescription="@string/image_description"
                             android:src="@drawable/icon_navitime" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/_80sdp"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:paddingRight="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_25sdp"
                             android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_30sdp"
+                            android:gravity="center"
                             android:text="@string/NAVITIME"
-                            android:textSize="@dimen/_15sdp" />
+                            android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -251,46 +260,55 @@
                 android:background="@color/BG_courseDetail"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/_30sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
                 android:paddingTop="@dimen/_25sdp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/_10sdp"
                     android:text="@string/CourseStory"
                     android:textColor="@color/Black"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_18sdp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
+
 
                 <ListView
                     android:id="@+id/lv_list_spots"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></ListView>
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcl_list_spots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
 
                 <RelativeLayout
                     android:id="@+id/btn_signup_favorite"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_30sdp"
-                    android:background="@drawable/custom_frame"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    >
+                    android:background="@drawable/custom_frame">
+
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/txt_btn_ping"
+                        android:layout_width="wrap_content"
                         android:layout_height="@dimen/_50sdp"
                         android:gravity="center"
+                        android:layout_centerHorizontal="true"
                         android:text="@string/txtRedButtonDetail"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_23sdp"
-                        android:layout_alignParentLeft="true"
+                        android:layout_toStartOf="@id/txt_btn_ping"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_40sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
                         android:src="@drawable/icon_bicycle_white" />
                 </RelativeLayout>
 
@@ -298,33 +316,32 @@
                     android:id="@+id/btn_running_app"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
-                    android:background="@drawable/custom_frame_blue"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    >
+                    android:background="@drawable/custom_frame_blue">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/txt_btn_blue"
+                        android:layout_width="wrap_content"
                         android:layout_height="@dimen/_50sdp"
                         android:gravity="center"
+                        android:layout_centerHorizontal="true"
                         android:text="@string/txtBlueButtonDetail"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_23sdp"
-                        android:layout_alignParentLeft="true"
+                        android:layout_toStartOf="@id/txt_btn_blue"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_40sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
                         android:src="@drawable/icon_bicycle_white" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+</android.support.v4.widget.NestedScrollView>
 
 

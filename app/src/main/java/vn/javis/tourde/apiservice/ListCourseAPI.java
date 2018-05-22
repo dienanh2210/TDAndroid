@@ -60,26 +60,27 @@ public class ListCourseAPI {
         params.put("prefecture", "13");
         TourDeService.getWithAuth(ApiEndpoint.GET_COURSE_LIST, params, callback);
     }
+
     public static void getJsonValueSearch(HashMap params, ServiceCallback callback) {
         TourDeService.getWithAuth(ApiEndpoint.GET_COURSE_LIST, params, callback);
     }
-   public static void setAllCourses(JSONObject jsonObject) {
+
+    public static void setAllCourses(JSONObject jsonObject) {
         try {
-            System.out.println("sdfsdf" + jsonObject);
+            int abc = 0;
             JSONObject allJsonObject = jsonObject.getJSONObject("list");
             Iterator<String> key = allJsonObject.keys();
             while (key.hasNext()) {
+                abc++;
                 String id = key.next();
                 JSONObject singleJsonObject = allJsonObject.getJSONObject(id).getJSONObject("data");
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 String vl = singleJsonObject.toString();
-                JsonParser jsonParser = new JsonParser();
                 Course thisCourse = Course.getData(vl);
-                if (thisCourse != null) {
-                    instance.mAllCourses.clear();
-                    instance.mAllCourses.add(thisCourse);
-                }
+                instance.mAllCourses.add(thisCourse);
+
             }
+
         } catch (JSONException e) {
             System.out.println("error_" + e.getMessage());
         }
@@ -97,7 +98,7 @@ public class ListCourseAPI {
         Course model = null;
 
         for (Course course : mAllCourses) {
-            if (course.getCourseId() == id) {
+            if (Integer.valueOf(course.getCourseId()) == id) {
                 model = course;
                 break;
             }
@@ -135,7 +136,7 @@ public class ListCourseAPI {
     }
 
     public int getCourseIdByPosition(int position) {
-        return mAllCourses.get(position).getCourseId();
+        return Integer.valueOf(mAllCourses.get(position).getCourseId());
     }
 
     public List<Course> getSearchCourse(ServiceCallback callback) {

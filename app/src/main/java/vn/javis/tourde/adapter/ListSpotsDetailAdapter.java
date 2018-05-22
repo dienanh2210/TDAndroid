@@ -39,6 +39,7 @@ public class ListSpotsDetailAdapter extends ArrayAdapter<Spot> {
         LayoutInflater inflater =
                 context.getLayoutInflater();
         convertView = inflater.inflate(layoutId, null);
+
         if (convertView != null) {
             if (myArray.size() > 0 && position >= 0) {
                 final Spot spot = myArray.get(position);
@@ -56,8 +57,9 @@ public class ListSpotsDetailAdapter extends ArrayAdapter<Spot> {
                 txtIndex.setText(String.valueOf(order));
                 txtCatchPhrase.setText(spot.getCatchPhrase());
                 txtIntro.setText(spot.getIntroduction());
+                Log.i("myArray.size",position+""+ myArray.get(1).getTitle());
                 // txtTag.setText(spot.getTag().toString());
-                //  Picasso.with(context).load(spot.getTopImage()).into(imgCourse);
+                  Picasso.with(context).load(spot.getTopImage()).into(imgCourse);
                 if (order == myArray.size())
                     lnDistance.setVisibility(View.GONE);
 

@@ -76,7 +76,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
                 List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                 for (int i = 0; i < listFavorCourse.size(); i++) {
                     Log.i("response",listFavorCourse.get(i).getAccountId() +""+ model.getCourseId());
-                    if (listFavorCourse.get(i).getCourseId() == model.getCourseId()) {
+                    if (listFavorCourse.get(i).getCourseId() ==Integer.valueOf(model.getCourseId())) {
                         holder.isFavorite = true;
                         break;
                     }
@@ -91,8 +91,8 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
             }
         });
-
-        int rate = Math.round(model.getRatingAverage());
+        String s =model.getRatingAverage();
+        int rate = Math.round(Float.valueOf(s));
 
         if (rate == 1) {
             holder.imgStarRate.setImageResource(R.drawable.icon_star1);
@@ -134,7 +134,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             public void onClick(final View view) {
                 holder.isFavorite = !holder.isFavorite;
                 String token = LoginFragment.getmUserToken();
-                int course_id = model.getCourseId();
+                int course_id =Integer.valueOf(model.getCourseId());
                 if (holder.isFavorite) {
                     FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
                         @Override

@@ -46,7 +46,12 @@ public class TabCommentFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         lstCommentRecyleView.setLayoutManager(layoutManager);
         btnPostComment.setOnClickListener(new View.OnClickListener() {
             @Override
