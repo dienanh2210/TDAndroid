@@ -27,6 +27,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.view.CircleTransform;
@@ -66,12 +67,32 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.txtPostUser.setText(model.getPostUserName());
         Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
         Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
-        holder.isFavorite = model.getStatus() == 1 ? true : false;
+
         holder.isFavorite = false;
-        if (holder.isFavorite) {
-            holder.btnFavorite.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
-        }
-        int rate = Math.round(model.getRatingAverage());
+        FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                Log.i("response",response.toString());
+                List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
+                for (int i = 0; i < listFavorCourse.size(); i++) {
+                    Log.i("response",listFavorCourse.get(i).getAccountId() +""+ model.getCourseId());
+                    if (listFavorCourse.get(i).getCourseId() ==Integer.valueOf(model.getCourseId())) {
+                        holder.isFavorite = true;
+                        break;
+                    }
+                }
+                if (holder.isFavorite) {
+                    holder.btnFavorite.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_red));
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+        String s =model.getRatingAverage();
+        int rate = Math.round(Float.valueOf(s));
 
         if (rate == 1) {
             holder.imgStarRate.setImageResource(R.drawable.icon_star1);
@@ -113,7 +134,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             public void onClick(final View view) {
                 holder.isFavorite = !holder.isFavorite;
                 String token = LoginFragment.getmUserToken();
-                int course_id = model.getCourseId();
+                int course_id =Integer.valueOf(model.getCourseId());
                 if (holder.isFavorite) {
                     FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
                         @Override
@@ -122,7 +143,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
                             JSONObject jsonObject = (JSONObject) response;
                             if (jsonObject.has("success")) {
-                                holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                                holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_red));
                             } else {
                                 holder.isFavorite = !holder.isFavorite;
                                 Log.i("is: ", "false");
@@ -139,8 +160,6 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                             Log.i("delete favorite",response.toString());
-                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
-
                             JSONObject jsonObject = (JSONObject) response;
                             if (jsonObject.has("success")) {
                                 holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));

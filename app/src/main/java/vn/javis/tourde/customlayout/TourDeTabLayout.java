@@ -3,6 +3,7 @@ package vn.javis.tourde.customlayout;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -150,18 +151,21 @@ public class TourDeTabLayout extends RelativeLayout {
                 if (i == selectIndex) {
                     if (title instanceof TextView) {
                         ((TextView) title).setTextColor(tabTextActiveColor);
-
+                        ((TextView) title).setTypeface(null, Typeface.BOLD);
                     } else {
                         ((TextView) title.findViewById(R.id.tv_content_tab)).setTextColor(tabTextActiveColor);
+                        ((TextView) title.findViewById(R.id.tv_content_tab)).setTypeface(null, Typeface.BOLD);
                         title.findViewById(R.id.v_divide_bottom).setVisibility(GONE);
-
                     }
                     title.setBackgroundColor(tabActiveColor);
                 } else {
                     if (title instanceof TextView)
-                        ((TextView) title).setTextColor(tabTextColor);
+                    {   ((TextView) title).setTextColor(tabTextColor);
+                    ((TextView) title).setTypeface(null, Typeface.NORMAL);
+                    }
                     else {
                         ((TextView) title.findViewById(R.id.tv_content_tab)).setTextColor(tabTextColor);
+                        ((TextView) title.findViewById(R.id.tv_content_tab)).setTypeface(null, Typeface.NORMAL);
                         title.findViewById(R.id.v_divide_bottom).setVisibility(VISIBLE);
                     }
                     title.setBackgroundColor(tabNormalColor);

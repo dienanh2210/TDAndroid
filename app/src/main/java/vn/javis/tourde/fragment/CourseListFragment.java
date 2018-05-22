@@ -77,7 +77,12 @@ public class CourseListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         lstCourseRecycleView.setLayoutManager(layoutManager);
         setFooter();
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +161,7 @@ public class CourseListFragment extends BaseFragment {
 
         int totalCourse = ListCourseAPI.getInstance().getCourseSize();
 
-        mTotalPage = totalCourse == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
+        mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE==0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
         int currentValue = mCurrentPage;
         mCurrentPage += nextPage;
         if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;

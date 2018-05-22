@@ -7,36 +7,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/course_border"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/_5sdp"
-        android:paddingRight="@dimen/_5sdp">
+        android:paddingLeft="@dimen/_7sdp"
+        android:paddingRight="@dimen/_7sdp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:minHeight="@dimen/_30sdp">
 
             <TextView
                 android:id="@+id/ic_story_1"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/blue_circle"
                 android:gravity="center"
+                android:textColor="@color/White"
+                android:textSize="@dimen/_13sdp"
                 android:text="@string/first_story_num" />
 
             <TextView
                 android:id="@+id/title_story_1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_toEndOf="@id/ic_story_1"
+                android:layout_centerVertical="true"
                 android:text="@string/StoryTitle1"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_14sdp" />
+                android:textSize="@dimen/_17sdp" />
         </RelativeLayout>
 
         <ImageView
@@ -57,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Story1ImageDes"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_14sdp" />
+            android:textSize="@dimen/_15sdp" />
 
         <View
             android:layout_width="match_parent"
@@ -72,7 +75,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Story1Content"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_13sdp" />
 
         <TextView
             android:id="@+id/tag_story_1"
@@ -81,7 +84,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/Story1Tag"
             android:textColor="@color/SkyBlue"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_11sdp" />
 
         <ImageView
             android:id="@+id/btn_spot_images"
@@ -137,7 +140,7 @@
                 android:layout_weight="1"
                 android:text="@string/distance_story"
                 android:textColor="@color/SkyBlue"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
 
         </LinearLayout>

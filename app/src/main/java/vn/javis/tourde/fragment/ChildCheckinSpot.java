@@ -47,6 +47,7 @@ public class ChildCheckinSpot extends BaseFragment implements View.OnClickListen
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mActivity = (CourseListActivity) getActivity();
         Picasso.with(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
 
     }

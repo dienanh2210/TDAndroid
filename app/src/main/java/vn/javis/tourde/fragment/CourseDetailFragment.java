@@ -27,7 +27,11 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +44,7 @@ import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.CourseData;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeService;
@@ -83,6 +88,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     ImageView imgCourse;
     @BindView(R.id.star_rate)
     ImageView imgStarRate;
+    @BindView(R.id.txt_date)
+    TextView txtDate;
+
     @BindView(R.id.txt_tag_detail)
     TextView txtTag;
     @BindView(R.id.img_post_user_detail)
@@ -114,13 +122,13 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     TabCourseFragment tabCourseFragment;
     TabCommentFragment tabCommentFragment;
     String url = "";
-
+    String[] strCourseType = new String[]{"片道","往復","1周"};
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         // testAPI();
-        mCourseID = mActivity.getmCourseID();
-
+   //     mCourseID = mActivity.getmCourseID();
+        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -219,10 +227,11 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     }
 
     void showCourseDetail(CourseDetail courseDetail) {
-
-        CourseData model = courseDetail.getmCourseData();
+        final CourseData model = courseDetail.getmCourseData();
+        Log.i("coursedetail",model.toString());
         if (model == null)
             return;
+
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
@@ -233,9 +242,50 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtSeason.setText(model.getSeason());
         txtAverageSlope.setText(model.getAverageSlope());
         txtElevation.setText(model.getElevation() + "m");
-        txtCourseType.setText(model.getCourseType());
-        // txtTag.setText("#" + model.getTag());
-        isFavourite = model.getStatus() == 1 ? true : false;
+        int courseType = model.getCourseType();
+        txtCourseType.setText(strCourseType[courseType-1]);
+
+        String dateGet = model.getDisplayDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
+        try {
+            Date date = dateFormat.parse(dateGet);
+
+            String out = dateFormat2.format(date).toString();
+            txtDate.setText(out);
+        } catch (ParseException e) {
+        }
+
+
+      //   txtTag.setText("#" + model.getTag());
+
+        isFavourite = false;
+        FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
+                for (int i = 0; i < listFavorCourse.size(); i++) {
+                    if (listFavorCourse.get(i).getCourseId() == model.getCourseId()) {
+                        isFavourite = true;
+                        break;
+                    }
+                }
+                if (isFavourite) {
+                    btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
+
+                    if (tabCourseFragment != null) {
+                        tabCourseFragment.changeButtonColor(isFavourite);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+
+        Log.i("FavoriteCourseAPI",""+isFavourite);
         Picasso.with(activity).load(model.getTopImage())
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(imgCourse);
@@ -252,9 +302,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         } else if (rate >= 5) {
             imgStarRate.setImageResource(R.drawable.icon_star5);
         }
-        if (isFavourite) {
-            btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
-        }
+
         url = model.getRouteUrl();
     }
 
@@ -265,20 +313,17 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         mCourseDetail = new CourseDetail((JSONObject) response);
         showCourseDetail(mCourseDetail);
         view_pager.setAdapter(pagerAdapter);
-
+        if (tabCommentFragment != null) {
+            tabCommentFragment.setListReview(mCourseDetail.getReview());
+            tabCommentFragment.setRecyler();
+        }
         // TabCourseFragment tabCourseFragment = (TabCourseFragment) pagerAdapter.getItem(0);
 //
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
 
-        if (tabCommentFragment != null) {
-            tabCommentFragment.setListReview(mCourseDetail.getReview());
-            tabCommentFragment.setRecyler();
-        }
-        if (tabCourseFragment != null) {
-            tabCourseFragment.changeButtonColor(isFavourite);
-        }
+
     }
 
     @Override
@@ -322,7 +367,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_blue));
+                        btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
                         }

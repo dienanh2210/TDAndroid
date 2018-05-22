@@ -5,11 +5,15 @@ import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import android.content.pm.PackageManager;
+
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -40,6 +44,7 @@ import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.PostCommentFragment;
+import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -51,22 +56,23 @@ import vn.javis.tourde.fragment.CountDownTimesFragment;
 
 public class CourseListActivity extends AppCompatActivity implements ServiceCallback {
 
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
 
-    public int getmCourseID() {
-        return mCourseID;
-    }
+    public static final int MY_CAMERA_PERMISSION_CODE = 100;
+    public static final String COURSE_DETAIL_ID = "COURSE_ID";
+    public static final String SPOT_ID = "SPOT_ID";
+    private static final int REQUEST_PERMISSIONS = 50;
+
 
     private int mCourseID;
     private int mSpotID;
+
     Intent intentGPS;
-    private static final int REQUEST_PERMISSIONS = 100;
     boolean boolean_permission;
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
     Double latitude, longitude;
     Geocoder geocoder;
+    Bundle dataBundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +82,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         ListCourseAPI api = new ListCourseAPI(this);
         setHearder();
         fetchData();
+        dataBundle = new Bundle();
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
@@ -124,6 +131,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         openPage(new CourseDetailFragment(), true);
     }
 
@@ -149,6 +157,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
+        fragment.setArguments(dataBundle);
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -163,17 +172,22 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         showCourseListPage();
     }
 
+    public void showTakePhoto() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
+        } else {
+            openPage(new TakePhotoFragment(), true);
+        }
+    }
+
     @Override
     public void onError(VolleyError error) {
 
     }
 
-    public int getmSpotID() {
-        return mSpotID;
-    }
-
     public void showSpotImages(int spotID) {
         mSpotID = spotID;
+        dataBundle.putInt(SPOT_ID, mSpotID);
         openPage(new CourseDetailSpotImagesFragment(), true);
     }
 
@@ -206,6 +220,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
+            case MY_CAMERA_PERMISSION_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openPage(new TakePhotoFragment(), true);
+                }
+            }
             case REQUEST_PERMISSIONS: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     boolean_permission = true;
@@ -225,6 +244,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                 }
             }
         }
+
     }
 
     public void turnOnGPS() {
@@ -237,9 +257,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         stopService(intentGPS);
 
     }
-
-
-
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -272,5 +289,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     protected void onPause() {
         super.onPause();
         unregisterReceiver(broadcastReceiver);
+
     }
 }
