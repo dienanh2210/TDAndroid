@@ -67,6 +67,14 @@ ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDetailCircleAda
         holder.txtCatchPhrase.setText(spot.getCatchPhrase());
         holder.txtIntro.setText(spot.getIntroduction());
 
+        String tag = "";
+        if (spot.getTag() != null)
+            tag += "#" + spot.getTag();
+        for (int i = 0; i < spot.getListTag().size(); i++) {
+            tag += " #" + spot.getListTag().get(i);
+        }
+        holder.txtTag.setText(tag);
+
         if (spot.getTopImage() != null && spot.getTopImage() != "")
             Picasso.with(context).load(spot.getTopImage()).into(holder.imgCourse);
         if (order == listSpot.size())

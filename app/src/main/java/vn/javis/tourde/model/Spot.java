@@ -3,6 +3,9 @@ package vn.javis.tourde.model;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class Spot {
     @SerializedName("spot_id")
     @Expose
@@ -60,8 +63,9 @@ public class Spot {
     private String insertDatetime;
     @SerializedName("tag")
     @Expose
-    private Object tag;
+    private String tag;
 
+    private List<String> listTag;
     public static Spot getData(String data) {
         return new Gson().fromJson(data, Spot.class);
     }
@@ -210,12 +214,19 @@ public class Spot {
         this.insertDatetime = insertDatetime;
     }
 
-    public Object getTag() {
-        return tag;
-    }
-
-    public void setTag(Object tag) {
+    public void setTag(String tag) {
         this.tag = tag;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public List<String> getListTag() {
+        return listTag;
+    }
+
+    public void setListTag(List<String> listTag) {
+        this.listTag = listTag;
+    }
 }

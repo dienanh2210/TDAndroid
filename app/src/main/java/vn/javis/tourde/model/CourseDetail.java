@@ -1,5 +1,7 @@
 package vn.javis.tourde.model;
 
+import android.nfc.Tag;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +13,10 @@ public class CourseDetail {
     private CourseData mCourseData;
     private List<Review> review;
     private List<Spot> spot;
+
+
     private ReviewTotal reviewTotal;
+    private List<String> listTag;
 
     public CourseDetail(JSONObject jsonResponse) {
 
@@ -24,7 +29,21 @@ public class CourseDetail {
             for (int i = 0; i < listSpot.length(); i++) {
                 JSONObject dtSpot = (JSONObject) listSpot.get(i);
                 Spot modelSpot = Spot.getData(dtSpot.getJSONObject("data").toString());
+
+                JSONArray listTagOb = dtSpot.getJSONArray("tag");
+                listTag = new ArrayList<String>();
+                for (int a = 0; a < listTagOb.length(); a++) {
+                    listTagOb.get(a);
+                    listTag.add(listTagOb.get(a).toString());
+                }
+                modelSpot.setListTag(listTag);
                 spot.add(modelSpot);
+            }
+            listTag = new ArrayList<String>();
+            JSONArray listTagOb = jsonResponse.getJSONArray("tag");
+            for (int i = 0; i < listTagOb.length(); i++) {
+               listTagOb.get(i);
+                listTag.add(listTagOb.get(i).toString());
             }
 
             review = new ArrayList<Review>();
@@ -70,5 +89,13 @@ public class CourseDetail {
 
     public void setReviewTotal(ReviewTotal reviewTotal) {
         this.reviewTotal = reviewTotal;
+    }
+
+    public List<String> getListTag() {
+        return listTag;
+    }
+
+    public void setListTag(List<String> listTag) {
+        this.listTag = listTag;
     }
 }

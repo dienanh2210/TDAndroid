@@ -82,7 +82,7 @@
             </ImageButton>
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
@@ -98,6 +98,7 @@
                 app:riv_border_color="@color/SkyBlue"
                 app:riv_border_width=".5dp"
                 app:riv_mutate_background="true"
+                android:layout_centerVertical="true"
                 app:riv_oval="true"
                 app:riv_tile_mode="clamp" />
 
@@ -111,10 +112,12 @@
                 android:id="@+id/title_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/course_detail_title"
+                android:layout_toEndOf="@id/img_post_user_detail"
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_17sdp" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -154,8 +157,17 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:text="@string/course_detail_phrase_detail"
             android:textColor="@color/Black"
+            android:textSize="@dimen/_17sdp" />
+        <TextView
+            android:id="@+id/txt_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:text="@string/course_detail_phrase_detail"
+            android:textColor="@color/Black"
             android:textSize="@dimen/_13sdp" />
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"

@@ -1,6 +1,7 @@
 package vn.javis.tourde.apiservice;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -82,7 +83,7 @@ public class ListCourseAPI {
                 }
 
             }
-
+            Log.i("error_" , abc+"");
         } catch (JSONException e) {
             System.out.println("error_" + e.getMessage());
         }

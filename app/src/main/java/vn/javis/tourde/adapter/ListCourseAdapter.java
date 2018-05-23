@@ -56,7 +56,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
     @Override
     public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
         final Course model = listCourse.get(position);
-
+        Log.i("response",position+"");
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
         holder.txtTag.setText("# " + model.getTag());
