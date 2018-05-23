@@ -72,10 +72,6 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
     EditText edt_passwordlogin;
     @BindView(R.id.tv_register_new_account)
     TextView tv_register_new_account;
-   // @BindView( R.id.textView_forget )
-
-
-
     public static void setmUserToken(String mUserToken) {
         LoginFragment.mUserToken = mUserToken;
     }
@@ -85,7 +81,6 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
             mUserToken = "";
         return mUserToken;
     }
-
 
     private static String mUserToken;
     private static Account mAccount;
@@ -212,7 +207,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
         }
     }
 
-    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line,R.id.textView_forget,R.id.tv_register_new_account})
+    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line,R.id.textView_forget,R.id.tv_register_new_account, R.id.tv_back_login})
     public void onClickView(View view) {
 
         switch (view.getId()) {
@@ -256,6 +251,10 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
             case  R.id.tv_register_new_account:
                 Intent myIntent = new Intent(getActivity(), MenuEntryActivity.class);
                 getActivity().startActivity(myIntent);
+                break;
+            case R.id.tv_back_login:
+                LoginSNSActivity lActivity =  (LoginSNSActivity) getActivity();
+                lActivity.onBackPressed();
                 break;
         }
     }
@@ -432,4 +431,5 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
     public void onClick(View v) {
 
     }
+
 }

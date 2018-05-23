@@ -7,23 +7,31 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.BaseFragment;
+import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class MenuEntryActivity extends BaseActivity {
     RelativeLayout rlt_usermailrigister;
-    TextView tv_back_menu_entry,tv_loginEntry,tv_searchskip;
-
+    TextView tv_back_menu,tv_loginEntry,tv_searchskip;
+    MenuEntryActivity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_entry);
         rlt_usermailrigister = findViewById(R.id.rlt_usermailrigister);
         rlt_usermailrigister.setOnClickListener(onClickNewUserMail);
-//        tv_back_menu_entry = findViewById(R.id.tv_back_menu_entry);
-//        tv_back_menu_entry.setOnClickListener(onClickBackMenuPage);
+        tv_back_menu = findViewById(R.id.tv_back_menu);
+        tv_back_menu.setOnClickListener(onClickBackMenuPage);
         tv_loginEntry=findViewById( R.id.tv_loginEntry );
         tv_loginEntry.setOnClickListener( onClickLoginEntry );
         tv_searchskip=findViewById( R.id.tv_searchskip );
         tv_searchskip.setOnClickListener( onClickSearchSkip  );
+        if(SharedPreferencesUtils.getInstance(this).getStringValue("MenuEntry")=="")
+            tv_back_menu.setVisibility(View.GONE);
+        else
+            tv_back_menu.setVisibility(View.VISIBLE);
+        SharedPreferencesUtils.getInstance(this).setStringValue("MenuEntry", "1");
 
     }
 
@@ -39,6 +47,7 @@ public class MenuEntryActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MenuEntryActivity.this, MenuPageActivity.class);
             startActivity(intent);
+            //finish();
         }
     };
     View.OnClickListener onClickLoginEntry  = new View.OnClickListener() {
@@ -55,4 +64,10 @@ public class MenuEntryActivity extends BaseActivity {
             startActivity(intent);
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
 }

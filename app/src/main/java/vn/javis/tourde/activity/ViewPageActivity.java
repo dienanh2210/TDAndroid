@@ -44,6 +44,7 @@ public class ViewPageActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(2, true);
                 } else {
                     Intent intent = new Intent(ViewPageActivity.this, MenuEntryActivity.class);
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Tutorial", "finish");
                     startActivity(intent);
                 }
             }

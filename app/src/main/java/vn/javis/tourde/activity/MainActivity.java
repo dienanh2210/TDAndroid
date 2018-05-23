@@ -40,14 +40,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        if (SharedPreferencesUtils.getInstance(this).getStringValue("Email") == "")
-            changeActivity();
+        if (SharedPreferencesUtils.getInstance(this).getStringValue("Email") == "") {
+            if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial") == "")
+                changeActivity();
+            else
+                changeMenupPage();
+        }
         else
             changeCourseListActivity();
     }
 
     void changeActivity() {
         Intent intent = new Intent(this, ViewPageActivity.class);
+        startActivity(intent);
+    }
+
+    void changeMenupPage(){
+        Intent intent = new Intent(this, MenuPageActivity.class);
         startActivity(intent);
     }
 

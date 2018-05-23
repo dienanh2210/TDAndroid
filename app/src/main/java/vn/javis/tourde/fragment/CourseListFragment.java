@@ -77,12 +77,7 @@ public class CourseListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
         setFooter();
         btnMenu.setOnClickListener(new View.OnClickListener() {
