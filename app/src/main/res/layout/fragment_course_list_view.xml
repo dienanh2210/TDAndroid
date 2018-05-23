@@ -18,7 +18,7 @@
             android:layout_height="@dimen/_20sdp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dimen10"
+            android:layout_marginStart="@dimen/_15sdp"
             android:background="@drawable/ic_menu_option"
             android:contentDescription="@string/button_description" />
 
@@ -45,14 +45,14 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/icon_search"
             android:contentDescription="@string/button_description" />
     </RelativeLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/course_list_footer"
         android:layout_alignTop="@+id/course_list_header"
         android:layout_marginLeft="@dimen/_15sdp"
@@ -68,6 +68,7 @@
                 android:id="@+id/lst_courses_recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginTop="@dimen/_15sdp"
                  />
 
@@ -108,7 +109,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/course_list_footer"
