@@ -1,35 +1,37 @@
 package vn.javis.tourde.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
+
+import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Window;
-import android.widget.Toast;
-import java.io.IOException;
+
+import com.android.volley.VolleyError;
+import com.facebook.login.Login;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import vn.javis.tourde.R;
-import vn.javis.tourde.apiservice.ListCourseAPI;
-import vn.javis.tourde.services.GoogleService;
+import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.fragment.RegisterFragment;
+import vn.javis.tourde.model.Account;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     @Override
@@ -38,19 +40,88 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
-        changeActivity();
-
-
-
-      //  Intent intent = new Intent(this, TestUploadImage.class);
-
-
+        if (SharedPreferencesUtils.getInstance(this).getStringValue("Email") == "")
+            changeActivity();
+        else
+            changeCourseListActivity();
     }
+
     void changeActivity() {
         Intent intent = new Intent(this, ViewPageActivity.class);
         startActivity(intent);
     }
+
+    void changeCourseListActivity() {
+       loginToApp();
+        //openPage(new LoginFragment());
+    }
+
+    public void loginToApp() {
+        final boolean gender = false;
+        String email = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue("Email");
+        String password = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue("Pass");
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            LoginAPI.loginEmail(email, password, new ServiceCallback() {
+                @Override
+                public void onSuccess(ServiceResult resultCode, Object response) {
+                    JSONObject jsonObject = (JSONObject) response;
+                    if (jsonObject.has("success")) {
+//                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
+//                        startActivity( intent );
+                        Intent intent = new Intent(MainActivity.this,CourseListActivity.class);
+                        startActivity(intent);
+                        intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                        MainActivity.this.setResult(Activity.RESULT_OK, intent);
+                        //     getActivity().finish();
+                        if (jsonObject.has("token")) {
+                            try {
+                                LoginFragment.setmUserToken(jsonObject.getString("token"));
+                                getAccount();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    } else {
+                        //Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
+                    }
+
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+                }
+            });
+        }
+    }
+
+    public void getAccount() {
+
+        LoginAPI.pushToken(LoginFragment.getmUserToken(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                if (jsonObject.has("account_id")) {
+                    setmAccount(Account.getData(jsonObject.toString()));
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+            }
+        });
+    }
+
+    public static Account getmAccount() {
+        return getmAccount();
+    }
+
+    public static void setmAccount(Account mAccount) {
+        LoginFragment.setmAccount(mAccount);
+    }
+
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();

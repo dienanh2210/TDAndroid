@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -33,11 +35,14 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListRegisterAdapter;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.model.Account;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
@@ -64,7 +69,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     TextView tv_age;
     Bitmap bitmapIcon;
     private RegisterActivity activity;
-
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -160,10 +164,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         int sex = 1;
         switch (v.getId()) {
             case R.id.rlt_prefecture:
-                activity.openPage(PrefectureFragment.newInstance(this), true);
+                activity.openPage(PrefectureFragment.newInstance(this), true, true);
                 break;
             case R.id.rlt_age:
-                activity.openPage(AgeFragment.newInstance(this), true);
+                activity.openPage(AgeFragment.newInstance(this), true, true);
                 break;
             case R.id.rlt_man:
                 sex = chooseGender(true) ? 1 : 2;
@@ -188,6 +192,64 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
+    void loginToApp() {
+        final boolean gender = false;
+        String email = edt_email.getText().toString();
+        String password = edt_password.getText().toString();
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            LoginAPI.loginEmail(email, password, new ServiceCallback() {
+                @Override
+                public void onSuccess(ServiceResult resultCode, Object response) {
+                    JSONObject jsonObject = (JSONObject) response;
+                    if (jsonObject.has("success")) {
+                        Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes" + response.toString());
+//                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
+//                        startActivity( intent );
+                        Intent intent = new Intent(getActivity(),CourseListActivity.class);
+                        startActivity(intent);
+                        intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                        getActivity().setResult(Activity.RESULT_OK, intent);
+                        //     getActivity().finish();
+                        if (jsonObject.has("token")) {
+                            try {
+                               LoginFragment.setmUserToken(jsonObject.getString("token"));
+                                getAccount();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    } else {
+                        Log.d(edt_email.toString(), edt_password.toString() + "error");
+                    }
+
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+                }
+            });
+        }
+    }
+
+    public void getAccount() {
+
+        LoginAPI.pushToken(LoginFragment.getmUserToken(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                if (jsonObject.has("account_id")) {
+                    LoginFragment.setmAccount(Account.getData(jsonObject.toString()));
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+            }
+        });
+    }
     //    startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -222,7 +284,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     //SharedPreferencesUtils.getInstance(getContext()).setIntValue("UserIcon", select_userIcon.getDrawable());
                     SharedPreferencesUtils.getInstance(getContext()).setStringValue("Email", edt_email.getText().toString());
                     SharedPreferencesUtils.getInstance(getContext()).setStringValue("Pass", edt_password.getText().toString());
-                    Toast.makeText(getContext(), "Register Sucessflly", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "登録成功", Toast.LENGTH_LONG).show();
+                    loginToApp();
                 } else {
                     Log.d(edt_email.toString(), edt_password.toString() + "error");
                 }
@@ -251,7 +314,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             SharedPreferencesUtils.getInstance(getContext()).setStringValue("Email", edt_email.getText().toString());
             SharedPreferencesUtils.getInstance(getContext()).setStringValue("Pass", edt_password.getText().toString());
             Toast.makeText(getContext(), "Register Sucessflly", Toast.LENGTH_LONG).show();
+            loginToApp();
         } else {
+
             Log.d(edt_email.toString(), edt_password.toString() + "error");
         }
     }
