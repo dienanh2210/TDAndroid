@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        if (SharedPreferencesUtils.getInstance(this).getStringValue("Email") == "") {
-            if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial") == "")
+        if (SharedPreferencesUtils.getInstance(this).getStringValue("Email").equals("")) {
+            if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals(""))
                 changeActivity();
             else
                 changeMenupPage();

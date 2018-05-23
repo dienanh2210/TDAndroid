@@ -27,7 +27,7 @@ public class MenuEntryActivity extends BaseActivity {
         tv_loginEntry.setOnClickListener( onClickLoginEntry );
         tv_searchskip=findViewById( R.id.tv_searchskip );
         tv_searchskip.setOnClickListener( onClickSearchSkip  );
-        if(SharedPreferencesUtils.getInstance(this).getStringValue("MenuEntry")=="")
+        if(SharedPreferencesUtils.getInstance(this).getStringValue("MenuEntry").equals(""))
             tv_back_menu.setVisibility(View.GONE);
         else
             tv_back_menu.setVisibility(View.VISIBLE);
