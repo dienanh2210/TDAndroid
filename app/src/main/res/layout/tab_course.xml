@@ -270,6 +270,7 @@
                     android:text="@string/CourseStory"
                     android:textColor="@color/Black"
                     android:textSize="@dimen/_18sdp"
+                    android:textStyle="bold"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
 

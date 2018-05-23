@@ -37,6 +37,7 @@
                 android:layout_toEndOf="@id/ic_story_1"
                 android:layout_centerVertical="true"
                 android:text="@string/StoryTitle1"
+                android:textStyle="bold"
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_17sdp" />
         </RelativeLayout>

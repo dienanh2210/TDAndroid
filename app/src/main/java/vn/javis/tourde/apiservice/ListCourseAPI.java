@@ -78,7 +78,9 @@ public class ListCourseAPI {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 String vl = singleJsonObject.toString();
                 Course thisCourse = Course.getData(vl);
-                instance.mAllCourses.add(thisCourse);
+                if (thisCourse != null) {
+                    instance.mAllCourses.add(thisCourse);
+                }
 
             }
             Log.i("error_" , abc+"");

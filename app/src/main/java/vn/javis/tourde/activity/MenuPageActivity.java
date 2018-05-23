@@ -23,6 +23,7 @@ import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class MenuPageActivity extends BaseActivity {
 
@@ -59,7 +60,7 @@ public class MenuPageActivity extends BaseActivity {
         basic_Info=findViewById(R.id.basic_Info);
         basic_Info.setVisibility(View.GONE);
         String token = LoginFragment.getmUserToken();
-        if(token != ""){
+        if(token != "" ){
             ll_logout.setVisibility( View.VISIBLE );
             tv_login.setVisibility(View.GONE);
             rlt_register.setVisibility(View.GONE);
@@ -125,6 +126,9 @@ public class MenuPageActivity extends BaseActivity {
                         basic_Info.setVisibility(View.GONE);
                         LoginFragment.setmAccount(null);
                         LoginFragment.setmUserToken("");
+                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
+                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
+                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
                     } else {
 
                     }
