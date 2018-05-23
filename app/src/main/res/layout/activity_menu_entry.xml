@@ -23,16 +23,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:background="@color/backgroud">
-            <!-->
+
                         <TextView
-                            android:id="@+id/tv_back_menu_entry"
+                            android:id="@+id/tv_back_menu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_10ssp"
                             android:text="@string/Back"
                             android:textColor="@color/search_course_color_close_text"
-                            android:textSize="@dimen/_16sdp" /><!-->
+                            android:textSize="@dimen/_16sdp" />
 
                         <TextView
                             android:id="@+id/tv_searchskip"

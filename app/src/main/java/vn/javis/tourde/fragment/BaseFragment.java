@@ -46,5 +46,4 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract View getView(LayoutInflater inflater, @Nullable ViewGroup container);
 
-
 }

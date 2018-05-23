@@ -126,7 +126,9 @@ public class MenuPageActivity extends BaseActivity {
                         basic_Info.setVisibility(View.GONE);
                         LoginFragment.setmAccount(null);
                         LoginFragment.setmUserToken("");
-
+                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
+                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
+                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
                     } else {
 
                     }
