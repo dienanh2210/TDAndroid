@@ -268,7 +268,8 @@
     <string name="btnFirst">コース画面へ</string>
     <string name="btnSecond">スタート地点までのアクセス</string>
     <string name="cancel">いいえ</string>
-    <string name="ok">はい</string>
+    <string name="yes">はい</string>
+    <string name="ok">OK</string>
 
     <string name="btn_add_contact"><u>ログイン</u></string>
     //spot facilities
@@ -312,5 +313,6 @@
     <string name="spotName">瀬戸田町観光案内所</string>
     <string name="selectSpotToCheckin">チェックインするスポットを 選択してください</string>
     <string name="new_account"><u>新規登録</u></string>
+
 </resources>
 

@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -226,6 +227,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     }
 
+    @SuppressLint("SetTextI18n")
     void showCourseDetail(CourseDetail courseDetail) {
         final CourseData model = courseDetail.getmCourseData();
         Log.i("coursedetail",model.toString());
