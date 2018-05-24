@@ -29,7 +29,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.adapter.ListSpotDetailCircleAdapter;
-import vn.javis.tourde.adapter.ListSpotsDetailAdapter;
+
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.Spot;

@@ -95,7 +95,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     }
 
     public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, final int new_image) {
-        final Animation anim_out = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
+       /* final Animation anim_out = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
         final Animation anim_in = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
         anim_out.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -130,7 +130,22 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
             }
         });
         v.startAnimation(anim_out);
-        textView.startAnimation(anim_out);
+        textView.startAnimation(anim_out);*/
+
+        final Animation anim_img = AnimationUtils.loadAnimation(c,R.anim.rotate_up);
+        final Animation anim_text = AnimationUtils.loadAnimation(c,R.anim.rotate_up_in);
+        v.setBackgroundResource(new_image);
+        v.setTag(new_image);
+        textView.setText(s);
+        v.startAnimation(anim_img);
+        textView.startAnimation(anim_text);
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate( savedInstanceState );
+
 
     }
 
@@ -141,21 +156,24 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         runnable = new Runnable() {
             @Override
             public void run() {
-                if (imgView.getTag() != null && imgView.getTag().equals(R.drawable.icon_fishing)) {
+
+                if (imgView.getTag() == null ) {
                     ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+                    handler.postDelayed( runnable,2000 );
                     // Animation rotation = AnimationUtils.loadAnimation(this,R.anim.rotation);
                     // imgView.startAnimation(rotation);
-
-                } else
+                } else {
                     // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
                     //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                    txtView.setVisibility(View.GONE);
-                ImageViewAnimatedChange(getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing);
-                ImageViewAnimatedChange(getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing);
-
+                    ImageViewAnimatedChange( getApplicationContext(), txtView, "バッジを獲得！", imgView, R.drawable.icon_fishing );
+                }
             }
 
+
         };
+        handler = new Handler();
+        handler.postDelayed(runnable, 1000);
+
 //        runnabletwo = new Runnable() {
 //            @Override
 //            public void run() {
@@ -174,9 +192,8 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         //  btnStartDemo.setOnClickListener(new View.OnClickListener() {
         //  @Override
         //  public void onClick(View view) {
-        ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
-        handler = new Handler();
-        handler.postDelayed(runnable, 1000);
+
+
 
 //        ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",img,R.drawable.backgound_check);
 //        handler = new Handler();

@@ -24,7 +24,7 @@
                 android:gravity="center"
                 android:text="@string/BtnBackBadge"
                 android:textColor="@color/SkyBlue"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_13sdp" />
 
             <TextView
                 android:id="@+id/badge_collection_title"
@@ -36,7 +36,7 @@
                 android:gravity="center"
                 android:text="@string/BadgeTitile"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:text="@string/BtnCloseBadge"
                 android:textColor="@color/SkyBlue"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_13sdp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -70,12 +70,12 @@
                     android:gravity="center"
                     android:text="@string/AchivementBadges"
                     android:textColor="@color/Black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <ImageView
                     android:id="@+id/redline_archivement"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_3sdp"
+                    android:layout_height="@dimen/_2sdp"
                     android:layout_alignParentBottom="true"
                     android:background="@color/Red"
                     android:contentDescription="@string/AchivementBadges"
@@ -93,12 +93,12 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/SpotBadges"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <ImageView
                     android:id="@+id/redline_spot"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_3sdp"
+                    android:layout_height="@dimen/_2sdp"
                     android:layout_alignParentBottom="true"
                     android:background="@color/Red"
                     android:contentDescription="@string/SpotBadges"
@@ -129,7 +129,7 @@
                     />
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"/>
+                    android:layout_height="@dimen/_5sdp"/>
             </LinearLayout>
 
         </ScrollView>

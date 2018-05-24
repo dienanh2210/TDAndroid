@@ -65,6 +65,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     TextView txtTitle;
     @BindView(R.id.txt_catch_phrase_detail)
     TextView txtCatchPhrase;
+    @BindView(R.id.txt_introduction)
+    TextView txtIntroduction;
     @BindView(R.id.txt_area_detail)
     TextView txtArea;
     @BindView(R.id.txt_distance_detail)
@@ -230,13 +232,14 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     @SuppressLint("SetTextI18n")
     void showCourseDetail(CourseDetail courseDetail) {
         final CourseData model = courseDetail.getmCourseData();
-        Log.i("coursedetail",model.toString());
+
         if (model == null)
             return;
 
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
+        txtIntroduction.setText(model.getIntroduction());
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
         txtArea.setText(model.getArea());
@@ -257,9 +260,15 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             txtDate.setText(out);
         } catch (ParseException e) {
         }
-
-
-      //   txtTag.setText("#" + model.getTag());
+        List<String> listTag = courseDetail.getListTag();
+        if(listTag.size()>0) {
+            String s ="";
+            for(int i=0;i<listTag.size();i++)
+            {
+                s+="#" + listTag.get(i)+" ";
+            }
+            txtTag.setText(s);
+        }
 
         isFavourite = false;
         FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {

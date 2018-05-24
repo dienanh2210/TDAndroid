@@ -19,7 +19,7 @@
             android:layout_marginStart="@dimen/_10ssp"
             android:text="@string/Back"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_12sdp" />
 
         <TextView
             android:id="@+id/tv_close"
@@ -33,7 +33,7 @@
             android:paddingStart="@dimen/_1sdp"
             android:text="@string/search_course_close"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_12sdp" />
 
         <TextView
             android:id="@+id/register_title"
@@ -42,7 +42,7 @@
             android:layout_centerInParent="true"
             android:text="@string/SignUp"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -64,10 +64,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -81,26 +78,23 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextUsername"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <EditText
                     android:id="@+id/edt_username"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/_47sdp"
                     android:background="@color/backgroud"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
                     android:paddingEnd="@dimen/_1sdp"
                     android:paddingStart="@dimen/_15sdp"
                     android:textColorHint="@color/Gray"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <include layout="@layout/item_divider" />
@@ -110,10 +104,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -127,22 +118,19 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextUserIcon"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/select_userIcon"
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_60sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:src="@drawable/plus_button"
                     android:textColorHint="@color/Gray" />
             </LinearLayout>
@@ -152,10 +140,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -169,7 +154,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextEmailUser"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -181,7 +166,7 @@
                 <EditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/_47sdp"
                     android:background="@color/backgroud"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
@@ -198,10 +183,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -215,26 +197,23 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/PassWord"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <EditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/_47sdp"
                     android:background="@color/backgroud"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:paddingEnd="@dimen/_1sdp"
                     android:paddingStart="@dimen/_15sdp"
                     android:textColorHint="@color/Gray"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -244,20 +223,6 @@
 
             <include layout="@layout/item_divider" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:text="@string/TextHelpUser"
-                android:textColor="@color/search_course_color_close_text"
-                android:textSize="@dimen/_15ssp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
-
-            <include layout="@layout/item_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -276,18 +241,15 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextGender"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C8CDD0" />
+                <include layout="@layout/item_divider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/_47sdp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -376,12 +338,12 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextAge"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -393,7 +355,7 @@
                 <RelativeLayout
                     android:id="@+id/rlt_age"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp">
+                    android:layout_height="@dimen/_47sdp">
 
                     <TextView
                         android:id="@+id/tv_age"
@@ -406,7 +368,7 @@
                         android:paddingEnd="@dimen/_1sdp"
                         android:paddingStart="@dimen/_15sdp"
                         android:text="@string/register_10t"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <ImageView
                         android:id="@+id/select_age"
@@ -448,7 +410,7 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:text="@string/TextPrefecture"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -460,7 +422,7 @@
                 <RelativeLayout
                     android:id="@+id/rlt_prefecture"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp">
+                    android:layout_height="@dimen/_47sdp">
 
                     <TextView
                         android:id="@+id/tv_prefecture"
@@ -473,7 +435,7 @@
                         android:paddingEnd="@dimen/_1sdp"
                         android:paddingStart="@dimen/_15sdp"
                         android:text="@string/register_hok"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_12ssp" />
 
                     <ImageView
                         android:id="@+id/im_choose"
@@ -501,7 +463,8 @@
             <Button
                 android:id="@+id/appCompatButtonLogin"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_47sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_30sdp"
@@ -509,8 +472,7 @@
                 android:text="@string/SignUp"
                 android:textAlignment="center"
                 android:textColor="@color/backgroud"
-                android:layout_marginBottom="@dimen/_30sdp"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

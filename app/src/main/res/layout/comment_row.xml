@@ -12,9 +12,10 @@
         android:layout_height="wrap_content">
         <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/img_avata"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_23sdp"
             android:src="@drawable/icon_classic"
+            android:layout_centerVertical="true"
             app:riv_border_color="@color/SkyBlue"
             app:riv_border_width=".5dp"
             app:riv_mutate_background="true"
@@ -30,14 +31,14 @@
             android:layout_height="wrap_content"
             android:text="@string/course_detail_title"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="@dimen/_12sdp"
             android:maxWidth="@dimen/_140sdp"
             android:layout_centerVertical="true"
             />
         <ImageView
             android:id="@+id/img_star_rating"
-            android:layout_width="@dimen/_98sdp"
-            android:layout_height="@dimen/_18sdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_13sdp"
             android:background="@drawable/icon_star5"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
@@ -48,7 +49,7 @@
         android:id="@+id/txt_comment_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/Black"
-        android:textSize="@dimen/_13sdp"
+        android:textSize="@dimen/_12sdp"
         android:layout_marginLeft="@dimen/_15sdp"
         android:layout_marginRight="@dimen/_15sdp"
         android:layout_width="match_parent"
@@ -68,6 +69,6 @@
     <View
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
+        android:layout_height=".3dp"
         android:background="@color/search_course_color_divider_background" />
 </LinearLayout>
