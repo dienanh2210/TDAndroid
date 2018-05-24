@@ -26,7 +26,12 @@ public class CommentsAPI {
         params.put("course_id", String.valueOf(course_id));
         params.put("rating", String.valueOf(rating));
         params.put("comment", comment);
-        String url = ApiEndpoint.BASE_URL + ApiEndpoint.POST_CREATE_ACCOUNT;
         TourDeService.postWithAuth(ApiEndpoint.POST_REVIEW_COURSE, params, callback);
+    }
+    public static void postCheckCourseReview(String token, int course_id, ServiceCallback callback){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token", token);
+        params.put("course_id", String.valueOf(course_id));
+        TourDeService.postWithAuth(ApiEndpoint.POST_CHECK_COURSE_REVIEW, params, callback);
     }
 }

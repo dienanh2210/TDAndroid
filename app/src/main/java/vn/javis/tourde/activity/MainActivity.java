@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.apiservice.SpotEquipmentReview;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.model.Account;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else
             changeCourseListActivity();
+
+
     }
 
     void changeActivity() {

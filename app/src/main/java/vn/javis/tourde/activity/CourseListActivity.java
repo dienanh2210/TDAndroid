@@ -35,7 +35,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
+import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
@@ -43,6 +45,7 @@ import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
+import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.services.GoogleService;
@@ -149,7 +152,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     public void showCommentPost() {
         openPage(new PostCommentFragment(), true);
-
     }
 
     public void showCourseDrive() {
