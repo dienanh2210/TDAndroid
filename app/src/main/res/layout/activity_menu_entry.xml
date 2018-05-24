@@ -32,7 +32,7 @@
                             android:layout_marginStart="@dimen/_10ssp"
                             android:text="@string/Back"
                             android:textColor="@color/search_course_color_close_text"
-                            android:textSize="@dimen/_16sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <TextView
                             android:id="@+id/tv_searchskip"
@@ -46,7 +46,7 @@
                             android:paddingStart="@dimen/_1sdp"
                             android:text="@string/search_course_skip"
                             android:textColor="@color/search_course_color_close_text"
-                            android:textSize="@dimen/_16sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <TextView
                             android:id="@+id/topic_title"
@@ -55,14 +55,14 @@
                             android:layout_centerInParent="true"
                             android:text="@string/SignUp"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_17ssp"
+                            android:textSize="@dimen/_16sdp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:background="@color/search_course_color_title_background">
 
                         <TextView
@@ -72,7 +72,7 @@
                             android:layout_marginStart="@dimen/_16sdp"
                             android:text="@string/TextNewEntry"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_13sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -81,7 +81,7 @@
                     <RelativeLayout
                         android:id="@+id/rlt_usermailrigister"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
+                        android:layout_height="@dimen/_47sdp"
                         android:background="@color/backgroud">
 
                         <ImageView
@@ -89,7 +89,7 @@
                             android:layout_width="@dimen/_26ssp"
                             android:layout_height="@dimen/_26ssp"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_9sdp"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@string/image_description"
                             android:gravity="center_vertical|center_horizontal"
                             android:src="@drawable/icon_mail" />
@@ -124,7 +124,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
+                        android:layout_height="@dimen/_47sdp"
                         android:background="@color/backgroud">
 
                         <ImageView
@@ -132,7 +132,7 @@
                             android:layout_width="@dimen/_26ssp"
                             android:layout_height="@dimen/_26ssp"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_9sdp"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@string/image_description"
                             android:gravity="center_vertical|center_horizontal"
                             android:src="@drawable/icon_facebook" />
@@ -167,7 +167,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
+                        android:layout_height="@dimen/_47sdp"
                         android:background="@color/backgroud">
 
                         <ImageView
@@ -175,7 +175,7 @@
                             android:layout_width="@dimen/_26ssp"
                             android:layout_height="@dimen/_26ssp"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_9sdp"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@string/image_description"
                             android:gravity="center_vertical|center_horizontal"
                             android:src="@drawable/icon_twitter" />
@@ -210,7 +210,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
+                        android:layout_height="@dimen/_47sdp"
                         android:background="@color/backgroud">
 
                         <ImageView
@@ -218,7 +218,7 @@
                             android:layout_width="@dimen/_26ssp"
                             android:layout_height="@dimen/_26ssp"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_9sdp"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@string/image_description"
                             android:gravity="center_vertical|center_horizontal"
                             android:src="@drawable/icon_google" />
@@ -253,7 +253,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
+                        android:layout_height="@dimen/_47sdp"
                         android:background="@color/backgroud">
 
                         <ImageView
@@ -261,7 +261,7 @@
                             android:layout_width="@dimen/_26ssp"
                             android:layout_height="@dimen/_26ssp"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_9sdp"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@string/image_description"
                             android:gravity="center_vertical|center_horizontal"
                             android:src="@drawable/icon_line" />
