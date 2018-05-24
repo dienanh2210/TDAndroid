@@ -71,6 +71,7 @@ public class ListCourseAPI {
             int abc = 0;
             JSONObject allJsonObject = jsonObject.getJSONObject("list");
             Iterator<String> key = allJsonObject.keys();
+            instance.mAllCourses.clear();
             while (key.hasNext()) {
                 abc++;
                 String id = key.next();

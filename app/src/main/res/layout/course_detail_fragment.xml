@@ -13,7 +13,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp">
+            android:layout_height="@dimen/_210sdp">
 
             <ImageView
                 android:id="@+id/img_course_detail"
@@ -40,19 +40,19 @@
 
             <ImageButton
                 android:id="@+id/btn_back_to_list"
-                android:layout_width="@dimen/_14sdp"
-                android:layout_height="@dimen/_21sdp"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_17sdp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/icon_back"
                 android:contentDescription="@string/image_description" />
 
             <ImageButton
                 android:id="@+id/btn_share"
-                android:layout_width="@dimen/_21sdp"
-                android:layout_height="@dimen/_21sdp"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="@dimen/_15sdp"
@@ -62,8 +62,8 @@
 
             <ImageButton
                 android:id="@+id/btn_bicyle"
-                android:layout_width="@dimen/_26sdp"
-                android:layout_height="@dimen/_21sdp"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_17sdp"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -92,8 +92,8 @@
 
             <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/img_post_user_detail"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_38sdp"
+                android:layout_height="@dimen/_38sdp"
                 android:src="@drawable/icon_classic"
                 app:riv_border_color="@color/SkyBlue"
                 app:riv_border_width=".5dp"
@@ -157,7 +157,7 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:text="@string/course_detail_phrase_detail"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_17sdp" />
+            android:textSize="@dimen/_13sdp" />
         <TextView
             android:id="@+id/txt_introduction"
             android:layout_width="match_parent"
@@ -167,7 +167,7 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:text="@string/course_detail_phrase_detail"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_12sdp" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
@@ -187,8 +187,8 @@
 
             <ImageView
                 android:id="@+id/img_icon_comment"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_11sdp"
                 android:contentDescription="@string/image_description"
                 android:src="@drawable/icon_comment1" />
 
@@ -200,14 +200,14 @@
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:text="@string/course_detail_212"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="@color/Gray"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/img_icon_spot"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_11sdp"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:contentDescription="@string/image_description"
                 android:src="@drawable/ic_spot" />
@@ -220,14 +220,14 @@
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:text="@string/course_detail_3"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="@color/Gray"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/star_rate"
-                android:layout_width="@dimen/_90sdp"
-                android:layout_height="@dimen/_15sdp"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_13sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:src="@drawable/icon_star0" />
 
@@ -239,7 +239,7 @@
                 android:gravity="end"
                 android:text="@string/course_detail_date"
                 android:textColor="@color/Gray"
-                android:textSize="@dimen/_9ssp" />
+                android:textSize="@dimen/_9sdp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -264,12 +264,12 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
                     android:text="@string/Area"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textSize="@dimen/_8sdp" />
 
 
                 <TextView
@@ -277,7 +277,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -293,12 +293,12 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
                     android:text="@string/DistanceType"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textSize="@dimen/_8sdp" />
 
 
                 <TextView
@@ -306,7 +306,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -322,12 +322,12 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
                     android:text="@string/Season"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp"
+                    android:textSize="@dimen/_8ssp"
 
                     />
 
@@ -336,7 +336,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
         </LinearLayout>
@@ -362,19 +362,19 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
                     android:text="@string/AvarageSlope"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textSize="@dimen/_8ssp" />
 
                 <TextView
                     android:id="@+id/txt_average_slope"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -390,12 +390,12 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
                     android:text="@string/search_course_elevation"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11sdp" />
+                    android:textSize="@dimen/_8sdp" />
 
 
                 <TextView
@@ -403,7 +403,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
 
@@ -419,19 +419,19 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:background="@drawable/text_border"
                     android:gravity="center"
                     android:text="@string/CourseType"
 
                     android:textColor="@color/Red"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textSize="@dimen/_8sdp" />
 
                 <TextView
                     android:id="@+id/txt_course_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/Red"
                     android:layout_marginStart="@dimen/_5sdp" />
             </LinearLayout>
@@ -445,29 +445,28 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:textColor="@color/SkyBlue"
-            android:textSize="@dimen/_11sdp" />
+            android:textSize="@dimen/_10sdp" />
 
         <!--<include layout="@layout/course_tab_container"></include>-->
 
         <vn.javis.tourde.customlayout.TourDeTabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:visibility="visible"
             app:tabActiveColor="@android:color/white"
-            app:tabHeight="@dimen/_50sdp"
+            app:tabHeight="@dimen/_45sdp"
             app:tabItems="@array/title_test"
             app:tabNormalColor="#DCE0E2"
             app:tabTextActiveColor="@color/color_text_tab"
             app:tabTextColor="@color/Black"
-            app:tabTextSize="@dimen/_13sdp"></vn.javis.tourde.customlayout.TourDeTabLayout>
+            app:tabTextSize="@dimen/_12sdp"></vn.javis.tourde.customlayout.TourDeTabLayout>
 
         <vn.javis.tourde.view.YourScrollableViewPager
             android:id="@+id/course_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></vn.javis.tourde.view.YourScrollableViewPager>
-
         <include layout="@layout/footer_layout"></include>
     </LinearLayout>
 </ScrollView>

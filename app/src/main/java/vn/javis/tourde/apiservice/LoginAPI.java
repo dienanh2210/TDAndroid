@@ -73,6 +73,11 @@ public class LoginAPI {
         param.put("token", token);
         TourDeService.getWithAuth(ApiEndpoint.POST_LOGOUT_ACCOUNT, param,callback);
     }
-
+    public static void resetPassword(final String email, final String password,ServiceCallback callback) {
+        HashMap<String, String> param = new HashMap<>();
+        param.put("email", email);
+        param.put("password", password);
+        TourDeService.postWithAuth(ApiEndpoint.POST_RESET_PASSWORD, param, callback);
+    }
 
 }
