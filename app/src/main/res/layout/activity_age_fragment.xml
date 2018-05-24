@@ -28,7 +28,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:text="@string/Back"
                     android:textColor="@color/search_course_color_close_text"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/tv_close"
@@ -42,7 +42,7 @@
                     android:paddingStart="@dimen/_1sdp"
                     android:text="@string/search_course_close"
                     android:textColor="@color/search_course_color_close_text"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/topic_title"
@@ -51,7 +51,7 @@
                     android:layout_centerInParent="true"
                     android:text="@string/select_age"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_17sdp"
+                    android:textSize="@dimen/_18sdp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -74,7 +74,7 @@
             <Button
                 android:id="@+id/btn_choose"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:layout_marginLeft="@dimen/_30sdp"
                 android:layout_marginRight="@dimen/_30sdp"

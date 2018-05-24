@@ -390,6 +390,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
 
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
+                        Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                     }
 
                 }

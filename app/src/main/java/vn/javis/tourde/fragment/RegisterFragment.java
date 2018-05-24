@@ -222,6 +222,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
                     } else {
                         Log.d(edt_email.toString(), edt_password.toString() + "error");
+                        Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                     }
 
                 }

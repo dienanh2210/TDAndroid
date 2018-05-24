@@ -35,7 +35,7 @@
             android:paddingStart="@dimen/_1sdp"
             android:text="@string/search_course_close"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_12sdp" />
 
         <TextView
             android:id="@+id/topic_title"
@@ -44,7 +44,7 @@
             android:layout_centerInParent="true"
             android:text="@string/MenuPage"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -64,7 +64,7 @@
             <RelativeLayout
                 android:id="@+id/user_Info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -74,7 +74,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/UserInfo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_11sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -95,7 +95,7 @@
                     android:layout_alignParentStart="true"
                     android:text="@string/BasicInfo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
 
                 <ImageView
@@ -166,7 +166,7 @@
                         android:layout_alignParentStart="true"
                         android:text="@string/NewUserRegisretion"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_13sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <ImageView
                         android:id="@+id/register"
@@ -199,7 +199,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/Login"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <ImageView
                     android:id="@+id/iv_login"
@@ -245,7 +245,7 @@
             <RelativeLayout
                 android:id="@+id/app_Info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -255,7 +255,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/AppInfo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_11sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -275,7 +275,7 @@
                     android:layout_toStartOf="@+id/im_how"
                     android:layout_alignParentStart="true"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <ImageView
                     android:id="@+id/im_how"
@@ -305,7 +305,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/PrivacyPolicy"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
@@ -322,7 +322,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/Inquiry"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
@@ -339,7 +339,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/RateInApp"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
@@ -347,7 +347,7 @@
             <RelativeLayout
                 android:id="@+id/version"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -357,7 +357,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/Version"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_11sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -374,13 +374,13 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/versiontwo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -390,7 +390,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/MenuPageWeb"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -406,7 +406,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/MenuPageWebText"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
             </RelativeLayout>
 
             <include layout="@layout/item_divider"/>
