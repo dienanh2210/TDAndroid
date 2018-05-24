@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,7 +50,16 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
         holder.txtUserName.setText(model.getEmail());
         holder.txtCommentContent.setText(model.getComment());
       //  holder.txtPostDate.setText(model.getPostDate().toString());
-        holder.txtPostDate.setText(model.getReviewInsertDatetime());
+
+        String dateGet = model.getInsertDatetime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
+        try {
+            Date date = dateFormat.parse(dateGet);
+            String out = dateFormat2.format(date).toString();
+            holder.txtPostDate.setText(out);
+        } catch (ParseException e) {
+        }
         int rate = model.getRating();
         if (rate == 1)
             holder.imgStarRate.setImageResource(R.drawable.icon_star1);
