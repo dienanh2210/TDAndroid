@@ -78,7 +78,7 @@ public class ProcessDialog {
 
         dialog.show();
     }
-    public static void showDialogOk(final Context context,String title, String content, final  OnActionDialogClickOk action) {
+    public static void showDialogOk(final Context context,String title, String content) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
