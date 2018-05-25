@@ -12,7 +12,7 @@
         <RelativeLayout
             android:id="@+id/badge_collection_header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_38sdp"
             android:background="@color/White">
 
             <TextView
@@ -53,7 +53,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_38sdp"
             android:background="@drawable/header_border"
             android:baselineAligned="false"
             android:orientation="horizontal">

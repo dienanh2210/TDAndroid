@@ -20,7 +20,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_38sdp"
                 android:background="@color/backgroud">
 
                 <TextView
@@ -31,7 +31,7 @@
                     android:layout_marginStart="@dimen/_10ssp"
                     android:text="@string/Back"
                     android:textColor="@color/search_course_color_close_text"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/tv_close_basicInfo"
@@ -45,7 +45,7 @@
                     android:paddingStart="@dimen/_1sdp"
                     android:text="@string/search_course_close"
                     android:textColor="@color/search_course_color_close_text"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/topic_title"
@@ -54,7 +54,7 @@
                     android:layout_centerInParent="true"
                     android:text="@string/basic_info_title"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_17ssp"
+                    android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -62,7 +62,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -73,7 +73,7 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/TextNameBasic"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -111,7 +111,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -121,7 +121,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/UserEmail"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -129,7 +129,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_55sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@color/backgroud">
 
                 <TextView
@@ -140,7 +140,7 @@
                     android:paddingStart="@dimen/_16sdp"
                     android:text="@string/hint_email_basicinfo"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/dimen25"
+                    android:textSize="@dimen/_12sdp"
                     tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
@@ -148,7 +148,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -158,7 +158,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/TextGender"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -166,7 +166,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_55sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@color/backgroud">
 
                 <TextView
@@ -185,7 +185,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -195,7 +195,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/TextAge"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -203,7 +203,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_55sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@color/backgroud">
 
                 <TextView
@@ -222,7 +222,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -232,7 +232,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/TextPrefecture"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -240,7 +240,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_55sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@color/backgroud">
 
                 <TextView
@@ -258,7 +258,7 @@
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/appCompatButtonLogin"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/dimen50"
@@ -266,7 +266,7 @@
                 android:text="@string/ButtonBasic"
                 android:textAlignment="center"
                 android:textColor="@color/backgroud"
-                android:textSize="@dimen/dimen25" />
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
     </ScrollView>
 

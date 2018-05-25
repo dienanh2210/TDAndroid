@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp">
+        android:layout_height="@dimen/_38sdp">
         <!-->
                 <TextView
                     android:id="@+id/tv_tutorial"
@@ -83,7 +83,7 @@
             <RelativeLayout
                 android:id="@+id/basic_Info"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:id="@+id/tv_basic"
@@ -154,7 +154,7 @@
                 <RelativeLayout
                     android:id="@+id/rlt_register"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp">
+                    android:layout_height="@dimen/_47sdp">
 
                     <TextView
                         android:id="@+id/tv_userregistration"
@@ -188,7 +188,7 @@
             <RelativeLayout
                 android:id="@+id/login"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -264,7 +264,7 @@
             <RelativeLayout
                 android:id="@+id/rlt_tutorial"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -296,7 +296,7 @@
             <RelativeLayout
                 android:id="@+id/privacy"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -313,7 +313,7 @@
             <RelativeLayout
                 android:id="@+id/inquiry"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -330,7 +330,7 @@
             <RelativeLayout
                 android:id="@+id/rateInApp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -365,7 +365,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -397,7 +397,7 @@
             <include layout="@layout/item_divider"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -66,23 +66,23 @@
         <Button
             android:id="@+id/btn_back_detail"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_47sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/custom_frame_blue"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="@dimen/_12sdp"
             android:textColor="@color/White"
             android:text="@string/btnFirst" />
 
         <Button
             android:id="@+id/btn_show_map"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_47sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="@dimen/_12sdp"
             android:textColor="@color/White"
             android:background="@drawable/custom_frame_blue"
             android:text="@string/btnSecond" />
