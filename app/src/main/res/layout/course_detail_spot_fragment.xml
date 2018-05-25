@@ -201,7 +201,7 @@
         <vn.javis.tourde.customlayout.TourDeTabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_47sdp"
             android:visibility="visible"
             app:tabActiveColor="@android:color/white"
             app:tabHeight="@dimen/_50sdp"
@@ -209,7 +209,7 @@
             app:tabNormalColor="#DCE0E2"
             app:tabTextActiveColor="@color/color_text_tab"
             app:tabTextColor="@color/Black"
-            app:tabTextSize="@dimen/_14ssp"/>
+            app:tabTextSize="@dimen/_13ssp"/>
 
 
         <vn.javis.tourde.view.YourScrollableViewPager

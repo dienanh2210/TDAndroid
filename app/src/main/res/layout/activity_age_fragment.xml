@@ -18,7 +18,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:background="@color/backgroud"
-                android:layout_height="@dimen/_35sdp">
+                android:layout_height="@dimen/_38sdp">
 
                 <TextView
                     android:id="@+id/tv_back_menu_entry"

@@ -293,6 +293,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     loginToApp();
                 } else {
                     Log.d(edt_email.toString(), edt_password.toString() + "error");
+                    Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                 }
             }
         };
@@ -304,6 +305,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("register account error", error.getMessage());
+
+                Toast.makeText(getContext(), "登録に失敗しました",Toast.LENGTH_LONG).show();
+
             }
         };
     }
@@ -318,11 +322,12 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             //SharedPreferencesUtils.getInstance(getContext()).setIntValue("UserIcon", select_userIcon.getDrawable());
             SharedPreferencesUtils.getInstance(getContext()).setStringValue("Email", edt_email.getText().toString());
             SharedPreferencesUtils.getInstance(getContext()).setStringValue("Pass", edt_password.getText().toString());
-            Toast.makeText(getContext(), "Register Sucessflly", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "登録成功", Toast.LENGTH_LONG).show();
             loginToApp();
         } else {
 
             Log.d(edt_email.toString(), edt_password.toString() + "error");
+            Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
         }
     }
 

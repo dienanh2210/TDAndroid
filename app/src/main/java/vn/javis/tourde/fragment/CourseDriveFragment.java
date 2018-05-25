@@ -20,9 +20,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.apiservice.GetCourseDataAPI;
+import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.ProcessDialog;
 
 public class CourseDriveFragment extends BaseFragment {
@@ -35,17 +44,31 @@ public class CourseDriveFragment extends BaseFragment {
     @BindView(R.id.btn_show_map)
     Button btnMapWay;
     CourseListActivity mAcitivity;
+    @BindView(R.id.title_detail)
+    TextView title_detail;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAcitivity = (CourseListActivity) getActivity();
+        GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+                title_detail.setText(mCourseDetail.getmCourseData().getTitle());
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProcessDialog.showDialogConfirm(getContext(), "","走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-                       mAcitivity.ShowCountDown();
+                        mAcitivity.ShowCountDown();
                     }
                 });
             }

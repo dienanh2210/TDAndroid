@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.squareup.picasso.MemoryPolicy;
@@ -228,6 +230,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     }
 
+    @SuppressLint("SetTextI18n")
     void showCourseDetail(CourseDetail courseDetail) {
         final CourseData model = courseDetail.getmCourseData();
 
@@ -383,6 +386,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         isFavourite = !isFavourite;
                         Log.i("is: ", "false");
+                        Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                     }
                 }
 
@@ -404,6 +408,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         Log.i("is: ", "true");
                         isFavourite = !isFavourite;
+                        Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                     }
                 }
 

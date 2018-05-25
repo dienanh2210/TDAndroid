@@ -26,7 +26,7 @@
                 android:gravity="center"
                 android:text="@string/MyCourse"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

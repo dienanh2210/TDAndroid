@@ -17,7 +17,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:background="@color/backgroud"
-                android:layout_height="@dimen/_35sdp">
+                android:layout_height="@dimen/_38sdp">
 
                 <TextView
                     android:id="@+id/tv_back_sppot_faclities"
@@ -27,7 +27,7 @@
                     android:layout_marginStart="@dimen/_10ssp"
                     android:text="@string/Back"
                     android:textColor="@color/search_course_color_close_text"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/topic_title"
@@ -36,7 +36,7 @@
                     android:layout_centerInParent="true"
                     android:text="@string/text_spot_facilities"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/_17ssp"
+                    android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -58,13 +58,14 @@
             <Button
                 android:id="@+id/btn_choose"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btn_background"
                 android:text="@string/btn_spot_facilities"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/White"
                 android:textStyle="bold" />
 
