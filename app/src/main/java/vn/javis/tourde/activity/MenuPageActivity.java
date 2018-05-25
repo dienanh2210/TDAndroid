@@ -24,6 +24,7 @@ import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class MenuPageActivity extends BaseActivity {
@@ -111,39 +112,42 @@ public class MenuPageActivity extends BaseActivity {
     View.OnClickListener onClickLogout = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
-            final String token = LoginFragment.getmUserToken();
-            LogoutAccount.logOut( token, new ServiceCallback() {
+            ProcessDialog.showDialogConfirm(MenuPageActivity.this, "", "ログアウトしますか？", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
-                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                    JSONObject jsonObject = (JSONObject)response;
-                   // Log.d("logout", jsonObject.toString());
-                    Log.d("logout", token+jsonObject);
-                    if (jsonObject.has("success")) {
-                        rlt_register.setVisibility( View.VISIBLE );
-                        lineRegister.setVisibility(View.VISIBLE);
-                        tv_login.setVisibility(View.VISIBLE);
-                        ll_logout.setVisibility( View.GONE );
-                        basic_Info.setVisibility(View.GONE);
-                        LoginFragment.setmAccount(null);
-                        LoginFragment.setmUserToken("");
-                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
-                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
-                        SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
-                    } else {
+                public void onOkClick() {
+                Intent intent = new Intent(MenuPageActivity.this,CourseListActivity.class);
+                startActivity(intent);
+                    final String token = LoginFragment.getmUserToken();
+                    LogoutAccount.logOut( token, new ServiceCallback() {
+                        @Override
+                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                            JSONObject jsonObject = (JSONObject)response;
+                            // Log.d("logout", jsonObject.toString());
+                            Log.d("logout", token+jsonObject);
+                            if (jsonObject.has("success")) {
+                                rlt_register.setVisibility( View.VISIBLE );
+                                lineRegister.setVisibility(View.VISIBLE);
+                                tv_login.setVisibility(View.VISIBLE);
+                                ll_logout.setVisibility( View.GONE );
+                                basic_Info.setVisibility(View.GONE);
+                                LoginFragment.setmAccount(null);
+                                LoginFragment.setmUserToken("");
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
 
-                    }
+                            } else {
+
+                            }
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
+                        }
+                    } );
                 }
-
-                @Override
-                public void onError(VolleyError error) {
-
-                }
-            } );
-
-
-
-
+            });
         }
     };
 
