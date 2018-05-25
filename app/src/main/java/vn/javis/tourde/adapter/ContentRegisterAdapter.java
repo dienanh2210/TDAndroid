@@ -1,6 +1,7 @@
 package vn.javis.tourde.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ContentRegisterAdapter extends RecyclerView.Adapter<ContentRegister
     private OnClickItem onClickItem;
     public HashMap<Integer, View> mapItemView = new HashMap<>();
     private boolean isShowMark;
+    int positionShow;
 
     public ContentRegisterAdapter(List<String> contentList, OnClickItem onClickItem) {
         this.contentList = contentList;
@@ -42,7 +44,7 @@ public class ContentRegisterAdapter extends RecyclerView.Adapter<ContentRegister
 //        holder.itemView.setOnClickListener(holder);
 //        holder.imv_mark.setTag(position);
         mapItemView.put(position, holder.imv_mark);
-        if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
+        if (position == positionShow && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -79,7 +81,9 @@ public class ContentRegisterAdapter extends RecyclerView.Adapter<ContentRegister
         return isShowMark;
     }
 
-    public void setShowMark(boolean showMark) {
+    public void setShowMark(boolean showMark, int positionShow) {
         isShowMark = showMark;
+        this.positionShow = positionShow;
+        Log.i("test age",""+positionShow);
     }
 }

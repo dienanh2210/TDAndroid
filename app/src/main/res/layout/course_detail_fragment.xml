@@ -94,7 +94,6 @@
                 android:id="@+id/img_post_user_detail"
                 android:layout_width="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp"
-                android:src="@drawable/icon_classic"
                 app:riv_border_color="@color/SkyBlue"
                 app:riv_border_width=".5dp"
                 app:riv_mutate_background="true"
@@ -113,7 +112,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/course_detail_title"
                 android:layout_toEndOf="@id/img_post_user_detail"
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_17sdp" />
@@ -144,7 +142,6 @@
                 android:id="@+id/txt_post_user_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/course_detail_user_detail"
                 android:textSize="@dimen/_9sdp" />
         </LinearLayout>
 
@@ -155,7 +152,6 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
-            android:text="@string/course_detail_phrase_detail"
             android:textColor="@color/Black"
             android:textSize="@dimen/_13sdp" />
         <TextView
@@ -165,7 +161,6 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
-            android:text="@string/course_detail_phrase_detail"
             android:textColor="@color/Black"
             android:textSize="@dimen/_12sdp" />
         <ImageView

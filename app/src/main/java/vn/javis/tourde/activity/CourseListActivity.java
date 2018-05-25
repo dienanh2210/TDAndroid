@@ -52,6 +52,7 @@ import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
+import vn.javis.tourde.utils.ProcessDialog;
 
 /**
  * Created by admin on 3/23/2018.
@@ -65,6 +66,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
 
+
+    public int getmCourseID() {
+        return mCourseID;
+    }
 
     private int mCourseID;
     private int mSpotID;
@@ -90,6 +95,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
         fn_permission();
+        /*ProcessDialog.showDialogOk(CourseListActivity.this, "", "ログアウトしました。", new ProcessDialog.OnActionDialogClickOk() {
+            @Override
+            public void onOkClick() {
+
+            }
+        });*/
     }
 
     @Override

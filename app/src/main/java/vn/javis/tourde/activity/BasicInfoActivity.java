@@ -1,5 +1,6 @@
 package vn.javis.tourde.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +12,13 @@ import com.squareup.picasso.Picasso;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.utils.ListArea;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 
 public class BasicInfoActivity extends BaseActivity {
 
-    TextView tv_back_basicInfo, tv_close_basicInfo, tv_UserEmail, tv_Username;
+    TextView tv_back_basicInfo, tv_close_basicInfo, tv_UserEmail, tv_Username, sex, age, prefecture;
     ImageView img_avatar;
 
     @Override
@@ -30,13 +32,28 @@ public class BasicInfoActivity extends BaseActivity {
         tv_Username = findViewById(R.id.tv_Username);
         tv_UserEmail = findViewById(R.id.tv_UserEmail);
         img_avatar = findViewById(R.id.avatar);
+        sex = findViewById(R.id.sex);
+        age = findViewById(R.id.age);
+        prefecture = findViewById(R.id.prefecture);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onResume() {
         super.onResume();
         tv_Username.setText(LoginFragment.getmAccount().getNickname());
         tv_UserEmail.setText(LoginFragment.getmAccount().getEmail());
+        if(LoginFragment.getmAccount().getSex().equals("1"))
+            sex.setText("男性");
+        else
+            sex.setText("女性");
+
+        age.setText(LoginFragment.getmAccount().getAge()+"代");
+
+        int area = Integer.parseInt(LoginFragment.getmAccount().getArea());
+        String strArea = ListArea.getAreas().get(area);
+        prefecture.setText(strArea);
+
         if(LoginFragment.getmAccount() !=null && LoginFragment.getmAccount().getImage() !="" && LoginFragment.getmAccount().getImage() !=null)
         {
             Log.i("avatar",LoginFragment.getmAccount().getImage());

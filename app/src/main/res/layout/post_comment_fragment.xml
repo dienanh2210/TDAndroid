@@ -26,7 +26,7 @@
                 android:layout_marginStart="@dimen/_15ssp"
                 android:text="@string/Back"
                 android:textColor="@color/search_course_color_close_text"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/headercommet"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -44,7 +44,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="@dimen/_30sdp"
             android:background="@color/search_course_color_title_background">
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:text="@string/item_text_header"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -96,7 +96,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="@dimen/_30sdp"
             android:background="@color/search_course_color_title_background">
 
             <TextView
@@ -106,7 +106,7 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="@string/item_text_detail"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_13ssp"
+                android:textSize="@dimen/_12sdp"
                 tools:ignore="SpUsage" />
         </RelativeLayout>
 
@@ -146,13 +146,14 @@
         <Button
             android:id="@+id/btn_choose"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_47sdp"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/btn_background"
             android:text="@string/item_button_detail"
+            android:textSize="@dimen/_12sdp"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
     </android.support.v7.widget.LinearLayoutCompat>

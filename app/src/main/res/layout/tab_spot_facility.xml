@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/user_Info"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_36sdp"
+            android:layout_height="@dimen/_38sdp"
             android:background="@color/White">
 
             <TextView
@@ -58,7 +58,7 @@
         <RelativeLayout
             android:id="@+id/basic_Info"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_50sdp">
+            android:layout_height="@dimen/_47sdp">
 
             <TextView
                 android:id="@+id/tv_basic"
@@ -138,7 +138,7 @@
             <include layout="@layout/item_divider"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_47sdp">
 
                 <TextView
                     android:id="@+id/tv_userregistration"
@@ -182,7 +182,7 @@
         <RelativeLayout
             android:id="@+id/login"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp">
+            android:layout_height="@dimen/_47sdp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -250,7 +250,7 @@
         <RelativeLayout
             android:id="@+id/app_Info"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_36sdp">
+            android:layout_height="@dimen/_47sdp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -292,7 +292,7 @@
         <RelativeLayout
             android:id="@+id/rlt_tutorial"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp">
+            android:layout_height="@dimen/_47sdp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -347,7 +347,7 @@
         <RelativeLayout
             android:id="@+id/privacy"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp">
+            android:layout_height="@dimen/_47sdp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -387,8 +387,7 @@
         <RelativeLayout
             android:id="@+id/inquiry"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp">
-
+            android:layout_height="@dimen/_47sdp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -425,8 +424,7 @@
         <RelativeLayout
             android:id="@+id/rateInApp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp">
-
+            android:layout_height="@dimen/_47sdp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -463,7 +461,7 @@
         <RelativeLayout
             android:id="@+id/version"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_36sdp">
+            android:layout_height="@dimen/_47sdp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -501,8 +499,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp">
-
+            android:layout_height="@dimen/_47sdp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -538,7 +535,7 @@
         <Button
             android:id="@+id/bt_spot_page"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_height="@dimen/_47sdp"
             android:layout_marginLeft="@dimen/_50sdp"
             android:layout_marginRight="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_30sdp"
@@ -547,7 +544,7 @@
             android:textAlignment="center"
             android:textColor="@color/backgroud"
             android:layout_marginBottom="@dimen/_30sdp"
-            android:textSize="@dimen/_15sdp" />
+            android:textSize="@dimen/_12sdp" />
 
 
 

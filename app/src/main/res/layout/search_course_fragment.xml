@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/_38sdp"
         android:background="@android:color/white">
         <TextView
             android:id="@+id/topic_title"
@@ -18,7 +18,7 @@
             android:layout_centerInParent="true"
             android:text="@string/search_course_title"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:paddingEnd="@dimen/_11sdp"
             android:text="@string/search_course_close"
             android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_12sdp"
             tools:ignore="RelativeOverlap,RtlHardcoded,RtlSymmetry" />
     </RelativeLayout>
     <ScrollView
@@ -49,7 +49,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_area"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlCompat" />
 
@@ -69,7 +69,7 @@
             <RelativeLayout
                 android:id="@+id/rlt_prefecture"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@android:color/white">
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_toStartOf="@+id/im_choose"
                     android:text="@string/search_course_select_area"
                     android:textColor="@color/search_course_color_description_text"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_12sdp"
                     tools:ignore="RelativeOverlap,RtlCompat,UnknownIdInLayout" />
 
 
@@ -138,7 +138,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -148,7 +148,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_more_searching"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlCompat" />
 
@@ -160,7 +160,7 @@
             <RelativeLayout
                 android:id="@+id/more_searching_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@android:color/white">
 
                 <TextView
@@ -173,7 +173,7 @@
                     android:layout_toStartOf="@+id/im_more_searching"
                     android:text="@string/search_course_more_searching_description"
                     android:textColor="@color/search_course_color_description_text"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_12sdp"
                     tools:ignore="RtlCompat" />
 
 
@@ -197,7 +197,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:background="@color/search_course_color_title_background">
 
                 <TextView
@@ -208,7 +208,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="@string/search_course_free_text"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
 
@@ -220,7 +220,7 @@
             <RelativeLayout
                 android:id="@+id/free_word_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_47sdp"
                 android:background="@android:color/white">
 
                 <EditText
@@ -234,7 +234,7 @@
                     android:inputType="text"
                     android:maxLines="@android:integer/config_mediumAnimTime"
                     android:textColor="@color/search_course_color_description_text"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_12sdp"
                     tools:ignore="RtlCompat" />
 
             </RelativeLayout>
@@ -249,7 +249,7 @@
                 <Button
                     android:id="@+id/bt_search_course"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_height="@dimen/_47sdp"
                     android:layout_marginLeft="@dimen/_50sdp"
                     android:layout_marginRight="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_30sdp"
@@ -258,7 +258,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/backgroud"
                     android:layout_marginBottom="@dimen/_30sdp"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
             </RelativeLayout>
 

@@ -25,7 +25,9 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
 
     private OnClickItem onClickItem;
     private boolean isAgeSelection;
-    public ListRegisterAdapter(Context context, List<Data> dataList,boolean isAgeSelection, OnClickItem onClickItem) {
+
+
+    public ListRegisterAdapter(Context context, List<Data> dataList, boolean isAgeSelection, OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
         this.onClickItem = onClickItem;
@@ -34,42 +36,44 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
 
     @Override
     public ListRegisterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.item_list, parent, false );
-        ViewHolder viewHolder = new ViewHolder( view );
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ListRegisterAdapter.ViewHolder holder, int position) {
-        final Data data = dataList.get( position );
-        holder.tv_header.setText( data.getTitle() );
-        if(isAgeSelection)
+        final Data data = dataList.get(position);
+        holder.tv_header.setText(data.getTitle());
+        if (isAgeSelection)
             holder.tv_header.setVisibility(View.GONE);
         //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
-        holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
-        holder.rcv_content.setAdapter( new ContentRegisterAdapter( data.getContent(), new  ContentRegisterAdapter.OnClickItem() {
+        holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
+        holder.rcv_content.setAdapter(new ContentRegisterAdapter(data.getContent(), new ContentRegisterAdapter.OnClickItem() {
             @Override
             public void onClick(int position, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
                     //to get key
                     e1.getKey();
                     //and to get value
-                    for (Map.Entry<Integer, View> eItem : (( ContentRegisterAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
+                    for (Map.Entry<Integer, View> eItem : ((ContentRegisterAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
                         //to get key
                         eItem.getKey();
                         //and to get value
-                        eItem.getValue().setVisibility( View.GONE );
+                        eItem.getValue().setVisibility(View.GONE);
                     }
                 }
-                if (onClickItem != null) onClickItem.onClick( position );
-                if (onClickItem != null) onClickItem.onClick( data.getContent().get(position) );
-                Log.i( "Content", data.getContent().get( position ) );
+                if (onClickItem != null) onClickItem.onClick(position);
+                if (onClickItem != null) onClickItem.onClick(data.getContent().get(position));
+                Log.i("Content", data.getContent().get(position));
             }
-        } ) );
-        mapRecyclerView.put( position, holder.rcv_content );
-        if (position == 0) {
-            ((ContentRegisterAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
+        }));
+        mapRecyclerView.put(position, holder.rcv_content);
+        Log.i("test area", position+"-"+data.isMarked()+"-"+data.getPositionMarked());
+        if (data.isMarked()) {
+            ((ContentRegisterAdapter) holder.rcv_content.getAdapter()).setShowMark(true, data.getPositionMarked());
         }
+
         //0ne ...
         //  if(position == 1) {
         //   holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
@@ -87,10 +91,10 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
 
         public ViewHolder(View itemView) {
 
-            super( itemView );
-            tv_header = itemView.findViewById( R.id.tv_header );
-            rcv_content = itemView.findViewById( R.id.rcv_content );
-            itemView.setOnClickListener( this );
+            super(itemView);
+            tv_header = itemView.findViewById(R.id.tv_header);
+            rcv_content = itemView.findViewById(R.id.rcv_content);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -101,6 +105,7 @@ public class ListRegisterAdapter extends RecyclerView.Adapter<ListRegisterAdapte
 
     public interface OnClickItem {
         void onClick(int position);
+
         void onClick(String content);
     }
 

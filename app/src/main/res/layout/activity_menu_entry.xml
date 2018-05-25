@@ -21,7 +21,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_38sdp"
             android:background="@color/backgroud">
 
                         <TextView
@@ -104,7 +104,7 @@
                             android:layout_toStartOf="@+id/iv_choose_email"
                             android:text="@string/TextMailNewEntry"
                             android:textColor="@color/colorText"
-                            android:textSize="@dimen/_13sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <ImageView
                             android:id="@+id/iv_choose_email"
@@ -147,7 +147,7 @@
                             android:layout_toStartOf="@+id/iv_choose_facebook"
                             android:text="@string/LoginFacebookMenuEntry"
                             android:textColor="@color/colorText"
-                            android:textSize="@dimen/_13sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <ImageView
                             android:id="@+id/iv_choose_facebook"
@@ -190,7 +190,7 @@
                             android:layout_toStartOf="@+id/iv_choose_twitter"
                             android:text="@string/LoginTwitterMenuEntry"
                             android:textColor="@color/colorText"
-                            android:textSize="@dimen/_13sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <ImageView
                             android:id="@+id/iv_choose_twitter"
@@ -233,7 +233,7 @@
                             android:layout_toStartOf="@+id/iv_choose_google"
                             android:text="@string/LoginGoogleMenuEntry"
                             android:textColor="@color/colorText"
-                            android:textSize="@dimen/_13sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <ImageView
                             android:id="@+id/iv_choose_google"
@@ -276,7 +276,7 @@
                             android:layout_toStartOf="@+id/iv_choose_line"
                             android:text="@string/LoginLine"
                             android:textColor="@color/colorText"
-                            android:textSize="@dimen/_13sdp" />
+                            android:textSize="@dimen/_12sdp" />
 
                         <ImageView
                             android:id="@+id/iv_choose_line"

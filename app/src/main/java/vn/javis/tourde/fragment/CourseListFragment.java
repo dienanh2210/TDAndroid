@@ -38,6 +38,8 @@ import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.ProcessDialog;
 
 
 public class CourseListFragment extends BaseFragment {
@@ -124,7 +126,14 @@ public class CourseListFragment extends BaseFragment {
         });
         imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
         txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
-        testSpotDataAPI();
+        String token = LoginFragment.getmUserToken();
+        Intent intent = mActivity.getIntent();
+        if (intent.hasExtra(Constant.KEY_LOGOUT_SUCCESS)) {
+            if (token == "" && intent.getIntExtra(Constant.KEY_LOGOUT_SUCCESS,0)==1) {
+                ProcessDialog.showDialogOk(getContext(), "", "ログアウトしました。");
+            }
+        }
+
     }
 
     @Override
@@ -156,8 +165,8 @@ public class CourseListFragment extends BaseFragment {
 
 
         int totalCourse = ListCourseAPI.getInstance().getCourseSize();
-Log.i("aaa",ListCourseAPI.getInstance().getCourseSize()+"");
-        mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE==0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
+        Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
+        mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
         int currentValue = mCurrentPage;
         mCurrentPage += nextPage;
         if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
@@ -197,19 +206,6 @@ Log.i("aaa",ListCourseAPI.getInstance().getCourseSize()+"");
 
     }
 
-    private void testSpotDataAPI() {
-        int spotId = 1;
-        SpotDataAPI.getCourseData(spotId, new ServiceCallback() {
-            @Override
-            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                SpotData spotData = SpotData.getSpotData(response.toString());
-            }
 
-            @Override
-            public void onError(VolleyError error) {
-
-            }
-        });
-    }
 }
 

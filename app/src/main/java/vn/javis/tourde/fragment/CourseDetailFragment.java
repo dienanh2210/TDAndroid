@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.squareup.picasso.MemoryPolicy;
@@ -124,12 +126,13 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     TabCourseFragment tabCourseFragment;
     TabCommentFragment tabCommentFragment;
     String url = "";
-    String[] strCourseType = new String[]{"片道","往復","1周"};
+    String[] strCourseType = new String[]{"片道", "往復", "1周"};
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         // testAPI();
-   //     mCourseID = mActivity.getmCourseID();
+        //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
@@ -228,6 +231,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     }
 
+    @SuppressLint("SetTextI18n")
     void showCourseDetail(CourseDetail courseDetail) {
         final CourseData model = courseDetail.getmCourseData();
 
@@ -246,7 +250,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtAverageSlope.setText(model.getAverageSlope());
         txtElevation.setText(model.getElevation() + "m");
         int courseType = model.getCourseType();
-        txtCourseType.setText(strCourseType[courseType-1]);
+        txtCourseType.setText(strCourseType[courseType - 1]);
 
         String dateGet = model.getDisplayDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -259,11 +263,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         } catch (ParseException e) {
         }
         List<String> listTag = courseDetail.getListTag();
-        if(listTag.size()>0) {
-            String s ="";
-            for(int i=0;i<listTag.size();i++)
-            {
-                s+="#" + listTag.get(i)+" ";
+        if (listTag.size() > 0) {
+            String s = "";
+            for (int i = 0; i < listTag.size(); i++) {
+                s += "#" + listTag.get(i) + " ";
             }
             txtTag.setText(s);
         }
@@ -294,7 +297,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             }
         });
 
-        Log.i("FavoriteCourseAPI",""+isFavourite);
+        Log.i("FavoriteCourseAPI", "" + isFavourite);
         Picasso.with(activity).load(model.getTopImage())
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(imgCourse);
@@ -318,7 +321,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) {
         Log.i("GET COURSE API: ", response.toString());
-
         mCourseDetail = new CourseDetail((JSONObject) response);
         showCourseDetail(mCourseDetail);
         view_pager.setAdapter(pagerAdapter);
@@ -326,6 +328,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             tabCommentFragment.setListReview(mCourseDetail.getReview());
             tabCommentFragment.setRecyler();
         }
+
+
         // TabCourseFragment tabCourseFragment = (TabCourseFragment) pagerAdapter.getItem(0);
 //
 //        tabCourseFragment.setData("tabCourseFragment");
@@ -383,6 +387,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         isFavourite = !isFavourite;
                         Log.i("is: ", "false");
+                        Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -404,6 +409,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         Log.i("is: ", "true");
                         isFavourite = !isFavourite;
+                        Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                     }
                 }
 

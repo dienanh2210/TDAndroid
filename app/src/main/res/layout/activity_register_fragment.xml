@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_30sdp">
+        android:layout_height="@dimen/_38sdp">
 
         <TextView
             android:id="@+id/tv_back_resgister"

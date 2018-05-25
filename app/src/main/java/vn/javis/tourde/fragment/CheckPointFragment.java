@@ -44,7 +44,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
-
+    private Animation rotation;
 
     public static CheckPointFragment newInstance(ListSpotCheckinAdapter.OnItemClickedListener listener) {
         CheckPointFragment fragment = new CheckPointFragment();
@@ -61,13 +61,6 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         //  btnStartDemo = (Button)view.findViewById(R.id.btnStartDemo);
         gitImgView.setBackgroundResource(R.drawable.backgound_check);
         mActivity = (CourseListActivity) getActivity();
-
-//        ImageView vie = view.findViewById(R.id.image_im);
-//        RotateAnimation anim = new RotateAnimation(0.0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
-//        anim.setInterpolator(new LinearInterpolator());
-//        anim.setRepeatCount(Animation.INFINITE); //Repeat animation indefinitely
-//        anim.setDuration(10000); //Put desired duration per anim cycle here, in milliseconds
-//        vie.startAnimation(anim);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,11 +127,13 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 
         final Animation anim_img = AnimationUtils.loadAnimation(c,R.anim.rotate_up);
         final Animation anim_text = AnimationUtils.loadAnimation(c,R.anim.rotate_up_in);
+
         v.setBackgroundResource(new_image);
         v.setTag(new_image);
         textView.setText(s);
         v.startAnimation(anim_img);
         textView.startAnimation(anim_text);
+
 
     }
 
@@ -159,20 +154,26 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 
                 if (imgView.getTag() == null ) {
                     ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
-                    handler.postDelayed( runnable,2000 );
-                    // Animation rotation = AnimationUtils.loadAnimation(this,R.anim.rotation);
-                    // imgView.startAnimation(rotation);
+                    handler.postDelayed( runnable,1000 );
+
+//                    rotation = AnimationUtils.loadAnimation(getApplicationContext(),
+//                            R.anim.animscale);
+//                    imgView.startAnimation(rotation);
+
                 } else {
                     // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
                     //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                    ImageViewAnimatedChange( getApplicationContext(), txtView, "バッジを獲得！", imgView, R.drawable.icon_fishing );
+                    txtView.setVisibility( View.GONE );
+                    ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
+                    ImageViewAnimatedChange( getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
+
                 }
             }
 
 
         };
         handler = new Handler();
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 500);
 
 //        runnabletwo = new Runnable() {
 //            @Override

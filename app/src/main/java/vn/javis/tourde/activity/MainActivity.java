@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals(""))
                 changeActivity();
             else
-                changeMenupPage();
+                changeCourseListPage();
         }
         else
             changeCourseListActivity();
@@ -58,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    void changeMenupPage(){
-        Intent intent = new Intent(this, MenuPageActivity.class);
+
+    void changeCourseListPage(){
+        Intent intent = new Intent(this, CourseListActivity.class);
         startActivity(intent);
     }
 
