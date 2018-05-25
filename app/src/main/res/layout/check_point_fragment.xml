@@ -71,7 +71,7 @@
                     android:layout_height="@dimen/_130sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_65sdp"
+                    android:layout_marginTop="@dimen/_60sdp"
                     />
 
 

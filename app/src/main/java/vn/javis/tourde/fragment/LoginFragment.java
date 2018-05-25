@@ -287,6 +287,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
 
         } catch (ApiException e) {
             Log.w("GooglePlus", "signInResult:failed code=" + e.getMessage());
+            Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
         }
     }
 
@@ -310,20 +311,25 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                 break;
             case SERVER_ERROR:
                 Log.e("ERROR", "SERVER ERROR!!");
+                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                 break;
             case NETWORK_ERROR:
                 Log.e("ERROR", "NETWORK_ERROR!!");
+                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                 break;
             case INTERNAL_ERROR:
                 Log.e("ERROR", "INTERNAL_ERROR!!");
+                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                 break;
             case AUTHENTICATION_AGENT_ERROR:
                 break;
             case CANCEL:
                 Log.e("ERROR", "LINE Login Canceled by user!!");
+                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                 break;
             default:
                 Log.e("ERROR", "Login FAILED!");
+                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
         }
 
     }
@@ -352,7 +358,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
 
             @Override
             public void onError(VolleyError error) {
-
+                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
             }
         });
     }

@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     void changeMenupPage(){
         Intent intent = new Intent(this, MenuPageActivity.class);
+       // Intent intent = new Intent(this, CheckPoint.class);
         startActivity(intent);
     }
 
