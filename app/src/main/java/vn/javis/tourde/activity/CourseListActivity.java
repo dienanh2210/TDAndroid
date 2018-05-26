@@ -45,6 +45,7 @@ import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
+import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
@@ -158,7 +159,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     public void ShowCountDown() {
-        openPage(new CountDownTimesFragment(), true);
+        openPage(new CountDownTimesFragment(), false);
     }
 
     public void showCommentPost() {
@@ -168,7 +169,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showCourseDrive() {
         openPage(new CourseDriveFragment(), true);
     }
-
+    public void showFragmentTabLayoutRunning(){
+        openPage(new FragmentTabLayoutRunning(),true);
+    }
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
         fragment.setArguments(dataBundle);
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();

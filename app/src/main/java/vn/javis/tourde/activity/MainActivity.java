@@ -10,11 +10,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Window;
 
 import com.android.volley.VolleyError;
-import com.facebook.login.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,9 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.LoginAPI;
-import vn.javis.tourde.apiservice.SpotEquipmentReview;
 import vn.javis.tourde.fragment.LoginFragment;
-import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.model.Account;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;

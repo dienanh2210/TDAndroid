@@ -47,7 +47,7 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
         mActivity = (CourseListActivity) getActivity();
         myListImgUrl.add("plus_button");
         //this is for test
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 22; i++) {
             myListImgUrl.add("plus_button");
             listImgUrl.add("plus_button");
         }

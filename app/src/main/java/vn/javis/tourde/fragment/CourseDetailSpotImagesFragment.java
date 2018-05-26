@@ -61,13 +61,13 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     RelativeLayout btnMyCourse;
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
-
+    int spotId=0;
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         mActivity = (CourseListActivity) getActivity();
-
+        spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
         //GetCourseDataAPI.getCourseData(1,this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -119,21 +119,24 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 mActivity.showMyCourse();
             }
         });
-        int spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
-        SpotDataAPI.getCourseData(spotId, this);
+         SpotDataAPI.getCourseData(spotId, this);
     }
 
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         SpotData spotData = SpotData.getSpotData(response.toString());
-        Log.i("spot json", response.toString());
+        Log.i("detail spot img 130", response.toString());
         txtTitle.setText(spotData.getData().getTitle());
         txtAddress.setText(spotData.getData().getAddress());
         txtSiteURL.setText(spotData.getData().getSiteUrl());
         txtTel.setText(spotData.getData().getTel());
-        txtTag.setText(spotData.getTag().toString());
-      //  Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
+        String tags ="";
+        for (String s:spotData.getTag()) {
+            tags+="#"+s+" ";
+        }
+        txtTag.setText(tags);
+        Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
 
 
     }
@@ -160,7 +163,11 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 case 0:
                     return new TabSpotImages();
                 case 1:
-                    return new TabSpotFacility();
+                    TabSpotFacility tabSpotFacility = new TabSpotFacility();
+                    Bundle dataBundle = new Bundle();
+                    dataBundle.putInt(CourseListActivity.SPOT_ID, spotId);
+                    tabSpotFacility.setArguments(dataBundle);
+                    return tabSpotFacility;
                 default:
                     return null;
             }
