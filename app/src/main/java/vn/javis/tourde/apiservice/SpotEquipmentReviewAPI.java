@@ -5,7 +5,7 @@ import java.util.HashMap;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.TourDeService;
 
-public class SpotEquipmentReview {
+public class SpotEquipmentReviewAPI {
 
     public static void getSpotEquipmentReview(int spotId,ServiceCallback callback){
         HashMap<String, String> params = new HashMap<>();

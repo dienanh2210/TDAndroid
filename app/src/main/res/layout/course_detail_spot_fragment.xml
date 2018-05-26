@@ -24,7 +24,7 @@
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/image2" />
+                 />
 
             <ImageButton
                 android:id="@+id/btn_back_to_list"
@@ -134,7 +134,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_gravity="center"
-                android:text="tsumaoi.net"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
             <ImageView
@@ -176,7 +175,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_gravity="center"
-                android:text="0537-24-1111"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
 

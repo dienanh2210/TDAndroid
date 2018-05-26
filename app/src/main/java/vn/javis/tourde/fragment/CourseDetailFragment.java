@@ -166,7 +166,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnBackToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.onBackPressed();
+                mActivity.showCourseListPage();
             }
         });
 
@@ -185,7 +185,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.onBackPressed();
+                mActivity.showCourseListPage();
             }
         });
         imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));

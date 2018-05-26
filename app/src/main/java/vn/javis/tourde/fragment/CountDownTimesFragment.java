@@ -31,7 +31,7 @@ public class CountDownTimesFragment extends BaseFragment {
             }
 
             public void onFinish() {
-               mAcitivity.openPage(new FragmentTabLayoutRunning(),true);
+               mAcitivity.showFragmentTabLayoutRunning();
             }
         }.start();
     }

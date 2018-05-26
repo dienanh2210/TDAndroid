@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/_10sdp"
     android:layout_marginTop="@dimen/_10sdp"
     android:background="@drawable/course_border"
@@ -26,13 +27,17 @@
         android:textSize="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_1sdp"
         />
-
+<com.nex3z.flowlayout.FlowLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:flRowSpacing="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    >
     <RelativeLayout
         android:id="@+id/third_row"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-       >
+        >
 
         <ImageView
             android:id="@+id/img_ic_area"
@@ -46,18 +51,19 @@
 
         <TextView
             android:id="@+id/txt_course_area"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/img_ic_area"
             android:textColor="@color/colorButton"
             android:textSize="@dimen/_11sdp"
+            android:layout_marginRight="@dimen/_5sdp"
             android:textStyle="bold" />
     </RelativeLayout>
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp">
+        >
 
         <ImageView
             android:id="@+id/img_ic_distance"
@@ -70,13 +76,16 @@
 
         <TextView
             android:id="@+id/txt_distance"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/img_ic_distance"
             android:textColor="@color/colorButton"
-            android:textSize="@dimen/_11sdp" />
+            android:textSize="@dimen/_11sdp"
+            />
     </RelativeLayout>
+</com.nex3z.flowlayout.FlowLayout>
+
     <RelativeLayout
         android:id="@+id/fourth_row"
         android:layout_width="match_parent"
