@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:background="@drawable/course_item_bg"
+    android:elevation="3dp"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/_9sdp"
+    android:paddingRight="@dimen/_9sdp">
+
+    <TextView
+        android:layout_marginTop="@dimen/_7sdp"
+        android:id="@+id/txt_course_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_catch_phrase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        />
+<com.nex3z.flowlayout.FlowLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:flRowSpacing="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    >
+    <RelativeLayout
+        android:id="@+id/third_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/img_ic_area"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/ic_area"
+            android:contentDescription="@string/image_description" />
+
+        <TextView
+            android:id="@+id/txt_course_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/img_ic_area"
+            android:textColor="@color/colorButton"
+            android:textSize="@dimen/_11sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/img_ic_distance"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/ic_distance"
+            android:contentDescription="@string/image_description" />
+
+        <TextView
+            android:id="@+id/txt_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/img_ic_distance"
+            android:textColor="@color/colorButton"
+            android:textSize="@dimen/_11sdp"
+            />
+    </RelativeLayout>
+</com.nex3z.flowlayout.FlowLayout>
+
+    <RelativeLayout
+        android:id="@+id/fourth_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        >
+
+        <ImageView
+            android:id="@+id/img_course"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_description"
+            android:scaleType="fitXY" />
+
+        <ImageButton
+            android:id="@+id/btn_favorite_list"
+            android:layout_width="@dimen/_58sdp"
+            android:layout_height="@dimen/_58sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/icon_bicycle_gray">
+        </ImageButton>
+
+        <LinearLayout
+            android:id="@+id/fifth_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@+id/img_icon_comment"
+                android:layout_width="@dimen/_13sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/icon_comment1" />
+
+            <TextView
+                android:id="@+id/txt_review_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingEnd="@dimen/_1sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/Gray"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_icon_spot"
+                android:layout_width="@dimen/_13sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/ic_spot" />
+
+            <TextView
+                android:id="@+id/txt_spot_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingEnd="@dimen/_1sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/Gray"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/star_rate"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:src="@drawable/icon_star0" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/SkyBlue"
+        android:textSize="@dimen/_10sdp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/layout_creator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_15sdp">
+
+        <TextView
+            android:id="@+id/txt_post_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/Gray"
+             />
+
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_post_user"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_toStartOf="@id/txt_post_user"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/icon_classic"
+            app:riv_border_color="@color/SkyBlue"
+            app:riv_border_width=".5dp"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"
+            app:riv_tile_mode="clamp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
