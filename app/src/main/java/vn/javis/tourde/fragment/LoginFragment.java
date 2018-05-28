@@ -62,6 +62,7 @@ import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginView;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
@@ -289,6 +290,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
         } catch (ApiException e) {
             Log.w("GooglePlus", "signInResult:failed code=" + e.getMessage());
             Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+
         }
     }
 
@@ -359,7 +361,8 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
 
             @Override
             public void onError(VolleyError error) {
-                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                //Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
             }
         });
     }
@@ -397,7 +400,8 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
 
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
-                        Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                       // Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
                     }
 
                 }
