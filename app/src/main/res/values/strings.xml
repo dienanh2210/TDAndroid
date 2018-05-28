@@ -313,6 +313,9 @@
     <string name="spotName">瀬戸田町観光案内所</string>
     <string name="selectSpotToCheckin">チェックインするスポットを 選択してください</string>
     <string name="new_account"><u>新規登録</u></string>
-
+    //goal
+    <string name="textgoal">コースの最終目的地到着！</string>
+    <string name="text_button_up">走行結果を確認</string>
+    <string name="text_button_down">写真を撮影</string>
 </resources>
 

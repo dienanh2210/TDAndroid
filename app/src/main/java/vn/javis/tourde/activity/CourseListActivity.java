@@ -149,7 +149,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         openPage(new CourseDetailFragment(), true);
     }
+    public void ShowFavoriteCourseDetail(int courseId) {
 
+        dataBundle.putInt(COURSE_DETAIL_ID, courseId);
+        openPage(new CourseDetailFragment(), true);
+    }
     public void showMyCourse() {
         openPage(new FragmentTabLayoutMyCourse(), true);
     }
