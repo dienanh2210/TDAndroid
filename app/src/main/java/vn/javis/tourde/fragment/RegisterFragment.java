@@ -44,6 +44,7 @@ import vn.javis.tourde.model.Account;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
@@ -297,7 +298,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     loginToApp();
                 } else {
                     Log.d(edt_email.toString(), edt_password.toString() + "error");
-                    Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                   // Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                    ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
                 }
             }
         };

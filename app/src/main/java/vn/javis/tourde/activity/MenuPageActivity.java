@@ -1,6 +1,7 @@
 package vn.javis.tourde.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,8 @@ public class MenuPageActivity extends BaseActivity {
     RelativeLayout tv_login,tv_tutorial,logout, rlt_register, basic_Info;
     @BindView( R.id.rlt_newuserregister )
     View rlt_newuserregisterl;
+    @BindView( R.id.rlt_nippon )
+    RelativeLayout rlt_pippon;
     @BindView( R.id.ll_logout )
     View ll_logout;
     @BindView(R.id.line_register)
@@ -69,9 +72,15 @@ public class MenuPageActivity extends BaseActivity {
             lineRegister.setVisibility(View.GONE);
             basic_Info.setVisibility(View.VISIBLE);
         }
-
+   rlt_pippon.setOnClickListener( onClicknippon );
     }
-
+    View.OnClickListener onClicknippon = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Uri uri = Uri.parse("http://www.tour-de-nippon.jp/series/");
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
+    };
     View.OnClickListener onClickLogin = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

@@ -50,6 +50,7 @@ import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeService;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -387,7 +388,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         isFavourite = !isFavourite;
                         Log.i("is: ", "false");
-                        Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
+                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
                     }
                 }
 
@@ -409,7 +411,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         Log.i("is: ", "true");
                         isFavourite = !isFavourite;
-                        Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
+                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
                     }
                 }
 
