@@ -1,6 +1,7 @@
 package vn.javis.tourde.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +21,16 @@ import vn.javis.tourde.model.Data;
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
 
     private List<String> contentList;
+    private List<String> listContentSelected;
     private OnClickItem onClickItem;
     public HashMap<Integer, View> mapItemView = new HashMap<>();
     private boolean isShowMark;
 
-    public ContentAdapter(List<String> contentList, OnClickItem onClickItem) {
+    public ContentAdapter(List<String> contentList,List<String> listContentSelected, OnClickItem onClickItem) {
         this.contentList = contentList;
         this.onClickItem = onClickItem;
+        this.listContentSelected = listContentSelected;
+        Log.i("ContentAdapter 33",listContentSelected.toString());
     }
 
     @Override
@@ -45,7 +49,11 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
 //        holder.itemView.setOnClickListener(holder);
 //        holder.imv_mark.setTag(position);
         mapItemView.put(position, holder.imv_mark);
-        if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
+        if(listContentSelected !=null && listContentSelected.size()>0){
+            if(listContentSelected.contains(content))
+                holder.imv_mark.setVisibility(View.VISIBLE);
+        }
+       else if (position == 0) holder.imv_mark.setVisibility(View.VISIBLE);
     }
 
     @Override

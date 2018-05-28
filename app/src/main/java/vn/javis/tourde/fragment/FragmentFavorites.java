@@ -49,7 +49,6 @@ public class FragmentFavorites extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
-        recyclerFavorite.setItemAnimator(new DefaultItemAnimator());
         recyclerFavorite.setLayoutManager(layoutManager);
         String token = LoginFragment.getmUserToken();
         FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
@@ -58,7 +57,7 @@ public class FragmentFavorites extends BaseFragment {
                 Log.i("favorite",response.toString());
                 listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                // List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
-                favoriteCourseAdapter = new FavoriteCourseAdapter(listFavorCourse, getActivity());
+                favoriteCourseAdapter = new FavoriteCourseAdapter(listFavorCourse, mActivity);
                 recyclerFavorite.setAdapter(favoriteCourseAdapter);
                 favoriteCourseAdapter.setOnItemClickListener(new FavoriteCourseAdapter.OnItemClickedListener() {
                     @Override

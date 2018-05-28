@@ -91,7 +91,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         boolean gender = false;
         switch (v.getId()) {
             case R.id.im_select_area:
-                mActivity.openPage(PrefectureOneFragment.newInstance(this), true);
+                mActivity.openPage(PrefectureOneFragment.newInstance(this,tv_prefecture.getText().toString()), true);
                 break;
             case R.id.im_more_searching:
                 mActivity.openPage(PrefectureSearchFragment.newInstance(this), true);

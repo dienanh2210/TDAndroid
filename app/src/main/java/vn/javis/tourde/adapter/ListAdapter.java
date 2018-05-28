@@ -45,7 +45,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.tv_header.setText( data.getTitle() );
         //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
         holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
-        holder.rcv_content.setAdapter( new ContentAdapter( data.getContent(), new ContentAdapter.OnClickItem() {
+        holder.rcv_content.setAdapter( new ContentAdapter( data.getContent(),data.getListSelected(), new ContentAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {

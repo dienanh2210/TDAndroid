@@ -85,7 +85,7 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
                         } else listTag.remove(s);
                     }
                     Log.i("listSeason", listSeason.toString());
-                    Log.i("listTag", listTag.toString());
+                    Log.i("w", listTag.toString());
 //                    onClickItem.onClick( data.getContent().get( position ));
 
                 }

@@ -75,6 +75,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     private int mCourseID;
     private int mSpotID;
 
+
+
     Intent intentGPS;
     boolean boolean_permission;
     SharedPreferences mPref;
@@ -103,7 +105,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             }
         });*/
     }
-
+    public void setmCourseID(int mCourseID) {
+        this.mCourseID = mCourseID;
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
