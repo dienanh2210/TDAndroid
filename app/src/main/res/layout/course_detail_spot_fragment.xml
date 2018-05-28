@@ -24,7 +24,7 @@
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/image2" />
+                 />
 
             <ImageButton
                 android:id="@+id/btn_back_to_list"
@@ -83,7 +83,6 @@
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_15sdp"
-
                 android:layout_gravity="center"
                 android:src="@drawable/ic_spot" />
             <TextView
@@ -93,7 +92,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
-                android:layout_weight=".93"
+                android:layout_weight="1"
                 android:textSize="@dimen/_13sdp" />
             <ImageView
                 android:id="@+id/im_basic_info"
@@ -118,7 +117,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            >
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
@@ -128,11 +129,11 @@
                 android:src="@drawable/icon_website" />
             <TextView
                 android:id="@+id/tv_site_url"
-                android:layout_width="@dimen/_190sdp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_gravity="center"
-                android:text="tsumaoi.net"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
             <ImageView
@@ -158,6 +159,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:weightSum="1"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -168,11 +170,11 @@
                 android:src="@drawable/icon_phone" />
             <TextView
                 android:id="@+id/tv_tel"
-                android:layout_width="@dimen/_190sdp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_gravity="center"
-                android:text="0537-24-1111"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
 

@@ -57,18 +57,25 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     ImageView select_userIcon;
     @BindView(R.id.rlt_age)
     RelativeLayout rlt_age;
-    private EditText edt_email;
-    private EditText edt_password;
-    private ImageView imv_mark_man;
-    private ImageView imv_mark_woman;
+    @BindView(R.id.edt_email)
+    EditText edt_email;
+    @BindView(R.id.edt_password)
+    EditText edt_password;
+    @BindView(R.id.imv_mark_man)
+    ImageView imv_mark_man;
+    @BindView(R.id.imv_mark_woman)
+    ImageView imv_mark_woman;
+
     int prefecture = 1;
     int age = 10;
     String txtAge = "10代";
     String txtArea = "北海道";
+
     TextView tv_prefecture;
     TextView tv_age;
     Bitmap bitmapIcon;
     private RegisterActivity activity;
+
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -92,19 +99,15 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        edt_email = view.findViewById(R.id.edt_email);
-        edt_password = view.findViewById(R.id.edt_password);
         RelativeLayout rlt_prefecture = view.findViewById(R.id.rlt_prefecture);
-        imv_mark_man = view.findViewById(R.id.imv_mark_man);
-        imv_mark_woman = view.findViewById(R.id.imv_mark_woman);
         RelativeLayout rlt_man = view.findViewById(R.id.rlt_man);
         RelativeLayout rlt_woman = view.findViewById(R.id.rlt_woman);
         Button appCompatButtonLogin = view.findViewById(R.id.appCompatButtonLogin);
         View tv_back_resgister = view.findViewById(R.id.tv_back_resgister);
-        tv_prefecture = view.findViewById(R.id.tv_prefecture);
+
+        tv_prefecture =view.findViewById(R.id.tv_prefecture);
         tv_prefecture.setText(txtArea);
-        tv_age = view.findViewById(R.id.tv_age);
+        tv_age =  view.findViewById(R.id.tv_age);
         tv_age.setText(txtAge);
         edt_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -164,10 +167,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         int sex = 1;
         switch (v.getId()) {
             case R.id.rlt_prefecture:
-                activity.openPage(PrefectureFragment.newInstance(this), true, true);
+                activity.openPage(PrefectureFragment.newInstance(this,prefecture), true, true);
                 break;
             case R.id.rlt_age:
-                activity.openPage(AgeFragment.newInstance(this), true, true);
+                activity.openPage(AgeFragment.newInstance(this, age), true, true);
                 break;
             case R.id.rlt_man:
                 sex = chooseGender(true) ? 1 : 2;
@@ -180,7 +183,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 if (bitmapIcon == null)
                     LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, successListener(), errorListener());
                 else
-                    LoginAPI.registerAccount(activity,edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
+                    LoginAPI.registerAccount(activity, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
                 break;
             case R.id.tv_back_resgister:
                 activity.onBackPressed();
@@ -205,14 +208,14 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes" + response.toString());
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
-                        Intent intent = new Intent(getActivity(),CourseListActivity.class);
+                        Intent intent = new Intent(getActivity(), CourseListActivity.class);
                         startActivity(intent);
                         intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                         getActivity().setResult(Activity.RESULT_OK, intent);
                         //     getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
-                               LoginFragment.setmUserToken(jsonObject.getString("token"));
+                                LoginFragment.setmUserToken(jsonObject.getString("token"));
                                 getAccount();
 
                             } catch (JSONException e) {
@@ -222,7 +225,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
                     } else {
                         Log.d(edt_email.toString(), edt_password.toString() + "error");
-                        Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -251,6 +254,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             }
         });
     }
+
     //    startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -311,7 +315,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) {
         Log.i("Register ACCOUNT: ", response.toString());
-        JSONObject jsonObject = (JSONObject)response;
+        JSONObject jsonObject = (JSONObject) response;
         if (jsonObject.has("success")) {
             Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes");
             SharedPreferencesUtils.getInstance(getContext()).setStringValue("Username", edt_username.getText().toString());
@@ -337,6 +341,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         prefecture = valueArea;
         txtArea = content;
         tv_prefecture.setText(content);
+        Log.i("test area", "Register fragment 335 "+prefecture + "-"+content);
     }
 
     @Override

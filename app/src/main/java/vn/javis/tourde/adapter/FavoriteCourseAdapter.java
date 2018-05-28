@@ -67,6 +67,14 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
                 }
             }
         });
+        holder.imgShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickedListener != null) {
+                    onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
        /* holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {

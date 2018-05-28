@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
@@ -41,7 +42,7 @@ public class PostCommentFragment extends BaseFragment {
 
     private Dialog dialog;
     CourseListActivity mActivity;
-    int courseID=0;
+    int courseID = 0;
 
     private boolean isReached = false;
 
@@ -110,24 +111,66 @@ public class PostCommentFragment extends BaseFragment {
     }
 
     void postComment() {
-        String token = LoginFragment.getmUserToken();
-        int rating = mRatingBar.getNumStars();
-        String comment = edt_text.getText().toString();
-        if (comment != null) {
-            CommentsAPI.postReviewCourse(token, courseID, rating, comment, new ServiceCallback() {
+        final String token = LoginFragment.getmUserToken();
+        final int rating = mRatingBar.getNumStars();
+        final String comment = edt_text.getText().toString();
+        if (comment != null && comment != "") {
+            //check commented this course
+            CommentsAPI.postCheckCourseReview(token, courseID, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                    //post comment success return to current page
-                    mActivity.onBackPressed();
-                    Log.i("post comment",response.toString());
+
+                    JSONObject jsonObject = (JSONObject) response;
+                    // Log.d("logout", jsonObject.toString());
+                    Log.d("postCommentFrag 107", "" + jsonObject);
+                    if (jsonObject.has("success")) {
+                        String reviewed = jsonObject.get("reviewed").toString();
+                        if (reviewed == "true") {
+                            ProcessDialog.showDialogConfirm(mActivity, "", "前回のコメントと評価は上書きされますがよろしいですか？", new ProcessDialog.OnActionDialogClickOk() {
+                                @Override
+                                public void onOkClick() {
+                                    CommentsAPI.postReviewCourse(token, courseID, rating, comment, new ServiceCallback() {
+                                        @Override
+                                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                            //post comment success return to current page
+                                            mActivity.onBackPressed();
+                                            Log.i("post comment 118", response.toString());
+                                        }
+
+                                        @Override
+                                        public void onError(VolleyError error) {
+                                            Log.i("postcomment error 123: ", error.getMessage());
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            CommentsAPI.postReviewCourse(token, courseID, rating, comment, new ServiceCallback() {
+                                @Override
+                                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                    //post comment success return to current page
+                                    mActivity.onBackPressed();
+                                    Log.i("post comment 118", response.toString());
+                                }
+
+                                @Override
+                                public void onError(VolleyError error) {
+                                    Log.i("postcomment error 123: ", error.getMessage());
+                                }
+                            });
+                        }
+                    } else {
+
+                    }
 
                 }
 
                 @Override
                 public void onError(VolleyError error) {
-                    Log.i("post comment error: ", error.getMessage());
+
                 }
             });
+
         }
     }
 }

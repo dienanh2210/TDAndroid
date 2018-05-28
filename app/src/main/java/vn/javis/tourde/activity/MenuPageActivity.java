@@ -124,8 +124,6 @@ public class MenuPageActivity extends BaseActivity {
             ProcessDialog.showDialogConfirm(MenuPageActivity.this, "", "ログアウトしますか？", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
-                Intent intent = new Intent(MenuPageActivity.this,CourseListActivity.class);
-                startActivity(intent);
                     final String token = LoginFragment.getmUserToken();
                     LogoutAccount.logOut( token, new ServiceCallback() {
                         @Override
@@ -144,6 +142,9 @@ public class MenuPageActivity extends BaseActivity {
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
+                                Intent intent = new Intent(MenuPageActivity.this,CourseListActivity.class);
+                                intent.putExtra(Constant.KEY_LOGOUT_SUCCESS,1);
+                                startActivity(intent);
 
                             } else {
 

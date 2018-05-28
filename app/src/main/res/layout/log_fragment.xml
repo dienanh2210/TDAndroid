@@ -32,11 +32,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/BG_countDown">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/BG_countDown">
+           >
 
             <TextView
                 android:id="@+id/txt_prezent"
@@ -44,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:text="@string/prezents"
                 android:textColor="@color/White"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             <RelativeLayout
                 android:id="@+id/spot1"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_height="@dimen/_68sdp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="@dimen/_20sdp"
@@ -91,7 +91,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:layout_width="@dimen/_35sdp"
+                    android:layout_width="@dimen/_38sdp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
@@ -101,21 +101,23 @@
             </RelativeLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:id="@+id/img_end_spot1"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:layout_alignTop="@+id/spot1"
                 android:layout_marginStart="@dimen/_37sdp"
-                android:layout_marginTop="@dimen/_101sdp"
+                android:layout_marginTop="@dimen/_68sdp"
                 android:src="@drawable/image_link" />
 
             <RelativeLayout
+                android:id="@+id/spot2"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_alignParentTop="true"
+                android:layout_height="@dimen/_68sdp"
+                android:layout_alignTop="@+id/img_end_spot1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_115sdp">
+                android:layout_marginTop="@dimen/_13sdp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -151,11 +153,12 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/spot3"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_alignParentTop="true"
+                android:layout_height="@dimen/_68sdp"
+               android:layout_alignTop="@id/spot2"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_180sdp"
+                android:layout_marginTop="@dimen/_81sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_20sdp">
 
@@ -198,10 +201,10 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_alignParentTop="true"
+                android:layout_height="@dimen/_68sdp"
+                android:layout_alignTop="@id/spot3"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_245sdp"
+                android:layout_marginTop="@dimen/_81sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_20sdp">
 
