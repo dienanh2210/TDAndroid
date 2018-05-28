@@ -1,5 +1,7 @@
 package vn.javis.tourde.fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +26,7 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public class PostCommentFragment extends BaseFragment {
 
@@ -36,6 +39,7 @@ public class PostCommentFragment extends BaseFragment {
     @BindView(R.id.tv_back_basicInfo)
     TextView tvBackToDetail;
 
+    private Dialog dialog;
     CourseListActivity mActivity;
     int courseID=0;
 
@@ -85,6 +89,19 @@ public class PostCommentFragment extends BaseFragment {
                 mActivity.onBackPressed();
             }
         });
+//        btnPostComment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ProcessDialog.showDialogConfirm(getContext(), "", "前回のコメントと評価は上書きされますがよろしいですか？？", new ProcessDialog.OnActionDialogClickOk() {
+//                    @Override
+//                    public void onOkClick() {
+//                       // mActivity.openPage(new FragmentTabLayoutRunning(),true);
+//                 //  postComment();
+//
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Override
@@ -103,6 +120,7 @@ public class PostCommentFragment extends BaseFragment {
                     //post comment success return to current page
                     mActivity.onBackPressed();
                     Log.i("post comment",response.toString());
+
                 }
 
                 @Override
