@@ -55,11 +55,11 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         imgView = view.findViewById(R.id.imgMain);
-        img = view.findViewById(R.id.image_im);
+       // img = view.findViewById(R.id.image_im);
         txtView = view.findViewById(R.id.txtDesc);
         gitImgView = view.findViewById(R.id.gifImageView);
         //  btnStartDemo = (Button)view.findViewById(R.id.btnStartDemo);
-        gitImgView.setBackgroundResource(R.drawable.backgound_check);
+        gitImgView.setBackgroundResource(R.drawable.background_check);
         mActivity = (CourseListActivity) getActivity();
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,42 +88,6 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     }
 
     public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, final int new_image) {
-       /* final Animation anim_out = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
-        final Animation anim_in = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
-        anim_out.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                v.setBackgroundResource(new_image);
-                v.setTag(new_image);
-                textView.setText(s);
-                anim_in.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-
-                    }
-                });
-                v.startAnimation(anim_in);
-                textView.startAnimation(anim_in);
-            }
-        });
-        v.startAnimation(anim_out);
-        textView.startAnimation(anim_out);*/
 
         final Animation anim_img = AnimationUtils.loadAnimation(c,R.anim.rotate_up);
         final Animation anim_text = AnimationUtils.loadAnimation(c,R.anim.rotate_up_in);
@@ -133,15 +97,11 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         textView.setText(s);
         v.startAnimation(anim_img);
         textView.startAnimation(anim_text);
-
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-
-
     }
 
     @Override
@@ -155,10 +115,6 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
                 if (imgView.getTag() == null ) {
                     ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
                     handler.postDelayed( runnable,1000 );
-
-//                    rotation = AnimationUtils.loadAnimation(getApplicationContext(),
-//                            R.anim.animscale);
-//                    imgView.startAnimation(rotation);
 
                 } else {
                     // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
@@ -174,35 +130,6 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         };
         handler = new Handler();
         handler.postDelayed(runnable, 500);
-
-//        runnabletwo = new Runnable() {
-//            @Override
-//            public void run() {
-//                if (img.getTag() != null && img.getTag().equals(R.drawable.backgound_check)) {
-//                    ImageViewAnimatedChange( getApplicationContext(), txtView, "", img, R.drawable.backgound_check );
-//
-//        RotateAnimation anim = new RotateAnimation(0.0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
-//        anim.setInterpolator(new LinearInterpolator());
-//        anim.setRepeatCount(Animation.INFINITE); //Repeat animation indefinitely
-//        anim.setDuration(1000); //Put desired duration per anim cycle here, in milliseconds
-//        img.startAnimation(anim);
-//                }
-//            }
-//
-//        };
-        //  btnStartDemo.setOnClickListener(new View.OnClickListener() {
-        //  @Override
-        //  public void onClick(View view) {
-
-
-
-//        ImageViewAnimatedChange(getApplicationContext(),txtView,"チェックポイント通過！",img,R.drawable.backgound_check);
-//        handler = new Handler();
-//        handler.postDelayed(runnabletwo,1000);
-
-
-        //}
-        // });
 
     }
 

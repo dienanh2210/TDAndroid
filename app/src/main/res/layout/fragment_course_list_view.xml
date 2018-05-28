@@ -53,8 +53,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/course_list_footer"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/_15sdp"
         android:layout_marginRight="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_38sdp">
@@ -68,9 +68,8 @@
                 android:id="@+id/lst_courses_recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="@dimen/_17sdp"
-                 />
+                android:orientation="vertical" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

@@ -34,7 +34,6 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
     public List<String> getListTag() {
         return listTag;
     }
-
     private List<String> listSeason = new ArrayList<>();
     private List<String> listTag = new ArrayList<>();
 

@@ -47,19 +47,19 @@ public class FragmentRunning extends BaseFragment{
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerRunning.setLayoutManager(layoutManager);
         String token = LoginFragment.getmUserToken();
-        FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
-            @Override
-            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                List<FavoriteCourse> listRunCourse = FavoriteCourseAPI.getFavorites(response);
-                runningCourseAdapter = new RunningCourseAdapter(listRunCourse, getActivity());
-                recyclerRunning.setAdapter(runningCourseAdapter);
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
-            }
-        });
+//        FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
+//            @Override
+//            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+//                List<FavoriteCourse> listRunCourse = FavoriteCourseAPI.getFavorites(response);
+//                runningCourseAdapter = new RunningCourseAdapter(listRunCourse, getActivity());
+//                recyclerRunning.setAdapter(runningCourseAdapter);
+//            }
+//
+//            @Override
+//            public void onError(VolleyError error) {
+//
+//            }
+//        });
 
     }
 }
