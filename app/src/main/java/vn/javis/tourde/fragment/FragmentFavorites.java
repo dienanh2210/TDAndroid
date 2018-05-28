@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,7 +37,7 @@ public class FragmentFavorites extends BaseFragment {
     @BindView(R.id.recycler_favorite)
     RecyclerView recyclerFavorite;
     FavoriteCourseAdapter favoriteCourseAdapter;
-
+    List<FavoriteCourse> listFavorCourse;
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -48,16 +49,23 @@ public class FragmentFavorites extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        recyclerFavorite.setItemAnimator(new DefaultItemAnimator());
         recyclerFavorite.setLayoutManager(layoutManager);
         String token = LoginFragment.getmUserToken();
         FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 Log.i("favorite",response.toString());
-               List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
+                listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                // List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                 favoriteCourseAdapter = new FavoriteCourseAdapter(listFavorCourse, getActivity());
                 recyclerFavorite.setAdapter(favoriteCourseAdapter);
+                favoriteCourseAdapter.setOnItemClickListener(new FavoriteCourseAdapter.OnItemClickedListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        mActivity.ShowFavoriteCourseDetail(listFavorCourse.get(position).getCourseId());
+                    }
+                });
             }
 
             @Override
