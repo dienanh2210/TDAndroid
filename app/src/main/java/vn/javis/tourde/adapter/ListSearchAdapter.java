@@ -1,6 +1,7 @@
 package vn.javis.tourde.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,7 +34,6 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
     public List<String> getListTag() {
         return listTag;
     }
-
     private List<String> listSeason = new ArrayList<>();
     private List<String> listTag = new ArrayList<>();
 
@@ -43,15 +43,15 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
         this.onClickItem = onClickItem;
     }
 
+    @NonNull
     @Override
-    public ListSearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListSearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ListSearchAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListSearchAdapter.ViewHolder holder, int position) {
         final Data data = dataList.get(position);
         holder.tv_header.setText(data.getTitle());
 

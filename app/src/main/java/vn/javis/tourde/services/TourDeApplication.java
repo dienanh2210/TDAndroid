@@ -1,6 +1,8 @@
 package vn.javis.tourde.services;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -41,6 +43,12 @@ public class TourDeApplication extends Application {
 //            customApiClient = new TwitterApiClient(customClient);
 //            TwitterCore.getInstance().addGuestApiClient(customApiClient);
 //        }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public static synchronized TourDeApplication getInstance() {
