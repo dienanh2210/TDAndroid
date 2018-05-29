@@ -5,18 +5,20 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import vn.javis.tourde.R;
 
 public class ProcessDialog {
     public Context context;
-
     ProgressDialog dialog1;
 
     public ProcessDialog(final Context context) {
@@ -105,6 +107,60 @@ public class ProcessDialog {
         });
 
         dialog.show();
+    }
+    public static void showDialogcheckbox(final Context context, String title, String content, final OnActionDialogClickOk onActionDialogClickOk) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setContentView(R.layout.dialogcheckbox);
+        dialog.setCancelable(false);
+        TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
+        // tvTitle.setVisibility(View.GONE);
+        tvTitle.setText(title);
+        TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
+        tvMessage.setText(content);
+        //tuanpd
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.hide();
+            }
+        });
+        final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onActionDialogClickOk.onOkClick();
+                dialog.hide();
+            }
+        });
+        dialog.show();
+
+        CheckBox checkBox;
+        checkBox = dialog.findViewById( R.id.chkbox );
+        checkBox.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox;
+                checkBox = dialog.findViewById( R.id.chkbox );
+                if(checkBox.isChecked()){
+                    //xu ly click check box
+                    Log.d("dm","checkbox");
+                    SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+
+                }
+            }
+        } );
+
+
     }
     public interface OnActionDialogClickOk{
          void onOkClick();

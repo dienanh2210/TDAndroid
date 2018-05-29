@@ -12,13 +12,14 @@
     <TextView
         android:id="@+id/tv_header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_height="@dimen/_37sdp"
         android:background="@color/search_course_color_title_background"
         android:gravity="center_vertical"
         android:paddingStart="15dp"
         android:paddingEnd="@dimen/_1sdp"
         android:text="@string/item_header_text"
-        android:textColor="@android:color/black"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
         android:textSize="@dimen/_12sdp"/>
 
     <android.support.v7.widget.RecyclerView
