@@ -19,6 +19,8 @@ import vn.javis.tourde.fragment.SearchCourseFragment;
 
 public class SearchCourseActivity extends BaseActivity {
 
+
+
     private List<String> mListContent = new ArrayList<>();
 
 
@@ -46,9 +48,11 @@ public class SearchCourseActivity extends BaseActivity {
 
     public void setmLstContent(List<String> mLstContent) {
         this.mListContent = mLstContent;
-        Log.i("xxx: ", this.mListContent.toString());
+        Log.i("seach activity 51: ", this.mListContent.toString());
     }
-
+    public List<String> getmListContent() {
+        return mListContent;
+    }
     public void onBackCLickToList(HashMap map) {
 
         Intent intent = new Intent(this, CourseListActivity.class);

@@ -66,7 +66,7 @@ ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDetailCircleAda
         holder.txtIndex.setText(String.valueOf(order));
         holder.txtCatchPhrase.setText(spot.getCatchPhrase());
         holder.txtIntro.setText(spot.getIntroduction());
-
+        holder.txtSpotDistance.setText(spot.getSpotDistance()+"km");
         String tag = "";
         if (spot.getTag() != null)
             tag += "#" + spot.getTag();
@@ -106,7 +106,8 @@ ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDetailCircleAda
         TextView txtIntro;
         @BindView(R.id.tag_story_1)
         TextView txtTag;
-
+        @BindView(R.id.txt_spot_distance)
+        TextView txtSpotDistance;
         @BindView(R.id.img_story_1)
         ImageView imgCourse;
 
@@ -116,6 +117,7 @@ ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDetailCircleAda
 
         @BindView(R.id.btn_spot_images)
         ImageView btnSpotImages;
+
 
         boolean isFavorite;
 

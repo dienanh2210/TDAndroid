@@ -186,6 +186,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         adapter.addFragment(new FragmentLog(), "ログ");
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1);
 
     }
 

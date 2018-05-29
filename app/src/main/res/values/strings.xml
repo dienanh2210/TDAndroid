@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tour De</string>
+    <string name="app_name">ツール・ド・ニッポン</string>
     <string name="facebook_app_id">201940590394167</string>
     <string name="com.twitter.sdk.android.CONSUMER_KEY">E9SgLRW6z3YDe1tkZjA8gWNdu</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc
@@ -270,6 +270,7 @@
     <string name="cancel">いいえ</string>
     <string name="yes">はい</string>
     <string name="ok">OK</string>
+    <string name="noCourse">０件</string>
 
     <string name="btn_add_contact"><u>ログイン</u></string>
     //spot facilities

@@ -19,8 +19,8 @@
 
             <ImageView
                 android:id="@+id/btn_back"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/_13sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
@@ -45,7 +45,10 @@
             android:layout_height="@dimen/_40sdp"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"
+            app:tabTextColor="@color/Gray"
+            app:tabSelectedTextColor="@color/Black"
+            />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
@@ -58,31 +61,33 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_60sdp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/_80sdp">
 
         <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:id="@+id/icon_clock"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_28sdp"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:src="@drawable/icon_clock" />
 
         <Chronometer
             android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_85sdp"
+            android:layout_marginEnd="@dimen/_35sdp"
             android:gravity="center"
             android:text="@string/timing"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_25sdp"
+            android:textSize="@dimen/_32sdp"
             android:textStyle="bold"
             android:format="00:00:00">
 
         </Chronometer>
+
     </LinearLayout>
 
     <Button
