@@ -256,7 +256,7 @@
             </RelativeLayout>
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/appCompatButtonLogin"
+                android:id="@+id/updateInfo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
                 android:layout_marginLeft="@dimen/_15sdp"

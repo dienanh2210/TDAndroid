@@ -28,11 +28,13 @@ public class SearchCourseActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_course);
-        openPage(new SearchCourseFragment(), false);
+        openPage(new SearchCourseFragment(), true, true);
     }
 
-    public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
+    public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        if(isAnimation)
+            tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         if (isBackStack)

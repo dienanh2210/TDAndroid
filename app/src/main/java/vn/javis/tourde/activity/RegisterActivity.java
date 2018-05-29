@@ -7,6 +7,7 @@ import android.util.Log;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.RegisterFragment;
+import vn.javis.tourde.utils.Constant;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -14,7 +15,12 @@ public class RegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        openPage(new RegisterFragment(), false);
+        String email = getIntent().getStringExtra(Constant.KEY_CHANGE_INFO);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.KEY_CHANGE_INFO,email);
+        RegisterFragment ccl =new RegisterFragment();
+        ccl.setArguments(bundle);
+        openPage(ccl, false);
     }
 
     public void openPage(Fragment fragment, boolean isBackStack, boolean isAnimation) {

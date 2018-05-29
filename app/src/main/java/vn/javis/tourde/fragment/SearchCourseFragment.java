@@ -129,15 +129,14 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
                 }
                 break;
             case R.id.tv_close:
-                Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getActivity(), CourseListActivity.class);
+                startActivity(intent);*/
+                mActivity.onBackPressed();
                 break;
             case R.id.bt_search_course:
                 //  String tv_prefecture=getContext().toString();
                 //   String tv_searchtwo=getContext().toString();
                 //  String edt_search=getContext().toString();
-
-
                 Log.d(tv_prefecture.getText().toString(), tv_searchtwo.getText().toString());
                 Log.d(edt_search.getText().toString(), "edit text");
 
