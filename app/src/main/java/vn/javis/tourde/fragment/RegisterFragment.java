@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -266,6 +267,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
             try {
                 bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                //if(bitmapIcon.compress(Bitmap.CompressFormat.JPEG,100,baos))
+
                 select_userIcon.setImageBitmap(bitmapIcon);
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
