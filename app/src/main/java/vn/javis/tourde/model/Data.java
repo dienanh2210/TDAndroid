@@ -11,15 +11,8 @@ public class Data implements Serializable {
     private boolean isMarked;
     private int positionMarked;
 
-    public List<String> getListSelected() {
-        return listSelected;
-    }
 
-    public void setListSelected(List<String> listSelected) {
-        this.listSelected = listSelected;
-    }
 
-    private List<String> listSelected;
     public boolean isMarked() {
         return isMarked;
     }

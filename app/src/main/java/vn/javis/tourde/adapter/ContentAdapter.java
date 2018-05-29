@@ -26,11 +26,11 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
     public HashMap<Integer, View> mapItemView = new HashMap<>();
     private boolean isShowMark;
 
-    public ContentAdapter(List<String> contentList,List<String> listContentSelected, OnClickItem onClickItem) {
+    public ContentAdapter(List<String> contentList, OnClickItem onClickItem) {
         this.contentList = contentList;
         this.onClickItem = onClickItem;
-        this.listContentSelected = listContentSelected;
-        Log.i("ContentAdapter 33",listContentSelected.toString());
+     //   this.listContentSelected = listContentSelected;
+    //    Log.i("ContentAdapter 33",listContentSelected.toString());
     }
 
     @Override
