@@ -147,12 +147,19 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         tv_back_resgister.setOnClickListener(this);
         select_userIcon.setOnClickListener(this);
         String change = getArguments().getString(Constant.KEY_CHANGE_INFO);
-        assert change != null;
-        if(!change.equals("")){
+
+        if(change != null && change!=""){
             register_title.setVisibility(View.GONE);
             title_changeInfo.setVisibility(View.VISIBLE);
             appCompatButtonLogin.setVisibility(View.GONE);
             changeInfo.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            register_title.setVisibility(View.VISIBLE);
+            title_changeInfo.setVisibility(View.GONE);
+            appCompatButtonLogin.setVisibility(View.VISIBLE);
+            changeInfo.setVisibility(View.GONE);
         }
     }
 
