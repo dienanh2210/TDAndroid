@@ -139,7 +139,7 @@ public class ProcessDialog {
 
         final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
         final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
-
+//asdgynsdghisdmi
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
