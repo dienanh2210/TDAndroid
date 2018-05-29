@@ -107,6 +107,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         boolean gender = false;
         switch (v.getId()) {
             case R.id.im_select_area:
+
+              //  mActivity.openPage(PrefectureOneFragment.newInstance(this,tv_prefecture.getText().toString()), true);
+
                 selectAreaVisible = selectAreaVisible == View.GONE ? View.VISIBLE : View.GONE;
                 selectAreaRecyclerView.setVisibility(selectAreaVisible);
                 if (selectAreaVisible == View.GONE) {
@@ -114,6 +117,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
                 } else {
                     im_select_area.setImageResource(R.drawable.icon_down);
                 }
+
                 break;
             case R.id.im_more_searching:
                 additionalConditionVisible = additionalConditionVisible == View.GONE ? View.VISIBLE : View.GONE;
