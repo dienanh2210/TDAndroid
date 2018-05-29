@@ -49,7 +49,7 @@ public class PrefectureOneFragment extends Fragment {
         fragment.listener = (OnFragmentInteractionListener) listener;
       // String[] s1 = txtSelected.split(Pattern.quote("["));
 
-         fragment.listContent.add(s1[0]);
+      //   fragment.listContent.add(s1[0]);
         return fragment;
     }
 

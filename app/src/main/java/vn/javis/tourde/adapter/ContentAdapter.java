@@ -53,7 +53,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
             if(listContentSelected.contains(content))
                 holder.imv_mark.setVisibility(View.VISIBLE);
         }
-       else if (position == 0) holder.imv_mark.setVisibility(View.VISIBLE);
+       else if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
     }
 
     @Override

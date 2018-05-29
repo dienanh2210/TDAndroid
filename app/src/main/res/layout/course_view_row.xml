@@ -30,7 +30,7 @@
 
     <RelativeLayout
         android:id="@+id/third_row"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         >
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/txt_course_area"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/img_ic_area"
@@ -57,7 +57,7 @@
             android:textStyle="bold" />
     </RelativeLayout>
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         >
@@ -73,7 +73,7 @@
 
         <TextView
             android:id="@+id/txt_distance"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/img_ic_distance"
@@ -81,6 +81,8 @@
             android:textSize="@dimen/_11sdp"
             />
     </RelativeLayout>
+
+
 
 
     <RelativeLayout
