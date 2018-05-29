@@ -1,6 +1,7 @@
 package vn.javis.tourde.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
@@ -24,7 +26,7 @@ import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class CheckPointFragment extends BaseFragment implements ListSpotCheckinAdapter.OnItemClickedListener {
-    GifImageView gitImgView;
+    GifImageView gifImgView;
     ImageView imgView, img;
     TextView txtView;
 
@@ -40,6 +42,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     Runnable runnable, runnabletwo;
     Handler handler;
     CourseListActivity mActivity;
+    private GifDrawable gifDrawable;
 
     private OnFragmentInteractionListener listener;
     private String filePath;
@@ -55,11 +58,8 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         imgView = view.findViewById(R.id.imgMain);
-       // img = view.findViewById(R.id.image_im);
         txtView = view.findViewById(R.id.txtDesc);
-        gitImgView = view.findViewById(R.id.gifImageView);
-        //  btnStartDemo = (Button)view.findViewById(R.id.btnStartDemo);
-        gitImgView.setBackgroundResource(R.drawable.background_check);
+
         mActivity = (CourseListActivity) getActivity();
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +67,9 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
                 mActivity.showTakePhoto();
             }
         });
+        //demo
+//        final GifImageView gifImageView = (GifImageView) view.findViewById(R.id.gifImageView);
+//        gifDrawable = (GifDrawable) gifImageView.getDrawable();
 
     }
 
@@ -102,6 +105,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+
     }
 
     @Override
@@ -123,6 +127,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
                     ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
                     ImageViewAnimatedChange( getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
 
+
                 }
             }
 
@@ -133,6 +138,11 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 
     }
 
+
+    public void stop() {
+        gifImgView.setImageResource(R.drawable.background_check);
+
+    }
     @OnClick({R.id.tv_back_password})
     public void onClickView(View view) {
 
