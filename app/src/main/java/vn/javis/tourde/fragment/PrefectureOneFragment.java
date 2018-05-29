@@ -13,16 +13,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.model.Data;
 import vn.javis.tourde.adapter.ListAdapter;
+import vn.javis.tourde.utils.CheckTwoList;
 
 public class PrefectureOneFragment extends Fragment {
 
@@ -37,46 +44,49 @@ public class PrefectureOneFragment extends Fragment {
     private SearchCourseActivity activity;
     ListAdapter listAdapter;
 
-    public static PrefectureOneFragment newInstance(View.OnClickListener listener) {
+    public static PrefectureOneFragment newInstance(View.OnClickListener listener,String txtSelected) {
         PrefectureOneFragment fragment = new PrefectureOneFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;
+      // String[] s1 = txtSelected.split(Pattern.quote("["));
+
+      //   fragment.listContent.add(s1[0]);
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.prefecture_one_fragment, container, false );
-        rcv_list = view.findViewById( R.id.rcv_list );
-        btn_choose = view.findViewById( R.id.btn_choose );
+        View view = inflater.inflate(R.layout.prefecture_one_fragment, container, false);
+        rcv_list = view.findViewById(R.id.rcv_list);
+        btn_choose = view.findViewById(R.id.btn_choose);
 
-        tv_close = view.findViewById( R.id.tv_close );
-        tv_close.setOnClickListener( onClickClose );
-        tv_back_menu_entry = view.findViewById( R.id.tv_back_menu_entry );
-        tv_back_menu_entry.setOnClickListener( onClickBack );
+        tv_close = view.findViewById(R.id.tv_close);
+        tv_close.setOnClickListener(onClickClose);
+        tv_back_menu_entry = view.findViewById(R.id.tv_back_menu_entry);
+        tv_back_menu_entry.setOnClickListener(onClickBack);
         activity = (SearchCourseActivity) getActivity();
 
         createData();
-        btn_choose.setOnClickListener( new View.OnClickListener() {
+        btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (listener != null) {
                     getAllContent();
-                    listener.onFragmentInteraction( listContent.toString() );
-                    activity.setmLstContent( listContent );
+                    listener.onFragmentInteraction(listContent.toString());
+                    activity.setmLstContent(listContent);
                     activity.onBackPressed();
                 }
             }
-        } );
+        });
         return view;
     }
 
     View.OnClickListener onClickClose = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent( getActivity(), CourseListActivity.class );
-            startActivity( intent );
+            Intent intent = new Intent(getActivity(), CourseListActivity.class);
+            startActivity(intent);
         }
     };
     View.OnClickListener onClickBack = new View.OnClickListener() {
@@ -87,6 +97,8 @@ public class PrefectureOneFragment extends Fragment {
     };
 
     private void createData() {
+        Log.i("PrefectureOne 91",listContent.toString());
+
         String[] contentList1 = new String[]{"北海道"};
         String[] contentList2 = new String[]{"青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"};
         String[] contentList3 = new String[]{"茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"};
@@ -97,44 +109,88 @@ public class PrefectureOneFragment extends Fragment {
         String[] contentList8 = new String[]{"福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"};
         dataList = new ArrayList<>();
         Data data1 = new Data();
-        data1.setTitle( "北海道地方" );
-        data1.setContent( Arrays.asList( contentList1 ) );
-        dataList.add( data1 );
+
+//        data1.setTitle( "北海道地方" );
+//        data1.setContent( Arrays.asList( contentList1 ) );
+//        data1.setListSelected(listContent);
+//        dataList.add( data1 );
+//        Data data2 = new Data();
+//        data2.setTitle( "東北地方" );
+//        data2.setContent( Arrays.asList( contentList2 ) );
+//        data2.setListSelected(listContent);
+//        dataList.add( data2 );
+//        Data data3 = new Data();
+//        data3.setTitle( "関東地方" );
+//        data3.setContent( Arrays.asList( contentList3 ) );
+//        data3.setListSelected(listContent);
+//        dataList.add( data3 );
+//        Data data4 = new Data();
+//        data4.setTitle( "中部地方" );
+//        data4.setContent( Arrays.asList( contentList4 ) );
+//        data4.setListSelected(listContent);
+//        dataList.add( data4 );
+//        Data data5 = new Data();
+//        data5.setTitle( "近畿地方" );
+//        data5.setContent( Arrays.asList( contentList5 ) );
+//        data5.setListSelected(listContent);
+//        dataList.add( data5 );
+//        Data data6 = new Data();
+//        data6.setTitle( "中国地方" );
+//        data6.setContent( Arrays.asList( contentList6 ) );
+//        data6.setListSelected(listContent);
+//        dataList.add( data6 );
+//        Data data7 = new Data();
+//        data7.setTitle( "四国地方" );
+//        data7.setContent( Arrays.asList( contentList7 ) );
+//        data7.setListSelected(listContent);
+//        dataList.add( data7 );
+//        Data data8 = new Data();
+//        data8.setTitle( "四国地方" );
+//        data8.setContent( Arrays.asList( contentList8 ) );
+//        data8.setListSelected(listContent);
+//        dataList.add( data8 );
+//        rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
+//        listAdapter = new ListAdapter( getContext(), dataList, new ListAdapter.OnClickItem() {
+
+        data1.setTitle("北海道地方");
+        data1.setContent(Arrays.asList(contentList1));
+        dataList.add(data1);
         Data data2 = new Data();
-        data2.setTitle( "東北地方" );
-        data2.setContent( Arrays.asList( contentList2 ) );
-        dataList.add( data2 );
+        data2.setTitle("東北地方");
+        data2.setContent(Arrays.asList(contentList2));
+        dataList.add(data2);
         Data data3 = new Data();
-        data3.setTitle( "関東地方" );
-        data3.setContent( Arrays.asList( contentList3 ) );
-        dataList.add( data3 );
+        data3.setTitle("関東地方");
+        data3.setContent(Arrays.asList(contentList3));
+        dataList.add(data3);
         Data data4 = new Data();
-        data4.setTitle( "中部地方" );
-        data4.setContent( Arrays.asList( contentList4 ) );
-        dataList.add( data4 );
+        data4.setTitle("中部地方");
+        data4.setContent(Arrays.asList(contentList4));
+        dataList.add(data4);
         Data data5 = new Data();
-        data5.setTitle( "近畿地方" );
-        data5.setContent( Arrays.asList( contentList5 ) );
-        dataList.add( data5 );
+        data5.setTitle("近畿地方");
+        data5.setContent(Arrays.asList(contentList5));
+        dataList.add(data5);
         Data data6 = new Data();
-        data6.setTitle( "中国地方" );
-        data6.setContent( Arrays.asList( contentList6 ) );
-        dataList.add( data6 );
+        data6.setTitle("中国地方");
+        data6.setContent(Arrays.asList(contentList6));
+        dataList.add(data6);
         Data data7 = new Data();
-        data7.setTitle( "四国地方" );
-        data7.setContent( Arrays.asList( contentList7 ) );
-        dataList.add( data7 );
+        data7.setTitle("四国地方");
+        data7.setContent(Arrays.asList(contentList7));
+        dataList.add(data7);
         Data data8 = new Data();
-        data8.setTitle( "四国地方" );
-        data8.setContent( Arrays.asList( contentList8 ) );
-        dataList.add( data8 );
-        rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
-        listAdapter = new ListAdapter( getContext(), dataList, new ListAdapter.OnClickItem() {
+        data8.setTitle("四国地方");
+        data8.setContent(Arrays.asList(contentList8));
+        dataList.add(data8);
+        rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
+        listAdapter = new ListAdapter(getContext(), dataList, new ListAdapter.OnClickItem() {
+
             @Override
             public void onClick(Map content) {
             }
-        } );
-        rcv_list.setAdapter( listAdapter );
+        });
+        rcv_list.setAdapter(listAdapter);
     }
 
     public interface OnFragmentInteractionListener extends View.OnClickListener {
@@ -148,7 +204,7 @@ public class PrefectureOneFragment extends Fragment {
         for (Map.Entry<String, Boolean> entry : listAdapter.getMapContent().entrySet()) {
             String content = entry.getKey();
             Boolean isPick = entry.getValue();
-            if (isPick) listContent.add( content );
+            if (isPick) listContent.add(content);
 
         }
     }

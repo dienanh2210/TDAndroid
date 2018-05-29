@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +36,7 @@ import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class TabCourseFragment extends BaseFragment {
 
@@ -55,6 +58,7 @@ public class TabCourseFragment extends BaseFragment {
     TextView txtStartAddress;
     @BindView(R.id.btn_running_app)
     RelativeLayout btnRunningApp;
+
 
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
@@ -128,20 +132,32 @@ public class TabCourseFragment extends BaseFragment {
         btnRunningApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
-                        "\n" +
-                        " \n" +
-                        "\n" +
-                        "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
 
-                ProcessDialog.showDialogConfirm(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
-                    @Override
-                    public void onOkClick() {
-                        mActivity.showCourseDrive();
-                    }
-                });
+                if(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox")=="") {
+                    String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
+                            "\n" +
+                            " \n" +
+                            "\n" +
+                            "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
+
+                    ProcessDialog.showDialogcheckbox( getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            mActivity.showCourseDrive();
+
+                        }
+                    } );
+                }
+                else
+                {
+                    mActivity.showCourseDrive();
+                }
+
+
             }
         });
+
+
     }
 
     @Override

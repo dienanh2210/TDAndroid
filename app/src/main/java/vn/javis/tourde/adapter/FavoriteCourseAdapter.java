@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
@@ -31,13 +32,13 @@ import vn.javis.tourde.view.CircleTransform;
 public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAdapter.FavoriteCourseViewHolder> {
 
     List<FavoriteCourse> listCourse = new ArrayList<FavoriteCourse>();
-    Context context;
+    CourseListActivity activityContext;
     View mView;
 
-    public FavoriteCourseAdapter(List<FavoriteCourse> listCourse, Context context) {
+    public FavoriteCourseAdapter(List<FavoriteCourse> listCourse, CourseListActivity activityContext) {
 
         this.listCourse = listCourse;
-        this.context = context;
+        this.activityContext = activityContext;
     }
 
     @Override
@@ -50,12 +51,12 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
 
     @Override
     public void onBindViewHolder(@NonNull final FavoriteCourseViewHolder holder, final int position) {
-        FavoriteCourse model = listCourse.get(position);
+        final FavoriteCourse model = listCourse.get(position);
 
         holder.txtTitle.setText(model.getTitle());
         holder.txtPostUsername.setText(model.getPostUserName());
-        Picasso.with(context).load(model.getTopImage()).into(holder.imgShow);
-        Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
+        Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShow);
+        Picasso.with(activityContext).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
         if (holder.isRunning) {
             //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
@@ -73,6 +74,13 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
                 if (onItemClickedListener != null) {
                     onItemClickedListener.onItemClick(position);
                 }
+            }
+        });
+        holder.txtRunning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityContext.setmCourseID(model.getCourseId());
+               activityContext.showCourseDrive();
             }
         });
        /* holder.btnFavorite.setOnClickListener(new View.OnClickListener() {

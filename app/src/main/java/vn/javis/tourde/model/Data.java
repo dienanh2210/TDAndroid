@@ -11,6 +11,8 @@ public class Data implements Serializable {
     private boolean isMarked;
     private int positionMarked;
 
+
+
     public boolean isMarked() {
         return isMarked;
     }

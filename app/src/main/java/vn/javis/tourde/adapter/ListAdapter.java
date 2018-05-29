@@ -1,6 +1,7 @@
 package vn.javis.tourde.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,15 +33,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         this.onClickItem = onClickItem;
     }
 
+    @NonNull
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.item_list, parent, false );
-        ViewHolder viewHolder = new ViewHolder( view );
-        return viewHolder;
+        return new ViewHolder( view );
     }
 
     @Override
-    public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
         final Data data = dataList.get( position );
         holder.tv_header.setText( data.getTitle() );
         //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
