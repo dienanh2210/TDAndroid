@@ -44,6 +44,16 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/title_changeInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/changeInfo"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <include layout="@layout/item_divider" />
@@ -473,6 +483,20 @@
                 android:textAlignment="center"
                 android:textColor="@color/backgroud"
                 android:textSize="@dimen/_12sdp" />
+            <Button
+                android:id="@+id/changeInfo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_47sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/custom_frame"
+                android:text="@string/changeInfo"
+                android:textAlignment="center"
+                android:textColor="@color/backgroud"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

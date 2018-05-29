@@ -41,6 +41,12 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
         String model = listImgage.get(position);
         if(position ==0) {
             holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.plus_button));
+            holder.imgSpot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickedListener.onItemClick(0);
+                }
+            });
         }
         else {
         //Picasso.with(context).load(imgUrl).into( holder.imgSpot);

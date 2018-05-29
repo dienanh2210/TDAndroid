@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -67,7 +68,12 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     ImageView imv_mark_man;
     @BindView(R.id.imv_mark_woman)
     ImageView imv_mark_woman;
-
+    @BindView(R.id.register_title)
+    TextView register_title;
+    @BindView(R.id.title_changeInfo)
+    TextView title_changeInfo;
+    @BindView(R.id.changeInfo)
+    Button changeInfo;
     int prefecture = 1;
     int age = 10;
     String txtAge = "10代";
@@ -77,7 +83,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     TextView tv_age;
     Bitmap bitmapIcon;
     private RegisterActivity activity;
-
+    public static final long FILE_SIZE_8MB = 8192;
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -92,6 +98,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = (RegisterActivity) getActivity();
+
     }
 
     @Override
@@ -139,6 +146,14 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         appCompatButtonLogin.setOnClickListener(this);
         tv_back_resgister.setOnClickListener(this);
         select_userIcon.setOnClickListener(this);
+        String change = getArguments().getString(Constant.KEY_CHANGE_INFO);
+        assert change != null;
+        if(!change.equals("")){
+            register_title.setVisibility(View.GONE);
+            title_changeInfo.setVisibility(View.VISIBLE);
+            appCompatButtonLogin.setVisibility(View.GONE);
+            changeInfo.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -257,20 +272,26 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         });
     }
 
-    //    startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Detects request codes
+
+
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-
             try {
                 bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                //if(bitmapIcon.compress(Bitmap.CompressFormat.JPEG,100,baos))
-
-                select_userIcon.setImageBitmap(bitmapIcon);
+                boolean isLarge = false;
+                File file = new File("android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI");
+                Log.i("File size: ", "" + file.length());
+                if (file.length() > FILE_SIZE_8MB) {
+                    isLarge = true;
+                }
+                if(!isLarge)
+                    select_userIcon.setImageBitmap(bitmapIcon);
+                else
+                    ProcessDialog.showDialogOk(getContext(),"","容量が大きすぎるため投稿できません。");
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -279,6 +300,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 e.printStackTrace();
             }
         }
+
+
     }
 
     private Response.Listener<JSONObject> successListener() {
@@ -298,7 +321,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     loginToApp();
                 } else {
                     Log.d(edt_email.toString(), edt_password.toString() + "error");
-                   // Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
                     ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
                 }
             }

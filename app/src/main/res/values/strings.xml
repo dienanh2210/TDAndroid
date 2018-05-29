@@ -168,6 +168,7 @@
     <string name="TextNewEntry">登録方法を選んでください</string>
     <string name="TextMailNewEntry">メールアドレスで登録</string>
     <string name="SignUp">新規登録</string>
+    <string name="changeInfo">登録情報変更</string>
     <string name="TextHelpUser">アンケートにご協力ください</string>
     <string name="TextGender">性別</string>
     <string name="TextMan">男性</string>

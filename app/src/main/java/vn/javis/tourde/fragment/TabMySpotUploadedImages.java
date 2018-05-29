@@ -1,6 +1,11 @@
 package vn.javis.tourde.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +25,9 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListMySpotUploadedImageAdapter;
+import vn.javis.tourde.utils.ProcessDialog;
+
+import static vn.javis.tourde.fragment.RegisterFragment.FILE_SIZE_8MB;
 
 
 public class TabMySpotUploadedImages extends BaseFragment {
@@ -45,9 +56,41 @@ public class TabMySpotUploadedImages extends BaseFragment {
             RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1);;
             rcvMySpotImage.setLayoutManager(layoutManager);
             listSpotImageAdapter = new ListMySpotUploadedImageAdapter( listSpotImg,mActivity);
+            listSpotImageAdapter.setOnItemClickListener(new ListMySpotUploadedImageAdapter.OnItemClickedListener() {
+                @Override
+                public void onItemClick(int position) {
+                    if(position==0)
+                    {
+                        //uploadMyImage(GET_FROM_GALLERY,Activity.RESULT_OK,);
+                    }
+                }
+            });
             rcvMySpotImage.setAdapter(listSpotImageAdapter);
         }
 
+    }
+    Bitmap bitmapIcon;
+    private static final int GET_FROM_GALLERY = 1;
+    private void uploadMyImage(int requestCode, int resultCode, Intent data) {
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            try {
+                bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                File file = new File("android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI");
+
+                if(file.length() > FILE_SIZE_8MB)
+                    Log.i("","");
+                    //listSpotImg.setImageBitmap(bitmapIcon);
+                else
+                    ProcessDialog.showDialogOk(getContext(),"","容量が大きすぎるため投稿できません。");
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
