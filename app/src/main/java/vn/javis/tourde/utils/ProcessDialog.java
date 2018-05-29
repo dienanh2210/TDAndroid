@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Layout;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -66,6 +67,82 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
               action.onOkClick();
+                dialog.hide();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.hide();
+            }
+        });
+
+        dialog.show();
+    }
+    public static void showDialogConfirm(final Context context,int viewLayout, String title, String content, final  OnActionDialogClickOk action) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setContentView(viewLayout);
+        dialog.setCancelable(false);
+        TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
+        // tvTitle.setVisibility(View.GONE);
+        tvTitle.setText(title);
+        TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
+        tvMessage.setText(content);
+        //tuanpd
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
+        final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                action.onOkClick();
+                dialog.hide();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.hide();
+            }
+        });
+
+        dialog.show();
+    }
+    public static void showDialogConfirm(final Context context,int viewLayout,int colorTitle,int colorMessage, String title, String content, final  OnActionDialogClickOk action) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setContentView(viewLayout);
+        dialog.setCancelable(false);
+        TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
+        // tvTitle.setVisibility(View.GONE);
+        tvTitle.setText(title);
+        tvTitle.setTextColor(colorTitle);
+
+        TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
+        tvMessage.setTextColor(colorMessage);
+        tvMessage.setText(content);
+
+        //tuanpd
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
+        final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                action.onOkClick();
                 dialog.hide();
             }
         });
