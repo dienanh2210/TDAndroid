@@ -98,12 +98,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
         fn_permission();
-        /*ProcessDialog.showDialogOk(CourseListActivity.this, "", "ログアウトしました。", new ProcessDialog.OnActionDialogClickOk() {
-            @Override
-            public void onOkClick() {
 
-            }
-        });*/
     }
     public void setmCourseID(int mCourseID) {
         this.mCourseID = mCourseID;
@@ -124,6 +119,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             actionBar.hide();
         }
 
+    }
+
+    public void showDialogWarning()
+    {
+        ProcessDialog.showDialogOk(CourseListActivity.this, "", "この機能を利用するにはログインをお願いいたします。");
     }
 
     private void fetchData() {

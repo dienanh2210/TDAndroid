@@ -79,7 +79,7 @@ public class CourseListFragment extends BaseFragment {
 
     private static final int NUMBER_COURSE_ON_PAGE = 5;
     private static final int DEFAULT_PAGE = 1;
-
+    String token = LoginFragment.getmUserToken();
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -119,7 +119,10 @@ public class CourseListFragment extends BaseFragment {
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showBadgeCollection();
+                if(token!="")
+                    mActivity.showBadgeCollection();
+                else
+                    mActivity.showDialogWarning();
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
