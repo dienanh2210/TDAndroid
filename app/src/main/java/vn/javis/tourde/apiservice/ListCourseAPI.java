@@ -67,11 +67,11 @@ public class ListCourseAPI {
     }
 
     public static void setAllCourses(JSONObject jsonObject) {
+        instance.mAllCourses.clear();
         try {
             int abc = 0;
             JSONObject allJsonObject = jsonObject.getJSONObject("list");
             Iterator<String> key = allJsonObject.keys();
-            instance.mAllCourses.clear();
             while (key.hasNext()) {
                 abc++;
                 String id = key.next();

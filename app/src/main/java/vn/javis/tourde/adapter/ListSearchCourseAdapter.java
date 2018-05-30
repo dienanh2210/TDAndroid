@@ -65,24 +65,12 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         final Data data = dataList.get(position);
         holder.tv_header.setText(data.getTitle());
         holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
-        // holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
+
 
         holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(position, data.getContent(), new ContentSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {
 
-
-//                for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
-//                    //to get key
-//                    e1.getKey();
-//                    //and to get value
-//                    for (Map.Entry<Integer, View> eItem : ((ContentSearchCourseAdapter) e1.getValue().getAdapter()).mapItemView.entrySet()) {
-//                        //to get key
-//                        eItem.getKey();
-//                        //and to get value, 1
-//                      //  eItem.getValue().setVisibility( View.GONE );
-//                    }
-//                }
                 if (onClickItem != null) {
                     String s = data.getContent().get(position);
                     mapContent.put(s, isPick);

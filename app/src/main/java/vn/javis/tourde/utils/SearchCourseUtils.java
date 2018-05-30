@@ -30,7 +30,52 @@ public class SearchCourseUtils {
 
         return dataList;
     }
+    public int getIndexPrefecture(String s){
+        ArrayList<String> dataList = new ArrayList<>();
+        String[] contentList1 = new String[]{"北海道"};
+        String[] contentList2 = new String[]{"青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"};
+        String[] contentList3 = new String[]{"茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"};
+        String[] contentList4 = new String[]{"新潟県", "富山県", "石川県", "福井県", "長野県", "山梨県", "岐阜県", "静岡県", "愛知県"};
+        String[] contentList5 = new String[]{"三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"};
+        String[] contentList6 = new String[]{"鳥取県", "島根県", "岡山県", "広島県", "山口県"};
+        String[] contentList7 = new String[]{"徳島県", "香川県", "愛媛県", "高知県"};
+        String[] contentList8 = new String[]{"福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"};
+        dataList.addAll(Arrays.asList(contentList1));
+        dataList.addAll(Arrays.asList(contentList2));
+        dataList.addAll(Arrays.asList(contentList3));
+        dataList.addAll(Arrays.asList(contentList4));
+        dataList.addAll(Arrays.asList(contentList5));
+        dataList.addAll(Arrays.asList(contentList6));
+        dataList.addAll(Arrays.asList(contentList7));
+        dataList.addAll(Arrays.asList(contentList8));
+        return  dataList.indexOf(s)+1;
+    }
+    public String getIndexSeason(String s){
 
+        ArrayList<String> dataList = new ArrayList<>();
+        ArrayList<String> dataList2 = new ArrayList<>();
+        String[] contentList1 = new String[]{"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
+        String[] contentList2 = new String[]{"1","2","4","8","10","32","64","128","256","512","1024","2048"};
+        dataList.addAll(Arrays.asList(contentList1));
+        dataList2.addAll(Arrays.asList(contentList2));
+        if(dataList.contains(s)) {
+            return dataList2.get(dataList.indexOf(s));
+        }
+        return "-1";
+    }
+    public String getIndexTag(String s){
+
+        ArrayList<String> dataList = new ArrayList<>();
+        ArrayList<String> dataList2 = new ArrayList<>();
+        String[] contentList1 = new String[]{"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
+        String[] contentList2 = new String[]{"1","2","4","8","10","32","64","128","256","512","1024","2048"};
+        if(dataList.contains(s)) {
+            dataList.addAll(Arrays.asList(contentList1));
+            dataList2.addAll(Arrays.asList(contentList2));
+            return dataList2.get(dataList.indexOf(s));
+        }
+        return "-1";
+    }
     public List<Data> createDataSelectArea() {
         List<Data> dataList = new ArrayList<>();
         String[] contentList1 = new String[]{"北海道"};

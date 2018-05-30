@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.apiservice.SpotEquipmentReviewAPI;
 import vn.javis.tourde.model.SpotEquipment;
 import vn.javis.tourde.services.ServiceCallback;
