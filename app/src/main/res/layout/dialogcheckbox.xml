@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/ln_checkbox"
     android:layout_height="match_parent"
     android:background="#B3172129"
     android:gravity="center"
@@ -27,13 +28,13 @@
             android:paddingBottom="@dimen/_20sdp"
             android:paddingTop="@dimen/_10sdp">
 
+
             <TextView
                 android:id="@+id/title_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center"
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
@@ -44,9 +45,17 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:gravity="center"
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_13sdp"
+                android:textStyle="bold"/>
+            <CheckBox
+                android:id="@+id/chkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_205sdp"
+                android:textColor="@color/Black"
+                android:text="@string/checkbox"
+                android:checked="false"
                 android:textStyle="bold"/>
         </RelativeLayout>
 

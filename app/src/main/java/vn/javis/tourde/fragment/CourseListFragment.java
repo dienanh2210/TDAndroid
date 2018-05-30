@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -67,9 +68,12 @@ public class CourseListFragment extends BaseFragment {
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
     TextView txtHomeBtn;
+    @BindView(R.id.txt_no_course)
+    TextView txtNoCourse;
     @BindView(R.id.btn_my_course_footer)
     RelativeLayout btnMyCourse;
-
+    @BindView(R.id.content_course_list)
+    NestedScrollView contentCourseList;
 
     private int mTotalPage = 1;
 
@@ -129,7 +133,7 @@ public class CourseListFragment extends BaseFragment {
         String token = LoginFragment.getmUserToken();
         Intent intent = mActivity.getIntent();
         if (intent.hasExtra(Constant.KEY_LOGOUT_SUCCESS)) {
-            if (token == "" && intent.getIntExtra(Constant.KEY_LOGOUT_SUCCESS,0)==1) {
+            if (token == "" && intent.getIntExtra(Constant.KEY_LOGOUT_SUCCESS, 0) == 1) {
                 ProcessDialog.showDialogOk(getContext(), "", "ログアウトしました。");
             }
         }
@@ -166,17 +170,23 @@ public class CourseListFragment extends BaseFragment {
 
         int totalCourse = ListCourseAPI.getInstance().getCourseSize();
         Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
-        mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
-        int currentValue = mCurrentPage;
-        mCurrentPage += nextPage;
-        if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
-        if (mCurrentPage < 1) mCurrentPage = 1;
-        if (mCurrentPage != currentValue || nextPage == 0) {
-            txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
-            setRecycle();
-        }
+        if (totalCourse == 0) {
+            txtNoCourse.setVisibility(View.VISIBLE);
+            contentCourseList.setVisibility(View.GONE);
+        } else {
 
-        changeButtonBackground();
+            mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
+            int currentValue = mCurrentPage;
+            mCurrentPage += nextPage;
+            if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
+            if (mCurrentPage < 1) mCurrentPage = 1;
+            if (mCurrentPage != currentValue || nextPage == 0) {
+                txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
+                setRecycle();
+            }
+
+            changeButtonBackground();
+        }
     }
 
     void setRecycle() {

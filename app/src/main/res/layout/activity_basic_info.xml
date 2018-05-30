@@ -256,12 +256,13 @@
             </RelativeLayout>
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/appCompatButtonLogin"
+                android:id="@+id/updateInfo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/dimen50"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_25sdp"
                 android:background="@drawable/basicinfo"
                 android:text="@string/ButtonBasic"
                 android:textAlignment="center"

@@ -28,9 +28,12 @@
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/gifImageView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@drawable/background_goal"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:scaleX="1.5"
+                android:scaleY="1.5" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

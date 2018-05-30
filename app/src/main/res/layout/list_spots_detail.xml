@@ -134,7 +134,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/txt_length"
+                android:id="@+id/txt_spot_distance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_5sdp"

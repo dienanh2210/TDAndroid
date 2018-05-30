@@ -50,6 +50,7 @@ import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeService;
+import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
@@ -247,7 +248,17 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtSpotCount.setText("" + courseDetail.getSpot().size());
         txtArea.setText(model.getArea());
         txtDistance.setText(model.getDistance());
-        txtSeason.setText(model.getSeason());
+        String strMonths = model.getSeason();
+        Log.i("Course Detail 255",""+strMonths);
+        try {
+            int number = Integer.valueOf(model.getSeason());
+            strMonths = BinaryConvert.convertToMonths(number)+"月";
+            Log.i("Course Detail 255",""+strMonths);
+        }
+        catch (Exception e){
+
+        }
+        txtSeason.setText(strMonths);
         txtAverageSlope.setText(model.getAverageSlope());
         txtElevation.setText(model.getElevation() + "m");
         int courseType = model.getCourseType();

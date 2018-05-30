@@ -19,6 +19,8 @@ import vn.javis.tourde.fragment.SearchCourseFragment;
 
 public class SearchCourseActivity extends BaseActivity {
 
+
+
     private List<String> mListContent = new ArrayList<>();
 
 
@@ -26,11 +28,13 @@ public class SearchCourseActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_course);
-        openPage(new SearchCourseFragment(), false);
+        openPage(new SearchCourseFragment(), true, true);
     }
 
-    public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack) {
+    public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        if(isAnimation)
+            tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         if (isBackStack)
@@ -46,9 +50,11 @@ public class SearchCourseActivity extends BaseActivity {
 
     public void setmLstContent(List<String> mLstContent) {
         this.mListContent = mLstContent;
-        Log.i("xxx: ", this.mListContent.toString());
+        Log.i("seach activity 51: ", this.mListContent.toString());
     }
-
+    public List<String> getmListContent() {
+        return mListContent;
+    }
     public void onBackCLickToList(HashMap map) {
 
         Intent intent = new Intent(this, CourseListActivity.class);
