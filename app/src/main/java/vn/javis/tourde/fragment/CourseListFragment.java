@@ -23,15 +23,16 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MenuPageActivity;
-import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
@@ -43,7 +44,7 @@ import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 
 
-public class CourseListFragment extends BaseFragment {
+public class CourseListFragment extends BaseFragment implements ServiceCallback {
 
     @BindView(R.id.lst_courses_recycleview)
     RecyclerView lstCourseRecycleView;
@@ -80,6 +81,9 @@ public class CourseListFragment extends BaseFragment {
     private static final int NUMBER_COURSE_ON_PAGE = 5;
     private static final int DEFAULT_PAGE = 1;
 
+    String token = LoginFragment.getmUserToken();
+    HashMap<String, String> paramsSearch;
+    
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -87,6 +91,19 @@ public class CourseListFragment extends BaseFragment {
         lstCourseRecycleView.setLayoutManager(layoutManager);
         lstCourseRecycleView.setNestedScrollingEnabled(false);
         setFooter();
+        Bundle bundle = getArguments();
+        paramsSearch = new HashMap<String, String>();
+        boolean search = false;
+        if (bundle != null) {
+            String getStr = bundle.getString("searching");
+            if (getStr != null && getStr != "") {
+                paramsSearch = (HashMap<String, String>) bundle.getSerializable("params");
+                Log.i("lst course 97", "" + paramsSearch);
+                search = true;
+            }
+
+        }
+        getData(search);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +114,7 @@ public class CourseListFragment extends BaseFragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mActivity, SearchCourseActivity.class));
+                mActivity.showSearchPage();
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -114,12 +131,14 @@ public class CourseListFragment extends BaseFragment {
         });
         mCurrentPage = DEFAULT_PAGE;
 
-        changePage(0);
 
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showBadgeCollection();
+                if(token!="")
+                    mActivity.showBadgeCollection();
+                else
+                    mActivity.showDialogWarning();
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
@@ -165,27 +184,41 @@ public class CourseListFragment extends BaseFragment {
         });
     }
 
+    void getData(boolean searching) {
+
+        if (!searching) {
+            ListCourseAPI.getJsonValues(this);
+        } else {
+            ListCourseAPI.getJsonValueSearch(paramsSearch, this);
+        }
+        Log.i("lst course 184", searching + "" + paramsSearch);
+    }
+
     void changePage(int nextPage) {
 
+        try {
+            int totalCourse = ListCourseAPI.getInstance().getCourseSize();
+            Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
+            if (totalCourse == 0) {
+                txtNoCourse.setVisibility(View.VISIBLE);
+                contentCourseList.setVisibility(View.GONE);
+            } else {
+                txtNoCourse.setVisibility(View.GONE);
+                contentCourseList.setVisibility(View.VISIBLE);
+                mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
+                int currentValue = mCurrentPage;
+                mCurrentPage += nextPage;
+                if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
+                if (mCurrentPage < 1) mCurrentPage = 1;
+                if (mCurrentPage != currentValue || nextPage == 0) {
+                    txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
+                    setRecycle();
+                }
 
-        int totalCourse = ListCourseAPI.getInstance().getCourseSize();
-        Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
-        if (totalCourse == 0) {
-            txtNoCourse.setVisibility(View.VISIBLE);
-            contentCourseList.setVisibility(View.GONE);
-        } else {
-
-            mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
-            int currentValue = mCurrentPage;
-            mCurrentPage += nextPage;
-            if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
-            if (mCurrentPage < 1) mCurrentPage = 1;
-            if (mCurrentPage != currentValue || nextPage == 0) {
-                txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
-                setRecycle();
+                changeButtonBackground();
             }
+        } catch (Exception e) {
 
-            changeButtonBackground();
         }
     }
 
@@ -217,5 +250,20 @@ public class CourseListFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+        ListCourseAPI.setAllCourses((JSONObject) response);
+        changePage(0);
+    }
+
+    @Override
+    public void onError(VolleyError error) {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }
 

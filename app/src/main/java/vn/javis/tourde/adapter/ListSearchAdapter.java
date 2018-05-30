@@ -96,7 +96,7 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
         }));
         mapRecyclerView.put(position, holder.rcv_content);
         if (position == 0) {
-            ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark(true);
+           // ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark(true);
             holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
         } else {
 

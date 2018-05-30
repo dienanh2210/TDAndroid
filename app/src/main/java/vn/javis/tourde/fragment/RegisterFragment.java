@@ -163,6 +163,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
+    private void unResgisterForcus() {
+        edt_email.setOnFocusChangeListener(null);
+        edt_password.setOnFocusChangeListener(null);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -174,6 +178,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         super.onDetach();
     }
 
+    @Override
+    public void onDestroyView() {
+        unResgisterForcus();
+        super.onDestroyView();
+    }
 
     private boolean chooseGender(boolean isMan) {
         if (isMan) {
@@ -229,7 +238,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes" + response.toString());
+                        //Log.d(edt_email.getText().toString(), edt_password.getText().toString() + "yes" + response.toString());
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
                         Intent intent = new Intent(getActivity(), CourseListActivity.class);
