@@ -169,6 +169,8 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         mSelectAreaAdapter = new ListAdapter(getContext(), mSelectAreaData, new ListAdapter.OnClickItem() {
             @Override
             public void onClick(Map content) {
+                setTextOnTextView(tv_prefecture, content);
+
             }
         });
         selectAreaRecyclerView.setAdapter(mSelectAreaAdapter);
@@ -181,11 +183,27 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         mAdditionalConditionAdapter = new ListSearchAdapter( getContext(), mAdditionalConditionData, new ListSearchAdapter.OnClickItem() {
             @Override
             public void onClick(Map content) {
-
+                setTextOnTextView(tv_searchtwo, content);
             }
         } );
         moreConditionRecyclerView.setAdapter(mAdditionalConditionAdapter);
     }
+
+    private void setTextOnTextView(TextView textView, Map content) {
+        if (content.size() == 0) {
+            textView.setText(prefecture);
+            return;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        String prefix = "";
+        for (Object str : content.keySet()) {
+            stringBuilder.append(prefix);
+            prefix = ",";
+            stringBuilder.append(str);
+        }
+        textView.setText(stringBuilder.toString());
+    }
+
 
     public interface OnFragmentInteractionListener extends View.OnClickListener {
         void onFragmentInteraction(String content);
