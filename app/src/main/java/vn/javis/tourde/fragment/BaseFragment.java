@@ -26,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
 
         mView = getView(inflater, container);
         mUnbind = ButterKnife.bind(this, mView);
+        ButterKnife.setDebug(true);
         return mView;
     }
 

@@ -36,17 +36,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @NonNull
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.item_list, parent, false );
-        return new ViewHolder( view );
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
-        final Data data = dataList.get( position );
-        holder.tv_header.setText( data.getTitle() );
+        final Data data = dataList.get(position);
+        holder.tv_header.setText(data.getTitle());
         //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
-        holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
-        holder.rcv_content.setAdapter( new ContentAdapter( data.getContent(), new ContentAdapter.OnClickItem() {
+        holder.rcv_content.setLayoutManager(new LinearLayoutManager(context));
+        holder.rcv_content.setAdapter(new ContentAdapter(data.getContent(), new ContentAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {
                 for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
@@ -62,14 +62,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 }
 
                 if (onClickItem != null) {
-                    String s =data.getContent().get( position );
-                    mapContent.put( s, isPick);
-                    Log.i( "Content", data.getContent().get( position ) );
-//                    onClickItem.onClick( data.getContent().get( position ));
+                    String s = data.getContent().get(position);
+                    if (isPick) {
+                        mapContent.put(s, true);
+                    } else {
+                        mapContent.remove(s);
+                    }
+
+                    Log.i("Content", data.getContent().get(position));
+                    onClickItem.onClick(mapContent);
                 }
             }
-        } ) );
-        mapRecyclerView.put( position, holder.rcv_content );
+        }));
+        mapRecyclerView.put(position, holder.rcv_content);
         if (position == 0) {
             //  ((ContentAdapter) holder.rcv_content.getAdapter()).setShowMark( true );
         }
@@ -85,10 +90,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         RecyclerView rcv_content;
 
         public ViewHolder(View itemView) {
-            super( itemView );
-            tv_header = itemView.findViewById( R.id.tv_header );
-            rcv_content = itemView.findViewById( R.id.rcv_content );
-            itemView.setOnClickListener( this );
+            super(itemView);
+            tv_header = itemView.findViewById(R.id.tv_header);
+            rcv_content = itemView.findViewById(R.id.rcv_content);
+            itemView.setOnClickListener(this);
         }
 
         @Override

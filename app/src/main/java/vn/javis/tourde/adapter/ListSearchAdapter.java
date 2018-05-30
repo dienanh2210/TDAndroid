@@ -71,7 +71,12 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
                 }
                 if (onClickItem != null) {
                     String s = data.getContent().get(position);
-                    mapContent.put(s, isPick);
+                    if (isPick) {
+                        mapContent.put(s, true);
+                    } else {
+                        mapContent.remove(s);
+                    }
+
                     Log.i("Content", data.getContent().get(position));
 
                     if ("おすすめの月".equals(data.getTitle())) //area
@@ -84,16 +89,14 @@ public class ListSearchAdapter extends RecyclerView.Adapter<ListSearchAdapter.Vi
                             listTag.add(s);
                         } else listTag.remove(s);
                     }
-                    Log.i("listSeason", listSeason.toString());
-                    Log.i("w", listTag.toString());
-//                    onClickItem.onClick( data.getContent().get( position ));
+                    onClickItem.onClick(mapContent);
 
                 }
             }
         }));
         mapRecyclerView.put(position, holder.rcv_content);
         if (position == 0) {
-            ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark(true);
+           // ((ContentSearchAdapter) holder.rcv_content.getAdapter()).setShowMark(true);
             holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
         } else {
 

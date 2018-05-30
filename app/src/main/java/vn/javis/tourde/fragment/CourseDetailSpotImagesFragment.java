@@ -23,7 +23,6 @@ import org.json.JSONException;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.DetailSpotActivity;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.customlayout.TourDeTabLayout;

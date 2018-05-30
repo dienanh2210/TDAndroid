@@ -67,7 +67,7 @@
         android:textStyle="bold" />
 
     <android.support.v4.widget.NestedScrollView
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/content_course_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

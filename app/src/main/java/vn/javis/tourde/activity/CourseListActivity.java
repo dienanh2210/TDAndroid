@@ -48,6 +48,7 @@ import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.PostCommentFragment;
+import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
@@ -92,8 +93,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         setContentView(R.layout.course_list_view);
         ListCourseAPI api = new ListCourseAPI(this);
         setHearder();
-        fetchData();
+       // fetchData();
         dataBundle = new Bundle();
+        showCourseListPage();
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
@@ -144,10 +146,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     public void showCourseListPage() {
-
+        dataBundle.putString("searching","");
         openPage(new CourseListFragment(), false);
     }
-
+    public void showCourseListPage(HashMap<String,String> parram) {
+        dataBundle.putSerializable("params",parram);
+        dataBundle.putString("searching","searching");
+        openPage(new CourseListFragment(), false);
+    }
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
@@ -220,7 +226,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }
-
+    public void showSearchPage(){
+        openPage(new SearchCourseFragment(),true);
+    }
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
 

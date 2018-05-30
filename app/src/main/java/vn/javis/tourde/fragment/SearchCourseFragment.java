@@ -24,7 +24,6 @@ import java.util.Map;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.RegisterActivity;
-import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.adapter.ListAdapter;
 import vn.javis.tourde.adapter.ListSearchAdapter;
 import vn.javis.tourde.adapter.ListSearchCourseAdapter;
@@ -51,7 +50,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     TextView tv_prefecture, tv_searchtwo, tv_close;
     EditText edt_search;
     ImageView im_select_area, im_more_searching;
-    private SearchCourseActivity mActivity;
+    private CourseListActivity mActivity;
     ListSearchCourseAdapter listSearchCourseAdapter;
     List<String> listContent = new ArrayList<>();
 
@@ -73,7 +72,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivity = (SearchCourseActivity) getActivity();
+        mActivity = (CourseListActivity) getActivity();
     }
 
     @Nullable
@@ -108,7 +107,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.im_select_area:
 
-              //  mActivity.openPage(PrefectureOneFragment.newInstance(this,tv_prefecture.getText().toString()), true);
+                //  mActivity.openPage(PrefectureOneFragment.newInstance(this,tv_prefecture.getText().toString()), true);
 
                 selectAreaVisible = selectAreaVisible == View.GONE ? View.VISIBLE : View.GONE;
                 selectAreaRecyclerView.setVisibility(selectAreaVisible);
@@ -169,6 +168,8 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         mSelectAreaAdapter = new ListAdapter(getContext(), mSelectAreaData, new ListAdapter.OnClickItem() {
             @Override
             public void onClick(Map content) {
+                setTextOnTextView(tv_prefecture, content);
+
             }
         });
         selectAreaRecyclerView.setAdapter(mSelectAreaAdapter);
@@ -178,14 +179,30 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         moreConditionRecyclerView.setNestedScrollingEnabled(false);
         moreConditionRecyclerView.setHasFixedSize(false);
         moreConditionRecyclerView.setVisibility(additionalConditionVisible);
-        mAdditionalConditionAdapter = new ListSearchAdapter( getContext(), mAdditionalConditionData, new ListSearchAdapter.OnClickItem() {
+        mAdditionalConditionAdapter = new ListSearchAdapter(getContext(), mAdditionalConditionData, new ListSearchAdapter.OnClickItem() {
             @Override
             public void onClick(Map content) {
-
+                setTextOnTextView(tv_searchtwo, content);
             }
-        } );
+        });
         moreConditionRecyclerView.setAdapter(mAdditionalConditionAdapter);
     }
+
+    private void setTextOnTextView(TextView textView, Map content) {
+        if (content.size() == 0) {
+            textView.setText(prefecture);
+            return;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        String prefix = "";
+        for (Object str : content.keySet()) {
+            stringBuilder.append(prefix);
+            prefix = ",";
+            stringBuilder.append(str);
+        }
+        textView.setText(stringBuilder.toString());
+    }
+
 
     public interface OnFragmentInteractionListener extends View.OnClickListener {
         void onFragmentInteraction(String content);
@@ -216,19 +233,18 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     private void getAllContent() {
 
-
-//        for (Map.Entry<String, Boolean> entry : listSearchCourseAdapter.getMapContent().entrySet()) {
-//            String content = entry.getKey();
-//            Boolean isPick = entry.getValue();
-//            if (isPick) listContent.add(content);
-//            Log.d(listContent.toString(), "text");
-//
-//        }
         String listCourseType = listSearchCourseAdapter.getListCourseType().toString();
         String evelation = listSearchCourseAdapter.getTxtElevation();
-        String distance = listSearchCourseAdapter.getTxtDistance();
+        String dist = listSearchCourseAdapter.getTxtDistance();
+        String distance = "-1";
+        String isOver = "-1";
+        String isLess = "-1";
+        String strTag = "-1";
+        String strSeason = "-1";
+        String typeStr = "-1";
 
-        switch (distance) {
+        //check distance
+        switch (dist) {
             case "〜20km":
                 distance = "1";
                 break;
@@ -243,47 +259,84 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
                 break;
         }
 
-        String isOver = "0";
-        String isLess = "0";
+
         if (evelation.equals("激坂")) {
             isOver = "1";
-        } else isLess = "1";
+        } else if (evelation.equals("坂少"))
+            isLess = "1";
+
         List<String> type = new ArrayList<>();
         if (listCourseType.contains("片道")) {
-            type.add("1");
+            if (typeStr == "-1")
+                typeStr = "1";
+            else typeStr += ",1";
         }
         if (listCourseType.contains("往復")) {
-            type.add("2");
+            if (typeStr == "-1")
+                typeStr = "2";
+            else typeStr += ",2";
         }
         if (listCourseType.contains("1周")) {
-            type.add("3");
+            if (typeStr == "-1")
+                typeStr = "3";
+            else typeStr += ",3";
         }
-        List<String> seasonValue = new ArrayList<>();
-        if (seasonSelected.contains("1月")) seasonValue.add("1");
-        if (seasonSelected.contains("2月")) seasonValue.add("2");
-        if (seasonSelected.contains("3月")) seasonValue.add("4");
-        if (seasonSelected.contains("4月")) seasonValue.add("8");
-        if (seasonSelected.contains("5月")) seasonValue.add("16");
-        if (seasonSelected.contains("6月")) seasonValue.add("32");
-        if (seasonSelected.contains("7月")) seasonValue.add("64");
-        if (seasonSelected.contains("8月")) seasonValue.add("128");
-        if (seasonSelected.contains("9月")) seasonValue.add("256");
-        if (seasonSelected.contains("10月")) seasonValue.add("512");
-        if (seasonSelected.contains("11月")) seasonValue.add("1024");
-        if (seasonSelected.contains("12月")) seasonValue.add("2048");
 
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("prefecture", tv_prefecture.getText().toString());
-        map.put("distance_type", distance);
-        map.put("over_elevation", isOver);
-        map.put("less_elevation", isLess);
-        map.put("course_type", type.toString());
-        map.put("freeword", edt_search.getText().toString());
-        map.put("season", seasonValue.toString());
-        map.put("tag", tagSelected.toString());
-        Log.i("map", map.toString());
-        mActivity.onBackCLickToList(map);
+        if (tv_prefecture.getText().toString() != "エリアを選択") {
+
+            String[] str = tv_prefecture.getText().toString().trim().split(",");
+            String preStr = "";
+            for (int i = 0; i < str.length; i++) {
+                if (i < str.length - 1)
+                    preStr += mSearchCourseUtils.getIndexPrefecture(str[i]) + ",";
+                else
+                    preStr += mSearchCourseUtils.getIndexPrefecture(str[i]);
+            }
+            map.put("prefecture", preStr);
+        }
+
+        if (tv_searchtwo.getText().toString() != prefecturetext) {
+            String[] str = tv_searchtwo.getText().toString().trim().split(",");
+            for (int i = 0; i < str.length; i++) {
+                String s = mSearchCourseUtils.getIndexSeason(str[i]);
+                if (s != "-1") {
+                    if (strSeason == "-1")
+                        strSeason = s;
+                    else
+                        strSeason += "," + s;
+                } else {
+                    if (strTag == "-1")
+                        strTag = str[i];
+                    else
+                        strTag += "," + str[i];
+                }
+
+            }
+        }
+
+
+        for (int i = 0; i < type.size(); i++) {
+
+        }
+        if (distance != "-1")
+            map.put("distance_type", distance);
+        if (isOver != "-1")
+            map.put("over_elevation", isOver);
+        if (isLess != "-1")
+            map.put("less_elevation", isLess);
+        if (typeStr != "-1")
+            map.put("course_type", typeStr);
+        if (!edt_search.getText().toString().matches(""))
+            map.put("freeword", edt_search.getText().toString());
+        if (strSeason != "-1")
+            map.put("season", strSeason);
+        if (strTag != "-1")
+            map.put("tag", strTag);
+        Log.i("search_frg_302", map.toString());
+        //   mActivity.onBackCLickToList(map);
+        mActivity.showCourseListPage(map);
     }
 
 }

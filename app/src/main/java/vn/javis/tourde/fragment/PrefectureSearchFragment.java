@@ -20,7 +20,6 @@ import java.util.Map;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.SearchCourseActivity;
 import vn.javis.tourde.adapter.ListAdapter;
 import vn.javis.tourde.adapter.ListSearchAdapter;
 import vn.javis.tourde.model.Data;
@@ -32,7 +31,6 @@ public class PrefectureSearchFragment extends Fragment {
     private Button btn_choose;
     private OnFragmentInteractionListener listener;
     TextView tv_close,tv_back_menu_entry;
-    private SearchCourseActivity activity;
     List<String> listContent = new ArrayList<>();
 
     private String contentArea = "北海道";
@@ -55,7 +53,6 @@ public class PrefectureSearchFragment extends Fragment {
         tv_close.setOnClickListener( onClickClose );
         tv_back_menu_entry=view.findViewById( R.id.tv_back_menu_entry );
         tv_back_menu_entry.setOnClickListener( onClickBack );
-        activity= (SearchCourseActivity) getActivity();
 
         createData();
         btn_choose.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +63,6 @@ public class PrefectureSearchFragment extends Fragment {
                     getAllContent();
                     listener.onFragment( listContent.toString() );
                     listener.onFragment( listSearchAdapter.getListSeason().toString(),listSearchAdapter.getListTag().toString() );
-                    activity.setmLstContent( listContent );
-                    activity.onBackPressed();
                 }
             }
         });
@@ -83,7 +78,6 @@ public class PrefectureSearchFragment extends Fragment {
     View.OnClickListener onClickBack = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            activity.onBackPressed();
         }
     };
 

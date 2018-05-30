@@ -19,7 +19,6 @@ import java.util.List;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.DetailSpotActivity;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
