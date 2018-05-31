@@ -8,14 +8,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
+import vn.javis.tourde.model.TagClass;
 import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
@@ -68,6 +70,7 @@ public class ListCourseAPI {
 
     public static void setAllCourses(JSONObject jsonObject) {
         instance.mAllCourses.clear();
+        List<Course> list1 =new ArrayList<>();
         try {
             int abc = 0;
             JSONObject allJsonObject = jsonObject.getJSONObject("list");
@@ -75,14 +78,36 @@ public class ListCourseAPI {
             while (key.hasNext()) {
                 abc++;
                 String id = key.next();
+
                 JSONObject singleJsonObject = allJsonObject.getJSONObject(id).getJSONObject("data");
+               JSONArray singleJsonObjectTag = allJsonObject.getJSONObject(id).getJSONArray("tag");
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 String vl = singleJsonObject.toString();
+
+                ArrayList<String> listTag = new ArrayList<String>();
+
+
+
+
                 Course thisCourse = Course.getData(vl);
+
                 if (thisCourse != null) {
-                    instance.mAllCourses.add(thisCourse);
+                    Log.i("courseID",thisCourse.getCourseId());
+                    List<String> lst1 =new ArrayList<>();
+                    for (int i = 0; i < singleJsonObjectTag.length(); i++) {
+                        TagClass tagClass = TagClass.getData(singleJsonObjectTag.get(i).toString());
+                       lst1.add(tagClass.getTag());
+                    }
+                    thisCourse.setListTag(lst1);
+                    list1.add(thisCourse);
+
                 }
 
+
+            }
+            for(int i=list1.size()-1;i>=0;i--)
+            {
+                instance.mAllCourses.add(list1.get(i));
             }
             Log.i("error_" , abc+"");
         } catch (JSONException e) {

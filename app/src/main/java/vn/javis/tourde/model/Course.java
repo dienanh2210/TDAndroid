@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by admin on 3/23/2018.
@@ -134,6 +136,19 @@ public class Course {
     @SerializedName("spot_count")
     @Expose
     private String spotCount;
+
+
+
+
+    public void setListTag(List<String> listTag) {
+        this.listTag = listTag;
+    }
+
+    public List<String> getListTag() {
+        return listTag;
+    }
+
+    private List<String> listTag;
 
     public static Course getData(String data) {
         return new Gson().fromJson(data, Course.class);

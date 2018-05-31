@@ -63,6 +63,11 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     RelativeLayout btnHome;
     int spotId=0;
     String token = LoginFragment.getmUserToken();
+    @BindView(R.id.img_home)
+    ImageView imgHomeBtn;
+    @BindView(R.id.txt_home)
+    TextView txtHomeBtn;
+    
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -102,10 +107,13 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 mActivity.onBackPressed();
             }
         });
+        imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
+        txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mActivity.showCourseListPage();
+
             }
         });
         btnBadge.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +137,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 mActivity.showMyCourse();
             }
         });
-         SpotDataAPI.getCourseData(spotId, this);
+        SpotDataAPI.getSpotData(spotId, this);
     }
 
 
@@ -141,12 +149,13 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         txtAddress.setText(spotData.getData().getAddress());
         txtSiteURL.setText(spotData.getData().getSiteUrl());
         txtTel.setText(spotData.getData().getTel());
-        String tags ="";
-        for (String s:spotData.getTag()) {
-            tags+="#"+s+" ";
+        String tags = "";
+        for (String s : spotData.getTag()) {
+            tags += "#" + s + " ";
         }
         txtTag.setText(tags);
-        Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
+        if (spotData.getData().getTopImage() != null && spotData.getData().getTopImage() != "")
+            Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
 
 
     }
@@ -182,6 +191,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                     return null;
             }
         }
+
         @Override
         public int getCount() {
             return 2;

@@ -21,7 +21,7 @@ public class SpotDataFragment extends BaseFragment implements ServiceCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         int spotId = 1;
-        SpotDataAPI.getCourseData(spotId, this);
+        SpotDataAPI.getSpotData(spotId, this);
     }
 
     @Override

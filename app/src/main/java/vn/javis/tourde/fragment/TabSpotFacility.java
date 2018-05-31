@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.apiservice.SpotEquipmentReviewAPI;
+import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.SpotEquipment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -77,8 +77,22 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
     TextView bike_rented_1;
     @BindView(R.id.bike_rented_2)
     TextView bike_rented_2;
-
-
+    @BindView(R.id.cycling_guide_1)
+    TextView cycling_guide_1;
+    @BindView(R.id.cycling_guide_2)
+    TextView cycling_guide_2;
+    @BindView(R.id.tool_rental_1)
+    TextView tool_rental_1;
+    @BindView(R.id.tool_rental_2)
+    TextView tool_rental_2;
+    @BindView(R.id.floor_pump_rental_1)
+    TextView floor_pump_rental_1;
+    @BindView(R.id.floor_pump_rental_2)
+    TextView floor_pump_rental_2;
+    @BindView(R.id.mechanic_maintenance_1)
+    TextView mechanic_maintenance_1;
+    @BindView(R.id.mechanic_maintenance_2)
+    TextView mechanic_maintenance_2;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -91,7 +105,7 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
     void insertInfo() {
         int spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
         Log.d("tab spot facility 54", "" + spotId);
-        SpotEquipmentReviewAPI.getSpotEquipmentReview(spotId, new ServiceCallback() {
+        SpotDataAPI.getSpotEquipmentReview(spotId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;
@@ -122,7 +136,14 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
                     cycle_rack_2.setText(model.getCycleRackNg());
                     bike_rented_1.setText(model.getBicycleRentalOk());
                     bike_rented_2.setText(model.getBicycleRentalNg());
-
+                    cycling_guide_1.setText(model.getCyclingGuideOk());
+                    cycling_guide_2.setText(model.getCyclingGuideNg());
+                    tool_rental_1.setText(model.getToolRentalOk());
+                    tool_rental_2.setText(model.getToolRentalNg());
+                    floor_pump_rental_1.setText(model.getFloorPumpRentalOk());
+                    floor_pump_rental_2.setText(model.getFloorPumpRentalNg());
+                    mechanic_maintenance_1.setText(model.getMechanicMaintenanceOk());
+                    mechanic_maintenance_2.setText(model.getMechanicMaintenanceNg());
 
                 } else //false
                 {
@@ -155,7 +176,7 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.bt_spot_page:
-                activity.openPage(SpotFacilitiesFragment.newInstance(this), true);
+                activity.openPage(SpotFacilitiesFragment.newInstance(this), true,false);
                 break;
 
         }
