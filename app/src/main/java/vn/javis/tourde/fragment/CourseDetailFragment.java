@@ -171,13 +171,22 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 mActivity.showCourseListPage();
             }
         });
-
-        btnBadge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mActivity.showBadgeCollection();
-            }
-        });
+            btnBadge.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(token != "") {
+                        mActivity.showBadgeCollection();
+                    }
+                    else {
+                        ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mActivity.openLoginPage();
+                            }
+                        });
+                    }
+                }
+            });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -249,13 +258,12 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtArea.setText(model.getArea());
         txtDistance.setText(model.getDistance());
         String strMonths = model.getSeason();
-        Log.i("Course Detail 255",""+strMonths);
+        Log.i("Course Detail 255", "" + strMonths);
         try {
             int number = Integer.valueOf(model.getSeason());
-            strMonths = BinaryConvert.convertToMonths(number)+"月";
-            Log.i("Course Detail 255",""+strMonths);
-        }
-        catch (Exception e){
+            strMonths = BinaryConvert.convertToMonths(number) + "月";
+            Log.i("Course Detail 255", "" + strMonths);
+        } catch (Exception e) {
 
         }
         txtSeason.setText(strMonths);
@@ -381,10 +389,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             return 2;
         }
     }
-
+    String token = LoginFragment.getmUserToken();
     private void btnFavoriteClick() {
         isFavourite = !isFavourite;
-        String token = LoginFragment.getmUserToken();
+
         int course_id = mCourseID;
         if (isFavourite) {
             FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
@@ -399,8 +407,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         isFavourite = !isFavourite;
                         Log.i("is: ", "false");
-                     //   Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
-                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
+                        //   Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
+                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
                     }
                 }
 
@@ -422,8 +430,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     } else {
                         Log.i("is: ", "true");
                         isFavourite = !isFavourite;
-                       // Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
-                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
+                        // Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
+                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
                     }
                 }
 

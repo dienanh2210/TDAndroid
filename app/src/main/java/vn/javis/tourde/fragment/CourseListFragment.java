@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
@@ -83,7 +85,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
 
     String token = LoginFragment.getmUserToken();
     HashMap<String, String> paramsSearch;
-    
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -230,6 +232,12 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
             @Override
             public void onItemClick(int position) {
                 mActivity.ShowCourseDetail(position);
+            }
+
+            @Override
+            public void openPage(Fragment fragment) {
+                Intent intent = new Intent(mActivity,LoginSNSActivity.class);
+                startActivity(intent);
             }
         });
     }

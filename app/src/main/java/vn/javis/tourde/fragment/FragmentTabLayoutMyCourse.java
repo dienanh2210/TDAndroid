@@ -17,6 +17,7 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public class FragmentTabLayoutMyCourse  extends BaseFragment{
 
@@ -37,6 +38,7 @@ public class FragmentTabLayoutMyCourse  extends BaseFragment{
     ImageView imgMyCourse;
     @BindView(R.id.txt_mycourse)
     TextView txtMyCourse;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -46,14 +48,25 @@ public class FragmentTabLayoutMyCourse  extends BaseFragment{
               mActivity.showCourseListPage();
             }
         });
-
-
+        final String token = LoginFragment.getmUserToken();
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               mActivity.showBadgeCollection();
+                if(token!="") {
+                    mActivity.showBadgeCollection();
+                }
+                else {
+                    ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            mActivity.openLoginPage();
+                        }
+                    });
+                }
             }
         });
+
+
 
         imgMyCourse.setBackground(getResources().getDrawable(R.drawable.icon_courseclick));
         txtMyCourse.setTextColor(getResources().getColor(R.color.SkyBlue));

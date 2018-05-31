@@ -29,6 +29,7 @@ import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
 public class CourseDetailSpotImagesFragment extends BaseFragment implements ServiceCallback {
@@ -61,6 +62,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
     int spotId=0;
+    String token = LoginFragment.getmUserToken();
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -109,7 +111,16 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showBadgeCollection();
+                if(token!="")
+                    mActivity.showBadgeCollection();
+                else {
+                    ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            mActivity.openLoginPage();
+                        }
+                    });
+                }
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {

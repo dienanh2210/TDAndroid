@@ -10,19 +10,33 @@ import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.utils.Constant;
 
 public class RegisterActivity extends BaseActivity {
-
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         String email = getIntent().getStringExtra(Constant.KEY_CHANGE_INFO);
-        Bundle bundle = new Bundle();
+        bundle = new Bundle();
         bundle.putString(Constant.KEY_CHANGE_INFO,email);
         RegisterFragment ccl =new RegisterFragment();
         ccl.setArguments(bundle);
         openPage(ccl, false);
     }
-
+    /* Bundle bundle;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_register);
+            String keyChangeInfo = getIntent().getStringExtra(Constant.KEY_CHANGE_INFO);
+            bundle = new Bundle();
+            if(keyChangeInfo=="1") {
+                bundle.putString(Constant.KEY_CHANGE_INFO, keyChangeInfo);
+            }
+            else {
+                bundle.putString(Constant.KEY_CHANGE_INFO, "0");
+            }
+            openPage(new RegisterFragment(), false);
+        }*/
     public void openPage(Fragment fragment, boolean isBackStack, boolean isAnimation) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         if (isAnimation)

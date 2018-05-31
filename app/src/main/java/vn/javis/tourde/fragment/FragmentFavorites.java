@@ -54,12 +54,12 @@ public class FragmentFavorites extends BaseFragment {
         FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                Log.i("favorite",response.toString());
+                Log.i("favorite", response.toString());
                 try {
                     listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                     // List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                     favoriteCourseAdapter = new FavoriteCourseAdapter(listFavorCourse, mActivity);
-                    if(recyclerFavorite ==null)
+                    if (recyclerFavorite == null)
                         recyclerFavorite = view.findViewById(R.id.recycler_favorite);
                     recyclerFavorite.setAdapter(favoriteCourseAdapter);
                     favoriteCourseAdapter.setOnItemClickListener(new FavoriteCourseAdapter.OnItemClickedListener() {
@@ -68,9 +68,8 @@ public class FragmentFavorites extends BaseFragment {
                             mActivity.ShowFavoriteCourseDetail(listFavorCourse.get(position).getCourseId());
                         }
                     });
-                }catch (Exception e)
-                {
-                    Log.i("Error frgFavor71",e.getMessage() +"-"+recyclerFavorite +"-" +favoriteCourseAdapter);
+                } catch (Exception e) {
+                    Log.i("Error frgFavor71", e.getMessage() + "-" + recyclerFavorite + "-" + favoriteCourseAdapter);
                 }
             }
 

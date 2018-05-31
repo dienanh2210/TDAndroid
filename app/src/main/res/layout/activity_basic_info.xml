@@ -263,7 +263,7 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_25sdp"
                 android:layout_marginBottom="@dimen/_25sdp"
-                android:background="@drawable/basicinfo"
+                android:background="@drawable/custom_frame"
                 android:text="@string/ButtonBasic"
                 android:textAlignment="center"
                 android:textColor="@color/backgroud"

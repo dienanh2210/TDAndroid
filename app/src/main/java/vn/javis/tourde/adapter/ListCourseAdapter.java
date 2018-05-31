@@ -1,5 +1,6 @@
 package vn.javis.tourde.adapter;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
+import vn.javis.tourde.fragment.FragmentLog;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
@@ -181,7 +183,14 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
                 }
                 else
                 {
-                    ProcessDialog.showDialogOk(context, "", "この機能を利用するにはログインをお願いいたします。");
+                    ProcessDialog.showDialogLogin(context, "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            if (onItemClickedListener != null) {
+                                onItemClickedListener.openPage(new LoginFragment());
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -232,6 +241,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
     public interface OnItemClickedListener {
         void onItemClick(int position);
+        void openPage(android.support.v4.app.Fragment fragment);
     }
 
     private OnItemClickedListener onItemClickedListener;
