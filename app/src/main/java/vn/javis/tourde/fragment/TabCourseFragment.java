@@ -1,5 +1,8 @@
 package vn.javis.tourde.fragment;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -58,7 +61,10 @@ public class TabCourseFragment extends BaseFragment {
     TextView txtStartAddress;
     @BindView(R.id.btn_running_app)
     RelativeLayout btnRunningApp;
-
+    @BindView( R.id.rlt_googlemap )
+    RelativeLayout rlt_googlemap;
+    @BindView( R.id.rlt_Navitime )
+    RelativeLayout rlt_Navitime;
 
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
@@ -156,6 +162,37 @@ public class TabCourseFragment extends BaseFragment {
 
             }
         });
+        rlt_googlemap.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                try
+                {
+                    startActivity(intent);
+                }
+                catch(ActivityNotFoundException ex)
+                {
+                    try
+                    {
+                        Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        startActivity(unrestrictedIntent);
+                    }
+                    catch(ActivityNotFoundException innerEx)
+                    {
+                        //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        } );
+        rlt_Navitime.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja "));
+                startActivity(browserIntent);
+            }
+        } );
 
 
     }

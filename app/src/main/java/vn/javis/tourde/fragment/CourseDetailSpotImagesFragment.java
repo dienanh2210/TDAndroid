@@ -60,6 +60,10 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     RelativeLayout btnMyCourse;
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
+    @BindView(R.id.img_home)
+    ImageView imgHomeBtn;
+    @BindView(R.id.txt_home)
+    TextView txtHomeBtn;
     int spotId=0;
     @Nullable
     @Override
@@ -100,10 +104,13 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 mActivity.onBackPressed();
             }
         });
+        imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
+        txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mActivity.showCourseListPage();
+
             }
         });
         btnBadge.setOnClickListener(new View.OnClickListener() {

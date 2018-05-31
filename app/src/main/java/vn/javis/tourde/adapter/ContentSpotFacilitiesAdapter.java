@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,10 +38,7 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
     public void onBindViewHolder(ContentSpotFacilitiesAdapter.ViewHolder holder, int position) {
 
         String content = contentList.get(position);
-
         holder.tv_content.setText(content);
-//        holder.itemView.setOnClickListener(holder);
-//        holder.imv_mark.setTag(position);
         mapItemView.put(position, holder.imv_mark);
         mapItemView.put(position, holder.imv_mark1);
         mapItemView.put(position, holder.imv_mark2);
@@ -55,7 +53,7 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_content;
-        ImageView imv_mark,imv_mark1,imv_mark2,imv_mark3;
+        ImageButton imv_mark,imv_mark1,imv_mark2,imv_mark3;
         RelativeLayout rlt_mark;
 
         public ViewHolder(View itemView) {
@@ -63,32 +61,33 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
             tv_content = itemView.findViewById(R.id.tv_content);
             imv_mark = itemView.findViewById(R.id.imv_mark);
             imv_mark1 = itemView.findViewById(R.id.imv_mark1);
-            imv_mark2 = itemView.findViewById(R.id.imv_mark2);
-            imv_mark3 = itemView.findViewById(R.id.imv_mark3);
+//            imv_mark2 = itemView.findViewById(R.id.imv_mark2);
+//            imv_mark3 = itemView.findViewById(R.id.imv_mark3);
             rlt_mark = itemView.findViewById(R.id.rlt_mark);
 
             itemView.setOnClickListener(this);
+
+            imv_mark.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imv_mark1.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                    imv_mark.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                }
+            } );
+
+            imv_mark1.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imv_mark.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                    imv_mark1.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                }
+            } );
         }
 
         @Override
         public void onClick(View v) {
             if (onClickItem != null) onClickItem.onClick(getAdapterPosition(), v);
             mapItemView.put(getAdapterPosition(), imv_mark);
-
-            if (imv_mark1.getVisibility() == View.VISIBLE) {
-                // mapItemView.put( getAdapterPosition(), imv_mark );
-                imv_mark.setVisibility(View.GONE);
-                imv_mark2.setVisibility(View.VISIBLE);
-                imv_mark3.setVisibility(View.VISIBLE);
-                imv_mark1.setVisibility(View.GONE);
-
-            } else if (imv_mark3.getVisibility() == View.VISIBLE) {
-
-                imv_mark.setVisibility(View.VISIBLE);
-                imv_mark2.setVisibility(View.GONE);
-                imv_mark3.setVisibility(View.GONE);
-                imv_mark1.setVisibility(View.VISIBLE);
-            }
         }
     }
 

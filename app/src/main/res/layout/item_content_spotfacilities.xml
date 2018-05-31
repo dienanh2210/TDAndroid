@@ -46,17 +46,17 @@
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_15ssp" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/imv_mark1"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_75sdp"
+                android:background="@drawable/icon_check_circle"
                 android:contentDescription="@string/item_text"
-                android:src="@drawable/image_gray_circle"
                 android:visibility="visible" />
-            <ImageView
+        <!-->    <ImageView
                 android:id="@+id/imv_mark2"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
@@ -65,7 +65,7 @@
                 android:layout_marginEnd="@dimen/_75sdp"
                 android:contentDescription="@string/item_text"
                 android:src="@drawable/icon_check_circle_blue"
-                android:visibility="gone" />
+                android:visibility="gone" /><!-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,17 +80,17 @@
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_15ssp" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/imv_mark"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_9sdp"
+                android:background="@drawable/icon_check_circle_blue"
                 android:contentDescription="@string/item_text"
-                android:src="@drawable/icon_check_circle_blue"
                 android:visibility="visible" />
-            <ImageView
+        <!-->    <ImageView
                 android:id="@+id/imv_mark3"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
@@ -100,7 +100,7 @@
                 android:contentDescription="@string/item_text"
                 android:src="@drawable/image_gray_circle"
                 android:visibility="gone"
-                />
+                /><!-->
 
         </RelativeLayout>
 

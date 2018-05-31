@@ -33,6 +33,7 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MenuPageActivity;
+import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
@@ -65,6 +66,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     private int mCurrentPage;
     ListCourseAdapter listCourseAdapter;
     CourseListActivity mActivity;
+
     @BindView(R.id.img_home)
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
@@ -80,11 +82,14 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
 
     private static final int NUMBER_COURSE_ON_PAGE = 5;
     private static final int DEFAULT_PAGE = 1;
-    HashMap<String, String> paramsSearch;
 
+    String token = LoginFragment.getmUserToken();
+    HashMap<String, String> paramsSearch;
+    
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
         lstCourseRecycleView.setNestedScrollingEnabled(false);
@@ -112,7 +117,9 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showSearchPage();
+             //   mActivity.showSearchPage();
+                mActivity.openPage(SearchCourseFragment.newInstance(this), true,true);
+
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +140,10 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showBadgeCollection();
+                if(token!="")
+                    mActivity.showBadgeCollection();
+                else
+                    mActivity.showDialogWarning();
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {

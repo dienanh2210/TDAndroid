@@ -55,7 +55,7 @@ public class ListSpotFacilitiesAdapter extends RecyclerView.Adapter<ListSpotFaci
                         //to get key
                         eItem.getKey();
                         //and to get value
-                        eItem.getValue().setVisibility( View.GONE );
+                      //  eItem.getValue().setVisibility( View.GONE );
                     }
                 }
                 if (onClickItem != null) onClickItem.onClick( data.getContent().get( position ) );

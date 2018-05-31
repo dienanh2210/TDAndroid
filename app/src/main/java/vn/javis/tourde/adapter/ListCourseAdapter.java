@@ -24,12 +24,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.CircleTransform;
 
 public class
@@ -52,7 +54,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         mView = inflater.inflate(R.layout.course_view_row, parent, false);
         return new CourseViewHolder(mView);
     }
-
+    String token = LoginFragment.getmUserToken();
     @Override
     public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
         final Course model = listCourse.get(position);
@@ -132,48 +134,54 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                holder.isFavorite = !holder.isFavorite;
-                String token = LoginFragment.getmUserToken();
-                int course_id =Integer.valueOf(model.getCourseId());
-                if (holder.isFavorite) {
-                    FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
-                        @Override
-                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            Log.i("insert favorite",response.toString());
+                if(token!="") {
+                    holder.isFavorite = !holder.isFavorite;
+                    String token = LoginFragment.getmUserToken();
+                    int course_id = Integer.valueOf(model.getCourseId());
+                    if (holder.isFavorite) {
+                        FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
+                            @Override
+                            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                Log.i("insert favorite", response.toString());
 
-                            JSONObject jsonObject = (JSONObject) response;
-                            if (jsonObject.has("success")) {
-                                holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_red));
-                            } else {
-                                holder.isFavorite = !holder.isFavorite;
-                                Log.i("is: ", "false");
+                                JSONObject jsonObject = (JSONObject) response;
+                                if (jsonObject.has("success")) {
+                                    holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_red));
+                                } else {
+                                    holder.isFavorite = !holder.isFavorite;
+                                    Log.i("is: ", "false");
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onError(VolleyError error) {
+                            @Override
+                            public void onError(VolleyError error) {
 
-                        }
-                    });
-                } else {
-                    FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
-                        @Override
-                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            Log.i("delete favorite",response.toString());
-                            JSONObject jsonObject = (JSONObject) response;
-                            if (jsonObject.has("success")) {
-                                holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
-
-                            } else {
-                                holder.isFavorite = !holder.isFavorite;
                             }
-                        }
+                        });
+                    } else {
+                        FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
+                            @Override
+                            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                Log.i("delete favorite", response.toString());
+                                JSONObject jsonObject = (JSONObject) response;
+                                if (jsonObject.has("success")) {
+                                    holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
 
-                        @Override
-                        public void onError(VolleyError error) {
+                                } else {
+                                    holder.isFavorite = !holder.isFavorite;
+                                }
+                            }
 
-                        }
-                    });
+                            @Override
+                            public void onError(VolleyError error) {
+
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    ProcessDialog.showDialogOk(context, "", "この機能を利用するにはログインをお願いいたします。");
                 }
             }
         });

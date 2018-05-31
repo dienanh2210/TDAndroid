@@ -155,7 +155,7 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.bt_spot_page:
-                activity.openPage(SpotFacilitiesFragment.newInstance(this), true);
+                activity.openPage(SpotFacilitiesFragment.newInstance(this), true,false);
                 break;
 
         }
