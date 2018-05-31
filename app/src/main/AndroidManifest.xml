@@ -74,8 +74,8 @@
 
         <service android:name=".services.GoogleService" />
 
-        <activity android:name=".activity.CheckPoint" />
-        <activity android:name=".fragment.GoalFragment"></activity>
+
+
     </application>
 
 </manifest>

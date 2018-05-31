@@ -5,12 +5,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.HashMap;
+
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.fragment.RegisterFragment;
+import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.utils.Constant;
 
 public class RegisterActivity extends BaseActivity {
-
+    Bundle dataBundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,5 +47,10 @@ public class RegisterActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Log.i("onBackPressed", "true");
+    }
+    public void showCourseListPage(HashMap<String,String> parram) {
+        dataBundle.putSerializable("params",parram);
+        dataBundle.putString("searching","searching");
+        openPage(new SearchCourseFragment(), false);
     }
 }
