@@ -125,7 +125,13 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     public void showDialogWarning()
     {
-        ProcessDialog.showDialogOk(CourseListActivity.this, "", "この機能を利用するにはログインをお願いいたします。");
+        ProcessDialog.showDialogLogin(CourseListActivity.this, "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+            @Override
+            public void onOkClick() {
+                Intent intent = new Intent(CourseListActivity.this,LoginSNSActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void fetchData() {
@@ -225,7 +231,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putInt(SPOT_ID, mSpotID);
         openPage(new CourseDetailSpotImagesFragment(), true,false);
     }
-
+    public  void  openLoginPage(){
+        Intent intent = new Intent(this, LoginSNSActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
