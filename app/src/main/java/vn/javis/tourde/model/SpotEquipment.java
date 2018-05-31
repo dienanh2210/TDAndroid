@@ -70,6 +70,30 @@ public class SpotEquipment {
     @SerializedName("bicycle_rental_ng")
     @Expose
     private String bicycleRentalNg;
+    @SerializedName("cycling_guide_ok")
+    @Expose
+    private String cyclingGuideOk;
+    @SerializedName("cycling_guide_ng")
+    @Expose
+    private String cyclingGuideNg;
+    @SerializedName("tool_rental_ok")
+    @Expose
+    private String toolRentalOk;
+    @SerializedName("tool_rental_ng")
+    @Expose
+    private String toolRentalNg;
+    @SerializedName("floor_pump_rental_ok")
+    @Expose
+    private String floorPumpRentalOk;
+    @SerializedName("floor_pump_rental_ng")
+    @Expose
+    private String floorPumpRentalNg;
+    @SerializedName("mechanic_maintenance_ok")
+    @Expose
+    private String mechanicMaintenanceOk;
+    @SerializedName("mechanic_maintenance_ng")
+    @Expose
+    private String mechanicMaintenanceNg;
 
     public static SpotEquipment getData(String data) {
         return new Gson().fromJson(data, SpotEquipment.class);
@@ -248,6 +272,70 @@ public class SpotEquipment {
 
     public void setBicycleRentalNg(String bicycleRentalNg) {
         this.bicycleRentalNg = bicycleRentalNg;
+    }
+
+    public String getCyclingGuideOk() {
+        return cyclingGuideOk;
+    }
+
+    public void setCyclingGuideOk(String cyclingGuideOk) {
+        this.cyclingGuideOk = cyclingGuideOk;
+    }
+
+    public String getCyclingGuideNg() {
+        return cyclingGuideNg;
+    }
+
+    public void setCyclingGuideNg(String cyclingGuideNg) {
+        this.cyclingGuideNg = cyclingGuideNg;
+    }
+
+    public String getToolRentalOk() {
+        return toolRentalOk;
+    }
+
+    public void setToolRentalOk(String toolRentalOk) {
+        this.toolRentalOk = toolRentalOk;
+    }
+
+    public String getToolRentalNg() {
+        return toolRentalNg;
+    }
+
+    public void setToolRentalNg(String toolRentalNg) {
+        this.toolRentalNg = toolRentalNg;
+    }
+
+    public String getFloorPumpRentalOk() {
+        return floorPumpRentalOk;
+    }
+
+    public void setFloorPumpRentalOk(String floorPumpRentalOk) {
+        this.floorPumpRentalOk = floorPumpRentalOk;
+    }
+
+    public String getFloorPumpRentalNg() {
+        return floorPumpRentalNg;
+    }
+
+    public void setFloorPumpRentalNg(String floorPumpRentalNg) {
+        this.floorPumpRentalNg = floorPumpRentalNg;
+    }
+
+    public String getMechanicMaintenanceOk() {
+        return mechanicMaintenanceOk;
+    }
+
+    public void setMechanicMaintenanceOk(String mechanicMaintenanceOk) {
+        this.mechanicMaintenanceOk = mechanicMaintenanceOk;
+    }
+
+    public String getMechanicMaintenanceNg() {
+        return mechanicMaintenanceNg;
+    }
+
+    public void setMechanicMaintenanceNg(String mechanicMaintenanceNg) {
+        this.mechanicMaintenanceNg = mechanicMaintenanceNg;
     }
 
 }

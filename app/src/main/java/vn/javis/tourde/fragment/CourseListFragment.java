@@ -223,7 +223,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
                 changeButtonBackground();
             }
         } catch (Exception e) {
-
+            Log.i("CourseListError 216", e.getMessage());
         }
     }
 

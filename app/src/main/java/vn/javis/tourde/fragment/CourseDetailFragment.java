@@ -239,7 +239,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
         if (model == null)
             return;
-
+        if(txtTitle ==null)
+            return;
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());

@@ -203,6 +203,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         ListCourseAPI.setAllCourses((JSONObject) response);
+
         showCourseListPage();
     }
 

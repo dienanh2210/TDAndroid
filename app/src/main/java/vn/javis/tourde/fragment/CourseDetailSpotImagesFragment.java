@@ -64,7 +64,8 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
     TextView txtHomeBtn;
-    int spotId=0;
+    int spotId = 0;
+
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -125,7 +126,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 mActivity.showMyCourse();
             }
         });
-         SpotDataAPI.getCourseData(spotId, this);
+        SpotDataAPI.getSpotData(spotId, this);
     }
 
 
@@ -137,12 +138,13 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         txtAddress.setText(spotData.getData().getAddress());
         txtSiteURL.setText(spotData.getData().getSiteUrl());
         txtTel.setText(spotData.getData().getTel());
-        String tags ="";
-        for (String s:spotData.getTag()) {
-            tags+="#"+s+" ";
+        String tags = "";
+        for (String s : spotData.getTag()) {
+            tags += "#" + s + " ";
         }
         txtTag.setText(tags);
-        Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
+        if (spotData.getData().getTopImage() != null && spotData.getData().getTopImage() != "")
+            Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
 
 
     }
@@ -178,6 +180,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                     return null;
             }
         }
+
         @Override
         public int getCount() {
             return 2;

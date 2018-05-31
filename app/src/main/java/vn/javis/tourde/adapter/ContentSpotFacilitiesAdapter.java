@@ -35,14 +35,29 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
     }
 
     @Override
-    public void onBindViewHolder(ContentSpotFacilitiesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ContentSpotFacilitiesAdapter.ViewHolder holder, final int position) {
 
         String content = contentList.get(position);
         holder.tv_content.setText(content);
         mapItemView.put(position, holder.imv_mark);
         mapItemView.put(position, holder.imv_mark1);
-        mapItemView.put(position, holder.imv_mark2);
-        mapItemView.put(position, holder.imv_mark3);
+        holder.imv_mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                if (onClickItem != null) onClickItem.onClick(position,2);
+            }
+        });
+
+        holder.imv_mark1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                if (onClickItem != null) onClickItem.onClick(position,1);
+            }
+        });
         if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
     }
 
@@ -53,10 +68,10 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_content;
-        ImageButton imv_mark,imv_mark1,imv_mark2,imv_mark3;
+        ImageButton imv_mark, imv_mark1;
         RelativeLayout rlt_mark;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             tv_content = itemView.findViewById(R.id.tv_content);
             imv_mark = itemView.findViewById(R.id.imv_mark);
@@ -65,34 +80,20 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
 //            imv_mark3 = itemView.findViewById(R.id.imv_mark3);
             rlt_mark = itemView.findViewById(R.id.rlt_mark);
 
-            itemView.setOnClickListener(this);
 
-            imv_mark.setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    imv_mark1.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
-                    imv_mark.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
-                }
-            } );
 
-            imv_mark1.setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    imv_mark.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
-                    imv_mark1.setBackground( imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
-                }
-            } );
+
         }
 
         @Override
         public void onClick(View v) {
-            if (onClickItem != null) onClickItem.onClick(getAdapterPosition(), v);
+
             mapItemView.put(getAdapterPosition(), imv_mark);
         }
     }
 
     public interface OnClickItem {
-        void onClick(int position, View view);
+        void onClick(int pos,int value);
     }
 
     public boolean isShowMark() {
