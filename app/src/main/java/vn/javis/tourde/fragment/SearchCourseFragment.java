@@ -65,7 +65,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     public static SearchCourseFragment newInstance(View.OnClickListener listener) {
         SearchCourseFragment fragment = new SearchCourseFragment();
-        fragment.listener = (OnFragmentInteractionListener) listener;
+      //  fragment.listener = (OnFragmentInteractionListener) listener;
         return fragment;
     }
 
@@ -119,6 +119,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
                 break;
             case R.id.im_more_searching:
+
                 additionalConditionVisible = additionalConditionVisible == View.GONE ? View.VISIBLE : View.GONE;
                 moreConditionRecyclerView.setVisibility(additionalConditionVisible);
                 if (additionalConditionVisible == View.GONE) {
@@ -128,8 +129,8 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
                 }
                 break;
             case R.id.tv_close:
-                /*Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                startActivity(intent);*/
+//                Intent intent = new Intent(getActivity(), CourseListActivity.class);
+//                startActivity(intent);
                 mActivity.onBackPressed();
                 break;
             case R.id.bt_search_course:

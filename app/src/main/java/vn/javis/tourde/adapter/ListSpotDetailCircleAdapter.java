@@ -33,8 +33,7 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.view.CircleTransform;
 
-public class
-ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDetailCircleAdapter.CourseViewHolder> {
+public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDetailCircleAdapter.CourseViewHolder> {
 
     List<Spot> listSpot = new ArrayList<>();
     Context context;

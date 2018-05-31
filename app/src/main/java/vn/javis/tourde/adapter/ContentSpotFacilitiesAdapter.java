@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,17 +35,29 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
     }
 
     @Override
-    public void onBindViewHolder(ContentSpotFacilitiesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ContentSpotFacilitiesAdapter.ViewHolder holder, final int position) {
 
         String content = contentList.get(position);
-
         holder.tv_content.setText(content);
-//        holder.itemView.setOnClickListener(holder);
-//        holder.imv_mark.setTag(position);
         mapItemView.put(position, holder.imv_mark);
         mapItemView.put(position, holder.imv_mark1);
-        mapItemView.put(position, holder.imv_mark2);
-        mapItemView.put(position, holder.imv_mark3);
+        holder.imv_mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                if (onClickItem != null) onClickItem.onClick(position,2);
+            }
+        });
+
+        holder.imv_mark1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                if (onClickItem != null) onClickItem.onClick(position,1);
+            }
+        });
         if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
     }
 
@@ -55,45 +68,32 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_content;
-        ImageView imv_mark,imv_mark1,imv_mark2,imv_mark3;
+        ImageButton imv_mark, imv_mark1;
         RelativeLayout rlt_mark;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             tv_content = itemView.findViewById(R.id.tv_content);
             imv_mark = itemView.findViewById(R.id.imv_mark);
             imv_mark1 = itemView.findViewById(R.id.imv_mark1);
-            imv_mark2 = itemView.findViewById(R.id.imv_mark2);
-            imv_mark3 = itemView.findViewById(R.id.imv_mark3);
+//            imv_mark2 = itemView.findViewById(R.id.imv_mark2);
+//            imv_mark3 = itemView.findViewById(R.id.imv_mark3);
             rlt_mark = itemView.findViewById(R.id.rlt_mark);
 
-            itemView.setOnClickListener(this);
+
+
+
         }
 
         @Override
         public void onClick(View v) {
-            if (onClickItem != null) onClickItem.onClick(getAdapterPosition(), v);
+
             mapItemView.put(getAdapterPosition(), imv_mark);
-
-            if (imv_mark1.getVisibility() == View.VISIBLE) {
-                // mapItemView.put( getAdapterPosition(), imv_mark );
-                imv_mark.setVisibility(View.GONE);
-                imv_mark2.setVisibility(View.VISIBLE);
-                imv_mark3.setVisibility(View.VISIBLE);
-                imv_mark1.setVisibility(View.GONE);
-
-            } else if (imv_mark3.getVisibility() == View.VISIBLE) {
-
-                imv_mark.setVisibility(View.VISIBLE);
-                imv_mark2.setVisibility(View.GONE);
-                imv_mark3.setVisibility(View.GONE);
-                imv_mark1.setVisibility(View.VISIBLE);
-            }
         }
     }
 
     public interface OnClickItem {
-        void onClick(int position, View view);
+        void onClick(int pos,int value);
     }
 
     public boolean isShowMark() {

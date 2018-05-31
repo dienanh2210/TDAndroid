@@ -103,7 +103,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         listSpotCheckinAdapter.setOnItemClickListener(new ListSpotCheckinAdapter.OnItemClickedListener() {
             @Override
             public void onItemClick(int position) {
-                mActivity.openPage(CheckPointFragment.newInstance(this), true);
+                mActivity.openPage(CheckPointFragment.newInstance(this), true,false);
             }
         });
 
@@ -116,7 +116,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
-                mActivity.openPage(new CourseDetailFragment(), true);
+                mActivity.openPage(new CourseDetailFragment(), true,false);
                 break;
             case R.id.stop_time:
                 chronometer.stop();
