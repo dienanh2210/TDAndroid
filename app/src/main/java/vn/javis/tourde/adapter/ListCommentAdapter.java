@@ -47,7 +47,9 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     @Override
     public void onBindViewHolder(@NonNull ListCommentAdapter.CommentViewHolder holder, final int position) {
         Review model = listReview.get(position);
-        holder.txtUserName.setText(model.getEmail());
+        if(model.getImage()!="" && model.getImage() !=null)
+        holder.txtUserName.setText(model.getNickname());
+        else   holder.txtUserName.setText(model.getEmail());
         holder.txtCommentContent.setText(model.getComment());
       //  holder.txtPostDate.setText(model.getPostDate().toString());
 
@@ -71,7 +73,8 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
             holder.imgStarRate.setImageResource(R.drawable.icon_star4);
         else if (rate == 5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star5);
-        //Picasso.with(context).load(model.getUserAvatar()).into(holder.imgUserAvata);
+        if(model.getImage()!="" && model.getImage() !=null)
+             Picasso.with(context).load(model.getImage()).into(holder.imgUserAvata);
     }
 
     @Override

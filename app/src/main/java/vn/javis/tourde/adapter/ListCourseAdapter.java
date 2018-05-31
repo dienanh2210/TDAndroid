@@ -56,7 +56,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
     @Override
     public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
         final Course model = listCourse.get(position);
-        Log.i("response",position+"");
+        Log.i("response", position + "");
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
         holder.txtTag.setText("# " + model.getTag());
@@ -72,11 +72,11 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                Log.i("response",response.toString());
+                Log.i("response", response.toString());
                 List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                 for (int i = 0; i < listFavorCourse.size(); i++) {
-                    Log.i("response",listFavorCourse.get(i).getAccountId() +""+ model.getCourseId());
-                    if (listFavorCourse.get(i).getCourseId() ==Integer.valueOf(model.getCourseId())) {
+                    Log.i("response", listFavorCourse.get(i).getAccountId() + "" + model.getCourseId());
+                    if (listFavorCourse.get(i).getCourseId() == Integer.valueOf(model.getCourseId())) {
                         holder.isFavorite = true;
                         break;
                     }
@@ -91,7 +91,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
             }
         });
-        String s =model.getRatingAverage();
+        String s = model.getRatingAverage();
         int rate = Math.round(Float.valueOf(s));
 
         if (rate == 1) {
@@ -134,12 +134,12 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             public void onClick(final View view) {
                 holder.isFavorite = !holder.isFavorite;
                 String token = LoginFragment.getmUserToken();
-                int course_id =Integer.valueOf(model.getCourseId());
+                int course_id = Integer.valueOf(model.getCourseId());
                 if (holder.isFavorite) {
                     FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            Log.i("insert favorite",response.toString());
+                            Log.i("insert favorite", response.toString());
 
                             JSONObject jsonObject = (JSONObject) response;
                             if (jsonObject.has("success")) {
@@ -159,7 +159,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
                     FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            Log.i("delete favorite",response.toString());
+                            Log.i("delete favorite", response.toString());
                             JSONObject jsonObject = (JSONObject) response;
                             if (jsonObject.has("success")) {
                                 holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
@@ -182,7 +182,9 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
     @Override
     public int getItemCount() {
-        return listCourse.size();
+        if (listCourse != null)
+            return listCourse.size();
+        else return 0;
     }
 
     public class CourseViewHolder extends RecyclerView.ViewHolder {
