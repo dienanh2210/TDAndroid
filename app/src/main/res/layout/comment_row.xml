@@ -14,7 +14,6 @@
             android:id="@+id/img_avata"
             android:layout_width="@dimen/_23sdp"
             android:layout_height="@dimen/_23sdp"
-            android:src="@drawable/icon_classic"
             android:layout_centerVertical="true"
             app:riv_border_color="@color/SkyBlue"
             app:riv_border_width=".5dp"
