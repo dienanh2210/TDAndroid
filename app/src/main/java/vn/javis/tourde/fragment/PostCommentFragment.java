@@ -70,7 +70,6 @@ public class PostCommentFragment extends BaseFragment {
         });
 
         edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
-      //  edt_text.setImeOptions(EditorInfo.IME_ACTION_DONE);
         edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
 
         edt_text.setOnTouchListener(new View.OnTouchListener() {
@@ -102,19 +101,6 @@ public class PostCommentFragment extends BaseFragment {
                 mActivity.onBackPressed();
             }
         });
-//        btnPostComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ProcessDialog.showDialogConfirm(getContext(), "", "前回のコメントと評価は上書きされますがよろしいですか？？", new ProcessDialog.OnActionDialogClickOk() {
-//                    @Override
-//                    public void onOkClick() {
-//                       // mActivity.openPage(new FragmentTabLayoutRunning(),true);
-//                 //  postComment();
-//
-//                    }
-//                });
-//            }
-//        });
     }
 
     @Override
