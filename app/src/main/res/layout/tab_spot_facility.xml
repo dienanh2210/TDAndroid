@@ -321,7 +321,6 @@
                 android:contentDescription="@string/search_course_text_row"
                 android:paddingEnd="@dimen/_20sdp"
                 android:paddingStart="@dimen/_1sdp"
-                android:text="2"
                 android:textColor="@color/search_course_color_row"
                 android:textSize="@dimen/_16sdp"
                 app:srcCompat="@drawable/icon_next" />
@@ -334,7 +333,6 @@
                 android:contentDescription="@string/search_course_text_row"
                 android:paddingEnd="@dimen/_20sdp"
                 android:paddingStart="@dimen/_1sdp"
-                android:text="2"
                 android:textColor="@color/search_course_color_row"
                 android:textSize="@dimen/_16sdp"
                 app:srcCompat="@drawable/icon_next" />
@@ -600,7 +598,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
             <TextView
-
+                android:id="@+id/cycling_guide_2"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -612,7 +610,7 @@
                 android:textColor="@color/search_course_color_row"
                 android:textSize="@dimen/_16sdp" />
             <TextView
-
+                android:id="@+id/cycling_guide_1"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -637,7 +635,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
             <TextView
-
+                android:id="@+id/tool_rental_2"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -649,7 +647,7 @@
                 android:textColor="@color/search_course_color_row"
                 android:textSize="@dimen/_16sdp" />
             <TextView
-
+                android:id="@+id/tool_rental_1"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -674,7 +672,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
             <TextView
-
+                android:id="@+id/floor_pump_rental_2"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -686,6 +684,7 @@
                 android:textColor="@color/search_course_color_row"
                 android:textSize="@dimen/_16sdp" />
             <TextView
+                android:id="@+id/floor_pump_rental_1"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -710,7 +709,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
             <TextView
-
+                android:id="@+id/mechanic_maintenance_2"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -722,6 +721,7 @@
                 android:textColor="@color/search_course_color_row"
                 android:textSize="@dimen/_16sdp" />
             <TextView
+                android:id="@+id/mechanic_maintenance_1"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"

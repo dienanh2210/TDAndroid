@@ -257,6 +257,8 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
             case R.id.tv_back_login:
                 LoginSNSActivity lActivity =  (LoginSNSActivity) getActivity();
                 lActivity.onBackPressed();
+               /* Intent intent = new Intent(getContext(), CourseListActivity.class);
+                startActivity(intent);*/
                 break;
         }
     }
@@ -273,7 +275,6 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
         }
 
     }
-
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {

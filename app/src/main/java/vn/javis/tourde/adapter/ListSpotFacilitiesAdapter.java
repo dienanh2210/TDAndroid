@@ -39,15 +39,16 @@ public class ListSpotFacilitiesAdapter extends RecyclerView.Adapter<ListSpotFaci
     }
 
     @Override
-    public void onBindViewHolder(ListSpotFacilitiesAdapter .ViewHolder holder, int position) {
+    public void onBindViewHolder(ListSpotFacilitiesAdapter .ViewHolder holder, final int position) {
         final Data data = dataList.get( position );
         holder.tv_header.setText( data.getTitle() );
         //  holder.rcv_content.setLayoutManager(new GridLayoutManager(context,2));
         holder.rcv_content.setLayoutManager( new LinearLayoutManager( context ) );
         holder.rcv_content.setAdapter( new ContentSpotFacilitiesAdapter( data.getContent(), new  ContentSpotFacilitiesAdapter.OnClickItem() {
             @Override
-            public void onClick(int position, View view) {
-                for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet()) {
+            public void onClick(int pos, int value) {
+                for (Map.Entry<Integer, RecyclerView> e1 : mapRecyclerView.entrySet())
+                {
                     //to get key
                     e1.getKey();
                     //and to get value
@@ -58,8 +59,7 @@ public class ListSpotFacilitiesAdapter extends RecyclerView.Adapter<ListSpotFaci
                       //  eItem.getValue().setVisibility( View.GONE );
                     }
                 }
-                if (onClickItem != null) onClickItem.onClick( data.getContent().get( position ) );
-                Log.i( "Content", data.getContent().get( position ) );
+                if (onClickItem != null) onClickItem.onClick( pos,value );
             }
         } ) );
         mapRecyclerView.put( position, holder.rcv_content );
@@ -95,7 +95,7 @@ public class ListSpotFacilitiesAdapter extends RecyclerView.Adapter<ListSpotFaci
     }
 
     public interface OnClickItem {
-        void onClick(String content);
+        void onClick(int positon,int value);
     }
 
 }

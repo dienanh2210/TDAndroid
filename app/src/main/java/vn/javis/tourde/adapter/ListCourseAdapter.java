@@ -1,5 +1,6 @@
 package vn.javis.tourde.adapter;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
+import vn.javis.tourde.fragment.FragmentLog;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
@@ -58,7 +60,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
     @Override
     public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
         final Course model = listCourse.get(position);
-        Log.i("response",position+"");
+        Log.i("response", position + "");
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
         holder.txtTag.setText("# " + model.getTag());
@@ -70,15 +72,23 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
         Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
 
+        List<String> listTag = model.getListTag();
+        if (listTag.size() > 0) {
+            String s ="#"+ model.getTag() + " ";
+            for (int i = 0; i < listTag.size(); i++) {
+                s += "#" + listTag.get(i) + " ";
+            }
+            holder.txtTag.setText(s);
+        }
         holder.isFavorite = false;
         FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                Log.i("response",response.toString());
+                Log.i("response", response.toString());
                 List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
                 for (int i = 0; i < listFavorCourse.size(); i++) {
-                    Log.i("response",listFavorCourse.get(i).getAccountId() +""+ model.getCourseId());
-                    if (listFavorCourse.get(i).getCourseId() ==Integer.valueOf(model.getCourseId())) {
+                    Log.i("response", listFavorCourse.get(i).getAccountId() + "" + model.getCourseId());
+                    if (listFavorCourse.get(i).getCourseId() == Integer.valueOf(model.getCourseId())) {
                         holder.isFavorite = true;
                         break;
                     }
@@ -93,7 +103,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
             }
         });
-        String s =model.getRatingAverage();
+        String s = model.getRatingAverage();
         int rate = Math.round(Float.valueOf(s));
 
         if (rate == 1) {
@@ -107,6 +117,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         } else if (rate == 5) {
             holder.imgStarRate.setImageResource(R.drawable.icon_star5);
         }
+
         holder.txtTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,6 +181,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
                                 } else {
                                     holder.isFavorite = !holder.isFavorite;
                                 }
+
                             }
 
                             @Override
@@ -181,7 +193,14 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
                 }
                 else
                 {
-                    ProcessDialog.showDialogOk(context, "", "この機能を利用するにはログインをお願いいたします。");
+                    ProcessDialog.showDialogLogin(context, "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            if (onItemClickedListener != null) {
+                                onItemClickedListener.openPage(new LoginFragment());
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -190,7 +209,9 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
     @Override
     public int getItemCount() {
-        return listCourse.size();
+        if (listCourse != null)
+            return listCourse.size();
+        else return 0;
     }
 
     public class CourseViewHolder extends RecyclerView.ViewHolder {
@@ -232,6 +253,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
     public interface OnItemClickedListener {
         void onItemClick(int position);
+        void openPage(android.support.v4.app.Fragment fragment);
     }
 
     private OnItemClickedListener onItemClickedListener;
