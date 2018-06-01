@@ -321,5 +321,7 @@
     <string name="text_button_down">写真を撮影</string>
     //checkbox
     <string name="checkbox">次から表示しない</string>
+    <string name="textleftcheckbox">同意する</string>
+    <string name="textrightcheckbox">同意しない</string>
 </resources>
 

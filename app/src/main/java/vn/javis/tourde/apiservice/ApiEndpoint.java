@@ -8,6 +8,7 @@ public class ApiEndpoint {
 
     //public static final String BASE_URL ="http://www.app-tour-de-nippon.jp/api";
     public static final String BASE_URL ="http://www.app-tour-de-nippon.jp/test/api";
+    public static final String BASE_URL_AVATA ="https://www.app-tour-de-nippon.jp/test/post_data/account_image/";
 
     //course
     public static String GET_COURSE_LIST = "/get/getCourseList/";
