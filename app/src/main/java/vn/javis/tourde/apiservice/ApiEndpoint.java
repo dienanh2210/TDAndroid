@@ -23,6 +23,7 @@ public class ApiEndpoint {
     public static String POST_LOGIN_SNS = "/post/loginAccountSNS/";
     public  static String GET_GET_ACCOUNT ="/get/getAccount/";
     public  static String POST_RESET_PASSWORD ="/post/resetPassword/";
+    public  static String POST_EDIT_ACCOUNT ="/post/editAccount/";
     //review
     public  static String POST_REVIEW_COURSE ="/post/reviewCourse/";
     public  static String POST_CHECK_COURSE_REVIEW ="/post/checkCourseReview/";
