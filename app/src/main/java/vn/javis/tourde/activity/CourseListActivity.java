@@ -77,7 +77,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     private int mSpotID;
 
 
-
     Intent intentGPS;
     boolean boolean_permission;
     SharedPreferences mPref;
@@ -93,7 +92,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         setContentView(R.layout.course_list_view);
         ListCourseAPI api = new ListCourseAPI(this);
         setHearder();
-       // fetchData();
+        // fetchData();
         dataBundle = new Bundle();
         showCourseListPage();
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -102,9 +101,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         fn_permission();
 
     }
+
     public void setmCourseID(int mCourseID) {
         this.mCourseID = mCourseID;
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -123,12 +124,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     }
 
-    public void showDialogWarning()
-    {
+    public void showDialogWarning() {
         ProcessDialog.showDialogLogin(CourseListActivity.this, "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
             @Override
             public void onOkClick() {
-                Intent intent = new Intent(CourseListActivity.this,LoginSNSActivity.class);
+                Intent intent = new Intent(CourseListActivity.this, LoginSNSActivity.class);
                 startActivity(intent);
             }
         });
@@ -152,45 +152,50 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     public void showCourseListPage() {
-        dataBundle.putString("searching","");
-        openPage(new CourseListFragment(), false,false);
+        dataBundle.putString("searching", "");
+        openPage(new CourseListFragment(), false, false);
     }
-    public void showCourseListPage(HashMap<String,String> parram) {
-        dataBundle.putSerializable("params",parram);
-        dataBundle.putString("searching","searching");
-        openPage(new CourseListFragment(), false,false);
+
+    public void showCourseListPage(HashMap<String, String> parram) {
+        dataBundle.putSerializable("params", parram);
+        dataBundle.putString("searching", "searching");
+        openPage(new CourseListFragment(), false, true);
     }
+
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        openPage(new CourseDetailFragment(), true,false);
+        openPage(new CourseDetailFragment(), true, false, true);
     }
+
     public void ShowFavoriteCourseDetail(int courseId) {
 
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
-        openPage(new CourseDetailFragment(), true,false);
+        openPage(new CourseDetailFragment(), true, false);
     }
+
     public void showMyCourse() {
-        openPage(new FragmentTabLayoutMyCourse(), true,false);
+        openPage(new FragmentTabLayoutMyCourse(), true, false);
     }
 
     public void showBadgeCollection() {
-        openPage(new BadgeCollectionFragment(), true,false);
+        openPage(new BadgeCollectionFragment(), true, false);
     }
 
     public void ShowCountDown() {
-        openPage(new CountDownTimesFragment(), false,false);
+        openPage(new CountDownTimesFragment(), false, false);
     }
 
     public void showCommentPost() {
-        openPage(new PostCommentFragment(), true,false);
+        openPage(new PostCommentFragment(), true, false);
     }
 
     public void showCourseDrive() {
-        openPage(new CourseDriveFragment(), true,false);
+        openPage(new CourseDriveFragment(), true, false);
     }
-    public void showFragmentTabLayoutRunning(){
-        openPage(new FragmentTabLayoutRunning(),true,false);
+
+    public void showFragmentTabLayoutRunning() {
+        openPage(new FragmentTabLayoutRunning(), true, false);
     }
 
 
@@ -201,6 +206,25 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (isBackStack)
+            tx.addToBackStack(null);
+        tx.commitAllowingStateLoss();
+    }
+
+    public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation, boolean isBack) {
+        fragment.setArguments(dataBundle);
+        android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        if (isAnimation) {
+            if (isBack)
+                tx.setCustomAnimations(R.anim.pop_exit, R.anim.pop_enter);
+            else
+                tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        }
+
+        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        tx.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+
         if (isBackStack)
             tx.addToBackStack(null);
         tx.commitAllowingStateLoss();
@@ -217,7 +241,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
-            openPage(new TakePhotoFragment(), true,false);
+            openPage(new TakePhotoFragment(), true, false);
         }
     }
 
@@ -229,23 +253,26 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showSpotImages(int spotID) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
-        openPage(new CourseDetailSpotImagesFragment(), true,false);
+        openPage(new CourseDetailSpotImagesFragment(), true, false);
     }
-    public  void  openLoginPage(){
+
+    public void openLoginPage() {
         Intent intent = new Intent(this, LoginSNSActivity.class);
         startActivity(intent);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }
-    public void showSearchPage(){
-        openPage(new SearchCourseFragment(),true,false);
 
+    public void showSearchPage() {
+        openPage(new SearchCourseFragment(), true, false);
 
 
     }
+
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
 
@@ -271,7 +298,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         switch (requestCode) {
             case MY_CAMERA_PERMISSION_CODE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    openPage(new TakePhotoFragment(), true,false);
+                    openPage(new TakePhotoFragment(), true, false);
                 }
             }
             case REQUEST_PERMISSIONS: {

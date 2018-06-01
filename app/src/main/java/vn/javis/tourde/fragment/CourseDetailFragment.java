@@ -375,7 +375,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getSpot());
+                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getSpot(),CourseDetailFragment.this);
 //                    return TabSpotUploadedImages.intansce(listImgUrl);
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());
@@ -391,7 +391,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         }
     }
     String token = LoginFragment.getmUserToken();
-    private void btnFavoriteClick() {
+    public void btnFavoriteClick() {
         isFavourite = !isFavourite;
 
         int course_id = mCourseID;
