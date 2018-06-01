@@ -67,7 +67,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
     TextView txtHomeBtn;
-    
+
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
