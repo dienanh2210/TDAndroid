@@ -65,7 +65,6 @@ public class TabCourseFragment extends BaseFragment {
     RelativeLayout rlt_googlemap;
     @BindView( R.id.rlt_Navitime )
     RelativeLayout rlt_Navitime;
-
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
@@ -149,8 +148,6 @@ public class TabCourseFragment extends BaseFragment {
 
                 if(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox")=="") {
                     String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
-                            "\n" +
-                            " \n" +
                             "\n" +
                             "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
 

@@ -2,17 +2,23 @@ package vn.javis.tourde.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -22,6 +28,8 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
@@ -61,26 +69,26 @@ public class PostCommentFragment extends BaseFragment {
             }
         });
 
-        edt_text.addTextChangedListener(new TextWatcher() {
+        edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
+        edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
 
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+        edt_text.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
 
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            public void afterTextChanged(Editable s) {
-
-                for (int i = s.length() - 1; i >= 0; i--) {
-                    if (s.charAt(i) == '\n') {
-                        s.delete(i, i + 1);
-                        return;
-                    }
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                switch (motionEvent.getAction() & MotionEvent.ACTION_MASK){
+                    case MotionEvent.ACTION_UP:
+                        view.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
                 }
+
+                return false;
             }
+
         });
+
+
         btnPostComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,19 +101,6 @@ public class PostCommentFragment extends BaseFragment {
                 mActivity.onBackPressed();
             }
         });
-//        btnPostComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ProcessDialog.showDialogConfirm(getContext(), "", "前回のコメントと評価は上書きされますがよろしいですか？？", new ProcessDialog.OnActionDialogClickOk() {
-//                    @Override
-//                    public void onOkClick() {
-//                       // mActivity.openPage(new FragmentTabLayoutRunning(),true);
-//                 //  postComment();
-//
-//                    }
-//                });
-//            }
-//        });
     }
 
     @Override
