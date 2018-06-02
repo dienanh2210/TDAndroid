@@ -347,6 +347,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         view_pager.setAdapter(pagerAdapter);
         if (tabCommentFragment != null) {
             tabCommentFragment.setListReview(mCourseDetail.getReview());
+            Log.i("COMMENT API detail350: ", mCourseDetail.getReview().toString());
             tabCommentFragment.setRecyler();
         }
 

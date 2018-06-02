@@ -74,7 +74,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
             holder.imgStarRate.setImageResource(R.drawable.icon_star4);
         else if (rate == 5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star5);
-        if(model.getImage()!="" && model.getImage() !=null) {
+        if( model.getImage() !=null && model.getImage()!="") {
             String imgUrl = ApiEndpoint.BASE_URL_AVATA+model.getImage();
             Picasso.with(context).load(imgUrl).transform(new CircleTransform()).into(holder.imgUserAvata);
         }
