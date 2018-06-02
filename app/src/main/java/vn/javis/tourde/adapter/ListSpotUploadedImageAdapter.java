@@ -35,7 +35,7 @@ public class ListSpotUploadedImageAdapter extends RecyclerView.Adapter<ListSpotU
     View mView;
 
     public ListSpotUploadedImageAdapter(List<String> listImgage, Context context) {
-        Log.i("asd",""+listImgage.size());
+        Log.i("asd", "" + listImgage.size());
         this.listImgage = listImgage;
         this.context = context;
     }
@@ -51,13 +51,14 @@ public class ListSpotUploadedImageAdapter extends RecyclerView.Adapter<ListSpotU
     @Override
     public void onBindViewHolder(@NonNull final SpotViewHolder holder, final int position) {
         String model = listImgage.get(position);
-        holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.plus_button));
-        //Picasso.with(context).load(imgUrl).into( holder.imgSpot);
+        //  holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.plus_button));
+        if (model != null)
+            Picasso.with(context).load(model).into(holder.imgSpot);
     }
 
     @Override
     public int getItemCount() {
-        Log.i("asd1",""+listImgage.size());
+        Log.i("asd1", "" + listImgage.size());
         return listImgage.size();
     }
 

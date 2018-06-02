@@ -53,7 +53,12 @@ public class TabMySpotUploadedImages extends BaseFragment {
         mActivity = (CourseListActivity) getActivity();
         if (listSpotImg.size() > 0) {
             Log.i("listSpot: ", "" + listSpotImg.size());
-            RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1);;
+            RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1){
+                @Override
+                public boolean canScrollVertically() {
+                    return false;
+                }
+            };
             rcvMySpotImage.setLayoutManager(layoutManager);
             listSpotImageAdapter = new ListMySpotUploadedImageAdapter( listSpotImg,mActivity);
             listSpotImageAdapter.setOnItemClickListener(new ListMySpotUploadedImageAdapter.OnItemClickedListener() {

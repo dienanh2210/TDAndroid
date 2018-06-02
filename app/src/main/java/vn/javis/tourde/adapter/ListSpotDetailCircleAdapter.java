@@ -67,8 +67,8 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
         holder.txtIntro.setText(spot.getIntroduction());
         holder.txtSpotDistance.setText(spot.getSpotDistance()+"km");
         String tag = "";
-        if (spot.getTag() != null)
-            tag += "#" + spot.getTag();
+//        if (spot.getTag() != null)
+//            tag += "#" + spot.getTag();
         for (int i = 0; i < spot.getListTag().size(); i++) {
             tag += " #" + spot.getListTag().get(i);
         }

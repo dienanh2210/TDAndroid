@@ -74,8 +74,9 @@
             android:id="@+id/content_story_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Story1Content"
             android:textColor="@color/Black"
+            android:textAlignment="gravity"
+
             android:textSize="@dimen/_12sdp" />
 
         <TextView

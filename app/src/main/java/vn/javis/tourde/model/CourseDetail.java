@@ -39,6 +39,7 @@ public class CourseDetail {
                 modelSpot.setListTag(listTag);
                 spot.add(modelSpot);
             }
+            listTag.clear();
             listTag = new ArrayList<String>();
             JSONArray listTagOb = jsonResponse.getJSONArray("tag");
             for (int i = 0; i < listTagOb.length(); i++) {

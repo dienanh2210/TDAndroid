@@ -151,6 +151,7 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/Black"
+            android:textAlignment="gravity"
             android:textSize="@dimen/_13sdp" />
 
         <TextView
@@ -160,6 +161,7 @@
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
+            android:textAlignment="gravity"
             android:textColor="@color/Black"
             android:textSize="@dimen/_12sdp" />
 
@@ -269,8 +271,8 @@
                     android:id="@+id/txt_area_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:textColor="@color/Red"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -298,9 +300,9 @@
                     android:id="@+id/txt_distance_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:textColor="@color/Red"
-                    android:layout_marginEnd="@dimen/_12sdp"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
 
@@ -328,9 +330,9 @@
                     android:id="@+id/txt_season"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:textColor="@color/Red"
-                    android:layout_marginEnd="@dimen/_12sdp"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
 
@@ -356,9 +358,9 @@
                     android:id="@+id/txt_average_slope"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:textColor="@color/Red"
-                    android:layout_marginEnd="@dimen/_12sdp"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
 
@@ -385,9 +387,9 @@
                     android:id="@+id/txt_elevation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:textColor="@color/Red"
-                    android:layout_marginEnd="@dimen/_12sdp"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
 
@@ -413,9 +415,9 @@
                     android:id="@+id/txt_course_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:textColor="@color/Red"
-                    android:layout_marginEnd="@dimen/_12sdp"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
         </com.nex3z.flowlayout.FlowLayout>

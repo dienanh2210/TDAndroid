@@ -202,7 +202,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         age = Integer.parseInt(model.getAge());
         tv_age.setText(model.getAge() +"代");
         prefecture = Integer.parseInt(model.getArea());
-
+        if(prefecture==0) prefecture=1;
         tv_prefecture.setText(ListArea.getAreaName(prefecture-1));
        // prefecture += 1;
     }
