@@ -151,6 +151,7 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/Black"
+            android:textAlignment="gravity"
             android:textSize="@dimen/_13sdp" />
 
         <TextView
@@ -160,7 +161,7 @@
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textAlignment="center"
+            android:textAlignment="gravity"
             android:textColor="@color/Black"
             android:textSize="@dimen/_12sdp" />
 

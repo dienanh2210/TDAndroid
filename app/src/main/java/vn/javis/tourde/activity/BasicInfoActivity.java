@@ -55,7 +55,7 @@ public class BasicInfoActivity extends BaseActivity {
         age.setText(LoginFragment.getmAccount().getAge()+"代");
 
         int area = Integer.parseInt(LoginFragment.getmAccount().getArea());
-
+        if(area==0) area=1;
         prefecture.setText(ListArea.getAreaName(area-1));
 
         if(LoginFragment.getmAccount() !=null && LoginFragment.getmAccount().getImage() !="" && LoginFragment.getmAccount().getImage() !=null)

@@ -3,6 +3,7 @@ package vn.javis.tourde.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -20,6 +21,10 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
@@ -29,6 +34,7 @@ import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -67,7 +73,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
     TextView txtHomeBtn;
-
+    List<String> listSpotImage= new ArrayList<>();
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -79,26 +85,6 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
             @Override
             public void onTabChange(int index, boolean isScroll) {
                 view_pager.setCurrentItem(index);
-            }
-        });
-        PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager());
-        view_pager.setAdapter(pagerAdapter);
-        view_pager.setOffscreenPageLimit(2);
-        view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                tab_layout.highLightTab(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -154,10 +140,30 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
             tags += "#" + s + " ";
         }
         txtTag.setText(tags);
+        listSpotImage = spotData.getImages();
         if (spotData.getData().getTopImage() != null && spotData.getData().getTopImage() != "")
             Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
 
+        PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager());
+        view_pager.setAdapter(pagerAdapter);
+        view_pager.setOffscreenPageLimit(2);
+        view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tab_layout.highLightTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -175,12 +181,16 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
+        private int mCurrentPosition = -1;
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new TabSpotImages();
+                    TabSpotImages tabSpotImages =new TabSpotImages();
+                    Bundle dataBundle1 = new Bundle();
+                    dataBundle1.putSerializable(Constant.LIST_SPOT_IMAGE, (Serializable) listSpotImage);
+                    tabSpotImages.setArguments(dataBundle1);
+                    return tabSpotImages;
                 case 1:
                     TabSpotFacility tabSpotFacility = new TabSpotFacility();
                     Bundle dataBundle = new Bundle();
@@ -191,7 +201,18 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                     return null;
             }
         }
-
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            super.setPrimaryItem(container, position, object);
+            if (position != mCurrentPosition) {
+                Fragment fragment = (Fragment) object;
+                YourScrollableViewPager pager = (YourScrollableViewPager) container;
+                if (fragment != null && fragment.getView() != null) {
+                    mCurrentPosition = position;
+                    pager.measureCurrentView(fragment.getView());
+                }
+            }
+        }
         @Override
         public int getCount() {
             return 2;

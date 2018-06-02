@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import java.util.List;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
 public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelectedListener {
@@ -28,7 +31,7 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    List<String> listImgUrl = new ArrayList<>();
+    List<String> listImgUrl;
     List<String> myListImgUrl = new ArrayList<>();
 
     @Override
@@ -46,12 +49,9 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
         mActivity = (CourseListActivity) getActivity();
         myListImgUrl.add("plus_button");
         //this is for test
-        for (int i = 0; i < 22; i++) {
-            myListImgUrl.add("plus_button");
-            listImgUrl.add("plus_button");
-        }
+        listImgUrl = (ArrayList<String>)getArguments().getSerializable(Constant.LIST_SPOT_IMAGE);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-
+        Log.i("listImgUrl",listImgUrl.toString());
         tabLayout.addTab(tabLayout.newTab().setText("ユーザー投稿写真"));
         tabLayout.addTab(tabLayout.newTab().setText("自分の投稿写真"));
         viewPager = view.findViewById(R.id.pager);
@@ -81,7 +81,7 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
     public class Pager extends FragmentStatePagerAdapter {
 
         int tabCount;
-
+        private int mCurrentPosition = -1;
         public Pager(FragmentManager fm, int tabCount) {
             super(fm);
             //Initializing tab count
@@ -99,6 +99,18 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
                     return tab2;
                 default:
                     return null;
+            }
+        }
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            super.setPrimaryItem(container, position, object);
+            if (position != mCurrentPosition) {
+                Fragment fragment = (Fragment) object;
+                YourScrollableViewPager pager = (YourScrollableViewPager) container;
+                if (fragment != null && fragment.getView() != null) {
+                    mCurrentPosition = position;
+                    pager.measureCurrentView(fragment.getView());
+                }
             }
         }
         @Override
