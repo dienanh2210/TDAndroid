@@ -44,6 +44,7 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/title_changeInfo"
             android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
 
     <include layout="@layout/item_divider" />
@@ -134,15 +135,18 @@
 
                 <include layout="@layout/item_divider" />
 
-                <android.support.v7.widget.AppCompatImageButton
+                <ImageButton
                     android:id="@+id/select_userIcon"
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_60sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:src="@drawable/plus_button"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/plus_button"
                     android:textColorHint="@color/Gray" />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -483,6 +487,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/backgroud"
                 android:textSize="@dimen/_12sdp" />
+
             <Button
                 android:id="@+id/changeInfo"
                 android:layout_width="match_parent"
@@ -496,7 +501,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/backgroud"
                 android:textSize="@dimen/_12sdp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
