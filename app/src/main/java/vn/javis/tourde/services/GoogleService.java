@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaScannerConnection;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -27,6 +28,12 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -51,7 +58,7 @@ public class GoogleService extends Service implements LocationListener {
     Intent intent;
     private double latitude_des, longitude_des;
     int timeDelay = 5;
-
+    private String filename = "logGPS.txt";
     public GoogleService() {
 
     }
@@ -128,9 +135,8 @@ public class GoogleService extends Service implements LocationListener {
                     location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     if (location != null) {
 
-                        Log.e("gps_latitude", location.getLatitude() + "");
-                        Log.e("gps_longitude", location.getLongitude() + "");
 
+                        Log.i("GPSLOG: ","latutide: " +location.getLatitude()+ ", longitude: "+location.getLongitude());
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
                         fn_update(location);
@@ -196,10 +202,6 @@ public class GoogleService extends Service implements LocationListener {
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
             stopService(new Intent(GoogleService.this, GoogleService.class));
         }
-        Toast.makeText(getApplicationContext(), longitude + "" + latitude, Toast.LENGTH_LONG);
-        Log.i("distance", "" + distance);
-        Log.i("latutide", "" + location.getLatitude());
-        Log.i("longitude", "" + location.getLongitude());
         sendBroadcast(intent);
 //        stopService(new Intent(GoogleService.this, GoogleService.class));
     }
@@ -239,6 +241,24 @@ public class GoogleService extends Service implements LocationListener {
     public void onDestroy() {
         super.onDestroy();
         mTimer.cancel();
+    }
+    private void writeToFile(String data) {
+        try {
+            File testFile = new File(this.getExternalFilesDir(null), filename);
+            if (!testFile.exists())
+                testFile.createNewFile();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(testFile, true /*append*/));
+            writer.write(data);
+            writer.close();
+            MediaScannerConnection.scanFile(this,
+                    new String[]{testFile.toString()},
+                    null,
+                    null);
+        } catch (IOException e) {
+            Log.e("ReadWriteFile", "Unable to write to the TestFile.txt file.");
+        }
+
+
     }
 
 }

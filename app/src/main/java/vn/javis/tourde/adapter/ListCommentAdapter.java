@@ -55,14 +55,17 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
       //  holder.txtPostDate.setText(model.getPostDate().toString());
 
         String dateGet = model.getReviewInsertDatetime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
-        try {
-            Date date = dateFormat.parse(dateGet);
-            String out = dateFormat2.format(date).toString();
-            holder.txtPostDate.setText(out);
-        } catch (ParseException e) {
+        if(dateGet !=null && dateGet !=""){
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
+            try {
+                Date date = dateFormat.parse(dateGet);
+                String out = dateFormat2.format(date).toString();
+                holder.txtPostDate.setText(out);
+            } catch (ParseException e) {
+            }
         }
+
         int rate = model.getRating();
         if (rate == 1)
             holder.imgStarRate.setImageResource(R.drawable.icon_star1);

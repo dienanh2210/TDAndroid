@@ -273,7 +273,6 @@ public class ProcessDialog {
                     //xu ly click check box
                     Log.d("dm","checkbox");
                     SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
-
                 }
             }
         } );

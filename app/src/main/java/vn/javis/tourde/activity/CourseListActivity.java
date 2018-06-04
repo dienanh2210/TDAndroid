@@ -14,7 +14,9 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 
+import android.media.MediaScannerConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -30,7 +32,12 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -85,6 +92,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     Geocoder geocoder;
     Bundle dataBundle;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -98,7 +106,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-        fn_permission();
+     //   fn_permission();
 
     }
 
@@ -287,7 +295,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             }
         } else {
             boolean_permission = true;
-            turnOnGPS();
+                turnOnGPS();
         }
 
     }
@@ -307,7 +315,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                     if (boolean_permission) {
                         if (mPref.getString("service", "").matches("")) {
                             medit.putString("service", "service").commit();
-                            turnOnGPS();
+                                turnOnGPS();
                         } else {
                             Toast.makeText(getApplicationContext(), "Service is already running", Toast.LENGTH_SHORT).show();
                         }
@@ -324,13 +332,19 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     public void turnOnGPS() {
-        intentGPS = new Intent(this, GoogleService.class);
-        startService(intentGPS);
-        Log.i("gps", "turn on");
+        if (!boolean_permission)
+            fn_permission();
+        else {
+            intentGPS = new Intent(this, GoogleService.class);
+            startService(intentGPS);
+            Log.i("GPSLOG", "turn on \n");
+        }
     }
 
     public void turnOffGPS() {
         stopService(intentGPS);
+
+        Log.i("GPSLOG", "turn off \n");
 
     }
 
@@ -340,6 +354,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
             latitude = Double.valueOf(intent.getStringExtra("latutide"));
             longitude = Double.valueOf(intent.getStringExtra("longitude"));
+            Log.i("latutide", "" + latitude);
+            Log.i("longitude", "" + longitude);
 
             List<Address> addresses = null;
 
@@ -366,5 +382,20 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         super.onPause();
         unregisterReceiver(broadcastReceiver);
 
+    }
+    private static boolean isExternalStorageReadOnly() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isExternalStorageAvailable() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
+            return true;
+        }
+        return false;
     }
 }

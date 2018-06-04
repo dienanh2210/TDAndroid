@@ -326,9 +326,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         });
 
         Log.i("FavoriteCourseAPI", "" + isFavourite);
-        Picasso.with(activity).load(model.getTopImage())
-                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                .networkPolicy(NetworkPolicy.NO_CACHE).into(imgCourse);
+       // Picasso.with(activity).load(model.getTopImage())
+        //        .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+        //        .networkPolicy(NetworkPolicy.NO_CACHE).into(imgCourse);
+        Picasso.with(activity).load(model.getTopImage()).into(imgCourse);
         Picasso.with(activity).load(model.getPostUserImage()).transform(new CircleTransform()).into(imgPostUser);
         int rate = Math.round(courseDetail.getReviewTotal().getRatingAverage());
         if (rate == 1) {

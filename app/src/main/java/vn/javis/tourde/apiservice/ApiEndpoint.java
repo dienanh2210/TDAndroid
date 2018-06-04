@@ -34,6 +34,8 @@ public class ApiEndpoint {
     public  static String GET_SPOT_EQUIPMENT_REVIEW ="/get/getSpotEquipmentReview/";
     public  static String GET_CHECK_SPOT_EQUIPMENT_REVIEW ="/get/checkSpotEquipmentReview/";
     public  static String POST_REVIEW_SPOT_EQUIPMENT ="/post/reviewSpotEquipment/";
+    public  static String POST_SPOT_IMAGE ="/post/postSpotImage/";
+
 
     //post image
     public  static String POST_IMAGE ="/post/postImage/";

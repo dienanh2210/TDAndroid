@@ -189,6 +189,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                     TabSpotImages tabSpotImages =new TabSpotImages();
                     Bundle dataBundle1 = new Bundle();
                     dataBundle1.putSerializable(Constant.LIST_SPOT_IMAGE, (Serializable) listSpotImage);
+                    dataBundle1.putInt(CourseListActivity.SPOT_ID, spotId);
                     tabSpotImages.setArguments(dataBundle1);
                     return tabSpotImages;
                 case 1:
