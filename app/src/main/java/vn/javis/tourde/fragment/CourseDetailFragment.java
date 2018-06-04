@@ -141,28 +141,35 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             @Override
             public void onTabChange(int index, boolean isScroll) {
                 view_pager.setCurrentItem(index);
+
             }
+
         });
 
         pagerAdapter = new PagerAdapter(getChildFragmentManager());
 //        view_pager.setAdapter(pagerAdapter);
         view_pager.setOffscreenPageLimit(2);
+
         view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                Log.i("test_tab_scroll","1--"+position);
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(int position)
+            {
                 tab_layout.highLightTab(position);
+
+                Log.i("test_tab_scroll","2");
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                Log.i("test_tab_scroll","3-"+state);
             }
+
         });
 
         btnBackToList.setOnClickListener(new View.OnClickListener() {
@@ -347,6 +354,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         view_pager.setAdapter(pagerAdapter);
         if (tabCommentFragment != null) {
             tabCommentFragment.setListReview(mCourseDetail.getReview());
+            Log.i("COMMENT API detail350: ", mCourseDetail.getReview().toString());
             tabCommentFragment.setRecyler();
         }
 
@@ -370,12 +378,12 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
+        private int mCurrentPosition = -1;
         @Override
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getSpot());
+                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getSpot(),CourseDetailFragment.this);
 //                    return TabSpotUploadedImages.intansce(listImgUrl);
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());
@@ -384,14 +392,25 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     return null;
             }
         }
-
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            super.setPrimaryItem(container, position, object);
+            if (position != mCurrentPosition) {
+                Fragment fragment = (Fragment) object;
+                YourScrollableViewPager pager = (YourScrollableViewPager) container;
+                if (fragment != null && fragment.getView() != null) {
+                    mCurrentPosition = position;
+                    pager.measureCurrentView(fragment.getView());
+                }
+            }
+        }
         @Override
         public int getCount() {
             return 2;
         }
     }
     String token = LoginFragment.getmUserToken();
-    private void btnFavoriteClick() {
+    public void btnFavoriteClick() {
         isFavourite = !isFavourite;
 
         int course_id = mCourseID;

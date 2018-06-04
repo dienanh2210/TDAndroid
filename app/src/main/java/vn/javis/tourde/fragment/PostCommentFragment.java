@@ -110,14 +110,16 @@ public class PostCommentFragment extends BaseFragment {
 
     void postComment() {
         final String token = LoginFragment.getmUserToken();
-        if(token !="" && token !=null){
-            final int rating = mRatingBar.getNumStars();
+        if(token !="" && token !=null)
+        {
+            final int rating =(int) mRatingBar.getRating();
             final String comment = edt_text.getText().toString();
             if (comment != null && comment != "") {
                 //check commented this course
                 CommentsAPI.postCheckCourseReview(token, courseID, new ServiceCallback() {
                     @Override
-                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException
+                    {
 
                         JSONObject jsonObject = (JSONObject) response;
                         // Log.d("logout", jsonObject.toString());
@@ -127,13 +129,14 @@ public class PostCommentFragment extends BaseFragment {
                             if (reviewed == "true") {
                                 ProcessDialog.showDialogConfirm(mActivity,R.layout.dialog_confirm2, "", "前回のコメントと評価は上書きされますがよろしいですか？", new ProcessDialog.OnActionDialogClickOk() {
                                     @Override
-                                    public void onOkClick() {
+                                    public void onOkClick()
+                                    {
                                         CommentsAPI.postReviewCourse(token, courseID, rating, comment, new ServiceCallback() {
                                             @Override
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 //post comment success return to current page
                                                 mActivity.onBackPressed();
-                                                Log.i("post comment 118", response.toString());
+
                                             }
 
                                             @Override

@@ -8,6 +8,7 @@ public class ApiEndpoint {
 
     //public static final String BASE_URL ="http://www.app-tour-de-nippon.jp/api";
     public static final String BASE_URL ="http://www.app-tour-de-nippon.jp/test/api";
+    public static final String BASE_URL_AVATA ="https://www.app-tour-de-nippon.jp/test/post_data/account_image/";
 
     //course
     public static String GET_COURSE_LIST = "/get/getCourseList/";
@@ -23,6 +24,7 @@ public class ApiEndpoint {
     public static String POST_LOGIN_SNS = "/post/loginAccountSNS/";
     public  static String GET_GET_ACCOUNT ="/get/getAccount/";
     public  static String POST_RESET_PASSWORD ="/post/resetPassword/";
+    public  static String POST_EDIT_ACCOUNT ="/post/editAccount/";
     //review
     public  static String POST_REVIEW_COURSE ="/post/reviewCourse/";
     public  static String POST_CHECK_COURSE_REVIEW ="/post/checkCourseReview/";

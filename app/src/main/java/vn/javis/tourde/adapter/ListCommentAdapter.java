@@ -20,6 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
+import vn.javis.tourde.apiservice.ApiEndpoint;
 import vn.javis.tourde.model.Comment;
 import vn.javis.tourde.model.Review;
 import vn.javis.tourde.view.CircleTransform;
@@ -73,8 +74,10 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
             holder.imgStarRate.setImageResource(R.drawable.icon_star4);
         else if (rate == 5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star5);
-        if(model.getImage()!="" && model.getImage() !=null)
-             Picasso.with(context).load(model.getImage()).into(holder.imgUserAvata);
+        if( model.getImage() !=null && model.getImage()!="") {
+            String imgUrl = ApiEndpoint.BASE_URL_AVATA+model.getImage();
+            Picasso.with(context).load(imgUrl).transform(new CircleTransform()).into(holder.imgUserAvata);
+        }
     }
 
     @Override

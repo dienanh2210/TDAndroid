@@ -158,9 +158,11 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
         String token = LoginFragment.getmUserToken();
         Intent intent = mActivity.getIntent();
-        if (intent.hasExtra(Constant.KEY_LOGOUT_SUCCESS)) {
+        if (intent.hasExtra(Constant.KEY_LOGOUT_SUCCESS))
+        {
             if (token == "" && intent.getIntExtra(Constant.KEY_LOGOUT_SUCCESS, 0) == 1) {
                 ProcessDialog.showDialogOk(getContext(), "", "ログアウトしました。");
+                intent.removeExtra(Constant.KEY_LOGOUT_SUCCESS);
             }
         }
 

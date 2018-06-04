@@ -73,19 +73,21 @@ public class TabCourseFragment extends BaseFragment {
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
     String avagePace, finishTIme, startAddress;
-
-    public static TabCourseFragment instance(List<Spot> lstSpot) {
+    CourseDetailFragment parentFragment;
+    public static TabCourseFragment instance(List<Spot> lstSpot,CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
+        fragment.parentFragment =parentFragment;
         return fragment;
     }
 
-    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, List<Spot> lstSpot) {
+    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, List<Spot> lstSpot,CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
         fragment.finishTIme = finishTime;
         fragment.avagePace = averagePace;
         fragment.startAddress = startAddress;
+        fragment.parentFragment =parentFragment;
         return fragment;
     }
 
@@ -136,7 +138,13 @@ public class TabCourseFragment extends BaseFragment {
         } catch (ParseException e) {
         }
 
-
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            if(parentFragment !=null)
+                parentFragment.btnFavoriteClick();
+            }
+        });
         txtStartAddress.setText(startAddress);
         btnRunningApp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +250,5 @@ public class TabCourseFragment extends BaseFragment {
         else
             btnSignUp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame));
     }
-
 
 }
