@@ -29,7 +29,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="15dp"
                 android:paddingEnd="@dimen/_1sdp"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textColor="@color/Black"
                 android:text="@string/item_text" />
 
@@ -38,13 +38,13 @@
                 android:layout_height="@dimen/_47sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/_100sdp"
+                android:layout_marginEnd="@dimen/_85sdp"
                 android:gravity="center_vertical"
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_1sdp"
                 android:text="あり"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_11sdp" />
 
             <ImageButton
                 android:id="@+id/imv_mark1"
@@ -52,7 +52,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_75sdp"
+                android:layout_marginEnd="@dimen/_65sdp"
                 android:background="@drawable/icon_check_circle"
                 android:contentDescription="@string/item_text"
                 android:visibility="visible" />
@@ -72,13 +72,13 @@
                 android:layout_height="@dimen/_47sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
                 android:gravity="center_vertical"
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_1sdp"
                 android:text="なし"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_11sdp" />
 
             <ImageButton
                 android:id="@+id/imv_mark"

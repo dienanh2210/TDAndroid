@@ -1,6 +1,7 @@
 package vn.javis.tourde.fragment;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,12 +38,9 @@ public class FragmentMap extends BaseFragment{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.navitime:
-                final String appPackageName = "com.navitime.local.navitime&hl=ja";
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                }
+                String packageName = "com.navitime.local.navitime";
+                // String packageName = "NAVITIME: 地図・ルート検索";
+                launchNewActivity(getContext(),packageName);
                 break;
             case R.id.googleMap:
                 String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
@@ -68,6 +66,27 @@ public class FragmentMap extends BaseFragment{
             case R.id.resume:
 
                 break;
+        }
+    }
+    public void launchNewActivity(Context context, String packageName) {
+        Intent intent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.CUPCAKE) {
+            intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        }
+        if (intent == null) {
+            try {
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
+                context.startActivity(intent);
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+
+            }
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+
         }
     }
 }

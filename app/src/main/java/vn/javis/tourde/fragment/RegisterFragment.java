@@ -295,10 +295,12 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         ProcessDialog.showDialogLogin(getContext(), "", "新規登録に成功しました", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {
+
                                 Intent intent = new Intent(getActivity(), CourseListActivity.class);
                                 startActivity(intent);
                                 intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                                 getActivity().setResult(Activity.RESULT_OK, intent);
+
                             }
                         });
                         //     getActivity().finish();

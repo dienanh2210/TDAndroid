@@ -25,4 +25,11 @@ public class SpotDataAPI {
     public static void postReviewSpotEquipment (HashMap<String,String> params, ServiceCallback callback){
         TourDeService.postWithAuth(ApiEndpoint.POST_REVIEW_SPOT_EQUIPMENT, params, callback);
     }
+    public static void postSpotImage(String token,int spotId,String user_image_id, ServiceCallback callback){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",""+token);
+        params.put("spot_id",""+spotId);
+        params.put("user_image_id",""+user_image_id);
+        TourDeService.postWithAuth(ApiEndpoint.POST_SPOT_IMAGE, params, callback);
+    }
 }

@@ -55,7 +55,9 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
         //  holder.txtPostDate.setText(model.getPostDate().toString());
 
         String dateGet = model.getReviewInsertDatetime();
-        if (dateGet != null) {
+
+        if(dateGet !=null && dateGet !=""){
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
             try {
@@ -79,6 +81,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
                 String imgUrl = ApiEndpoint.BASE_URL_AVATA + model.getImage();
                 Picasso.with(context).load(imgUrl).transform(new CircleTransform()).into(holder.imgUserAvata);
             }
+
         }
     }
 

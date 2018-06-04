@@ -33,7 +33,7 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
     private ViewPager viewPager;
     List<String> listImgUrl;
     List<String> myListImgUrl = new ArrayList<>();
-
+    int spotId;
     @Override
     public void onStart() {
         super.onStart();
@@ -50,6 +50,8 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
         myListImgUrl.add("plus_button");
         //this is for test
         listImgUrl = (ArrayList<String>)getArguments().getSerializable(Constant.LIST_SPOT_IMAGE);
+        spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         Log.i("listImgUrl",listImgUrl.toString());
         tabLayout.addTab(tabLayout.newTab().setText("ユーザー投稿写真"));
@@ -95,7 +97,7 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
                     TabSpotUploadedImages tab1 = TabSpotUploadedImages.intansce(listImgUrl);
                     return tab1;
                 case 1:
-                    TabMySpotUploadedImages tab2 = TabMySpotUploadedImages.intansce(myListImgUrl);
+                    TabMySpotUploadedImages tab2 = TabMySpotUploadedImages.intansce(myListImgUrl,spotId);
                     return tab2;
                 default:
                     return null;
