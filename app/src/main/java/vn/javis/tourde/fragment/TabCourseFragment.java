@@ -196,7 +196,7 @@ public class TabCourseFragment extends BaseFragment {
 //               Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja "));
 //                startActivity(browserIntent)
 
-               String packageName = "com.google.android.gm";
+               String packageName = "com.navitime.local.navitime";
                // String packageName = "NAVITIME: 地図・ルート検索";
                 launchNewActivity(getContext(),packageName);
             }
@@ -215,7 +215,6 @@ public class TabCourseFragment extends BaseFragment {
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
-
                 context.startActivity(intent);
             } catch (android.content.ActivityNotFoundException anfe) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
