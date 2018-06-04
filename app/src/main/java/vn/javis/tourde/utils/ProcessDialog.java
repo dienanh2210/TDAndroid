@@ -11,6 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,9 +20,10 @@ import android.widget.Toast;
 import vn.javis.tourde.R;
 
 public class ProcessDialog {
+
     public Context context;
     ProgressDialog dialog1;
-
+    private static ProgressBar spinner;
     public ProcessDialog(final Context context) {
         this.context = context;
         dialog1 = new ProgressDialog(context);
@@ -175,10 +178,15 @@ public class ProcessDialog {
 
         final Button btnCancel = (Button) dialog.findViewById(R.id.btn_ok);
 
+
+
+
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.hide();
+
+
             }
         });
 
@@ -198,14 +206,19 @@ public class ProcessDialog {
         tvTitle.setText(title);
         TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
         tvMessage.setText(content);
+
         //tuanpd
         dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
         final Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
 
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+               showloading( context );
+
                 action.onOkClick();
                 dialog.hide();
             }
@@ -267,7 +280,18 @@ public class ProcessDialog {
 
 
     }
+    public static void showloading(final Context context) {
 
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setContentView(R.layout.loading);
+        spinner=dialog.findViewById( R.id.pBar );
+        spinner.setVisibility( View.VISIBLE );
+        dialog.show();
+    }
     public interface OnActionDialogClickOk{
          void onOkClick();
     }
