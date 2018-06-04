@@ -48,35 +48,37 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     @Override
     public void onBindViewHolder(@NonNull ListCommentAdapter.CommentViewHolder holder, final int position) {
         Review model = listReview.get(position);
-        if(model.getImage()!="" && model.getImage() !=null)
-        holder.txtUserName.setText(model.getNickname());
-        else   holder.txtUserName.setText(model.getEmail());
+        if (model.getImage() != "" && model.getImage() != null)
+            holder.txtUserName.setText(model.getNickname());
+        else holder.txtUserName.setText(model.getEmail());
         holder.txtCommentContent.setText(model.getComment());
-      //  holder.txtPostDate.setText(model.getPostDate().toString());
+        //  holder.txtPostDate.setText(model.getPostDate().toString());
 
         String dateGet = model.getReviewInsertDatetime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
-        try {
-            Date date = dateFormat.parse(dateGet);
-            String out = dateFormat2.format(date).toString();
-            holder.txtPostDate.setText(out);
-        } catch (ParseException e) {
-        }
-        int rate = model.getRating();
-        if (rate == 1)
-            holder.imgStarRate.setImageResource(R.drawable.icon_star1);
-        else if (rate == 2)
-            holder.imgStarRate.setImageResource(R.drawable.icon_star2);
-        else if (rate == 3)
-            holder.imgStarRate.setImageResource(R.drawable.icon_star3);
-        else if (rate == 4)
-            holder.imgStarRate.setImageResource(R.drawable.icon_star4);
-        else if (rate == 5)
-            holder.imgStarRate.setImageResource(R.drawable.icon_star5);
-        if( model.getImage() !=null && model.getImage()!="") {
-            String imgUrl = ApiEndpoint.BASE_URL_AVATA+model.getImage();
-            Picasso.with(context).load(imgUrl).transform(new CircleTransform()).into(holder.imgUserAvata);
+        if (dateGet != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
+            try {
+                Date date = dateFormat.parse(dateGet);
+                String out = dateFormat2.format(date).toString();
+                holder.txtPostDate.setText(out);
+            } catch (ParseException e) {
+            }
+            int rate = model.getRating();
+            if (rate == 1)
+                holder.imgStarRate.setImageResource(R.drawable.icon_star1);
+            else if (rate == 2)
+                holder.imgStarRate.setImageResource(R.drawable.icon_star2);
+            else if (rate == 3)
+                holder.imgStarRate.setImageResource(R.drawable.icon_star3);
+            else if (rate == 4)
+                holder.imgStarRate.setImageResource(R.drawable.icon_star4);
+            else if (rate == 5)
+                holder.imgStarRate.setImageResource(R.drawable.icon_star5);
+            if (model.getImage() != null && model.getImage() != "") {
+                String imgUrl = ApiEndpoint.BASE_URL_AVATA + model.getImage();
+                Picasso.with(context).load(imgUrl).transform(new CircleTransform()).into(holder.imgUserAvata);
+            }
         }
     }
 

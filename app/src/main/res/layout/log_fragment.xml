@@ -3,254 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp">
-
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/icon_clock" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_85sdp"
-            android:gravity="center"
-            android:text="00:00:00"
-            android:textColor="@color/Black"
-            android:textSize="@dimen/_25sdp"
-            android:textStyle="bold">
-
-        </TextView>
-    </LinearLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_log"
-        android:layout_marginTop="@dimen/_15sdp">
-        <RelativeLayout
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/bg_log">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-          >
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txt_prezent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:textColor="@color/White"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:id="@+id/spot1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_68sdp"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/txt_prezent"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_50sdp">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/boder_white" />
-
-                <TextView
-                    android:id="@+id/number"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:background="@drawable/blue_circle"
-                    android:gravity="center"
-                    android:text="@string/one"
-                    android:textColor="@color/White"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/number"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    android:gravity="center"
-                    android:text="@string/place1"
-                    android:textColor="@color/Black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_15sdp"/>
-
-                <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/circle_success" />
-
-            </RelativeLayout>
+            </android.support.v7.widget.RecyclerView>
 
             <ImageView
-                android:id="@+id/img_end_spot1"
-                android:layout_width="@dimen/_12sdp"
-                android:layout_height="@dimen/_13sdp"
-                android:layout_alignTop="@+id/spot1"
-                android:layout_marginStart="@dimen/_37sdp"
-                android:layout_marginTop="@dimen/_68sdp"
-                android:src="@drawable/image_link" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_spot" />
 
-            <RelativeLayout
-                android:id="@+id/spot2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_68sdp"
-                android:layout_alignTop="@+id/img_end_spot1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_13sdp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/bg_spot" />
-
-                <TextView
-                    android:id="@+id/number2"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:background="@drawable/circle"
-                    android:gravity="center"
-                    android:text="@string/two"
-                    android:textColor="@color/SkyBlue"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/number2"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    android:gravity="center"
-                    android:text="@string/place2"
-                    android:textColor="@color/White"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_15sdp"/>
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/spot3"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_68sdp"
-               android:layout_alignTop="@id/spot2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_81sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_15sdp">
-
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alpha="0.5"
-                    android:src="@drawable/bg_spot" />
-
-                <TextView
-                    android:id="@+id/number3"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:alpha="0.75"
-                    android:background="@drawable/blue_circle"
-                    android:gravity="center"
-                    android:text="@string/three"
-                    android:textColor="@color/White"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/number3"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    android:alpha="0.5"
-                    android:gravity="center"
-                    android:text="@string/place3"
-                    android:textColor="@color/White"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_15sdp"/>
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_68sdp"
-                android:layout_alignTop="@id/spot3"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_81sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_20sdp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alpha="0.5"
-                    android:src="@drawable/bg_spot" />
-
-                <TextView
-                    android:id="@+id/number4"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:alpha="0.75"
-                    android:background="@drawable/blue_circle"
-                    android:gravity="center"
-                    android:text="@string/four"
-                    android:textColor="@color/White"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/number4"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    android:alpha="0.5"
-                    android:gravity="center"
-                    android:text="@string/place4"
-                    android:textColor="@color/White"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_15sdp"/>
-
-
-            </RelativeLayout>
-
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
+
+
 
 </RelativeLayout>
