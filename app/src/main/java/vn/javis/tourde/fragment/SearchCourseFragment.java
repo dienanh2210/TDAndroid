@@ -255,6 +255,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
             case "〜100km":
                 distance = "3";
                 break;
+            case "100km〜":
+                distance = "4";
+                break;
             default:
                 distance = "4";
                 break;
