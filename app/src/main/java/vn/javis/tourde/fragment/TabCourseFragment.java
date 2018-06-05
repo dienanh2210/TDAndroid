@@ -1,7 +1,11 @@
 package vn.javis.tourde.fragment;
 
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -88,19 +92,20 @@ public class TabCourseFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         if (listSpot.size() > 0) {
 
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity){
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-            };
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
             rcllistspots.setItemAnimator(new DefaultItemAnimator());
             rcllistspots.setLayoutManager(layoutManager);
-
+            rcllistspots.setNestedScrollingEnabled(false);
 
             listSpotAdapter = new ListSpotDetailCircleAdapter(listSpot, mActivity);
             rcllistspots.setAdapter(listSpotAdapter);
@@ -191,16 +196,49 @@ public class TabCourseFragment extends BaseFragment {
                 }
             }
         } );
+
+
+
         rlt_Navitime.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja "));
-                startActivity(browserIntent);
+//               Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja "));
+//                startActivity(browserIntent)
+
+               String packageName = "com.navitime.local.navitime";
+               // String packageName = "NAVITIME: 地図・ルート検索";
+                launchNewActivity(getContext(),packageName);
             }
         } );
 
 
     }
+
+    public void launchNewActivity(Context context, String packageName) {
+        Intent intent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.CUPCAKE) {
+            intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        }
+        if (intent == null) {
+            try {
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+               intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
+                context.startActivity(intent);
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+
+            }
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+
+        }
+    }
+
+
+
+
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {

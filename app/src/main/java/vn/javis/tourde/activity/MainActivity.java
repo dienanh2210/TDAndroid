@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Window;
 
 import com.android.volley.VolleyError;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
         if (SharedPreferencesUtils.getInstance(this).getStringValue("Email").equals("")) {
             if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals(""))
                 changeActivity();

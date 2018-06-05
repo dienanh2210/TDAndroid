@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_150sdp"
                 android:textColor="@color/Black"
+                android:textSize="@dimen/_11sdp"
                 android:text="@string/checkbox"
                 android:checked="false" />
         </RelativeLayout>

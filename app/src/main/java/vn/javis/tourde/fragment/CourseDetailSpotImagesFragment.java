@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -123,14 +125,24 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 mActivity.showMyCourse();
             }
         });
+        Log.i("DetailSpotImages128",""+spotId);
         SpotDataAPI.getSpotData(spotId, this);
     }
 
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+        JSONObject jsonObject =(JSONObject)response;
+
+        if(jsonObject.has("error"))
+            return;
         SpotData spotData = SpotData.getSpotData(response.toString());
+        if(spotData==null)
+            return;
         Log.i("detail spot img 130", response.toString());
+        if(txtTitle==null)
+            return;
+
         txtTitle.setText(spotData.getData().getTitle());
         txtAddress.setText(spotData.getData().getAddress());
         txtSiteURL.setText(spotData.getData().getSiteUrl());
@@ -142,7 +154,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         txtTag.setText(tags);
         listSpotImage = spotData.getImages();
         if (spotData.getData().getTopImage() != null && spotData.getData().getTopImage() != "")
-            Picasso.with(mActivity).load(spotData.getData().getTopImage()).into(imgCourse);
+            PicassoUtil.getSharedInstance(mActivity).load(spotData.getData().getTopImage()).resize(0, 400).onlyScaleDown().into(imgCourse);
 
         PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager());
         view_pager.setAdapter(pagerAdapter);
@@ -189,6 +201,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                     TabSpotImages tabSpotImages =new TabSpotImages();
                     Bundle dataBundle1 = new Bundle();
                     dataBundle1.putSerializable(Constant.LIST_SPOT_IMAGE, (Serializable) listSpotImage);
+                    dataBundle1.putInt(CourseListActivity.SPOT_ID, spotId);
                     tabSpotImages.setArguments(dataBundle1);
                     return tabSpotImages;
                 case 1:

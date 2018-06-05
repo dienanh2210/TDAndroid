@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.SpotCheckIn;
+import vn.javis.tourde.utils.PicassoUtil;
 
 public class ListSpotCheckinAdapter extends RecyclerView.Adapter<ListSpotCheckinAdapter.SpotViewHolder>{
 
@@ -43,7 +44,7 @@ public class ListSpotCheckinAdapter extends RecyclerView.Adapter<ListSpotCheckin
         SpotCheckIn model = listSpot.get(position);
         holder.tv_spotNumber.setText(model.getSportNumber());
         holder.tv_spotName.setText(model.getSpotName());
-        Picasso.with(context).load(model.getImageUrl()).into(holder.imgSpot);
+        PicassoUtil.getSharedInstance(context).load(model.getImageUrl()).resize(0, 200).onlyScaleDown().into(holder.imgSpot);
 
         //load local for test
         int idImgSpot = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());

@@ -265,7 +265,7 @@
                         android:hint="@string/search_course_free_text_description"
                         android:inputType="text"
                         android:maxLines="@android:integer/config_mediumAnimTime"
-                        android:textColor="@color/search_course_color_description_text"
+                        android:textColor="@color/colorText"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="RtlCompat" />
 

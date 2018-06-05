@@ -27,6 +27,7 @@
             android:layout_toEndOf="@id/img_avata"
             android:layout_toStartOf="@+id/img_star_rating"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_height="wrap_content"
             android:text="@string/course_detail_title"
             android:textColor="@color/Black"
