@@ -21,7 +21,7 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.view.CircleTransform;
 
-public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder>{
+public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder> {
     List<Spot> listSpot = new ArrayList<Spot>();
     CourseListActivity activityContext;
     View mView;
@@ -44,29 +44,23 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
     public void onBindViewHolder(@NonNull final ListSpotLog.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Spot model = listSpot.get(position);
 
-        holder.txtTitle.setText(model.getTitle());
-        holder.spot_id.setText(model.getSpotId());
-        Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);
-        if (holder.isRunning) {
-            //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
-        }
-        holder.txtTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(position);
-                }
-            }
-        });
-        holder.imgShowSuccess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(position);
-                }
-            }
-        });
+        holder.txt_spotName.setText(model.getTitle());
+        holder.spot_id.setText("" + model.getSpotId());
+        /*if (model.getTopImage() != null && model.getTopImage() !="")
+            Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);*/
 
+        holder.txt_spotName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickedListener != null) {
+                    onItemClickedListener.onItemClick(position);
+                }
+            }
+        });
+       if(position==listSpot.size()-1)
+       {
+           holder.img_link_spot.setVisibility(View.GONE);
+       }
 
 
     }
@@ -80,11 +74,12 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
 
         @BindView(R.id.success)
         ImageView imgShowSuccess;
-        @BindView(R.id.txt_title)
-        TextView txtTitle;
+        @BindView(R.id.txt_spotName)
+        TextView txt_spotName;
         @BindView(R.id.number)
         TextView spot_id;
-
+        @BindView(R.id.img_link_spot)
+        ImageView img_link_spot;
 
         boolean isRunning;
 

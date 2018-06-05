@@ -83,7 +83,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     private int mCourseID;
     private int mSpotID;
 
-
+    public int getmSpotID() {
+        return mSpotID;
+    }
     Intent intentGPS;
     boolean boolean_permission;
     SharedPreferences mPref;

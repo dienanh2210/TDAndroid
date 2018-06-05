@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -12,7 +12,6 @@
         android:layout_marginStart="@dimen/_15sdp">
 
         <ImageView
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/boder_white" />
@@ -30,17 +29,20 @@
             android:textColor="@color/White"
             android:textStyle="bold" />
 
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_spotName"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/_60sdp"
             android:layout_marginStart="@dimen/_50sdp"
             android:layout_toEndOf="@+id/number"
-            android:gravity="center"
             android:text=""
+            android:gravity="center_vertical"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
 
         <ImageView
@@ -55,7 +57,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/img_end_spot1"
+        android:id="@+id/img_link_spot"
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_13sdp"
         android:layout_marginStart="@dimen/_37sdp"
