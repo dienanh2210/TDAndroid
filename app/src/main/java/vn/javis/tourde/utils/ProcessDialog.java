@@ -238,6 +238,7 @@ public class ProcessDialog {
         TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
         // tvTitle.setVisibility(View.GONE);
         tvTitle.setText(title);
+
         TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
         tvMessage.setText(content);
         //tuanpd

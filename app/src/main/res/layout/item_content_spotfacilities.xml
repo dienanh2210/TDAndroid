@@ -44,7 +44,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="あり"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_11sdp" />
+                android:textSize="@dimen/_12sdp" />
 
             <ImageButton
                 android:id="@+id/imv_mark1"

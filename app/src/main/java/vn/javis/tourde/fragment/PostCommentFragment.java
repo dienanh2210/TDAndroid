@@ -69,8 +69,8 @@ public class PostCommentFragment extends BaseFragment {
             }
         });
 
-        edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
-        edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
+       // edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
+      //  edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
 
         edt_text.setOnTouchListener(new View.OnTouchListener() {
             @Override

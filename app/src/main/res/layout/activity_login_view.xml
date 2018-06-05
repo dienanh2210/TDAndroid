@@ -347,6 +347,7 @@
                     android:layout_centerVertical="true"
                     android:text="@string/new_account"
                     android:textAllCaps="false"
+                    android:textStyle="bold"
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/_12sdp"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored" />
