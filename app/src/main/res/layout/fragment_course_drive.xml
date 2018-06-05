@@ -97,6 +97,7 @@
             android:paddingTop="@dimen/_5sdp">
 
             <RelativeLayout
+                android:id="@+id/rlt_googlemap"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -133,6 +134,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/rlt_Navitime"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

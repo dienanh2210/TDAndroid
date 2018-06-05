@@ -1,10 +1,12 @@
 package vn.javis.tourde.fragment;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -46,6 +48,10 @@ public class CourseDriveFragment extends BaseFragment {
     CourseListActivity mAcitivity;
     @BindView(R.id.title_detail)
     TextView title_detail;
+    @BindView( R.id.rlt_googlemap )
+    RelativeLayout rlt_googlemap;
+    @BindView( R.id.rlt_Navitime )
+    RelativeLayout rlt_Navitime;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -86,8 +92,61 @@ public class CourseDriveFragment extends BaseFragment {
             }
         });
 
-    }
+        rlt_googlemap.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                try
+                {
+                    startActivity(intent);
+                }
+                catch(ActivityNotFoundException ex)
+                {
+                    try
+                    {
+                        Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        startActivity(unrestrictedIntent);
+                    }
+                    catch(ActivityNotFoundException innerEx)
+                    {
+                        //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        } );
+        rlt_Navitime.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String packageName = "com.navitime.local.navitime";
+                // String packageName = "NAVITIME: 地図・ルート検索";
+                launchNewActivity(getContext(),packageName);
+            }
+        } );
 
+    }
+    public void launchNewActivity(Context context, String packageName) {
+        Intent intent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.CUPCAKE) {
+            intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        }
+        if (intent == null) {
+            try {
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
+                context.startActivity(intent);
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+
+            }
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+
+        }
+    }
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.fragment_course_drive, container, false);

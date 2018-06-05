@@ -125,6 +125,7 @@
                     android:textColor="@color/backgroud"
                     android:textSize="@dimen/_12sdp" />
                 <Button
+                    android:id="@+id/bt_checkpointleft"
                     android:layout_width="@dimen/_140sdp"
                     android:layout_height="@dimen/_47sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
@@ -136,6 +137,7 @@
                     android:textColor="@color/backgroud"
                     android:textSize="@dimen/_12sdp" />
                 <Button
+                    android:id="@+id/bt_checkpointright"
                     android:layout_width="@dimen/_150sdp"
                     android:layout_height="@dimen/_47sdp"
                     android:layout_marginLeft="@dimen/_160sdp"

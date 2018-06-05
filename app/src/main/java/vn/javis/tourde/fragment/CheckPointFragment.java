@@ -43,7 +43,11 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     Handler handler;
     CourseListActivity mActivity;
     private GifDrawable gifDrawable;
-
+    @BindView( R.id.bt_checkpointleft )
+    Button bt_checkpointleft;
+    @BindView( R.id.bt_checkpointright )
+    Button bt_checkpointright;
+    int spotID;
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
@@ -59,7 +63,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         imgView = view.findViewById(R.id.imgMain);
         txtView = view.findViewById(R.id.txtDesc);
-
+        spotID =1;
         mActivity = (CourseListActivity) getActivity();
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +71,21 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
                 mActivity.showTakePhoto();
             }
         });
-        //demo
-//        final GifImageView gifImageView = (GifImageView) view.findViewById(R.id.gifImageView);
-//        gifDrawable = (GifDrawable) gifImageView.getDrawable();
+        bt_checkpointleft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                mActivity.openPage(SpotFacilitiesFragment.newInstance(this), true,false);
+            }
+        });
+        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  onItemClickedListener.onItemClick(spot.getSpotId());
+                //  mActivity.openPage(new CourseDetailSpotImagesFragment(), true, false,false);
+                mActivity. showSpotImages( spotID);
+            }
+        });
     }
 
     @Override
