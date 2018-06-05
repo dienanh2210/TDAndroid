@@ -34,15 +34,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/Black"
-                android:textSize="@dimen/_12sdp" />
+                android:textColor="@color/colorText"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13sdp" />
 
             <TextView
                 android:id="@+id/message_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_12sdp" />
             <CheckBox
@@ -69,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/White"
-                android:text="@string/textleftcheckbox"
+                android:text="@string/textrightcheckbox"
                 android:textColor="@color/SkyBlue"
                 android:textStyle="bold"/>
 
@@ -86,7 +87,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/White"
-                android:text="@string/textrightcheckbox"
+
+                android:text="@string/textleftcheckbox"
                 android:textColor="@color/SkyBlue"
                 android:textStyle="bold"/>
         </LinearLayout>
