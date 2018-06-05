@@ -18,15 +18,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.model.FavoriteCourse;
+import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder>{
-    List<FavoriteCourse> listSpot = new ArrayList<FavoriteCourse>();
+    List<Spot> listSpot = new ArrayList<Spot>();
     CourseListActivity activityContext;
     View mView;
 
-    public ListSpotLog(List<FavoriteCourse> listSpot, CourseListActivity activityContext) {
+    public ListSpotLog(List<Spot> listSpot, CourseListActivity activityContext) {
 
         this.listSpot = listSpot;
         this.activityContext = activityContext;
@@ -42,12 +42,11 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final ListSpotLog.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        final FavoriteCourse model = listSpot.get(position);
+        final Spot model = listSpot.get(position);
 
         holder.txtTitle.setText(model.getTitle());
-        holder.txtPostUsername.setText(model.getPostUserName());
-        Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShow);
-        Picasso.with(activityContext).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
+        holder.spot_id.setText(model.getSpotId());
+        Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);
         if (holder.isRunning) {
             //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
@@ -59,7 +58,7 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 }
             }
         });
-        holder.imgShow.setOnClickListener(new View.OnClickListener() {
+        holder.imgShowSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
@@ -67,13 +66,7 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 }
             }
         });
-        holder.txtRunning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activityContext.setmCourseID(model.getCourseId());
-                activityContext.showCourseDrive();
-            }
-        });
+
 
 
     }
@@ -85,16 +78,13 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
 
     public class SpotViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.img_show)
-        ImageView imgShow;
+        @BindView(R.id.success)
+        ImageView imgShowSuccess;
         @BindView(R.id.txt_title)
         TextView txtTitle;
-        @BindView(R.id.img_post_user)
-        ImageView imgPostUser;
-        @BindView(R.id.txt_post_username)
-        TextView txtPostUsername;
-        @BindView(R.id.running)
-        TextView txtRunning;
+        @BindView(R.id.number)
+        TextView spot_id;
+
 
         boolean isRunning;
 

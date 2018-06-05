@@ -50,11 +50,11 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
         Review model = listReview.get(position);
         if (model.getImage() != "" && model.getImage() != null)
             holder.txtUserName.setText(model.getNickname());
-        else holder.txtUserName.setText(model.getEmail());
+      //  else holder.txtUserName.setText(model.getEmail());
         holder.txtCommentContent.setText(model.getComment());
         //  holder.txtPostDate.setText(model.getPostDate().toString());
 
-        String dateGet = model.getReviewInsertDatetime();
+        String dateGet = model.getReviewUpdateDatetime();
 
         if(dateGet !=null && dateGet !=""){
 
@@ -66,7 +66,8 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
                 holder.txtPostDate.setText(out);
             } catch (ParseException e) {
             }
-            int rate = model.getRating();
+           // int rate = model.getRating();
+            int rate =1;
             if (rate == 1)
                 holder.imgStarRate.setImageResource(R.drawable.icon_star1);
             else if (rate == 2)

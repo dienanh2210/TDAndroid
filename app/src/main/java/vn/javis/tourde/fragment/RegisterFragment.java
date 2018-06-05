@@ -85,7 +85,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     TextView tv_prefecture;
     TextView tv_age;
-    static Bitmap bitmapIcon;
+    public static Bitmap bitmapIcon;
     int changeImage = 0;
     private RegisterActivity activity;
     public static final long FILE_SIZE_8MB = 8192;
