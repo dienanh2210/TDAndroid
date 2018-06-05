@@ -49,7 +49,7 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
             });
         }
         else {
-        //Picasso.with(context).load(imgUrl).into( holder.imgSpot);
+        //PicassoUtil.getSharedInstance(context).load(imgUrl).into( holder.imgSpot);
             holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.icon_classic));
             }
     }

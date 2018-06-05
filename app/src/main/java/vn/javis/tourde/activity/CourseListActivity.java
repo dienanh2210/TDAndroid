@@ -56,6 +56,7 @@ import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
+import vn.javis.tourde.fragment.SpotFacilitiesFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
@@ -202,6 +203,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new CourseDriveFragment(), true, false);
     }
 
+    public void showSpotFacilitiesFragment(int spotID){
+        mSpotID = spotID;
+        dataBundle.putInt(SPOT_ID, mSpotID);
+        openPage(new SpotFacilitiesFragment(), true, false);
+    }
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }

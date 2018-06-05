@@ -48,6 +48,7 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ListArea;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
@@ -185,7 +186,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         edt_email.setText(model.getEmail());
         String url = model.getImage();
         if (url != null && url != ""){
-            Picasso.with(getContext()).load(url).transform(new CircleTransform()).into(select_userIcon);
+            PicassoUtil.getSharedInstance(getContext()).load(url).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
             changeImage=1;
         } else {}
         String sex = model.getSex();
