@@ -23,6 +23,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.ApiEndpoint;
 import vn.javis.tourde.model.Comment;
 import vn.javis.tourde.model.Review;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.CommentViewHolder> {
@@ -48,15 +49,14 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     @Override
     public void onBindViewHolder(@NonNull ListCommentAdapter.CommentViewHolder holder, final int position) {
         Review model = listReview.get(position);
+
         if (model.getImage() != "" && model.getImage() != null)
             holder.txtUserName.setText(model.getNickname());
-      //  else holder.txtUserName.setText(model.getEmail());
+        //  else holder.txtUserName.setText(model.getEmail());
         holder.txtCommentContent.setText(model.getComment());
         //  holder.txtPostDate.setText(model.getPostDate().toString());
-
         String dateGet = model.getReviewUpdateDatetime();
-
-        if(dateGet !=null && dateGet !=""){
+        if (dateGet != null && dateGet != "") {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy.MM.dd");
@@ -66,23 +66,22 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
                 holder.txtPostDate.setText(out);
             } catch (ParseException e) {
             }
-           // int rate = model.getRating();
-            int rate =1;
-            if (rate == 1)
-                holder.imgStarRate.setImageResource(R.drawable.icon_star1);
-            else if (rate == 2)
-                holder.imgStarRate.setImageResource(R.drawable.icon_star2);
-            else if (rate == 3)
-                holder.imgStarRate.setImageResource(R.drawable.icon_star3);
-            else if (rate == 4)
-                holder.imgStarRate.setImageResource(R.drawable.icon_star4);
-            else if (rate == 5)
-                holder.imgStarRate.setImageResource(R.drawable.icon_star5);
-            if (model.getImage() != null && model.getImage() != "") {
-                String imgUrl = ApiEndpoint.BASE_URL_AVATA + model.getImage();
-                Picasso.with(context).load(imgUrl).transform(new CircleTransform()).into(holder.imgUserAvata);
-            }
-
+        }
+        //int rate = model.getRating();
+        int rate = 0;
+        if (rate == 1)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star1);
+        else if (rate == 2)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star2);
+        else if (rate == 3)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star3);
+        else if (rate == 4)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star4);
+        else if (rate == 5)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star5);
+        if (model.getImage() != null && model.getImage() != "") {
+            String imgUrl = ApiEndpoint.BASE_URL_AVATA + model.getImage();
+            PicassoUtil.getSharedInstance(context).load(imgUrl).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(holder.imgUserAvata);
         }
     }
 

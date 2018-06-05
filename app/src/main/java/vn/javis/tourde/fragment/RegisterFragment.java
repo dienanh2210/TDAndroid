@@ -48,6 +48,7 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ListArea;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
@@ -184,11 +185,12 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         edt_username.setText(model.getNickname());
         edt_email.setText(model.getEmail());
         String url = model.getImage();
-        if (url != null && url != "") {
-            Picasso.with(getContext()).load(url).transform(new CircleTransform()).into(select_userIcon);
-            changeImage = 1;
-        } else {
-        }
+
+        if (url != null && url != ""){
+            PicassoUtil.getSharedInstance(getContext()).load(url).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
+            changeImage=1;
+        } else {}
+
         String sex = model.getSex();
         if (sex.equals("1")) {
             imv_mark_man.setVisibility(View.VISIBLE);

@@ -27,6 +27,7 @@ import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
 public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAdapter.FavoriteCourseViewHolder> {
@@ -55,8 +56,8 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
 
         holder.txtTitle.setText(model.getTitle());
         holder.txtPostUsername.setText(model.getPostUserName());
-        Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShow);
-        Picasso.with(activityContext).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
+        PicassoUtil.getSharedInstance(activityContext).load(model.getTopImage()).resize(0, 400).onlyScaleDown().into(holder.imgShow);
+        PicassoUtil.getSharedInstance(activityContext).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(holder.imgPostUser);
         if (holder.isRunning) {
             //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }

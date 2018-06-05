@@ -26,6 +26,7 @@ import vn.javis.tourde.apiservice.FavoriteCourseAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListSpotUploadedImageAdapter extends RecyclerView.Adapter<ListSpotUploadedImageAdapter.SpotViewHolder> {
@@ -53,7 +54,7 @@ public class ListSpotUploadedImageAdapter extends RecyclerView.Adapter<ListSpotU
         String model = listImgage.get(position);
         //  holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.plus_button));
         if (model != null)
-            Picasso.with(context).load(model).into(holder.imgSpot);
+            PicassoUtil.getSharedInstance(context).load(model).resize(0, 300).onlyScaleDown().into(holder.imgSpot);
     }
 
     @Override

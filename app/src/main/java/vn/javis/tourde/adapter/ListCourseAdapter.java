@@ -33,6 +33,7 @@ import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.CircleTransform;
 
@@ -69,9 +70,8 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.txtReviewCount.setText(model.getReviewCount());
         holder.txtSpotCount.setText(model.getSpotCount());
         holder.txtPostUser.setText(model.getPostUserName());
-        Picasso.with(context).load(model.getTopImage()).into(holder.imgCourse);
-        Picasso.with(context).load(model.getPostUserImage()).transform(new CircleTransform()).into(holder.imgPostUser);
-
+        PicassoUtil.getSharedInstance(context).load(model.getTopImage()).resize(0, 400).onlyScaleDown().into(holder.imgCourse);
+        PicassoUtil.getSharedInstance(context).load(model.getPostUserImage()).resize(0, 50).onlyScaleDown().transform(new CircleTransform()).into(holder.imgPostUser);
         List<String> listTag = model.getListTag();
         if (listTag.size() > 0) {
             String s ="#"+ model.getTag() + " ";

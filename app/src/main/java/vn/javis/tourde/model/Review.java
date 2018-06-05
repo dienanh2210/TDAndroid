@@ -53,4 +53,5 @@ public class Review {
     public void setReviewUpdateDatetime(String reviewUpdateDatetime) {
         this.reviewUpdateDatetime = reviewUpdateDatetime;
     }
+
 }

@@ -15,6 +15,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ListArea;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 
@@ -61,7 +62,7 @@ public class BasicInfoActivity extends BaseActivity {
         if(LoginFragment.getmAccount() !=null && LoginFragment.getmAccount().getImage() !="" && LoginFragment.getmAccount().getImage() !=null)
         {
             Log.i("avatar",LoginFragment.getmAccount().getImage());
-            Picasso.with(this).load(LoginFragment.getmAccount().getImage()).transform(new CircleTransform()).into(img_avatar);
+            PicassoUtil.getSharedInstance(this).load(LoginFragment.getmAccount().getImage()).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
         }
     }
 

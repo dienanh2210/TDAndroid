@@ -29,6 +29,7 @@ import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ChildCheckinSpot extends BaseFragment implements View.OnClickListener {
@@ -48,7 +49,7 @@ public class ChildCheckinSpot extends BaseFragment implements View.OnClickListen
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        Picasso.with(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
+        PicassoUtil.getSharedInstance(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
 
     }
     @OnClick({R.id.ln_select_checkin_spot})
