@@ -92,19 +92,20 @@ public class TabCourseFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         if (listSpot.size() > 0) {
 
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity){
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-            };
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
             rcllistspots.setItemAnimator(new DefaultItemAnimator());
             rcllistspots.setLayoutManager(layoutManager);
-
+            rcllistspots.setNestedScrollingEnabled(false);
 
             listSpotAdapter = new ListSpotDetailCircleAdapter(listSpot, mActivity);
             rcllistspots.setAdapter(listSpotAdapter);

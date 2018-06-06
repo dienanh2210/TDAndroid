@@ -91,7 +91,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         initTabControl();
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
-        // Picasso.with(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
+        // PicassoUtil.getSharedInstance(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
         spotRecycler.setLayoutManager(layoutManager);

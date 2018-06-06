@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -31,6 +32,7 @@ import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDetailCircleAdapter.CourseViewHolder> {
@@ -65,7 +67,7 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
         holder.txtIndex.setText(String.valueOf(order));
         holder.txtCatchPhrase.setText(spot.getCatchPhrase());
         holder.txtIntro.setText(spot.getIntroduction());
-        holder.txtSpotDistance.setText(spot.getSpotDistance()+"km");
+        holder.txtSpotDistance.setText(spot.getSpotDistance() + "km");
         String tag = "";
 //        if (spot.getTag() != null)
 //            tag += "#" + spot.getTag();
@@ -73,9 +75,12 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
             tag += " #" + spot.getListTag().get(i);
         }
         holder.txtTag.setText(tag);
-
+//
         if (spot.getTopImage() != null && spot.getTopImage() != "")
-            Picasso.with(context).load(spot.getTopImage()).into(holder.imgCourse);
+            PicassoUtil.getSharedInstance(context)
+                    .load(spot.getTopImage())
+                    .resize(0, 400).onlyScaleDown()
+                    .into(holder.imgCourse);
         if (order == listSpot.size())
             holder.lnDistance.setVisibility(View.GONE);
 

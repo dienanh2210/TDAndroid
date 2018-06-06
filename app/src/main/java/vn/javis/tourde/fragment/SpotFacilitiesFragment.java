@@ -40,6 +40,7 @@ public class SpotFacilitiesFragment extends Fragment {
     private String contentArea = "北海道";
     TextView tv_back_sppot_faclities;
     HashMap<String,String> params = new HashMap<>();
+    int spotId;
     String[] contentList2 = new String[]{"toilet","parking","accommodation","bath","shower","locker","dressing_room","bicycle_delivery","tourist_information","cycle_rack","bicycle_rental","cycling_guide","tool_rental","floor_pump_rental","mechanic_maintenance"};
     public static SpotFacilitiesFragment newInstance(View.OnClickListener listener) {
         SpotFacilitiesFragment fragment = new SpotFacilitiesFragment();
@@ -55,7 +56,7 @@ public class SpotFacilitiesFragment extends Fragment {
         btn_choose = view.findViewById( R.id.btn_choose );
         tv_back_sppot_faclities=view.findViewById( R.id.tv_back_sppot_faclities );
         String token = LoginFragment.getmUserToken();
-        int spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+        spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
         params.put("token",token);
         params.put("spot_id",String.valueOf(spotId));
         for(int i=0;i<contentList2.length;i++){
@@ -113,7 +114,7 @@ public class SpotFacilitiesFragment extends Fragment {
         @Override
         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
             Log.i("spotFacility111",response.toString());
-            ((CourseListActivity) getActivity()).onBackPressed();
+            ((CourseListActivity) getActivity()).showSpotImages(spotId);
         }
 
         @Override

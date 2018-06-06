@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.FavoriteCourse;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
 public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdapter.FavoriteCourseViewHolder> {
@@ -45,7 +46,7 @@ public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdap
         FavoriteCourse model = listCourse.get(position);
 
         holder.txtTitle.setText(model.getTitle());
-        Picasso.with(context).load(model.getTopImage()).into(holder.imgShow);
+        PicassoUtil.getSharedInstance(context).load(model.getTopImage()).into(holder.imgShow);
         if (holder.isRunning) {
             //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
