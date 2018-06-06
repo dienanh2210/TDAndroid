@@ -25,12 +25,12 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="設備名"
                 android:textColor="@android:color/holo_blue_dark"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/search_course_text_row"
@@ -38,18 +38,18 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="なし"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_10sdp"
                 app:srcCompat="@drawable/icon_next" />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/search_course_text_row"
                 android:paddingEnd="@dimen/_65sdp"
                 android:text="あり"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_10sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -69,8 +69,8 @@
                 android:layout_toStartOf="@+id/im_basic_info"
                 android:layout_alignParentStart="true"
                 android:text="トイレ"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
 
 
             <TextView
@@ -84,7 +84,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="22"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
             <TextView
                 android:id="@+id/toilet_1"
@@ -96,7 +96,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="0"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
         <!-->
@@ -151,8 +151,8 @@
                     android:layout_toStartOf="@+id/register"
                     android:layout_alignParentStart="true"
                     android:text="駐車場"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/parking_2"
@@ -165,7 +165,7 @@
                     android:paddingStart="@dimen/_1sdp"
                     android:text="2"
                     android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:srcCompat="@drawable/icon_next" />
                 <TextView
                     android:id="@+id/parking_1"
@@ -177,7 +177,7 @@
                     android:paddingEnd="@dimen/_75sdp"
                     android:text="24"
                     android:textColor="@color/search_course_color_row"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:srcCompat="@drawable/icon_next" />
             </RelativeLayout></LinearLayout>
 
@@ -196,8 +196,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="宿泊設備"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/accomodation_2"
@@ -210,7 +210,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="0"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
             <TextView
                 android:id="@+id/accomodation_1"
@@ -222,7 +222,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="1"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -264,9 +264,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="入浴設備"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+               />
 
             <TextView
                 android:id="@+id/bath_2"
@@ -279,7 +279,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="2"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
             <TextView
                 android:id="@+id/bath_1"
@@ -291,7 +291,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="20"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -310,8 +310,8 @@
                 android:text="シャワー"
                 android:layout_toStartOf="@+id/im_how"
                 android:layout_alignParentStart="true"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -322,7 +322,7 @@
                 android:paddingEnd="@dimen/_20sdp"
                 android:paddingStart="@dimen/_1sdp"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
             <TextView
                 android:id="@+id/shower_2"
@@ -334,7 +334,7 @@
                 android:paddingEnd="@dimen/_20sdp"
                 android:paddingStart="@dimen/_1sdp"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
             <TextView
                 android:id="@+id/shower_1"
@@ -346,7 +346,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="50"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -363,8 +363,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="ロッカー"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/locker_2"
                 android:layout_width="wrap_content"
@@ -376,7 +376,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="2"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
             <TextView
                 android:id="@+id/locker_1"
@@ -388,7 +388,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="40"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/icon_next" />
         </RelativeLayout>
 
@@ -404,8 +404,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="更衣室"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/dress_2"
                 android:layout_width="wrap_content"
@@ -417,7 +417,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="28"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/dress_1"
                 android:layout_width="wrap_content"
@@ -428,7 +428,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="2"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
         </RelativeLayout>
 
         <include layout="@layout/item_divider"/>
@@ -443,8 +443,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="自転車配送（受取/発送）"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/bike_delivey_2"
                 android:layout_width="wrap_content"
@@ -456,7 +456,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="27"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/bike_delivey_1"
                 android:layout_width="wrap_content"
@@ -467,7 +467,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="2"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
         </RelativeLayout>
 
         <include layout="@layout/item_divider"/>
@@ -483,9 +483,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="観光案内"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/tour_info_2"
                 android:layout_width="wrap_content"
@@ -497,7 +496,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="14"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/tour_info_1"
                 android:layout_width="wrap_content"
@@ -508,7 +507,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="0"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
         </RelativeLayout>
 
         <include layout="@layout/item_divider"/>
@@ -521,8 +520,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="サイクルラック"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/cycle_rack_2"
                 android:layout_width="wrap_content"
@@ -534,7 +533,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="30"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/cycle_rack_1"
                 android:layout_width="wrap_content"
@@ -545,7 +544,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="20"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
         <include layout="@layout/item_divider"/>
@@ -558,8 +557,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="レンタサイクル"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/bike_rented_2"
                 android:layout_width="wrap_content"
@@ -571,7 +570,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="30"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/bike_rented_1"
                 android:layout_width="wrap_content"
@@ -582,7 +581,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="20"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
         <include layout="@layout/item_divider"/>
@@ -595,8 +594,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="サイクリングガイド"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/cycling_guide_2"
                 android:layout_width="wrap_content"
@@ -608,7 +607,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="30"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/cycling_guide_1"
                 android:layout_width="wrap_content"
@@ -619,7 +618,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="20"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
         <include layout="@layout/item_divider"/>
@@ -632,8 +631,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="工具貸出"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/tool_rental_2"
                 android:layout_width="wrap_content"
@@ -645,7 +644,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="30"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/tool_rental_1"
                 android:layout_width="wrap_content"
@@ -656,7 +655,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="20"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
         <include layout="@layout/item_divider"/>
@@ -669,8 +668,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="フロアポンプ貸出"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/floor_pump_rental_2"
                 android:layout_width="wrap_content"
@@ -682,7 +681,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="30"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/floor_pump_rental_1"
                 android:layout_width="wrap_content"
@@ -693,7 +692,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="20"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
         <include layout="@layout/item_divider"/>
@@ -706,8 +705,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:text="メカニック/メンテナンス"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/mechanic_maintenance_2"
                 android:layout_width="wrap_content"
@@ -719,7 +718,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:text="30"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
             <TextView
                 android:id="@+id/mechanic_maintenance_1"
                 android:layout_width="wrap_content"
@@ -730,7 +729,7 @@
                 android:paddingEnd="@dimen/_75sdp"
                 android:text="20"
                 android:textColor="@color/search_course_color_row"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
         <include layout="@layout/item_divider"/>

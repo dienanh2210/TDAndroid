@@ -38,7 +38,7 @@
                 android:layout_height="@dimen/_47sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/_85sdp"
+                android:layout_marginEnd="@dimen/_87sdp"
                 android:gravity="center_vertical"
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_1sdp"
@@ -48,8 +48,8 @@
 
             <ImageButton
                 android:id="@+id/imv_mark1"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_65sdp"
@@ -72,7 +72,7 @@
                 android:layout_height="@dimen/_47sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_32sdp"
                 android:gravity="center_vertical"
                 android:paddingEnd="@dimen/_1sdp"
                 android:paddingStart="@dimen/_1sdp"
@@ -82,8 +82,8 @@
 
             <ImageButton
                 android:id="@+id/imv_mark"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_9sdp"
