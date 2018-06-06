@@ -246,21 +246,10 @@ public class ProcessDialog {
 
         final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.hide();
-            }
-        });
+
         final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
 
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onActionDialogClickOk.onOkClick();
-                dialog.hide();
-            }
-        });
+
         dialog.show();
 
         CheckBox checkBox;
@@ -272,8 +261,25 @@ public class ProcessDialog {
                 checkBox = dialog.findViewById( R.id.chkbox );
                 if(checkBox.isChecked()){
                     //xu ly click check box
+
                     Log.d("dm","checkbox");
-                    SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                   // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.hide();
+
+                        }
+                    });
+                    btnOk.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onActionDialogClickOk.onOkClick();
+                            dialog.hide();
+                            SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                        }
+                    });
+
                 }
             }
         } );
