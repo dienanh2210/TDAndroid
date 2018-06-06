@@ -8,50 +8,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewAnimator;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.model.SpotCheckIn;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
-public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder> {
+public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotViewHolder> {
     List<Spot> listSpot = new ArrayList<Spot>();
     CourseListActivity activityContext;
     View mView;
 
-    public ListSpotLog(List<Spot> listSpot, CourseListActivity activityContext) {
+    public ListCheckInSpot(List<Spot> listSpot, CourseListActivity activityContext) {
 
         this.listSpot = listSpot;
         this.activityContext = activityContext;
     }
 
     @Override
-    public ListSpotLog.SpotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListCheckInSpot.SpotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        mView = inflater.inflate(R.layout.log_fragment_finish, parent, false);
-        return new ListSpotLog.SpotViewHolder(mView);
+        mView = inflater.inflate(R.layout.child_checkin_spot, parent, false);
+        return new ListCheckInSpot.SpotViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ListSpotLog.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final ListCheckInSpot.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Spot model = listSpot.get(position);
-        int spotID = model.getOrderNumber()+1;
-        holder.txt_spotName.setText(model.getTitle());
-        holder.spot_id.setText(""+spotID);
+        if (model.getTopImage() != null && model.getTopImage() != "")
+            PicassoUtil.getSharedInstance(activityContext).load(model.getTopImage()).resize(0, 100).transform(new CircleTransform()).into(holder.image_checkin_spot);
+
+        holder.tv_spot_nunber.setText("スポット" + (model.getOrderNumber()+1));
+        holder.tv_spot_name.setText(model.getTitle());
         /*if (model.getTopImage() != null && model.getTopImage() !="")
             Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);*/
 
-        holder.txt_spotName.setOnClickListener(new View.OnClickListener() {
+        holder.tv_spot_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
@@ -59,10 +59,6 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 }
             }
         });
-       if(position==listSpot.size()-1)
-       {
-           holder.img_link_spot.setVisibility(View.GONE);
-       }
 
 
     }
@@ -74,16 +70,13 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
 
     public class SpotViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.success)
-        ImageView imgShowSuccess;
-        @BindView(R.id.txt_spotName)
-        TextView txt_spotName;
-        @BindView(R.id.number)
-        TextView spot_id;
-        @BindView(R.id.img_link)
-        GifImageView img_link_spot;
+        @BindView(R.id.image_checkin_spot)
+        ImageView image_checkin_spot;
+        @BindView(R.id.tv_spotNumber)
+        TextView tv_spot_nunber;
+        @BindView(R.id.tv_spotName)
+        TextView tv_spot_name;
 
-        boolean isRunning;
 
         public SpotViewHolder(View itemView) {
             super(itemView);
@@ -95,9 +88,9 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         void onItemClick(int position);
     }
 
-    private FavoriteCourseAdapter.OnItemClickedListener onItemClickedListener;
+    private OnItemClickedListener onItemClickedListener;
 
-    public void setOnItemClickListener(FavoriteCourseAdapter.OnItemClickedListener onItemClickedListener) {
+    public void setOnItemClickListener(OnItemClickedListener onItemClickedListener) {
         this.onItemClickedListener = onItemClickedListener;
     }
 }
