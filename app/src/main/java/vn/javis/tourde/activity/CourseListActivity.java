@@ -286,7 +286,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
 
     }
+    public void showSpotFacilities() {
+        openPage(new SpotFacilitiesFragment(), true, false);
 
+
+    }
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
 

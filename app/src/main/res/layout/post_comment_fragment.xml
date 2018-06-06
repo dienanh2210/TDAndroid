@@ -129,6 +129,21 @@
                     android:hint="@string/hint_detail"
                     android:lines="5"
                     android:textColor="@color/colorText"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:background="@color/backgroud"
+                    android:minLines="5"
+                    android:gravity="top|left"
+                    android:scrollbars="vertical" />
+               <!--> <EditText
+                    android:inputType="textMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:id="@+id/edt_text"
+                    android:padding="@dimen/_10sdp"
+                    android:hint="@string/hint_detail"
+                    android:lines="5"
+                    android:textColor="@color/colorText"
                     android:imeOptions="actionDone"
                     android:imeActionLabel="Done"
                     android:overScrollMode="always"
@@ -136,7 +151,7 @@
                     android:background="@color/backgroud"
                     android:minLines="5"
                     android:gravity="top|left"
-                    android:scrollbars="vertical" />
+                    android:scrollbars="vertical" /><!-->
 
             </RelativeLayout>
 

@@ -238,6 +238,7 @@ public class ProcessDialog {
         TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
         // tvTitle.setVisibility(View.GONE);
         tvTitle.setText(title);
+
         TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
         tvMessage.setText(content);
         //tuanpd
@@ -245,21 +246,10 @@ public class ProcessDialog {
 
         final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.hide();
-            }
-        });
+
         final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
 
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onActionDialogClickOk.onOkClick();
-                dialog.hide();
-            }
-        });
+
         dialog.show();
 
         CheckBox checkBox;
@@ -271,8 +261,25 @@ public class ProcessDialog {
                 checkBox = dialog.findViewById( R.id.chkbox );
                 if(checkBox.isChecked()){
                     //xu ly click check box
+
                     Log.d("dm","checkbox");
-                    SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                   // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.hide();
+
+                        }
+                    });
+                    btnOk.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onActionDialogClickOk.onOkClick();
+                            dialog.hide();
+                            SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                        }
+                    });
+
                 }
             }
         } );
