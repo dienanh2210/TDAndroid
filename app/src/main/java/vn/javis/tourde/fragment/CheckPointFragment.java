@@ -1,7 +1,6 @@
 package vn.javis.tourde.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -21,11 +20,11 @@ import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
+import vn.javis.tourde.adapter.ListCheckInSpot;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class CheckPointFragment extends BaseFragment implements ListSpotCheckinAdapter.OnItemClickedListener {
+public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.OnItemClickedListener {
     GifImageView gifImgView;
     ImageView imgView, img;
     TextView txtView;
@@ -53,7 +52,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     //  TextView tv_back_password;
     private Animation rotation;
 
-    public static CheckPointFragment newInstance(ListSpotCheckinAdapter.OnItemClickedListener listener) {
+    public static CheckPointFragment newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         CheckPointFragment fragment = new CheckPointFragment();
 //        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
         return fragment;

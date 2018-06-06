@@ -56,10 +56,11 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/img_link_spot"
-        android:layout_width="@dimen/_12sdp"
-        android:layout_height="@dimen/_13sdp"
-        android:layout_marginStart="@dimen/_37sdp"
-        android:src="@drawable/image_link" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/img_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_33sdp"
+        android:background="@drawable/log_animation"
+        android:scaleType="fitXY" />
 </LinearLayout>

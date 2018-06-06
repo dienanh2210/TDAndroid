@@ -1,7 +1,6 @@
 package vn.javis.tourde.fragment;
 
 import android.annotation.SuppressLint;;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -19,7 +18,10 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
 
-import com.squareup.picasso.Picasso;
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -28,12 +30,14 @@ import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.RegisterActivity;
-import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
+import vn.javis.tourde.adapter.ListCheckInSpot;
+import vn.javis.tourde.adapter.ListSpotLog;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
-import vn.javis.tourde.apiservice.SpotCheckInAPI;
-import vn.javis.tourde.model.SpotCheckIn;
-import vn.javis.tourde.services.GoogleService;
-import vn.javis.tourde.view.CircleTransform;
+import vn.javis.tourde.apiservice.GetCourseDataAPI;
+import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
 
 public class FragmentTabLayoutRunning extends BaseFragment {
     @BindView(R.id.tabs)
@@ -55,13 +59,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     CourseListActivity mActivity;
     @BindView(R.id.select_spot)
     RecyclerView spotRecycler;
-    ListSpotCheckinAdapter listSpotCheckinAdapter;
+    ListCheckInSpot listSpotCheckinAdapter;
     long time;
     private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
     //  TextView tv_back_password;
     private RegisterActivity activity;
 
-    public static FragmentTabLayoutRunning newInstance(ListSpotCheckinAdapter.OnItemClickedListener listener) {
+    public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
 //        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
         return fragment;
@@ -95,19 +99,33 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
         spotRecycler.setLayoutManager(layoutManager);
-        SpotCheckInAPI spot = new SpotCheckInAPI();
 
-        List<SpotCheckIn> list_courses = spot.getListSpot();
-
-        listSpotCheckinAdapter = new ListSpotCheckinAdapter(list_courses, mActivity);
-        listSpotCheckinAdapter.setOnItemClickListener(new ListSpotCheckinAdapter.OnItemClickedListener() {
+        final int courseId = mActivity.getmCourseID();
+        GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
-            public void onItemClick(int position) {
-                mActivity.openPage(CheckPointFragment.newInstance(this), true,false);
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+
+                CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+
+                List<Spot> list_spot = mCourseDetail.getSpot();
+                listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
+                listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        mActivity.openPage(new CheckPointFragment(),true,false);
+                    }
+                });
+                spotRecycler.setAdapter(listSpotCheckinAdapter);
+
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
             }
         });
-
-        spotRecycler.setAdapter(listSpotCheckinAdapter);
 
         mActivity.fn_permission();
     }
@@ -124,7 +142,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
                 show_select_spot.setVisibility(View.VISIBLE);
-
                 mActivity.turnOffGPS();
                 break;
             case R.id.resume:

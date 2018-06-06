@@ -351,14 +351,17 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) {
-        Log.i("GET COURSE API: ", response.toString());
-        mCourseDetail = new CourseDetail((JSONObject) response);
-        showCourseDetail(mCourseDetail);
-        view_pager.setAdapter(pagerAdapter);
-        if (tabCommentFragment != null) {
-            tabCommentFragment.setListReview(mCourseDetail.getReview());
-            Log.i("COMMENT API detail350: ", mCourseDetail.getReview().toString());
-            tabCommentFragment.setRecyler();
+        try {
+            Log.i("GET COURSE API: ", response.toString());
+            mCourseDetail = new CourseDetail((JSONObject) response);
+            showCourseDetail(mCourseDetail);
+            view_pager.setAdapter(pagerAdapter);
+            if (tabCommentFragment != null) {
+                tabCommentFragment.setListReview(mCourseDetail.getReview());
+                Log.i("COMMENT API detail350: ", mCourseDetail.getReview().toString());
+                tabCommentFragment.setRecyler();
+            }
+        } catch (Exception e) {
         }
 
 
