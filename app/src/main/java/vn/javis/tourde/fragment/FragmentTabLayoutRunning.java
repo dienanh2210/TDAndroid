@@ -109,7 +109,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
         spotRecycler.setAdapter(listSpotCheckinAdapter);
 
-        mActivity.fn_permission();
+       // mActivity.fn_permission();
     }
 
     @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})

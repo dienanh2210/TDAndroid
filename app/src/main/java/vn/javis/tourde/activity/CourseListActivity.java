@@ -109,7 +109,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-     //   fn_permission();
+        fn_permission();
 
     }
 
@@ -253,12 +253,23 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         showCourseListPage();
     }
 
-    public void showTakePhoto() {
+    public void showTakePhoto(int spotID) {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
+            mSpotID = spotID;
+            dataBundle.putInt(SPOT_ID, mSpotID);
+            dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
             openPage(new TakePhotoFragment(), true, false);
         }
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
     }
 
     @Override

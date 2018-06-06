@@ -68,7 +68,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showTakePhoto();
+                mActivity.showTakePhoto(spotID);
             }
         });
         bt_checkpointleft.setOnClickListener(new View.OnClickListener() {

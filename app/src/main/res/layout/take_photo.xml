@@ -1,136 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_custom_camera"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BadgeBackground">
+    android:background="@color/BadgeBackground"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <FrameLayout
-        android:id="@+id/frameCamera"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btn_capture"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="0dp"
+        android:layout_weight=".98">
 
-    <ImageButton
-        android:id="@+id/btn_back_take_photo"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/icon_back"
-        android:contentDescription="@string/image_description" />
+        <FrameLayout
+            android:id="@+id/frameCamera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/txt_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:textColor="@color/Black"
-        android:textSize="@dimen/_20ssp" />
+        <ImageButton
+            android:id="@+id/btn_back_take_photo"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/icon_back"
+            android:contentDescription="@string/image_description" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_capture"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/_10sdp"
-        android:weightSum="2">
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_20ssp" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_10sdp"
+            android:weightSum="2">
 
-            <TextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/englishCourse"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <include layout="@layout/item_divider" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txt_course_title"
-                android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/englishCourse"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <include layout="@layout/item_divider" />
+
+                    <TextView
+                        android:id="@+id/txt_course_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/englishTime"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/_12sdp" />
+
+                <include layout="@layout/item_divider" />
+
+                <TextView
+                    android:id="@+id/txt_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Spot"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/_12sdp" />
 
-            <TextView
+                <include layout="@layout/item_divider" />
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/englishTime"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
+                <TextView
+                    android:id="@+id/txt_spot_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <TextView
 
-            <include layout="@layout/item_divider" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/Distance"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/_12sdp" />
 
-            <TextView
-                android:id="@+id/txt_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
+                <include layout="@layout/item_divider" />
 
+                <TextView
+                    android:id="@+id/txt_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/_13ssp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+    </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/Spot"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
-
-            <include layout="@layout/item_divider" />
-
-            <TextView
-                android:id="@+id/txt_spot_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
-
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/Distance"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
-
-            <include layout="@layout/item_divider" />
-
-            <TextView
-                android:id="@+id/txt_distance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/White"
-                android:textSize="@dimen/_13ssp" />
-
-        </LinearLayout>
-    </LinearLayout>
 
     <ImageButton
         android:id="@+id/btn_capture"
@@ -138,7 +163,9 @@
         android:layout_height="@dimen/_80sdp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/home_circle" />
-</RelativeLayout>
+        android:background="@drawable/home_circle"
+        android:visibility="visible" />
+</LinearLayout>
