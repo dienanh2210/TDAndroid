@@ -3,50 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--<LinearLayout
-        android:id="@+id/layout_check"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="10">
-
-        <CheckedTextView
-            android:id="@+id/list_left_item"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_47sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_weight="5"
-            android:checkMark="@drawable/checked"
-            android:checked="false"
-            android:gravity="center"
-            android:paddingEnd="@dimen/_1sdp"
-            android:paddingStart="@dimen/_15sdp"
-            android:textAllCaps="true"
-            android:textSize="@dimen/_15ssp" />
-
-        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_47sdp"
-            android:contentDescription= "@string/line_description"
-            android:background="@color/search_course_color_divider_background" />
-
-        <CheckedTextView
-            android:id="@+id/list_right_item"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_47sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_weight="5"
-            android:checkMark="@drawable/checked"
-            android:checked="false"
-            android:gravity="center"
-            android:paddingEnd="@dimen/_1sdp"
-            android:paddingStart="@dimen/_15sdp"
-            android:textAllCaps="true"
-            android:textSize="@dimen/_15ssp" />
-
-
-    </LinearLayout>-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_month"
         android:layout_width="match_parent"

@@ -123,13 +123,4 @@ public class PrefectureOneFragment extends Fragment {
         void onClick(View v);
     }
 
-    private void getAllContent() {
-//        for (Map.Entry<String, Boolean> entry : listAdapter.getMapContent().entrySet()) {
-//            String content = entry.getKey();
-//            Boolean isPick = entry.getValue();
-//            if (isPick) listContent.add(content);
-//
-//        }
-    }
-
 }
