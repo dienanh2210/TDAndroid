@@ -28,7 +28,7 @@ import vn.javis.tourde.services.ServiceResult;
 public class TabSpotFacility extends BaseFragment implements View.OnClickListener {
 
     CourseListActivity activity;
-    int spotID;
+    int spotId;
     //Overriden method onCreateView
     @BindView(R.id.bt_spot_page)
     Button bt_spot_page;
@@ -103,7 +103,7 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
     }
 
     void insertInfo() {
-        int spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
         Log.d("tab spot facility 54", "" + spotId);
         SpotDataAPI.getSpotEquipmentReview(spotId, new ServiceCallback() {
             @Override
@@ -176,7 +176,7 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.bt_spot_page:
-                activity.openPage(SpotFacilitiesFragment.newInstance(this), true,false);
+               activity.showSpotFacilitiesFragment(spotId);
                 break;
 
         }

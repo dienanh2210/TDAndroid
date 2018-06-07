@@ -43,7 +43,7 @@ public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.Badg
         holder.txtBadgeName.setText(model.getBadgeName());
         holder.txtBadgeDateGet.setText(model.getDateGet());
 
-      //  Picasso.with(context).load(model.getImageUrl()).into(holder.imgBadge);
+      //  PicassoUtil.getSharedInstance(context).load(model.getImageUrl()).into(holder.imgBadge);
 
         //load local for test
         int idImgBadge = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());

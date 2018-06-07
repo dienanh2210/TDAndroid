@@ -27,7 +27,8 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class CheckPointFragment extends BaseFragment implements ListSpotCheckinAdapter.OnItemClickedListener {
     GifImageView gifImgView;
-    ImageView imgView, img;
+    ImageView imgView;
+    @BindView( R.id.txtDesc )
     TextView txtView;
 
     @BindView(R.id.tv_back_password)
@@ -36,14 +37,18 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     TextView txtDesctwo;
     @BindView(R.id.txtDescthree)
     TextView txtDescthree;
-    Button btnStartDemo;
+
     @BindView(R.id.take_photo)
     Button takePhoto;
     Runnable runnable, runnabletwo;
     Handler handler;
     CourseListActivity mActivity;
     private GifDrawable gifDrawable;
-
+    @BindView( R.id.bt_checkpointleft )
+    Button bt_checkpointleft;
+    @BindView( R.id.bt_checkpointright )
+    Button bt_checkpointright;
+    int spotID;
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
@@ -58,8 +63,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         imgView = view.findViewById(R.id.imgMain);
-        txtView = view.findViewById(R.id.txtDesc);
-
+        spotID =1;
         mActivity = (CourseListActivity) getActivity();
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +71,52 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
                 mActivity.showTakePhoto();
             }
         });
-        //demo
-//        final GifImageView gifImageView = (GifImageView) view.findViewById(R.id.gifImageView);
-//        gifDrawable = (GifDrawable) gifImageView.getDrawable();
 
+        bt_checkpointleft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+
+                       // bt_checkpointleft.setEnabled(false);
+                        mActivity.showSpotFacilities();
+                    }
+                }, 800);
+
+            }
+        });
+
+//        bt_checkpointleft.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                mActivity.openPage(SpotFacilitiesFragment.newInstance(this), true,false);
+//            }
+//        });
+//        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                mActivity. showSpotImages( spotID);
+//            }
+//        });
+        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+
+                        // bt_checkpointleft.setEnabled(false);
+                        mActivity. showSpotImages( spotID);
+                    }
+                }, 800);
+
+            }
+        });
     }
 
     @Override
