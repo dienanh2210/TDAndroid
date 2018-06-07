@@ -1,6 +1,5 @@
 package vn.javis.tourde.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,27 +15,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListAdapter;
 import vn.javis.tourde.adapter.ListSearchAdapter;
 import vn.javis.tourde.adapter.ListSearchCourseAdapter;
 import vn.javis.tourde.model.Data;
-import vn.javis.tourde.adapter.ListRegisterAdapter;
 import vn.javis.tourde.utils.SearchCourseUtils;
 import vn.javis.tourde.view.WrappingLinearLayoutManager;
 
 public class SearchCourseFragment extends Fragment implements View.OnClickListener, PrefectureSearchFragment.OnFragmentInteractionListener, PrefectureOneFragment.OnFragmentInteractionListener {
 
     private RecyclerView rcv_list;
-    private RecyclerView selectAreaRecyclerView;
-    private RecyclerView moreConditionRecyclerView;
     private List<Data> dataList;
     private Button bt_search_course;
     private OnFragmentInteractionListener listener;
@@ -55,13 +49,6 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     List<String> listContent = new ArrayList<>();
 
     private SearchCourseUtils mSearchCourseUtils;
-    private List<Data> mSelectAreaData;
-    private List<Data> mAdditionalConditionData;
-    private ListAdapter mSelectAreaAdapter;
-    private ListSearchAdapter mAdditionalConditionAdapter;
-
-    private int selectAreaVisible = View.GONE;
-    private int additionalConditionVisible = View.GONE;
 
     public static SearchCourseFragment newInstance(View.OnClickListener listener) {
         SearchCourseFragment fragment = new SearchCourseFragment();
@@ -80,8 +67,6 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_course_fragment, container, false);
         rcv_list = view.findViewById(R.id.rcv_list);
-        selectAreaRecyclerView = view.findViewById(R.id.select_area_list);
-        moreConditionRecyclerView = view.findViewById(R.id.more_condition_list);
         bt_search_course = view.findViewById(R.id.bt_search_course);
         bt_search_course.setOnClickListener(this);
         im_select_area = view.findViewById(R.id.im_select_area);
@@ -106,27 +91,10 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         boolean gender = false;
         switch (v.getId()) {
             case R.id.im_select_area:
-
-                //  mActivity.openPage(PrefectureOneFragment.newInstance(this,tv_prefecture.getText().toString()), true);
-
-                selectAreaVisible = selectAreaVisible == View.GONE ? View.VISIBLE : View.GONE;
-                selectAreaRecyclerView.setVisibility(selectAreaVisible);
-                if (selectAreaVisible == View.GONE) {
-                    im_select_area.setImageResource(R.drawable.icon_next);
-                } else {
-                    im_select_area.setImageResource(R.drawable.icon_down);
-                }
-
+                mActivity.openPage(PrefectureOneFragment.newInstance(this, ""),true, true);
                 break;
             case R.id.im_more_searching:
-
-                additionalConditionVisible = additionalConditionVisible == View.GONE ? View.VISIBLE : View.GONE;
-                moreConditionRecyclerView.setVisibility(additionalConditionVisible);
-                if (additionalConditionVisible == View.GONE) {
-                    im_more_searching.setImageResource(R.drawable.icon_next);
-                } else {
-                    im_more_searching.setImageResource(R.drawable.icon_down);
-                }
+                mActivity.openPage(PrefectureSearchFragment.newInstance(this), true,true);
                 break;
             case R.id.tv_close:
 //                Intent intent = new Intent(getActivity(), CourseListActivity.class);
@@ -148,9 +116,6 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     private void initData() {
         dataList = mSearchCourseUtils.createResearchCourseData();
-        mSelectAreaData = mSearchCourseUtils.createDataSelectArea();
-        mAdditionalConditionData = mSearchCourseUtils.createAdditionalConditionData();
-
         rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
         listSearchCourseAdapter = new ListSearchCourseAdapter(getContext(), dataList, new ListSearchCourseAdapter.OnClickItem() {
             @Override
@@ -160,33 +125,6 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         });
         rcv_list.setAdapter(listSearchCourseAdapter);
 
-
-        selectAreaRecyclerView.setLayoutManager(new WrappingLinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false));
-        selectAreaRecyclerView.setNestedScrollingEnabled(false);
-        selectAreaRecyclerView.setHasFixedSize(false);
-        selectAreaRecyclerView.setVisibility(selectAreaVisible);
-        mSelectAreaAdapter = new ListAdapter(getContext(), mSelectAreaData, new ListAdapter.OnClickItem() {
-            @Override
-            public void onClick(Map content) {
-                setTextOnTextView(tv_prefecture, content);
-
-            }
-        });
-        selectAreaRecyclerView.setAdapter(mSelectAreaAdapter);
-
-        moreConditionRecyclerView.setLayoutManager(new WrappingLinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false));
-        moreConditionRecyclerView.setNestedScrollingEnabled(false);
-        moreConditionRecyclerView.setHasFixedSize(false);
-        moreConditionRecyclerView.setVisibility(additionalConditionVisible);
-        mAdditionalConditionAdapter = new ListSearchAdapter(getContext(), mAdditionalConditionData, new ListSearchAdapter.OnClickItem() {
-            @Override
-            public void onClick(Map content) {
-                setTextOnTextView(tv_searchtwo, content);
-            }
-        });
-        moreConditionRecyclerView.setAdapter(mAdditionalConditionAdapter);
     }
 
     private void setTextOnTextView(TextView textView, Map content) {
@@ -215,6 +153,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onFragmentInteraction(String content) {
+        if (content.isEmpty()) {
+            return;
+        }
         prefecture = content;
         tv_prefecture.setText(content);
 
@@ -222,6 +163,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onFragment(String content) {
+        if (content.isEmpty()) {
+            return;
+        }
         prefecturetext = content;
         tv_searchtwo.setText(content);
     }

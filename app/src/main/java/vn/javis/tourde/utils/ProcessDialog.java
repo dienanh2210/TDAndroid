@@ -249,7 +249,21 @@ public class ProcessDialog {
 
         final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.hide();
 
+            }
+        });
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onActionDialogClickOk.onOkClick();
+                dialog.hide();
+               // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+            }
+        });
         dialog.show();
 
         CheckBox checkBox;

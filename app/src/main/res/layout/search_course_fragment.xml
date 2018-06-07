@@ -111,17 +111,6 @@
 
                 </RelativeLayout>
 
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/select_area_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:orientation="vertical"
-                    android:visibility="visible" />
-
                 <android.support.v4.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -213,17 +202,6 @@
 
 
                 </RelativeLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/more_condition_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:orientation="vertical"
-                    android:background="@android:color/white"
-                    android:visibility="visible" />
 
                 <include layout="@layout/item_divider" />
 
