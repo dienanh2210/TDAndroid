@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import vn.javis.tourde.model.Data;
+import vn.javis.tourde.model.MultiCheckGenre;
 
 public class SearchCourseUtils {
 
@@ -76,8 +77,8 @@ public class SearchCourseUtils {
         }
         return "-1";
     }
-    public List<Data> createDataSelectArea() {
-        List<Data> dataList = new ArrayList<>();
+    public List<MultiCheckGenre> createDataSelectArea() {
+        List<MultiCheckGenre> dataList = new ArrayList<>();
         String[] contentList1 = new String[]{"北海道"};
         String[] contentList2 = new String[]{"青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"};
         String[] contentList3 = new String[]{"茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"};
@@ -86,44 +87,20 @@ public class SearchCourseUtils {
         String[] contentList6 = new String[]{"鳥取県", "島根県", "岡山県", "広島県", "山口県"};
         String[] contentList7 = new String[]{"徳島県", "香川県", "愛媛県", "高知県"};
         String[] contentList8 = new String[]{"福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"};
-        Data data1 = new vn.javis.tourde.model.Data();
-        data1.setTitle("北海道地方");
-        data1.setContent(Arrays.asList(contentList1));
-        dataList.add(data1);
-        Data data2 = new vn.javis.tourde.model.Data();
-        data2.setTitle("東北地方");
-        data2.setContent(Arrays.asList(contentList2));
-        dataList.add(data2);
-        Data data3 = new vn.javis.tourde.model.Data();
-        data3.setTitle("関東地方");
-        data3.setContent(Arrays.asList(contentList3));
-        dataList.add(data3);
-        Data data4 = new vn.javis.tourde.model.Data();
-        data4.setTitle("中部地方");
-        data4.setContent(Arrays.asList(contentList4));
-        dataList.add(data4);
-        Data data5 = new vn.javis.tourde.model.Data();
-        data5.setTitle("近畿地方");
-        data5.setContent(Arrays.asList(contentList5));
-        dataList.add(data5);
-        Data data6 = new vn.javis.tourde.model.Data();
-        data6.setTitle("中国地方");
-        data6.setContent(Arrays.asList(contentList6));
-        dataList.add(data6);
-        Data data7 = new vn.javis.tourde.model.Data();
-        data7.setTitle("四国地方");
-        data7.setContent(Arrays.asList(contentList7));
-        dataList.add(data7);
-        Data data8 = new Data();
-        data8.setTitle("四国地方");
-        data8.setContent(Arrays.asList(contentList8));
-        dataList.add(data8);
+        dataList.add(new MultiCheckGenre("北海道地方", Arrays.asList(contentList1)));
+        dataList.add(new MultiCheckGenre("東北地方", Arrays.asList(contentList2)));
+        dataList.add(new MultiCheckGenre("関東地方", Arrays.asList(contentList3)));
+        dataList.add(new MultiCheckGenre("中部地方", Arrays.asList(contentList4)));
+        dataList.add(new MultiCheckGenre("近畿地方", Arrays.asList(contentList5)));
+        dataList.add(new MultiCheckGenre("中国地方", Arrays.asList(contentList6)));
+        dataList.add(new MultiCheckGenre("四国地方", Arrays.asList(contentList7)));
+        dataList.add(new MultiCheckGenre("四国地方", Arrays.asList(contentList8)));
         return dataList;
     }
 
-    public List<Data> createAdditionalConditionData() {
-        List<Data> dataList = new ArrayList<>();
-        String[] contentList1 = new String[]{"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
+    public List<MultiCheckGenre> createAdditionalConditionData() {
+        List<MultiCheckGenre> dataList = new ArrayList<>();
+        String[] contentList1 = new String[]{"1月"};
         String[] contentList2 = new String[]{"グルメが充実", "絶景・景観が充実", "名所・観光地が充実", "フォトスポットが充実", "トレーニング要素が充実"};
         String[] contentList3 = new String[]{"都会・街中", "田舎・村里", "森林・林間"};
         String[] contentList4 = new String[]{"グループライド向き", "ソロ向き", "女性向き", "ファミリー向き", "カップル向き"};
@@ -132,42 +109,15 @@ public class SearchCourseUtils {
         String[] contentList7 = new String[]{"信号が少ない", "交通量が少ない", "路面状態が良好", "オフロードあり"};
         String[] contentList8 = new String[]{"坂好き向き", "坂嫌い向き"};
         String[] contentList9 = new String[]{"サイクリング大会公式コース", "アプリ内イベント専用コース","季節限定コース"};
-        Data data1 = new Data();
-        data1.setTitle("おすすめの月");
-        data1.setContent(Arrays.asList(contentList1));
-        dataList.add(data1);
-        Data data2 = new Data();
-        data2.setTitle("コーステーマ");
-        data2.setContent(Arrays.asList(contentList2));
-        dataList.add(data2);
-        Data data3 = new Data();
-        data3.setTitle("コースエリア");
-        data3.setContent(Arrays.asList(contentList3));
-        dataList.add(data3);
-        Data data4 = new Data();
-        data4.setTitle("属性適正");
-        data4.setContent(Arrays.asList(contentList4));
-        dataList.add(data4);
-        Data data5 = new Data();
-        data5.setTitle("レベル適正");
-        data5.setContent(Arrays.asList(contentList5));
-        dataList.add(data5);
-        Data data6 = new Data();
-        data6.setTitle("所要時間");
-        data6.setContent(Arrays.asList(contentList6));
-        dataList.add(data6);
-        Data data7 = new Data();
-        data7.setTitle("道路環境");
-        data7.setContent(Arrays.asList(contentList7));
-        dataList.add(data7);
-        Data data8 = new Data();
-        data8.setTitle("登坂");
-        data8.setContent(Arrays.asList(contentList8));
-        dataList.add(data8);
-        Data data9 = new Data();
-        data9.setTitle("特殊コース");
-        data9.setContent(Arrays.asList(contentList9));
-        dataList.add(data9);
+        dataList.add(new MultiCheckGenre("おすすめの月", Arrays.asList(contentList1), true));
+        dataList.add(new MultiCheckGenre("コーステーマ", Arrays.asList(contentList2)));
+        dataList.add(new MultiCheckGenre("コースエリア", Arrays.asList(contentList3)));
+        dataList.add(new MultiCheckGenre("属性適正", Arrays.asList(contentList4)));
+        dataList.add(new MultiCheckGenre("レベル適正", Arrays.asList(contentList5)));
+        dataList.add(new MultiCheckGenre("所要時間", Arrays.asList(contentList6)));
+        dataList.add(new MultiCheckGenre("道路環境", Arrays.asList(contentList7)));
+        dataList.add(new MultiCheckGenre("登坂", Arrays.asList(contentList8)));
+        dataList.add(new MultiCheckGenre("特殊コース", Arrays.asList(contentList9)));
         return dataList;
 
     }

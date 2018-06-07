@@ -267,11 +267,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         Log.i("onBackPressed", "true");
     }
 
-    public void showSearchPage() {
-        openPage(new SearchCourseFragment(), true, false);
-
-
-    }
+//    public void showSearchPage() {
+//        openPage(new SearchCourseFragment(), true, false);
+//    }
 
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {

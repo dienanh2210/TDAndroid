@@ -61,7 +61,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
             Date date = dateFormat.parse(dateGet);
             String out = dateFormat2.format(date).toString();
             holder.txtPostDate.setText(out);
-        } catch (ParseException e) {
+        } catch (Exception ex) {
         }
         int rate = model.getRating();
         if (rate == 1)
