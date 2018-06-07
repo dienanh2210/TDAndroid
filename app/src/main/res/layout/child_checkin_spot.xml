@@ -15,7 +15,7 @@
             android:id="@+id/image_checkin_spot"
             android:layout_width="@dimen/_90sdp"
             android:layout_height="@dimen/_90sdp"
-            android:src="@drawable/image11"
+            android:src="@drawable/circle_location_multi_color"
             android:contentDescription="@string/spotName" />
 
         <ImageView
