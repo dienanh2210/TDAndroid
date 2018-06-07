@@ -65,7 +65,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        mActivity =(CourseListActivity)getActivity();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.map, SupportMapFragment.newInstance(), "map");
         transaction.commit();
