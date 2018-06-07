@@ -73,8 +73,8 @@
             android:id="@+id/content_story_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="fill_vertical"
-
+            android:gravity="fill_horizontal"
+            android:textAlignment="gravity"
             android:textColor="@color/Black"
             android:textSize="@dimen/_12sdp" />
 

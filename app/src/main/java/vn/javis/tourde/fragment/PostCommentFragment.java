@@ -135,7 +135,8 @@ public class PostCommentFragment extends BaseFragment {
                                             @Override
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 //post comment success return to current page
-                                                mActivity.onBackPressed();
+                                                //mActivity.onBackPressed();
+                                                mActivity.ShowCourseDetailByTab(1);
 
                                             }
 
