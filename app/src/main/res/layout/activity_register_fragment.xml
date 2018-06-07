@@ -142,7 +142,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     android:background="@drawable/plus_button"
                     android:textColorHint="@color/Gray" />
 

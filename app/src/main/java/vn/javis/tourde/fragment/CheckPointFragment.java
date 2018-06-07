@@ -1,7 +1,6 @@
 package vn.javis.tourde.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -21,11 +20,11 @@ import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
+import vn.javis.tourde.adapter.ListCheckInSpot;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class CheckPointFragment extends BaseFragment implements ListSpotCheckinAdapter.OnItemClickedListener {
+public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.OnItemClickedListener {
     GifImageView gifImgView;
     ImageView imgView;
     @BindView( R.id.txtDesc )
@@ -54,7 +53,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     //  TextView tv_back_password;
     private Animation rotation;
 
-    public static CheckPointFragment newInstance(ListSpotCheckinAdapter.OnItemClickedListener listener) {
+    public static CheckPointFragment newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         CheckPointFragment fragment = new CheckPointFragment();
 //        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
         return fragment;
@@ -68,7 +67,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showTakePhoto();
+                mActivity.showTakePhoto(spotID);
             }
         });
 
@@ -80,8 +79,23 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
                     public void run() {
                         // Do something after 5s = 5000ms
 
-                       // bt_checkpointleft.setEnabled(false);
+                   //    bt_checkpointleft.setEnabled(true);
                         mActivity.showSpotFacilities();
+                    }
+                }, 800);
+
+            }
+        });
+        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+
+                     //  bt_checkpointright.setEnabled(true);
+                        mActivity. showSpotImages( spotID);
                     }
                 }, 800);
 
@@ -102,21 +116,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 //                mActivity. showSpotImages( spotID);
 //            }
 //        });
-        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
 
-                        // bt_checkpointleft.setEnabled(false);
-                        mActivity. showSpotImages( spotID);
-                    }
-                }, 800);
-
-            }
-        });
     }
 
     @Override
@@ -180,7 +180,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
 
         };
         handler = new Handler();
-        handler.postDelayed(runnable, 500);
+        handler.postDelayed(runnable, 1000);
 
     }
 

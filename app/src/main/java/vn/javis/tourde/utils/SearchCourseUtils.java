@@ -11,7 +11,7 @@ public class SearchCourseUtils {
 
     public List<Data> createResearchCourseData() {
         List<Data> dataList = new ArrayList<>();
-        String[] contentList1 = new String[]{"〜20km", "〜50km", "〜100km", "〜100km"};
+        String[] contentList1 = new String[]{"〜20km", "〜50km", "〜100km", "100km〜"};
         String[] contentList2 = new String[]{"激坂", "坂少"};
         String[] contentList3 = new String[]{"片道", "往復", "1周", ""};
 

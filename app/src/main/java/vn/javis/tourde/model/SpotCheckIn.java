@@ -4,6 +4,28 @@ public class SpotCheckIn {
     private String spotNumber;
     private String spotName;
     private String imageUrl;
+    private  double lattitude;
+    private double longtitude;
+
+    public String getSpotNumber() {
+        return spotNumber;
+    }
+
+    public double getLattitude() {
+        return lattitude;
+    }
+
+    public void setLattitude(double lattitude) {
+        this.lattitude = lattitude;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
 
     public SpotCheckIn(String spotNumber, String spotName, String imageUrl) {
         this.spotNumber = spotNumber;
