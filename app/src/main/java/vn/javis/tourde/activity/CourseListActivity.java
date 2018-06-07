@@ -378,7 +378,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         else {
             intentGPS = new Intent(this, GoogleService.class);
             ArrayList<Location> lstLOcat = new ArrayList<>();
-            Location location1 =new Location(21.0243063,105.7848029);
+            Location location1 =new Location(1,21.0243063,105.7848029);
             lstLOcat.add(location1);
             intentGPS.putExtra("location",lstLOcat);
             startService(intentGPS);

@@ -40,6 +40,7 @@ import java.util.TimerTask;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.utils.DistanceLocation;
 
 /**
  * Created by QuanPV
@@ -55,12 +56,16 @@ public class GoogleService extends Service implements LocationListener {
     private Handler mHandler = new Handler();
     private Timer mTimer = null;
     long notify_interval = 10000;
-    public static String str_receiver = "servicetutorial.service.receiver";
+    public static String str_receiver = "tourde.service.receiver";
+    public static String str_receiver_arrived = "tourde.service.receiver.arrived";
     Intent intent;
+
     private double latitude_des, longitude_des;
     int timeDelay = 5;
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
+    ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
+
     public GoogleService() {
 
     }
@@ -77,7 +82,7 @@ public class GoogleService extends Service implements LocationListener {
 //       data=(String) intent.getExtras().get("data");
         latitude_des = intent.getDoubleExtra("ed_latitude", 0);
         longitude_des = intent.getDoubleExtra("ed_longitude", 0);
-        lstLocation =(ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
+        lstLocation = (ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
         Log.i("onBind", "" + latitude_des + "-" + longitude_des + lstLocation.get(0).getLatitude());
         return START_STICKY_COMPATIBILITY;
     }
@@ -139,7 +144,7 @@ public class GoogleService extends Service implements LocationListener {
                     if (location != null) {
 
 
-                        Log.i("GPSLOG: ","latutide: " +location.getLatitude()+ ", longitude: "+location.getLongitude());
+                        Log.i("GPSLOG: ", "latutide: " + location.getLatitude() + ", longitude: " + location.getLongitude());
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
                         fn_update(location);
@@ -198,16 +203,28 @@ public class GoogleService extends Service implements LocationListener {
 
         intent.putExtra("latutide", location.getLatitude() + "");
         intent.putExtra("longitude", location.getLongitude() + "");
+        intent.putExtra("arrived", false);
+        lstLocationArrived.clear();
+        //double distance1 = DistanceLocation.getDistance(location.getLatitude(), location.getLongitude(),lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude());
+        Intent intent1 = new Intent(str_receiver_arrived);
+        for (vn.javis.tourde.model.Location lct : lstLocation) {
+            double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude()));
+            if (distance < 1000) {
+                if (!lstLocationArrived.contains(lct))
+                    lstLocationArrived.add(lct);
+                showNotification();
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
+                intent1.putExtra("arrived",lstLocationArrived);
 
-
-        double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude()));
-        if (distance < 1000) {
-            showNotification();
-            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
-
-            stopService(new Intent(GoogleService.this, GoogleService.class));
+            //    stopService(new Intent(GoogleService.this, GoogleService.class));
+            }
         }
-        Log.i("distance", ""+distance);
+        if(!lstLocationArrived.isEmpty()){
+            sendBroadcast(intent1);
+        }
+
+       // intent.putExtra("arrived", lstLocationArrived);
+        //   Log.i("distance", ""+distance + "--");
         sendBroadcast(intent);
 //        stopService(new Intent(GoogleService.this, GoogleService.class));
     }
@@ -248,6 +265,7 @@ public class GoogleService extends Service implements LocationListener {
         super.onDestroy();
         mTimer.cancel();
     }
+
     private void writeToFile(String data) {
         try {
             File testFile = new File(this.getExternalFilesDir(null), filename);
