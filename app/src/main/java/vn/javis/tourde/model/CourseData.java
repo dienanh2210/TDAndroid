@@ -70,16 +70,16 @@ public class CourseData {
     @SerializedName("route_image")
     @Expose
     private String routeImage;
+    @SerializedName("kml_file")
+    @Expose
+    private String kmlFile;
     @SerializedName("status")
     @Expose
-    private int status;
+    private String status;
     @SerializedName("insert_datetime")
     @Expose
     private String insertDatetime;
 
-    public static CourseData getData(String data) {
-        return new Gson().fromJson(data, CourseData.class);
-    }
     public int getCourseId() {
         return courseId;
     }
@@ -256,11 +256,19 @@ public class CourseData {
         this.routeImage = routeImage;
     }
 
-    public int getStatus() {
+    public String getKmlFile() {
+        return kmlFile;
+    }
+
+    public void setKmlFile(String kmlFile) {
+        this.kmlFile = kmlFile;
+    }
+
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -271,5 +279,7 @@ public class CourseData {
     public void setInsertDatetime(String insertDatetime) {
         this.insertDatetime = insertDatetime;
     }
-
+    public static CourseData getData(String data) {
+        return new Gson().fromJson(data, CourseData.class);
+    }
 }

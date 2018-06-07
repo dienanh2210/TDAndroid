@@ -214,7 +214,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnFavoriteClick();
+                btnFavoriteClick(false);
             }
         });
 
@@ -260,6 +260,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             return;
         if (txtTitle == null)
             return;
+        mActivity.setMapUrl(model.getKmlFile());
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
@@ -428,7 +429,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     String token = LoginFragment.getmUserToken();
 
-    public void btnFavoriteClick() {
+    public void btnFavoriteClick(boolean inChild) {
+        if(inChild && isFavourite){return;}
         isFavourite = !isFavourite;
 
         int course_id = mCourseID;

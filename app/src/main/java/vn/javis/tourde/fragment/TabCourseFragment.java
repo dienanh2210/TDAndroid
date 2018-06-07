@@ -143,7 +143,7 @@ public class TabCourseFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
             if(parentFragment !=null)
-                parentFragment.btnFavoriteClick();
+                parentFragment.btnFavoriteClick(true);
             }
         });
         txtStartAddress.setText(startAddress);
