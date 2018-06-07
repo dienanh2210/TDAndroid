@@ -53,7 +53,6 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
         holder.txtUserName.setText(model.getNickname());
         holder.txtCommentContent.setText(model.getComment());
       //  holder.txtPostDate.setText(model.getPostDate().toString());
-
         String dateGet = model.getReviewUpdateDatetime();
         if(dateGet !=null && dateGet !=""){
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
