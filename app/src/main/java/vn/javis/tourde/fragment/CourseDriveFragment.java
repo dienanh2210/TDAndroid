@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,6 +35,7 @@ import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.DistanceLocation;
 import vn.javis.tourde.utils.ProcessDialog;
 
 public class CourseDriveFragment extends BaseFragment {
@@ -52,10 +54,15 @@ public class CourseDriveFragment extends BaseFragment {
     RelativeLayout rlt_googlemap;
     @BindView( R.id.rlt_Navitime )
     RelativeLayout rlt_Navitime;
+    int courseID;
 
+    double startLongtitude;
+    double startLatitude;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAcitivity = (CourseListActivity) getActivity();
+        courseID =mAcitivity.getmCourseID();
+        getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -71,12 +78,23 @@ public class CourseDriveFragment extends BaseFragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
-                    @Override
-                    public void onOkClick() {
-                        mAcitivity.ShowCountDown();
-                    }
-                });
+                double longtitude = mAcitivity.getLongitude();
+                double latitude = mAcitivity.getLatitude();
+                double distance = DistanceLocation.getDistance(startLatitude,startLongtitude,latitude,longtitude);
+                if(distance<=20){
+                    ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            mAcitivity.ShowCountDown();
+                        }
+                    });
+                }
+                else {
+                    ProcessDialog.showDialogOk(mAcitivity,"","スタート地点を確認できませんでした。スタート地点付近に移動してください。");
+                  //show for test
+                    mAcitivity.ShowCountDown();
+                }
+
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +144,32 @@ public class CourseDriveFragment extends BaseFragment {
         } );
 
     }
+
+    private void getStartPosition() {
+        GetCourseDataAPI.getCourseData(courseID, new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject =(JSONObject)response;
+                if(jsonObject.has("error"))
+                    return;
+               CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+               String strLat = mCourseDetail.getmCourseData().getStartLatitude();
+               String strLong = mCourseDetail.getmCourseData().getStartLongitude();
+               if((strLat != null && strLat !="") &&(strLong !=null && strLong !="")){
+                   startLatitude = Double.parseDouble(strLat);
+                   startLongtitude = Double.parseDouble(strLong);
+               }
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+    }
+
+
     public void launchNewActivity(Context context, String packageName) {
         Intent intent = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.CUPCAKE) {

@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -31,6 +32,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
@@ -42,7 +48,13 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
+import vn.javis.tourde.apiservice.GetCourseDataAPI;
+import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.Badge;
+import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.SpotData;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.CameraPreview;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
@@ -71,12 +83,52 @@ public class TakePhotoFragment extends BaseFragment {
     Camera camera;
     CameraPreview cameraPreview;
     int cameraType = 0;
-
-
+    int spotId;
+    int courseID;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
+        spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+        courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
 
+        if(spotId>0){
+            SpotDataAPI.getSpotData(spotId, new ServiceCallback() {
+                @Override
+                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                    JSONObject jsonObject =(JSONObject)response;
+                    if(jsonObject.has("error"))
+                        return;
+                    SpotData spotData = SpotData.getSpotData(response.toString());
+                    if(spotData==null)
+                        return;
+                    spotTitle.setText(spotData.getData().getTitle());
+                  if(spotData.getData().getInsertDatetime() !=null && spotData.getData().getInsertDatetime() !="" )
+                      txtTime.setText(spotData.getData().getInsertDatetime());
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+                }
+            });
+        }
+        if(courseID>0){
+            GetCourseDataAPI.getCourseData(courseID, new ServiceCallback() {
+                @Override
+                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                    JSONObject jsonObject =(JSONObject)response;
+                    if(jsonObject.has("error"))
+                        return;
+                  CourseDetail  mCourseDetail = new CourseDetail((JSONObject) response);
+                  courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+                }
+            });
+        }
         if (checkCameraHardware()) {
 
             camera = getCameraInstance(cameraType);
@@ -244,11 +296,46 @@ public class TakePhotoFragment extends BaseFragment {
                 Log.d("getMessage", e.getMessage());
             }
             camera.startPreview();
+           // btnCapture.setVisibility(View.GONE);
+           // takeScreenshot();
             Log.d("tag", "Camera ok ");
 
         }
 
     };
+    private void takeScreenshot() {
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
 
+        try {
+            // image naming and path  to include sd card  appending name you choose for file
+            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
 
+            // create bitmap screen capture
+            View v1 = mActivity.getWindow().getDecorView().getRootView();
+            v1.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+            v1.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(mPath);
+
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+            openScreenshot(imageFile);
+        } catch (Throwable e) {
+            // Several error may come out with file handling or DOM
+            e.printStackTrace();
+        }
+    }
+    private void openScreenshot(File imageFile) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.fromFile(imageFile);
+        intent.setDataAndType(uri, "image/*");
+        startActivity(intent);
+    }
 }

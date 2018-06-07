@@ -22,6 +22,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.apiservice.LogoutAccount;
 import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
@@ -145,7 +146,7 @@ public class MenuPageActivity extends BaseActivity {
                                 Intent intent = new Intent(MenuPageActivity.this,CourseListActivity.class);
                                 intent.putExtra(Constant.KEY_LOGOUT_SUCCESS,1);
                                 startActivity(intent);
-
+                                RegisterFragment.bitmapIcon=null;
                             } else {
 
                             }

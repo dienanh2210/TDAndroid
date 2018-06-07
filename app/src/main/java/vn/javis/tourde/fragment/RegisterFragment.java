@@ -80,14 +80,14 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     TextView title_changeInfo;
     int prefecture = 1;
     int age = 10;
-    int sex=1;
+    int sex = 1;
     String txtAge = "10代";
     String txtArea = "北海道";
 
     TextView tv_prefecture;
     TextView tv_age;
-    Bitmap bitmapIcon;
-    int changeImage=0;
+    public static Bitmap bitmapIcon;
+    int changeImage = 0;
     private RegisterActivity activity;
     public static final long FILE_SIZE_8MB = 8192;
 
@@ -157,23 +157,23 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         tv_back_resgister.setOnClickListener(this);
         tv_close.setOnClickListener(this);
         select_userIcon.setOnClickListener(this);
-
+        select_userIcon.setImageBitmap(bitmapIcon);
         String change = getArguments().getString(Constant.KEY_CHANGE_INFO);
 
         if (change.equals("1")) {
             register_title.setVisibility(View.GONE);
             title_changeInfo.setVisibility(View.VISIBLE);
 
-            getArguments().putString(Constant.KEY_CHANGE_INFO,"0");
+            getArguments().putString(Constant.KEY_CHANGE_INFO, "0");
             setInfo();
-            isChangAccount=true;
+            isChangAccount = true;
         } else {
             register_title.setVisibility(View.VISIBLE);
             title_changeInfo.setVisibility(View.GONE);
             appCompatButtonLogin.setVisibility(View.VISIBLE);
             changeInfo.setVisibility(View.GONE);
         }
-        if(isChangAccount){
+        if (isChangAccount) {
             appCompatButtonLogin.setVisibility(View.GONE);
             changeInfo.setVisibility(View.VISIBLE);
         }
@@ -185,27 +185,26 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         edt_username.setText(model.getNickname());
         edt_email.setText(model.getEmail());
         String url = model.getImage();
+
         if (url != null && url != ""){
             PicassoUtil.getSharedInstance(getContext()).load(url).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
             changeImage=1;
         } else {}
+
         String sex = model.getSex();
-        if(sex.equals("1"))
-        {
+        if (sex.equals("1")) {
             imv_mark_man.setVisibility(View.VISIBLE);
             imv_mark_woman.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             imv_mark_woman.setVisibility(View.VISIBLE);
             imv_mark_man.setVisibility(View.GONE);
         }
         age = Integer.parseInt(model.getAge());
-        tv_age.setText(model.getAge() +"代");
+        tv_age.setText(model.getAge() + "代");
         prefecture = Integer.parseInt(model.getArea());
-        if(prefecture==0) prefecture=1;
-        tv_prefecture.setText(ListArea.getAreaName(prefecture-1));
-       // prefecture += 1;
+        if (prefecture == 0) prefecture = 1;
+        tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
+        // prefecture += 1;
     }
 
     private void unResgisterForcus() {
@@ -255,7 +254,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 sex = 1;
                 break;
             case R.id.rlt_woman:
-                sex =  2;
+                sex = 2;
                 chooseGender(false);
                 break;
             case R.id.appCompatButtonLogin:
@@ -266,11 +265,13 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     LoginAPI.registerAccount(activity, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
                 break;
             case R.id.tv_back_resgister:
-                isChangAccount=false;
+                isChangAccount = false;
+                bitmapIcon=null;
                 activity.onBackPressed();
                 break;
             case R.id.tv_close:
-                isChangAccount=false;
+                bitmapIcon=null;
+                isChangAccount = false;
                 activity.onBackPressed();
                 break;
             case R.id.select_userIcon:
@@ -278,7 +279,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.changeInfo:
                 String token = LoginFragment.getmUserToken();
-                LoginAPI.editAccount(activity,token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon,changeImage, sex, age, prefecture, this);
+                LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
                 break;
         }
     }
@@ -316,7 +317,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         }
                     } else {
                         Log.d(edt_email.toString(), edt_password.toString() + "error");
-                        Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -353,15 +354,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             Uri selectedImage = data.getData();
             try {
                 bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                boolean isLarge = false;
                 File file = new File("android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI");
                 Log.i("File size: ", "" + file.length());
-                if (file.length() > FILE_SIZE_8MB) {
-                    isLarge = true;
-                }
-                if (!isLarge)
+                if (file.length() < FILE_SIZE_8MB && bitmapIcon!=null) {
                     select_userIcon.setImageBitmap(bitmapIcon);
-                else
+                } else
                     ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
@@ -403,7 +400,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("register account error", error.getMessage());
-                Toast.makeText(getContext(), "登録に失敗しました", Toast.LENGTH_LONG).show();
+                ProcessDialog.showDialogOk(getContext(), "", " 新規登録に失敗しました。");
             }
         };
     }

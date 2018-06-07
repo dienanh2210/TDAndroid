@@ -1,7 +1,6 @@
 package vn.javis.tourde.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -21,11 +20,11 @@ import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.adapter.ListSpotCheckinAdapter;
+import vn.javis.tourde.adapter.ListCheckInSpot;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class CheckPointFragment extends BaseFragment implements ListSpotCheckinAdapter.OnItemClickedListener {
+public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.OnItemClickedListener {
     GifImageView gifImgView;
     ImageView imgView;
     @BindView( R.id.txtDesc )
@@ -54,7 +53,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
     //  TextView tv_back_password;
     private Animation rotation;
 
-    public static CheckPointFragment newInstance(ListSpotCheckinAdapter.OnItemClickedListener listener) {
+    public static CheckPointFragment newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         CheckPointFragment fragment = new CheckPointFragment();
 //        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
         return fragment;
@@ -68,7 +67,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showTakePhoto();
+                mActivity.showTakePhoto(spotID);
             }
         });
 
@@ -170,7 +169,7 @@ public class CheckPointFragment extends BaseFragment implements ListSpotCheckinA
                 } else {
                     // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
                     //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                    txtView.setVisibility( View.GONE );
+//                    txtView.setVisibility( View.GONE );
                     ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
                     ImageViewAnimatedChange( getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
 
