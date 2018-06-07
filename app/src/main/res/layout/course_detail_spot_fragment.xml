@@ -38,7 +38,6 @@
                 android:contentDescription="@string/image_description" />
 
             <ImageButton
-                android:id="@+id/btn_share"
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"
@@ -53,7 +52,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_47sdp"
+            android:layout_height="@dimen/_55sdp"
             android:orientation="horizontal">
 
             <TextView
@@ -62,8 +61,8 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:layout_marginStart="@dimen/_15sdp"
-                android:layout_gravity="center"
-                android:textColor="@android:color/black"
+               android:layout_marginTop="@dimen/_30sdp"
+                android:textColor="@color/colorText"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -73,10 +72,12 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_17sdp"
             android:layout_marginEnd="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_9sdp"
             android:background="@color/search_course_color_divider_background"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:weightSum="1"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -111,15 +112,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1ssp"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:background="@color/search_course_color_divider_background"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            >
+            android:layout_marginTop="@dimen/_15sdp"
+            android:weightSum="1">
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
@@ -154,12 +156,14 @@
             android:layout_height="@dimen/_1ssp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_17sdp"
             android:background="@color/search_course_color_divider_background"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:weightSum="1"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -184,12 +188,13 @@
             android:layout_height="@dimen/_1ssp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_17sdp"
             android:background="@color/search_course_color_divider_background"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_47sdp">
+            android:layout_height="@dimen/_55sdp">
 
             <TextView
                 android:id="@+id/tv_tag"
@@ -211,7 +216,6 @@
             app:tabItems="@array/title_coursedetail"
             app:tabNormalColor="#DCE0E2"
             app:tabTextActiveColor="@color/color_text_tab"
-
             app:tabTextColor="@color/Black"
             app:tabTextSize="@dimen/_13ssp"/>
 

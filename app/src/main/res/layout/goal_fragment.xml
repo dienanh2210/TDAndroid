@@ -54,31 +54,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_230sdp"
+                    android:layout_marginTop="@dimen/_235sdp"
                     android:text="@string/textgoal"
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/_20sdp"
                     android:textStyle="bold" />
 
                 <Button
+
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_47sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_275sdp"
-                    android:background="@drawable/custom_frame_blue"
+                    android:layout_marginTop="@dimen/_285sdp"
+                    android:background="@drawable/custom_frame"
                     android:text="@string/text_button_up"
                     android:textAlignment="center"
                     android:textColor="@color/backgroud"
                     android:textSize="@dimen/_12sdp" />
 
                 <Button
+                    android:id="@+id/take_photo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_47sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_335sdp"
-                    android:background="@drawable/custom_frame"
+                    android:layout_marginTop="@dimen/_345sdp"
+                    android:background="@drawable/custom_frame_blue"
                     android:text="@string/text_button_down"
                     android:textAlignment="center"
                     android:textColor="@color/backgroud"
