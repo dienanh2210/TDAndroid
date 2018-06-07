@@ -77,10 +77,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_9sdp"
-                android:background="@drawable/icon_check_circle_blue"
+                android:background="@drawable/icon_check_circle"
                 android:contentDescription="@string/item_text"
                 android:visibility="visible" />
-       
+
         </RelativeLayout>
 
 
