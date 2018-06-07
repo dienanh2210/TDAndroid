@@ -26,9 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40ssp"
                 android:gravity="center_vertical"
-                android:paddingStart="15dp"
+                android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_1sdp"
-                android:textSize="@dimen/_15ssp"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_16ssp"
                 android:text="@string/item_text" />
 
             <ImageView

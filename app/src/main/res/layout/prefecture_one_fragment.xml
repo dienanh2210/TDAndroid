@@ -8,8 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/backgroud"
-        android:layout_height="@dimen/_38sdp">
+        android:layout_height="@dimen/_38sdp"
+        android:background="@color/backgroud">
 
         <TextView
             android:id="@+id/tv_back_menu_entry"
@@ -46,11 +46,13 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -61,31 +63,37 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="visible"/>
 
-            </android.support.v7.widget.RecyclerView>
-
-
-            <View
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C8CDD0" />
+                android:layout_height="@dimen/_120sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/rcv_list"
+                >
 
-            <Button
-                android:id="@+id/btn_choose"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_47sdp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_background"
-                android:text="@string/selection_decision"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#C8CDD0" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btn_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_47sdp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@drawable/btn_background"
+                    android:layout_centerInParent="true"
+                    android:text="@string/selection_decision"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
