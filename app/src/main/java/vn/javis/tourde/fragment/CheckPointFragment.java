@@ -168,7 +168,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                 } else {
                     // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
                     //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                    txtView.setVisibility( View.GONE );
+//                    txtView.setVisibility( View.GONE );
                     ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
                     ImageViewAnimatedChange( getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
 

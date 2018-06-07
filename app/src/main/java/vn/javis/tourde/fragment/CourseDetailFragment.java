@@ -58,6 +58,7 @@ import vn.javis.tourde.view.YourScrollableViewPager;
 
 public class CourseDetailFragment extends BaseFragment implements ServiceCallback {
     private int mCourseID;
+
     private CourseListActivity mActivity;
     List<String> listImgUrl = new ArrayList<>();
     @BindView(R.id.btn_back_to_list)
@@ -130,13 +131,16 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     TabCommentFragment tabCommentFragment;
     String url = "";
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
-
+    int indexTab;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
+        indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
+
+        indexTab = indexTab<0?0:indexTab;
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -356,6 +360,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             mCourseDetail = new CourseDetail((JSONObject) response);
             showCourseDetail(mCourseDetail);
             view_pager.setAdapter(pagerAdapter);
+            view_pager.setCurrentPageNumber(indexTab);
+            view_pager.setCurrentItem(indexTab);
             if (tabCommentFragment != null) {
                 tabCommentFragment.setListReview(mCourseDetail.getReview());
                 Log.i("COMMENT API detail350: ", mCourseDetail.getReview().toString());

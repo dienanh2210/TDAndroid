@@ -73,6 +73,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     public static final int MY_CAMERA_PERMISSION_CODE = 100;
     public static final String COURSE_DETAIL_ID = "COURSE_ID";
+    public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
 
@@ -83,7 +84,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     private int mCourseID;
     private int mSpotID;
-
+    private String mapUrl;
     public int getmSpotID() {
         return mSpotID;
     }
@@ -111,6 +112,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         medit = mPref.edit();
         fn_permission();
 
+    }
+
+    public String getMapUrl() {
+        return mapUrl;
+    }
+
+    public void setMapUrl(String mapUrl) {
+        this.mapUrl = mapUrl;
     }
 
     public void setmCourseID(int mCourseID) {
@@ -172,16 +181,22 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putString("searching", "searching");
         openPage(new CourseListFragment(), false, true);
     }
-
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
         openPage(new CourseDetailFragment(), true, false, true);
     }
+    public void ShowCourseDetailByTab(int indexTab) {
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
 
+        openPage(new CourseDetailFragment(), true, false, true);
+    }
     public void ShowFavoriteCourseDetail(int courseId) {
 
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
+        dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
         openPage(new CourseDetailFragment(), true, false);
     }
 

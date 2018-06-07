@@ -137,7 +137,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
-                mActivity.openPage(new CourseDetailFragment(), true,false);
+                mActivity.ShowCourseDetailByTab(0);
                 break;
             case R.id.stop_time:
                 chronometer.stop();
