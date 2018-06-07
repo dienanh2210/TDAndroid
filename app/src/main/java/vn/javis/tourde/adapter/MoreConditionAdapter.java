@@ -87,9 +87,12 @@ public class MoreConditionAdapter extends MultiTypeExpandableRecyclerViewAdapter
                 areaViewHolder.setChecked(false);
                 break;
             case TYPE_TWO_COLUMN:
-                final String[] data = new String[]{"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
+                final String[] data = new String[]{"1月","2月","3月","4月","5月","6月",
+                                                    "7月","8月","9月","10月","11月","12月"};
                 TowColumnHolder towColumnHolder = (TowColumnHolder) holder;
-                towColumnHolder.recyclerMonth.setAdapter(new ContentSearchCourseAdapter(flatPosition, Arrays.asList(data), new ContentSearchCourseAdapter.OnClickItem() {
+                towColumnHolder.recyclerMonth.setAdapter(
+                        new ContentSearchCourseAdapter(flatPosition, Arrays.asList(data),
+                        new ContentSearchCourseAdapter.OnClickItem() {
                     @Override
                     public void onClick(int position, boolean isPick, View view) {
                         for(String data: data) {
