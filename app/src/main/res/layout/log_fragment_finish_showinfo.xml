@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/_37sdp"
-            android:layout_marginTop="@dimen/_110sdp"
+            android:layout_marginTop="@dimen/_107sdp"
             android:src="@drawable/image_link_long" />
 
         <LinearLayout

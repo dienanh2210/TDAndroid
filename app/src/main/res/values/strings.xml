@@ -296,8 +296,8 @@
     <string name="place3">瀬戸田町観光案内所</string>
     <string name="four">4</string>
     <string name="place4">尾道港</string>
-    <string name="sumTime">走行時間-</string>
-    <string name="averageSpeed">平均速度-</string>
+    <string name="sumTime">走行時間</string>
+    <string name="averageSpeed">平均速度</string>
     <string name="kmh">10.00km/h</string>
 
     <string name="englishCourse">COURSE</string>

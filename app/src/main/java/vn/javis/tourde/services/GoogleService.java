@@ -32,6 +32,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -59,6 +60,7 @@ public class GoogleService extends Service implements LocationListener {
     private double latitude_des, longitude_des;
     int timeDelay = 5;
     private String filename = "logGPS.txt";
+    ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     public GoogleService() {
 
     }
@@ -75,7 +77,8 @@ public class GoogleService extends Service implements LocationListener {
 //       data=(String) intent.getExtras().get("data");
         latitude_des = intent.getDoubleExtra("ed_latitude", 0);
         longitude_des = intent.getDoubleExtra("ed_longitude", 0);
-        Log.i("onBind", "" + latitude_des + "-" + longitude_des);
+        lstLocation =(ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
+        Log.i("onBind", "" + latitude_des + "-" + longitude_des + lstLocation.get(0).getLatitude());
         return START_STICKY_COMPATIBILITY;
     }
 
@@ -196,12 +199,15 @@ public class GoogleService extends Service implements LocationListener {
         intent.putExtra("latutide", location.getLatitude() + "");
         intent.putExtra("longitude", location.getLongitude() + "");
 
-        double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(latitude_des, longitude_des));
+
+        double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude()));
         if (distance < 1000) {
             showNotification();
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
+
             stopService(new Intent(GoogleService.this, GoogleService.class));
         }
+        Log.i("distance", ""+distance);
         sendBroadcast(intent);
 //        stopService(new Intent(GoogleService.this, GoogleService.class));
     }

@@ -1,6 +1,12 @@
 package vn.javis.tourde.fragment;
 
 import android.annotation.SuppressLint;;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -23,6 +29,7 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,6 +43,7 @@ import vn.javis.tourde.adapter.ViewPagerAdapter;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 
@@ -61,6 +69,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     RecyclerView spotRecycler;
     ListCheckInSpot listSpotCheckinAdapter;
     long time;
+    Double latitude;
+    Double longtitude;
+    Geocoder geocoder;
+
     private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
     //  TextView tv_back_password;
     private RegisterActivity activity;
@@ -128,8 +140,29 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         });
 
         mActivity.fn_permission();
+
     }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mActivity.unregisterReceiver(broadcastReceiver);
+
+    }
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            latitude = Double.valueOf(intent.getStringExtra("latutide"));
+            longtitude = Double.valueOf(intent.getStringExtra("longitude"));
+            Log.i("latutide", "" + latitude);
+            Log.i("longitude", "" + longtitude);
+
+
+
+        }
+    };
     @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -167,6 +200,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
 
+        mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
 
     }
 

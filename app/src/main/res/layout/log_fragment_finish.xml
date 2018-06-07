@@ -5,16 +5,17 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/spot1"
+        android:id="@+id/spot"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_68sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginStart="@dimen/_15sdp">
 
         <ImageView
+            android:id="@+id/BG_spot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/boder_white" />
+            android:src="@drawable/boder_blue" />
 
         <TextView
             android:id="@+id/number"
@@ -23,10 +24,10 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:background="@drawable/blue_circle"
+            android:background="@drawable/circle"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/White"
+            android:textColor="@color/SkyBlue"
             android:textStyle="bold" />
 
 
@@ -39,28 +40,101 @@
             android:layout_marginEnd="@dimen/_60sdp"
             android:layout_marginStart="@dimen/_50sdp"
             android:layout_toEndOf="@+id/number"
-            android:text=""
             android:gravity="center_vertical"
-            android:textColor="@color/Black"
+            android:text=""
+            android:textColor="@color/White"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/success"
+            android:id="@+id/checked"
             android:layout_width="@dimen/_38sdp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="15dp"
-            android:src="@drawable/circle_success" />
+            android:src="@drawable/circle_success"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/img_link"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_33sdp"
         android:background="@drawable/log_animation"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/img_link_vitual"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_33sdp"
+        android:scaleType="fitXY"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/showInfoSpot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:src="@drawable/image_link_long" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sumTime"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/spotTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timing"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_30sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/averageSpeed"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/averageSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kmh"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"/>
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
