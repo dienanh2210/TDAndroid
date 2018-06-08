@@ -79,10 +79,10 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                     public void run() {
                         // Do something after 5s = 5000ms
 
-                   //    bt_checkpointleft.setEnabled(true);
+                    //  bt_checkpointleft.setEnabled(true);
                         mActivity.showSpotFacilities();
                     }
-                }, 800);
+                }, 1000);
 
             }
         });
@@ -94,10 +94,10 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                     public void run() {
                         // Do something after 5s = 5000ms
 
-                     //  bt_checkpointright.setEnabled(true);
+                   //    bt_checkpointright.setEnabled(true);
                         mActivity. showSpotImages( spotID);
                     }
-                }, 800);
+                }, 1000);
 
             }
         });
@@ -116,7 +116,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 //                mActivity. showSpotImages( spotID);
 //            }
 //        });
-
+//
     }
 
     @Override
@@ -136,6 +136,12 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         void onClick(View v);
     }
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate( savedInstanceState );
+
+    }
     public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, final int new_image) {
 
         final Animation anim_img = AnimationUtils.loadAnimation(c,R.anim.rotate_up);
@@ -147,16 +153,10 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         v.startAnimation(anim_img);
         textView.startAnimation(anim_text);
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();
+
 
         runnable = new Runnable() {
             @Override
@@ -165,14 +165,12 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                 if (imgView.getTag() == null ) {
                     ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
                     handler.postDelayed( runnable,1000 );
-
                 } else {
                     // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
                     //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                    txtView.setVisibility( View.GONE );
+                  //  .setVisibility( View.GONE );
                     ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
-                    ImageViewAnimatedChange( getApplicationContext(), txtDescthree, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
-
+                    ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
 
                 }
             }
@@ -185,10 +183,8 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     }
 
 
-    public void stop() {
-        gifImgView.setImageResource(R.drawable.background_check);
 
-    }
+
     @OnClick({R.id.tv_back_password})
     public void onClickView(View view) {
 

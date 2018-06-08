@@ -196,7 +196,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 pauseOffset = time - chronometer.getBase();
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
-                //show_select_spot.setVisibility(View.VISIBLE);
+                show_select_spot.setVisibility(View.VISIBLE);
                 mActivity.turnOffGPS();
                 break;
             case R.id.resume:
