@@ -19,12 +19,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -44,6 +46,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
@@ -88,23 +92,29 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     private int mCourseID;
     private int mSpotID;
     private String mapUrl;
+
     public int getmSpotID() {
         return mSpotID;
     }
+
     Intent intentGPS;
+
     boolean boolean_permission;
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
-    Double latitude, longitude;
+    double latitude, longitude;
     Geocoder geocoder;
     Bundle dataBundle;
 
+    @BindView(R.id.main_layout)
+    View mLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
+        ButterKnife.bind(this);
         ListCourseAPI api = new ListCourseAPI(this);
         setHearder();
         // fetchData();
@@ -113,8 +123,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-        fn_permission();
+        //fn_permission();
 
+    }
+
+    public boolean isBoolean_permission() {
+        return boolean_permission;
     }
 
     public String getMapUrl() {
@@ -184,18 +198,21 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putString("searching", "searching");
         openPage(new CourseListFragment(), false, true);
     }
+
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
         openPage(new CourseDetailFragment(), true, false, true);
     }
+
     public void ShowCourseDetailByTab(int indexTab) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
 
         openPage(new CourseDetailFragment(), true, false, true);
     }
+
     public void ShowFavoriteCourseDetail(int courseId) {
 
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
@@ -223,11 +240,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new CourseDriveFragment(), true, false);
     }
 
-    public void showSpotFacilitiesFragment(int spotID){
+    public void showSpotFacilitiesFragment(int spotID) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         openPage(new SpotFacilitiesFragment(), true, false);
     }
+
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
@@ -277,16 +295,16 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         } else {
             mSpotID = spotID;
             dataBundle.putInt(SPOT_ID, mSpotID);
-            dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
+            dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
             openPage(new TakePhotoFragment(), true, false);
         }
     }
 
-    public Double getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public Double getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -317,15 +335,31 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
 
     }
+
     public void showSpotFacilities() {
         openPage(new SpotFacilitiesFragment(), true, false);
-
-
     }
+
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
 
             if ((ActivityCompat.shouldShowRequestPermissionRationale(CourseListActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION))) {
+                Log.i("shouldShowRequest", "------------------>");
+                ActivityCompat.requestPermissions(CourseListActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION
+
+                        },
+                        REQUEST_PERMISSIONS);
+//                Snackbar.make(mLayout, "Accept location",
+//                        Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        // Request the permission
+//                        ActivityCompat.requestPermissions(CourseListActivity.this,
+//                                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+//                                REQUEST_PERMISSIONS);
+//                    }
+//                }).show();
+
 
             } else {
                 ActivityCompat.requestPermissions(CourseListActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -336,7 +370,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             }
         } else {
             boolean_permission = true;
-                turnOnGPS();
+            turnOnGPS();
         }
 
     }
@@ -356,7 +390,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                     if (boolean_permission) {
                         if (mPref.getString("service", "").matches("")) {
                             medit.putString("service", "service").commit();
-                                turnOnGPS();
+                            turnOnGPS();
                         } else {
                             Toast.makeText(getApplicationContext(), "Service is already running", Toast.LENGTH_SHORT).show();
                         }
@@ -378,9 +412,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         else {
             intentGPS = new Intent(this, GoogleService.class);
             ArrayList<Location> lstLOcat = new ArrayList<>();
-            Location location1 =new Location(1,21.0243063,105.7848029);
+            Location location1 = new Location(1, 21.0243063, 105.7848029);
             lstLOcat.add(location1);
-            intentGPS.putExtra("location",lstLOcat);
+            intentGPS.putExtra("location", lstLOcat);
             startService(intentGPS);
             Log.i("GPSLOG", "turn on \n");
         }
@@ -428,6 +462,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         unregisterReceiver(broadcastReceiver);
 
     }
+
     private static boolean isExternalStorageReadOnly() {
         String extStorageState = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {

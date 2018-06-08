@@ -15,16 +15,7 @@
             android:layout_height="@dimen/_38sdp"
             android:background="@color/White">
 
-            <TextView
-                android:id="@+id/btn_back_badge"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:gravity="center"
-                android:text="@string/BtnBackBadge"
-                android:textColor="@color/SkyBlue"
-                android:textSize="@dimen/_13sdp" />
+
 
             <TextView
                 android:id="@+id/badge_collection_title"
@@ -39,16 +30,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/btn_close_badge_collection"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:gravity="center"
-                android:text="@string/BtnCloseBadge"
-                android:textColor="@color/SkyBlue"
-                android:textSize="@dimen/_13sdp" />
+
         </RelativeLayout>
 
         <LinearLayout

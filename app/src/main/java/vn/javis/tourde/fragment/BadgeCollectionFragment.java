@@ -40,10 +40,8 @@ public class BadgeCollectionFragment extends BaseFragment {
     ImageView imgRedLineAchivement;
     @BindView(R.id.redline_spot)
     ImageView imgRedLineSpot;
-    @BindView(R.id.btn_close_badge_collection)
-    TextView btnClose;
-    @BindView(R.id.btn_back_badge)
-    TextView btnBack;
+
+
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
     @BindView(R.id.img_badge_collect)
@@ -77,18 +75,8 @@ public class BadgeCollectionFragment extends BaseFragment {
                 onSpotClick();
             }
         });
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gotoMenuPage();
-            }
-        });
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gotoMenuPage();
-            }
-        });
+
+
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

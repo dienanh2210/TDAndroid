@@ -214,7 +214,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnFavoriteClick();
+                btnFavoriteClick(false);
             }
         });
 
@@ -230,7 +230,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 String shareBody = txtTitle.getText().toString();
                 String shareSub = txtTitle.getText().toString();
                 String share = url;
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
+              //  myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareBody + "\n" + share);
 
                 startActivity(Intent.createChooser(myIntent, ""));
@@ -260,6 +260,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             return;
         if (txtTitle == null)
             return;
+        mActivity.setMapUrl(model.getKmlFile());
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
@@ -428,7 +429,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     String token = LoginFragment.getmUserToken();
 
-    public void btnFavoriteClick() {
+    public void btnFavoriteClick(boolean inChild) {
+        if(inChild && isFavourite){return;}
         isFavourite = !isFavourite;
 
         int course_id = mCourseID;

@@ -70,6 +70,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
         transaction.replace(R.id.map, SupportMapFragment.newInstance(), "map");
         transaction.commit();
         mapUrl = mActivity.getMapUrl();
+        Log.i("kml_link",mapUrl);
     }
 
     @Override
@@ -152,23 +153,29 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     }
 
     private void moveCameraToKml(KmlLayer kmlLayer) {
-        //Retrieve the first container in the KML layer
-        KmlContainer container = kmlLayer.getContainers().iterator().next();
-        //Retrieve a nested container within the first container
-        //container = container.getContainers().iterator().next();
-        //Retrieve the first placemark in the nested container
-        KmlPlacemark placemark = container.getPlacemarks().iterator().next();
-        //Retrieve a polygon object in a placemark
-        LineString polygon = (LineString) placemark.getGeometry();
-        //Create LatLngBounds of the outer coordinates of the polygon
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (LatLng latLng : polygon.getGeometryObject()) {
-            builder.include(latLng);
-        }
+        try {
 
-        int width = getResources().getDisplayMetrics().widthPixels;
-        int height = getResources().getDisplayMetrics().heightPixels;
-        getMap().moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), width, height, 1));
+            //Retrieve the first container in the KML layer
+            KmlContainer container = kmlLayer.getContainers().iterator().next();
+            //Retrieve a nested container within the first container
+            //container = container.getContainers().iterator().next();
+            //Retrieve the first placemark in the nested container
+            KmlPlacemark placemark = container.getPlacemarks().iterator().next();
+            //Retrieve a polygon object in a placemark
+            LineString polygon = (LineString) placemark.getGeometry();
+            //Create LatLngBounds of the outer coordinates of the polygon
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (LatLng latLng : polygon.getGeometryObject()) {
+                builder.include(latLng);
+            }
+
+            int width = getResources().getDisplayMetrics().widthPixels;
+            int height = getResources().getDisplayMetrics().heightPixels;
+            getMap().moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), width, height, 1));
+        }
+        catch (Exception e){
+
+        }
     }
 
     private class DownloadKmlFile extends AsyncTask<String, Void, byte[]> {
@@ -197,6 +204,8 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
 
         protected void onPostExecute(byte[] byteArr) {
             try {
+                if(mMap ==null || byteArr==null)
+                    return;
                 KmlLayer kmlLayer = new KmlLayer(mMap, new ByteArrayInputStream(byteArr),
                         getActivity());
                 kmlLayer.addLayerToMap();

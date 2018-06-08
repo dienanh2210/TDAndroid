@@ -157,13 +157,5 @@
 
 
     </LinearLayout>
-    <!--> <Button
-         android:layout_below="@id/txtDesc"
-         android:id="@+id/btnStartDemo"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_centerInParent="true"
-         android:text="Start Demo"
-         />
- <!-->
+
 </android.support.design.widget.CoordinatorLayout>

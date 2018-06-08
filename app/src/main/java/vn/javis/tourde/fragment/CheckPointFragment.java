@@ -79,8 +79,23 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                     public void run() {
                         // Do something after 5s = 5000ms
 
-                       // bt_checkpointleft.setEnabled(false);
+                   //    bt_checkpointleft.setEnabled(true);
                         mActivity.showSpotFacilities();
+                    }
+                }, 800);
+
+            }
+        });
+        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+
+                     //  bt_checkpointright.setEnabled(true);
+                        mActivity. showSpotImages( spotID);
                     }
                 }, 800);
 
@@ -101,21 +116,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 //                mActivity. showSpotImages( spotID);
 //            }
 //        });
-        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
 
-                        // bt_checkpointleft.setEnabled(false);
-                        mActivity. showSpotImages( spotID);
-                    }
-                }, 800);
-
-            }
-        });
     }
 
     @Override
@@ -179,7 +180,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 
         };
         handler = new Handler();
-        handler.postDelayed(runnable, 500);
+        handler.postDelayed(runnable, 1000);
 
     }
 

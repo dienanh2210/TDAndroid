@@ -48,18 +48,21 @@
             app:tabMode="fixed"
             app:tabTextColor="@color/Gray"
             app:tabSelectedTextColor="@color/Black"
+            android:background="@color/White"
+            app:tabTextAppearance="@style/TabLayoutTextBoldStyle"
             />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_65sdp"
             android:layout_marginBottom="@dimen/_50sdp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/clock_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
         android:layout_alignParentStart="true"

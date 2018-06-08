@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_36sdp"
+    android:background="@color/search_course_color_title_background"
+    >
+
+
+    <TextView
+        android:id="@+id/group_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_1sdp"
+        android:gravity="center_vertical"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:textSize="@dimen/_13ssp"
+        tools:text="Genre" />
+
+
+
+    <include layout="@layout/item_divider"/>
+
+</FrameLayout>
