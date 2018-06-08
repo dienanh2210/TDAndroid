@@ -49,6 +49,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.apiservice.CommentsAPI;
+import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
@@ -64,7 +65,10 @@ import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.fragment.SpotFacilitiesFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
+import vn.javis.tourde.model.CourseData;
+import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Location;
+import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -410,12 +414,40 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         if (!boolean_permission)
             fn_permission();
         else {
+            final ArrayList<Location> lstLOcat = new ArrayList<>();
             intentGPS = new Intent(this, GoogleService.class);
-            ArrayList<Location> lstLOcat = new ArrayList<>();
-            Location location1 = new Location(1, 21.0243063, 105.7848029);
-            lstLOcat.add(location1);
-            intentGPS.putExtra("location", lstLOcat);
-            startService(intentGPS);
+            if (mCourseID > 0) {
+                Log.i("onBind", "" + mCourseID);
+                GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
+                    @Override
+                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                        JSONObject jsonObjec = (JSONObject) response;
+                        if (!jsonObjec.has("error")) {
+                            CourseDetail courseData = new CourseDetail((JSONObject) response);
+                            List<Spot> lstSpot = courseData.getSpot();
+                            for (Spot spot : lstSpot) {
+                                Location location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+                                //  Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLatitude()));
+                                if (!lstLOcat.contains(location1))
+                                    lstLOcat.add(location1);
+
+                            }
+                            intentGPS.putExtra("location", lstLOcat);
+                            startService(intentGPS);
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+
+                    }
+                });
+            } else {
+                intentGPS.putExtra("location", lstLOcat);
+                startService(intentGPS);
+            }
+
+
             Log.i("GPSLOG", "turn on \n");
         }
     }

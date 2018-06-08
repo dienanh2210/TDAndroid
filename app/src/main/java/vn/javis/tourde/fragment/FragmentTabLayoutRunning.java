@@ -74,7 +74,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     Double latitude;
     Double longtitude;
     Geocoder geocoder;
-
+    boolean changePaged;
     private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
     //  TextView tv_back_password;
     private RegisterActivity activity;
@@ -85,9 +85,19 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivity = (CourseListActivity) getActivity();
+    }
+
     @SuppressLint("SetTextI18n")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mActivity = (CourseListActivity) getActivity();
+        Intent intent1 = new Intent("googleservice");
+        intent1.putExtra("test","tét");
+
+        mActivity. sendBroadcast(intent1);
+
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
@@ -143,7 +153,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
 
         spotRecycler.setAdapter(listSpotCheckinAdapter);
-        //   mActivity.fn_permission();
+
+        mActivity.fn_permission();
 
     }
 
@@ -151,35 +162,33 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        mActivity.unregisterReceiver(broadcastReceiver);
+      //  mActivity.unregisterReceiver(broadcastReceiver);
         mActivity.unregisterReceiver(broadcastReceiverArried);
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
-            latitude = Double.valueOf(intent.getStringExtra("latutide"));
-            longtitude = Double.valueOf(intent.getStringExtra("longitude"));
-            Log.i("latutide", "" + latitude);
-            Log.i("longitude", "" + longtitude);
-
+         //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
+       //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
         }
     };
 
     private BroadcastReceiver broadcastReceiverArried = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
+            if(changePaged)
+                return;
             ArrayList<Location> lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
             if (!lst.isEmpty()) {
                 Log.i("latutide111", "" + lst.get(0).getLatitude());
+
                 if (lst.size() == 1) {
                     mActivity.openPage(new CheckPointFragment(),true, false);
                 } else {
                     show_select_spot.setVisibility(View.VISIBLE);
                 }
-
+                changePaged=true;
             }
 
         }
@@ -222,7 +231,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
+    //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
 
     }

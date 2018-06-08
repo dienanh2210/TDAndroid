@@ -64,7 +64,7 @@ public class CourseDriveFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAcitivity = (CourseListActivity) getActivity();
         courseID = mAcitivity.getmCourseID();
-        mAcitivity.fn_permission();
+        mAcitivity.turnOnGPS();
         getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
             @Override
