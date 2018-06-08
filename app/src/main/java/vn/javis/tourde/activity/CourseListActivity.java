@@ -38,6 +38,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.sql.Struct;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +53,7 @@ import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.FinishCourseFragment;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.fragment.LoginFragment;
@@ -58,6 +61,7 @@ import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.fragment.SpotFacilitiesFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
+import vn.javis.tourde.model.Location;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -111,7 +115,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
         fn_permission();
-
+    //    showCourseFinish();
     }
 
     public String getMapUrl() {
@@ -228,7 +232,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
-
+    public void showCourseFinish(){
+        mCourseID=1;
+        dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
+        openPage(new FinishCourseFragment(),true,false);
+    }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
         fragment.setArguments(dataBundle);
@@ -372,6 +380,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             fn_permission();
         else {
             intentGPS = new Intent(this, GoogleService.class);
+            ArrayList<Location> lstLOcat = new ArrayList<>();
+            Location location1 =new Location(1,21.0243063,105.7848029);
+            lstLOcat.add(location1);
+            intentGPS.putExtra("location",lstLOcat);
             startService(intentGPS);
             Log.i("GPSLOG", "turn on \n");
         }
@@ -434,4 +446,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         }
         return false;
     }
+
 }
+

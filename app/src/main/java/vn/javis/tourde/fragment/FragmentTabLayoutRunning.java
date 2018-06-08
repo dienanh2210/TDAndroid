@@ -1,6 +1,12 @@
 package vn.javis.tourde.fragment;
 
 import android.annotation.SuppressLint;;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -23,6 +29,8 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +43,9 @@ import vn.javis.tourde.adapter.ListSpotLog;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.Location;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 
@@ -61,6 +71,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     RecyclerView spotRecycler;
     ListCheckInSpot listSpotCheckinAdapter;
     long time;
+    Double latitude;
+    Double longtitude;
+    Geocoder geocoder;
+
     private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
     //  TextView tv_back_password;
     private RegisterActivity activity;
@@ -91,7 +105,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         chronometer.setBase(time);
         chronometer.setText("00:00:00");
         chronometer.start();
-        Log.i("timer",""+SystemClock.elapsedRealtime());
+        Log.i("timer", "" + SystemClock.elapsedRealtime());
         initTabControl();
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -113,7 +127,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
                     @Override
                     public void onItemClick(int position) {
-                        mActivity.openPage(new CheckPointFragment(),true,false);
+                        mActivity.openPage(new CheckPointFragment(), true, false);
                     }
                 });
                 spotRecycler.setAdapter(listSpotCheckinAdapter);
@@ -129,9 +143,47 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
 
         spotRecycler.setAdapter(listSpotCheckinAdapter);
-     //   mActivity.fn_permission();
+        //   mActivity.fn_permission();
 
     }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mActivity.unregisterReceiver(broadcastReceiver);
+        mActivity.unregisterReceiver(broadcastReceiverArried);
+    }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            latitude = Double.valueOf(intent.getStringExtra("latutide"));
+            longtitude = Double.valueOf(intent.getStringExtra("longitude"));
+            Log.i("latutide", "" + latitude);
+            Log.i("longitude", "" + longtitude);
+
+        }
+    };
+
+    private BroadcastReceiver broadcastReceiverArried = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            ArrayList<Location> lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
+            if (!lst.isEmpty()) {
+                Log.i("latutide111", "" + lst.get(0).getLatitude());
+                if (lst.size() == 1) {
+                    mActivity.openPage(new CheckPointFragment(),true, false);
+                } else {
+                    show_select_spot.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+        }
+    };
 
     @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
     public void onClick(View view) {
@@ -144,7 +196,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 pauseOffset = time - chronometer.getBase();
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
-                show_select_spot.setVisibility(View.VISIBLE);
+                //show_select_spot.setVisibility(View.VISIBLE);
                 mActivity.turnOffGPS();
                 break;
             case R.id.resume:
@@ -170,6 +222,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
 
+        mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
+        mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
 
     }
 

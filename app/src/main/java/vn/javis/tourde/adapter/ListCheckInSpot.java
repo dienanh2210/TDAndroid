@@ -40,12 +40,13 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
         return new ListCheckInSpot.SpotViewHolder(mView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final ListCheckInSpot.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Spot model = listSpot.get(position);
-        if (model.getTopImage() != null && model.getTopImage() != "")
+        if (model.getTopImage() != null && !model.getTopImage().equals("")) {
             PicassoUtil.getSharedInstance(activityContext).load(model.getTopImage()).resize(0, 100).transform(new CircleTransform()).into(holder.image_checkin_spot);
-
+        }
         holder.tv_spot_nunber.setText("スポット" + (model.getOrderNumber()+1));
         holder.tv_spot_name.setText(model.getTitle());
         /*if (model.getTopImage() != null && model.getTopImage() !="")

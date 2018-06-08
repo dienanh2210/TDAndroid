@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.droidsonroids.gif.GifImageView;
@@ -45,9 +47,9 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ListSpotLog.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Spot model = listSpot.get(position);
-        int spotID = model.getOrderNumber()+1;
+        int spotID = model.getOrderNumber() + 1;
         holder.txt_spotName.setText(model.getTitle());
-        holder.spot_id.setText(""+spotID);
+        holder.spot_id.setText("" + spotID);
         /*if (model.getTopImage() != null && model.getTopImage() !="")
             Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);*/
 
@@ -59,11 +61,35 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 }
             }
         });
-       if(position==listSpot.size()-1)
-       {
-           holder.img_link_spot.setVisibility(View.GONE);
-       }
-
+        if (position == listSpot.size() - 1) {
+            holder.img_link_spot.setVisibility(View.GONE);
+        }
+        if (position == 0) {
+            holder.BG_spot.setImageResource(R.drawable.boder_white);
+            holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
+            holder.showInfoSpot.setVisibility(View.VISIBLE);
+            //holder.img_link_spot.setVisibility(View.VISIBLE);
+            holder.imgShowChecked.setVisibility(View.VISIBLE);
+            holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
+            holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
+            holder.img_link_vitual.setVisibility(View.GONE);
+        }
+        else if(position==1)
+        {
+            holder.BG_spot.setImageResource(R.drawable.boder_white);
+            holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
+            //holder.showInfoSpot.setVisibility(View.VISIBLE);
+            holder.img_link_spot.setVisibility(View.VISIBLE);
+            holder.imgShowChecked.setVisibility(View.VISIBLE);
+            holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
+            holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
+            holder.img_link_vitual.setVisibility(View.GONE);
+        }
+        else if(position==2)
+        {}
+        else {
+            holder.spot.setAlpha((float) 0.3);
+        }
 
     }
 
@@ -74,14 +100,22 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
 
     public class SpotViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.success)
-        ImageView imgShowSuccess;
+        @BindView(R.id.spot)
+        RelativeLayout spot;
+        @BindView(R.id.BG_spot)
+        ImageView BG_spot;
+        @BindView(R.id.checked)
+        ImageView imgShowChecked;
         @BindView(R.id.txt_spotName)
         TextView txt_spotName;
         @BindView(R.id.number)
         TextView spot_id;
         @BindView(R.id.img_link)
         GifImageView img_link_spot;
+        @BindView(R.id.img_link_vitual)
+        GifImageView img_link_vitual;
+        @BindView(R.id.showInfoSpot)
+        RelativeLayout showInfoSpot;
 
         boolean isRunning;
 

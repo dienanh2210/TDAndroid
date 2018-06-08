@@ -6,8 +6,11 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +25,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,8 +42,10 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +66,7 @@ import vn.javis.tourde.utils.CameraPreview;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
-public class TakePhotoFragment extends BaseFragment {
+public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Callback{
 
     CourseListActivity mActivity;
     @BindView(R.id.txt_title)
@@ -79,12 +86,16 @@ public class TakePhotoFragment extends BaseFragment {
     ImageButton btnCapture;
     @BindView(R.id.btn_back_take_photo)
     ImageButton btnBack;
-
+    Bitmap bitmap;
     Camera camera;
     CameraPreview cameraPreview;
     int cameraType = 0;
     int spotId;
     int courseID;
+    @BindView(R.id.surfaceView)
+    SurfaceView surfaceView;
+    public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
+    private static String imageStoragePath;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -131,13 +142,15 @@ public class TakePhotoFragment extends BaseFragment {
         }
         if (checkCameraHardware()) {
 
-            camera = getCameraInstance(cameraType);
+            /*camera = getCameraInstance(cameraType);
             cameraPreview = new CameraPreview(mActivity, camera, cameraType);
             frameCamera.addView(cameraPreview);
-            camera.setFaceDetectionListener(new MyFaceDetectionListener());
-
-            setFocus();
-            startFaceDetection();
+            camera.setFaceDetectionListener(new MyFaceDetectionListener());*/
+            SurfaceHolder surfaceHolder = surfaceView.getHolder();
+            surfaceHolder.addCallback(this);
+            surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+            /*setFocus();
+            startFaceDetection();*/
         } else {
             Toast.makeText(mActivity, "Device not support camera feature", Toast.LENGTH_SHORT).show();
         }
@@ -210,8 +223,11 @@ public class TakePhotoFragment extends BaseFragment {
         }
     }
 
-    private Camera getCameraInstance(int cameraType) {
-        Camera camera = null;
+   /* private Camera getCameraInstance(int cameraType) {
+        SurfaceHolder surfaceHolder = surfaceView.getHolder();
+        surfaceHolder.addCallback(this);
+        surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        *//*Camera camera = null;
 //        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
 //        for (int i=0;i<Camera.getNumberOfCameras();i++){
 //            Camera.CameraInfo camInfo = new Camera.CameraInfo();
@@ -226,8 +242,8 @@ public class TakePhotoFragment extends BaseFragment {
 //            }
 //        }
 
-        return camera;
-    }
+        return camera;*//*
+    }*/
 
     Camera.ShutterCallback myShutterCallback = new Camera.ShutterCallback() {
 
@@ -237,6 +253,29 @@ public class TakePhotoFragment extends BaseFragment {
 
         }
     };
+
+    @Override
+    public void surfaceCreated(SurfaceHolder surfaceHolder) {
+        camera = android.hardware.Camera.open();
+        try {
+            setFocus();
+            camera.setDisplayOrientation(90);
+            camera.setPreviewDisplay(surfaceHolder);
+            camera.startPreview();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+    }
 
     class MyFaceDetectionListener implements Camera.FaceDetectionListener {
 
@@ -256,7 +295,7 @@ public class TakePhotoFragment extends BaseFragment {
     private Camera.PictureCallback pictureCallback = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            if ((ContextCompat.checkSelfPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+           /* if ((ContextCompat.checkSelfPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
                 Toast.makeText(mActivity.getApplicationContext(), "Please allow perminssion to access your memory", Toast.LENGTH_LONG);
             }
             File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS) + "/" + System.currentTimeMillis() + ".jpg");
@@ -298,12 +337,38 @@ public class TakePhotoFragment extends BaseFragment {
             camera.startPreview();
            // btnCapture.setVisibility(View.GONE);
            // takeScreenshot();
-            Log.d("tag", "Camera ok ");
+            Log.d("tag", "Camera ok ");*/
+
+            bitmap = BitmapFactory.decodeByteArray(data, 0, (data) != null ? data.length : 0);
+            File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS) + "/" + System.currentTimeMillis() + ".jpg");
+            imageStoragePath = file.getAbsolutePath();
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            bitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+            FileOutputStream outStream = null;
+            try {
+                outStream = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+                outStream.flush();
+                outStream.close();
+                Bitmap second = addLayout(bitmap);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                second.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                MediaStore.Images.Media.insertImage(mActivity.getContentResolver(),
+                        second, imageStoragePath, "" + new Date().getTime());
+                //previewCapturedImage(second);
+            } catch (Exception e) {
+                e.getMessage();
+                Log.d("getMessage", e.getMessage());
+            }
+
 
         }
 
+
+
     };
-    private void takeScreenshot() {
+    /*private void takeScreenshot() {
         Date now = new Date();
         android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
 
@@ -330,12 +395,53 @@ public class TakePhotoFragment extends BaseFragment {
             // Several error may come out with file handling or DOM
             e.printStackTrace();
         }
-    }
-    private void openScreenshot(File imageFile) {
+    }*/
+    /*private void openScreenshot(File imageFile) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         Uri uri = Uri.fromFile(imageFile);
         intent.setDataAndType(uri, "image/*");
         startActivity(intent);
+    }*/
+
+    private Bitmap addLayout(Bitmap toEdit){
+
+        Bitmap dest = toEdit.copy(Bitmap.Config.ARGB_8888, true);
+        int pictureHeight = dest.getHeight();
+        int pictureWidth = dest.getWidth();
+        int margin = 50;
+        int padding = 100;
+
+
+
+        Canvas canvas = new Canvas(dest);
+
+        Paint painText = new Paint();  //set the look
+        painText.setAntiAlias(true);
+        painText.setColor(Color.WHITE);
+        painText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        painText.setStyle(Paint.Style.FILL);
+        painText.setShadowLayer(2.0f, 1.0f, 1.0f, Color.GRAY);
+        painText.setTextSize(pictureHeight * .04629f);
+
+        Paint paintLine = new Paint();  //set the look
+        paintLine.setAntiAlias(true);
+        paintLine.setColor(Color.WHITE);
+        paintLine.setStyle(Paint.Style.FILL);
+        paintLine.setStrokeWidth(10f);
+        paintLine.setShadowLayer(2.0f, 1.0f, 1.0f, Color.GRAY);
+
+        //Draw line 1
+        canvas.drawLine(padding,pictureHeight*2/3 + margin,pictureWidth/3,pictureHeight*2/3 + margin,paintLine);
+        canvas.drawText("COURSE" , padding,  pictureHeight*2/3 , painText);
+        canvas.drawLine(pictureWidth *2/3,pictureHeight*2/3 + margin,pictureWidth - padding,pictureHeight*2/3 + margin,paintLine);
+        canvas.drawText("SPOT" , pictureWidth *2/3,  pictureHeight*2/3 , painText);
+        //Draw line 2
+        canvas.drawLine(padding,pictureHeight*5/6 + margin,pictureWidth/3,pictureHeight*5/6 + margin,paintLine);
+        canvas.drawText("TIME" , padding,  pictureHeight*5/6 , painText);
+        canvas.drawLine(pictureWidth *2/3,pictureHeight*5/6 + margin,pictureWidth - padding,pictureHeight*5/6 + margin,paintLine);
+        canvas.drawText("DISTANCE" , pictureWidth *2/3,  pictureHeight*5/6 , painText);
+        return dest;
     }
+
 }
