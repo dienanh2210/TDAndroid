@@ -58,6 +58,7 @@ import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.FinishCourseFragment;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.fragment.LoginFragment;
@@ -127,7 +128,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-        //fn_permission();
+
+        fn_permission();
+    //    showCourseFinish();
 
     }
 
@@ -253,7 +256,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
-
+    public void showCourseFinish(){
+        mCourseID=1;
+        dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
+        openPage(new FinishCourseFragment(),true,false);
+    }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
         fragment.setArguments(dataBundle);

@@ -32,5 +32,6 @@
 
     <color name="BG_countDown">#12476f</color>
     <color name="BG_courseDetail">#f3f5f7</color>
+    <color name="BG_finish_course">#0A2C45</color>
 
 </resources>

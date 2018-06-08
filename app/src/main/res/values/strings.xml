@@ -326,5 +326,10 @@
     <string name="textleftcheckbox">同意する</string>
     <string name="textrightcheckbox">同意しない</string>
 
+    <!--finish -->
+    <string name="coursetime">コース完走日</string>
+    <string name="share_travel_log">走行結果をシェア</string>
+    <string name="confirm_log">ログを確認</string>
+    <string name="end_running">走行を終了</string>
 </resources>
 
