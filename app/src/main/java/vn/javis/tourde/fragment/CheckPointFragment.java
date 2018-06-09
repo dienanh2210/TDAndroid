@@ -79,8 +79,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
         mActivity = (CourseListActivity) getActivity();
-        if (!imgUrl.isEmpty())
-            PicassoUtil.getSharedInstance(mActivity).load(imgUrl).into(imgView);
+
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,17 +184,17 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         textView.startAnimation(anim_text);
     }
 
-    public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, String tag) {
+    public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, String url) {
 
-        if (textView != null && !s.isEmpty() && v != null && tag != null) {
+        if (textView != null && !s.isEmpty() && v != null && url != null) {
             final Animation anim_img = AnimationUtils.loadAnimation(c, R.anim.rotate_up);
             final Animation anim_text = AnimationUtils.loadAnimation(c, R.anim.rotate_up_in);
-
+            if (!url.isEmpty())
+                PicassoUtil.getSharedInstance(c).load(url).into(v);
             textView.setText(s);
-            v.setTag(tag);
+            v.setTag(url);
             v.startAnimation(anim_img);
             textView.startAnimation(anim_text);
-
         }
     }
 

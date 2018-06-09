@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
@@ -68,6 +69,13 @@ public class FinishCourseFragment extends BaseFragment {
     ImageView imgCourse;
     @BindView(R.id.img_post_user_detail)
     ImageView imgPostUser;
+    @BindView(R.id.txt_btn_ping)
+    TextView btnShare;
+    @BindView(R.id.txt_btn_blue)
+    TextView btnShowLoging;
+    @BindView(R.id.txt_btn_gray)
+    TextView btnToDetail;
+
     boolean isFavourite;
     private CourseDetail mCourseDetail;
 
@@ -101,11 +109,11 @@ public class FinishCourseFragment extends BaseFragment {
                         PicassoUtil.getSharedInstance(activity).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(imgPostUser);
                     }
                     txtTitle.setText(model.getTitle());
-                    txtDistance.setText(model.getDistance()+"km");
-                    txtAvageSpeed.setText(avage_speed+"km/h");
+                    txtDistance.setText(model.getDistance() + "km");
+                    txtAvageSpeed.setText(avage_speed + "km/h");
                     DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
                     Date date = new Date();
-                    txtElevation.setText(model.getElevation()+"m");
+                    txtElevation.setText(model.getElevation() + "m");
                     txtDate.setText(dateFormat.format(date));
                     txtTime.setText(time_finish);
                 }
@@ -117,7 +125,29 @@ public class FinishCourseFragment extends BaseFragment {
             }
         });
 
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        btnShowLoging.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActivity.showFragmentTabLayoutRunning();
+            }
+        });
+        btnToDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProcessDialog.showDialogConfirm(mActivity, "", "終了してコース画面へ 戻りますが宜しいですか？", new ProcessDialog.OnActionDialogClickOk() {
+                    @Override
+                    public void onOkClick() {
+                        mActivity.ShowCourseDetail(mCourseID);
+                    }
+                });
+            }
+        });
     }
 
     @Override

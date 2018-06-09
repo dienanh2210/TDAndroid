@@ -92,7 +92,6 @@ public class GoogleService extends Service implements LocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        registerReceiver(broadcastReceiver, new IntentFilter("googleservice"));
         mTimer = new Timer();
         mTimer.schedule(new TimerTaskToGetLocation(), timeDelay, notify_interval);
         intent = new Intent(str_receiver);

@@ -320,10 +320,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
             mSpotID = spotID;
-
             dataBundle.putInt(SPOT_ID, mSpotID);
-            dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-            openPage(new TakePhotoFragment(), true, false);
+            dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
+//            openPage(new TakePhotoFragment(), true, false);
+            Intent intent = new Intent(this, TakePhotoActivity.class);
+            intent.putExtra(SPOT_ID, mSpotID);
+            intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+            startActivity(intent);
+
         }
     }
 
@@ -416,7 +420,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         switch (requestCode) {
             case MY_CAMERA_PERMISSION_CODE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    openPage(new TakePhotoFragment(), true, false);
+//                    openPage(new TakePhotoFragment(), true, false);
+                    Intent intent = new Intent(this, TakePhotoActivity.class);
+                    intent.putExtra(SPOT_ID, mSpotID);
+                    intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+                    startActivity(intent);
                 }
             }
             case REQUEST_PERMISSIONS: {

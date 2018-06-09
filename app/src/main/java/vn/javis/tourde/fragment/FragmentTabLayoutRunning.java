@@ -100,11 +100,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     @SuppressLint("SetTextI18n")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Intent intent1 = new Intent("googleservice");
-        intent1.putExtra("test", "tét");
-
-        mActivity.sendBroadcast(intent1);
-
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {

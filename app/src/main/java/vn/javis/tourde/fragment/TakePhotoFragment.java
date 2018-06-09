@@ -95,7 +95,7 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
     int cameraType = 0;
     int spotId;
     int courseID;
-    @BindView(R.id.surfaceView)
+//    @BindView(R.id.surfaceView)
     SurfaceView surfaceView;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
     private static String imageStoragePath;
