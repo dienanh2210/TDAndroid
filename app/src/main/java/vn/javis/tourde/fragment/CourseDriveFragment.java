@@ -66,8 +66,14 @@ public class CourseDriveFragment extends BaseFragment {
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                title_detail.setText(mCourseDetail.getmCourseData().getTitle());
+                JSONObject jsonObject = (JSONObject) response;
+                if (jsonObject.has("error")) {
+                    Log.i("Error course drive73", response.toString());
+                } else {
+                    CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+                    if(mCourseDetail.getmCourseData()!=null)
+                        title_detail.setText(mCourseDetail.getmCourseData().getTitle()==null ?"":mCourseDetail.getmCourseData().getTitle());
+                }
             }
 
             @Override

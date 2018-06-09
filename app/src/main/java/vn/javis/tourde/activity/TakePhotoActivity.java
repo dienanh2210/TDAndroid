@@ -1,40 +1,26 @@
-package vn.javis.tourde.fragment;
+package vn.javis.tourde.activity;
 
 import android.Manifest;
-import android.content.Intent;
+import android.app.ActionBar;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Point;
 import android.hardware.Camera;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,26 +35,27 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import vn.javis.tourde.R;
-import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.activity.MenuPageActivity;
-import vn.javis.tourde.activity.TakePhotoActivity;
-import vn.javis.tourde.adapter.ListBadgeAdapter;
-import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
-import vn.javis.tourde.model.Badge;
+import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.CameraPreview;
+import vn.javis.tourde.utils.TimeUtil;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
-public class TakePhotoFragment extends BaseFragment {
+/**
+ * Created by QuanPham on 6/9/18.
+ */
 
-    TakePhotoActivity mActivity;
+public class TakePhotoActivity extends AppCompatActivity {
+
+    @Nullable
     @BindView(R.id.txt_title)
     TextView txtTitle;
     @BindView(R.id.txt_course_title)
@@ -97,41 +84,25 @@ public class TakePhotoFragment extends BaseFragment {
     int courseID;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivity = (TakePhotoActivity) getActivity();
-        setRetainInstance(true);
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-    }
+        setContentView(R.layout.take_photo);
+        ButterKnife.bind(this);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    private void setHeightView(View view) {
-        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
-        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-
-        FrameLayout.LayoutParams layoutParams;
-        layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
-        layoutParams.height = height;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        setHeightView(view);
-//        spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
-//        courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
-        spotId = mActivity.getIntent().getIntExtra(CourseListActivity.SPOT_ID, 0);
-        courseID = mActivity.getIntent().getIntExtra(CourseListActivity.COURSE_DETAIL_ID, 0);
+        spotId = getIntent().getIntExtra(CourseListActivity.SPOT_ID, 0);
+        courseID = getIntent().getIntExtra(CourseListActivity.COURSE_DETAIL_ID, 0);
 
         if (spotId > 0) {
             SpotDataAPI.getSpotData(spotId, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                     JSONObject jsonObject = (JSONObject) response;
+                    Log.i("getSpotData", jsonObject.toString());
                     if (jsonObject.has("error"))
                         return;
                     SpotData spotData = SpotData.getSpotData(response.toString());
@@ -139,7 +110,7 @@ public class TakePhotoFragment extends BaseFragment {
                         return;
                     spotTitle.setText(spotData.getData().getTitle());
                     if (spotData.getData().getInsertDatetime() != null && spotData.getData().getInsertDatetime() != "")
-                        txtTime.setText(spotData.getData().getInsertDatetime());
+                        txtTime.setText(TimeUtil.formatDateFromString(TimeUtil.DATE_FORMAT, TimeUtil.DATE_FORMAT1, spotData.getData().getInsertDatetime()));
                 }
 
                 @Override
@@ -153,10 +124,12 @@ public class TakePhotoFragment extends BaseFragment {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                     JSONObject jsonObject = (JSONObject) response;
+                    Log.i("getCourseData", jsonObject.toString());
                     if (jsonObject.has("error"))
                         return;
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                     courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
+                    txtDistance.setText(mCourseDetail.getmCourseData().getDistance() + "km");
                 }
 
                 @Override
@@ -167,19 +140,17 @@ public class TakePhotoFragment extends BaseFragment {
         }
 
 
-            if (checkCameraHardware()) {
-                camera = getCameraInstance(cameraType);
-                cameraPreview = new CameraPreview(mActivity, camera, cameraType);
-                frameCamera.addView(cameraPreview);
-                Log.i("camera", ""+camera);
-                camera.setFaceDetectionListener(new MyFaceDetectionListener());
+        if (checkCameraHardware()) {
+            camera = getCameraInstance(cameraType);
+            cameraPreview = new CameraPreview(this, camera, cameraType);
+            frameCamera.addView(cameraPreview);
+            camera.setFaceDetectionListener(new TakePhotoActivity.MyFaceDetectionListener());
 
-                setFocus();
-                startFaceDetection();
-            } else {
-                Toast.makeText(mActivity, "Device not support camera feature", Toast.LENGTH_SHORT).show();
-            }
-
+            setFocus();
+            startFaceDetection();
+        } else {
+            Toast.makeText(TakePhotoActivity.this, "Device not support camera feature", Toast.LENGTH_SHORT).show();
+        }
 
 
         btnCapture.setOnClickListener(new View.OnClickListener() {
@@ -192,15 +163,20 @@ public class TakePhotoFragment extends BaseFragment {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.onBackPressed();
+                onBackPressed();
             }
         });
     }
 
-    @Override
-    public View getView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.take_photo, container, false);
+    private void setHeightView(View view) {
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+
+        FrameLayout.LayoutParams layoutParams;
+        layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
+        layoutParams.height = height;
     }
+
 
     public void setFocus() {
         Camera.Parameters params = camera.getParameters();
@@ -244,7 +220,7 @@ public class TakePhotoFragment extends BaseFragment {
 
     private boolean checkCameraHardware() {
 
-        if (mActivity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             return true;
         } else {
             return false;
@@ -252,7 +228,7 @@ public class TakePhotoFragment extends BaseFragment {
     }
 
     private Camera getCameraInstance(int cameraType) {
-        Log.i("cameraType", ""+cameraType);
+        Log.i("cameraType", "" + cameraType);
         Camera camera = null;
 //        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
 //        for (int i=0;i<Camera.getNumberOfCameras();i++){
@@ -284,22 +260,22 @@ public class TakePhotoFragment extends BaseFragment {
 
         @Override
         public void onFaceDetection(Camera.Face[] faces, Camera camera) {
-            if (faces.length > 0) {
+            /*if (faces.length > 0) {
                 Log.d("FaceDetection", "face detected: " + faces.length +
                         " Face 1 Location X: " + faces[0].rect.centerX() +
                         "Y: " + faces[0].rect.centerY());
-                Toast.makeText(mActivity, "face detected: " + faces.length +
+                Toast.makeText(TakePhotoActivity.this, "face detected: " + faces.length +
                         " Face 1 Location X: " + faces[0].rect.centerX() +
                         "Y: " + faces[0].rect.centerY(), Toast.LENGTH_SHORT).show();
-            }
+            }*/
         }
     }
 
     private Camera.PictureCallback pictureCallback = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            if ((ContextCompat.checkSelfPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
-                Toast.makeText(mActivity.getApplicationContext(), "Please allow perminssion to access your memory", Toast.LENGTH_LONG);
+            if ((ContextCompat.checkSelfPermission(TakePhotoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+                Toast.makeText(getApplicationContext(), "Please allow perminssion to access your memory", Toast.LENGTH_LONG);
             }
             File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS) + "/" + System.currentTimeMillis() + ".jpg");
             if (file == null) {
@@ -331,7 +307,7 @@ public class TakePhotoFragment extends BaseFragment {
                 bm.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
                 fileOutputStream.flush();
                 fileOutputStream.close();
-                MediaStore.Images.Media.insertImage(mActivity.getContentResolver(),
+                MediaStore.Images.Media.insertImage(getContentResolver(),
                         bm, myPath.getPath(), "" + new Date().getTime());
             } catch (Exception e) {
                 e.getMessage();
@@ -346,53 +322,8 @@ public class TakePhotoFragment extends BaseFragment {
 
     };
 
-
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(getContext(), "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            Toast.makeText(getContext(), "portrait", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void takeScreenshot() {
-        Date now = new Date();
-        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-
-        try {
-            // image naming and path  to include sd card  appending name you choose for file
-            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
-
-            // create bitmap screen capture
-            View v1 = mActivity.getWindow().getDecorView().getRootView();
-            v1.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-            v1.setDrawingCacheEnabled(false);
-
-            File imageFile = new File(mPath);
-
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
-            int quality = 100;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-            outputStream.flush();
-            outputStream.close();
-
-            openScreenshot(imageFile);
-        } catch (Throwable e) {
-            // Several error may come out with file handling or DOM
-            e.printStackTrace();
-        }
-    }
-
-    private void openScreenshot(File imageFile) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        Uri uri = Uri.fromFile(imageFile);
-        intent.setDataAndType(uri, "image/*");
-        startActivity(intent);
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

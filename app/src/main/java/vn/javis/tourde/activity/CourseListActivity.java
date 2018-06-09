@@ -278,7 +278,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             mSpotID = spotID;
             dataBundle.putInt(SPOT_ID, mSpotID);
             dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
-            openPage(new TakePhotoFragment(), true, false);
+//            openPage(new TakePhotoFragment(), true, false);
+            Intent intent = new Intent(this, TakePhotoActivity.class);
+            intent.putExtra(SPOT_ID, mSpotID);
+            intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+            startActivity(intent);
+
         }
     }
 
