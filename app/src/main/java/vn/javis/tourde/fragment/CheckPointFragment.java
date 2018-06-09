@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import pl.droidsonroids.gif.GifDrawable;
@@ -21,13 +26,18 @@ import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListCheckInSpot;
+import vn.javis.tourde.apiservice.CheckInStampAPI;
+import vn.javis.tourde.model.Stamp;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.PicassoUtil;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.OnItemClickedListener {
     GifImageView gifImgView;
     ImageView imgView;
-    @BindView( R.id.txtDesc )
+    @BindView(R.id.txtDesc)
     TextView txtView;
 
     @BindView(R.id.tv_back_password)
@@ -43,11 +53,14 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     Handler handler;
     CourseListActivity mActivity;
     private GifDrawable gifDrawable;
-    @BindView( R.id.bt_checkpointleft )
+    @BindView(R.id.bt_checkpointleft)
     Button bt_checkpointleft;
-    @BindView( R.id.bt_checkpointright )
+    @BindView(R.id.bt_checkpointright)
     Button bt_checkpointright;
     int spotID;
+    int courseID;
+    String imgUrl;
+    boolean finishedAnim;
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
@@ -62,12 +75,17 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         imgView = view.findViewById(R.id.imgMain);
-        spotID =1;
+        spotID = getArguments().getInt(CourseListActivity.SPOT_ID);
+        courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
+        imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
         mActivity = (CourseListActivity) getActivity();
+        if (!imgUrl.isEmpty())
+            PicassoUtil.getSharedInstance(mActivity).load(imgUrl).into(imgView);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showTakePhoto(spotID);
+                if (finishedAnim)
+                    mActivity.showTakePhoto(spotID);
             }
         });
 
@@ -78,9 +96,9 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                     @Override
                     public void run() {
                         // Do something after 5s = 5000ms
-
-                    //  bt_checkpointleft.setEnabled(true);
-                        mActivity.showSpotFacilities();
+                        //  bt_checkpointleft.setEnabled(true);
+                        if (finishedAnim)
+                            mActivity.showSpotFacilities();
                     }
                 }, 1000);
 
@@ -94,29 +112,41 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                     public void run() {
                         // Do something after 5s = 5000ms
 
-                   //    bt_checkpointright.setEnabled(true);
-                        mActivity. showSpotImages( spotID);
+                        //    bt_checkpointright.setEnabled(true);
+                        if (finishedAnim)
+                            mActivity.showSpotImages(spotID);
                     }
                 }, 1000);
 
             }
         });
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
 
-//        bt_checkpointleft.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                mActivity.openPage(SpotFacilitiesFragment.newInstance(this), true,false);
-//            }
-//        });
-//        bt_checkpointright.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                mActivity. showSpotImages( spotID);
-//            }
-//        });
-//
+                if (imgView.getTag() == null) {
+                     ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+                //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+                    handler.postDelayed(runnable, 1000);
+                } else {
+                    // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
+                    //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
+                    //  .setVisibility( View.GONE );
+                    //  ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
+                    //  ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
+
+                    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+                    ImageViewAnimatedChange(mActivity, txtView, "『琵琶湖1周』", imgView, imgUrl);
+                    finishedAnim = true;
+
+                }
+            }
+
+
+        };
+
+        handler.postDelayed(runnable, 1000);
     }
 
     @Override
@@ -139,50 +169,42 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
+        super.onCreate(savedInstanceState);
 
     }
+
     public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, final int new_image) {
 
-        final Animation anim_img = AnimationUtils.loadAnimation(c,R.anim.rotate_up);
-        final Animation anim_text = AnimationUtils.loadAnimation(c,R.anim.rotate_up_in);
+        final Animation anim_img = AnimationUtils.loadAnimation(c, R.anim.rotate_up);
+        final Animation anim_text = AnimationUtils.loadAnimation(c, R.anim.rotate_up_in);
 
-        v.setBackgroundResource(new_image);
+        v.setImageResource(new_image);
         v.setTag(new_image);
         textView.setText(s);
         v.startAnimation(anim_img);
         textView.startAnimation(anim_text);
     }
+
+    public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, String tag) {
+
+        if (textView != null && !s.isEmpty() && v != null && tag != null) {
+            final Animation anim_img = AnimationUtils.loadAnimation(c, R.anim.rotate_up);
+            final Animation anim_text = AnimationUtils.loadAnimation(c, R.anim.rotate_up_in);
+
+            textView.setText(s);
+            v.setTag(tag);
+            v.startAnimation(anim_img);
+            textView.startAnimation(anim_text);
+
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
 
 
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-
-                if (imgView.getTag() == null ) {
-                    ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
-                    handler.postDelayed( runnable,1000 );
-                } else {
-                    // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
-                    //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                  //  .setVisibility( View.GONE );
-                    ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
-                    ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
-
-                }
-            }
-
-
-        };
-        handler = new Handler();
-        handler.postDelayed(runnable, 1000);
-
     }
-
-
 
 
     @OnClick({R.id.tv_back_password})

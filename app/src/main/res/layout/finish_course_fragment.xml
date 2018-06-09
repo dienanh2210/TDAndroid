@@ -22,17 +22,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_228sdp">
 
-                <ImageView
-                    android:id="@+id/img_course_finish"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/_30sdp"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/image_description"
+                    android:layout_height="wrap_content">
 
-                    android:scaleType="fitXY" />
+                    <ImageView
+                        android:id="@+id/img_course_finish"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="false"
+                        android:layout_centerHorizontal="true"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_description"
+                        android:scaleType="fitXY" />
+                    <ImageView
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_150sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/finish" />
+                </RelativeLayout>
 
                 <ImageButton
                     android:id="@+id/btn_favorite_detail"
@@ -41,7 +50,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/icon_bicycle_gray">
+                    android:background="@drawable/icon_path">
 
                 </ImageButton>
             </RelativeLayout>
@@ -49,10 +58,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_15sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
                 android:orientation="horizontal">
 
                 <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -118,16 +127,16 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:gravity="center"
                 android:text="00:00:00"
-                android:textStyle="bold"
                 android:textColor="@color/White"
-                android:textSize="@dimen/_64sdp" />
+                android:textSize="@dimen/_64sdp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_30sdp"
                 android:paddingLeft="@dimen/_5sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:weightSum="2">
@@ -162,7 +171,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="5.20km"
+                            android:textStyle="bold"
                             android:textColor="@color/White"
                             android:textSize="@dimen/_16sdp" />
                     </LinearLayout>
@@ -175,9 +184,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/Elevation"
                             android:textColor="@color/SkyBlue"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:textSize="@dimen/_14sdp" />
 
                         <View
@@ -190,7 +199,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="400m"
+                            android:textStyle="bold"
                             android:textColor="@color/White"
                             android:textSize="@dimen/_16sdp" />
                     </LinearLayout>
@@ -211,9 +220,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/average_speed"
                             android:textColor="@color/SkyBlue"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:textSize="@dimen/_14sdp" />
 
                         <View
@@ -226,7 +235,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="100km/h"
+                            android:textStyle="bold"
                             android:textColor="@color/White"
                             android:textSize="@dimen/_16sdp" />
                     </LinearLayout>
@@ -239,9 +248,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/coursetime"
                             android:textColor="@color/SkyBlue"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:textSize="@dimen/_14sdp" />
 
                         <View
@@ -254,7 +263,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="2018.03.24"
+                            android:textStyle="bold"
                             android:textColor="@color/White"
                             android:textSize="@dimen/_16sdp" />
                     </LinearLayout>
@@ -267,16 +276,16 @@
             android:layout_height="wrap_content"
             android:background="@color/colorTextF4F6F8"
             android:orientation="vertical"
-            android:paddingTop="@dimen/_20sdp"
             android:paddingBottom="@dimen/_20sdp"
             android:paddingLeft="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp">
+            android:paddingRight="@dimen/_15sdp"
+            android:paddingTop="@dimen/_20sdp">
 
             <TextView
                 android:id="@+id/txt_btn_ping"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
-                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:background="@drawable/custom_frame"
                 android:gravity="center"
                 android:text="@string/share_travel_log"
@@ -288,7 +297,7 @@
                 android:id="@+id/txt_btn_blue"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
-                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:background="@drawable/custom_frame_blue"
                 android:gravity="center"
                 android:text="@string/confirm_log"
@@ -300,7 +309,7 @@
                 android:id="@+id/txt_btn_gray"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
-                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:background="@drawable/custom_frame_gray"
                 android:gravity="center"
                 android:text="@string/end_running"

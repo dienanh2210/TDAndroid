@@ -53,6 +53,7 @@ import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
+import vn.javis.tourde.fragment.CheckPointFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.CourseDriveFragment;
@@ -61,6 +62,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.FinishCourseFragment;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
+import vn.javis.tourde.fragment.GoalFragment;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
@@ -86,6 +88,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public static final int MY_CAMERA_PERMISSION_CODE = 100;
     public static final String COURSE_DETAIL_ID = "COURSE_ID";
     public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
+    public static final String STAMP_IMAGE = "stamp_img";
+    public static final String AVARAGE_SPEED = "avarage_speed";
+    public static final String TIME_FINISH = "time_finish";
+
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
 
@@ -107,7 +113,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     boolean boolean_permission;
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
-    double latitude=0, longitude=0;
+    double latitude = 0, longitude = 0;
     Geocoder geocoder;
     Bundle dataBundle;
 
@@ -130,7 +136,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         medit = mPref.edit();
 
         fn_permission();
-    //    showCourseFinish();
+        //    showCourseFinish();
 
     }
 
@@ -256,10 +262,19 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
-    public void showCourseFinish(){
-        mCourseID=1;
-        dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
-        openPage(new FinishCourseFragment(),true,false);
+    public void showGoalFragment(float speed,String time){
+        mCourseID = 1;
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
+        dataBundle.putString(TIME_FINISH, time);
+        openPage(new GoalFragment(), true, false);
+    }
+    public void showCourseFinish(String speed,String time) {
+        mCourseID = 1;
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(AVARAGE_SPEED, speed);
+        dataBundle.putString(TIME_FINISH, time);
+        openPage(new FinishCourseFragment(), true, false);
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
@@ -305,6 +320,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
             mSpotID = spotID;
+
             dataBundle.putInt(SPOT_ID, mSpotID);
             dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
             openPage(new TakePhotoFragment(), true, false);
@@ -345,6 +361,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new SearchCourseFragment(), true, false);
 
 
+    }
+
+    public void showCheckPointFragment(int mSpotID,String imgUrl) {
+        this.mSpotID = mSpotID;
+        dataBundle.putInt(SPOT_ID,mSpotID);
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(STAMP_IMAGE, imgUrl);
+        openPage(new CheckPointFragment(),true,false);
     }
 
     public void showSpotFacilities() {

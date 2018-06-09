@@ -23,8 +23,10 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -81,6 +83,8 @@ public class FinishCourseFragment extends BaseFragment {
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
+        final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
+        final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
 
         GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
             @Override
@@ -95,13 +99,15 @@ public class FinishCourseFragment extends BaseFragment {
                                 .resize(0, 400).onlyScaleDown()
                                 .into(imgCourse);
                         PicassoUtil.getSharedInstance(activity).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(imgPostUser);
-
                     }
                     txtTitle.setText(model.getTitle());
-                    txtDistance.setText(model.getDistance());
-                    txtAvageSpeed.setText(model.getAveragePace());
-                    txtElevation.setText(model.getElevation());
-                    txtDate.setText(model.getDisplayDate());
+                    txtDistance.setText(model.getDistance()+"km");
+                    txtAvageSpeed.setText(avage_speed+"km/h");
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+                    Date date = new Date();
+                    txtElevation.setText(model.getElevation()+"m");
+                    txtDate.setText(dateFormat.format(date));
+                    txtTime.setText(time_finish);
                 }
             }
 

@@ -56,7 +56,7 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(position);
+                    onItemClickedListener.onItemClick(model.getSpotId());
                 }
             }
         });
@@ -86,7 +86,7 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
     }
 
     public interface OnItemClickedListener {
-        void onItemClick(int position);
+        void onItemClick(int id);
     }
 
     private OnItemClickedListener onItemClickedListener;
