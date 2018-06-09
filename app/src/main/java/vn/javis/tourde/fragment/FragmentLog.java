@@ -54,15 +54,17 @@ public class FragmentLog extends BaseFragment {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;
+                if (jsonObject.has("error")) {
 
-                CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                txtPrezent.setText(mCourseDetail.getmCourseData().getTitle());
-                spotDataList = mCourseDetail.getSpot();
-                listSpotLogAdapter = new ListSpotLog(spotDataList, mActivity);
-                if (recyclerSpot == null)
-                    recyclerSpot = mView.findViewById(R.id.recycler_spot);
-                recyclerSpot.setAdapter(listSpotLogAdapter);
-
+                } else {
+                    CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+                    txtPrezent.setText(mCourseDetail.getmCourseData().getTitle());
+                    spotDataList = mCourseDetail.getSpot();
+                    listSpotLogAdapter = new ListSpotLog(spotDataList, mActivity);
+                    if (recyclerSpot == null)
+                        recyclerSpot = mView.findViewById(R.id.recycler_spot);
+                    recyclerSpot.setAdapter(listSpotLogAdapter);
+                }
             }
 
             @Override

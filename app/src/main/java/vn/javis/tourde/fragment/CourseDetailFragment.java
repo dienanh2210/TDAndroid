@@ -214,7 +214,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnFavoriteClick();
+                btnFavoriteClick(false);
             }
         });
 
@@ -260,6 +260,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             return;
         if (txtTitle == null)
             return;
+        mActivity.setMapUrl(model.getKmlFile());
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
@@ -355,22 +356,24 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) {
-        try {
-            Log.i("GET COURSE API: ", response.toString());
-            mCourseDetail = new CourseDetail((JSONObject) response);
-            showCourseDetail(mCourseDetail);
-            view_pager.setAdapter(pagerAdapter);
-            view_pager.setCurrentPageNumber(indexTab);
-            view_pager.setCurrentItem(indexTab);
-            if (tabCommentFragment != null) {
-                tabCommentFragment.setListReview(mCourseDetail.getReview());
-                Log.i("COMMENT API detail350: ", mCourseDetail.getReview().toString());
-                tabCommentFragment.setRecyler();
+        JSONObject jsonObject = (JSONObject)response;
+        if(!jsonObject.has("error")) {
+            try {
+                Log.i("GET COURSE API: ", response.toString());
+                mCourseDetail = new CourseDetail((JSONObject) response);
+                showCourseDetail(mCourseDetail);
+                view_pager.setAdapter(pagerAdapter);
+                view_pager.setCurrentPageNumber(indexTab);
+                view_pager.setCurrentItem(indexTab);
+                if (tabCommentFragment != null) {
+                    tabCommentFragment.setListReview(mCourseDetail.getReview());
+                    Log.i("COMMENT API detail350: ", mCourseDetail.getReview().toString());
+                    tabCommentFragment.setRecyler();
+                }
+            } catch (Exception e) {
             }
-        } catch (Exception e) {
+
         }
-
-
         // TabCourseFragment tabCourseFragment = (TabCourseFragment) pagerAdapter.getItem(0);
 //
 //        tabCourseFragment.setData("tabCourseFragment");
@@ -428,7 +431,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     String token = LoginFragment.getmUserToken();
 
-    public void btnFavoriteClick() {
+    public void btnFavoriteClick(boolean inChild) {
+        if(inChild && isFavourite){return;}
         isFavourite = !isFavourite;
 
         int course_id = mCourseID;

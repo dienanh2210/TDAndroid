@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,18 +51,20 @@ public class CourseDriveFragment extends BaseFragment {
     CourseListActivity mAcitivity;
     @BindView(R.id.title_detail)
     TextView title_detail;
-    @BindView( R.id.rlt_googlemap )
+    @BindView(R.id.rlt_googlemap)
     RelativeLayout rlt_googlemap;
-    @BindView( R.id.rlt_Navitime )
+    @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
     int courseID;
 
     double startLongtitude;
     double startLatitude;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAcitivity = (CourseListActivity) getActivity();
-        courseID =mAcitivity.getmCourseID();
+        courseID = mAcitivity.getmCourseID();
+        mAcitivity.turnOnGPS();
         getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
             @Override
@@ -71,8 +74,8 @@ public class CourseDriveFragment extends BaseFragment {
                     Log.i("Error course drive73", response.toString());
                 } else {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                    if(mCourseDetail.getmCourseData()!=null)
-                        title_detail.setText(mCourseDetail.getmCourseData().getTitle()==null ?"":mCourseDetail.getmCourseData().getTitle());
+                    if (mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty())
+                        title_detail.setText(mCourseDetail.getmCourseData().getTitle());
                 }
             }
 
@@ -84,23 +87,25 @@ public class CourseDriveFragment extends BaseFragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double longtitude = mAcitivity.getLongitude();
-                double latitude = mAcitivity.getLatitude();
-                double distance = DistanceLocation.getDistance(startLatitude,startLongtitude,latitude,longtitude);
-                if(distance<=20){
-                    ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
-                        @Override
-                        public void onOkClick() {
-                            mAcitivity.ShowCountDown();
-                        }
-                    });
+                if (mAcitivity.isBoolean_permission()) {
+                    double longtitude = mAcitivity.getLongitude();
+                    double latitude = mAcitivity.getLatitude();
+                    double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
+                    if (distance <= 20) {
+                        ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mAcitivity.ShowCountDown();
+                            }
+                        });
+                    } else {
+                        ProcessDialog.showDialogOk(mAcitivity, "", "スタート地点を確認できませんでした。スタート地点付近に移動してください。");
+                        //show for test
+                        mAcitivity.ShowCountDown();
+                    }
+                } else {
+                    mAcitivity.fn_permission();
                 }
-                else {
-                    ProcessDialog.showDialogOk(mAcitivity,"","スタート地点を確認できませんでした。スタート地点付近に移動してください。");
-                  //show for test
-                    mAcitivity.ShowCountDown();
-                }
-
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -116,38 +121,32 @@ public class CourseDriveFragment extends BaseFragment {
             }
         });
 
-        rlt_googlemap.setOnClickListener( new View.OnClickListener() {
+        rlt_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.setPackage("com.google.android.apps.maps");
-                try
-                {
+                try {
                     startActivity(intent);
-                }
-                catch(ActivityNotFoundException ex)
-                {
-                    try
-                    {
+                } catch (ActivityNotFoundException ex) {
+                    try {
                         Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                         startActivity(unrestrictedIntent);
-                    }
-                    catch(ActivityNotFoundException innerEx)
-                    {
+                    } catch (ActivityNotFoundException innerEx) {
                         //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
                     }
                 }
             }
-        } );
-        rlt_Navitime.setOnClickListener( new View.OnClickListener() {
+        });
+        rlt_Navitime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String packageName = "com.navitime.local.navitime";
                 // String packageName = "NAVITIME: 地図・ルート検索";
-                launchNewActivity(getContext(),packageName);
+                launchNewActivity(getContext(), packageName);
             }
-        } );
+        });
 
     }
 
@@ -155,16 +154,16 @@ public class CourseDriveFragment extends BaseFragment {
         GetCourseDataAPI.getCourseData(courseID, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                JSONObject jsonObject =(JSONObject)response;
-                if(jsonObject.has("error"))
+                JSONObject jsonObject = (JSONObject) response;
+                if (jsonObject.has("error"))
                     return;
-               CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-               String strLat = mCourseDetail.getmCourseData().getStartLatitude();
-               String strLong = mCourseDetail.getmCourseData().getStartLongitude();
-               if((strLat != null && strLat !="") &&(strLong !=null && strLong !="")){
-                   startLatitude = Double.parseDouble(strLat);
-                   startLongtitude = Double.parseDouble(strLong);
-               }
+                CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+                String strLat = mCourseDetail.getmCourseData().getStartLatitude();
+                String strLong = mCourseDetail.getmCourseData().getStartLongitude();
+                if ((strLat != null && strLat != "") && (strLong != null && strLong != "")) {
+                    startLatitude = Double.parseDouble(strLat);
+                    startLongtitude = Double.parseDouble(strLong);
+                }
 
             }
 
@@ -197,6 +196,7 @@ public class CourseDriveFragment extends BaseFragment {
 
         }
     }
+
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.fragment_course_drive, container, false);

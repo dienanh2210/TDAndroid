@@ -5,8 +5,10 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -83,14 +85,13 @@ public class GoogleService extends Service implements LocationListener {
         latitude_des = intent.getDoubleExtra("ed_latitude", 0);
         longitude_des = intent.getDoubleExtra("ed_longitude", 0);
         lstLocation = (ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
-        Log.i("onBind", "" + latitude_des + "-" + longitude_des + lstLocation.get(0).getLatitude());
+        Log.i("onBind", "" + latitude_des + "-" + longitude_des + lstLocation.size());
         return START_STICKY_COMPATIBILITY;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-
         mTimer = new Timer();
         mTimer.schedule(new TimerTaskToGetLocation(), timeDelay, notify_interval);
         intent = new Intent(str_receiver);
@@ -212,18 +213,18 @@ public class GoogleService extends Service implements LocationListener {
             if (distance < 1000) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
-                showNotification();
+             //   showNotification();
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
-                intent1.putExtra("arrived",lstLocationArrived);
+                intent1.putExtra("arrived", lstLocationArrived);
 
-            //    stopService(new Intent(GoogleService.this, GoogleService.class));
+                //    stopService(new Intent(GoogleService.this, GoogleService.class));
             }
         }
-        if(!lstLocationArrived.isEmpty()){
+        if (!lstLocationArrived.isEmpty()) {
             sendBroadcast(intent1);
         }
 
-       // intent.putExtra("arrived", lstLocationArrived);
+        // intent.putExtra("arrived", lstLocationArrived);
         //   Log.i("distance", ""+distance + "--");
         sendBroadcast(intent);
 //        stopService(new Intent(GoogleService.this, GoogleService.class));
@@ -265,6 +266,15 @@ public class GoogleService extends Service implements LocationListener {
         super.onDestroy();
         mTimer.cancel();
     }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i("googleservice",intent.getStringExtra("test"));
+            //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
+            //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
+        }
+    };
 
     private void writeToFile(String data) {
         try {

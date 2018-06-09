@@ -19,12 +19,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -44,23 +46,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import vn.javis.tourde.apiservice.CommentsAPI;
+import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
+import vn.javis.tourde.fragment.CheckPointFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.CourseDriveFragment;
 import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.FinishCourseFragment;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
+import vn.javis.tourde.fragment.GoalFragment;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.fragment.SpotFacilitiesFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
+import vn.javis.tourde.model.CourseData;
+import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Location;
+import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -77,6 +88,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public static final int MY_CAMERA_PERMISSION_CODE = 100;
     public static final String COURSE_DETAIL_ID = "COURSE_ID";
     public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
+    public static final String STAMP_IMAGE = "stamp_img";
+    public static final String AVARAGE_SPEED = "avarage_speed";
+    public static final String TIME_FINISH = "time_finish";
+
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
 
@@ -88,23 +103,29 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     private int mCourseID;
     private int mSpotID;
     private String mapUrl;
+
     public int getmSpotID() {
         return mSpotID;
     }
+
     Intent intentGPS;
+
     boolean boolean_permission;
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
-    Double latitude, longitude;
+    double latitude = 0, longitude = 0;
     Geocoder geocoder;
     Bundle dataBundle;
 
+    @BindView(R.id.main_layout)
+    View mLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
+        ButterKnife.bind(this);
         ListCourseAPI api = new ListCourseAPI(this);
         setHearder();
         // fetchData();
@@ -113,8 +134,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-        fn_permission();
 
+        fn_permission();
+        //    showCourseFinish();
+
+    }
+
+    public boolean isBoolean_permission() {
+        return boolean_permission;
     }
 
     public String getMapUrl() {
@@ -184,18 +211,21 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putString("searching", "searching");
         openPage(new CourseListFragment(), false, true);
     }
+
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
         openPage(new CourseDetailFragment(), true, false, true);
     }
+
     public void ShowCourseDetailByTab(int indexTab) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
 
         openPage(new CourseDetailFragment(), true, false, true);
     }
+
     public void ShowFavoriteCourseDetail(int courseId) {
 
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
@@ -223,15 +253,29 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new CourseDriveFragment(), true, false);
     }
 
-    public void showSpotFacilitiesFragment(int spotID){
+    public void showSpotFacilitiesFragment(int spotID) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         openPage(new SpotFacilitiesFragment(), true, false);
     }
+
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
-
+    public void showGoalFragment(float speed,String time){
+        mCourseID = 1;
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
+        dataBundle.putString(TIME_FINISH, time);
+        openPage(new GoalFragment(), true, false);
+    }
+    public void showCourseFinish(String speed,String time) {
+        mCourseID = 1;
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(AVARAGE_SPEED, speed);
+        dataBundle.putString(TIME_FINISH, time);
+        openPage(new FinishCourseFragment(), true, false);
+    }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
         fragment.setArguments(dataBundle);
@@ -287,11 +331,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         }
     }
 
-    public Double getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public Double getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -322,13 +366,39 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
 
     }
+
+    public void showCheckPointFragment(int mSpotID,String imgUrl) {
+        this.mSpotID = mSpotID;
+        dataBundle.putInt(SPOT_ID,mSpotID);
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(STAMP_IMAGE, imgUrl);
+        openPage(new CheckPointFragment(),true,false);
+    }
+
     public void showSpotFacilities() {
         openPage(new SpotFacilitiesFragment(), true, false);
     }
+
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
 
             if ((ActivityCompat.shouldShowRequestPermissionRationale(CourseListActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION))) {
+                Log.i("shouldShowRequest", "------------------>");
+                ActivityCompat.requestPermissions(CourseListActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION
+
+                        },
+                        REQUEST_PERMISSIONS);
+//                Snackbar.make(mLayout, "Accept location",
+//                        Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        // Request the permission
+//                        ActivityCompat.requestPermissions(CourseListActivity.this,
+//                                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+//                                REQUEST_PERMISSIONS);
+//                    }
+//                }).show();
+
 
             } else {
                 ActivityCompat.requestPermissions(CourseListActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -339,7 +409,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             }
         } else {
             boolean_permission = true;
-                turnOnGPS();
+            turnOnGPS();
         }
 
     }
@@ -363,7 +433,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                     if (boolean_permission) {
                         if (mPref.getString("service", "").matches("")) {
                             medit.putString("service", "service").commit();
-                                turnOnGPS();
+                            turnOnGPS();
                         } else {
                             Toast.makeText(getApplicationContext(), "Service is already running", Toast.LENGTH_SHORT).show();
                         }
@@ -383,12 +453,40 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         if (!boolean_permission)
             fn_permission();
         else {
+            final ArrayList<Location> lstLOcat = new ArrayList<>();
             intentGPS = new Intent(this, GoogleService.class);
-            ArrayList<Location> lstLOcat = new ArrayList<>();
-            Location location1 =new Location(1,21.0243063,105.7848029);
-            lstLOcat.add(location1);
-            intentGPS.putExtra("location",lstLOcat);
-            startService(intentGPS);
+            if (mCourseID > 0) {
+                Log.i("onBind", "" + mCourseID);
+                GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
+                    @Override
+                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                        JSONObject jsonObjec = (JSONObject) response;
+                        if (!jsonObjec.has("error")) {
+                            CourseDetail courseData = new CourseDetail((JSONObject) response);
+                            List<Spot> lstSpot = courseData.getSpot();
+                            for (Spot spot : lstSpot) {
+                                Location location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+                                //  Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLatitude()));
+                                if (!lstLOcat.contains(location1))
+                                    lstLOcat.add(location1);
+
+                            }
+                            intentGPS.putExtra("location", lstLOcat);
+                            startService(intentGPS);
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+
+                    }
+                });
+            } else {
+                intentGPS.putExtra("location", lstLOcat);
+                startService(intentGPS);
+            }
+
+
             Log.i("GPSLOG", "turn on \n");
         }
     }
@@ -435,6 +533,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         unregisterReceiver(broadcastReceiver);
 
     }
+
     private static boolean isExternalStorageReadOnly() {
         String extStorageState = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {

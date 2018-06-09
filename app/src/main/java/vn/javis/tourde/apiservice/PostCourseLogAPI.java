@@ -13,7 +13,6 @@ public class PostCourseLogAPI {
         params.put("course_id", String.valueOf(course_id));
         params.put("speed_average", String.valueOf(speed_average));
         params.put("finish_time", finish_time);
-        String url = ApiEndpoint.BASE_URL + ApiEndpoint.POST_COURSE_LOG;
-        TourDeService.postWithAuth(ApiEndpoint.POST_REVIEW_COURSE, params, callback);
+        TourDeService.postWithAuth(ApiEndpoint.POST_COURSE_LOG, params, callback);
     }
 }
