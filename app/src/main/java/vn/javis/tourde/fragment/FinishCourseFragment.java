@@ -2,7 +2,9 @@ package vn.javis.tourde.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +48,7 @@ import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.BinaryConvert;
+import vn.javis.tourde.utils.CameraUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.CircleTransform;
@@ -75,10 +80,11 @@ public class FinishCourseFragment extends BaseFragment {
     TextView btnShowLoging;
     @BindView(R.id.txt_btn_gray)
     TextView btnToDetail;
-
+    @BindView(R.id.layout_to_capture)
+    LinearLayout viewCapture;
     boolean isFavourite;
     private CourseDetail mCourseDetail;
-
+    private static String imageStoragePath;
     TabCourseFragment tabCourseFragment;
     TabCommentFragment tabCommentFragment;
     String url = "";
@@ -159,5 +165,11 @@ public class FinishCourseFragment extends BaseFragment {
         return mCourseDetail;
     }
 
-
+    @OnClick(R.id.btn_save_image)
+    void captureFinish() {
+        File file = new File(CameraUtils.getAppDirectory(mActivity) + "/" + System.currentTimeMillis() + ".jpg");
+        imageStoragePath = file.getAbsolutePath();
+        Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
+        MediaStore.Images.Media.insertImage(mActivity.getContentResolver(), bitmap, imageStoragePath, "" + new Date().getTime());
+    }
 }

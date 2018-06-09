@@ -9,13 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
         <LinearLayout
+            android:id="@+id/layout_to_capture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/BG_finish_course"
-
             android:orientation="vertical">
 
             <RelativeLayout
@@ -44,7 +42,7 @@
                 </RelativeLayout>
 
                 <ImageButton
-                    android:id="@+id/btn_favorite_detail"
+                    android:id="@+id/btn_save_image"
                     android:layout_width="@dimen/_57sdp"
                     android:layout_height="@dimen/_57sdp"
                     android:layout_alignParentBottom="true"
