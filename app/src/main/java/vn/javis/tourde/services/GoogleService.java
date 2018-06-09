@@ -214,7 +214,7 @@ public class GoogleService extends Service implements LocationListener {
             if (distance < 1000) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
-                showNotification();
+             //   showNotification();
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
                 intent1.putExtra("arrived", lstLocationArrived);
 

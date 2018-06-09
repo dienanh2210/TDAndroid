@@ -107,7 +107,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     boolean boolean_permission;
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
-    double latitude, longitude;
+    double latitude=0, longitude=0;
     Geocoder geocoder;
     Bundle dataBundle;
 

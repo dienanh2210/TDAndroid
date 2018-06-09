@@ -338,7 +338,7 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
            // btnCapture.setVisibility(View.GONE);
            // takeScreenshot();
             Log.d("tag", "Camera ok ");*/
-
+            Log.i("", "onPicture: ");
             bitmap = BitmapFactory.decodeByteArray(data, 0, (data) != null ? data.length : 0);
             File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS) + "/" + System.currentTimeMillis() + ".jpg");
             imageStoragePath = file.getAbsolutePath();
@@ -347,6 +347,7 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
             bitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
             FileOutputStream outStream = null;
             try {
+                Log.i("", "onPictureTaken: ");
                 outStream = new FileOutputStream(file);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
                 outStream.flush();
