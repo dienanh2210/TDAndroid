@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -53,14 +54,9 @@ public class CameraUtils {
     }
 
     public static Bitmap loadBitmapFromView(View v) {
-        v.setDrawingCacheEnabled(true);
-        v.buildDrawingCache(true);
         Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(b);
-        v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
         v.draw(c);
-        v.setDrawingCacheEnabled(false);
-        v.destroyDrawingCache();
         return b;
     }
 
@@ -73,6 +69,18 @@ public class CameraUtils {
         options.inSampleSize = sampleSize;
 
         return BitmapFactory.decodeFile(filePath, options);
+    }
+    public Bitmap combineImages(Bitmap ScaledBitmap, Bitmap bit) {
+
+        int X = bit.getWidth();
+        int Y = bit.getHeight();
+
+        Bitmap overlaybitmap = Bitmap.createBitmap(ScaledBitmap.getWidth(),
+                ScaledBitmap.getHeight(), ScaledBitmap.getConfig());
+        Canvas canvas = new Canvas(overlaybitmap);
+        canvas.drawBitmap(ScaledBitmap, new Matrix(), null);
+        canvas.drawBitmap(bit, new Matrix(), null);
+        return overlaybitmap;
     }
 
 
