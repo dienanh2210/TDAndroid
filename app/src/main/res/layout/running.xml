@@ -23,7 +23,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:src="@drawable/icon_back_black" />
 
             <TextView
