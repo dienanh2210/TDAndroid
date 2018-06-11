@@ -25,6 +25,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
@@ -85,7 +89,7 @@ public class TabCourseFragment extends BaseFragment {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
         fragment.finishTIme = finishTime;
-        fragment.avagePace = averagePace;
+        fragment.avagePace = processAveragePace(averagePace);
         fragment.startAddress = startAddress;
         fragment.parentFragment =parentFragment;
         return fragment;
@@ -133,7 +137,7 @@ public class TabCourseFragment extends BaseFragment {
             Date date = dateFormat.parse(finishTIme);
             Calendar timeConvert = Calendar.getInstance();
             timeConvert.setTime(date);
-            String out = timeConvert.get(Calendar.HOUR) + "時間" + timeConvert.get(Calendar.MINUTE) + "分";
+            String out = (timeConvert.get(Calendar.MINUTE) > 0 ? timeConvert.get(Calendar.HOUR) + "時間" + timeConvert.get(Calendar.MINUTE) + "分":timeConvert.get(Calendar.HOUR) + "時間");
             Log.e("Time", out);
             txtFinishTime.setText(out);
         } catch (ParseException e) {
@@ -250,6 +254,18 @@ public class TabCourseFragment extends BaseFragment {
             btnSignUp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame_gray));
         else
             btnSignUp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame));
+    }
+
+    private static String processAveragePace(String s){
+        if (s.contains(","))
+        {
+            s = s.replace(",","");
+        }
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
+        otherSymbols.setDecimalSeparator('.');
+        otherSymbols.setGroupingSeparator(',');
+        DecimalFormat df = new DecimalFormat(".00", otherSymbols);
+        return String.valueOf(df.format(Double.valueOf(s)));
     }
 
 }
