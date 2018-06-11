@@ -284,7 +284,7 @@
             android:paddingTop="@dimen/_20sdp">
 
             <TextView
-                android:id="@+id/txt_btn_ping"
+                android:id="@+id/txt_btn_share"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
                 android:layout_marginTop="@dimen/_8sdp"
