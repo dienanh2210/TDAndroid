@@ -96,7 +96,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
 
-
     public int getmCourseID() {
         return mCourseID;
     }
@@ -221,7 +220,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
         openPage(new CourseDetailFragment(), true, false, true);
     }
-
+    public void ShowCourseDetail() {
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        openPage(new CourseDetailFragment(), true, false, true);
+    }
     public void ShowCourseDetailByTab(int indexTab) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
@@ -364,6 +366,9 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         }
         if(fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
+        }
+        if(fragment instanceof FragmentTabLayoutRunning) {
+          // ShowCourseDetail();
         }
         super.onBackPressed();
         Log.i("onBackPressed", "true");
