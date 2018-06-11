@@ -64,7 +64,7 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
             } catch (ParseException e) {
             }
         }
-        int rate = 0;
+        int rate =model.getRating();
         if (rate == 1)
             holder.imgStarRate.setImageResource(R.drawable.icon_star1);
         else if (rate == 2)

@@ -21,6 +21,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -119,6 +120,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     @BindView(R.id.main_layout)
     View mLayout;
+
+    public int typeBackPress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -263,14 +266,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
     public void showGoalFragment(float speed,String time){
-        mCourseID = 1;
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
         openPage(new GoalFragment(), true, false);
     }
     public void showCourseFinish(String speed,String time) {
-        mCourseID = 1;
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, speed);
         dataBundle.putString(TIME_FINISH, time);
@@ -357,6 +358,13 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     @Override
     public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if(fragment instanceof PostCommentFragment) {
+            typeBackPress = 1;
+        }
+        if(fragment instanceof SpotFacilitiesFragment) {
+            typeBackPress = 3;
+        }
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }

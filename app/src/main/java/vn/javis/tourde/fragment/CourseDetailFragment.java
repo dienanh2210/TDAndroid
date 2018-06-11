@@ -138,9 +138,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
-        indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
-
-        indexTab = indexTab<0?0:indexTab;
+        if(mActivity.typeBackPress==1) {
+            indexTab = 1;
+            mActivity.typeBackPress = 0;
+        }
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -152,7 +153,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         });
 
         pagerAdapter = new PagerAdapter(getChildFragmentManager());
-//        view_pager.setAdapter(pagerAdapter);
+  //      view_pager.setAdapter(pagerAdapter);
         view_pager.setOffscreenPageLimit(2);
 
         view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
