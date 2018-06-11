@@ -33,7 +33,6 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -82,18 +81,22 @@
         <activity
             android:name=".activity.SearchActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activity.TestUploadImage"
             android:label="@string/title_activity_course_search"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.TakePhotoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".services.GoogleService" />
+
+        <activity
+            android:name=".fragment.PrivacypolicyFragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".fragment.InquiryFragment"
+            android:theme="@style/AppTheme.NoActionBar"  />
     </application>
 
 </manifest>

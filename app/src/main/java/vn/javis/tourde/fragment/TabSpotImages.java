@@ -57,7 +57,6 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
         tabLayout.addTab(tabLayout.newTab().setText("ユーザー投稿写真"));
         tabLayout.addTab(tabLayout.newTab().setText("自分の投稿写真"));
         viewPager = view.findViewById(R.id.pager);
-
         Pager adapter = new Pager(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
