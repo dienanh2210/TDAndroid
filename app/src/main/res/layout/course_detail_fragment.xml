@@ -151,8 +151,8 @@
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/Black"
             android:textAlignment="gravity"
+            android:textColor="@color/Black"
             android:textSize="@dimen/_13sdp" />
 
         <TextView
@@ -260,9 +260,11 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_border"
                     android:gravity="center"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_3sdp"
                     android:text="@string/Area"
                     android:textColor="@color/Red"
                     android:textSize="@dimen/_8sdp" />
@@ -289,9 +291,11 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_border"
                     android:gravity="center"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_3sdp"
                     android:text="@string/DistanceType"
                     android:textColor="@color/Red"
                     android:textSize="@dimen/_8sdp" />
@@ -318,9 +322,11 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_border"
                     android:gravity="center"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_3sdp"
                     android:text="@string/Season"
                     android:textColor="@color/Red"
                     android:textSize="@dimen/_8ssp"
@@ -348,9 +354,11 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_border"
                     android:gravity="center"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_3sdp"
                     android:text="@string/AvarageSlope"
                     android:textColor="@color/Red"
                     android:textSize="@dimen/_8ssp" />
@@ -376,9 +384,11 @@
 
                 <TextView
                     android:layout_width="@dimen/_55sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_border"
                     android:gravity="center"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_3sdp"
                     android:text="@string/search_course_elevation"
                     android:textColor="@color/Red"
                     android:textSize="@dimen/_8sdp" />
@@ -405,9 +415,12 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_border"
                     android:gravity="center"
+                    android:minWidth="@dimen/_55sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_3sdp"
                     android:text="@string/CourseType"
                     android:textColor="@color/Red"
                     android:textSize="@dimen/_8sdp" />

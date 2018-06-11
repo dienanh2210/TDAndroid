@@ -15,12 +15,12 @@
     </stroke>
 
     <!-- các thuộc tính căn chỉnh-->
-    <padding
-        android:left="3dp"
-        android:top="1.5dp"
-        android:right="3dp"
-        android:bottom="1.5dp" >
-    </padding>
+    <!--<padding-->
+        <!--android:left="3dp"-->
+        <!--android:top="1.5dp"-->
+        <!--android:right="3dp"-->
+        <!--android:bottom="1.5dp" >-->
+    <!--</padding>-->
 
     <!-- và đây là bán kính đường tròn ở 4 góc -->
     <corners
