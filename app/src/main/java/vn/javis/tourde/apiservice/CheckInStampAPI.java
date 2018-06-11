@@ -12,7 +12,6 @@ public class CheckInStampAPI {
         params.put("token", token);
         params.put("course_id", String.valueOf(course_id));
         params.put("spot_id", String.valueOf(spot_id));
-        String url = ApiEndpoint.BASE_URL + ApiEndpoint.POST_CHECK_IN_STAMP;
-        TourDeService.postWithAuth(ApiEndpoint.POST_REVIEW_COURSE, params, callback);
+        TourDeService.postWithAuth(ApiEndpoint.POST_CHECK_IN_STAMP, params, callback);
     }
 }

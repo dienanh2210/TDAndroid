@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 
@@ -41,10 +42,13 @@ import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListCheckInSpot;
 import vn.javis.tourde.adapter.ListSpotLog;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
+import vn.javis.tourde.apiservice.CheckInStampAPI;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
+import vn.javis.tourde.apiservice.PostCourseLogAPI;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Location;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.model.Stamp;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -55,7 +59,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     @BindView(R.id.show_select_spot)
-    LinearLayout show_select_spot;
+    RelativeLayout show_select_spot;
 
     private long pauseOffset;
     // private boolean running;
@@ -71,9 +75,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     RecyclerView spotRecycler;
     ListCheckInSpot listSpotCheckinAdapter;
     long time;
-    Double latitude;
-    Double longtitude;
+    double latitude;
+    double longtitude;
     Geocoder geocoder;
+    int courseID;
+    int lastSpotId;
+    float courseDistance;
     boolean changePaged;
     private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
     //  TextView tv_back_password;
@@ -89,15 +96,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
+        courseID = mActivity.getmCourseID();
     }
 
     @SuppressLint("SetTextI18n")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Intent intent1 = new Intent("googleservice");
-        intent1.putExtra("test","tét");
-
-        mActivity. sendBroadcast(intent1);
-
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
@@ -129,20 +132,25 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;
-
+                if (jsonObject.has("error"))
+                    return;
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-
+                if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
+                    courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
                 List<Spot> list_spot = mCourseDetail.getSpot();
-                listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
-                listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        mActivity.openPage(new CheckPointFragment(), true, false);
-                    }
-                });
-                spotRecycler.setAdapter(listSpotCheckinAdapter);
+                if (list_spot.size() > 0) {
+                    lastSpotId = list_spot.get(list_spot.size() - 1).getSpotId();
 
+                    listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
+                    listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
+                        @Override
+                        public void onItemClick(int id) {
+                            showCheckPointFragment(id);
+                        }
+                    });
+                    spotRecycler.setAdapter(listSpotCheckinAdapter);
 
+                }
             }
 
             @Override
@@ -162,37 +170,89 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-      //  mActivity.unregisterReceiver(broadcastReceiver);
+        //  mActivity.unregisterReceiver(broadcastReceiver);
         mActivity.unregisterReceiver(broadcastReceiverArried);
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-         //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
-       //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
+            //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
+            //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
         }
     };
 
     private BroadcastReceiver broadcastReceiverArried = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(changePaged)
+            if (changePaged)
                 return;
             ArrayList<Location> lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
             if (!lst.isEmpty()) {
                 Log.i("latutide111", "" + lst.get(0).getLatitude());
 
-                if (lst.size() == 1) {
-                    mActivity.openPage(new CheckPointFragment(),true, false);
-                } else {
-                    show_select_spot.setVisibility(View.VISIBLE);
-                }
-                changePaged=true;
+                onGetListSpotArrived(lst.size(), lst.get(0).getSpotID());
+                changePaged = true;
             }
 
         }
     };
+
+    void onGetListSpotArrived(int numSpot, int spotId) {
+        if (numSpot == 1) {
+            showCheckPointFragment(spotId);
+        } else {
+            show_select_spot.setVisibility(View.VISIBLE);
+        }
+    }
+
+    void showCheckPointFragment(final int spotId) {
+
+        if (spotId > 0 && courseID > 0) {
+            String token = LoginFragment.getmUserToken();
+            if (spotId == lastSpotId) {
+                final float speed = courseDistance/((float) time/3600000);
+                int h = (int) (time / 3600000);
+                int m = (int) (time - h * 3600000) / 60000;
+                int s = (int) (time - h * 3600000 - m * 60000) / 1000;
+                final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+              //  mActivity.showGoalFragment(speed,finishTime);
+                PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
+                    @Override
+                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                        JSONObject jsonObject = (JSONObject) response;
+                        if (jsonObject.has("success")) {
+                            mActivity.showGoalFragment(speed,finishTime);
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+
+                    }
+                });
+            } else {
+             //   mActivity.showCheckPointFragment(spotId, "");
+                CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
+                    @Override
+                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                        JSONObject jsonObject = (JSONObject) response;
+                        if (!jsonObject.has("error")) {
+                            Stamp model = Stamp.getData(response.toString());
+                            if (model.getSuccess()) {
+                                mActivity.showCheckPointFragment(spotId, model.getImage());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+
+                    }
+                });
+            }
+        }
+    }
 
     @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
     public void onClick(View view) {
@@ -231,7 +291,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-    //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
+        //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
 
     }

@@ -16,9 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
             android:background="@color/White">
-
-
-
             <TextView
                 android:id="@+id/badge_collection_title"
                 android:layout_width="wrap_content"
@@ -28,71 +25,25 @@
                 android:gravity="center"
                 android:text="@string/BadgeTitile"
                 android:textColor="@color/Black"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
                 tools:ignore="UnknownId" />
-
-
         </RelativeLayout>
 
-        <LinearLayout
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_38sdp"
-            android:background="@drawable/header_border"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/btn_archivement_badge"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/AchivementBadges"
-                    android:textColor="@color/colorText"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp" />
-
-                <ImageView
-                    android:id="@+id/redline_archivement"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_2sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/Red"
-                    android:contentDescription="@string/AchivementBadges"
-                    android:textSize="@dimen/_15ssp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/btn_spot_badge"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/SpotBadges"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp" />
-
-                <ImageView
-                    android:id="@+id/redline_spot"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_2sdp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/Red"
-                    android:contentDescription="@string/SpotBadges"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
+            android:layout_height="@dimen/_47sdp"
+            android:background="@color/White"
+            android:minHeight="?attr/actionBarSize"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabSelectedTextColor="@color/colorText"
+            app:tabTextAppearance="@style/MineCustomTabText"
+            app:tabTextColor="@color/Gray" />
+        <!-- View pager to swipe views -->
 
 
         <ScrollView

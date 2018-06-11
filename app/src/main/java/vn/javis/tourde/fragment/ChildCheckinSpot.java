@@ -35,6 +35,8 @@ import vn.javis.tourde.view.CircleTransform;
 public class ChildCheckinSpot extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.image_checkin_spot)
     ImageView imageCheckinSport;
+    @BindView(R.id.image_checkin_spot_cover)
+    ImageView imageCheckinSportCover;
     @BindView(R.id.tv_spotNumber)
     ImageView tv_spotNumber;
     @BindView(R.id.tv_spotName)

@@ -69,7 +69,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     RelativeLayout btnMyCourse;
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
-    int spotId=0;
+    int spotId=0,indexTab=0;
     String token = LoginFragment.getmUserToken();
     @BindView(R.id.img_home)
     ImageView imgHomeBtn;
@@ -82,6 +82,11 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
 
         mActivity = (CourseListActivity) getActivity();
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+        if(mActivity.typeBackPress==3)
+        {
+            indexTab=1;
+            mActivity.typeBackPress=0;
+        }
         //GetCourseDataAPI.getCourseData(1,this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -157,7 +162,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
             PicassoUtil.getSharedInstance(mActivity).load(spotData.getData().getTopImage()).resize(0, 400).onlyScaleDown().into(imgCourse);
 
         PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager());
-        view_pager.setAdapter(pagerAdapter);
+
         view_pager.setOffscreenPageLimit(2);
         view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -176,6 +181,9 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
 
             }
         });
+        view_pager.setCurrentPageNumber(indexTab);
+        view_pager.setCurrentItem(indexTab);
+        view_pager.setAdapter(pagerAdapter);
     }
 
     @Override

@@ -21,6 +21,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,7 @@ import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
+import vn.javis.tourde.fragment.CheckPointFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
 import vn.javis.tourde.fragment.CourseDriveFragment;
@@ -61,6 +63,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.FinishCourseFragment;
 import vn.javis.tourde.fragment.FragmentTabLayoutMyCourse;
 import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
+import vn.javis.tourde.fragment.GoalFragment;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
@@ -86,9 +89,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public static final int MY_CAMERA_PERMISSION_CODE = 100;
     public static final String COURSE_DETAIL_ID = "COURSE_ID";
     public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
+    public static final String STAMP_IMAGE = "stamp_img";
+    public static final String AVARAGE_SPEED = "avarage_speed";
+    public static final String TIME_FINISH = "time_finish";
+
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
-
 
     public int getmCourseID() {
         return mCourseID;
@@ -107,12 +113,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     boolean boolean_permission;
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
-    double latitude=0, longitude=0;
+    double latitude = 0, longitude = 0;
     Geocoder geocoder;
     Bundle dataBundle;
 
     @BindView(R.id.main_layout)
     View mLayout;
+
+    public int typeBackPress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,7 +138,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         medit = mPref.edit();
 
         fn_permission();
-    //    showCourseFinish();
+        //    showCourseFinish();
 
     }
 
@@ -212,7 +220,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
         openPage(new CourseDetailFragment(), true, false, true);
     }
-
+    public void ShowCourseDetail() {
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        openPage(new CourseDetailFragment(), true, false, true);
+    }
     public void ShowCourseDetailByTab(int indexTab) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
@@ -256,10 +267,17 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
-    public void showCourseFinish(){
-        mCourseID=1;
-        dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
-        openPage(new FinishCourseFragment(),true,false);
+    public void showGoalFragment(float speed,String time){
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
+        dataBundle.putString(TIME_FINISH, time);
+        openPage(new GoalFragment(), true, false);
+    }
+    public void showCourseFinish(String speed,String time) {
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(AVARAGE_SPEED, speed);
+        dataBundle.putString(TIME_FINISH, time);
+        openPage(new FinishCourseFragment(), true, false);
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
@@ -306,8 +324,13 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         } else {
             mSpotID = spotID;
             dataBundle.putInt(SPOT_ID, mSpotID);
-            dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-            openPage(new TakePhotoFragment(), true, false);
+            dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
+//            openPage(new TakePhotoFragment(), true, false);
+            Intent intent = new Intent(this, TakePhotoActivity.class);
+            intent.putExtra(SPOT_ID, mSpotID);
+            intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+            startActivity(intent);
+
         }
     }
 
@@ -337,6 +360,16 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     @Override
     public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if(fragment instanceof PostCommentFragment) {
+            typeBackPress = 1;
+        }
+        if(fragment instanceof SpotFacilitiesFragment) {
+            typeBackPress = 3;
+        }
+        if(fragment instanceof FragmentTabLayoutRunning) {
+          // ShowCourseDetail();
+        }
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }
@@ -345,6 +378,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new SearchCourseFragment(), true, false);
 
 
+    }
+
+    public void showCheckPointFragment(int mSpotID,String imgUrl) {
+        this.mSpotID = mSpotID;
+        dataBundle.putInt(SPOT_ID,mSpotID);
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(STAMP_IMAGE, imgUrl);
+        openPage(new CheckPointFragment(),true,false);
     }
 
     public void showSpotFacilities() {
@@ -392,7 +433,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         switch (requestCode) {
             case MY_CAMERA_PERMISSION_CODE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    openPage(new TakePhotoFragment(), true, false);
+//                    openPage(new TakePhotoFragment(), true, false);
+                    Intent intent = new Intent(this, TakePhotoActivity.class);
+                    intent.putExtra(SPOT_ID, mSpotID);
+                    intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+                    startActivity(intent);
                 }
             }
             case REQUEST_PERMISSIONS: {

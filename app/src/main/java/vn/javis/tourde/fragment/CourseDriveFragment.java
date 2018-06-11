@@ -71,10 +71,11 @@ public class CourseDriveFragment extends BaseFragment {
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;
                 if (jsonObject.has("error")) {
-                    Log.i("Error course drive73",response.toString());
+                    Log.i("Error course drive73", response.toString());
                 } else {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                    title_detail.setText(mCourseDetail.getmCourseData().getTitle());
+                    if (mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty())
+                        title_detail.setText(mCourseDetail.getmCourseData().getTitle());
                 }
             }
 
@@ -86,26 +87,25 @@ public class CourseDriveFragment extends BaseFragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(mAcitivity.isBoolean_permission()) {
-                   double longtitude = mAcitivity.getLongitude();
-                   double latitude = mAcitivity.getLatitude();
-                   double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
-                   if (distance <= 20) {
-                       ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
-                           @Override
-                           public void onOkClick() {
-                               mAcitivity.ShowCountDown();
-                           }
-                       });
-                   } else {
-                       ProcessDialog.showDialogOk(mAcitivity, "", "スタート地点を確認できませんでした。スタート地点付近に移動してください。");
-                       //show for test
-                       mAcitivity.ShowCountDown();
-                   }
-               }
-               else {
-                   mAcitivity.fn_permission();
-               }
+                if (mAcitivity.isBoolean_permission()) {
+                    double longtitude = mAcitivity.getLongitude();
+                    double latitude = mAcitivity.getLatitude();
+                    double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
+                    if (distance <= 20) {
+                        ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mAcitivity.ShowCountDown();
+                            }
+                        });
+                    } else {
+                        ProcessDialog.showDialogOk(mAcitivity, "", "スタート地点を確認できませんでした。スタート地点付近に移動してください。");
+                        //show for test
+                        mAcitivity.ShowCountDown();
+                    }
+                } else {
+                    mAcitivity.fn_permission();
+                }
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {

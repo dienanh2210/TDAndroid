@@ -38,7 +38,7 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
-
+        <include layout="@layout/item_divider" />
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
@@ -136,39 +136,46 @@
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold" />
     </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:id="@+id/show_select_spot"
         android:layout_marginBottom="@dimen/_50sdp"
         android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/tw__composer_blue"
-            android:paddingBottom="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_30sdp"
-            android:paddingStart="@dimen/_30sdp"
-            android:paddingTop="@dimen/_15sdp"
-            android:text="@string/selectSpotToCheckin"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            android:textSize="@dimen/_18sdp"
-            android:textStyle="bold"
-            tools:ignore="RtlSymmetry" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/select_spot"
+        <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.7"
-            android:background="@color/Black">
+            android:background="@color/Black"
+            android:alpha=".85"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+           >
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tw__composer_blue"
+                android:paddingBottom="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingTop="@dimen/_15sdp"
+                android:text="@string/selectSpotToCheckin"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold"
+               />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/select_spot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </RelativeLayout>
 
-        </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
 
 </RelativeLayout>

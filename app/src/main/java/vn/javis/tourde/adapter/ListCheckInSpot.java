@@ -47,7 +47,7 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
         if (model.getTopImage() != null && !model.getTopImage().equals("")) {
             PicassoUtil.getSharedInstance(activityContext).load(model.getTopImage()).resize(0, 100).transform(new CircleTransform()).into(holder.image_checkin_spot);
         }
-        holder.tv_spot_nunber.setText("スポット" + (model.getOrderNumber()+1));
+        holder.tv_spot_nunber.setText("スポット" + (model.getOrderNumber() + 1));
         holder.tv_spot_name.setText(model.getTitle());
         /*if (model.getTopImage() != null && model.getTopImage() !="")
             Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);*/
@@ -56,7 +56,15 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(position);
+                    onItemClickedListener.onItemClick(model.getSpotId());
+                }
+            }
+        });
+        holder.imageCheckinSportCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickedListener != null) {
+                    onItemClickedListener.onItemClick(model.getSpotId());
                 }
             }
         });
@@ -73,6 +81,8 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
 
         @BindView(R.id.image_checkin_spot)
         ImageView image_checkin_spot;
+        @BindView(R.id.image_checkin_spot_cover)
+        ImageView imageCheckinSportCover;
         @BindView(R.id.tv_spotNumber)
         TextView tv_spot_nunber;
         @BindView(R.id.tv_spotName)
@@ -86,7 +96,7 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
     }
 
     public interface OnItemClickedListener {
-        void onItemClick(int position);
+        void onItemClick(int id);
     }
 
     private OnItemClickedListener onItemClickedListener;
