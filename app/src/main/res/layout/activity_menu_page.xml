@@ -10,18 +10,6 @@
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_38sdp">
-        <!-->
-                <TextView
-                    android:id="@+id/tv_tutorial"
-                    android:layout_width="@dimen/_100ssp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:text="@string/tutorial"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/dimen20"
-                    android:textStyle="bold" /><!-->
 
         <TextView
             android:id="@+id/tv_close"
