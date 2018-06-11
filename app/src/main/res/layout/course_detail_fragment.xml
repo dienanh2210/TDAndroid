@@ -164,7 +164,16 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:textAlignment="gravity"
             android:textColor="@color/Black"
+            android:visibility="gone"
             android:textSize="@dimen/_12sdp" />
+
+        <WebView
+            android:id="@+id/webView_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:visibility="visible"/>
 
         <ImageView
             android:layout_width="match_parent"
