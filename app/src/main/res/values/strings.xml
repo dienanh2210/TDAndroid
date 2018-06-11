@@ -4,7 +4,7 @@
     <string name="com.twitter.sdk.android.CONSUMER_KEY">E9SgLRW6z3YDe1tkZjA8gWNdu</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc</string>
 
-    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyBtUj9O-CLKSw4iYSyarAhcWlJqZcBbSVA</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBtUj9O-CLKSw4iYSyarAhcWlJqZcBbSVA</string>
 
     <string name="desc_google_icon">Google Logo</string>
     <string name="title_text">Google Sign-In\nQuickstart</string>
@@ -331,5 +331,8 @@
     <string name="share_travel_log">走行結果をシェア</string>
     <string name="confirm_log">ログを確認</string>
     <string name="end_running">走行を終了</string>
+    //privacy
+    <string name="privacy">プライバシーポリシー </string>
+    <string name="inquiry">お問い合わせ </string>
 </resources>
 

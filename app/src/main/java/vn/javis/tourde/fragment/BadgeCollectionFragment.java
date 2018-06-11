@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,21 +28,13 @@ import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.model.Badge;
 
-public class BadgeCollectionFragment extends BaseFragment {
+public class BadgeCollectionFragment extends BaseFragment implements TabLayout.OnTabSelectedListener   {
 
     CourseListActivity mActivity;
     @BindView(R.id.recycler_barge)
     RecyclerView badgeRecycler;
     ListBadgeAdapter listBadgeAdapter;
-    @BindView(R.id.btn_archivement_badge)
-    TextView btnArchivement;
-    @BindView(R.id.btn_spot_badge)
-    TextView btnSpotBarge;
-    @BindView(R.id.redline_archivement)
-    ImageView imgRedLineAchivement;
-    @BindView(R.id.redline_spot)
-    ImageView imgRedLineSpot;
-
+    private TabLayout tabLayout;
 
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
@@ -63,19 +57,10 @@ public class BadgeCollectionFragment extends BaseFragment {
         badgeRecycler.setItemAnimator(new DefaultItemAnimator());
         badgeRecycler.setLayoutManager(layoutManager);
         setBadgeData();
-        btnArchivement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onArchivementClick();
-            }
-        });
-        btnSpotBarge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSpotClick();
-            }
-        });
-
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("達成バッジ"));
+        tabLayout.addTab(tabLayout.newTab().setText("ご当地バッジ"));
+        tabLayout.setOnTabSelectedListener(this);
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +76,7 @@ public class BadgeCollectionFragment extends BaseFragment {
         });
         imgBadgeBtn.setBackground(getResources().getDrawable(R.drawable.icon_badge_blue));
         txtBadgeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
-        onArchivementClick();
+      //  onArchivementClick();
     }
 
     void gotoMenuPage() {
@@ -105,22 +90,23 @@ public class BadgeCollectionFragment extends BaseFragment {
         badgeRecycler.setAdapter(listBadgeAdapter);
     }
 
-    void onArchivementClick() {
-        imgRedLineAchivement.setVisibility(View.VISIBLE);
-        imgRedLineSpot.setVisibility(View.INVISIBLE);
-        btnArchivement.setTextColor(Color.BLACK);
-        btnSpotBarge.setTextColor(Color.GRAY);
-    }
-
-    void onSpotClick() {
-        imgRedLineAchivement.setVisibility(View.INVISIBLE);
-        imgRedLineSpot.setVisibility(View.VISIBLE);
-        btnSpotBarge.setTextColor(Color.BLACK);
-        btnArchivement.setTextColor(Color.GRAY);
-    }
-
     @Override
     public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.badge_collection, container, false);
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }

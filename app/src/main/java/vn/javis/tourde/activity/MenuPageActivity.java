@@ -3,6 +3,8 @@ package vn.javis.tourde.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 
@@ -21,7 +23,10 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.apiservice.LogoutAccount;
+import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
+import vn.javis.tourde.fragment.InquiryFragment;
 import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.fragment.PrivacypolicyFragment;
 import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -41,6 +46,11 @@ public class MenuPageActivity extends BaseActivity {
     View ll_logout;
     @BindView(R.id.line_register)
     ImageView lineRegister;
+    @BindView( R.id.privacy )
+    RelativeLayout privacy;
+    @BindView( R.id.inquiry )
+     RelativeLayout inquiry;
+    MenuPageActivity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_menu_page);
@@ -74,7 +84,24 @@ public class MenuPageActivity extends BaseActivity {
             basic_Info.setVisibility(View.VISIBLE);
         }
    rlt_pippon.setOnClickListener( onClicknippon );
+privacy.setOnClickListener( new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyFragment.class);
+        //basic_Info.setVisibility(View.VISIBLE);
+        startActivityForResult(intent, 1);
     }
+} );
+        inquiry.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuPageActivity.this, InquiryFragment.class);
+                //basic_Info.setVisibility(View.VISIBLE);
+                startActivityForResult(intent, 1);
+            }
+        } );
+    }
+
     View.OnClickListener onClicknippon = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -185,29 +212,6 @@ public class MenuPageActivity extends BaseActivity {
             }
         }
     }
-//    private Response.Listener<JSONObject> successListener() {
-//        return new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("logout", response.toString());
-//                if (response.has("success")) {
-//
-//
-//                } else {
-//
-//                }
-//            }
-//        };
-//
-//    }
-//    private Response.ErrorListener errorListener() {
-//        return new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e("logout error", error.getMessage());
-//            }
-//        };
-//    }
 }
 
 

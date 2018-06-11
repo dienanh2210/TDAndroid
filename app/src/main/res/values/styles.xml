@@ -28,5 +28,9 @@
         <item name="android:color">@color/Gray</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>
