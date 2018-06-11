@@ -58,6 +58,23 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
                 if (onClickItem != null) onClickItem.onClick(position,1);
             }
         });
+        holder.imv_mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                if (onClickItem != null) onClickItem.onClick(position,2);
+            }
+        });
+
+        holder.imv_mark1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+                if (onClickItem != null) onClickItem.onClick(position,1);
+            }
+        });
         if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
     }
 
