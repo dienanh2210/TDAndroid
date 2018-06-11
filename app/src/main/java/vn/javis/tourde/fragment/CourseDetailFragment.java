@@ -3,6 +3,7 @@ package vn.javis.tourde.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,10 +12,14 @@ import android.support.v4.view.ViewPager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -122,6 +127,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     TextView txtHomeBtn;
     @BindView(R.id.btn_favorite_detail)
     ImageButton btnFavorite;
+    @BindView(R.id.webView_introduction)
+    WebView webView;
 
     boolean isFavourite;
     private CourseDetail mCourseDetail;
@@ -132,6 +139,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String url = "";
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
     int indexTab;
+    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black\"> %s </body></Html>";
+    int fontSize;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -142,6 +152,15 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             indexTab = 1;
             mActivity.typeBackPress = 0;
         }
+        indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
+
+//        final WebSettings webSettings = webView.getSettings();
+        Resources res = getResources();
+         fontSize = res.getInteger(R.integer.txtSizeWebView);
+        Log.i("fontSize", ""+fontSize);
+//        webSettings.setDefaultFontSize((int)fontSize);
+
+        indexTab = indexTab<0?0:indexTab;
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -153,7 +172,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         });
 
         pagerAdapter = new PagerAdapter(getChildFragmentManager());
-  //      view_pager.setAdapter(pagerAdapter);
+//        view_pager.setAdapter(pagerAdapter);
         view_pager.setOffscreenPageLimit(2);
 
         view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -237,6 +256,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 startActivity(Intent.createChooser(myIntent, ""));
             }
         });
+
     }
 
     @Override
@@ -265,7 +285,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
-        txtIntroduction.setText(model.getIntroduction());
+//        txtIntroduction.setText(model.getIntroduction());
+        webView.loadData(String.format(htmlText,""+fontSize,model.getIntroduction()), "text/html", "utf-8");
+
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
         txtArea.setText(model.getArea());
