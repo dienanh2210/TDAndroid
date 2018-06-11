@@ -114,7 +114,7 @@ public class SpotFacilitiesFragment extends Fragment {
         @Override
         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
             Log.i("spotFacility111",response.toString());
-            ((CourseListActivity) getActivity()).showSpotImages(spotId);
+            ((CourseListActivity) getActivity()).onBackPressed();
         }
 
         @Override

@@ -23,6 +23,7 @@
          app:tabMode="fixed"
          android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
          app:tabSelectedTextColor="@color/colorText"
+         app:tabTextAppearance="@style/MineCustomTabText"
          app:tabTextColor="@color/Gray" />
         <!-- View pager to swipe views -->
         <vn.javis.tourde.view.YourScrollableViewPager

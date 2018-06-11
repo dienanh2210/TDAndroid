@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 
@@ -58,7 +59,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     @BindView(R.id.show_select_spot)
-    LinearLayout show_select_spot;
+    RelativeLayout show_select_spot;
 
     private long pauseOffset;
     // private boolean running;
@@ -215,6 +216,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+              //  mActivity.showGoalFragment(speed,finishTime);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -230,7 +232,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     }
                 });
             } else {
-
+             //   mActivity.showCheckPointFragment(spotId, "");
                 CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
