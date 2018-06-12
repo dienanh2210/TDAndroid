@@ -270,10 +270,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
 
-    public void showGoalFragment(float speed, String time) {
+    public void showGoalFragment(int idSpot, float speed, String time) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
+        dataBundle.putInt(SPOT_ID, idSpot);
         openPage(new GoalFragment(), true, false);
     }
 
@@ -485,8 +486,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
                                 if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty())
                                 {
-                                    Location location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
-                                 //   Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
+                                   // Location location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+                                    Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
                                     if (!lstLOcat.contains(location1))
                                         lstLOcat.add(location1);
                                 }

@@ -216,13 +216,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-                  mActivity.showGoalFragment(speed,finishTime);
+                  mActivity.showGoalFragment(spotId,speed,finishTime);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                            mActivity.showGoalFragment(speed, finishTime);
+                            mActivity.showGoalFragment(spotId,speed, finishTime);
                         }
                     }
 

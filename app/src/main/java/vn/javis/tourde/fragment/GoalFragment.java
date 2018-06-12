@@ -41,6 +41,7 @@ public class GoalFragment extends BaseFragment {
         mActivity = (CourseListActivity) getActivity();
         final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
         final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
+        spotID = getArguments().getInt(CourseListActivity.SPOT_ID);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

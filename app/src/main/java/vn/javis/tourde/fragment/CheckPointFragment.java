@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,13 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListCheckInSpot;
 import vn.javis.tourde.apiservice.CheckInStampAPI;
+import vn.javis.tourde.apiservice.SpotDataAPI;
+import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.model.Stamp;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.PicassoUtil;
+import vn.javis.tourde.utils.TimeUtil;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -77,6 +81,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         imgView = view.findViewById(R.id.imgMain);
         spotID = getArguments().getInt(CourseListActivity.SPOT_ID);
         courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
+
         imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
         mActivity = (CourseListActivity) getActivity();
 
@@ -115,37 +120,57 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                         if (finishedAnim)
                             mActivity.showSpotImages(spotID);
                     }
-                }, 1000);
+                }, 5000);
 
             }
         });
-        handler = new Handler();
-        runnable = new Runnable() {
+        SpotDataAPI.getSpotData(spotID, new ServiceCallback() {
             @Override
-            public void run() {
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                Log.i("getSpotData", jsonObject.toString());
+                if (jsonObject.has("error"))
+                    return;
+                SpotData spotData = SpotData.getSpotData(response.toString());
+                if (spotData == null)
+                    return;
+                final String spotTitle = spotData.getData().getTitle();
+                handler = new Handler();
+                runnable = new Runnable() {
+                    @Override
+                    public void run() {
 
-                if (imgView.getTag() == null) {
-                     ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
-                //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
-                    handler.postDelayed(runnable, 1000);
-                } else {
-                    // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
-                    //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                    //  .setVisibility( View.GONE );
-                    //  ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
-                    //  ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
+                        if (imgView.getTag() == null) {
+                            ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+                            //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+                            handler.postDelayed(runnable, 1000);
+                        } else {
+                            // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
+                            //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
+                            //  .setVisibility( View.GONE );
+                            //  ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
+                            //  ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
 
-                    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
-                    ImageViewAnimatedChange(mActivity, txtView, "『琵琶湖1周』", imgView, imgUrl);
-                    finishedAnim = true;
+                            ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
 
-                }
+                            ImageViewAnimatedChange(mActivity, txtView, "『+" + spotTitle + "』", imgView, imgUrl);
+                            finishedAnim = true;
+
+                        }
+                    }
+
+
+                };
+                handler.postDelayed(runnable, 1000);
             }
 
+            @Override
+            public void onError(VolleyError error) {
 
-        };
+            }
+        });
 
-        handler.postDelayed(runnable, 1000);
+
     }
 
     @Override
