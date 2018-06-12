@@ -188,11 +188,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             if (changePaged)
                 return;
             ArrayList<Location> lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
+            Log.i("latutide111", "sbcccc" );
             if (!lst.isEmpty()) {
-                Log.i("latutide111", "" + lst.get(0).getLatitude());
 
                 onGetListSpotArrived(lst.size(), lst.get(0).getSpotID());
-                changePaged = true;
             }
 
         }
@@ -203,6 +202,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             showCheckPointFragment(spotId);
         } else {
             show_select_spot.setVisibility(View.VISIBLE);
+            changePaged = true;
         }
     }
 
@@ -211,18 +211,18 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         if (spotId > 0 && courseID > 0) {
             String token = LoginFragment.getmUserToken();
             if (spotId == lastSpotId) {
-                final float speed = courseDistance/((float) time/3600000);
+                final float speed = courseDistance / ((float) time / 3600000);
                 int h = (int) (time / 3600000);
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-              //  mActivity.showGoalFragment(speed,finishTime);
+                  mActivity.showGoalFragment(speed,finishTime);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                            mActivity.showGoalFragment(speed,finishTime);
+                            mActivity.showGoalFragment(speed, finishTime);
                         }
                     }
 
@@ -232,7 +232,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     }
                 });
             } else {
-             //   mActivity.showCheckPointFragment(spotId, "");
+                   mActivity.showCheckPointFragment(spotId, "");
                 CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -247,7 +247,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
                     @Override
                     public void onError(VolleyError error) {
-
+                        Log.i("VolleyError", "" + error.getMessage());
                     }
                 });
             }
@@ -290,7 +290,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        changePaged = false;
         //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
 
