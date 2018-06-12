@@ -1,7 +1,8 @@
 package vn.javis.tourde.activity;
 
 import android.Manifest;
-import android.app.ActionBar;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -39,15 +40,12 @@ import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
-import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.CameraPreview;
 import vn.javis.tourde.utils.TimeUtil;
-
-import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 /**
  * Created by QuanPham on 6/9/18.
@@ -277,7 +275,7 @@ public class TakePhotoActivity extends AppCompatActivity {
             if ((ContextCompat.checkSelfPermission(TakePhotoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
                 Toast.makeText(getApplicationContext(), "Please allow perminssion to access your memory", Toast.LENGTH_LONG);
             }
-            File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS) + "/" + System.currentTimeMillis() + ".jpg");
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
             if (file == null) {
                 Log.d("tag", "Error creating media file, check storage permissions: ");
                 return;
@@ -298,29 +296,36 @@ public class TakePhotoActivity extends AppCompatActivity {
                 bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, false);
 
             }
-            String extr = Environment.getExternalStorageDirectory().toString()
-                    + File.separator + "testfolder";
-            File myPath = new File(extr, "");
-            FileOutputStream fos = null;
+
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 bm.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
                 fileOutputStream.flush();
                 fileOutputStream.close();
                 MediaStore.Images.Media.insertImage(getContentResolver(),
-                        bm, myPath.getPath(), "" + new Date().getTime());
+                        bm, file.getAbsolutePath(), "" + new Date().getTime());
+                addImageToGallery(file.getAbsolutePath(), TakePhotoActivity.this);
+                Log.i("addImageToGallery", file.getAbsolutePath());
             } catch (Exception e) {
                 e.getMessage();
                 Log.d("getMessage", e.getMessage());
             }
             camera.startPreview();
             // btnCapture.setVisibility(View.GONE);
-            // takeScreenshot();
             Log.d("tag", "Camera ok ");
 
         }
 
     };
+
+    private void addImageToGallery(final String filePath, final Context context) {
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+        values.put(MediaStore.MediaColumns.DATA, filePath);
+        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+    }
 
     @Override
     protected void onDestroy() {
