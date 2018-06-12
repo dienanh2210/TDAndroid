@@ -30,11 +30,18 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginTop="@dimen/_38sdp">
+        <include layout="@layout/item_divider" />
+    </RelativeLayout>
     <WebView
+
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_38sdp">
+        android:layout_marginTop="@dimen/_40sdp">
 
     </WebView>
 
