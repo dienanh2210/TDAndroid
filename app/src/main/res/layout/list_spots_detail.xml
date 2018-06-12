@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -76,7 +77,15 @@
             android:gravity="fill_horizontal"
             android:textAlignment="gravity"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone" />
+
+        <WebView
+            android:id="@+id/webView_content_story"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:ignore="WebViewLayout" />
 
         <TextView
             android:id="@+id/tag_story_1"

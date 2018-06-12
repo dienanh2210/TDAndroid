@@ -1,12 +1,15 @@
 package vn.javis.tourde.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,11 +43,15 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
     List<Spot> listSpot = new ArrayList<>();
     Context context;
     View mView;
+    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black\"> %s </body></Html>";
+    int fontSize;
 
     public ListSpotDetailCircleAdapter(List<Spot> listSpot, Context context) {
 
         this.listSpot = listSpot;
         this.context = context;
+        Resources res = context.getResources();
+        fontSize = res.getInteger(R.integer.txtSizeWebView);
     }
 
     @Override
@@ -61,12 +68,12 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
 
         final Spot spot = listSpot.get(position);
 
-
         int order = spot.getOrderNumber() + 1;
         holder.txtTitle.setText(spot.getTitle());
         holder.txtIndex.setText(String.valueOf(order));
         holder.txtCatchPhrase.setText(spot.getCatchPhrase());
-        holder.txtIntro.setText(spot.getIntroduction());
+//        holder.txtIntro.setText(spot.getIntroduction());
+        holder.webViewIntro.loadData(String.format(htmlText, "" + fontSize, spot.getIntroduction()), "text/html; charset=utf-8", "utf-8");
         holder.txtSpotDistance.setText(spot.getSpotDistance() + "km");
         String tag = "";
 //        if (spot.getTag() != null)
@@ -121,6 +128,9 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
 
         @BindView(R.id.btn_spot_images)
         ImageView btnSpotImages;
+
+        @BindView(R.id.webView_content_story)
+        WebView webViewIntro;
 
 
         boolean isFavorite;

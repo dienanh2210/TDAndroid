@@ -9,15 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
         <LinearLayout
+            android:id="@+id/layout_to_capture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/BG_finish_course"
-
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_228sdp">
@@ -44,7 +46,7 @@
                 </RelativeLayout>
 
                 <ImageButton
-                    android:id="@+id/btn_favorite_detail"
+                    android:id="@+id/btn_save_image"
                     android:layout_width="@dimen/_57sdp"
                     android:layout_height="@dimen/_57sdp"
                     android:layout_alignParentBottom="true"
@@ -282,7 +284,7 @@
             android:paddingTop="@dimen/_20sdp">
 
             <TextView
-                android:id="@+id/txt_btn_ping"
+                android:id="@+id/txt_btn_share"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
                 android:layout_marginTop="@dimen/_8sdp"
