@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -57,6 +58,7 @@ public class PostCommentFragment extends BaseFragment {
 
     private boolean isReached = false;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -68,9 +70,8 @@ public class PostCommentFragment extends BaseFragment {
                 mRatingBar.setRating(0);
             }
         });
-
-       // edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
-      //  edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
+        edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
+       edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
 
         edt_text.setOnTouchListener(new View.OnTouchListener() {
             @Override
