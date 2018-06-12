@@ -20,7 +20,7 @@ public class InquiryFragment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.privacy_policy_fragment );
+        setContentView( R.layout.inquiry_fragment );
         tv_back_privacy=findViewById( R.id.tv_back_privacy );
         tv_back_privacy.setOnClickListener( new View.OnClickListener() {
             @Override
