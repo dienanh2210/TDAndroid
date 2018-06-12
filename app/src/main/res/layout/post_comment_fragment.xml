@@ -120,7 +120,7 @@
                 android:layout_height="@dimen/_150sdp"
                 android:background="@android:color/white">
 
-                <EditText
+            <!-->    <EditText
                     android:inputType="textMultiLine"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
@@ -134,8 +134,8 @@
                     android:background="@color/backgroud"
                     android:minLines="5"
                     android:gravity="top|left"
-                    android:scrollbars="vertical" />
-               <!--> <EditText
+                    android:scrollbars="vertical" /><!-->
+                <EditText
                     android:inputType="textMultiLine"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
@@ -151,7 +151,7 @@
                     android:background="@color/backgroud"
                     android:minLines="5"
                     android:gravity="top|left"
-                    android:scrollbars="vertical" /><!-->
+                    android:scrollbars="vertical" />
 
             </RelativeLayout>
 
