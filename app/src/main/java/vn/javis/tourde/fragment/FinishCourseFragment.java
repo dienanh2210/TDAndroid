@@ -1,7 +1,9 @@
 package vn.javis.tourde.fragment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +32,11 @@ import com.android.volley.VolleyError;
 import com.facebook.FacebookSdk;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,6 +71,8 @@ import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
+
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class FinishCourseFragment extends BaseFragment {
     private int mCourseID;
@@ -173,18 +183,22 @@ public class FinishCourseFragment extends BaseFragment {
 
     @OnClick(R.id.btn_save_image)
     void captureFinish() {
-        photoFile =  new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)+ "/" + System.currentTimeMillis() + ".jpg");
+        photoFile = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
         imageStoragePath = photoFile.getAbsolutePath();
         Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
-        CameraUtils.storeImage(bitmap,photoFile);
-        MediaStore.Images.Media.insertImage(mActivity.getContentResolver(), bitmap, imageStoragePath, "" + new Date().getTime());
-        Toast.makeText(mActivity, "Save result Image is successfully! " , Toast.LENGTH_SHORT).show();
+        CameraUtils.storeImage(bitmap, photoFile);
+        if (CameraUtils.checkWriteToDiskPermissions(mActivity)) {
+            CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+        } else {
+            requestPermission();
+        }
+
     }
 
     @OnClick(R.id.txt_btn_share)
     void shareSNS() {
+        captureFinish();
         if (imageStoragePath != null) {
-            //setupFacebookShareIntent();
             final Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             shareIntent.setType("image/*");
@@ -197,11 +211,41 @@ public class FinishCourseFragment extends BaseFragment {
 
     }
 
-    public void setupFacebookShareIntent() {
-        Uri uri = Uri.fromFile(photoFile);
-        ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                .setContentUrl(uri)
-                .build();
-        ShareDialog.show(mActivity, linkContent);
+    private void requestPermission() {
+        Dexter.withActivity(mActivity)
+                .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+
+                        } else if (report.isAnyPermissionPermanentlyDenied()) {
+                            showPermissionsAlert();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
     }
+
+    private void showPermissionsAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setTitle("Permissions required!")
+                .setMessage("Camera needs few permissions to work properly. Grant them in settings.")
+                .setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        CameraUtils.openSettings(mActivity);
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
+    }
+
 }

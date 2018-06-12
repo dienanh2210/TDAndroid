@@ -6,14 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,18 +26,20 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.FavoriteCourseAdapter;
 import vn.javis.tourde.adapter.RunningCourseAdapter;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
+import vn.javis.tourde.apiservice.RunningCourseAPI;
 import vn.javis.tourde.model.FavoriteCourse;
+import vn.javis.tourde.model.RunningCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 
-public class FragmentRunning extends BaseFragment{
+public class FragmentRunning extends BaseFragment {
     View mView;
     CourseListActivity mActivity;
 
     @BindView(R.id.recycler_running)
     RecyclerView recyclerRunning;
     RunningCourseAdapter runningCourseAdapter;
-
+    List<RunningCourse> listRunningCourse = new ArrayList<>();
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -42,24 +48,38 @@ public class FragmentRunning extends BaseFragment{
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerRunning.setLayoutManager(layoutManager);
-        String token = LoginFragment.getmUserToken();
-//        FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
-//            @Override
-//            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-//                List<FavoriteCourse> listRunCourse = FavoriteCourseAPI.getFavorites(response);
-//                runningCourseAdapter = new RunningCourseAdapter(listRunCourse, getActivity());
-//                recyclerRunning.setAdapter(runningCourseAdapter);
-//            }
-//
-//            @Override
-//            public void onError(VolleyError error) {
-//
-//            }
-//        });
+        final String token =LoginFragment.getmUserToken();
+        RunningCourseAPI.getListRunningCourse(token, 1, 5, new ServiceCallback()
+        {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                Log.i("favorite", response.toString());
+                try {
+                    JSONArray list =new JSONArray(response.toString());
+                    for (int i = 0; i < list.length(); i++) {
+                        RunningCourse model = RunningCourse.getData(list.get(i).toString());
+                        // List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
+                        listRunningCourse.add(model);
+                    }
+                    runningCourseAdapter = new RunningCourseAdapter(listRunningCourse, mActivity);
+                    if (recyclerRunning == null)
+                        recyclerRunning = view.findViewById(R.id.recycler_running);
+                    recyclerRunning.setAdapter(runningCourseAdapter);
+
+                } catch (Exception e) {
+                    Log.i("Error Running", e.getMessage() + "-" + recyclerRunning + "-" + runningCourseAdapter);
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
 
     }
 }

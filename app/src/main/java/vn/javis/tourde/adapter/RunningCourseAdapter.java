@@ -18,16 +18,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.FavoriteCourse;
+import vn.javis.tourde.model.RunningCourse;
+import vn.javis.tourde.utils.DateTimeFomater;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.view.CircleTransform;
 
 public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdapter.FavoriteCourseViewHolder> {
 
-    List<FavoriteCourse> listCourse = new ArrayList<FavoriteCourse>();
+    List<RunningCourse> listCourse = new ArrayList<RunningCourse>();
     Context context;
     View mView;
 
-    public RunningCourseAdapter(List<FavoriteCourse> listCourse, Context context) {
+    public RunningCourseAdapter(List<RunningCourse> listCourse, Context context) {
 
         this.listCourse = listCourse;
         this.context = context;
@@ -43,10 +45,12 @@ public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdap
 
     @Override
     public void onBindViewHolder(@NonNull final FavoriteCourseViewHolder holder, final int position) {
-        FavoriteCourse model = listCourse.get(position);
-
+        RunningCourse model = listCourse.get(position);
         holder.txtTitle.setText(model.getTitle());
         PicassoUtil.getSharedInstance(context).load(model.getTopImage()).into(holder.imgShow);
+        holder.value_travel_time.setText(model.getFinishTime());
+        holder.value_average_speed.setText(model.getSpeedAverage()+"km/h");
+        holder.value_finish_date.setText(DateTimeFomater.GetDateFomat(model.getInsertDatetime()));
         if (holder.isRunning) {
             //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));
         }
@@ -74,6 +78,12 @@ public class RunningCourseAdapter extends RecyclerView.Adapter<RunningCourseAdap
         TextView txtTitle;
         @BindView(R.id.txt_travel_time)
         TextView txtTravelTime;
+        @BindView(R.id.value_travel_time)
+        TextView value_travel_time;
+        @BindView(R.id.value_average_speed)
+        TextView value_average_speed;
+        @BindView(R.id.value_finish_date)
+        TextView value_finish_date;
 
         boolean isRunning;
 

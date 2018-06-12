@@ -24,7 +24,7 @@
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_40ssp"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_1sdp"
@@ -38,7 +38,7 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 android:contentDescription="@string/item_text"
                 android:src="@drawable/ic_mark_red"
                 android:visibility="gone" />
