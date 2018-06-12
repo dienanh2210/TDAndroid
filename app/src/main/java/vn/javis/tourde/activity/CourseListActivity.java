@@ -220,10 +220,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
         openPage(new CourseDetailFragment(), true, false, true);
     }
+
     public void ShowCourseDetail() {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         openPage(new CourseDetailFragment(), true, false, true);
     }
+
     public void ShowCourseDetailByTab(int indexTab) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
@@ -267,13 +269,16 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showFragmentTabLayoutRunning() {
         openPage(new FragmentTabLayoutRunning(), true, false);
     }
-    public void showGoalFragment(float speed,String time){
+
+    public void showGoalFragment(int idSpot, float speed, String time) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
+        dataBundle.putInt(SPOT_ID, idSpot);
         openPage(new GoalFragment(), true, false);
     }
-    public void showCourseFinish(String speed,String time) {
+
+    public void showCourseFinish(String speed, String time) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, speed);
         dataBundle.putString(TIME_FINISH, time);
@@ -324,7 +329,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         } else {
             mSpotID = spotID;
             dataBundle.putInt(SPOT_ID, mSpotID);
-            dataBundle.putInt(COURSE_DETAIL_ID,mCourseID);
+            dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
 //            openPage(new TakePhotoFragment(), true, false);
             Intent intent = new Intent(this, TakePhotoActivity.class);
             intent.putExtra(SPOT_ID, mSpotID);
@@ -361,14 +366,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     @Override
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
-        if(fragment instanceof PostCommentFragment) {
+        if (fragment instanceof PostCommentFragment) {
             typeBackPress = 1;
         }
-        if(fragment instanceof SpotFacilitiesFragment) {
+        if (fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
         }
-        if(fragment instanceof FragmentTabLayoutRunning) {
-          // ShowCourseDetail();
+        if (fragment instanceof FragmentTabLayoutRunning) {
+            // ShowCourseDetail();
         }
         super.onBackPressed();
         Log.i("onBackPressed", "true");
@@ -380,12 +385,12 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     }
 
-    public void showCheckPointFragment(int mSpotID,String imgUrl) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl) {
         this.mSpotID = mSpotID;
-        dataBundle.putInt(SPOT_ID,mSpotID);
+        dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
-        openPage(new CheckPointFragment(),true,false);
+        openPage(new CheckPointFragment(), true, false);
     }
 
     public void showSpotFacilities() {
@@ -478,11 +483,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                             CourseDetail courseData = new CourseDetail((JSONObject) response);
                             List<Spot> lstSpot = courseData.getSpot();
                             for (Spot spot : lstSpot) {
-                                Location location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
-                                //  Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLatitude()));
-                                if (!lstLOcat.contains(location1))
-                                    lstLOcat.add(location1);
 
+                                if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty())
+                                {
+                                   // Location location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+                                    Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
+                                    if (!lstLOcat.contains(location1))
+                                        lstLOcat.add(location1);
+                                }
                             }
                             intentGPS.putExtra("location", lstLOcat);
                             startService(intentGPS);
@@ -514,6 +522,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            String str1 =intent.getStringExtra("latutide");
+            String str2 =intent.getStringExtra("longitude");
+
+            if(str1.isEmpty() && str2.isEmpty())
+                return;
 
             latitude = Double.valueOf(intent.getStringExtra("latutide"));
             longitude = Double.valueOf(intent.getStringExtra("longitude"));

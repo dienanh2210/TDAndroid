@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -89,7 +90,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     public static Bitmap bitmapIcon;
     int changeImage = 0;
     private RegisterActivity activity;
-    public static final long FILE_SIZE_8MB = 8192;
+    public static final long FILE_SIZE_8MB =  8*1024*1024;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -186,10 +187,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         edt_email.setText(model.getEmail());
         String url = model.getImage();
 
-        if (url != null && url != ""){
+        if (url != null && url != "") {
             PicassoUtil.getSharedInstance(getContext()).load(url).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
-            changeImage=1;
-        } else {}
+            changeImage = 1;
+        } else {
+        }
 
         String sex = model.getSex();
         if (sex.equals("1")) {
@@ -266,11 +268,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.tv_back_resgister:
                 isChangAccount = false;
-                bitmapIcon=null;
+                bitmapIcon = null;
                 activity.onBackPressed();
                 break;
             case R.id.tv_close:
-                bitmapIcon=null;
+                bitmapIcon = null;
                 isChangAccount = false;
                 activity.onBackPressed();
                 break;
@@ -294,17 +296,22 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        ProcessDialog.showDialogLogin(getContext(), "", "新規登録に成功しました", new ProcessDialog.OnActionDialogClickOk() {
-                            @Override
-                            public void onOkClick() {
-
-                                Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                                startActivity(intent);
-                                intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
-                                getActivity().setResult(Activity.RESULT_OK, intent);
-
-                            }
-                        });
+                        if (!isChangAccount) {
+                            ProcessDialog.showDialogLogin(getContext(), "", "新規登録に成功しました", new ProcessDialog.OnActionDialogClickOk() {
+                                @Override
+                                public void onOkClick() {
+                                    Intent intent = new Intent(getActivity(), CourseListActivity.class);
+                                    startActivity(intent);
+                                    intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                                    getActivity().setResult(Activity.RESULT_OK, intent);
+                                }
+                            });
+                        } else {
+                            Intent intent = new Intent(getActivity(), CourseListActivity.class);
+                            startActivity(intent);
+                            intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+                            getActivity().setResult(Activity.RESULT_OK, intent);
+                        }
                         //     getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
@@ -354,9 +361,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             Uri selectedImage = data.getData();
             try {
                 bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                File file = new File("android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI");
-                Log.i("File size: ", "" + file.length());
-                if (file.length() < FILE_SIZE_8MB && bitmapIcon!=null) {
+                File file = new File(getPath(selectedImage));
+                Log.i("File size: ", "size" + file.length()+getPath(selectedImage));
+                if (file.length() < FILE_SIZE_8MB && bitmapIcon != null) {
                     select_userIcon.setImageBitmap(bitmapIcon);
                 } else
                     ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
@@ -368,6 +375,18 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 e.printStackTrace();
             }
         }
+    }
+
+    public String getPath(Uri uri)
+    {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s=cursor.getString(column_index);
+        cursor.close();
+        return s;
     }
 
     private Response.Listener<JSONObject> successListener() {

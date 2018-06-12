@@ -63,11 +63,14 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         });
         if (position == listSpot.size() - 1) {
             holder.img_link_spot.setVisibility(View.GONE);
+            holder.image_link_long.setVisibility(View.GONE);
         }
         if (position == 0) {
             holder.BG_spot.setImageResource(R.drawable.boder_white);
             holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
             holder.showInfoSpot.setVisibility(View.VISIBLE);
+            //holder.spotTime.setText(model.);
+            //holder.averageSpeed.setText(model.);
             //holder.img_link_spot.setVisibility(View.VISIBLE);
             holder.imgShowChecked.setVisibility(View.VISIBLE);
             holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
@@ -116,6 +119,12 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         GifImageView img_link_vitual;
         @BindView(R.id.showInfoSpot)
         RelativeLayout showInfoSpot;
+        @BindView(R.id.image_link_long)
+        ImageView image_link_long;
+        @BindView(R.id.spotTime)
+        TextView spotTime;
+        @BindView(R.id.averageSpeed)
+        TextView averageSpeed;
 
         boolean isRunning;
 

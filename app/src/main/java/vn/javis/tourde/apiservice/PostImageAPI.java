@@ -3,6 +3,7 @@ package vn.javis.tourde.apiservice;
 import android.app.Activity;
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import vn.javis.tourde.services.ServiceCallback;
@@ -14,11 +15,13 @@ public class PostImageAPI {
         TourDeService.uploadImageBitmap(activity, ApiEndpoint.POST_IMAGE, bitmap, params, callback);
     }
 
-    public static void postCourseImage(String token, int course_id, String user_image_id, ServiceCallback callback) {
+    public static void postCourseImage(String token, int course_id, ArrayList<String> user_image_id, ServiceCallback callback) {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", token);
         params.put("course_id", String.valueOf(course_id));
-        params.put("user_image_id", user_image_id);
+        for (int i = 0; i < user_image_id.size(); i++) {
+            params.put("user_image_id[" + i + "]", user_image_id.get(i));
+        }
         TourDeService.postWithAuth(ApiEndpoint.POST_COURSE_IMAGE, params, callback);
     }
 }

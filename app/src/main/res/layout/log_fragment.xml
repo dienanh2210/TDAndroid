@@ -6,7 +6,7 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/bg_log">
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,11 +34,6 @@
                 android:layout_marginTop="@dimen/_15sdp">
 
             </android.support.v7.widget.RecyclerView>
-
-            <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/bg_spot" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

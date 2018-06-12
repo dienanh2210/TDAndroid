@@ -119,8 +119,8 @@ public class TabMySpotUploadedImages extends BaseFragment {
                                 String token = LoginFragment.getmUserToken();
                                 ArrayList<String> arrayID = new ArrayList<>();
                                 arrayID.add(user_image_id);
-                                String s = arrayID.toString();
-                                SpotDataAPI.postSpotImage(token, spotId,s, new ServiceCallback() {
+
+                                SpotDataAPI.postSpotImage(token, spotId,arrayID, new ServiceCallback() {
                                     @Override
                                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                         JSONObject jsonObject = (JSONObject) response;
