@@ -286,7 +286,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
 //        txtIntroduction.setText(model.getIntroduction());
-        webView.loadData(String.format(htmlText,""+fontSize,model.getIntroduction()), "text/html", "utf-8");
+        webView.loadData(String.format(htmlText,""+fontSize,model.getIntroduction()), "text/html; charset=utf-8", "utf-8");
 
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
