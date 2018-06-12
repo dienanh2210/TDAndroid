@@ -120,7 +120,9 @@
                 android:layout_height="@dimen/_150sdp"
                 android:background="@android:color/white">
 
-          <!-->      <EditText
+
+            <!-->    <EditText
+>>>>>>> ae8bdf2c8eed45d00636d9162bd6285e7ce3546e
                     android:inputType="textMultiLine"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
