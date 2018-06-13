@@ -28,10 +28,7 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
     List<String> listImgage = new ArrayList<>();
     Context context;
     View mView;
-
     List<FavoriteCourse> listCourse = new ArrayList<FavoriteCourse>();
-
-
 
     public ListMySpotUploadedImageAdapter(List<String> listImgage, Context context) {
         Log.i("asd",""+listImgage.size());
@@ -57,12 +54,10 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
                 @Override
                 public void onClick(View v) {
                     onItemClickedListener.onItemClick(0);
-
                 }
             });
         }
         else {
-        //PicassoUtil.getSharedInstance(context).load(imgUrl).into( holder.imgSpot);
             holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.icon_classic));
             }
     }
