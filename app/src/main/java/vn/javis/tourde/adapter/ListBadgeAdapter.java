@@ -27,7 +27,6 @@ public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.Badg
         this.listBadge = listBadge;
         this.context = context;
     }
-
     @Override
     @NonNull
     public BadgeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,10 +41,6 @@ public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.Badg
         Badge model = listBadge.get(position);
         holder.txtBadgeName.setText(model.getBadgeName());
         holder.txtBadgeDateGet.setText(model.getDateGet());
-
-      //  PicassoUtil.getSharedInstance(context).load(model.getImageUrl()).into(holder.imgBadge);
-
-        //load local for test
         int idImgBadge = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());
         holder.imgBadge.setImageResource(idImgBadge);
     }
