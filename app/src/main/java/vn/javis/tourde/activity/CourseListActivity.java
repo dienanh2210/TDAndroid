@@ -543,15 +543,11 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                         if (!jsonObjec.has("error")) {
                             CourseDetail courseData = new CourseDetail((JSONObject) response);
                             List<Spot> lstSpot = courseData.getSpot();
-                            int i = 0;
+
                             for (Spot spot : lstSpot) {
                                 if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty()) {
                                     Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
-                                    if (i < 2) {
-                                        location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
-                                    }
-                                    i++;
-
+                                       // location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
                                     if (!lstLOcat.contains(location1))
                                         lstLOcat.add(location1);
 
