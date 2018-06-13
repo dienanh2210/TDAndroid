@@ -241,6 +241,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
+    public void ShowCourseDetailById(int id) {
+        mCourseID = id;
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
+        if (mCourseDetailFragment == null)
+            mCourseDetailFragment = new CourseDetailFragment();
+        openPage(mCourseDetailFragment, true, false, true);
+    }
 
     public void ShowCourseDetail() {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
