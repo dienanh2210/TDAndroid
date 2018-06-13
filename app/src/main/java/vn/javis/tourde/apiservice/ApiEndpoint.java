@@ -15,6 +15,7 @@ public class ApiEndpoint {
     public static String GET_COURSE_DATA = "/get/getCourseData/";
     public  static String POST_COURSE_LOG ="/post/postCourseLog/";
     public  static String GET_FAVORITE_COURSE_APP  ="/get/getFavoriteCourseListApp/";
+    public  static String GET_RUNNING_COURSE_APP  ="/get/getRunCourseList/";
     public  static String POST_INSERT_FAVORITE_COURSE_APP ="/post/insertFavoriteCourseApp/";
     public  static String POST_DELETE_FAVORITE_COURSE_APP ="/post/deleteFavoriteCourseApp/";
     //log in

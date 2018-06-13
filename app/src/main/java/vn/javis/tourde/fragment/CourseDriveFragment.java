@@ -91,7 +91,7 @@ public class CourseDriveFragment extends BaseFragment {
                     double longtitude = mAcitivity.getLongitude();
                     double latitude = mAcitivity.getLatitude();
                     double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
-                    if (distance <= 20) {
+                    if (distance <= 100) {
                         ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {

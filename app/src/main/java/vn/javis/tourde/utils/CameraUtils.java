@@ -1,7 +1,11 @@
 package vn.javis.tourde.utils;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -10,10 +14,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,9 +32,10 @@ import vn.javis.tourde.BuildConfig;
 
 public class CameraUtils {
     private static final String TAG = CameraUtils.class.getSimpleName();
-    public static boolean checkPermissions(Context context) {
-        return ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+
+
+    public static boolean checkWriteToDiskPermissions(Context context) {
+        return ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
     public static boolean isDeviceSupportCamera(Context context) {
@@ -76,6 +85,7 @@ public class CameraUtils {
 
         return BitmapFactory.decodeFile(filePath, options);
     }
+
     public Bitmap combineImages(Bitmap ScaledBitmap, Bitmap bit) {
 
         int X = bit.getWidth();
@@ -88,6 +98,7 @@ public class CameraUtils {
         canvas.drawBitmap(bit, new Matrix(), null);
         return overlaybitmap;
     }
+
     public static void storeImage(Bitmap image, File file) {
         if (file == null) {
             Log.d(TAG,
@@ -104,6 +115,15 @@ public class CameraUtils {
         } catch (IOException e) {
             Log.d(TAG, "Error accessing file: " + e.getMessage());
         }
+    }
+
+    public static void addImageToGallery(final String filePath, final Context context) {
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+        values.put(MediaStore.MediaColumns.DATA, filePath);
+        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
     }
 
 

@@ -52,7 +52,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     public static SearchCourseFragment newInstance(View.OnClickListener listener) {
         SearchCourseFragment fragment = new SearchCourseFragment();
-      //  fragment.listener = (OnFragmentInteractionListener) listener;
+        //  fragment.listener = (OnFragmentInteractionListener) listener;
         return fragment;
     }
 
@@ -91,10 +91,10 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         boolean gender = false;
         switch (v.getId()) {
             case R.id.im_select_area:
-                mActivity.openPage(PrefectureOneFragment.newInstance(this, ""),true, true);
+                mActivity.openPage(PrefectureOneFragment.newInstance(this, ""), true, true);
                 break;
             case R.id.im_more_searching:
-                mActivity.openPage(PrefectureSearchFragment.newInstance(this), true,true);
+                mActivity.openPage(PrefectureSearchFragment.newInstance(this), true, true);
                 break;
             case R.id.tv_close:
 //                Intent intent = new Intent(getActivity(), CourseListActivity.class);
@@ -186,8 +186,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         String isLess = "-1";
         String strTag = "-1";
         String strSeason = "-1";
-        String typeStr = "-1";
-
+        HashMap<String, String> map = new HashMap<>();
         //check distance
         switch (dist) {
             case "〜20km":
@@ -214,51 +213,37 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
             isLess = "1";
 
         List<String> type = new ArrayList<>();
+        List<String> typeValue = new ArrayList<>();
         if (listCourseType.contains("片道")) {
-            if (typeStr == "-1")
-                typeStr = "1";
-            else typeStr += ",1";
+            typeValue.add("1");
         }
         if (listCourseType.contains("往復")) {
-            if (typeStr == "-1")
-                typeStr = "2";
-            else typeStr += ",2";
+            typeValue.add("2");
         }
         if (listCourseType.contains("1周")) {
-            if (typeStr == "-1")
-                typeStr = "3";
-            else typeStr += ",3";
+            typeValue.add("3");
         }
 
 
-        HashMap<String, String> map = new HashMap<>();
+        List<String> lstPrefectureValue = new ArrayList<String>();
         if (tv_prefecture.getText().toString() != "エリアを選択") {
 
             String[] str = tv_prefecture.getText().toString().trim().split(",");
             String preStr = "";
             for (int i = 0; i < str.length; i++) {
-                if (i < str.length - 1)
-                    preStr += mSearchCourseUtils.getIndexPrefecture(str[i]) + ",";
-                else
-                    preStr += mSearchCourseUtils.getIndexPrefecture(str[i]);
+                lstPrefectureValue.add(String.valueOf(mSearchCourseUtils.getIndexPrefecture(str[i])));
             }
-            map.put("prefecture", preStr);
         }
-
+        List<String> lstSeasonValue = new ArrayList<String>();
+        List<String> lstTagValue = new ArrayList<String>();
         if (tv_searchtwo.getText().toString() != prefecturetext) {
             String[] str = tv_searchtwo.getText().toString().trim().split(",");
             for (int i = 0; i < str.length; i++) {
                 String s = mSearchCourseUtils.getIndexSeason(str[i]);
                 if (s != "-1") {
-                    if (strSeason == "-1")
-                        strSeason = s;
-                    else
-                        strSeason += "," + s;
+                    lstSeasonValue.add(s);
                 } else {
-                    if (strTag == "-1")
-                        strTag = str[i];
-                    else
-                        strTag += "," + str[i];
+                    lstTagValue.add(str[i]);
                 }
 
             }
@@ -268,20 +253,29 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         for (int i = 0; i < type.size(); i++) {
 
         }
+        map.put("limit", "5");
+
         if (distance != "-1")
             map.put("distance_type", distance);
         if (isOver != "-1")
             map.put("over_elevation", isOver);
         if (isLess != "-1")
             map.put("less_elevation", isLess);
-        if (typeStr != "-1")
-            map.put("course_type", typeStr);
+        for (int i = 0; i < lstPrefectureValue.size(); i++) {
+            map.put("prefecture[" + i + "]", lstPrefectureValue.get(i));
+        }
+        for (int i = 0; i < typeValue.size(); i++) {
+            map.put("course_type[" + i + "]", typeValue.get(i));
+        }
         if (!edt_search.getText().toString().matches(""))
             map.put("freeword", edt_search.getText().toString());
-        if (strSeason != "-1")
-            map.put("season", strSeason);
-        if (strTag != "-1")
-            map.put("tag", strTag);
+
+        for (int i = 0; i < typeValue.size(); i++) {
+            map.put("season[" + i + "]", lstSeasonValue.get(i));
+        }
+        for (int i = 0; i < typeValue.size(); i++) {
+            map.put("tag[" + i + "]", lstTagValue.get(i));
+        }
         Log.i("search_frg_302", map.toString());
         //   mActivity.onBackCLickToList(map);
 

@@ -40,7 +40,10 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_42sdp"
-/>
+            app:tabTextColor="@color/Gray"
+            app:tabSelectedTextColor="@color/Black"
+            app:tabTextAppearance="@style/TabLayoutTextBoldStyle"
+            />
         <View
             android:layout_width="match_parent"
             android:layout_height=".3dp"

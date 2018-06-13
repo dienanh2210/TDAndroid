@@ -34,6 +34,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -202,14 +203,19 @@ public class GoogleService extends Service implements LocationListener {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void fn_update(Location location) {
 
-        intent.putExtra("latutide", location.getLatitude() + "");
-        intent.putExtra("longitude", location.getLongitude() + "");
+        intent.putExtra("latutide", location.getLatitude()+"" );
+        intent.putExtra("longitude", location.getLongitude()+"");
         intent.putExtra("arrived", false);
+        if(lstLocation.size()>0){
+            Log.i("latutide", location.getLatitude() + "-"+lstLocation.get(0).getLatitude());
+            Log.i("longitude", location.getLongitude() + "-"+lstLocation.get(0).getLongtitude());
+        }
         lstLocationArrived.clear();
         //double distance1 = DistanceLocation.getDistance(location.getLatitude(), location.getLongitude(),lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude());
         Intent intent1 = new Intent(str_receiver_arrived);
         for (vn.javis.tourde.model.Location lct : lstLocation) {
-            double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude()));
+            double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
+            Log.i("GPS_218,lat",lct.getSpotID() +"-"+ location.getLatitude() + "-"+lct.getLatitude() +",longitude"+location.getLongitude() + "-"+lct.getLongtitude() +",distance"+distance);
             if (distance < 1000) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
