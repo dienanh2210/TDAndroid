@@ -58,6 +58,8 @@ public class FragmentLog extends BaseFragment {
 
                 } else {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+                    if (txtPrezent == null)
+                        return;
                     txtPrezent.setText(mCourseDetail.getmCourseData().getTitle());
                     spotDataList = mCourseDetail.getSpot();
                     listSpotLogAdapter = new ListSpotLog(spotDataList, mActivity);

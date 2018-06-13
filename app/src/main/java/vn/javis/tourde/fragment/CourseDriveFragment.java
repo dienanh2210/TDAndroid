@@ -74,7 +74,7 @@ public class CourseDriveFragment extends BaseFragment {
                     Log.i("Error course drive73", response.toString());
                 } else {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                    if (mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty())
+                    if (title_detail !=null && mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty())
                         title_detail.setText(mCourseDetail.getmCourseData().getTitle());
                 }
             }

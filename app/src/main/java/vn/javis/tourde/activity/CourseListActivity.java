@@ -71,6 +71,7 @@ import vn.javis.tourde.fragment.SpotFacilitiesFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
 import vn.javis.tourde.model.CourseData;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.Location;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
@@ -121,6 +122,20 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     View mLayout;
 
     public int typeBackPress;
+
+    private CourseListFragment mCourseListFragment;
+    private CourseDetailFragment mCourseDetailFragment;
+    private CourseDriveFragment courseDriveFragment;
+    private FinishCourseFragment finishCourseFragment;
+    private GoalFragment goalFragment;
+    private FragmentTabLayoutRunning fragmentTabLayoutRunning;
+    private SearchCourseFragment searchCourseFragment;
+    private CourseDetailSpotImagesFragment courseDetailSpotImagesFragment;
+    private FragmentTabLayoutMyCourse fragmentTabLayoutMyCourse;
+    private BadgeCollectionFragment badgeCollectionFragment;
+    private SpotFacilitiesFragment spotFacilitiesFragment;
+    private CheckPointFragment checkPointFragment;
+    android.support.v4.app.FragmentTransaction frgTransaction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -205,47 +220,63 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
-        openPage(new CourseListFragment(), false, false);
+        if (mCourseListFragment == null)
+            mCourseListFragment = new CourseListFragment();
+        openPage(mCourseListFragment, false, false);
     }
 
     public void showCourseListPage(HashMap<String, String> parram) {
         dataBundle.putSerializable("params", parram);
         dataBundle.putString("searching", "searching");
-        openPage(new CourseListFragment(), false, true);
+        if (mCourseListFragment == null)
+            mCourseListFragment = new CourseListFragment();
+        openPage(mCourseListFragment, false, true);
     }
 
     public void ShowCourseDetail(int position) {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
-        openPage(new CourseDetailFragment(), true, false, true);
+        if (mCourseDetailFragment == null)
+            mCourseDetailFragment = new CourseDetailFragment();
+        openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void ShowCourseDetail() {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        openPage(new CourseDetailFragment(), true, false, true);
+        if (mCourseDetailFragment == null)
+            mCourseDetailFragment = new CourseDetailFragment();
+        openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void ShowCourseDetailByTab(int indexTab) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
+        if (mCourseDetailFragment == null)
+            mCourseDetailFragment = new CourseDetailFragment();
+        openPage(mCourseDetailFragment, true, false, true);
 
-        openPage(new CourseDetailFragment(), true, false, true);
     }
 
     public void ShowFavoriteCourseDetail(int courseId) {
 
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
-        openPage(new CourseDetailFragment(), true, false);
+        if (mCourseDetailFragment == null)
+            mCourseDetailFragment = new CourseDetailFragment();
+        openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void showMyCourse() {
-        openPage(new FragmentTabLayoutMyCourse(), true, false);
+        if (fragmentTabLayoutMyCourse == null)
+            fragmentTabLayoutMyCourse = new FragmentTabLayoutMyCourse();
+        openPage(fragmentTabLayoutMyCourse, true, false);
     }
 
     public void showBadgeCollection() {
-        openPage(new BadgeCollectionFragment(), true, false);
+        if (badgeCollectionFragment == null)
+            badgeCollectionFragment = new BadgeCollectionFragment();
+        openPage(badgeCollectionFragment, true, false);
     }
 
     public void ShowCountDown() {
@@ -257,17 +288,23 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     }
 
     public void showCourseDrive() {
-        openPage(new CourseDriveFragment(), true, false);
+        if (courseDriveFragment == null)
+            courseDriveFragment = new CourseDriveFragment();
+        openPage(courseDriveFragment, true, false);
     }
 
     public void showSpotFacilitiesFragment(int spotID) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
-        openPage(new SpotFacilitiesFragment(), true, false);
+        if (spotFacilitiesFragment == null)
+            spotFacilitiesFragment = new SpotFacilitiesFragment();
+        openPage(spotFacilitiesFragment, true, false);
     }
 
     public void showFragmentTabLayoutRunning() {
-        openPage(new FragmentTabLayoutRunning(), true, false);
+        if (fragmentTabLayoutRunning == null)
+            fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
+        openPage(fragmentTabLayoutRunning, true, false);
     }
 
     public void showGoalFragment(int idSpot, float speed, String time) {
@@ -275,14 +312,50 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putInt(SPOT_ID, idSpot);
-        openPage(new GoalFragment(), true, false);
+        if (goalFragment == null)
+            goalFragment = new GoalFragment();
+        openPage(goalFragment, true, false);
     }
 
     public void showCourseFinish(String speed, String time) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, speed);
         dataBundle.putString(TIME_FINISH, time);
-        openPage(new FinishCourseFragment(), true, false);
+        if (finishCourseFragment == null)
+            finishCourseFragment = new FinishCourseFragment();
+        openPage(finishCourseFragment, true, false);
+    }
+
+    public void showSpotImages(int spotID) {
+        mSpotID = spotID;
+        dataBundle.putInt(SPOT_ID, mSpotID);
+        if (courseDetailSpotImagesFragment == null)
+            courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
+        openPage(courseDetailSpotImagesFragment, true, false);
+    }
+
+    public void showCheckPointFragment(int mSpotID, String imgUrl) {
+        this.mSpotID = mSpotID;
+        dataBundle.putInt(SPOT_ID, mSpotID);
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        dataBundle.putString(STAMP_IMAGE, imgUrl);
+        if (checkPointFragment == null)
+            checkPointFragment = new CheckPointFragment();
+        openPage(checkPointFragment, true, false);
+    }
+
+    public void showSpotFacilities() {
+        if (spotFacilitiesFragment == null)
+            spotFacilitiesFragment = new SpotFacilitiesFragment();
+        openPage(spotFacilitiesFragment, true, false);
+    }
+
+    public void showSearchPage() {
+        if (searchCourseFragment == null)
+            searchCourseFragment = new SearchCourseFragment();
+        openPage(searchCourseFragment, true, false);
+
+
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
@@ -299,21 +372,21 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation, boolean isBack) {
         fragment.setArguments(dataBundle);
-        android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        frgTransaction = getSupportFragmentManager().beginTransaction();
         if (isAnimation) {
             if (isBack)
-                tx.setCustomAnimations(R.anim.pop_exit, R.anim.pop_enter);
+                frgTransaction.setCustomAnimations(R.anim.pop_exit, R.anim.pop_enter);
             else
-                tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+                frgTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         }
 
-        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
-        tx.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        frgTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        frgTransaction.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
 
         if (isBackStack)
-            tx.addToBackStack(null);
-        tx.commitAllowingStateLoss();
+            frgTransaction.addToBackStack(null);
+        frgTransaction.commitAllowingStateLoss();
     }
 
     @Override
@@ -352,11 +425,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     }
 
-    public void showSpotImages(int spotID) {
-        mSpotID = spotID;
-        dataBundle.putInt(SPOT_ID, mSpotID);
-        openPage(new CourseDetailSpotImagesFragment(), true, false);
-    }
 
     public void openLoginPage() {
         Intent intent = new Intent(this, LoginSNSActivity.class);
@@ -373,29 +441,14 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             typeBackPress = 3;
         }
         if (fragment instanceof FragmentTabLayoutRunning) {
-            // ShowCourseDetail();
+            ShowCourseDetail();
+
+            return;
         }
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }
 
-    public void showSearchPage() {
-        openPage(new SearchCourseFragment(), true, false);
-
-
-    }
-
-    public void showCheckPointFragment(int mSpotID, String imgUrl) {
-        this.mSpotID = mSpotID;
-        dataBundle.putInt(SPOT_ID, mSpotID);
-        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        dataBundle.putString(STAMP_IMAGE, imgUrl);
-        openPage(new CheckPointFragment(), true, false);
-    }
-
-    public void showSpotFacilities() {
-        openPage(new SpotFacilitiesFragment(), true, false);
-    }
 
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
@@ -482,14 +535,20 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                         if (!jsonObjec.has("error")) {
                             CourseDetail courseData = new CourseDetail((JSONObject) response);
                             List<Spot> lstSpot = courseData.getSpot();
+                            int i = 0;
                             for (Spot spot : lstSpot) {
-
-                                if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty())
-                                {
-                                   // Location location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+                                if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty()) {
                                     Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
+                                    if (i < 2) {
+                                        location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+                                    }
+                                    i++;
+
                                     if (!lstLOcat.contains(location1))
                                         lstLOcat.add(location1);
+
+                                    // Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
+
                                 }
                             }
                             intentGPS.putExtra("location", lstLOcat);
@@ -522,10 +581,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String str1 =intent.getStringExtra("latutide");
-            String str2 =intent.getStringExtra("longitude");
+            String str1 = intent.getStringExtra("latutide");
+            String str2 = intent.getStringExtra("longitude");
 
-            if(str1.isEmpty() && str2.isEmpty())
+            if (str1.isEmpty() && str2.isEmpty())
                 return;
 
             latitude = Double.valueOf(intent.getStringExtra("latutide"));
