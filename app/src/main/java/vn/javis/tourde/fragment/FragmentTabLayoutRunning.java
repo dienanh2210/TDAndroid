@@ -211,11 +211,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             if (changePaged)
                 return;
             ArrayList<Location> lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
+            Log.i("latutide111", "sbcccc" );
             if (!lst.isEmpty()) {
-                Log.i("latutide111", "" + lst.get(0).getLatitude());
 
                 onGetListSpotArrived(lst.size(), lst.get(0).getSpotID());
-                changePaged = true;
             }
 
         }
@@ -235,6 +234,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             showCheckPointFragment(spotId);
         } else {
             show_select_spot.setVisibility(View.VISIBLE);
+            changePaged = true;
         }
     }
 
@@ -254,7 +254,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                            mActivity.showGoalFragment(speed, finishTime);
+                            mActivity.showGoalFragment(spotId,speed, finishTime);
                         }
                     }
 
@@ -264,7 +264,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     }
                 });
             } else {
-                //   mActivity.showCheckPointFragment(spotId, "");
+             //   mActivity.showCheckPointFragment(spotId, "");
                 CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -279,7 +279,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
                     @Override
                     public void onError(VolleyError error) {
-
+                        Log.i("VolleyError", "" + error.getMessage());
                     }
                 });
             }
@@ -322,6 +322,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        changePaged = false;
         time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
         chronometer.setBase(time);
         chronometer.start();

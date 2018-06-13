@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,12 +64,14 @@ public abstract class TourDeService {
         return ApiEndpoint.BASE_URL + url;
     }
 
-    public static void getWithAuth(String url, HashMap<String, String> params, final ServiceCallback serviceCallback) {
+    public static void getWithAuth(final String url, HashMap<String, String> params, final ServiceCallback serviceCallback) {
         StringRequest mRequest = new StringRequest(Request.Method.GET, generateURL(url, params), new Response.Listener<String>() {
+            String ss =url;
             @Override
             public void onResponse(String responseStr) {
                 JSONObject response = null;
                 try {
+
                     response = new JSONObject(responseStr);
                     serviceCallback.onSuccess(RESULT_SUCCESS, response);
                 } catch (JSONException e) {
@@ -91,7 +94,36 @@ public abstract class TourDeService {
 
         TourDeApplication.getInstance().addToRequestQueue(mRequest, url);
     }
+    public static void getWithAuthAray(final String url, HashMap<String, String> params, final ServiceCallback serviceCallback) {
+        StringRequest mRequest = new StringRequest(Request.Method.GET, generateURL(url, params), new Response.Listener<String>() {
+            String ss =url;
+            @Override
+            public void onResponse(String responseStr) {
+                JSONArray response = null;
+                try {
 
+                    response = new JSONArray(responseStr);
+                    serviceCallback.onSuccess(RESULT_SUCCESS, response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                serviceCallback.onError(error);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        TourDeApplication.getInstance().addToRequestQueue(mRequest, url);
+    }
     public static void postWithAuth(String api, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiEndpoint.BASE_URL + api, new Response.Listener<String>() {

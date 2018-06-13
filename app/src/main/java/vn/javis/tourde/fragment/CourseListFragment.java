@@ -68,7 +68,6 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     private int mCurrentPage;
     ListCourseAdapter listCourseAdapter;
     CourseListActivity mActivity;
-
     @BindView(R.id.img_home)
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
@@ -81,7 +80,6 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     NestedScrollView contentCourseList;
 
     private int mTotalPage = 1;
-
     private static final int NUMBER_COURSE_ON_PAGE = 5;
     private static final int DEFAULT_PAGE = 1;
 
@@ -119,9 +117,8 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   mActivity.showSearchPage();
-                mActivity.openPage(SearchCourseFragment.newInstance(this), true,true);
-
+                //   mActivity.showSearchPage();
+                mActivity.openPage(SearchCourseFragment.newInstance(this), true, true);
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -138,11 +135,10 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         });
         mCurrentPage = DEFAULT_PAGE;
 
-
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(token!="")
+                if (token != "")
                     mActivity.showBadgeCollection();
                 else
                     mActivity.showDialogWarning();
@@ -151,15 +147,16 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showMyCourse();
+                if (token != "")
+                    mActivity.showMyCourse();
+                else
+                    mActivity.showDialogWarning();
             }
         });
         imgHomeBtn.setBackground(getResources().getDrawable(R.drawable.icon_homeclick));
         txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
-        String token = LoginFragment.getmUserToken();
         Intent intent = mActivity.getIntent();
-        if (intent.hasExtra(Constant.KEY_LOGOUT_SUCCESS))
-        {
+        if (intent.hasExtra(Constant.KEY_LOGOUT_SUCCESS)) {
             if (token == "" && intent.getIntExtra(Constant.KEY_LOGOUT_SUCCESS, 0) == 1) {
                 ProcessDialog.showDialogOk(getContext(), "", "ログアウトしました。");
                 intent.removeExtra(Constant.KEY_LOGOUT_SUCCESS);
@@ -243,7 +240,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
 
             @Override
             public void openPage(Fragment fragment) {
-                Intent intent = new Intent(mActivity,LoginSNSActivity.class);
+                Intent intent = new Intent(mActivity, LoginSNSActivity.class);
                 startActivity(intent);
             }
         });

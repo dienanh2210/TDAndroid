@@ -68,8 +68,6 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
                 }
             }
         });
-
-
     }
 
     @Override
@@ -78,7 +76,6 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
     }
 
     public class SpotViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.image_checkin_spot)
         ImageView image_checkin_spot;
         @BindView(R.id.image_checkin_spot_cover)
@@ -88,17 +85,14 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
         @BindView(R.id.tv_spotName)
         TextView tv_spot_name;
 
-
         public SpotViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
-
     public interface OnItemClickedListener {
         void onItemClick(int id);
     }
-
     private OnItemClickedListener onItemClickedListener;
 
     public void setOnItemClickListener(OnItemClickedListener onItemClickedListener) {

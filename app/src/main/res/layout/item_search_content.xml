@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_47sdp"
                 android:gravity="center_vertical"
-                android:paddingStart="15dp"
+                android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 android:textSize="@dimen/_15ssp"
                 android:text="@string/item_text" />
@@ -37,7 +37,7 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:contentDescription="@string/item_text"
                 android:src="@drawable/ic_mark_red"
                 android:visibility="gone" />

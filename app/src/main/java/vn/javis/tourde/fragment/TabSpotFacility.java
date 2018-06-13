@@ -93,12 +93,23 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
     TextView mechanic_maintenance_1;
     @BindView(R.id.mechanic_maintenance_2)
     TextView mechanic_maintenance_2;
+
+    String token = LoginFragment.getmUserToken();
+    CourseListActivity mActivity;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        bt_spot_page.setOnClickListener(this);
-        insertInfo();
-
+        mActivity = (CourseListActivity) getActivity();
+//        bt_spot_page.setOnClickListener(this);
+//        insertInfo();
+bt_spot_page.setOnClickListener( new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(token!="")
+            insertInfo();
+        else
+            mActivity.showDialogWarning();
+    }
+} );
 
     }
 

@@ -1,7 +1,10 @@
 package vn.javis.tourde.adapter;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +18,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.model.FavoriteCourse;
+
 
 public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMySpotUploadedImageAdapter.SpotViewHolder> {
 
     List<String> listImgage = new ArrayList<>();
     Context context;
     View mView;
+    List<FavoriteCourse> listCourse = new ArrayList<FavoriteCourse>();
 
     public ListMySpotUploadedImageAdapter(List<String> listImgage, Context context) {
         Log.i("asd",""+listImgage.size());
@@ -30,7 +38,7 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
 
     @Override
     public SpotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+     //   mActivity = (CourseListActivity) getActivity();
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         mView = inflater.inflate(R.layout.spot_image_single, parent, false);
         return new SpotViewHolder(mView);
@@ -38,6 +46,7 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
 
     @Override
     public void onBindViewHolder(@NonNull final SpotViewHolder holder, final int position) {
+
         String model = listImgage.get(position);
         if(position ==0) {
             holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.plus_button));
@@ -49,7 +58,6 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
             });
         }
         else {
-        //PicassoUtil.getSharedInstance(context).load(imgUrl).into( holder.imgSpot);
             holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.icon_classic));
             }
     }
@@ -59,6 +67,8 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
         Log.i("asd1",""+listImgage.size());
         return listImgage.size();
     }
+
+
 
     public class SpotViewHolder extends RecyclerView.ViewHolder {
 

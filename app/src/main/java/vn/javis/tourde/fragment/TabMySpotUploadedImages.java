@@ -49,6 +49,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
     CourseListActivity mActivity;
     List<String> listSpotImg = new ArrayList<>();
     String avagePace, finishTIme, startAddress;
+    String token = LoginFragment.getmUserToken();
     int spotId;
 
     public static TabMySpotUploadedImages intansce(List<String> listSpotImg,int spotID) {
@@ -76,8 +77,11 @@ public class TabMySpotUploadedImages extends BaseFragment {
                 public void onItemClick(int position) {
                     if (position == 0) {
 
-                        startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-                        //     uploadMyImage(GET_FROM_GALLERY,Activity.RESULT_OK,);
+                     //   startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                        if(token!="")
+                            startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                        else
+                            mActivity.showDialogWarning();
                     }
                 }
             });
@@ -119,8 +123,8 @@ public class TabMySpotUploadedImages extends BaseFragment {
                                 String token = LoginFragment.getmUserToken();
                                 ArrayList<String> arrayID = new ArrayList<>();
                                 arrayID.add(user_image_id);
-                                String s = arrayID.toString();
-                                SpotDataAPI.postSpotImage(token, spotId,s, new ServiceCallback() {
+
+                                SpotDataAPI.postSpotImage(token, spotId,arrayID, new ServiceCallback() {
                                     @Override
                                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                         JSONObject jsonObject = (JSONObject) response;
