@@ -153,7 +153,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 
                             ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
 
-                            ImageViewAnimatedChange(mActivity, txtView, "『+" + spotTitle + "』", imgView, imgUrl);
+                            ImageViewAnimatedChange(mActivity, txtView, "『" + spotTitle + "』", imgView, imgUrl);
                             finishedAnim = true;
 
                         }
