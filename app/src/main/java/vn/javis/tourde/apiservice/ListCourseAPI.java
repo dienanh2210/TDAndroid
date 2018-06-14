@@ -92,7 +92,7 @@ public class ListCourseAPI {
                 Course thisCourse = Course.getData(vl);
 
                 if (thisCourse != null) {
-                    Log.i("courseID",thisCourse.getCourseId());
+
                     List<String> lst1 =new ArrayList<>();
                     for (int i = 0; i < singleJsonObjectTag.length(); i++) {
                         TagClass tagClass = TagClass.getData(singleJsonObjectTag.get(i).toString());

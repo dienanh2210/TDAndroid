@@ -344,7 +344,7 @@ public class CourseListActivity extends BaseActivity implements ServiceCallback 
     public void showSearchPage() {
         if (searchCourseFragment == null)
             searchCourseFragment = new SearchCourseFragment();
-        openPage(searchCourseFragment, true, false);
+        openPage(searchCourseFragment, true, true);
 
     }
 

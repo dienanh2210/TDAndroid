@@ -15,7 +15,7 @@ import java.util.List;
 public class Course {
     @SerializedName("course_id")
     @Expose
-    private String courseId;
+    private int courseId;
     @SerializedName("spot_id")
     @Expose
     private String spotId;
@@ -153,11 +153,11 @@ public class Course {
     public static Course getData(String data) {
         return new Gson().fromJson(data, Course.class);
     }
-    public String getCourseId() {
+    public Integer getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 

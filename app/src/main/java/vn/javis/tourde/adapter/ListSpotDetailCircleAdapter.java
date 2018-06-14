@@ -43,7 +43,7 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
     List<Spot> listSpot = new ArrayList<>();
     Context context;
     View mView;
-    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black\"> %s </body></Html>";
+    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0\"> %s </body></Html>";
     int fontSize;
 
     public ListSpotDetailCircleAdapter(List<Spot> listSpot, Context context) {

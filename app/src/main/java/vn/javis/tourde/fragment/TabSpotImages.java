@@ -1,6 +1,7 @@
 package vn.javis.tourde.fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -113,6 +114,14 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
                     pager.measureCurrentView(fragment.getView());
                 }
             }
+        }
+        @Override
+        public Parcelable saveState() {
+            return null;
+        }
+
+        @Override
+        public void restoreState(Parcelable arg0, ClassLoader arg1) {
         }
         @Override
         public int getCount() {

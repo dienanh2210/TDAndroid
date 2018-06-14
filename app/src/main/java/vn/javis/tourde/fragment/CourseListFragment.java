@@ -234,8 +234,8 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
             @Override
-            public void onItemClick(int position) {
-                mActivity.ShowCourseDetail(position);
+            public void onItemClick(int id) {
+                mActivity.ShowCourseDetailById(id);
             }
 
             @Override

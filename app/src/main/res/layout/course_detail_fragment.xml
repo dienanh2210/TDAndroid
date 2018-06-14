@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/_45sdp"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:background="@color/White"
         android:orientation="vertical">
 
@@ -470,16 +474,18 @@
             app:tabNormalColor="#DCE0E2"
             app:tabTextActiveColor="@color/color_text_tab"
             app:tabTextColor="@color/Black"
-            app:tabTextSize="@dimen/_12sdp"></vn.javis.tourde.customlayout.TourDeTabLayout>
+            app:tabTextSize="@dimen/_12sdp" />
 
         <vn.javis.tourde.view.YourScrollableViewPager
             android:id="@+id/course_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></vn.javis.tourde.view.YourScrollableViewPager>
+            android:layout_height="match_parent" />
 
-        <include layout="@layout/footer_layout"></include>
+
     </LinearLayout>
 </ScrollView>
+    <include layout="@layout/footer_layout" />
+</RelativeLayout>
 
 
 

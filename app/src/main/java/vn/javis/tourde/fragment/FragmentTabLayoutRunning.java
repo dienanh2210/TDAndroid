@@ -283,14 +283,14 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-               // mActivity.showGoalFragment(spotId, speed, finishTime);
-                ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                mActivity.showGoalFragment(spotId, speed, finishTime);
+             //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                            mActivity.showGoalFragment(spotId, speed, finishTime);
+                      //      mActivity.showGoalFragment(spotId, speed, finishTime);
                         }
                         ProcessDialog.hideProgressDialog();
                     }
@@ -301,8 +301,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     }
                 });
             } else {
-              //  mActivity.showCheckPointFragment(spotId, "");
-                ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                mActivity.showCheckPointFragment(spotId, "");
+             //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -310,7 +310,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                         if (!jsonObject.has("error")) {
                             Stamp model = Stamp.getData(response.toString());
                             if (model.getSuccess()) {
-                                mActivity.showCheckPointFragment(spotId, model.getImage());
+                             //   mActivity.showCheckPointFragment(spotId, model.getImage());
                             }
                         }
                         ProcessDialog.hideProgressDialog();
