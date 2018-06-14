@@ -139,7 +139,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String url = "";
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
     int indexTab;
-    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black\"> %s </body></Html>";
+    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0\"> %s </body></Html>";
     int fontSize;
 
     @Override
@@ -148,19 +148,22 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
-        if(mActivity.typeBackPress==1) {
+        if (mActivity.typeBackPress == 1) {
             indexTab = 1;
             mActivity.typeBackPress = 0;
         }
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
 
 //        final WebSettings webSettings = webView.getSettings();
+//        webSettings.setUseWideViewPort(true);
+//        webView.setInitialScale(1);
+//        webSettings.setLoadWithOverviewMode(true);
         Resources res = getResources();
-         fontSize = res.getInteger(R.integer.txtSizeWebView);
-        Log.i("fontSize", ""+fontSize);
+        fontSize = res.getInteger(R.integer.txtSizeWebView);
+        Log.i("fontSize", "" + fontSize);
 //        webSettings.setDefaultFontSize((int)fontSize);
 
-        indexTab = indexTab<0?0:indexTab;
+        indexTab = indexTab < 0 ? 0 : indexTab;
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
@@ -250,7 +253,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 String shareBody = txtTitle.getText().toString();
                 String shareSub = txtTitle.getText().toString();
                 String share = url;
-              //  myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
+                //  myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareBody + "\n" + share);
 
                 startActivity(Intent.createChooser(myIntent, ""));
@@ -286,7 +289,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());
 //        txtIntroduction.setText(model.getIntroduction());
-        webView.loadData(String.format(htmlText,""+fontSize,model.getIntroduction()), "text/html; charset=utf-8", "utf-8");
+        webView.loadData(String.format(htmlText, "" + fontSize, model.getIntroduction()), "text/html; charset=utf-8", "utf-8");
 
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
@@ -337,7 +340,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         break;
                     }
                 }
-                if (isFavourite && btnFavorite!=null) {
+                if (isFavourite && btnFavorite != null) {
                     btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
 
                     if (tabCourseFragment != null) {
@@ -379,8 +382,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) {
-        JSONObject jsonObject = (JSONObject)response;
-        if(!jsonObject.has("error")) {
+        JSONObject jsonObject = (JSONObject) response;
+        if (!jsonObject.has("error")) {
             try {
                 Log.i("GET COURSE API: ", response.toString());
                 mCourseDetail = new CourseDetail((JSONObject) response);
@@ -455,7 +458,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String token = LoginFragment.getmUserToken();
 
     public void btnFavoriteClick(boolean inChild) {
-        if(inChild && isFavourite){return;}
+        if (inChild && isFavourite) {
+            return;
+        }
         isFavourite = !isFavourite;
 
         int course_id = mCourseID;
