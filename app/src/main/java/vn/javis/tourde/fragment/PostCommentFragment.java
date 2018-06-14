@@ -99,7 +99,8 @@ public class PostCommentFragment extends BaseFragment {
         tvBackToDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.ShowCourseDetailByTab(1);
+//                mActivity.ShowCourseDetailByTab(1);
+                mActivity.onBackPressed();
             }
         });
     }
@@ -136,8 +137,8 @@ public class PostCommentFragment extends BaseFragment {
                                             @Override
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 //post comment success return to current page
-                                             //   mActivity.onBackPressed();
-                                                mActivity.ShowCourseDetailByTab(1);
+                                                mActivity.onBackPressed();
+//                                                mActivity.ShowCourseDetailByTab(1);
 
                                             }
 
