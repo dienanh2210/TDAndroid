@@ -122,7 +122,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(position);
+                    onItemClickedListener.onItemClick(model.getCourseId());
                 }
             }
         });
@@ -130,7 +130,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(position);
+                    onItemClickedListener.onItemClick(model.getCourseId());
                 }
             }
         });
@@ -138,7 +138,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             @Override
             public void onClick(View view) {
                 if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(position);
+                    onItemClickedListener.onItemClick(model.getCourseId());
                 }
             }
         });

@@ -54,6 +54,7 @@ import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
+import vn.javis.tourde.fragment.BaseFragment;
 import vn.javis.tourde.fragment.CheckPointFragment;
 import vn.javis.tourde.fragment.CourseDetailFragment;
 import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
@@ -84,7 +85,7 @@ import vn.javis.tourde.utils.ProcessDialog;
  * Created by admin on 3/23/2018.
  */
 
-public class CourseListActivity extends AppCompatActivity implements ServiceCallback {
+public class CourseListActivity extends BaseActivity implements ServiceCallback {
 
 
     public static final int MY_CAMERA_PERMISSION_CODE = 100;
@@ -139,9 +140,8 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.course_list_view);
+        super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         ListCourseAPI api = new ListCourseAPI(this);
         setHearder();
@@ -200,24 +200,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             }
         });
     }
-
-    private void fetchData() {
-        Intent intent = getIntent();
-        boolean searching = "true".equals(intent.getStringExtra("searching"));
-        HashMap<String, String> params = new HashMap<>();
-        if (intent.getSerializableExtra("searchValue") instanceof HashMap) {
-            params = (HashMap<String, String>) intent.getSerializableExtra("searchValue");
-            if (params != null) {
-                Log.i("params", params.toString());
-            }
-        }
-        if (!searching) {
-            ListCourseAPI.getJsonValues(this);
-        } else {
-            ListCourseAPI.getJsonValueSearch(params, this);
-        }
-    }
-
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
         if (mCourseListFragment == null)
@@ -241,6 +223,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
             mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
+
     public void ShowCourseDetailById(int id) {
         mCourseID = id;
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
@@ -442,15 +425,16 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
         if (fragment instanceof PostCommentFragment) {
             typeBackPress = 1;
-        }
-        if (fragment instanceof SpotFacilitiesFragment) {
+        } else if (fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
-        }
-        if (fragment instanceof FragmentTabLayoutRunning) {
+            showSpotImages(mSpotID);
+            return;
+        } else if (fragment instanceof FragmentTabLayoutRunning) {
             ShowCourseDetail();
 
             return;
         }
+
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }
@@ -545,7 +529,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
                             for (Spot spot : lstSpot) {
                                 if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty()) {
                                     Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
-                                       // location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+                                    // location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
                                     if (!lstLOcat.contains(location1))
                                         lstLOcat.add(location1);
 

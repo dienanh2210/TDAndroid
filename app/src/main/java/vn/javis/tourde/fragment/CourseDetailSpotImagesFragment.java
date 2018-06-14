@@ -1,6 +1,7 @@
 package vn.javis.tourde.fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -139,6 +140,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
             }
         });
         Log.i("DetailSpotImages128",""+spotId);
+        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
         SpotDataAPI.getSpotData(spotId, this);
     }
 
@@ -189,9 +191,10 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
 
             }
         });
+        view_pager.setAdapter(pagerAdapter);
         view_pager.setCurrentPageNumber(indexTab);
         view_pager.setCurrentItem(indexTab);
-        view_pager.setAdapter(pagerAdapter);
+        ProcessDialog.hideProgressDialog();
     }
 
     @Override
@@ -241,6 +244,14 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                     pager.measureCurrentView(fragment.getView());
                 }
             }
+        }
+        @Override
+        public Parcelable saveState() {
+            return null;
+        }
+
+        @Override
+        public void restoreState(Parcelable arg0, ClassLoader arg1) {
         }
         @Override
         public int getCount() {
