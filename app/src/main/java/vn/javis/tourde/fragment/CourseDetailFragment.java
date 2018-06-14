@@ -148,10 +148,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
-        if (mActivity.typeBackPress == 1) {
-            indexTab = 1;
-            mActivity.typeBackPress = 0;
-        }
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
 
 //        final WebSettings webSettings = webView.getSettings();
@@ -164,6 +160,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        webSettings.setDefaultFontSize((int)fontSize);
 
         indexTab = indexTab < 0 ? 0 : indexTab;
+        if (mActivity.typeBackPress == 1) {
+            indexTab = 1;
+            mActivity.typeBackPress = 0;
+        }
         GetCourseDataAPI.getCourseData(mCourseID, this);
         tab_layout.setOnTabChangeListener(new TourDeTabLayout.SCTabChangeListener() {
             @Override
