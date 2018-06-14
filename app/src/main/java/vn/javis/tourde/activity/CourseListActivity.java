@@ -358,10 +358,10 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         openPage(spotFacilitiesFragment, true, false);
     }
 
-    public void showSearchPage() {
+    public void showSearchPage(SearchCourseFragment.OnFragmentInteractionListener listener) {
         if (searchCourseFragment == null)
-            searchCourseFragment = new SearchCourseFragment();
-        openPage(searchCourseFragment, true, false);
+            searchCourseFragment = SearchCourseFragment.newInstance(listener);
+        openPage(searchCourseFragment, true, true);
 
 
     }

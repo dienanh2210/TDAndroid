@@ -328,7 +328,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 chronometer.stop();
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
-             //   show_select_spot.setVisibility(View.VISIBLE);
+                show_select_spot.setVisibility(View.VISIBLE);
                 mActivity.unregisterReceiver(broadcastReceiverArried);
                 break;
             case R.id.resume:

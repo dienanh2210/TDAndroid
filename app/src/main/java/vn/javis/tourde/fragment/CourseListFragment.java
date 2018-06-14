@@ -47,7 +47,7 @@ import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 
 
-public class CourseListFragment extends BaseFragment implements ServiceCallback {
+public class CourseListFragment extends BaseFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.lst_courses_recycleview)
     RecyclerView lstCourseRecycleView;
@@ -84,8 +84,8 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     private static final int DEFAULT_PAGE = 1;
 
     String token = LoginFragment.getmUserToken();
-    HashMap<String, String> paramsSearch;
-
+    HashMap<String, String> paramsSearch = new HashMap<String, String>();;
+    boolean search = false;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -95,17 +95,15 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         lstCourseRecycleView.setNestedScrollingEnabled(false);
         setFooter();
         Bundle bundle = getArguments();
-        paramsSearch = new HashMap<String, String>();
-        boolean search = false;
-        if (bundle != null) {
-            String getStr = bundle.getString("searching");
-            if (getStr != null && getStr != "") {
-                paramsSearch = (HashMap<String, String>) bundle.getSerializable("params");
-                Log.i("lst course 97", "" + paramsSearch);
-                search = true;
-            }
-
-        }
+//        if (bundle != null) {
+//            String getStr = bundle.getString("searching");
+//            if (getStr != null && getStr != "") {
+//                paramsSearch = (HashMap<String, String>) bundle.getSerializable("params");
+//                Log.i("lst course 97", "" + paramsSearch);
+//                search = true;
+//            }
+//
+//        }
         getData(search);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +115,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   mActivity.showSearchPage();
+                   mActivity.showSearchPage(CourseListFragment.this);
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -275,6 +273,13 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onFragmentInteraction(HashMap<String, String> map) {
+        paramsSearch = map;
+        search = true;
+//        getData(true);
     }
 }
 

@@ -185,6 +185,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         Account model = LoginFragment.getmAccount();
         edt_username.setText(model.getNickname());
         edt_email.setText(model.getEmail());
+        edt_password.setText(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Pass"));
         String url = model.getImage();
 
         if (url != null && url != "") {
@@ -296,7 +297,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        if (!isChangAccount) {
+                        if (isChangAccount) {
                             ProcessDialog.showDialogLogin(getContext(), "", "新規登録に成功しました", new ProcessDialog.OnActionDialogClickOk() {
                                 @Override
                                 public void onOkClick() {
