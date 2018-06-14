@@ -270,11 +270,13 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         if (!edt_search.getText().toString().matches(""))
             map.put("freeword", edt_search.getText().toString());
 
-        for (int i = 0; i < typeValue.size(); i++) {
+        for (int i = 0; i < lstSeasonValue.size(); i++) {
             map.put("season[" + i + "]", lstSeasonValue.get(i));
+            Log.i("", "getAllContent: "+i);
         }
-        for (int i = 0; i < typeValue.size(); i++) {
+        for (int i = 0; i < lstTagValue.size(); i++) {
             map.put("tag[" + i + "]", lstTagValue.get(i));
+            Log.i("", "getAllContent: "+i);
         }
         Log.i("search_frg_302", map.toString());
         //   mActivity.onBackCLickToList(map);

@@ -54,8 +54,8 @@ import vn.javis.tourde.services.ChronometerService;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
-
 
 
 public class FragmentTabLayoutRunning extends BaseFragment {
@@ -95,8 +95,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     private RegisterActivity activity;
     private SharedPreferencesUtils preferencesUtils;
     private static final String KEY_SHARED_BASETIME = "key_time";
-    ArrayList<Location> lst =new ArrayList<>();
-    List<Spot> list_spot =new ArrayList<>();
+    ArrayList<Location> lstLocation = new ArrayList<>();
+    List<Spot> list_spot = new ArrayList<>();
+    ArrayList<Integer> lstCheckedSpot = new ArrayList<>();
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -144,6 +145,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         show_select_spot.setVisibility(View.GONE);
         final int courseId = mActivity.getmCourseID();
         list_spot.clear();
+        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -167,11 +169,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     spotRecycler.setAdapter(listSpotCheckinAdapter);
 
                 }
+                ProcessDialog.hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-
+                ProcessDialog.hideProgressDialog();
             }
         });
 
@@ -190,19 +193,19 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
 
     }
+
     void changeListSpotCheckInData() {
         List<Spot> newList = new ArrayList<>();
         for (Spot spot : list_spot) {
             int id = spot.getSpotId();
-            for (int i = 0; i < lst.size(); i++) {
-                if (lst.get(i).getSpotID() == id) {
+            for (int i = 0; i < lstLocation.size(); i++) {
+                if (!lstCheckedSpot.contains(id) && lstLocation.get(i).getSpotID() == id) {
                     newList.add(spot);
                     continue;
                 }
             }
         }
-        if(newList.size()>0)
-        {
+        if (newList.size() > 0) {
             listSpotCheckinAdapter = new ListCheckInSpot(newList, mActivity);
             listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
                 @Override
@@ -241,10 +244,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             if (changePaged)
                 return;
-            lst.clear();
-            lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
+            lstLocation.clear();
+            lstLocation = (ArrayList<Location>) intent.getSerializableExtra("arrived");
             Log.i("latutide111", "sbcccc");
-            if (!lst.isEmpty()) {
+            if (!lstLocation.isEmpty()) {
                 changeListSpotCheckInData();
             }
 
@@ -270,7 +273,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     }
 
     void showCheckPointFragment(final int spotId) {
-
+        if (!lstCheckedSpot.contains(spotId))
+            lstCheckedSpot.add(spotId);
         if (spotId > 0 && courseID > 0) {
             String token = LoginFragment.getmUserToken();
             if (spotId == lastSpotId) {
@@ -279,23 +283,26 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-                mActivity.showGoalFragment(spotId, speed, finishTime);
+               // mActivity.showGoalFragment(spotId, speed, finishTime);
+                ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                            mActivity.showGoalFragment(spotId,speed, finishTime);
+                            mActivity.showGoalFragment(spotId, speed, finishTime);
                         }
+                        ProcessDialog.hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
-
+                        ProcessDialog.hideProgressDialog();
                     }
                 });
             } else {
-                   mActivity.showCheckPointFragment(spotId, "");
+              //  mActivity.showCheckPointFragment(spotId, "");
+                ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -306,11 +313,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 mActivity.showCheckPointFragment(spotId, model.getImage());
                             }
                         }
+                        ProcessDialog.hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
                         Log.i("VolleyError", "" + error.getMessage());
+                        ProcessDialog.hideProgressDialog();
                     }
                 });
             }
@@ -328,8 +337,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 chronometer.stop();
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
-             //   show_select_spot.setVisibility(View.VISIBLE);
-                mActivity.unregisterReceiver(broadcastReceiverArried);
+                //   show_select_spot.setVisibility(View.VISIBLE);
+                //   mActivity.unregisterReceiver(broadcastReceiverArried);
+                mActivity.turnOffGPS();
                 break;
             case R.id.resume:
                 chronometer.setBase(SystemClock.elapsedRealtime() + pauseOffset);
@@ -337,7 +347,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 stopTime.setVisibility(View.VISIBLE);
                 show_select_spot.setVisibility(View.GONE);
                 changePaged = false;
-                mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
+                //   mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
+                mActivity.turnOnGPS();
                 break;
 
         }

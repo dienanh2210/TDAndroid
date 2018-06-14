@@ -45,6 +45,7 @@ import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.CameraPreview;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.TimeUtil;
 
 /**
@@ -91,7 +92,7 @@ public class TakePhotoActivity extends AppCompatActivity {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-
+        ProcessDialog.showProgressDialog(this, "Loading", false);
         spotId = getIntent().getIntExtra(CourseListActivity.SPOT_ID, 0);
         courseID = getIntent().getIntExtra(CourseListActivity.COURSE_DETAIL_ID, 0);
 
@@ -128,11 +129,12 @@ public class TakePhotoActivity extends AppCompatActivity {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                     courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
                     txtDistance.setText(mCourseDetail.getmCourseData().getDistance() + "km");
+                    ProcessDialog.hideProgressDialog();
                 }
 
                 @Override
                 public void onError(VolleyError error) {
-
+                    ProcessDialog.hideProgressDialog();
                 }
             });
         }

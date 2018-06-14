@@ -80,7 +80,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     NestedScrollView contentCourseList;
 
     private int mTotalPage = 1;
-    private static final int NUMBER_COURSE_ON_PAGE = 5;
+    private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
 
     String token = LoginFragment.getmUserToken();
@@ -106,6 +106,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
             }
 
         }
+        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
         getData(search);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +211,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
             } else {
                 txtNoCourse.setVisibility(View.GONE);
                 contentCourseList.setVisibility(View.VISIBLE);
-                mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
+                mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourse / NUMBER_COURSE_ON_PAGE)+1;
                 int currentValue = mCurrentPage;
                 mCurrentPage += nextPage;
                 if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
@@ -228,7 +229,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     }
 
     void setRecycle() {
-        List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
+        List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage,NUMBER_COURSE_ON_PAGE);
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
@@ -265,6 +266,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         ListCourseAPI.setAllCourses((JSONObject) response);
         changePage(0);
+        ProcessDialog.hideProgressDialog();
     }
 
     @Override

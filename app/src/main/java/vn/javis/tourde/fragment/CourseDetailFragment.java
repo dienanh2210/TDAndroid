@@ -144,7 +144,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         mActivity = (CourseListActivity) getActivity();
+        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
@@ -402,7 +404,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
-
+        ProcessDialog.hideProgressDialog();
 
     }
 
