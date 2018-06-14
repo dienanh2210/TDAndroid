@@ -337,7 +337,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         break;
                     }
                 }
-                if (isFavourite) {
+                if (isFavourite && btnFavorite!=null) {
                     btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
 
                     if (tabCourseFragment != null) {

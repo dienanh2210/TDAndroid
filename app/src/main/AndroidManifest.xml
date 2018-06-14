@@ -98,8 +98,14 @@
         <activity
             android:name=".fragment.InquiryFragment"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".activity.SrcollViewImage"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".services.ChronometerService"
+            android:stopWithTask="false"></service>
+
     </application>
 
 </manifest>

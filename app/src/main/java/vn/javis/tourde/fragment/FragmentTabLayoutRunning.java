@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,9 +50,13 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Location;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.model.Stamp;
+import vn.javis.tourde.services.ChronometerService;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
+
+
 
 public class FragmentTabLayoutRunning extends BaseFragment {
     @BindView(R.id.tabs)
@@ -82,9 +87,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     int lastSpotId;
     float courseDistance;
     boolean changePaged;
+    private String time_str = "00:00:00";
     private FragmentTabLayoutRunning.OnFragmentInteractionListener listener;
+    int currentIdSpotDetect;
+    long currentTimeDetect;
     //  TextView tv_back_password;
     private RegisterActivity activity;
+    private SharedPreferencesUtils preferencesUtils;
+    private static final String KEY_SHARED_BASETIME = "key_time";
+    ArrayList<Location> lst =new ArrayList<>();
+    List<Spot> list_spot =new ArrayList<>();
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -97,6 +109,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
+        preferencesUtils = SharedPreferencesUtils.getInstance(mActivity);
     }
 
     @SuppressLint("SetTextI18n")
@@ -111,13 +124,15 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 String t = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
                 chronometer.setText(t);
+                time_str = t;
+                Log.i("onChronometerTick", t);
             }
         });
 
-        time = SystemClock.elapsedRealtime();
-        chronometer.setBase(time);
-        chronometer.setText("00:00:00");
-        chronometer.start();
+//        chronometer.setBase(time);
+        chronometer.setText(time_str);
+//        startChronometerService();
+//        chronometer.start();
         Log.i("timer", "" + SystemClock.elapsedRealtime());
         initTabControl();
         setupViewPager(viewPager);
@@ -126,8 +141,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
         spotRecycler.setLayoutManager(layoutManager);
-
+        show_select_spot.setVisibility(View.GONE);
         final int courseId = mActivity.getmCourseID();
+        list_spot.clear();
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -137,7 +153,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                 if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
                     courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
-                List<Spot> list_spot = mCourseDetail.getSpot();
+                list_spot = mCourseDetail.getSpot();
                 if (list_spot.size() > 0) {
                     lastSpotId = list_spot.get(list_spot.size() - 1).getSpotId();
 
@@ -159,20 +175,58 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             }
         });
 
-
-        spotRecycler.setAdapter(listSpotCheckinAdapter);
-
+        //   spotRecycler.setAdapter(listSpotCheckinAdapter);
         mActivity.fn_permission();
 
     }
 
+    private void startChronometerService() {
+        SharedPreferencesUtils pref = SharedPreferencesUtils.getInstance(mActivity);
+        if (TextUtils.isEmpty(pref.getStringValue("startChronometerService"))) {
+            pref.setStringValue("startChronometerService", "startChronometerService");
+            Intent intent = new Intent(getContext(), ChronometerService.class);
+            intent.putExtra(ChronometerService.KEY_TIME_BASE, SystemClock.elapsedRealtime());
+            mActivity.startService(intent);
+        }
+
+    }
+    void changeListSpotCheckInData() {
+        List<Spot> newList = new ArrayList<>();
+        for (Spot spot : list_spot) {
+            int id = spot.getSpotId();
+            for (int i = 0; i < lst.size(); i++) {
+                if (lst.get(i).getSpotID() == id) {
+                    newList.add(spot);
+                    continue;
+                }
+            }
+        }
+        if(newList.size()>0)
+        {
+            listSpotCheckinAdapter = new ListCheckInSpot(newList, mActivity);
+            listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
+                @Override
+                public void onItemClick(int id) {
+                    showCheckPointFragment(id);
+                }
+            });
+            spotRecycler.setAdapter(listSpotCheckinAdapter);
+            spotRecycler.setAdapter(listSpotCheckinAdapter);
+            onGetListSpotArrived(newList.size(), newList.get(0).getSpotId());
+        }
+
+    }
 
     @Override
     public void onPause() {
         super.onPause();
+        pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
+        preferencesUtils.setLongValue(KEY_SHARED_BASETIME, pauseOffset);
+        chronometer.stop();
         //  mActivity.unregisterReceiver(broadcastReceiver);
         mActivity.unregisterReceiver(broadcastReceiverArried);
     }
+
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -187,13 +241,22 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             if (changePaged)
                 return;
-            ArrayList<Location> lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
-            Log.i("latutide111", "sbcccc" );
+            lst.clear();
+            lst = (ArrayList<Location>) intent.getSerializableExtra("arrived");
+            Log.i("latutide111", "sbcccc");
             if (!lst.isEmpty()) {
-
-                onGetListSpotArrived(lst.size(), lst.get(0).getSpotID());
+                changeListSpotCheckInData();
             }
 
+        }
+    };
+
+    private BroadcastReceiver broadcastReceiver_chronometer = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            time_str = intent.getStringExtra(ChronometerService.KEY_TIME_STRING);
+            time = intent.getLongExtra(ChronometerService.KEY_TIME, 0);
+            chronometer.setText(time_str);
         }
     };
 
@@ -216,7 +279,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-                  mActivity.showGoalFragment(spotId,speed,finishTime);
+                mActivity.showGoalFragment(spotId, speed, finishTime);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -261,20 +324,20 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 mActivity.ShowCourseDetailByTab(0);
                 break;
             case R.id.stop_time:
+                pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
                 chronometer.stop();
-                pauseOffset = time - chronometer.getBase();
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
-                show_select_spot.setVisibility(View.VISIBLE);
-                mActivity.turnOffGPS();
+             //   show_select_spot.setVisibility(View.VISIBLE);
+                mActivity.unregisterReceiver(broadcastReceiverArried);
                 break;
             case R.id.resume:
-                chronometer.setBase(time - pauseOffset);
+                chronometer.setBase(SystemClock.elapsedRealtime() + pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);
                 show_select_spot.setVisibility(View.GONE);
-
-                mActivity.turnOnGPS();
+                changePaged = false;
+                mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
                 break;
 
         }
@@ -291,6 +354,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
         changePaged = false;
+        time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
+        chronometer.setBase(time);
+        chronometer.start();
         //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
 

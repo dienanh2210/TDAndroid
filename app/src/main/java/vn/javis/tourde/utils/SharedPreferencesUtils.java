@@ -51,6 +51,18 @@ public class SharedPreferencesUtils {
         editor.commit();
     }
 
+    public long getLongValue(String key) {
+        return prefs.getLong(key, 0);
+    }
+
+    public void setLongValue(String key, long value) {
+        if (editor == null) {
+            editor = prefs.edit();
+        }
+        editor.putLong(key, value);
+        editor.commit();
+    }
+
     public void removeKey(String key) {
         if (editor == null) {
             editor = prefs.edit();

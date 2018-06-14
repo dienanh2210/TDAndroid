@@ -165,7 +165,7 @@ public class FinishCourseFragment extends BaseFragment {
                 ProcessDialog.showDialogConfirm(mActivity, "", "終了してコース画面へ 戻りますが宜しいですか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-                        mActivity.ShowCourseDetail(mCourseID);
+                        mActivity.ShowCourseDetailById(mCourseID);
                     }
                 });
             }
