@@ -70,8 +70,8 @@ public class PostCommentFragment extends BaseFragment {
                 mRatingBar.setRating(0);
             }
         });
-        edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
-        edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
+    //    edt_text.setInputType(InputType.TYPE_CLASS_TEXT);
+      //  edt_text.setImeActionLabel("Done", EditorInfo.IME_ACTION_DONE);
 
         edt_text.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -99,7 +99,8 @@ public class PostCommentFragment extends BaseFragment {
         tvBackToDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.ShowCourseDetailByTab(1);
+//                mActivity.ShowCourseDetailByTab(1);
+                mActivity.onBackPressed();
             }
         });
     }
@@ -136,8 +137,8 @@ public class PostCommentFragment extends BaseFragment {
                                             @Override
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 //post comment success return to current page
-                                             //   mActivity.onBackPressed();
-                                                mActivity.ShowCourseDetailByTab(1);
+                                                mActivity.onBackPressed();
+//                                                mActivity.ShowCourseDetailByTab(1);
 
                                             }
 

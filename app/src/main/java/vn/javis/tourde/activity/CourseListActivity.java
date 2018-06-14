@@ -362,8 +362,6 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
         if (searchCourseFragment == null)
             searchCourseFragment = SearchCourseFragment.newInstance(listener);
         openPage(searchCourseFragment, true, true);
-
-
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
