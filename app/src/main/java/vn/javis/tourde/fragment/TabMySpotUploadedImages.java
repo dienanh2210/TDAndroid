@@ -52,7 +52,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
     String token = LoginFragment.getmUserToken();
     int spotId;
 
-    public static TabMySpotUploadedImages intansce(List<String> listSpotImg,int spotID) {
+    public static TabMySpotUploadedImages intansce(List<String> listSpotImg, int spotID) {
         TabMySpotUploadedImages instance = new TabMySpotUploadedImages();
         instance.listSpotImg = listSpotImg;
         instance.spotId = spotID;
@@ -77,8 +77,8 @@ public class TabMySpotUploadedImages extends BaseFragment {
                 public void onItemClick(int position) {
                     if (position == 0) {
 
-                     //   startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-                        if(token!="")
+                        //   startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                        if (token != "")
                             startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                         else
                             mActivity.showDialogWarning();
@@ -113,6 +113,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
                 }
                 if (!isLarge) {
                     //upload bitmap to server
+                    ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                     PostImageAPI.postImage(mActivity, bitmapIcon, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -124,18 +125,19 @@ public class TabMySpotUploadedImages extends BaseFragment {
                                 ArrayList<String> arrayID = new ArrayList<>();
                                 arrayID.add(user_image_id);
 
-                                SpotDataAPI.postSpotImage(token, spotId,arrayID, new ServiceCallback() {
+                                SpotDataAPI.postSpotImage(token, spotId, arrayID, new ServiceCallback() {
                                     @Override
                                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                         JSONObject jsonObject = (JSONObject) response;
                                         if (jsonObject.has("success")) {
-                                            Log.i("TabMyUploadImg1235","upload success");
+                                            Log.i("TabMyUploadImg1235", "upload success");
                                         }
+                                        ProcessDialog.hideProgressDialog();
                                     }
 
                                     @Override
                                     public void onError(VolleyError error) {
-
+                                        ProcessDialog.hideProgressDialog();
                                     }
                                 });
                             }

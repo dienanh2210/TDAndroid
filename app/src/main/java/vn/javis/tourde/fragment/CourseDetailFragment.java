@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -65,7 +66,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     private int mCourseID;
 
     private CourseListActivity mActivity;
-    List<String> listImgUrl = new ArrayList<>();
     @BindView(R.id.btn_back_to_list)
     ImageButton btnBackToList;
     @BindView(R.id.btn_share)
@@ -144,7 +144,13 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        mCourseDetail =null;
         mActivity = (CourseListActivity) getActivity();
+//        tabCourseFragment=null;
+//        tabCommentFragment=null;
+//        indexTab=0;
+//        pagerAdapter =null;
+        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
@@ -241,10 +247,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             }
         });
 
-        for (int i = 0; i < 20; i++) {
-
-            listImgUrl.add("plus_button");
-        }
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -405,7 +407,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
-
+        ProcessDialog.hideProgressDialog();
 
     }
 
@@ -447,6 +449,15 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                     pager.measureCurrentView(fragment.getView());
                 }
             }
+        }
+
+        @Override
+        public Parcelable saveState() {
+            return null;
+        }
+
+        @Override
+        public void restoreState(Parcelable arg0, ClassLoader arg1) {
         }
 
         @Override

@@ -26,6 +26,7 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public class FragmentLog extends BaseFragment {
     View mView;
@@ -50,6 +51,7 @@ public class FragmentLog extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);
         recyclerSpot.setNestedScrollingEnabled(false);
+        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -67,11 +69,12 @@ public class FragmentLog extends BaseFragment {
                         recyclerSpot = mView.findViewById(R.id.recycler_spot);
                     recyclerSpot.setAdapter(listSpotLogAdapter);
                 }
+                ProcessDialog.hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-
+                ProcessDialog.hideProgressDialog();
             }
         });
 

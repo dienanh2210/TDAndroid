@@ -90,7 +90,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     public static Bitmap bitmapIcon;
     int changeImage = 0;
     private RegisterActivity activity;
-    public static final long FILE_SIZE_8MB =  8*1024*1024;
+    public static final long FILE_SIZE_8MB = 8 * 1024 * 1024;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -185,6 +185,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         Account model = LoginFragment.getmAccount();
         edt_username.setText(model.getNickname());
         edt_email.setText(model.getEmail());
+        edt_password.setText(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Pass"));
         String url = model.getImage();
 
         if (url != null && url != "") {
@@ -263,8 +264,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 //   LoginAPI.register(edt_email.toString(), edt_password.toString(), gender, 10, "Tokyo", this);
                 if (bitmapIcon == null)
                     LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, successListener(), errorListener());
-                else
+                else {
                     LoginAPI.registerAccount(activity, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
+                    ProcessDialog.showProgressDialog(activity, "Loading", false);
+                }
                 break;
             case R.id.tv_back_resgister:
                 isChangAccount = false;
@@ -281,6 +284,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.changeInfo:
                 String token = LoginFragment.getmUserToken();
+                ProcessDialog.showProgressDialog(activity,"Loading",false);
                 LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
                 break;
         }
@@ -296,7 +300,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        if (!isChangAccount) {
+                        if (isChangAccount) {
                             ProcessDialog.showDialogLogin(getContext(), "", "新規登録に成功しました", new ProcessDialog.OnActionDialogClickOk() {
                                 @Override
                                 public void onOkClick() {
@@ -362,7 +366,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             try {
                 bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                 File file = new File(getPath(selectedImage));
-                Log.i("File size: ", "size" + file.length()+getPath(selectedImage));
+                Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
                 if (file.length() < FILE_SIZE_8MB && bitmapIcon != null) {
                     select_userIcon.setImageBitmap(bitmapIcon);
                 } else
@@ -377,14 +381,13 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    public String getPath(Uri uri)
-    {
-        String[] projection = { MediaStore.Images.Media.DATA };
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
         if (cursor == null) return null;
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
-        String s=cursor.getString(column_index);
+        String s = cursor.getString(column_index);
         cursor.close();
         return s;
     }
@@ -441,14 +444,16 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 String error_message = ((JSONObject) response).getString("error_message");
                 ProcessDialog.showDialogOk(getContext(), "", error_message);
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        ProcessDialog.hideProgressDialog();
     }
 
     @Override
     public void onError(VolleyError error) {
-
+        ProcessDialog.hideProgressDialog();
     }
 
     @Override

@@ -50,9 +50,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     private SearchCourseUtils mSearchCourseUtils;
 
-    public static SearchCourseFragment newInstance(View.OnClickListener listener) {
+    public static SearchCourseFragment newInstance(OnFragmentInteractionListener listener) {
         SearchCourseFragment fragment = new SearchCourseFragment();
-        //  fragment.listener = (OnFragmentInteractionListener) listener;
+        fragment.listener = listener;
         return fragment;
     }
 
@@ -109,6 +109,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
                 Log.d(edt_search.getText().toString(), "edit text");
 
                 getAllContent();
+                mActivity.onBackPressed();
 
                 break;
         }
@@ -143,12 +144,8 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     }
 
 
-    public interface OnFragmentInteractionListener extends View.OnClickListener {
-        void onFragmentInteraction(String content);
-
-        @Override
-        void onClick(View v);
-
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(HashMap<String, String> map);
     }
 
     @Override
@@ -270,17 +267,19 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         if (!edt_search.getText().toString().matches(""))
             map.put("freeword", edt_search.getText().toString());
 
-        for (int i = 0; i < typeValue.size(); i++) {
+        for (int i = 0; i < lstSeasonValue.size(); i++) {
             map.put("season[" + i + "]", lstSeasonValue.get(i));
+            Log.i("", "getAllContent: "+i);
         }
-        for (int i = 0; i < typeValue.size(); i++) {
+        for (int i = 0; i < lstTagValue.size(); i++) {
             map.put("tag[" + i + "]", lstTagValue.get(i));
+            Log.i("", "getAllContent: "+i);
         }
         Log.i("search_frg_302", map.toString());
         //   mActivity.onBackCLickToList(map);
 
-        mActivity.showCourseListPage(map);
-
+//        mActivity.showCourseListPage(map);
+        listener.onFragmentInteraction(map);
     }
 
 }

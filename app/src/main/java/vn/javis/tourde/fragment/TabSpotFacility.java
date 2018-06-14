@@ -96,16 +96,18 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
 
     String token = LoginFragment.getmUserToken();
     CourseListActivity mActivity;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         bt_spot_page.setOnClickListener(this);
-       insertInfo();
+        insertInfo();
+        token = LoginFragment.getmUserToken();
 
     }
 
     void insertInfo() {
-         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+        spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
         Log.d("tab spot facility 54", "" + spotId);
         SpotDataAPI.getSpotEquipmentReview(spotId, new ServiceCallback() {
             @Override
@@ -178,9 +180,9 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.bt_spot_page:
-                if(token!="")
-                    activity.showSpotFacilitiesFragment( spotId );
-                 else
+                if (token != "")
+                    activity.showSpotFacilitiesFragment(spotId);
+                else
                     mActivity.showDialogWarning();
 
                 break;
