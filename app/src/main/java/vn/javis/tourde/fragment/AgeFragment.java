@@ -31,6 +31,7 @@ public class AgeFragment extends Fragment {
     TextView txtclose;
     int valueAge;
 
+
     public static AgeFragment newInstance(View.OnClickListener listener, int age) {
         AgeFragment fragment = new AgeFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;

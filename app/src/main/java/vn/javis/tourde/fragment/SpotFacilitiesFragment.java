@@ -40,6 +40,7 @@ public class SpotFacilitiesFragment extends Fragment {
     private String contentArea = "北海道";
     TextView tv_back_sppot_faclities;
     HashMap<String,String> params = new HashMap<>();
+    CourseListActivity activity;
     int spotId;
     String[] contentList2 = new String[]{"toilet","parking","accommodation","bath","shower","locker","dressing_room","bicycle_delivery","tourist_information","cycle_rack","bicycle_rental","cycling_guide","tool_rental","floor_pump_rental","mechanic_maintenance"};
     public static SpotFacilitiesFragment newInstance(View.OnClickListener listener) {
@@ -114,7 +115,11 @@ public class SpotFacilitiesFragment extends Fragment {
         @Override
         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
             Log.i("spotFacility111",response.toString());
-            ((CourseListActivity) getActivity()).onBackPressed();
+          //  ((CourseListActivity) getActivity()).onBackPressed();
+
+        //    activity.openPage(CourseDetailSpotImagesFragment.newInstance(this), true, false);
+
+
         }
 
         @Override

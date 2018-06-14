@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Window;
 
 import com.android.volley.VolleyError;
@@ -52,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void changeActivity() {
-        Intent intent = new Intent(this, ViewPageActivity.class);
+     //   Intent intent = new Intent(this, ViewPageActivity.class);
+        Intent intent = new Intent(this, SrcollViewImage.class);
         startActivity(intent);
     }
 
