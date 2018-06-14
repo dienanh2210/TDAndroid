@@ -361,7 +361,7 @@ public class CourseListActivity extends AppCompatActivity implements ServiceCall
     public void showSearchPage() {
         if (searchCourseFragment == null)
             searchCourseFragment = new SearchCourseFragment();
-        openPage(searchCourseFragment, true, false);
+        openPage(searchCourseFragment, true, true);
 
 
     }
