@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.javis.tourde.activity.MainActivity;
+import vn.javis.tourde.services.ServiceCallback;
 
 public abstract class BaseFragment extends Fragment {
     private View mView;

@@ -77,6 +77,14 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     TextView txtHomeBtn;
     List<String> listSpotImage= new ArrayList<>();
     @Nullable
+
+    public static CourseDetailSpotImagesFragment newInstance(View.OnClickListener listener) {
+        CourseDetailSpotImagesFragment fragment = new CourseDetailSpotImagesFragment();
+        //  fragment.listener = (OnFragmentInteractionListener) listener;
+        return fragment;
+    }
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
