@@ -291,6 +291,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+
             LoginAPI.loginEmail(email, password, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) {

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -217,7 +218,8 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
 
-               showloading( context );
+             //  showloading( context );
+                
 
                 action.onOkClick();
                 dialog.hide();
@@ -311,6 +313,13 @@ public class ProcessDialog {
         spinner=dialog.findViewById( R.id.pBar );
         spinner.setVisibility( View.VISIBLE );
         dialog.show();
+       // dialog.dismiss();
+        new Handler().postDelayed( new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 2000);
     }
     public interface OnActionDialogClickOk{
          void onOkClick();
