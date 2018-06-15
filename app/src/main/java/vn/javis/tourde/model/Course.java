@@ -153,6 +153,7 @@ public class Course {
     public static Course getData(String data) {
         return new Gson().fromJson(data, Course.class);
     }
+
     public Integer getCourseId() {
         return courseId;
     }

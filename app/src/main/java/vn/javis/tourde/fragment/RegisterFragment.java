@@ -263,8 +263,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.appCompatButtonLogin:
                 //   LoginAPI.register(edt_email.toString(), edt_password.toString(), gender, 10, "Tokyo", this);
-                if (bitmapIcon == null)
+                if (bitmapIcon == null) {
+                    ProcessDialog.showProgressDialog(activity, "Loading", false);
                     LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, successListener(), errorListener());
+                }
                 else {
                     LoginAPI.registerAccount(activity, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
                     ProcessDialog.showProgressDialog(activity, "Loading", false);
@@ -297,6 +299,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            ProcessDialog.showProgressDialog(getContext(),"",false);
             LoginAPI.loginEmail(email, password, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) {
@@ -334,11 +337,12 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         Log.d(edt_email.toString(), edt_password.toString() + "error");
                         //Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                     }
+                    ProcessDialog.hideProgressDialog();
                 }
 
                 @Override
                 public void onError(VolleyError error) {
-
+                    ProcessDialog.hideProgressDialog();
                 }
             });
         }
@@ -417,8 +421,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                ProcessDialog.hideProgressDialog();
             }
+
         };
+
     }
 
     private Response.ErrorListener errorListener() {
@@ -427,6 +434,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             public void onErrorResponse(VolleyError error) {
                 Log.e("register account error", error.getMessage());
                 ProcessDialog.showDialogOk(getContext(), "", " 新規登録に失敗しました。");
+                ProcessDialog.hideProgressDialog();
             }
         };
     }

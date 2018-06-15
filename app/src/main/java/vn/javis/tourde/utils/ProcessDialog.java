@@ -68,7 +68,7 @@ public class ProcessDialog {
 
     public static void hideProgressDialog() {
         if (progressDialog != null)
-            progressDialog.dismiss();
+           progressDialog.dismiss();
     }
 
     public void close() {
@@ -249,8 +249,6 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
 
-              // showloading(context);
-
                 action.onOkClick();
                 dialog.hide();
             }
@@ -343,6 +341,7 @@ public class ProcessDialog {
         WindowManager.LayoutParams.FLAG_FULLSCREEN);
         dialog.setContentView(R.layout.loading);
         spinner = dialog.findViewById(R.id.pBar);
+
         spinner.setVisibility( View.VISIBLE );
 if(isrunloading) {
     dialog.show();

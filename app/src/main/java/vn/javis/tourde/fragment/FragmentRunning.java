@@ -54,7 +54,7 @@ public class FragmentRunning extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerRunning.setLayoutManager(layoutManager);
         final String token = LoginFragment.getmUserToken();
-        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+
         RunningCourseAPI.getListRunningCourse(token, 1, 5, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -74,12 +74,12 @@ public class FragmentRunning extends BaseFragment {
                 } catch (Exception e) {
                     Log.i("Error Running", e.getMessage() + "-" + recyclerRunning + "-" + runningCourseAdapter);
                 }
-                ProcessDialog.hideProgressDialog();
+
             }
 
             @Override
             public void onError(VolleyError error) {
-                ProcessDialog.hideProgressDialog();
+
             }
         });
 
