@@ -42,29 +42,30 @@ public class SpotFacilitiesFragment extends Fragment {
     HashMap<String,String> params = new HashMap<>();
     CourseListActivity activity;
     int spotId;
-    String[] contentList2 = new String[]{"toilet","parking","accommodation","bath","shower","locker","dressing_room","bicycle_delivery","tourist_information","cycle_rack","bicycle_rental","cycling_guide","tool_rental","floor_pump_rental","mechanic_maintenance"};
+    String[] contentList2 = new String[]{"toilet", "parking", "accommodation", "bath", "shower", "locker", "dressing_room", "bicycle_delivery", "tourist_information", "cycle_rack", "bicycle_rental", "cycling_guide", "tool_rental", "floor_pump_rental", "mechanic_maintenance"};
+
     public static SpotFacilitiesFragment newInstance(View.OnClickListener listener) {
         SpotFacilitiesFragment fragment = new SpotFacilitiesFragment();
-      //  fragment.listener = (OnFragmentInteractionListener) listener;
+        //  fragment.listener = (OnFragmentInteractionListener) listener;
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.spot_facilities_fragment, container, false );
-        rcv_list = view.findViewById( R.id.rcv_list );
-        btn_choose = view.findViewById( R.id.btn_choose );
-        tv_back_sppot_faclities=view.findViewById( R.id.tv_back_sppot_faclities );
+        View view = inflater.inflate(R.layout.spot_facilities_fragment, container, false);
+        rcv_list = view.findViewById(R.id.rcv_list);
+        btn_choose = view.findViewById(R.id.btn_choose);
+        tv_back_sppot_faclities = view.findViewById(R.id.tv_back_sppot_faclities);
         String token = LoginFragment.getmUserToken();
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
-        params.put("token",token);
-        params.put("spot_id",String.valueOf(spotId));
-        for(int i=0;i<contentList2.length;i++){
-            params.put(contentList2[i],"2"); //change to 0 for no report, wait for api
+        params.put("token", token);
+        params.put("spot_id", String.valueOf(spotId));
+        for (int i = 0; i < contentList2.length; i++) {
+            params.put(contentList2[i], "2"); //change to 0 for no report, wait for api
         }
         createData();
-        btn_choose.setOnClickListener( new View.OnClickListener() {
+        btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                if (listener != null) {
@@ -73,36 +74,34 @@ public class SpotFacilitiesFragment extends Fragment {
 //                }
                 SpotDataAPI.postReviewSpotEquipment(params, callback);
             }
-        } );
-        tv_back_sppot_faclities.setOnClickListener( new View.OnClickListener() {
+        });
+        tv_back_sppot_faclities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                     ((CourseListActivity) getActivity()).onBackPressed();
-
+                ((CourseListActivity) getActivity()).onBackPressed();
             }
-        } );
+        });
 
         return view;
     }
 
     private void createData() {
-        String[] contentList1 = new String[]{"トイレ","駐車場","宿泊設備","入浴設備","シャワー","ロッカー","更衣室","自転車配送（受取/発送）","観光案内","サイクルラック","レンタサイクル","サイクリングガイド","工具貸出","フロアポンプ貸出","メカニック/メンテナンス"};
+        String[] contentList1 = new String[]{"トイレ", "駐車場", "宿泊設備", "入浴設備", "シャワー", "ロッカー", "更衣室", "自転車配送（受取/発送）", "観光案内", "サイクルラック", "レンタサイクル", "サイクリングガイド", "工具貸出", "フロアポンプ貸出", "メカニック/メンテナンス"};
 
         dataList = new ArrayList<>();
         Data data1 = new Data();
-        data1.setTitle( "設備の有無に関してご記入ください" );
-        data1.setContent( Arrays.asList( contentList1 ) );
-        dataList.add( data1 );
+        data1.setTitle("設備の有無に関してご記入ください");
+        data1.setContent(Arrays.asList(contentList1));
+        dataList.add(data1);
 
-        rcv_list.setLayoutManager( new LinearLayoutManager( getContext() ) );
-        rcv_list.setAdapter( new ListSpotFacilitiesAdapter( getContext(), dataList, new ListSpotFacilitiesAdapter.OnClickItem() {
+        rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcv_list.setAdapter(new ListSpotFacilitiesAdapter(getContext(), dataList, new ListSpotFacilitiesAdapter.OnClickItem() {
             @Override
-            public void onClick(int pos,int val) {
-               params.put(contentList2[pos],String.valueOf(val));
-                Log.i("spotFacility 84",pos +"-"+val);
+            public void onClick(int pos, int val) {
+                params.put(contentList2[pos], String.valueOf(val));
+                Log.i("spotFacility 84", pos + "-" + val);
             }
-        } ) );
+        }));
     }
 
     public interface OnFragmentInteractionListener extends View.OnClickListener {
@@ -111,14 +110,12 @@ public class SpotFacilitiesFragment extends Fragment {
         void onClick(View v);
     }
     //call back when call api post review
-    ServiceCallback callback= new ServiceCallback() {
+    ServiceCallback callback = new ServiceCallback() {
         @Override
         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-            Log.i("spotFacility111",response.toString());
+            Log.i("spotFacility111", response.toString());
             ((CourseListActivity) getActivity()).onBackPressed();
-
-
-
+            //    activity.openPage(CourseDetailSpotImagesFragment.newInstance(this), true, false);
         }
 
         @Override

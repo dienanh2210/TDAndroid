@@ -340,6 +340,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 //   show_select_spot.setVisibility(View.VISIBLE);
                 //   mActivity.unregisterReceiver(broadcastReceiverArried);
                 mActivity.turnOffGPS();
+
                 break;
             case R.id.resume:
                 chronometer.setBase(SystemClock.elapsedRealtime() + pauseOffset);

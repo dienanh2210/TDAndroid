@@ -22,12 +22,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,14 +47,16 @@ import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.model.ListCourses;
 import vn.javis.tourde.model.SpotData;
+import vn.javis.tourde.model.TagClass;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 
 
-public class CourseListFragment extends BaseFragment implements ServiceCallback {
+public class CourseListFragment extends BaseFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.lst_courses_recycleview)
     RecyclerView lstCourseRecycleView;
@@ -82,10 +91,11 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     private int mTotalPage = 1;
     private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
-
+    int totalCourseSize =0;
     String token = LoginFragment.getmUserToken();
-    HashMap<String, String> paramsSearch;
-
+    HashMap<String, String> paramsSearch = new HashMap<String, String>();;
+    List<Course> list_courses = new ArrayList<>();
+    boolean search = false;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -96,7 +106,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         setFooter();
         Bundle bundle = getArguments();
         paramsSearch = new HashMap<String, String>();
-        boolean search = false;
+         search = false;
         if (bundle != null) {
             String getStr = bundle.getString("searching");
             if (getStr != null && getStr != "") {
@@ -106,7 +116,8 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
             }
 
         }
-        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
+
+        mCurrentPage=1;
         getData(search);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +129,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   mActivity.showSearchPage();
+                   mActivity.showSearchPage(CourseListFragment.this);
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -191,11 +202,11 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     }
 
     void getData(boolean searching) {
-
+        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
         if (!searching) {
-            ListCourseAPI.getJsonValues(this);
+            ListCourseAPI.getJsonValues(this,mCurrentPage,NUMBER_COURSE_ON_PAGE);
         } else {
-            ListCourseAPI.getJsonValueSearch(paramsSearch, this);
+            ListCourseAPI.getJsonValueSearch(paramsSearch, this,mCurrentPage,NUMBER_COURSE_ON_PAGE);
         }
         Log.i("lst course 184", searching + "" + paramsSearch);
     }
@@ -203,22 +214,25 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     void changePage(int nextPage) {
 
         try {
-            int totalCourse = ListCourseAPI.getInstance().getCourseSize();
+
             Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
-            if (totalCourse == 0) {
+            if (totalCourseSize == 0) {
                 txtNoCourse.setVisibility(View.VISIBLE);
                 contentCourseList.setVisibility(View.GONE);
-            } else {
+            }
+            else {
                 txtNoCourse.setVisibility(View.GONE);
                 contentCourseList.setVisibility(View.VISIBLE);
-                mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourse / NUMBER_COURSE_ON_PAGE)+1;
+
+                mTotalPage = totalCourseSize / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourseSize / NUMBER_COURSE_ON_PAGE)+1;
+
                 int currentValue = mCurrentPage;
                 mCurrentPage += nextPage;
                 if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
                 if (mCurrentPage < 1) mCurrentPage = 1;
-                if (mCurrentPage != currentValue || nextPage == 0) {
+                if (mCurrentPage != currentValue) {
                     txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
-                    setRecycle();
+                    getData(search);
                 }
 
                 changeButtonBackground();
@@ -229,7 +243,6 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     }
 
     void setRecycle() {
-        List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage,NUMBER_COURSE_ON_PAGE);
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
@@ -260,23 +273,99 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         }
 
     }
+    void setAllCourses(JSONObject jsonObject) {
+        list_courses.clear();
+        List<Course> list1 =new ArrayList<>();
+        try {
+            int abc = 0;
+            JSONObject allJsonObject = jsonObject.getJSONObject("list");
+            Iterator<String> key = allJsonObject.keys();
+            while (key.hasNext())
+            {
+                abc++;
+                String id = key.next();
+                JSONObject singleJsonObject = allJsonObject.getJSONObject(id).getJSONObject("data");
+                JSONArray singleJsonObjectTag = allJsonObject.getJSONObject(id).getJSONArray("tag");
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                String vl = singleJsonObject.toString();
+                ArrayList<String> listTag = new ArrayList<String>();
+                Course thisCourse = Course.getData(vl);
+
+                if (thisCourse != null) {
+
+                    List<String> lst1 =new ArrayList<>();
+                    for (int i = 0; i < singleJsonObjectTag.length(); i++) {
+                        TagClass tagClass = TagClass.getData(singleJsonObjectTag.get(i).toString());
+                        lst1.add(tagClass.getTag());
+                    }
+                    thisCourse.setListTag(lst1);
+                    list1.add(thisCourse);
+
+                }
 
 
+            }
+
+            Collections.sort(list1, new Comparator<Course>() {
+                @Override
+                public int compare(Course course, Course t1) {
+                    return course.getCourseId() -t1.getCourseId();
+                }
+            });
+            list_courses =list1;
+            Log.i("qa",""+abc+"s"+list1.size());
+//            for(int i=list1.size()-1;i>=0;i--)
+//            {
+//                list_courses.add(list1.get(i));
+//            }
+
+        } catch (JSONException e) {
+            System.out.println("error_" + e.getMessage());
+        }
+    }
+    void setAllCourses(List<ListCourses.CourseArray> list1) {
+        list_courses.clear();
+        for(int i=0;i<list1.size();i++)
+        {
+            list_courses.add(list1.get(i).getData());
+        }
+
+
+
+    }
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-        ListCourseAPI.setAllCourses((JSONObject) response);
+       JSONObject jsonObject =(JSONObject) response;
+        ListCourses listCourses = ListCourses.getData(response.toString());
+
+//        totalCourseSize =Integer.parseInt(jsonObject.get("total_count").toString());
+//        changePage(0);
+//        setAllCourses(jsonObject);
+//        setRecycle();
+//        ProcessDialog.hideProgressDialog();
+
+        totalCourseSize =listCourses.getTotalCount();
         changePage(0);
+        setAllCourses(listCourses.getList());
+        setRecycle();
         ProcessDialog.hideProgressDialog();
     }
 
     @Override
     public void onError(VolleyError error) {
-
+        ProcessDialog.hideProgressDialog();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onFragmentInteraction(HashMap<String, String> map) {
+        paramsSearch = map;
+        search = true;
+//        getData(true);
     }
 }
 
