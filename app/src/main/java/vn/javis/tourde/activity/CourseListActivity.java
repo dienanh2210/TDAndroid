@@ -80,6 +80,9 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
+
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
 
 /**
  * Created by admin on 3/23/2018.
@@ -154,7 +157,7 @@ public class CourseListActivity extends BaseActivity implements ServiceCallback 
 
         fn_permission();
         //    showCourseFinish();
-
+        checkLogging();
     }
 
     public boolean isBoolean_permission() {
@@ -191,6 +194,17 @@ public class CourseListActivity extends BaseActivity implements ServiceCallback 
 
     }
 
+    public void checkLogging() {
+        if (SharedPreferencesUtils.getInstance(getApplicationContext()).getLongValue("key_time_")!=0) {
+            ProcessDialog.showDialogCheckLogging(CourseListActivity.this,"","前回のロギングを再開しますか?",new ProcessDialog.OnActionDialogClickOk(){
+                @Override
+                public void onOkClick() {
+                    openPage(new FragmentTabLayoutRunning(),false);
+                }
+            });
+        }
+    }
+
     public void showDialogWarning() {
         ProcessDialog.showDialogLogin(CourseListActivity.this, "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
             @Override
@@ -200,6 +214,7 @@ public class CourseListActivity extends BaseActivity implements ServiceCallback 
             }
         });
     }
+
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
         if (mCourseListFragment == null)
