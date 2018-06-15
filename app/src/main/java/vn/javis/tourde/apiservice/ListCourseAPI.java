@@ -92,7 +92,7 @@ public class ListCourseAPI {
                 Course thisCourse = Course.getData(vl);
 
                 if (thisCourse != null) {
-                    Log.i("courseID",thisCourse.getCourseId());
+
                     List<String> lst1 =new ArrayList<>();
                     for (int i = 0; i < singleJsonObjectTag.length(); i++) {
                         TagClass tagClass = TagClass.getData(singleJsonObjectTag.get(i).toString());
@@ -140,10 +140,10 @@ public class ListCourseAPI {
         return model;
     }
 
-    public List<Course> getCourseByPage(int page) {
-        int firstValue = (page - 1) * 5;
+    public List<Course> getCourseByPage(int page,int pageSize) {
+        int firstValue = (page - 1) * pageSize;
 
-        int secondValue = page * 5;
+        int secondValue = page * pageSize;
 
         int maxIndex = mAllCourses.size();
 

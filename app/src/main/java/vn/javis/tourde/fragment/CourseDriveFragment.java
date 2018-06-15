@@ -65,6 +65,7 @@ public class CourseDriveFragment extends BaseFragment {
         mAcitivity = (CourseListActivity) getActivity();
         courseID = mAcitivity.getmCourseID();
         mAcitivity.turnOnGPS();
+        ProcessDialog.showProgressDialog(mAcitivity,"Loading",false);
         getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
             @Override
@@ -77,12 +78,15 @@ public class CourseDriveFragment extends BaseFragment {
                     if (title_detail !=null && mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty())
                         title_detail.setText(mCourseDetail.getmCourseData().getTitle());
                 }
+                ProcessDialog.hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-
+                ProcessDialog.hideProgressDialog();
             }
+
+
         });
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override

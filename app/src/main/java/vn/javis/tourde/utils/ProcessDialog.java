@@ -1,5 +1,6 @@
 package vn.javis.tourde.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,12 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.model.Comment;
 
 public class ProcessDialog {
-
+    private static Dialog progressDialog;
     public Context context;
     ProgressDialog dialog1;
     private static ProgressBar spinner;
+
     public ProcessDialog(final Context context) {
         this.context = context;
         dialog1 = new ProgressDialog(context);
@@ -43,12 +47,37 @@ public class ProcessDialog {
         }
     }
 
+    public static Dialog createProgressDialog(Context context) {
+        if (progressDialog == null) {
+            progressDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.loading_progress, null);
+            progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+            progressDialog.setContentView(view);
+        }
+        return progressDialog;
+    }
+
+    public static void showProgressDialog(final Context context, final String message, final boolean cancelable) {
+        Dialog dlg = createProgressDialog(context);
+        if (!dlg.isShowing()) {
+            dlg.setCancelable(cancelable);
+            dlg.show();
+        }
+    }
+
+    public static void hideProgressDialog() {
+        if (progressDialog != null)
+            progressDialog.dismiss();
+    }
+
     public void close() {
         if (dialog1 != null) {
             dialog1.dismiss();
         }
     }
-    public static void showDialogConfirm(final Context context,String title, String content, final  OnActionDialogClickOk action) {
+
+    public static void showDialogConfirm(final Context context, String title, String content, final OnActionDialogClickOk action) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -58,7 +87,7 @@ public class ProcessDialog {
         dialog.setContentView(R.layout.dialog_confirm);
         dialog.setCancelable(false);
         TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
-       // tvTitle.setVisibility(View.GONE);
+        // tvTitle.setVisibility(View.GONE);
         tvTitle.setText(title);
         TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
         tvMessage.setText(content);
@@ -71,7 +100,7 @@ public class ProcessDialog {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              action.onOkClick();
+                action.onOkClick();
                 dialog.hide();
             }
         });
@@ -84,7 +113,8 @@ public class ProcessDialog {
 
         dialog.show();
     }
-    public static void showDialogConfirm(final Context context,int viewLayout, String title, String content, final  OnActionDialogClickOk action) {
+
+    public static void showDialogConfirm(final Context context, int viewLayout, String title, String content, final OnActionDialogClickOk action) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -120,7 +150,8 @@ public class ProcessDialog {
 
         dialog.show();
     }
-    public static void showDialogConfirm(final Context context,int viewLayout,int colorTitle,int colorMessage, String title, String content, final  OnActionDialogClickOk action) {
+
+    public static void showDialogConfirm(final Context context, int viewLayout, int colorTitle, int colorMessage, String title, String content, final OnActionDialogClickOk action) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -160,7 +191,8 @@ public class ProcessDialog {
 
         dialog.show();
     }
-    public static void showDialogOk(final Context context,String title, String content) {
+
+    public static void showDialogOk(final Context context, String title, String content) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -180,8 +212,6 @@ public class ProcessDialog {
         final Button btnCancel = (Button) dialog.findViewById(R.id.btn_ok);
 
 
-
-
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,7 +223,8 @@ public class ProcessDialog {
 
         dialog.show();
     }
-    public static void showDialogLogin(final Context context,String title, String content, final  OnActionDialogClickOk action) {
+
+    public static void showDialogLogin(final Context context, String title, String content, final OnActionDialogClickOk action) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -218,8 +249,7 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
 
-             //  showloading( context );
-                
+          //      showloading(context);
 
                 action.onOkClick();
                 dialog.hide();
@@ -228,6 +258,7 @@ public class ProcessDialog {
 
         dialog.show();
     }
+
     public static void showDialogcheckbox(final Context context, String title, String content, final OnActionDialogClickOk onActionDialogClickOk) {
 
         final Dialog dialog = new Dialog(context);
@@ -263,23 +294,23 @@ public class ProcessDialog {
             public void onClick(View v) {
                 onActionDialogClickOk.onOkClick();
                 dialog.hide();
-               // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
             }
         });
         dialog.show();
 
         CheckBox checkBox;
-        checkBox = dialog.findViewById( R.id.chkbox );
-        checkBox.setOnClickListener( new View.OnClickListener() {
+        checkBox = dialog.findViewById(R.id.chkbox);
+        checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CheckBox checkBox;
-                checkBox = dialog.findViewById( R.id.chkbox );
-                if(checkBox.isChecked()){
+                checkBox = dialog.findViewById(R.id.chkbox);
+                if (checkBox.isChecked()) {
                     //xu ly click check box
 
-                    Log.d("dm","checkbox");
-                   // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
+                    Log.d("dm", "checkbox");
+                    // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
                     btnCancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -298,10 +329,11 @@ public class ProcessDialog {
 
                 }
             }
-        } );
+        });
 
 
     }
+
     public static void showloading(final Context context) {
 
         final Dialog dialog = new Dialog(context);
@@ -310,8 +342,8 @@ public class ProcessDialog {
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         dialog.setContentView(R.layout.loading);
-        spinner=dialog.findViewById( R.id.pBar );
-        spinner.setVisibility( View.VISIBLE );
+        spinner = dialog.findViewById(R.id.pBar);
+        spinner.setVisibility(View.VISIBLE);
         dialog.show();
        // dialog.dismiss();
         new Handler().postDelayed( new Runnable() {
@@ -321,8 +353,9 @@ public class ProcessDialog {
             }
         }, 2000);
     }
-    public interface OnActionDialogClickOk{
-         void onOkClick();
+
+    public interface OnActionDialogClickOk {
+        void onOkClick();
     }
 
 }

@@ -47,7 +47,7 @@ import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 
 
-public class CourseListFragment extends BaseFragment implements ServiceCallback {
+public class CourseListFragment extends BaseFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.lst_courses_recycleview)
     RecyclerView lstCourseRecycleView;
@@ -80,12 +80,12 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     NestedScrollView contentCourseList;
 
     private int mTotalPage = 1;
-    private static final int NUMBER_COURSE_ON_PAGE = 5;
+    private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
 
     String token = LoginFragment.getmUserToken();
-    HashMap<String, String> paramsSearch;
-
+    HashMap<String, String> paramsSearch = new HashMap<String, String>();;
+    boolean search = false;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -106,6 +106,8 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
             }
 
         }
+        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
+
         getData(search);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +119,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   mActivity.showSearchPage();
+                   mActivity.showSearchPage(CourseListFragment.this);
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +212,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
             } else {
                 txtNoCourse.setVisibility(View.GONE);
                 contentCourseList.setVisibility(View.VISIBLE);
-                mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : totalCourse / NUMBER_COURSE_ON_PAGE;
+                mTotalPage = totalCourse / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourse / NUMBER_COURSE_ON_PAGE)+1;
                 int currentValue = mCurrentPage;
                 mCurrentPage += nextPage;
                 if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
@@ -228,13 +230,13 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     }
 
     void setRecycle() {
-        List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage);
+        List<Course> list_courses = ListCourseAPI.getInstance().getCourseByPage(mCurrentPage,NUMBER_COURSE_ON_PAGE);
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
             @Override
-            public void onItemClick(int position) {
-                mActivity.ShowCourseDetail(position);
+            public void onItemClick(int id) {
+                mActivity.ShowCourseDetailById(id);
             }
 
             @Override
@@ -265,6 +267,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         ListCourseAPI.setAllCourses((JSONObject) response);
         changePage(0);
+        ProcessDialog.hideProgressDialog();
     }
 
     @Override
@@ -275,6 +278,13 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onFragmentInteraction(HashMap<String, String> map) {
+        paramsSearch = map;
+        search = true;
+//        getData(true);
     }
 }
 
