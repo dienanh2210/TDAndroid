@@ -28,7 +28,7 @@ public class ListCourseAPI {
     private static ListCourseAPI instance;
     Context context;
     private List<Course> mAllCourses = new ArrayList<Course>();
-
+    int totalSize=0;
     public static ListCourseAPI getInstance() {
         return instance;
     }
@@ -58,13 +58,16 @@ public class ListCourseAPI {
         });
     }
 
-    public static void getJsonValues(ServiceCallback callback) {
+    public static void getJsonValues(ServiceCallback callback,int page,int limit) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("prefecture", "13");
+        params.put("page",String.valueOf(page));
+        params.put("limit",String.valueOf(limit));
         TourDeService.getWithAuth(ApiEndpoint.GET_COURSE_LIST, params, callback);
     }
 
-    public static void getJsonValueSearch(HashMap params, ServiceCallback callback) {
+    public static void getJsonValueSearch(HashMap params, ServiceCallback callback,int page,int limit) {
+        params.put("page",String.valueOf(page));
+        params.put("limit",String.valueOf(limit));
         TourDeService.getWithAuth(ApiEndpoint.GET_COURSE_LIST, params, callback);
     }
 
@@ -75,7 +78,8 @@ public class ListCourseAPI {
             int abc = 0;
             JSONObject allJsonObject = jsonObject.getJSONObject("list");
             Iterator<String> key = allJsonObject.keys();
-            while (key.hasNext()) {
+            while (key.hasNext())
+            {
                 abc++;
                 String id = key.next();
 
@@ -105,6 +109,7 @@ public class ListCourseAPI {
 
 
             }
+
             for(int i=list1.size()-1;i>=0;i--)
             {
                 instance.mAllCourses.add(list1.get(i));

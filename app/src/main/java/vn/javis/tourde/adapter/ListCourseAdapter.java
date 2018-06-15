@@ -57,13 +57,16 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         mView = inflater.inflate(R.layout.course_view_row, parent, false);
         return new CourseViewHolder(mView);
     }
+
     String token = LoginFragment.getmUserToken();
+
     @Override
     public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
         final Course model = listCourse.get(position);
         Log.i("response", position + "");
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
+
         holder.txtTag.setText("# " + model.getTag());
         holder.txtDistance.setText(model.getDistance() + "km");
         holder.txtCatchPhrase.setText(model.getCatchPhrase());
@@ -73,8 +76,11 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         PicassoUtil.getSharedInstance(context).load(model.getTopImage()).resize(0, 400).onlyScaleDown().into(holder.imgCourse);
         PicassoUtil.getSharedInstance(context).load(model.getPostUserImage()).resize(0, 50).onlyScaleDown().transform(new CircleTransform()).into(holder.imgPostUser);
         List<String> listTag = model.getListTag();
-        if (listTag.size() > 0) {
-            String s ="#"+ model.getTag() + " ";
+
+        if (listTag !=null && listTag.size() > 0) {
+            String s="";
+            if (model.getTag() !=null && model.getTag() !="")
+                s = "#" + model.getTag() + " ";
             for (int i = 0; i < listTag.size(); i++) {
                 s += "#" + listTag.get(i) + " ";
             }
@@ -145,7 +151,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if(token!="") {
+                if (token != "") {
                     holder.isFavorite = !holder.isFavorite;
                     String token = LoginFragment.getmUserToken();
                     int course_id = Integer.valueOf(model.getCourseId());
@@ -190,9 +196,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
                             }
                         });
                     }
-                }
-                else
-                {
+                } else {
                     ProcessDialog.showDialogLogin(context, "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
                         @Override
                         public void onOkClick() {
@@ -253,6 +257,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
 
     public interface OnItemClickedListener {
         void onItemClick(int position);
+
         void openPage(android.support.v4.app.Fragment fragment);
     }
 

@@ -17,21 +17,27 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/image_demo" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_demo" />
 
               <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
                   android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/image_demotwo" />
+                  android:scaleType="fitCenter"
+                  android:adjustViewBounds="true"
+                android:src="@drawable/image_demotwo" />
             <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/image_three" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_three" />
 
             <Button
                 android:id="@+id/bt_rule"
