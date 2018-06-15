@@ -94,10 +94,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     //  TextView tv_back_password;
     private RegisterActivity activity;
     private SharedPreferencesUtils preferencesUtils;
-    private static final String KEY_SHARED_BASETIME = "key_time";
+    private static final String KEY_SHARED_BASETIME = "key_time_";
     ArrayList<Location> lstLocation = new ArrayList<>();
     List<Spot> list_spot = new ArrayList<>();
     ArrayList<Integer> lstCheckedSpot = new ArrayList<>();
+    private boolean isSaveTime = true;// save when leave sreen this
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -129,6 +130,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 Log.i("onChronometerTick", t);
             }
         });
+        isSaveTime = true;
 
 //        chronometer.setBase(time);
         chronometer.setText(time_str);
@@ -220,16 +222,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
-        preferencesUtils.setLongValue(KEY_SHARED_BASETIME, pauseOffset);
-        chronometer.stop();
-        //  mActivity.unregisterReceiver(broadcastReceiver);
-        mActivity.unregisterReceiver(broadcastReceiverArried);
-    }
-
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -283,14 +275,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+                preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, 0);
+                isSaveTime = false;
                 mActivity.showGoalFragment(spotId, speed, finishTime);
-             //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                      //      mActivity.showGoalFragment(spotId, speed, finishTime);
+                            //      mActivity.showGoalFragment(spotId, speed, finishTime);
                         }
                         ProcessDialog.hideProgressDialog();
                     }
@@ -302,7 +296,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 });
             } else {
                 mActivity.showCheckPointFragment(spotId, "");
-             //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -310,7 +304,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                         if (!jsonObject.has("error")) {
                             Stamp model = Stamp.getData(response.toString());
                             if (model.getSuccess()) {
-                             //   mActivity.showCheckPointFragment(spotId, model.getImage());
+                                //   mActivity.showCheckPointFragment(spotId, model.getImage());
                             }
                         }
                         ProcessDialog.hideProgressDialog();
@@ -333,7 +327,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 mActivity.ShowCourseDetailByTab(0);
                 break;
             case R.id.stop_time:
+                isSaveTime = false;
                 pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
+                preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, pauseOffset);
                 chronometer.stop();
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
@@ -343,6 +339,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
                 break;
             case R.id.resume:
+                isSaveTime = true;
                 chronometer.setBase(SystemClock.elapsedRealtime() + pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);
@@ -366,12 +363,24 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
         changePaged = false;
-        time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
+        time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME + courseID) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME + courseID);
         chronometer.setBase(time);
         chronometer.start();
         //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (isSaveTime) {
+            pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
+            preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, pauseOffset);
+            chronometer.stop();
+        }
+        //  mActivity.unregisterReceiver(broadcastReceiver);
+        mActivity.unregisterReceiver(broadcastReceiverArried);
     }
 
     private void initTabControl() {
