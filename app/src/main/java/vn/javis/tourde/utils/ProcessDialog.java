@@ -249,7 +249,7 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
 
-          //      showloading(context);
+              // showloading(context);
 
                 action.onOkClick();
                 dialog.hide();
@@ -334,24 +334,22 @@ public class ProcessDialog {
 
     }
 
-    public static void showloading(final Context context) {
+    public static void showloading(final Context context,final boolean isrunloading) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         dialog.setContentView(R.layout.loading);
         spinner = dialog.findViewById(R.id.pBar);
-        spinner.setVisibility(View.VISIBLE);
-        dialog.show();
-       // dialog.dismiss();
-        new Handler().postDelayed( new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        }, 2000);
+        spinner.setVisibility( View.VISIBLE );
+if(isrunloading) {
+    dialog.show();
+}else {
+    dialog.dismiss();
+}
+
     }
 
     public interface OnActionDialogClickOk {

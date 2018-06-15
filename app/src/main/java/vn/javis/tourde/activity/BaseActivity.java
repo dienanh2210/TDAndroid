@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.javis.tourde.BuildConfig;
 import vn.javis.tourde.R;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

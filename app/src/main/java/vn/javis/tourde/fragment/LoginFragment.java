@@ -257,6 +257,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
             case R.id.tv_back_login:
                 LoginSNSActivity lActivity =  (LoginSNSActivity) getActivity();
                 lActivity.onBackPressed();
+ProcessDialog.showloading( getContext(),false );
                /* Intent intent = new Intent(getContext(), CourseListActivity.class);
                 startActivity(intent);*/
                 break;

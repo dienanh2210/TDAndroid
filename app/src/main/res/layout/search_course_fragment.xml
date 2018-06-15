@@ -90,6 +90,11 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:layout_toStartOf="@+id/im_choose"
                         android:text="@string/search_course_select_area"
+
+                        android:singleLine="true"
+                        android:ellipsize="end"
+
+
                         android:textColor="@color/search_course_color_description_text"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="RelativeOverlap,RtlCompat,UnknownIdInLayout" />
