@@ -36,6 +36,7 @@ import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.DistanceLocation;
 import vn.javis.tourde.utils.ProcessDialog;
 
@@ -55,7 +56,7 @@ public class CourseDriveFragment extends BaseFragment {
     RelativeLayout rlt_googlemap;
     @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
-    int courseID;
+    int mCourseID;
 
     double startLongtitude;
     double startLatitude;
@@ -63,7 +64,7 @@ public class CourseDriveFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAcitivity = (CourseListActivity) getActivity();
-        courseID = mAcitivity.getmCourseID();
+        mCourseID = mAcitivity.getmCourseID();
         mAcitivity.turnOnGPS();
         ProcessDialog.showProgressDialog(mAcitivity,"Loading",false);
         getStartPosition();
@@ -91,6 +92,7 @@ public class CourseDriveFragment extends BaseFragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TourDeApplication.getInstance().trackEvent("tap_start_logging_course_id="+mCourseID,"tap","tap_start_logging_course_id="+mCourseID);
                 if (mAcitivity.isBoolean_permission()) {
                     double longtitude = mAcitivity.getLongitude();
                     double latitude = mAcitivity.getLatitude();
@@ -155,7 +157,7 @@ public class CourseDriveFragment extends BaseFragment {
     }
 
     private void getStartPosition() {
-        GetCourseDataAPI.getCourseData(courseID, new ServiceCallback() {
+        GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;

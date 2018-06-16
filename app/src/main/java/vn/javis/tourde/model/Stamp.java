@@ -12,6 +12,9 @@ public class Stamp {
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("title")
+    @Expose
+    private String title;
 
     public static Stamp getData(String data) {
         return new Gson().fromJson(data, Stamp.class);
@@ -40,4 +43,14 @@ public class Stamp {
         this.image = image;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 }
+
+

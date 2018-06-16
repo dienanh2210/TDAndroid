@@ -95,6 +95,7 @@ public class CourseListActivity extends BaseActivity {
     public static final String COURSE_DETAIL_ID = "COURSE_ID";
     public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
     public static final String STAMP_IMAGE = "stamp_img";
+    public static final String STAMP_TITLE = "stamp_title";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
 
@@ -315,11 +316,13 @@ public class CourseListActivity extends BaseActivity {
         openPage(fragmentTabLayoutRunning, true, false);
     }
 
-    public void showGoalFragment(int idSpot, float speed, String time) {
+    public void showGoalFragment(int idSpot, float speed, String time,String imgUrl,String title) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putInt(SPOT_ID, idSpot);
+        dataBundle.putString(STAMP_IMAGE, imgUrl);
+        dataBundle.putString(STAMP_TITLE, title);
         if (goalFragment == null)
             goalFragment = new GoalFragment();
         openPage(goalFragment, true, false);
@@ -342,11 +345,12 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl,String title) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
+        dataBundle.putString(STAMP_TITLE, title);
         if (checkPointFragment == null)
             checkPointFragment = new CheckPointFragment();
         openPage(checkPointFragment, true, false);

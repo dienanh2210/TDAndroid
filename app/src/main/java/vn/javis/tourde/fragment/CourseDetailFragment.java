@@ -2,6 +2,7 @@ package vn.javis.tourde.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -55,6 +58,7 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.PicassoUtil;
@@ -141,6 +145,18 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     int indexTab;
     String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0\"> %s </body></Html>";
     int fontSize;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        TourDeApplication.getInstance().trackScreenView("screen_course_id="+mCourseID);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -495,6 +511,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
+                         //   mTracker.setScreenName("screen_course_id" + ""+mCourseID);
+                          //  mTracker.send(new HitBuilders.EventBuilder().setCategory("tap_favorite_course_id="+mCourseID).build());
+                            TourDeApplication.getInstance().trackEvent("tap_favorite_course_id="+mCourseID,"tap","tap_favorite_course_id="+mCourseID);
                         }
                     } else {
                         isFavourite = !isFavourite;
