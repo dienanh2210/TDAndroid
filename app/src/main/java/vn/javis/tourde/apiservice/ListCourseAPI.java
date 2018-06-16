@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import vn.javis.tourde.model.TagClass;
+
 import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
@@ -89,25 +89,7 @@ public class ListCourseAPI {
                 String vl = singleJsonObject.toString();
 
                 ArrayList<String> listTag = new ArrayList<String>();
-
-
-
-
                 Course thisCourse = Course.getData(vl);
-
-                if (thisCourse != null) {
-
-                    List<String> lst1 =new ArrayList<>();
-                    for (int i = 0; i < singleJsonObjectTag.length(); i++) {
-                        TagClass tagClass = TagClass.getData(singleJsonObjectTag.get(i).toString());
-                       lst1.add(tagClass.getTag());
-                    }
-                    thisCourse.setListTag(lst1);
-                    list1.add(thisCourse);
-
-                }
-
-
             }
 
             for(int i=list1.size()-1;i>=0;i--)

@@ -49,7 +49,6 @@ import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.ListCourses;
 import vn.javis.tourde.model.SpotData;
-import vn.javis.tourde.model.TagClass;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
@@ -291,17 +290,17 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                 ArrayList<String> listTag = new ArrayList<String>();
                 Course thisCourse = Course.getData(vl);
 
-                if (thisCourse != null) {
-
-                    List<String> lst1 =new ArrayList<>();
-                    for (int i = 0; i < singleJsonObjectTag.length(); i++) {
-                        TagClass tagClass = TagClass.getData(singleJsonObjectTag.get(i).toString());
-                        lst1.add(tagClass.getTag());
-                    }
-                    thisCourse.setListTag(lst1);
-                    list1.add(thisCourse);
-
-                }
+//                if (thisCourse != null) {
+//
+//                    List<String> lst1 =new ArrayList<>();
+//                    for (int i = 0; i < singleJsonObjectTag.length(); i++) {
+//                        TagClass tagClass = TagClass.getData(singleJsonObjectTag.get(i).toString());
+//                        lst1.add(tagClass.getTag());
+//                    }
+//                    thisCourse.setListTag(lst1);
+//                    list1.add(thisCourse);
+//
+//                }
 
 
             }
@@ -325,13 +324,28 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     }
     void setAllCourses(List<ListCourses.CourseArray> list1) {
         list_courses.clear();
+
         for(int i=0;i<list1.size();i++)
         {
-            list_courses.add(list1.get(i).getData());
+           Course thisCourse = list1.get(i).getData();
+           List<String> lstTag = new ArrayList<>();
+            if (thisCourse != null) {
+
+                List<String> lst1 =new ArrayList<>();
+                for (int a = 0; a < list1.get(a).getTag().size(); a++) {
+                    lst1.add( list1.get(a).getTag().get(a).getTag());
+                }
+                thisCourse.setListTag(lst1);
+                list_courses.add(list1.get(i).getData());
+            }
+
         }
-
-
-
+        Collections.sort(list_courses, new Comparator<Course>() {
+            @Override
+            public int compare(Course course, Course t1) {
+                return   t1.getCourseId() - course.getCourseId();
+            }
+        });
     }
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
