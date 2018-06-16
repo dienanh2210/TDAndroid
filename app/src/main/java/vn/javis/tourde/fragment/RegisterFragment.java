@@ -287,7 +287,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             case R.id.changeInfo:
                 String token = LoginFragment.getmUserToken();
                 ProcessDialog.showProgressDialog(activity,"Loading",false);
-                LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
+                if(bitmapIcon==null)
+                    LoginAPI.editAccount(token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, successListener(), errorListener());
+                else
+                    LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
                 break;
         }
     }
@@ -303,7 +306,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        if (isChangAccount) {
+                        if (!isChangAccount) {
                             ProcessDialog.showDialogLogin(getContext(), "", "新規登録に成功しました", new ProcessDialog.OnActionDialogClickOk() {
                                 @Override
                                 public void onOkClick() {

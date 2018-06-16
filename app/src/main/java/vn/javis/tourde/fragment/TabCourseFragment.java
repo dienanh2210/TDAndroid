@@ -69,29 +69,31 @@ public class TabCourseFragment extends BaseFragment {
     TextView txtStartAddress;
     @BindView(R.id.btn_running_app)
     RelativeLayout btnRunningApp;
-    @BindView( R.id.rlt_googlemap )
+    @BindView(R.id.rlt_googlemap)
     RelativeLayout rlt_googlemap;
-    @BindView( R.id.rlt_Navitime )
+    @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
     String avagePace, finishTIme, startAddress;
     CourseDetailFragment parentFragment;
-    public static TabCourseFragment instance(List<Spot> lstSpot,CourseDetailFragment parentFragment) {
+    String token = LoginFragment.getmUserToken();
+
+    public static TabCourseFragment instance(List<Spot> lstSpot, CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
-        fragment.parentFragment =parentFragment;
+        fragment.parentFragment = parentFragment;
         return fragment;
     }
 
-    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, List<Spot> lstSpot,CourseDetailFragment parentFragment) {
+    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, List<Spot> lstSpot, CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
         fragment.finishTIme = finishTime;
         fragment.avagePace = processAveragePace(averagePace);
         fragment.startAddress = startAddress;
-        fragment.parentFragment =parentFragment;
+        fragment.parentFragment = parentFragment;
         return fragment;
     }
 
@@ -137,7 +139,7 @@ public class TabCourseFragment extends BaseFragment {
             Date date = dateFormat.parse(finishTIme);
             Calendar timeConvert = Calendar.getInstance();
             timeConvert.setTime(date);
-            String out = (timeConvert.get(Calendar.MINUTE) > 0 ? timeConvert.get(Calendar.HOUR) + "時間" + timeConvert.get(Calendar.MINUTE) + "分":timeConvert.get(Calendar.HOUR) + "時間");
+            String out = (timeConvert.get(Calendar.MINUTE) > 0 ? timeConvert.get(Calendar.HOUR) + "時間" + timeConvert.get(Calendar.MINUTE) + "分" : timeConvert.get(Calendar.HOUR) + "時間");
             Log.e("Time", out);
             txtFinishTime.setText(out);
         } catch (ParseException e) {
@@ -146,74 +148,84 @@ public class TabCourseFragment extends BaseFragment {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if(parentFragment !=null)
-                parentFragment.btnFavoriteClick(true);
+                if (token.equals("")) {
+                    ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            mActivity.openLoginPage();
+                        }
+                    });
+                } else {
+                    if (parentFragment != null)
+                        parentFragment.btnFavoriteClick(true);
+                }
+
             }
         });
         txtStartAddress.setText(startAddress);
         btnRunningApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox")=="") {
+                if (token.equals("")) {
+                    ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            mActivity.openLoginPage();
+                        }
+                    });
+                } else {
+                    mActivity.showCourseDrive();
+                }
+                if (SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox") == "") {
                     String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
                             "\n" +
                             "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
 
-                    ProcessDialog.showDialogcheckbox( getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
+                    ProcessDialog.showDialogcheckbox(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
                         @Override
                         public void onOkClick() {
                             mActivity.showCourseDrive();
 
                         }
-                    } );
-                }
-                else
-                {
+                    });
+                } else {
                     mActivity.showCourseDrive();
                 }
 
 
             }
         });
-        rlt_googlemap.setOnClickListener( new View.OnClickListener() {
+        rlt_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.setPackage("com.google.android.apps.maps");
-                try
-                {
+                try {
                     startActivity(intent);
-                }
-                catch(ActivityNotFoundException ex)
-                {
-                    try
-                    {
+                } catch (ActivityNotFoundException ex) {
+                    try {
                         Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                         startActivity(unrestrictedIntent);
-                    }
-                    catch(ActivityNotFoundException innerEx)
-                    {
+                    } catch (ActivityNotFoundException innerEx) {
                         //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
                     }
                 }
             }
-        } );
+        });
 
 
-
-        rlt_Navitime.setOnClickListener( new View.OnClickListener() {
+        rlt_Navitime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //               Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja "));
 //                startActivity(browserIntent)
 
-               String packageName = "com.navitime.local.navitime";
-               // String packageName = "NAVITIME: 地図・ルート検索";
-                launchNewActivity(getContext(),packageName);
+                String packageName = "com.navitime.local.navitime";
+                // String packageName = "NAVITIME: 地図・ルート検索";
+                launchNewActivity(getContext(), packageName);
             }
-        } );
+        });
 
 
     }
@@ -227,7 +239,7 @@ public class TabCourseFragment extends BaseFragment {
             try {
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
+                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
                 context.startActivity(intent);
             } catch (android.content.ActivityNotFoundException anfe) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
@@ -239,9 +251,6 @@ public class TabCourseFragment extends BaseFragment {
 
         }
     }
-
-
-
 
 
     @Override
@@ -256,10 +265,9 @@ public class TabCourseFragment extends BaseFragment {
             btnSignUp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame));
     }
 
-    private static String processAveragePace(String s){
-        if (s.contains(","))
-        {
-            s = s.replace(",","");
+    private static String processAveragePace(String s) {
+        if (s.contains(",")) {
+            s = s.replace(",", "");
         }
         DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
         otherSymbols.setDecimalSeparator('.');
