@@ -109,8 +109,6 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
                 mActivity.openPage(PrefectureSearchFragment.newInstance(this), true, true);
                 break;
             case R.id.tv_close:
-//                Intent intent = new Intent(getActivity(), CourseListActivity.class);
-//                startActivity(intent);
                 mActivity.onBackPressed();
                 break;
             case R.id.bt_search_course:

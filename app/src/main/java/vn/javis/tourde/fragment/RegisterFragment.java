@@ -296,7 +296,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 if(bitmapIcon==null)
                     LoginAPI.editAccount(token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, successListener(), errorListener());
                 else
-                    LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);>>>>>>> 8615293707401f6889193c092dc0ce5e64c75e82
+                    LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
                 break;
         }
     }
