@@ -64,6 +64,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     int spotID;
     int courseID;
     String imgUrl;
+    String title;
     boolean finishedAnim;
     private OnFragmentInteractionListener listener;
     private String filePath;
@@ -83,6 +84,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
 
         imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
+        title = getArguments().getString(CourseListActivity.STAMP_TITLE);
         mActivity = (CourseListActivity) getActivity();
 
         takePhoto.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +136,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                 SpotData spotData = SpotData.getSpotData(response.toString());
                 if (spotData == null)
                     return;
-                final String spotTitle = spotData.getData().getTitle();
+               // final String spotTitle = spotData.getData().getTitle();
                 handler = new Handler();
                 runnable = new Runnable() {
                     @Override
@@ -153,7 +155,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 
                             ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
 
-                            ImageViewAnimatedChange(mActivity, txtView, "『" + spotTitle + "』", imgView, imgUrl);
+                            ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
                             finishedAnim = true;
 
                         }

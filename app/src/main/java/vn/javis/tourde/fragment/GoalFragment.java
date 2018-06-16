@@ -12,6 +12,7 @@ import android.widget.Button;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.services.TourDeApplication;
 
 public class GoalFragment extends BaseFragment {
 
@@ -20,6 +21,9 @@ public class GoalFragment extends BaseFragment {
     @BindView(R.id.btn_to_finish)
     Button btnToFinish;
     int spotID;
+    int mCourseId;
+    String imgUrl;
+    String title;
     CourseListActivity mActivity;
 
     public static GoalFragment newInstance(View.OnClickListener listener) {
@@ -42,9 +46,13 @@ public class GoalFragment extends BaseFragment {
         final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
         final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
         spotID = getArguments().getInt(CourseListActivity.SPOT_ID);
+        mCourseId = mActivity.getmCourseID();
+        imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
+        title = getArguments().getString(CourseListActivity.STAMP_TITLE);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TourDeApplication.getInstance().trackEvent("tap_goal_logging_course_id="+mCourseId,"tap","tap_goal_logging_course_id="+mCourseId);
                 mActivity.showTakePhoto(spotID);
             }
         });

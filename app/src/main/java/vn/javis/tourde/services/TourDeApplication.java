@@ -9,14 +9,24 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
+import vn.javis.tourde.R;
 
 public class TourDeApplication extends Application {
 
     private final String CONSUMER_KEY = "o2Ixt07yGvkBoi1pfND1okRs3";
     private final String CONSUMER_SECRET = "dpS4plVCOqkHgxClbtzS1rZhk9IcnY0KTtZj6SUqojRdwzAIb6";
 
+    private  static final String PROPERTY_ID="UA-120902721-1";
+
     private static TourDeApplication sInstance;
     private RequestQueue mRequestQueue;
+
+    private static GoogleAnalytics sAnalytics;
+    private static Tracker sTracker;
 
     @Override
     public void onCreate() {
@@ -43,6 +53,8 @@ public class TourDeApplication extends Application {
 //            customApiClient = new TwitterApiClient(customClient);
 //            TwitterCore.getInstance().addGuestApiClient(customApiClient);
 //        }
+        sAnalytics = GoogleAnalytics.getInstance(this);
+        getDefaultTracker();
     }
 
     @Override
@@ -53,6 +65,14 @@ public class TourDeApplication extends Application {
 
     public static synchronized TourDeApplication getInstance() {
         return sInstance;
+    }
+
+    synchronized public Tracker getDefaultTracker() {
+        if(sTracker ==null)
+        {
+            sTracker =sAnalytics.newTracker(R.xml.global_tracker);
+        }
+        return sTracker;
     }
 
     public RequestQueue getRequestQueue() {
@@ -70,6 +90,17 @@ public class TourDeApplication extends Application {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         req.setRetryPolicy(policy);
         getRequestQueue().add(req);
+    }
+    public void trackScreenView(String screenName) {
+
+        // Set screen name.
+        sTracker.setScreenName(screenName);
+        // Send a screen view.
+        sTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        GoogleAnalytics.getInstance(this).dispatchLocalHits();
+    }
+    public void trackEvent(String category, String action, String label) {
+        sTracker.send(new HitBuilders.EventBuilder().setCategory(category).setAction(action).setLabel(label).build());
     }
 
 }

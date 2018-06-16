@@ -39,6 +39,7 @@ import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.ProcessDialog;
 
 public class PostCommentFragment extends BaseFragment {
@@ -93,6 +94,7 @@ public class PostCommentFragment extends BaseFragment {
         btnPostComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TourDeApplication.getInstance().trackEvent("tap_review_post_course_id="+courseID,"tap","tap_review_post_course_id="+courseID);
                 postComment();
             }
         });
