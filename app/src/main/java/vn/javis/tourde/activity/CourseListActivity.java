@@ -342,7 +342,7 @@ public class CourseListActivity extends BaseActivity {
     }
 
     public void showSearchPage(SearchCourseFragment.OnFragmentInteractionListener listener) {
-        if (searchCourseFragment == null)
+//        if (searchCourseFragment == null)
             searchCourseFragment = SearchCourseFragment.newInstance(listener);
         openPage(searchCourseFragment, true, true);
     }
