@@ -323,11 +323,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
-                if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
-                    mActivity.ShowCourseDetailByTab(0);
-                } else {
-                    mActivity.onBackPressed();
-                }
+//                if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
+//                    mActivity.ShowCourseDetailByTab(0);
+//                } else {
+//                    mActivity.onBackPressed();
+//                }
+                mActivity.onBackPressed();
                 break;
             case R.id.stop_time:
                 isSaveTime = false;
