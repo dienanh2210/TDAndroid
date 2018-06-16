@@ -47,8 +47,7 @@
                     android:layout_height="@dimen/_150sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_58sdp"
-                    android:background="@drawable/icon_goal" />
+                    android:layout_marginTop="@dimen/_58sdp" />
 
 
                 <TextView
@@ -57,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_220sdp"
-                    android:text="@string/textgoal"
+                    android:text=""
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/_20sdp"
                     android:textStyle="bold" />
