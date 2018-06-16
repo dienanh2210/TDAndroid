@@ -85,6 +85,20 @@ public class LoginAPI {
         TourDeService.postWithAuth(ApiEndpoint.POST_RESET_PASSWORD, param, callback);
     }
 
+    public static void editAccount(String token, String email, String password, String nickname, Bitmap bitmap, int delete_image, int sex, int age, int area, Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token", token);
+        params.put("email", email);
+        params.put("password", password);
+        params.put("nickname", nickname);
+        params.put("delete_image", String.valueOf(delete_image));
+        params.put("sex", String.valueOf(sex));
+        params.put("age", String.valueOf(age));
+        params.put("area", String.valueOf(area));
+        String url = ApiEndpoint.BASE_URL + ApiEndpoint.POST_CREATE_ACCOUNT;
+        VolleyCustomRequest jsObjRequest = new VolleyCustomRequest(Request.Method.POST, url, params, successListener, errorListener);
+        TourDeApplication.getInstance().addToRequestQueue(jsObjRequest, ApiEndpoint.POST_EDIT_ACCOUNT);
+    }
     public static void editAccount(Activity activity, String token, String email, String password, String nickname, Bitmap bitmap, int delete_image, int sex, int age, int area, ServiceCallback callback) {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", token);
@@ -95,10 +109,7 @@ public class LoginAPI {
         params.put("sex", String.valueOf(sex));
         params.put("age", String.valueOf(age));
         params.put("area", String.valueOf(area));
-        if (bitmap != null)
-            TourDeService.uploadImageBitmap(activity, ApiEndpoint.POST_CREATE_ACCOUNT, bitmap, params, callback);
-        else
-            TourDeService.postWithAuth(ApiEndpoint.POST_EDIT_ACCOUNT, params, callback);
+        TourDeService.uploadImageBitmap(activity, ApiEndpoint.POST_EDIT_ACCOUNT, bitmap, params, callback);
     }
 
 }

@@ -166,7 +166,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCommentFragment=null;
 //        indexTab=0;
 //        pagerAdapter =null;
-        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
+        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
         // testAPI();
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
@@ -245,7 +245,17 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showMyCourse();
+                if (token != "")
+                    mActivity.showMyCourse();
+                else
+                {
+                    ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            mActivity.openLoginPage();
+                        }
+                    });
+                }
             }
         });
         btnHome.setOnClickListener(new View.OnClickListener() {

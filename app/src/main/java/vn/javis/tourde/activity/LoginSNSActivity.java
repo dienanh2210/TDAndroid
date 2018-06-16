@@ -1,5 +1,6 @@
 package vn.javis.tourde.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.fragment.LoginFragment;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public class LoginSNSActivity extends BaseActivity {
 
@@ -45,4 +47,6 @@ public class LoginSNSActivity extends BaseActivity {
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }
+
+
 }

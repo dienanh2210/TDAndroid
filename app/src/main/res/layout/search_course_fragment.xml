@@ -83,14 +83,18 @@
 
                     <TextView
                         android:id="@+id/tv_prefecture"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_270sdp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_16sdp"
                         android:layout_toStartOf="@+id/im_choose"
-                        android:text="@string/search_course_select_area"
-                        android:textColor="@color/search_course_color_description_text"
+                        android:hint="@string/search_course_select_area"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColorHint="@color/search_course_color_description_text"
+                        android:textColor="@color/colorText"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="RelativeOverlap,RtlCompat,UnknownIdInLayout" />
 
@@ -179,9 +183,12 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_16sdp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:layout_toStartOf="@+id/im_more_searching"
-                        android:text="@string/search_course_more_searching_description"
-                        android:textColor="@color/search_course_color_description_text"
+                        android:hint="@string/search_course_more_searching_description"
+                        android:textColorHint="@color/search_course_color_description_text"
+                        android:textColor="@color/colorText"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="RtlCompat" />
 
