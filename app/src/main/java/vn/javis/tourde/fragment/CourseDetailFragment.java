@@ -208,7 +208,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnBackToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showCourseListPage();
+//                mActivity.showCourseListPage();
+                mActivity.onBackPressed();
             }
         });
         btnBadge.setOnClickListener(new View.OnClickListener() {
