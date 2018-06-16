@@ -12,6 +12,7 @@ import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public class RegisterActivity extends BaseActivity {
     Bundle bundle;
@@ -56,6 +57,7 @@ public class RegisterActivity extends BaseActivity {
             tx.addToBackStack(null);
         tx.commit();
         getSupportFragmentManager().executePendingTransactions();
+
     }
 
     //transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);

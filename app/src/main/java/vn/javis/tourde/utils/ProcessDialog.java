@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -286,6 +287,7 @@ public class ProcessDialog {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 action.onOkClick();
                 dialog.hide();
             }
@@ -369,19 +371,22 @@ public class ProcessDialog {
 
     }
 
-    public static void showloading(final Context context) {
+    public static void showloading(final Context context,final boolean isrunloading) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         dialog.setContentView(R.layout.loading);
         spinner = dialog.findViewById(R.id.pBar);
-        spinner.setVisibility(View.VISIBLE);
-        dialog.show();
-      //  dialog.dismiss();
-       // showProgressDialog(context,"",true);
+
+        spinner.setVisibility( View.VISIBLE );
+if(isrunloading) {
+    dialog.show();
+}else {
+    dialog.dismiss();
+}
 
     }
 

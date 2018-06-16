@@ -41,6 +41,7 @@ import java.io.IOException;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListRegisterAdapter;
 import vn.javis.tourde.apiservice.LoginAPI;
@@ -286,6 +287,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.changeInfo:
                 String token = LoginFragment.getmUserToken();
+
+               // ProcessDialog.showProgressDialog(activity,"Loading",false);
+             //   ProcessDialog.showloading( getContext() );
+                LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
+
                 ProcessDialog.showProgressDialog(activity,"Loading",false);
                 if(bitmapIcon==null)
                     LoginAPI.editAccount(token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, successListener(), errorListener());
@@ -314,6 +320,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                                     startActivity(intent);
                                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                                     getActivity().setResult(Activity.RESULT_OK, intent);
+                                    ProcessDialog.showloading( getContext(),true);
                                 }
                             });
                         } else {
@@ -321,6 +328,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                             startActivity(intent);
                             intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                             getActivity().setResult(Activity.RESULT_OK, intent);
+                            ProcessDialog.showloading( getContext(),true);
                         }
                         //     getActivity().finish();
                         if (jsonObject.has("token")) {

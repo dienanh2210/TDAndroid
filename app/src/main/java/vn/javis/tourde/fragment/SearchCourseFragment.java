@@ -1,8 +1,12 @@
 package vn.javis.tourde.fragment;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,7 +33,8 @@ import vn.javis.tourde.model.Data;
 import vn.javis.tourde.utils.SearchCourseUtils;
 import vn.javis.tourde.view.WrappingLinearLayoutManager;
 
-public class SearchCourseFragment extends Fragment implements View.OnClickListener, PrefectureSearchFragment.OnFragmentInteractionListener, PrefectureOneFragment.OnFragmentInteractionListener {
+public  class SearchCourseFragment extends Fragment implements View.OnClickListener, PrefectureSearchFragment.OnFragmentInteractionListener, PrefectureOneFragment.OnFragmentInteractionListener {
+
 
     private RecyclerView rcv_list;
     private List<Data> dataList;
@@ -36,12 +42,14 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
 
-    String prefecture = "エリアを選択";
-    String prefecturetext = "こだわり条件を指定";
+    String prefecture = "";
+    String prefecturetext = "";
     String seasonSelected = "";
     String tagSelected = "";
 
-    TextView tv_prefecture, tv_searchtwo, tv_close;
+    TextView tv_prefecture;
+    TextView tv_searchtwo;
+    TextView tv_close;
     EditText edt_search;
     ImageView im_select_area, im_more_searching;
     private CourseListActivity mActivity;
@@ -53,6 +61,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     public static SearchCourseFragment newInstance(OnFragmentInteractionListener listener) {
         SearchCourseFragment fragment = new SearchCourseFragment();
         fragment.listener = listener;
+
         return fragment;
     }
 
@@ -71,6 +80,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         bt_search_course.setOnClickListener(this);
         im_select_area = view.findViewById(R.id.im_select_area);
         im_select_area.setOnClickListener(this);
+
         im_more_searching = view.findViewById(R.id.im_more_searching);
         im_more_searching.setOnClickListener(this);
         tv_prefecture = view.findViewById(R.id.tv_prefecture);
@@ -80,6 +90,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         edt_search = view.findViewById(R.id.edt_search);
         tv_close = view.findViewById(R.id.tv_close);
         tv_close.setOnClickListener(this);
+
         mSearchCourseUtils = new SearchCourseUtils();
         initData();
         return view;
@@ -92,13 +103,12 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.im_select_area:
                 mActivity.openPage(PrefectureOneFragment.newInstance(this, ""), true, true);
+               // mActivity.openPage(GoalFragment.newInstance(this), true, true);
                 break;
             case R.id.im_more_searching:
                 mActivity.openPage(PrefectureSearchFragment.newInstance(this), true, true);
                 break;
             case R.id.tv_close:
-//                Intent intent = new Intent(getActivity(), CourseListActivity.class);
-//                startActivity(intent);
                 mActivity.onBackPressed();
                 break;
             case R.id.bt_search_course:
@@ -121,6 +131,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         listSearchCourseAdapter = new ListSearchCourseAdapter(getContext(), dataList, new ListSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(Map content) {
+
 
             }
         });
@@ -146,6 +157,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(HashMap<String, String> map);
+
     }
 
     @Override
@@ -155,6 +167,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         }
         prefecture = content;
         tv_prefecture.setText(content);
+
 
     }
 
@@ -226,9 +239,11 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         if (tv_prefecture.getText().toString() != "エリアを選択") {
 
             String[] str = tv_prefecture.getText().toString().trim().split(",");
+
             String preStr = "";
             for (int i = 0; i < str.length; i++) {
                 lstPrefectureValue.add(String.valueOf(mSearchCourseUtils.getIndexPrefecture(str[i])));
+
             }
         }
         List<String> lstSeasonValue = new ArrayList<String>();
