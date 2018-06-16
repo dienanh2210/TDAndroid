@@ -10,9 +10,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Window;
 
 import com.android.volley.VolleyError;
+import com.growthbeat.BuildConfig;
+import com.growthbeat.message.handler.ShowMessageHandler;
+import com.growthpush.GrowthPush;
+import com.growthpush.model.Environment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +42,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+        GrowthPush.getInstance().initialize(this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
+                BuildConfig.DEBUG ? Environment.development : Environment.production);
+        GrowthPush.getInstance().requestRegistrationId("1079044899926");
+        GrowthPush.getInstance().trackEvent("Launch");
+        GrowthPush.getInstance().trackEvent("AllowPushPermission", null, new ShowMessageHandler() {
+            @Override
+            public void complete(MessageRenderHandler renderHandler) {
+                Log.i("GrowthMessage", "run renderHandler, show message.");
+                renderHandler.render();
+            }
+
+            @Override
+            public void error(String error) {
+                Log.d("GrowthMessage", error);
+            }
+        });
 
         if (SharedPreferencesUtils.getInstance(this).getStringValue("Email").equals("")) {
             if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals(""))

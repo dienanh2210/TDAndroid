@@ -17,6 +17,16 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- for Growth Push -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.yumesol.tourde.dev.permission.C2D_MESSAGE" />
+
+    <permission
+        android:name="com.yumesol.tourde.dev.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -105,6 +115,67 @@
         <service
             android:name=".services.ChronometerService"
             android:stopWithTask="false"></service>
+
+        <!-- for Growth Push Custom Notification -->
+        <meta-data
+            android:name="com.growthpush.notification.icon"
+            android:resource="@drawable/star_yellow" />
+        <meta-data
+            android:name="com.growthpush.notification.icon.background.color"
+            android:resource="@android:color/darker_gray" />
+        <meta-data
+            android:name="com.growthpush.dialog.icon"
+            android:resource="@drawable/star_yellow" />
+        <meta-data
+            android:name="com.growthpush.notification.icon.large"
+            android:resource="@mipmap/ic_launcher" />
+
+        <activity
+            android:name="com.growthpush.view.AlertActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <service
+            android:name="com.growthpush.TokenRefreshService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <service android:name="com.growthpush.RegistrationIntentService" />
+        <service
+            android:name="com.growthpush.ReceiverService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.yumesol.tourde.dev" />
+            </intent-filter>
+        </receiver>
+
+        <!-- for Growth Message -->
+        <activity
+            android:name="com.growthbeat.message.view.MessageActivity"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <!-- for Growth Link -->
+        <receiver
+            android:name="com.growthbeat.link.InstallReferrerReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
