@@ -67,7 +67,7 @@ public class ProcessDialog {
 
     public static void hideProgressDialog() {
         if (progressDialog != null)
-            progressDialog.dismiss();
+           progressDialog.dismiss();
     }
 
     public void close() {
@@ -247,9 +247,6 @@ public class ProcessDialog {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                showloading(context);
-
                 action.onOkClick();
                 dialog.hide();
             }
@@ -344,6 +341,9 @@ public class ProcessDialog {
         spinner = dialog.findViewById(R.id.pBar);
         spinner.setVisibility(View.VISIBLE);
         dialog.show();
+      //  dialog.dismiss();
+       // showProgressDialog(context,"",true);
+
     }
 
     public interface OnActionDialogClickOk {
