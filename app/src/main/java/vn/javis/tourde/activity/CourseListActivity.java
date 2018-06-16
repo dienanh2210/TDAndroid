@@ -85,7 +85,7 @@ import vn.javis.tourde.utils.ProcessDialog;
  * Created by admin on 3/23/2018.
  */
 
-public class CourseListActivity extends BaseActivity implements ServiceCallback {
+public class CourseListActivity extends BaseActivity {
 
 
     public static final int MY_CAMERA_PERMISSION_CODE = 100;
@@ -378,12 +378,7 @@ public class CourseListActivity extends BaseActivity implements ServiceCallback 
         frgTransaction.commitAllowingStateLoss();
     }
 
-    @Override
-    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-        ListCourseAPI.setAllCourses((JSONObject) response);
 
-        showCourseListPage();
-    }
 
     public void showTakePhoto(int spotID) {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -409,10 +404,7 @@ public class CourseListActivity extends BaseActivity implements ServiceCallback 
         return longitude;
     }
 
-    @Override
-    public void onError(VolleyError error) {
 
-    }
 
 
     public void openLoginPage() {

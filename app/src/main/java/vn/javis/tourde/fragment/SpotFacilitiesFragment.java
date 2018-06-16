@@ -39,7 +39,7 @@ public class SpotFacilitiesFragment extends Fragment {
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
     TextView tv_back_sppot_faclities;
-    HashMap<String, String> params = new HashMap<>();
+    HashMap<String,String> params = new HashMap<>();
     CourseListActivity activity;
     int spotId;
     String[] contentList2 = new String[]{"toilet", "parking", "accommodation", "bath", "shower", "locker", "dressing_room", "bicycle_delivery", "tourist_information", "cycle_rack", "bicycle_rental", "cycling_guide", "tool_rental", "floor_pump_rental", "mechanic_maintenance"};
@@ -106,11 +106,9 @@ public class SpotFacilitiesFragment extends Fragment {
 
     public interface OnFragmentInteractionListener extends View.OnClickListener {
         void onFragmentInteraction(String content);
-
         @Override
         void onClick(View v);
     }
-
     //call back when call api post review
     ServiceCallback callback = new ServiceCallback() {
         @Override
