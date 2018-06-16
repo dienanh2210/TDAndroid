@@ -242,7 +242,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             if (!lstLocation.isEmpty()) {
                 changeListSpotCheckInData();
             }
-
         }
     };
 
