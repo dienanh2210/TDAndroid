@@ -436,11 +436,11 @@ public class CourseListActivity extends BaseActivity {
             typeBackPress = 3;
             showSpotImages(mSpotID);
             return;
-        } else if (fragment instanceof FragmentTabLayoutRunning) {
+        } /*else if (fragment instanceof FragmentTabLayoutRunning) {
             ShowCourseDetail();
 
             return;
-        }
+        }*/
 
         super.onBackPressed();
         Log.i("onBackPressed", "true");
