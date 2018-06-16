@@ -69,7 +69,7 @@ public class PrefectureSearchFragment extends Fragment {
                     String prefix = "";
                     for (String str : contents) {
                         stringBuilder.append(prefix);
-                        prefix = ",";
+                        prefix = " 、";
                         stringBuilder.append(str);
                     }
                     listener.onFragment(stringBuilder.toString());

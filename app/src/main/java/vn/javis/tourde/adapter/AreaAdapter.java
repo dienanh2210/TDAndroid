@@ -35,6 +35,8 @@ public class AreaAdapter extends CheckableChildRecyclerViewAdapter<TitleGroupVie
                 areaViewHolder.setChecked(!checkable.isChecked());
                 if (checkable.isChecked()) {
                     stringChosen.add(checkable.getText().toString());
+
+
                 } else {
                     stringChosen.remove(checkable.getText().toString());
                 }

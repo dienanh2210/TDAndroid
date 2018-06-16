@@ -247,8 +247,8 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                 break;
             case R.id.textView_forget:
                 LoginSNSActivity activity =  (LoginSNSActivity) getActivity();
-               activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
-              //  activity.openPage(GoalFragment.newInstance(this), true);
+              activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
+
                 break;
             case  R.id.tv_register_new_account:
                 Intent myIntent = new Intent(getActivity(), MenuEntryActivity.class);
@@ -257,6 +257,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
             case R.id.tv_back_login:
                 LoginSNSActivity lActivity =  (LoginSNSActivity) getActivity();
                 lActivity.onBackPressed();
+ProcessDialog.showloading( getContext(),false );
                /* Intent intent = new Intent(getContext(), CourseListActivity.class);
                 startActivity(intent);*/
                 break;

@@ -71,12 +71,13 @@ public class PrefectureOneFragment extends Fragment {
                     String prefix = "";
                     for (String str : contents) {
                         stringBuilder.append(prefix);
-                        prefix = ",";
+                        prefix = " 、";
                         stringBuilder.append(str);
                     }
                     listener.onFragmentInteraction(stringBuilder.toString());
                    if (getActivity() != null) {
                        getActivity().onBackPressed();
+
                     }
 
                 }
