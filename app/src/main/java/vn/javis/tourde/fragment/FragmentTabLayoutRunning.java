@@ -112,6 +112,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
+
+        } else {
+            courseID = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
+            mActivity.setmCourseID(courseID);
+        }
         preferencesUtils = SharedPreferencesUtils.getInstance(mActivity);
     }
 

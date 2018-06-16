@@ -47,16 +47,24 @@ public class FragmentLog extends BaseFragment {
         mView = inflater.inflate(R.layout.log_fragment, container, false);
         return mView;
     }
-
+    int courseId;
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
-        final int courseId;
         if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
             courseId = mActivity.getmCourseID();
         } else {
             courseId = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
+
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+
+
         SharedPreferencesUtils.getInstance(getContext()).setIntValue("CourseID", courseId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);

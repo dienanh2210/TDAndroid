@@ -104,18 +104,6 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         lstCourseRecycleView.setNestedScrollingEnabled(false);
         setFooter();
         Bundle bundle = getArguments();
-        paramsSearch = new HashMap<String, String>();
-         search = false;
-        if (bundle != null) {
-            String getStr = bundle.getString("searching");
-            if (getStr != null && getStr != "") {
-                paramsSearch = (HashMap<String, String>) bundle.getSerializable("params");
-                Log.i("lst course 97", "" + paramsSearch);
-                search = true;
-            }
-
-        }
-
         mCurrentPage=1;
         getData(search);
         btnMenu.setOnClickListener(new View.OnClickListener() {
