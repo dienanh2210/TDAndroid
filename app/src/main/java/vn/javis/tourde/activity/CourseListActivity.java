@@ -80,6 +80,10 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
+
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.newInstance;
 
 /**
  * Created by admin on 3/23/2018.
@@ -154,7 +158,7 @@ public class CourseListActivity extends BaseActivity {
 
         fn_permission();
         //    showCourseFinish();
-
+        checkLogging();
     }
 
     public boolean isBoolean_permission() {
@@ -191,6 +195,19 @@ public class CourseListActivity extends BaseActivity {
 
     }
 
+    public void checkLogging() {
+        if (SharedPreferencesUtils.getInstance(getApplicationContext()).getLongValue(KEY_SHARED_BASETIME) != 0) {
+            ProcessDialog.showDialogCheckLogging(CourseListActivity.this, "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
+                @Override
+                public void onOkClick() {
+                    if (fragmentTabLayoutRunning == null)
+                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
+                    openPage(fragmentTabLayoutRunning, true, false);
+                }
+            });
+        }
+    }
+
     public void showDialogWarning() {
         ProcessDialog.showDialogLogin(CourseListActivity.this, "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
             @Override
@@ -200,6 +217,7 @@ public class CourseListActivity extends BaseActivity {
             }
         });
     }
+
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
         if (mCourseListFragment == null)
@@ -379,7 +397,6 @@ public class CourseListActivity extends BaseActivity {
     }
 
 
-
     public void showTakePhoto(int spotID) {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
@@ -403,8 +420,6 @@ public class CourseListActivity extends BaseActivity {
     public double getLongitude() {
         return longitude;
     }
-
-
 
 
     public void openLoginPage() {

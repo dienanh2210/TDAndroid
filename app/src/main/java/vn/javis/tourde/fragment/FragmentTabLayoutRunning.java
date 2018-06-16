@@ -94,7 +94,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     //  TextView tv_back_password;
     private RegisterActivity activity;
     private SharedPreferencesUtils preferencesUtils;
-    private static final String KEY_SHARED_BASETIME = "key_time_";
+    public static final String KEY_SHARED_BASETIME = "key_time_";
     ArrayList<Location> lstLocation = new ArrayList<>();
     List<Spot> list_spot = new ArrayList<>();
     ArrayList<Integer> lstCheckedSpot = new ArrayList<>();
@@ -136,7 +136,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         chronometer.setText(time_str);
 //        startChronometerService();
 //        chronometer.start();
-        Log.i("timer", "" + SystemClock.elapsedRealtime());
+        Log.i("timer", "" + KEY_SHARED_BASETIME);
         initTabControl();
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -242,7 +242,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             if (!lstLocation.isEmpty()) {
                 changeListSpotCheckInData();
             }
-
         }
     };
 
@@ -275,7 +274,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 int m = (int) (time - h * 3600000) / 60000;
                 int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-                preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, 0);
+                preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
                 isSaveTime = false;
                 mActivity.showGoalFragment(spotId, speed, finishTime);
                 //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
@@ -329,7 +328,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             case R.id.stop_time:
                 isSaveTime = false;
                 pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
-                preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, pauseOffset);
+                preferencesUtils.setLongValue(KEY_SHARED_BASETIME, pauseOffset);
                 chronometer.stop();
                 stopTime.setVisibility(View.GONE);
                 //temporary open select spot to checkin
@@ -363,7 +362,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
         changePaged = false;
-        time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME + courseID) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME + courseID);
+        time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
         chronometer.setBase(time);
         chronometer.start();
         //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
@@ -376,7 +375,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         super.onPause();
         if (isSaveTime) {
             pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
-            preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, pauseOffset);
+            preferencesUtils.setLongValue(KEY_SHARED_BASETIME , pauseOffset);
             chronometer.stop();
         }
         //  mActivity.unregisterReceiver(broadcastReceiver);

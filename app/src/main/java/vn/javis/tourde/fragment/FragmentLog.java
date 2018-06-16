@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,9 @@ import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
+
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
 
 public class FragmentLog extends BaseFragment {
     View mView;
@@ -47,7 +51,13 @@ public class FragmentLog extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        final int courseId = mActivity.getmCourseID();
+        final int courseId;
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
+            courseId = mActivity.getmCourseID();
+        } else {
+            courseId = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
+        }
+        SharedPreferencesUtils.getInstance(getContext()).setIntValue("CourseID", courseId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);
         recyclerSpot.setNestedScrollingEnabled(false);
@@ -57,7 +67,7 @@ public class FragmentLog extends BaseFragment {
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;
                 if (jsonObject.has("error")) {
-
+                    Log.i("error", "aaaa");
                 } else {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                     if (txtPrezent == null)

@@ -38,7 +38,7 @@ public class ListCourses {
         private Course data;
         @SerializedName("tag")
         @Expose
-        private java.util.List<Tag> tag = null;
+        private List<Tag> tag = null;
 
         public Course getData() {
             return data;
@@ -48,11 +48,11 @@ public class ListCourses {
             this.data = data;
         }
 
-        public java.util.List<Tag> getTag() {
+        public List<Tag> getTag() {
             return tag;
         }
 
-        public void setTag(java.util.List<Tag> tag) {
+        public void setTag(List<Tag> tag) {
             this.tag = tag;
         }
 

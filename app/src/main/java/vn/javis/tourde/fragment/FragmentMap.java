@@ -70,7 +70,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
         transaction.replace(R.id.map, SupportMapFragment.newInstance(), "map");
         transaction.commit();
         mapUrl = mActivity.getMapUrl();
-
+        //Log.i("kml_link",mapUrl);
     }
 
     @Override
