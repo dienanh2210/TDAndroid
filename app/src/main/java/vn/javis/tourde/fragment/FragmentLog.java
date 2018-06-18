@@ -65,15 +65,11 @@ public class FragmentLog extends BaseFragment {
             courseId = mActivity.getmCourseID();
         } else {
             courseId = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
-
         }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
-
         SharedPreferencesUtils.getInstance(getContext()).setIntValue("CourseID", courseId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);
