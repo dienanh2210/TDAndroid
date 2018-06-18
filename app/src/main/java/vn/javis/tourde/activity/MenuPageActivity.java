@@ -96,7 +96,6 @@ privacy.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPageActivity.this, InquiryFragment.class);
-                //basic_Info.setVisibility(View.VISIBLE);
                 startActivityForResult(intent, 1);
             }
         } );
