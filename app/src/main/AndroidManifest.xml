@@ -108,13 +108,13 @@
         <activity
             android:name=".fragment.InquiryFragment"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".activity.SrcollViewImage"
+        <activity
+            android:name=".activity.SrcollViewImage"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".services.ChronometerService"
-            android:stopWithTask="false"></service>
+            android:stopWithTask="false" />
 
         <!-- for Growth Push Custom Notification -->
         <meta-data
@@ -158,6 +158,7 @@
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.yumesol.tourde.dev" />
             </intent-filter>
         </receiver>
@@ -177,6 +178,17 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".fragment.FourFragment" />
+        <activity android:name=".fragment.FireFragment" />
+        <activity android:name=".fragment.SixFragment" />
+        <activity android:name=".activity.UsePageActivity" />
+        <activity android:name=".fragment.UsePage.UsePageOneFragment" />
+        <activity android:name=".fragment.UsePage.UsePageTwoFragment" />
+        <activity android:name=".fragment.UsePage.UsePageThreeFragment" />
+        <activity android:name=".fragment.UsePage.UsePageFourFragment" />
+        <activity android:name=".fragment.UsePage.UsePageFireFragment" />
+        <activity android:name=".fragment.UsePage.UsePageSixFragment" />
+        <activity android:name=".fragment.UsePage.UsePageSevenFragment"></activity>
     </application>
 
 </manifest>

@@ -11,12 +11,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.fragment.FireFragment;
+import vn.javis.tourde.fragment.FourFragment;
+import vn.javis.tourde.fragment.SixFragment;
 import vn.javis.tourde.fragment.TwoFragment;
 import vn.javis.tourde.fragment.OneFragment;
 import vn.javis.tourde.fragment.ThreeFragment;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import android.view.Window;
+import android.widget.TextView;
 
 public class ViewPageActivity extends AppCompatActivity {
 
@@ -24,7 +28,7 @@ public class ViewPageActivity extends AppCompatActivity {
     private int dotscount;
     private ImageView[] dots;
     LinearLayout sliderDotspanel;
-    Button btnSkip;
+    TextView btnSkip;
     MainActivity.ViewPagerAdapter adapter;
 
     @Override
@@ -40,8 +44,8 @@ public class ViewPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (viewPager.getCurrentItem() != 2) {
-                    viewPager.setCurrentItem(2, true);
+                if (viewPager.getCurrentItem() != 5) {
+                    viewPager.setCurrentItem(5, true);
                 } else {
                     Intent intent = new Intent(ViewPageActivity.this, MenuEntryActivity.class);
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Tutorial", "finish");
@@ -87,7 +91,10 @@ public class ViewPageActivity extends AppCompatActivity {
         adapter.addFragment(new OneFragment(), "One");
         adapter.addFragment(new TwoFragment(), "Two");
         adapter.addFragment(new ThreeFragment(), "Three");
+        adapter.addFragment(new FourFragment(), "four");
+        adapter.addFragment(new FireFragment(), "fire");
+        adapter.addFragment(new SixFragment(), "six");
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(6);
     }
 }

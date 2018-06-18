@@ -5,7 +5,6 @@
     android:background="@color/colorTextF4F6F8"
     tools:context=".activity.MainActivity">
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -16,7 +15,7 @@
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:src="@drawable/image_01" />
+            android:src="@drawable/image_05" />
 
 
     </LinearLayout>

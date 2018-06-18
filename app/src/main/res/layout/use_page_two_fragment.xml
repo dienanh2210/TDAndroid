@@ -5,19 +5,19 @@
     android:background="@color/colorTextF4F6F8"
     tools:context=".activity.MainActivity">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:src="@drawable/image_01" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="fitXY"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:src="@drawable/imageuse_02" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
