@@ -1,4 +1,4 @@
-package vn.javis.tourde.fragment.UsePage;
+package vn.javis.tourde.fragment.usepage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
