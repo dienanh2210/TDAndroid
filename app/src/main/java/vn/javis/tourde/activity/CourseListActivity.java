@@ -1,7 +1,5 @@
 package vn.javis.tourde.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +20,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -96,6 +95,7 @@ public class CourseListActivity extends BaseActivity {
     public static final String COURSE_DETAIL_ID = "COURSE_ID";
     public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
     public static final String STAMP_IMAGE = "stamp_img";
+    public static final String STAMP_TITLE = "stamp_title";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
 
@@ -316,11 +316,13 @@ public class CourseListActivity extends BaseActivity {
         openPage(fragmentTabLayoutRunning, true, false);
     }
 
-    public void showGoalFragment(int idSpot, float speed, String time) {
+    public void showGoalFragment(int idSpot, float speed, String time,String imgUrl,String title) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putInt(SPOT_ID, idSpot);
+        dataBundle.putString(STAMP_IMAGE, imgUrl);
+        dataBundle.putString(STAMP_TITLE, title);
         if (goalFragment == null)
             goalFragment = new GoalFragment();
         openPage(goalFragment, true, false);
@@ -343,11 +345,12 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl,String title) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
+        dataBundle.putString(STAMP_TITLE, title);
         if (checkPointFragment == null)
             checkPointFragment = new CheckPointFragment();
         openPage(checkPointFragment, true, false);
@@ -429,7 +432,8 @@ public class CourseListActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof PostCommentFragment) {
             typeBackPress = 1;
         } else if (fragment instanceof SpotFacilitiesFragment) {
@@ -437,8 +441,12 @@ public class CourseListActivity extends BaseActivity {
             showSpotImages(mSpotID);
             return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
-            ShowCourseDetail();
+//            ShowCourseDetail();
 
+            for(int i = 0; i < 3; i++) { // Back to CourseDetailFragment
+                fm.popBackStack();
+            }
+//
             return;
         }
 

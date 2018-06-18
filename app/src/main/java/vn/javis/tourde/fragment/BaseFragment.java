@@ -11,15 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.analytics.Tracker;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.javis.tourde.activity.MainActivity;
 import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.TourDeApplication;
 
 public abstract class BaseFragment extends Fragment {
     private View mView;
     private Unbinder mUnbind;
     protected MainActivity activity;
+
 
     @Nullable
     @Override
