@@ -178,17 +178,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".fragment.FourFragment" />
-        <activity android:name=".fragment.FireFragment" />
-        <activity android:name=".fragment.SixFragment" />
-        <activity android:name=".activity.UsePageActivity" />
-        <activity android:name=".fragment.UsePage.UsePageOneFragment" />
-        <activity android:name=".fragment.UsePage.UsePageTwoFragment" />
-        <activity android:name=".fragment.UsePage.UsePageThreeFragment" />
-        <activity android:name=".fragment.UsePage.UsePageFourFragment" />
-        <activity android:name=".fragment.UsePage.UsePageFireFragment" />
-        <activity android:name=".fragment.UsePage.UsePageSixFragment" />
-        <activity android:name=".fragment.UsePage.UsePageSevenFragment"></activity>
+
     </application>
 
 </manifest>

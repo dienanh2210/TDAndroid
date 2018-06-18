@@ -95,7 +95,6 @@ public class UsePageActivity extends AppCompatActivity {
                     bt_usePage.setVisibility( View.VISIBLE );
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
             }
