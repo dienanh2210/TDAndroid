@@ -2,37 +2,24 @@ package vn.javis.tourde.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.fragment.CourseListFragment;
-import vn.javis.tourde.fragment.FireFragment;
-import vn.javis.tourde.fragment.FourFragment;
-import vn.javis.tourde.fragment.PrefectureFragment;
-import vn.javis.tourde.fragment.SixFragment;
-import vn.javis.tourde.fragment.TwoFragment;
-import vn.javis.tourde.fragment.OneFragment;
-import vn.javis.tourde.fragment.ThreeFragment;
-import vn.javis.tourde.fragment.UsePage.UsePageFireFragment;
-import vn.javis.tourde.fragment.UsePage.UsePageFourFragment;
-import vn.javis.tourde.fragment.UsePage.UsePageOneFragment;
-import vn.javis.tourde.fragment.UsePage.UsePageSevenFragment;
-import vn.javis.tourde.fragment.UsePage.UsePageSixFragment;
-import vn.javis.tourde.fragment.UsePage.UsePageThreeFragment;
-import vn.javis.tourde.fragment.UsePage.UsePageTwoFragment;
-import vn.javis.tourde.utils.SharedPreferencesUtils;
+import vn.javis.tourde.fragment.usepage.UsePageFireFragment;
+import vn.javis.tourde.fragment.usepage.UsePageFourFragment;
+import vn.javis.tourde.fragment.usepage.UsePageOneFragment;
+import vn.javis.tourde.fragment.usepage.UsePageSevenFragment;
+import vn.javis.tourde.fragment.usepage.UsePageSixFragment;
+import vn.javis.tourde.fragment.usepage.UsePageThreeFragment;
+import vn.javis.tourde.fragment.usepage.UsePageTwoFragment;
 
 import android.view.Window;
-import android.widget.TextView;
 
 public class UsePageActivity extends AppCompatActivity {
 
@@ -95,7 +82,6 @@ public class UsePageActivity extends AppCompatActivity {
                     bt_usePage.setVisibility( View.VISIBLE );
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
             }

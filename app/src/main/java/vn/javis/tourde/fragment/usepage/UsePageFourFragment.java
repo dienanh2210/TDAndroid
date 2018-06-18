@@ -1,4 +1,4 @@
-package vn.javis.tourde.fragment;
+package vn.javis.tourde.fragment.usepage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import vn.javis.tourde.R;
 
-public class FireFragment extends Fragment {
+public class UsePageFourFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class FireFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.fire_fragment, null );
+        View view = inflater.inflate( R.layout.use_page_four_fragment, null );
         return view;
     }
 }
