@@ -117,17 +117,4 @@ public class UsePageActivity extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(7);
 
     }
-    public void openPage(Fragment fragment, boolean isBackStack) {
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.containert, fragment, fragment.getClass().getSimpleName());
-        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        if (isBackStack)
-            tx.addToBackStack(null);
-        tx.commit();
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Log.i("onBackPressed", "true");
-    }
 }
