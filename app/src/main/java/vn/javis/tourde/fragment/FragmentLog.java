@@ -105,6 +105,10 @@ public class FragmentLog extends BaseFragment {
      void setRecyclerSpot(){
 
         listSpotLogAdapter = new ListSpotLog(lstCheckedSpot, mActivity);
+        if(mView==null && recyclerSpot==null)
+        {
+            return;
+        }
         if (recyclerSpot == null)
             recyclerSpot = mView.findViewById(R.id.recycler_spot);
         recyclerSpot.setAdapter(listSpotLogAdapter);

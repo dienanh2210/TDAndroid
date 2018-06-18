@@ -34,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -285,11 +286,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     }
 
     void showCheckPointFragment(final int spotId) {
-        for (int i = 0; i < listCheckedSpot.size(); i++) {
-            if (listCheckedSpot.get(i).getSpotID() == spotId) {
-                return;
-            }
-        }
+       if(isSpotChecked(spotId))
+           return;
 
         checkedSpot(spotId, getTimeFormat(time), calculateAvarageSpeed(time));
 
@@ -541,6 +539,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         aSpeed = courseDistance / ((double) time / 3600000);
         lastLatitude = latitude;
         lastLongtitude = longtitude;
+        DecimalFormat df = new DecimalFormat("#.##");
+        aSpeed = Double.valueOf(df.format(aSpeed));
         return aSpeed;
     }
 
@@ -553,6 +553,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     }
 
     void setListCheckedSpot() {
+        if(listCheckedSpot.size()>0)
+            return;;
         boolean checked = true;
         for (Spot spot : list_spot) {
             listCheckedSpot.add(new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked));
@@ -562,10 +564,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     boolean isSpotChecked(int spotId) {
         for (int i = 0; i < listCheckedSpot.size(); i++) {
-            if (listCheckedSpot.get(i).getSpotID() == spotId) {
+            if (listCheckedSpot.get(i).getSpotID() == spotId && listCheckedSpot.get(i).isChecked()) {
+                Log.i("running566",""+spotId);
                 return true;
+
             }
         }
+        Log.i("running566-",""+spotId);
         return false;
     }
 
