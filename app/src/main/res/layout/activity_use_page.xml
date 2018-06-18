@@ -45,7 +45,8 @@
             android:layout_marginLeft="@dimen/_70sdp"
             android:layout_marginRight="@dimen/_70sdp"
             android:visibility="gone"
-            android:background="@drawable/bt_use" /></RelativeLayout>
+            android:background="@drawable/bt_use" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

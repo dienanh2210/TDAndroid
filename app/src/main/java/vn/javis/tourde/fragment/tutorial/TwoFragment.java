@@ -1,4 +1,4 @@
-package vn.javis.tourde.fragment;
+package vn.javis.tourde.fragment.tutorial;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

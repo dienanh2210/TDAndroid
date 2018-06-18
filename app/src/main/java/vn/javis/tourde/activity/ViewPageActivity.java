@@ -6,17 +6,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import vn.javis.tourde.R;
-import vn.javis.tourde.fragment.FireFragment;
-import vn.javis.tourde.fragment.FourFragment;
-import vn.javis.tourde.fragment.SixFragment;
-import vn.javis.tourde.fragment.TwoFragment;
-import vn.javis.tourde.fragment.OneFragment;
-import vn.javis.tourde.fragment.ThreeFragment;
+import vn.javis.tourde.fragment.tutorial.FireFragment;
+import vn.javis.tourde.fragment.tutorial.FourFragment;
+import vn.javis.tourde.fragment.tutorial.SixFragment;
+import vn.javis.tourde.fragment.tutorial.TwoFragment;
+import vn.javis.tourde.fragment.tutorial.OneFragment;
+import vn.javis.tourde.fragment.tutorial.ThreeFragment;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import android.view.Window;
