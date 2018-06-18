@@ -335,5 +335,7 @@
     //privacy
     <string name="privacy">プライバシーポリシー </string>
     <string name="inquiry">お問い合わせ </string>
+    //tutorial
+    <string name="tutorialnew">使い方</string>
 </resources>
 

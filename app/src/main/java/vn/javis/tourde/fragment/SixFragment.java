@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import vn.javis.tourde.R;
 
-public class OneFragment extends Fragment {
+public class SixFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class OneFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.fragment_one, null );
+        View view = inflater.inflate( R.layout.six_fragment, null );
         return view;
     }
 }
