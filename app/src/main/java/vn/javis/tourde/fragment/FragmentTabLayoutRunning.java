@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -418,7 +419,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
+    @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume, R.id.finish})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -450,6 +451,17 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 changePaged = false;
                 //   mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
                 mActivity.turnOnGPS();
+                break;
+            case R.id.finish:
+                ProcessDialog.showDialogConfirm(getContext(), "", "終了しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                    @Override
+                    public void onOkClick() {
+                        courseID = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
+                        mActivity.setmCourseID(courseID);
+                        SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        mActivity.openPage(new CourseDetailFragment(),false,false);
+                    }
+                });
                 break;
 
         }

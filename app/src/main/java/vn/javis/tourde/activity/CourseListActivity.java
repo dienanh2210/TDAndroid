@@ -141,6 +141,7 @@ public class CourseListActivity extends BaseActivity {
     private SpotFacilitiesFragment spotFacilitiesFragment;
     private CheckPointFragment checkPointFragment;
     android.support.v4.app.FragmentTransaction frgTransaction;
+    String token = LoginFragment.getmUserToken();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -157,8 +158,10 @@ public class CourseListActivity extends BaseActivity {
         medit = mPref.edit();
 
         fn_permission();
-        //    showCourseFinish();
-        checkLogging();
+        //    showCourseFinish();hiện
+        if (!token.equals("")){
+            checkLogging();
+        }
     }
 
     public boolean isBoolean_permission() {
@@ -316,7 +319,7 @@ public class CourseListActivity extends BaseActivity {
         openPage(fragmentTabLayoutRunning, true, false);
     }
 
-    public void showGoalFragment(int idSpot, float speed, String time,String imgUrl,String title) {
+    public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
@@ -345,7 +348,7 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl,String title) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl, String title) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
@@ -364,7 +367,7 @@ public class CourseListActivity extends BaseActivity {
 
     public void showSearchPage(SearchCourseFragment.OnFragmentInteractionListener listener) {
 //        if (searchCourseFragment == null)
-            searchCourseFragment = SearchCourseFragment.newInstance(listener);
+        searchCourseFragment = SearchCourseFragment.newInstance(listener);
         openPage(searchCourseFragment, true, true);
     }
 
@@ -443,7 +446,7 @@ public class CourseListActivity extends BaseActivity {
         } else if (fragment instanceof FragmentTabLayoutRunning) {
 //            ShowCourseDetail();
 
-            for(int i = 0; i < 3; i++) { // Back to CourseDetailFragment
+            for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
                 fm.popBackStack();
             }
 //
