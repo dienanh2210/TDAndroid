@@ -1,4 +1,4 @@
-package vn.javis.tourde.fragment;
+package vn.javis.tourde.fragment.tutorial;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import vn.javis.tourde.R;
 
-public class ThreeFragment extends Fragment {
+public class TwoFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class ThreeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.fragment_three, null);
+        View view = inflater.inflate( R.layout.fragment_two, null);
         return view;
     }
 }
