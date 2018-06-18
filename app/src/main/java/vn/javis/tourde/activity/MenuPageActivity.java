@@ -89,7 +89,7 @@ privacy.setOnClickListener( new View.OnClickListener() {
     public void onClick(View v) {
        // Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyFragment.class);
         Intent intent = new Intent(MenuPageActivity.this, UsePageActivity.class);
-        startActivityForResult(intent, 1);
+        startActivity(intent);
     }
 } );
         inquiry.setOnClickListener( new View.OnClickListener() {
