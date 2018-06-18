@@ -263,6 +263,38 @@ public class ProcessDialog {
 
         dialog.show();
     }
+    public static void showDialogOk(final Context context, String title, String content,final OnActionDialogClickOk action) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setContentView(R.layout.dialog_ok);
+        dialog.setCancelable(false);
+        TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
+        // tvTitle.setVisibility(View.GONE);
+        tvTitle.setText(title);
+        TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
+        tvMessage.setText(content);
+        //tuanpd
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        final Button btnCancel = (Button) dialog.findViewById(R.id.btn_ok);
+
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.hide();
+                action.onOkClick();
+
+
+            }
+        });
+
+        dialog.show();
+    }
 
     public static void showDialogLogin(final Context context, String title, String content, final OnActionDialogClickOk action) {
 
