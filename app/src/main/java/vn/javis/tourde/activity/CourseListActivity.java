@@ -1,7 +1,5 @@
 package vn.javis.tourde.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +20,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -433,18 +432,23 @@ public class CourseListActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof PostCommentFragment) {
             typeBackPress = 1;
         } else if (fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
             showSpotImages(mSpotID);
             return;
-        } /*else if (fragment instanceof FragmentTabLayoutRunning) {
-            ShowCourseDetail();
+        } else if (fragment instanceof FragmentTabLayoutRunning) {
+//            ShowCourseDetail();
 
+            for(int i = 0; i < 3; i++) { // Back to CourseDetailFragment
+                fm.popBackStack();
+            }
+//
             return;
-        }*/
+        }
 
         super.onBackPressed();
         Log.i("onBackPressed", "true");

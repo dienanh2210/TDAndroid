@@ -30,8 +30,6 @@ public class AgeFragment extends Fragment {
     TextView txtbackmenu;
     TextView txtclose;
     int valueAge;
-
-
     public static AgeFragment newInstance(View.OnClickListener listener, int age) {
         AgeFragment fragment = new AgeFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;
@@ -77,13 +75,10 @@ public class AgeFragment extends Fragment {
     private void createData() {
         final String[] contentList = new String[]{"10代", "20代", "30代", "40代", "50代", "60代以上"};
         final int[] valueList = new int[]{10, 20, 30, 40, 50, 60};
-
         List<Data> dataList = new ArrayList<>();
         Data data = new Data();
         data.setContent(Arrays.asList(contentList));
         data.setMarked(true);
-
-
         dataList.add(data);
         int indexOfSelectedAge = 0;
         for (int i = 0; i < valueList.length; i++) {
