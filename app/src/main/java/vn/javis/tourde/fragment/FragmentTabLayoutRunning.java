@@ -55,6 +55,7 @@ import vn.javis.tourde.services.ChronometerService;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -219,6 +220,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
                 @Override
                 public void onItemClick(int id) {
+                    TourDeApplication.getInstance().trackEvent("tap_checkin_spot_id=" + id, "tap", "tap_checkin_spot_id=" + id);
                     showCheckPointFragment(id);
                 }
             });
@@ -273,9 +275,87 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     void showCheckPointFragment(final int spotId) {
         if (!lstCheckedSpot.contains(spotId))
             lstCheckedSpot.add(spotId);
+
         if (spotId > 0 && courseID > 0) {
-            String token = LoginFragment.getmUserToken();
-            if (spotId == lastSpotId) {
+            final String token = LoginFragment.getmUserToken();
+            if (lstCheckedSpot.size() == list_spot.size()) //complete all spot
+            {
+                if (spotId == lastSpotId)
+                {
+                    ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                    CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
+                        @Override
+                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                            JSONObject jsonObject = (JSONObject) response;
+                            if (!jsonObject.has("error")) {
+                                Stamp model = Stamp.getData(response.toString());
+                                if (model.getSuccess()) {
+                                    final String imgUrl = model.getImage() == null ? "" : model.getImage();
+                                    final String title = model.getTitle() == null ? "" : model.getTitle();
+                                    if (spotId == lastSpotId) {
+                                        final float speed = courseDistance / ((float) time / 3600000);
+                                        int h = (int) (time / 3600000);
+                                        int m = (int) (time - h * 3600000) / 60000;
+                                        int s = (int) (time - h * 3600000 - m * 60000) / 1000;
+                                        final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+                                        preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, 0);
+                                        isSaveTime = false;
+
+                                        //
+                                        PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() { //call postcourselog
+                                            @Override
+                                            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                                JSONObject jsonObject = (JSONObject) response;
+                                                if (jsonObject.has("success")) {
+                                                    mActivity.showGoalFragment(spotId, speed, finishTime,imgUrl,title);
+                                                }
+                                                ProcessDialog.hideProgressDialog();
+                                            }
+
+                                            @Override
+                                            public void onError(VolleyError error) {
+                                                ProcessDialog.hideProgressDialog();
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                            ProcessDialog.hideProgressDialog();
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+                            Log.i("VolleyError", "" + error.getMessage());
+                            ProcessDialog.hideProgressDialog();
+                        }
+                    });
+                }
+                else
+                    {
+                        CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
+                            @Override
+                            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                JSONObject jsonObject = (JSONObject) response;
+                                if (!jsonObject.has("error")) {
+                                    Stamp model = Stamp.getData(response.toString());
+                                    if (model.getSuccess()) {
+                                        final String imgUrl = model.getImage() == null ? "" : model.getImage();
+                                        final String title = model.getTitle() == null ? "" : model.getTitle();
+                                        mActivity.showCheckPointFragment(spotId, imgUrl, title);
+                                    }
+                                }
+                                ProcessDialog.hideProgressDialog();
+                            }
+
+                            @Override
+                            public void onError(VolleyError error) {
+                                Log.i("VolleyError", "" + error.getMessage());
+                                ProcessDialog.hideProgressDialog();
+                            }
+                        });
+                    }
+
+            } else if (spotId == lastSpotId) {
                 final float speed = courseDistance / ((float) time / 3600000);
                 int h = (int) (time / 3600000);
                 int m = (int) (time - h * 3600000) / 60000;
@@ -283,14 +363,14 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
                 preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
                 isSaveTime = false;
-                mActivity.showGoalFragment(spotId, speed, finishTime);
+             //   mActivity.showGoalFragment(spotId, speed, finishTime,"","");
                 //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                            //      mActivity.showGoalFragment(spotId, speed, finishTime);
+                                  mActivity.showGoalFragment(spotId, speed, finishTime,"","");
                         }
                         ProcessDialog.hideProgressDialog();
                     }
@@ -301,16 +381,19 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     }
                 });
             } else {
-                mActivity.showCheckPointFragment(spotId, "");
+                //   mActivity.showCheckPointFragment(spotId, "","");
                 //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
-                CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() {
+                CheckInStampAPI.postCheckInStamp(token, spotId, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (!jsonObject.has("error")) {
                             Stamp model = Stamp.getData(response.toString());
+
                             if (model.getSuccess()) {
-                                //   mActivity.showCheckPointFragment(spotId, model.getImage());
+                                String imgUrl = model.getImage() == null ? "" : model.getImage();
+                                String title = model.getTitle() == null ? "" : model.getTitle();
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title);
                             }
                         }
                         ProcessDialog.hideProgressDialog();
@@ -330,11 +413,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
-                if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
-                    mActivity.ShowCourseDetailByTab(0);
-                } else {
-                    mActivity.onBackPressed();
-                }
+//                if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
+//                    mActivity.ShowCourseDetailByTab(0);
+//                } else {
+//                    mActivity.onBackPressed();
+//                }
+                mActivity.onBackPressed();
                 break;
             case R.id.stop_time:
                 isSaveTime = false;

@@ -44,6 +44,7 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.CameraPreview;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.TimeUtil;
@@ -156,6 +157,7 @@ public class TakePhotoActivity extends AppCompatActivity {
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TourDeApplication.getInstance().trackEvent("tap_photoframe_spot_id="+spotId,"tap","tap_photoframe_spot_id="+spotId);
                 camera.takePicture(myShutterCallback, null, pictureCallback);
 
             }

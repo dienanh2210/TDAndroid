@@ -36,6 +36,7 @@ import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
@@ -85,6 +86,11 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         return fragment;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        TourDeApplication.getInstance().trackScreenView("screen_spot_id="+spotId);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

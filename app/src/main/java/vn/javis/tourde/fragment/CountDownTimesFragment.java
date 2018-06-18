@@ -18,6 +18,8 @@ public class CountDownTimesFragment extends BaseFragment {
 
     CourseListActivity mAcitivity;
     private TextView countdownText;
+    private CountDownTimer countDownTimer;
+    private boolean isCountDownTimer = true;
 
 
     @Override
@@ -25,15 +27,7 @@ public class CountDownTimesFragment extends BaseFragment {
         mAcitivity = (CourseListActivity) getActivity();
 
         countdownText = view.findViewById(R.id.countDownText);
-        new CountDownTimer(4000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                countdownText.setText("" + millisUntilFinished / 1000);
-            }
 
-            public void onFinish() {
-               mAcitivity.showFragmentTabLayoutRunning();
-            }
-        }.start();
     }
 
     @Override
@@ -41,5 +35,26 @@ public class CountDownTimesFragment extends BaseFragment {
         return inflater.inflate(R.layout.count_down_page, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        countDownTimer = new CountDownTimer(4000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                countdownText.setText("" + millisUntilFinished / 1000);
+            }
 
+            public void onFinish() {
+                mAcitivity.showFragmentTabLayoutRunning();
+            }
+        };
+        if(isCountDownTimer)
+        countDownTimer.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isCountDownTimer = false;
+//        countDownTimer.cancel();
+    }
 }

@@ -69,7 +69,7 @@ public class ProcessDialog {
 
     public static void hideProgressDialog() {
         if (progressDialog != null)
-           progressDialog.dismiss();
+            progressDialog.dismiss();
     }
 
     public void close() {
@@ -109,6 +109,7 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
                 SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                SharedPreferencesUtils.getInstance(context).setIntValue("CourseID", -1);
                 dialog.hide();
             }
         });
@@ -371,22 +372,22 @@ public class ProcessDialog {
 
     }
 
-    public static void showloading(final Context context,final boolean isrunloading) {
+    public static void showloading(final Context context, final boolean isrunloading) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         dialog.setContentView(R.layout.loading);
         spinner = dialog.findViewById(R.id.pBar);
 
-        spinner.setVisibility( View.VISIBLE );
-if(isrunloading) {
-    dialog.show();
-}else {
-    dialog.dismiss();
-}
+        spinner.setVisibility(View.VISIBLE);
+        if (isrunloading) {
+            dialog.show();
+        } else {
+            dialog.dismiss();
+        }
 
     }
 

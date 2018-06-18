@@ -2,6 +2,7 @@ package vn.javis.tourde.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -55,10 +58,12 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -129,7 +134,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     ImageButton btnFavorite;
     @BindView(R.id.webView_introduction)
     WebView webView;
-
+    @BindView(R.id.btn_bicyle)
+    ImageButton btn_bicyle;
+    @BindView(R.id.btn_bicyle_red)
+    ImageButton btn_bicyle_red;
     boolean isFavourite;
     private CourseDetail mCourseDetail;
     PagerAdapter pagerAdapter;
@@ -143,7 +151,20 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     int fontSize;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        TourDeApplication.getInstance().trackScreenView("screen_course_id="+mCourseID);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
 //        mCourseDetail =null;
         mActivity = (CourseListActivity) getActivity();
 //        tabCourseFragment=null;
@@ -155,7 +176,15 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
-
+        if(mCourseID== SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID"))
+        {
+            btn_bicyle_red.setVisibility(View.VISIBLE);
+            btn_bicyle.setVisibility(View.GONE);
+        }
+        else {
+            btn_bicyle_red.setVisibility(View.GONE);
+            btn_bicyle.setVisibility(View.VISIBLE);
+        }
 //        final WebSettings webSettings = webView.getSettings();
 //        webSettings.setUseWideViewPort(true);
 //        webView.setInitialScale(1);
@@ -208,7 +237,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnBackToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showCourseListPage();
+//                mActivity.showCourseListPage();
+                mActivity.onBackPressed();
             }
         });
         btnBadge.setOnClickListener(new View.OnClickListener() {
@@ -494,6 +524,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
+                         //   mTracker.setScreenName("screen_course_id" + ""+mCourseID);
+                          //  mTracker.send(new HitBuilders.EventBuilder().setCategory("tap_favorite_course_id="+mCourseID).build());
+                            TourDeApplication.getInstance().trackEvent("tap_favorite_course_id="+mCourseID,"tap","tap_favorite_course_id="+mCourseID);
                         }
                     } else {
                         isFavourite = !isFavourite;

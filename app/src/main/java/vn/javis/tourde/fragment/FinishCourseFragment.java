@@ -65,6 +65,7 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.CameraUtils;
 import vn.javis.tourde.utils.PicassoUtil;
@@ -199,6 +200,7 @@ public class FinishCourseFragment extends BaseFragment {
     @OnClick(R.id.txt_btn_share)
     void shareSNS() {
         captureFinish();
+
         if (imageStoragePath != null) {
             final Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -209,7 +211,7 @@ public class FinishCourseFragment extends BaseFragment {
             mActivity.startActivity(Intent.createChooser(shareIntent, "Share image using"));
         } else
             Toast.makeText(mActivity, "Please save the result before ", Toast.LENGTH_SHORT).show();
-
+        TourDeApplication.getInstance().trackEvent("tap_shared_course_id="+mCourseID,"tap","tap_shared_course_id="+mCourseID);
     }
 
     private void requestPermission() {

@@ -66,13 +66,14 @@ import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
-public class LoginFragment extends BaseFragment implements LoginView,RenewPasswordPageFragment.OnFragmentInteractionListener {
+public class LoginFragment extends BaseFragment implements LoginView, RenewPasswordPageFragment.OnFragmentInteractionListener {
     @BindView(R.id.edt_emaillogin)
     EditText edt_emaillogin;
     @BindView(R.id.edt_passwordlogin)
     EditText edt_passwordlogin;
     @BindView(R.id.tv_register_new_account)
     TextView tv_register_new_account;
+
     public static void setmUserToken(String mUserToken) {
         LoginFragment.mUserToken = mUserToken;
     }
@@ -162,7 +163,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
     @Override
     public void onStart() {
         super.onStart();
-      //  TextView txbackBasicinfoLogin = getView().findViewById(R.id.tv_back_basicinfo_login);
+        //  TextView txbackBasicinfoLogin = getView().findViewById(R.id.tv_back_basicinfo_login);
         TextView txclose = getView().findViewById(R.id.tv_close);
 //        txbackBasicinfoLogin.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -208,7 +209,7 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
         }
     }
 
-    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line,R.id.textView_forget,R.id.tv_register_new_account, R.id.tv_back_login})
+    @OnClick({R.id.rl_facebook, R.id.rl_twitter, R.id.rl_googleplus, R.id.rl_line, R.id.textView_forget, R.id.tv_register_new_account, R.id.tv_back_login})
     public void onClickView(View view) {
 
         switch (view.getId()) {
@@ -246,18 +247,18 @@ public class LoginFragment extends BaseFragment implements LoginView,RenewPasswo
                 signInLine();
                 break;
             case R.id.textView_forget:
-                LoginSNSActivity activity =  (LoginSNSActivity) getActivity();
-              activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
+                LoginSNSActivity activity = (LoginSNSActivity) getActivity();
+                activity.openPage(RenewPasswordPageFragment.newInstance(this), true);
 
                 break;
-            case  R.id.tv_register_new_account:
+            case R.id.tv_register_new_account:
                 Intent myIntent = new Intent(getActivity(), MenuEntryActivity.class);
                 getActivity().startActivity(myIntent);
                 break;
             case R.id.tv_back_login:
-                LoginSNSActivity lActivity =  (LoginSNSActivity) getActivity();
+                LoginSNSActivity lActivity = (LoginSNSActivity) getActivity();
                 lActivity.onBackPressed();
-ProcessDialog.showloading( getContext(),false );
+                ProcessDialog.showloading(getContext(), false);
                /* Intent intent = new Intent(getContext(), CourseListActivity.class);
                 startActivity(intent);*/
                 break;
@@ -291,7 +292,7 @@ ProcessDialog.showloading( getContext(),false );
 
         } catch (ApiException e) {
             Log.w("GooglePlus", "signInResult:failed code=" + e.getMessage());
-            Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+            Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
 
         }
     }
@@ -316,25 +317,25 @@ ProcessDialog.showloading( getContext(),false );
                 break;
             case SERVER_ERROR:
                 Log.e("ERROR", "SERVER ERROR!!");
-                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                 break;
             case NETWORK_ERROR:
                 Log.e("ERROR", "NETWORK_ERROR!!");
-                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                 break;
             case INTERNAL_ERROR:
                 Log.e("ERROR", "INTERNAL_ERROR!!");
-                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                 break;
             case AUTHENTICATION_AGENT_ERROR:
                 break;
             case CANCEL:
                 Log.e("ERROR", "LINE Login Canceled by user!!");
-                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                 break;
             default:
                 Log.e("ERROR", "Login FAILED!");
-                Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -364,7 +365,7 @@ ProcessDialog.showloading( getContext(),false );
             @Override
             public void onError(VolleyError error) {
                 //Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
-                ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
+                ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
             }
         });
     }
@@ -385,11 +386,11 @@ ProcessDialog.showloading( getContext(),false );
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
-                        Intent intent = new Intent(getActivity(),CourseListActivity.class);
+                        Intent intent = new Intent(getActivity(), CourseListActivity.class);
                         startActivity(intent);
                         intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                         getActivity().setResult(Activity.RESULT_OK, intent);
-                   //     getActivity().finish();
+                        //     getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
                                 mUserToken = jsonObject.getString("token");
@@ -402,8 +403,8 @@ ProcessDialog.showloading( getContext(),false );
 
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
-                       // Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
-                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ" );
+                        // Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
+                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
                     }
 
                 }
