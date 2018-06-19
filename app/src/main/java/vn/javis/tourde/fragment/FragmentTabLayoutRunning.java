@@ -170,8 +170,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
         spotRecycler.setLayoutManager(layoutManager);
         show_select_spot.setVisibility(View.GONE);
+        spotRecycler.setAdapter(listSpotCheckinAdapter);
         final int courseId = mActivity.getmCourseID();
         list_spot.clear();
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
         ProcessDialog.showProgressDialog(mActivity, "Loading", false);
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
@@ -198,12 +201,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             showCheckPointFragment(id);
                         }
                     });
-                    spotRecycler.setAdapter(listSpotCheckinAdapter);
-
+                    listSpotCheckinAdapter.notifyDataSetChanged();
                     setListCheckedSpot();
 
-                    setupViewPager(viewPager); //set info recyler tab fragment
-                    tabLayout.setupWithViewPager(viewPager);
+                     //set info recyler tab fragment
+
                 }
                 ProcessDialog.hideProgressDialog();
             }
@@ -598,11 +600,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             SaveCourseRunning.CheckedSpot checkedSpot = saveCourseRunning.new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
             saveCourseRunning.getLstCheckedSpot().add(checkedSpot);
             //saveCourseRunning.addCheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
-          //  checked = false;
+            checked = false;
         }
         String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
         SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
-
+        fragmentLog.updateCheckedSpot( saveCourseRunning);
     }
 
     private boolean isSpotChecked(int spotId) {

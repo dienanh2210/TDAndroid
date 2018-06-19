@@ -181,7 +181,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
         if (!savedString.isEmpty()) {
-            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString,SaveCourseRunning.class);
+            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
             if (mCourseID == saveCourseRunning.getCourseID()) {
                 btn_bicyle_red.setVisibility(View.VISIBLE);
                 btn_bicyle.setVisibility(View.GONE);

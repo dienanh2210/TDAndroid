@@ -639,5 +639,6 @@ public class CourseListActivity extends BaseActivity {
         return false;
     }
 
+
 }
 
