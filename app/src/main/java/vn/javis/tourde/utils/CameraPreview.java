@@ -72,7 +72,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        camera.release();
+//        camera.release();
     }
     public static void setCameraDisplayOrientation(Activity activity,
                                                    int cameraId, Camera camera) {
