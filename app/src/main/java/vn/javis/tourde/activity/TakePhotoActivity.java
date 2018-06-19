@@ -337,6 +337,7 @@ public class TakePhotoActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        camera.release();
     }
 
     private void resetView(){
