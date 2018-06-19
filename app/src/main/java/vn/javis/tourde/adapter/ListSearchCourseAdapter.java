@@ -94,7 +94,6 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
                 }
             }
         }));
-
     }
 
     @Override

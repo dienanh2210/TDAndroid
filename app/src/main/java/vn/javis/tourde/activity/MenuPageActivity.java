@@ -87,16 +87,15 @@ public class MenuPageActivity extends BaseActivity {
 privacy.setOnClickListener( new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyFragment.class);
-        //basic_Info.setVisibility(View.VISIBLE);
-        startActivityForResult(intent, 1);
+       // Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyFragment.class);
+        Intent intent = new Intent(MenuPageActivity.this, UsePageActivity.class);
+        startActivity(intent);
     }
 } );
         inquiry.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPageActivity.this, InquiryFragment.class);
-                //basic_Info.setVisibility(View.VISIBLE);
                 startActivityForResult(intent, 1);
             }
         } );

@@ -77,7 +77,11 @@ public class CourseDriveFragment extends BaseFragment {
                 } else {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                     if (title_detail !=null && mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty())
+                    {
                         title_detail.setText(mCourseDetail.getmCourseData().getTitle());
+                        startLatitude =Double.parseDouble(mCourseDetail.getSpot().get(0).getLatitude());
+                        startLongtitude =Double.parseDouble(mCourseDetail.getSpot().get(0).getLongitude());
+                    }
                 }
                 ProcessDialog.hideProgressDialog();
             }
@@ -105,9 +109,19 @@ public class CourseDriveFragment extends BaseFragment {
                             }
                         });
                     } else {
-                        ProcessDialog.showDialogOk(mAcitivity, "", "スタート地点を確認できませんでした。スタート地点付近に移動してください。");
+                        ProcessDialog.showDialogOk(mAcitivity, "", "スタート地点を確認できませんでした。スタート地点付近に移動してください。", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                                    @Override
+                                    public void onOkClick() {
+                                        mAcitivity.ShowCountDown();
+                                    }
+                                });
+                            }
+                        });
                         //show for test
-                        mAcitivity.ShowCountDown();
+                      //  mAcitivity.ShowCountDown();
                     }
                 } else {
                     mAcitivity.fn_permission();

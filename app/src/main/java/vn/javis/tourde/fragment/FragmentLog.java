@@ -23,6 +23,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListSpotLog;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
+import vn.javis.tourde.model.CheckedSpot;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.ServiceCallback;
@@ -41,6 +42,14 @@ public class FragmentLog extends BaseFragment {
     RecyclerView recyclerSpot;
     ListSpotLog listSpotLogAdapter;
     List<Spot> spotDataList;
+    List<CheckedSpot> lstCheckedSpot;
+
+
+    public static FragmentLog intance(List<CheckedSpot> lstCheckedSpot) {
+        FragmentLog frg = new FragmentLog();
+        frg.lstCheckedSpot = lstCheckedSpot;
+        return  frg;
+    }
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -56,15 +65,11 @@ public class FragmentLog extends BaseFragment {
             courseId = mActivity.getmCourseID();
         } else {
             courseId = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
-
         }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
-
         SharedPreferencesUtils.getInstance(getContext()).setIntValue("CourseID", courseId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);
@@ -81,11 +86,7 @@ public class FragmentLog extends BaseFragment {
                     if (txtPrezent == null)
                         return;
                     txtPrezent.setText(mCourseDetail.getmCourseData().getTitle());
-                    spotDataList = mCourseDetail.getSpot();
-                    listSpotLogAdapter = new ListSpotLog(spotDataList, mActivity);
-                    if (recyclerSpot == null)
-                        recyclerSpot = mView.findViewById(R.id.recycler_spot);
-                    recyclerSpot.setAdapter(listSpotLogAdapter);
+                    setRecyclerSpot();
                 }
                 ProcessDialog.hideProgressDialog();
             }
@@ -97,4 +98,20 @@ public class FragmentLog extends BaseFragment {
         });
 
     }
+     void setRecyclerSpot(){
+
+        listSpotLogAdapter = new ListSpotLog(lstCheckedSpot, mActivity);
+        if(mView==null && recyclerSpot==null)
+        {
+            return;
+        }
+        if (recyclerSpot == null)
+            recyclerSpot = mView.findViewById(R.id.recycler_spot);
+        recyclerSpot.setAdapter(listSpotLogAdapter);
+    }
+    public void updateCheckedSpot(List<CheckedSpot> lstCheckedSpot){
+        this.lstCheckedSpot = lstCheckedSpot;
+        setRecyclerSpot();
+    }
+
 }

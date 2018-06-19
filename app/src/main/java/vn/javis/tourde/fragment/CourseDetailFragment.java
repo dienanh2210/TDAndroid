@@ -63,6 +63,7 @@ import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -133,7 +134,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     ImageButton btnFavorite;
     @BindView(R.id.webView_introduction)
     WebView webView;
-
+    @BindView(R.id.btn_bicyle)
+    ImageButton btn_bicyle;
+    @BindView(R.id.btn_bicyle_red)
+    ImageButton btn_bicyle_red;
     boolean isFavourite;
     private CourseDetail mCourseDetail;
     PagerAdapter pagerAdapter;
@@ -160,6 +164,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
 //        mCourseDetail =null;
         mActivity = (CourseListActivity) getActivity();
 //        tabCourseFragment=null;
@@ -171,7 +176,15 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
-
+        if(mCourseID== SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID"))
+        {
+            btn_bicyle_red.setVisibility(View.VISIBLE);
+            btn_bicyle.setVisibility(View.GONE);
+        }
+        else {
+            btn_bicyle_red.setVisibility(View.GONE);
+            btn_bicyle.setVisibility(View.VISIBLE);
+        }
 //        final WebSettings webSettings = webView.getSettings();
 //        webSettings.setUseWideViewPort(true);
 //        webView.setInitialScale(1);
