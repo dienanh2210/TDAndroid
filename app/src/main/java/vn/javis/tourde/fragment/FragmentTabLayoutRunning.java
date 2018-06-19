@@ -458,7 +458,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     public void onOkClick() {
                         courseID = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
                         mActivity.setmCourseID(courseID);
-                        SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        SharedPreferencesUtils.getInstance(getContext()).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        SharedPreferencesUtils.getInstance(getContext()).removeKey("CourseID");
                         mActivity.openPage(new CourseDetailFragment(),false,false);
                     }
                 });
