@@ -109,7 +109,7 @@ public class ProcessDialog {
             @Override
             public void onClick(View v) {
                 SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
-                SharedPreferencesUtils.getInstance(context).setIntValue("CourseID", -1);
+                SharedPreferencesUtils.mInstance.removeKey(Constant.SAVED_COURSE_RUNNING);
                 dialog.hide();
             }
         });

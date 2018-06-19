@@ -22,16 +22,16 @@ import butterknife.ButterKnife;
 import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.model.CheckedSpot;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder> {
-    List<CheckedSpot> listSpot = new ArrayList<CheckedSpot>();
+    List<SaveCourseRunning.CheckedSpot> listSpot = new ArrayList<SaveCourseRunning.CheckedSpot>();
     CourseListActivity activityContext;
     View mView;
     int lastCheckedOrder=-1;
-    public ListSpotLog(List<CheckedSpot> listSpot, CourseListActivity activityContext) {
+    public ListSpotLog(List<SaveCourseRunning.CheckedSpot> listSpot, CourseListActivity activityContext) {
 
         this.listSpot = listSpot;
         this.activityContext = activityContext;
@@ -47,7 +47,7 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final ListSpotLog.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        final CheckedSpot model = listSpot.get(position);
+        final SaveCourseRunning.CheckedSpot model = listSpot.get(position);
         int spotID = model.getOrder() + 1;
         holder.txt_spotName.setText(model.getTitle());
         holder.spot_id.setText("" + spotID);

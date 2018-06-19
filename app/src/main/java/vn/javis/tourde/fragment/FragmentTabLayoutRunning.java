@@ -50,9 +50,9 @@ import vn.javis.tourde.adapter.ViewPagerAdapter;
 import vn.javis.tourde.apiservice.CheckInStampAPI;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.PostCourseLogAPI;
-import vn.javis.tourde.model.CheckedSpot;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Location;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.model.Stamp;
 import vn.javis.tourde.services.ChronometerService;
@@ -60,6 +60,8 @@ import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.ClassToJson;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -105,7 +107,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public static final String KEY_SHARED_BASETIME = "key_time_";
     ArrayList<Location> lstLocation = new ArrayList<>();
     List<Spot> list_spot = new ArrayList<>();
-    List<CheckedSpot> listCheckedSpot = new ArrayList<>();
+
+    SaveCourseRunning saveCourseRunning;
     FragmentLog fragmentLog;
     private boolean isSaveTime = true;// save when leave sreen this
 
@@ -120,11 +123,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
-        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
-
-        } else {
-            courseID = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
+        String savedString =SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+        if (!savedString.isEmpty()) {
+            saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+            courseID = saveCourseRunning.getCourseID();
             mActivity.setmCourseID(courseID);
+
         }
         preferencesUtils = SharedPreferencesUtils.getInstance(mActivity);
     }
@@ -183,7 +187,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
                     longtitude = Double.parseDouble(list_spot.get(0).getLongitude());
                     latitude = Double.parseDouble(list_spot.get(0).getLatitude());
-
+                    lastLatitude = latitude;
+                    lastLongtitude = longtitude;
                     lastSpotId = list_spot.get(list_spot.size() - 1).getSpotId();
 
                     listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
@@ -472,10 +477,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 ProcessDialog.showDialogConfirm(getContext(), "", "終了しますか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-                        courseID = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
-                        mActivity.setmCourseID(courseID);
+
                         SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
-                        mActivity.openPage(new CourseDetailFragment(), false, false);
+                        SharedPreferencesUtils.mInstance.removeKey(Constant.SAVED_COURSE_RUNNING);
+                        mActivity.ShowCourseDetail();
                     }
                 });
                 break;
@@ -550,7 +555,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new FragmentMap(), "MAP");
-        fragmentLog = FragmentLog.intance(listCheckedSpot);
+        fragmentLog = FragmentLog.intance(saveCourseRunning);
         adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
@@ -584,19 +589,25 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     }
 
     private void setListCheckedSpot() {
-        if (listCheckedSpot.size() > 0)
+        if (saveCourseRunning != null)
             return;
-        ;
+        saveCourseRunning = new SaveCourseRunning(courseID, lastLatitude, lastLongtitude);
         boolean checked = true;
+
         for (Spot spot : list_spot) {
-            listCheckedSpot.add(new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked));
-            checked = false;
+            SaveCourseRunning.CheckedSpot checkedSpot = saveCourseRunning.new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
+            saveCourseRunning.getLstCheckedSpot().add(checkedSpot);
+            //saveCourseRunning.addCheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
+          //  checked = false;
         }
+        String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
+        SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
+
     }
 
     private boolean isSpotChecked(int spotId) {
-        for (int i = 0; i < listCheckedSpot.size(); i++) {
-            if (listCheckedSpot.get(i).getSpotID() == spotId && listCheckedSpot.get(i).isChecked()) {
+        for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
+            if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId &&  saveCourseRunning.getLstCheckedSpot().get(i).isChecked()) {
                 Log.i("running566", "" + spotId);
                 return true;
 
@@ -607,20 +618,20 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     }
 
     private void checkedSpot(int spotId, String finishTime, double averageSpeed) {
-        for (int i = 0; i < listCheckedSpot.size(); i++) {
-            if (listCheckedSpot.get(i).getSpotID() == spotId) {
-                listCheckedSpot.get(i).setChecked(true);
-                listCheckedSpot.get(i).setAvarageSpeed(averageSpeed);
-                listCheckedSpot.get(i).setTime(finishTime);
+        for (int i = 0; i <  saveCourseRunning.getLstCheckedSpot().size(); i++) {
+            if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId) {
+                saveCourseRunning.getLstCheckedSpot().get(i).setChecked(true);
+                saveCourseRunning.getLstCheckedSpot().get(i).setAvarageSpeed(averageSpeed);
+                saveCourseRunning.getLstCheckedSpot().get(i).setTime(finishTime);
             }
         }
-        fragmentLog.updateCheckedSpot(listCheckedSpot);
+        fragmentLog.updateCheckedSpot( saveCourseRunning);
     }
 
     private int getSizeCheckedSpot() {
         int num = 0;
-        for (int i = 0; i < listCheckedSpot.size(); i++) {
-            if (listCheckedSpot.get(i).isChecked() == true) {
+        for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
+            if (saveCourseRunning.getLstCheckedSpot().get(i).isChecked() == true) {
                 num++;
 
             }
