@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -163,48 +164,53 @@ public class TabCourseFragment extends BaseFragment {
             }
         });
         txtStartAddress.setText(startAddress);
-        btnRunningApp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (token.equals("")) {
-                    ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
-                        @Override
-                        public void onOkClick() {
-                            mActivity.openLoginPage();
-                        }
-                    });
-                } else {
-                    if(SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME)==0)
-                        mActivity.showCourseDrive();
-                    else
-                    {
-                        ProcessDialog.showDialogCheckLogging(getContext(), "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
+        if(SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME)==0) {
+            btnRunningApp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (token.equals("")) {
+                        ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {
-                                mActivity.openPage(new FragmentTabLayoutRunning(), true, false);
+                                mActivity.openLoginPage();
                             }
                         });
-                    }
-                }
-                if (SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox") == "") {
-                    String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
-                            "\n" +
-                            "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
-
-                    ProcessDialog.showDialogcheckbox(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
-                        @Override
-                        public void onOkClick() {
+                    } else {
+                        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0)
                             mActivity.showCourseDrive();
-
+                        else {
+                            ProcessDialog.showDialogCheckLogging(getContext(), "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
+                                @Override
+                                public void onOkClick() {
+                                    mActivity.openPage(new FragmentTabLayoutRunning(), true, false);
+                                }
+                            });
                         }
-                    });
-                } else {
-                    mActivity.showCourseDrive();
+                    }
+                    if (SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox") == "") {
+                        String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
+                                "\n" +
+                                "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
+
+                        ProcessDialog.showDialogcheckbox(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mActivity.showCourseDrive();
+
+                            }
+                        });
+                    } else {
+                        mActivity.showCourseDrive();
+                    }
+
+
                 }
-
-
-            }
-        });
+            });
+        }
+        else
+        {
+            btnRunningApp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame_gray));
+        }
         rlt_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
