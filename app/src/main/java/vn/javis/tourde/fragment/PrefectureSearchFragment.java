@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
@@ -39,10 +40,16 @@ public class PrefectureSearchFragment extends Fragment {
 
     private String contentArea = "北海道";
     MoreConditionAdapter listSearchAdapter;
+    private static List<String> sMoreChosen = new ArrayList<>();
 
-    public static PrefectureSearchFragment newInstance(View.OnClickListener listener) {
+    public static PrefectureSearchFragment newInstance(View.OnClickListener listener,  String txtSelected) {
         PrefectureSearchFragment fragment = new PrefectureSearchFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;
+        if (!txtSelected.isEmpty()) {
+            sMoreChosen.clear();
+            String[] strings = txtSelected.split(Pattern.quote(" 、"));
+            sMoreChosen.addAll(Arrays.asList(strings));
+        }
         return fragment;
     }
 
@@ -108,7 +115,7 @@ public class PrefectureSearchFragment extends Fragment {
             }
         };
         rcv_list.setLayoutManager(linearLayoutManager);
-        listSearchAdapter = new MoreConditionAdapter(dataList, getContext());
+        listSearchAdapter = new MoreConditionAdapter(dataList, getContext(), sMoreChosen);
 
         rcv_list.setAdapter(listSearchAdapter);
     }

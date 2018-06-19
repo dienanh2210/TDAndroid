@@ -29,14 +29,15 @@ public class MoreConditionAdapter extends MultiTypeExpandableRecyclerViewAdapter
 
     private final int TYPE_TWO_COLUMN = 1;
     private final int TYPE_ONE_COLUMN = 3;
-    private List<String> stringChosen = new ArrayList<>();
+    private List<String> stringChosen;
     private ChildCheckController childCheckController;
     private static final String CHECKED_STATE_MAP = "child_check_controller_checked_state_map";
     private Context mContext;
 
-    public MoreConditionAdapter(List<? extends ExpandableGroup> groups, Context context) {
+    public MoreConditionAdapter(List<? extends ExpandableGroup> groups, Context context, List<String> moreConditionChosen) {
         super(groups);
         childCheckController = new ChildCheckController(expandableList, this);
+        stringChosen = moreConditionChosen;
         mContext = context;
     }
 
@@ -84,24 +85,21 @@ public class MoreConditionAdapter extends MultiTypeExpandableRecyclerViewAdapter
             case TYPE_ONE_COLUMN:
                 AreaViewHolder areaViewHolder = (AreaViewHolder) holder;
                 areaViewHolder.setAreaName(item);
-                areaViewHolder.setChecked(false);
+                if (stringChosen.contains(item)) {
+                    areaViewHolder.setChecked(true);
+                } else {
+                    areaViewHolder.setChecked(false);
+                }
                 break;
             case TYPE_TWO_COLUMN:
                 final String[] data = new String[]{"1月","2月","3月","4月","5月","6月",
                                                     "7月","8月","9月","10月","11月","12月"};
                 TowColumnHolder towColumnHolder = (TowColumnHolder) holder;
                 towColumnHolder.recyclerMonth.setAdapter(
-                        new ContentSearchCourseAdapter(flatPosition, Arrays.asList(data),
+                        new ContentSearchCourseAdapter(Arrays.asList(data), stringChosen,
                         new ContentSearchCourseAdapter.OnClickItem() {
                     @Override
                     public void onClick(int position, boolean isPick, View view) {
-                        for(String data: data) {
-                            for (String text : stringChosen) {
-                                if (data.equals(text)) {
-                                    stringChosen.remove(text);
-                                }
-                            }
-                        }
                         if (isPick) {
                             stringChosen.add(data[position]);
                         } else {
