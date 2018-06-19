@@ -203,9 +203,10 @@ public class CourseListActivity extends BaseActivity {
             ProcessDialog.showDialogCheckLogging(CourseListActivity.this, "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
-                    if (fragmentTabLayoutRunning == null)
-                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
-                    openPage(fragmentTabLayoutRunning, true, false);
+//                    if (fragmentTabLayoutRunning == null)
+//                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
+//                    openPage(fragmentTabLayoutRunning, true, false);
+                    openPage(CourseDetailFragment.newInstance(true), true, false);
                 }
             });
         }
@@ -445,12 +446,13 @@ public class CourseListActivity extends BaseActivity {
             return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
 //            ShowCourseDetail();
-
-            for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
-                fm.popBackStack();
+            if( SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
+                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
             }
-//
-            return;
+
         }
 
         super.onBackPressed();
