@@ -479,10 +479,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 ProcessDialog.showDialogConfirm(getContext(), "", "終了しますか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-
-                        SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
-                        SharedPreferencesUtils.mInstance.removeKey(Constant.SAVED_COURSE_RUNNING);
+                        SharedPreferencesUtils.getInstance(getContext()).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.SAVED_COURSE_RUNNING);
                         mActivity.ShowCourseDetail();
+
                     }
                 });
                 break;
