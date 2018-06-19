@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -27,11 +28,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.SphericalUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +52,7 @@ import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.PostCourseLogAPI;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.Location;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.model.Stamp;
 import vn.javis.tourde.services.ChronometerService;
@@ -55,6 +60,8 @@ import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.ClassToJson;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -83,6 +90,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     long time;
     double latitude;
     double longtitude;
+    double lastLatitude;
+    double lastLongtitude;
     Geocoder geocoder;
     int courseID;
     int lastSpotId;
@@ -98,7 +107,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public static final String KEY_SHARED_BASETIME = "key_time_";
     ArrayList<Location> lstLocation = new ArrayList<>();
     List<Spot> list_spot = new ArrayList<>();
-    ArrayList<Integer> lstCheckedSpot = new ArrayList<>();
+
+    SaveCourseRunning saveCourseRunning;
+    FragmentLog fragmentLog;
     private boolean isSaveTime = true;// save when leave sreen this
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
@@ -112,11 +123,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
-        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
-
-        } else {
-            courseID = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
+        String savedString =SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+        if (!savedString.isEmpty()) {
+            saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+            courseID = saveCourseRunning.getCourseID();
             mActivity.setmCourseID(courseID);
+
         }
         preferencesUtils = SharedPreferencesUtils.getInstance(mActivity);
     }
@@ -139,14 +151,20 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         });
         isSaveTime = true;
 
-//        chronometer.setBase(time);
+        if (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) {
+            time = SystemClock.elapsedRealtime();
+        } else if (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) < 0) {
+            time = SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
+        } else {
+            time = preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
+        }
+        chronometer.setBase(time);
+        chronometer.start();
         chronometer.setText(time_str);
-//        startChronometerService();
-//        chronometer.start();
+
         Log.i("timer", "" + KEY_SHARED_BASETIME);
         initTabControl();
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+
         // PicassoUtil.getSharedInstance(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -166,6 +184,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
                 list_spot = mCourseDetail.getSpot();
                 if (list_spot.size() > 0) {
+
+                    longtitude = Double.parseDouble(list_spot.get(0).getLongitude());
+                    latitude = Double.parseDouble(list_spot.get(0).getLatitude());
+                    lastLatitude = latitude;
+                    lastLongtitude = longtitude;
                     lastSpotId = list_spot.get(list_spot.size() - 1).getSpotId();
 
                     listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
@@ -177,6 +200,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     });
                     spotRecycler.setAdapter(listSpotCheckinAdapter);
 
+                    setListCheckedSpot();
+
+                    setupViewPager(viewPager); //set info recyler tab fragment
+                    tabLayout.setupWithViewPager(viewPager);
                 }
                 ProcessDialog.hideProgressDialog();
             }
@@ -208,7 +235,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         for (Spot spot : list_spot) {
             int id = spot.getSpotId();
             for (int i = 0; i < lstLocation.size(); i++) {
-                if (!lstCheckedSpot.contains(id) && lstLocation.get(i).getSpotID() == id) {
+                if (!isSpotChecked(id) && lstLocation.get(i).getSpotID() == id) {
                     newList.add(spot);
                     continue;
                 }
@@ -234,8 +261,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
-            //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
+            latitude = Double.valueOf(intent.getStringExtra("latutide"));
+            longtitude = Double.valueOf(intent.getStringExtra("longitude"));
         }
     };
 
@@ -272,15 +299,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     }
 
     void showCheckPointFragment(final int spotId) {
-        if (!lstCheckedSpot.contains(spotId))
-            lstCheckedSpot.add(spotId);
+        if (isSpotChecked(spotId))
+            return;
+
+        checkedSpot(spotId, getTimeFormat(time), calculateAvarageSpeed(time));
 
         if (spotId > 0 && courseID > 0) {
             final String token = LoginFragment.getmUserToken();
-            if (lstCheckedSpot.size() == list_spot.size()) //complete all spot
+            if (getSizeCheckedSpot() == list_spot.size()) //complete all spot
             {
-                if (spotId == lastSpotId)
-                {
+                if (spotId == lastSpotId) {
                     ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                     CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
                         @Override
@@ -297,7 +325,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                         int m = (int) (time - h * 3600000) / 60000;
                                         int s = (int) (time - h * 3600000 - m * 60000) / 1000;
                                         final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-                                        preferencesUtils.setLongValue(KEY_SHARED_BASETIME + courseID, 0);
+                                        preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
                                         isSaveTime = false;
 
                                         //
@@ -306,7 +334,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 JSONObject jsonObject = (JSONObject) response;
                                                 if (jsonObject.has("success")) {
-                                                    mActivity.showGoalFragment(spotId, speed, finishTime,imgUrl,title);
+                                                    mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title);
                                                 }
                                                 ProcessDialog.hideProgressDialog();
                                             }
@@ -328,31 +356,31 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             ProcessDialog.hideProgressDialog();
                         }
                     });
-                }
-                else
-                    {
-                        CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
-                            @Override
-                            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                                JSONObject jsonObject = (JSONObject) response;
-                                if (!jsonObject.has("error")) {
-                                    Stamp model = Stamp.getData(response.toString());
-                                    if (model.getSuccess()) {
-                                        final String imgUrl = model.getImage() == null ? "" : model.getImage();
-                                        final String title = model.getTitle() == null ? "" : model.getTitle();
-                                        mActivity.showCheckPointFragment(spotId, imgUrl, title);
-                                    }
+                } else {
+                    CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
+                        @Override
+                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                            JSONObject jsonObject = (JSONObject) response;
+                            if (!jsonObject.has("error")) {
+                                Stamp model = Stamp.getData(response.toString());
+                                if (model.getSuccess()) {
+                                    isSaveTime = false;
+                                    preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
+                                    final String imgUrl = model.getImage() == null ? "" : model.getImage();
+                                    final String title = model.getTitle() == null ? "" : model.getTitle();
+                                    mActivity.showCheckPointFragment(spotId, imgUrl, title);
                                 }
-                                ProcessDialog.hideProgressDialog();
                             }
+                            ProcessDialog.hideProgressDialog();
+                        }
 
-                            @Override
-                            public void onError(VolleyError error) {
-                                Log.i("VolleyError", "" + error.getMessage());
-                                ProcessDialog.hideProgressDialog();
-                            }
-                        });
-                    }
+                        @Override
+                        public void onError(VolleyError error) {
+                            Log.i("VolleyError", "" + error.getMessage());
+                            ProcessDialog.hideProgressDialog();
+                        }
+                    });
+                }
 
             } else if (spotId == lastSpotId) {
                 final float speed = courseDistance / ((float) time / 3600000);
@@ -362,14 +390,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
                 preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
                 isSaveTime = false;
-             //   mActivity.showGoalFragment(spotId, speed, finishTime,"","");
+                //   mActivity.showGoalFragment(spotId, speed, finishTime,"","");
                 //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         JSONObject jsonObject = (JSONObject) response;
                         if (jsonObject.has("success")) {
-                                  mActivity.showGoalFragment(spotId, speed, finishTime,"","");
+                            isSaveTime = false;
+                            preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
+                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "");
                         }
                         ProcessDialog.hideProgressDialog();
                     }
@@ -390,6 +420,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             Stamp model = Stamp.getData(response.toString());
 
                             if (model.getSuccess()) {
+                                isSaveTime = false;
+                                preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
                                 String imgUrl = model.getImage() == null ? "" : model.getImage();
                                 String title = model.getTitle() == null ? "" : model.getTitle();
                                 mActivity.showCheckPointFragment(spotId, imgUrl, title);
@@ -408,7 +440,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume})
+    @OnClick({R.id.btn_back, R.id.stop_time, R.id.resume, R.id.finish})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -441,6 +473,17 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 //   mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
                 mActivity.turnOnGPS();
                 break;
+            case R.id.finish:
+                ProcessDialog.showDialogConfirm(getContext(), "", "終了しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                    @Override
+                    public void onOkClick() {
+
+                        SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        SharedPreferencesUtils.mInstance.removeKey(Constant.SAVED_COURSE_RUNNING);
+                        mActivity.ShowCourseDetail();
+                    }
+                });
+                break;
 
         }
     }
@@ -456,10 +499,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public void onResume() {
         super.onResume();
         changePaged = false;
-        time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
-        chronometer.setBase(time);
-        chronometer.start();
-        //    mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
+        // time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
+        mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
 
     }
@@ -467,13 +508,21 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (isSaveTime) {
-            pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
-            preferencesUtils.setLongValue(KEY_SHARED_BASETIME , pauseOffset);
-            chronometer.stop();
-        }
-        //  mActivity.unregisterReceiver(broadcastReceiver);
+//        if (isSaveTime) {
+//            pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
+//            preferencesUtils.setLongValue(KEY_SHARED_BASETIME , pauseOffset);
+//            chronometer.stop();
+//        }
+        mActivity.unregisterReceiver(broadcastReceiver);
         mActivity.unregisterReceiver(broadcastReceiverArried);
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (isSaveTime) {
+            preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
+        }
+        super.onDestroyView();
     }
 
     private void initTabControl() {
@@ -506,7 +555,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new FragmentMap(), "MAP");
-        adapter.addFragment(new FragmentLog(), "ログ");
+        fragmentLog = FragmentLog.intance(saveCourseRunning);
+        adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
@@ -517,5 +567,75 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public interface OnFragmentInteractionListener extends View.OnClickListener {
         @Override
         void onClick(View v);
+    }
+
+    double calculateAvarageSpeed(long time) {
+        double aSpeed = 0;
+        double distance = SphericalUtil.computeDistanceBetween(new LatLng(lastLatitude, lastLongtitude), new LatLng(latitude, longtitude));
+        aSpeed = courseDistance / ((double) time / 3600000);
+        lastLatitude = latitude;
+        lastLongtitude = longtitude;
+        DecimalFormat df = new DecimalFormat("#.##");
+        aSpeed = Double.valueOf(df.format(aSpeed));
+        return aSpeed;
+    }
+
+    String getTimeFormat(long time) {
+        int h = (int) (time / 3600000);
+        int m = (int) (time - h * 3600000) / 60000;
+        int s = (int) (time - h * 3600000 - m * 60000) / 1000;
+        final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+        return finishTime;
+    }
+
+    private void setListCheckedSpot() {
+        if (saveCourseRunning != null)
+            return;
+        saveCourseRunning = new SaveCourseRunning(courseID, lastLatitude, lastLongtitude);
+        boolean checked = true;
+
+        for (Spot spot : list_spot) {
+            SaveCourseRunning.CheckedSpot checkedSpot = saveCourseRunning.new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
+            saveCourseRunning.getLstCheckedSpot().add(checkedSpot);
+            //saveCourseRunning.addCheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
+          //  checked = false;
+        }
+        String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
+        SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
+
+    }
+
+    private boolean isSpotChecked(int spotId) {
+        for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
+            if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId &&  saveCourseRunning.getLstCheckedSpot().get(i).isChecked()) {
+                Log.i("running566", "" + spotId);
+                return true;
+
+            }
+        }
+        Log.i("running566-", "" + spotId);
+        return false;
+    }
+
+    private void checkedSpot(int spotId, String finishTime, double averageSpeed) {
+        for (int i = 0; i <  saveCourseRunning.getLstCheckedSpot().size(); i++) {
+            if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId) {
+                saveCourseRunning.getLstCheckedSpot().get(i).setChecked(true);
+                saveCourseRunning.getLstCheckedSpot().get(i).setAvarageSpeed(averageSpeed);
+                saveCourseRunning.getLstCheckedSpot().get(i).setTime(finishTime);
+            }
+        }
+        fragmentLog.updateCheckedSpot( saveCourseRunning);
+    }
+
+    private int getSizeCheckedSpot() {
+        int num = 0;
+        for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
+            if (saveCourseRunning.getLstCheckedSpot().get(i).isChecked() == true) {
+                num++;
+
+            }
+        }
+        return num;
     }
 }

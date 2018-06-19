@@ -18,9 +18,11 @@ import vn.javis.tourde.model.MultiCheckGenre;
 
 public class AreaAdapter extends CheckableChildRecyclerViewAdapter<TitleGroupViewHolder, AreaViewHolder> {
 
-    private List<String> stringChosen = new ArrayList<>();
-    public AreaAdapter(List<MultiCheckGenre> groups) {
+    private List<String> stringChosen;
+
+    public AreaAdapter(List<MultiCheckGenre> groups, List<String> areaChosen) {
         super(groups);
+        stringChosen = areaChosen;
     }
 
     @Override
@@ -35,8 +37,6 @@ public class AreaAdapter extends CheckableChildRecyclerViewAdapter<TitleGroupVie
                 areaViewHolder.setChecked(!checkable.isChecked());
                 if (checkable.isChecked()) {
                     stringChosen.add(checkable.getText().toString());
-
-
                 } else {
                     stringChosen.remove(checkable.getText().toString());
                 }
@@ -50,7 +50,12 @@ public class AreaAdapter extends CheckableChildRecyclerViewAdapter<TitleGroupVie
                                            CheckedExpandableGroup group, int childIndex) {
         final String area = (String ) group.getItems().get(childIndex);
         holder.setAreaName(area);
-        holder.setChecked(false);
+        if (stringChosen.contains(area)) {
+            holder.setChecked(true);
+        } else {
+            holder.setChecked(false);
+        }
+
     }
 
     @Override

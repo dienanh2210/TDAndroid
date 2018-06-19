@@ -10,7 +10,7 @@ public class SharedPreferencesUtils {
     SharedPreferences.Editor editor = null;
 
     Context context;
-    static SharedPreferencesUtils mInstance;
+    public static SharedPreferencesUtils mInstance;
 
     public static SharedPreferencesUtils getInstance(Context context) {
         if (mInstance == null) mInstance = new SharedPreferencesUtils(context);
@@ -47,6 +47,7 @@ public class SharedPreferencesUtils {
         if (editor == null) {
             editor = prefs.edit();
         }
+
         editor.putInt(key, value);
         editor.commit();
     }

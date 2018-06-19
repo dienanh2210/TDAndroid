@@ -102,11 +102,17 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         boolean gender = false;
         switch (v.getId()) {
             case R.id.im_select_area:
-                mActivity.openPage(PrefectureOneFragment.newInstance(this, ""), true, true);
+                if (!prefecture.isEmpty()) {
+                    prefecture = tv_prefecture.getText().toString().trim();
+                }
+                mActivity.openPage(PrefectureOneFragment.newInstance(this, prefecture), true, true);
                // mActivity.openPage(GoalFragment.newInstance(this), true, true);
                 break;
             case R.id.im_more_searching:
-                mActivity.openPage(PrefectureSearchFragment.newInstance(this), true, true);
+                if (!prefecturetext.isEmpty()) {
+                    prefecturetext = tv_searchtwo.getText().toString().trim();
+                }
+                mActivity.openPage(PrefectureSearchFragment.newInstance(this, prefecturetext), true, true);
                 break;
             case R.id.tv_close:
                 mActivity.onBackPressed();
@@ -162,22 +168,26 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onFragmentInteraction(String content) {
-        if (content.isEmpty()) {
-            return;
-        }
         prefecture = content;
-        tv_prefecture.setText(content);
+        if (content.isEmpty()) {
+            tv_prefecture.setText(mActivity.getResources().getString(R.string.search_course_select_area));
+        } else {
+            tv_prefecture.setText(content);
+        }
+
+
 
 
     }
 
     @Override
     public void onFragment(String content) {
-        if (content.isEmpty()) {
-            return;
-        }
         prefecturetext = content;
-        tv_searchtwo.setText(content);
+        if (content.isEmpty()) {
+           tv_searchtwo.setText(mActivity.getResources().getString(R.string.search_course_more_searching_description));
+        } else {
+            tv_searchtwo.setText(content);
+        }
     }
 
     @Override

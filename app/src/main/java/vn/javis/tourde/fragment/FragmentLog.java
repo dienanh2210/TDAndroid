@@ -24,6 +24,7 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListSpotLog;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -41,6 +42,14 @@ public class FragmentLog extends BaseFragment {
     RecyclerView recyclerSpot;
     ListSpotLog listSpotLogAdapter;
     List<Spot> spotDataList;
+    SaveCourseRunning saveCourseRunning;
+
+
+    public static FragmentLog intance(SaveCourseRunning saveCourseRunning) {
+        FragmentLog frg = new FragmentLog();
+        frg.saveCourseRunning = saveCourseRunning;
+        return  frg;
+    }
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -52,19 +61,15 @@ public class FragmentLog extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
-        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) == 0) {
+        if (saveCourseRunning == null) {
             courseId = mActivity.getmCourseID();
         } else {
-            courseId = SharedPreferencesUtils.getInstance(getContext()).getIntValue("CourseID");
-
+            courseId = saveCourseRunning.getCourseID();
         }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
-
         SharedPreferencesUtils.getInstance(getContext()).setIntValue("CourseID", courseId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);
@@ -81,11 +86,7 @@ public class FragmentLog extends BaseFragment {
                     if (txtPrezent == null)
                         return;
                     txtPrezent.setText(mCourseDetail.getmCourseData().getTitle());
-                    spotDataList = mCourseDetail.getSpot();
-                    listSpotLogAdapter = new ListSpotLog(spotDataList, mActivity);
-                    if (recyclerSpot == null)
-                        recyclerSpot = mView.findViewById(R.id.recycler_spot);
-                    recyclerSpot.setAdapter(listSpotLogAdapter);
+                    setRecyclerSpot();
                 }
                 ProcessDialog.hideProgressDialog();
             }
@@ -97,4 +98,20 @@ public class FragmentLog extends BaseFragment {
         });
 
     }
+     void setRecyclerSpot(){
+
+        listSpotLogAdapter = new ListSpotLog(saveCourseRunning.getLstCheckedSpot(), mActivity);
+        if(mView==null && recyclerSpot==null)
+        {
+            return;
+        }
+        if (recyclerSpot == null)
+            recyclerSpot = mView.findViewById(R.id.recycler_spot);
+        recyclerSpot.setAdapter(listSpotLogAdapter);
+    }
+    public void updateCheckedSpot(SaveCourseRunning saveCourseRunning){
+        this.saveCourseRunning = saveCourseRunning;
+        setRecyclerSpot();
+    }
+
 }

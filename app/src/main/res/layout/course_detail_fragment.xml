@@ -31,6 +31,7 @@
 
                 android:scaleType="fitXY" />
 
+
             <!--<com.makeramen.roundedimageview.RoundedImageView-->
             <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
             <!--android:id="@+id/imageView1"-->
@@ -73,7 +74,20 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_toLeftOf="@id/btn_share"
                 android:background="@drawable/icon_bicycle_white"
-                android:contentDescription="@string/image_description" />
+                android:contentDescription="@string/image_description"
+                android:visibility="visible"/>
+
+            <ImageButton
+            android:id="@+id/btn_bicyle_red"
+            android:layout_width="@dimen/_21sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toLeftOf="@id/btn_share"
+            android:background="@drawable/icon_bicycle_running_red"
+            android:contentDescription="@string/image_description"
+            android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/btn_favorite_detail"
@@ -82,7 +96,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/icon_bicycle_gray"></ImageButton>
+                android:background="@drawable/icon_bicycle_gray">
+            </ImageButton>
         </RelativeLayout>
 
         <RelativeLayout

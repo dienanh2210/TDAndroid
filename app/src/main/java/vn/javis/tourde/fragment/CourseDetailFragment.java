@@ -56,13 +56,17 @@ import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.CourseData;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.utils.BinaryConvert;
+import vn.javis.tourde.utils.ClassToJson;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -133,7 +137,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     ImageButton btnFavorite;
     @BindView(R.id.webView_introduction)
     WebView webView;
-
+    @BindView(R.id.btn_bicyle)
+    ImageButton btn_bicyle;
+    @BindView(R.id.btn_bicyle_red)
+    ImageButton btn_bicyle_red;
     boolean isFavourite;
     private CourseDetail mCourseDetail;
     PagerAdapter pagerAdapter;
@@ -155,11 +162,12 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     @Override
     public void onResume() {
         super.onResume();
-        TourDeApplication.getInstance().trackScreenView("screen_course_id="+mCourseID);
+        TourDeApplication.getInstance().trackScreenView("screen_course_id=" + mCourseID);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
 //        mCourseDetail =null;
         mActivity = (CourseListActivity) getActivity();
 //        tabCourseFragment=null;
@@ -171,6 +179,18 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         //     mCourseID = mActivity.getmCourseID();
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
+        String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+        if (!savedString.isEmpty()) {
+            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString,SaveCourseRunning.class);
+            if (mCourseID == saveCourseRunning.getCourseID()) {
+                btn_bicyle_red.setVisibility(View.VISIBLE);
+                btn_bicyle.setVisibility(View.GONE);
+            } else {
+                btn_bicyle_red.setVisibility(View.GONE);
+                btn_bicyle.setVisibility(View.VISIBLE);
+            }
+
+        }
 
 //        final WebSettings webSettings = webView.getSettings();
 //        webSettings.setUseWideViewPort(true);
@@ -248,8 +268,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             public void onClick(View view) {
                 if (token != "")
                     mActivity.showMyCourse();
-                else
-                {
+                else {
                     ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
                         @Override
                         public void onOkClick() {
@@ -511,9 +530,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         btnFavorite.setBackground(getResources().getDrawable(R.drawable.icon_bicycle_red));
                         if (tabCourseFragment != null) {
                             tabCourseFragment.changeButtonColor(isFavourite);
-                         //   mTracker.setScreenName("screen_course_id" + ""+mCourseID);
-                          //  mTracker.send(new HitBuilders.EventBuilder().setCategory("tap_favorite_course_id="+mCourseID).build());
-                            TourDeApplication.getInstance().trackEvent("tap_favorite_course_id="+mCourseID,"tap","tap_favorite_course_id="+mCourseID);
+                            //   mTracker.setScreenName("screen_course_id" + ""+mCourseID);
+                            //  mTracker.send(new HitBuilders.EventBuilder().setCategory("tap_favorite_course_id="+mCourseID).build());
+                            TourDeApplication.getInstance().trackEvent("tap_favorite_course_id=" + mCourseID, "tap", "tap_favorite_course_id=" + mCourseID);
                         }
                     } else {
                         isFavourite = !isFavourite;
