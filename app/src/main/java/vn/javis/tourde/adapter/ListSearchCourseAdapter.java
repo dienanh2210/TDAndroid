@@ -56,8 +56,7 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
     @NonNull
     public ListSearchCourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
 
 
-        holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(position, data.getContent(), new ContentSearchCourseAdapter.OnClickItem() {
+        holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(), new ArrayList<String>(), new ContentSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {
 
