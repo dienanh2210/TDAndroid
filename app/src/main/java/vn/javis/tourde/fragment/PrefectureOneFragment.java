@@ -18,7 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
@@ -30,20 +33,23 @@ public class PrefectureOneFragment extends Fragment {
 
     private RecyclerView rcv_list;
     private List<MultiCheckGenre> dataList;
-    List<String> listContent = new ArrayList<>();
 
     private Button btn_choose;
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
     TextView tv_close, tv_back_menu_entry;
     AreaAdapter listAdapter;
+    private static List<String> sAreaChosen = new ArrayList<>();
 
-    public static PrefectureOneFragment newInstance(View.OnClickListener listener,String txtSelected) {
+    public static PrefectureOneFragment newInstance(View.OnClickListener listener, String txtSelected) {
         PrefectureOneFragment fragment = new PrefectureOneFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;
-      // String[] s1 = txtSelected.split(Pattern.quote("["));
+        if (!txtSelected.isEmpty()) {
+            sAreaChosen.clear();
+            String[] strings = txtSelected.split(Pattern.quote(" 、"));
+            sAreaChosen.addAll(Arrays.asList(strings));
+        }
 
-      //   fragment.listContent.add(s1[0]);
         return fragment;
     }
 
@@ -71,8 +77,8 @@ public class PrefectureOneFragment extends Fragment {
                     String prefix = "";
                     for (String str : contents) {
                         stringBuilder.append(prefix);
-                        prefix = " 、";
                         stringBuilder.append(str);
+                        prefix = " 、";
                     }
                     listener.onFragmentInteraction(stringBuilder.toString());
                    if (getActivity() != null) {
@@ -112,7 +118,7 @@ public class PrefectureOneFragment extends Fragment {
             }
         };
         rcv_list.setLayoutManager(linearLayoutManager);
-        listAdapter = new AreaAdapter(dataList);
+        listAdapter = new AreaAdapter(dataList, sAreaChosen);
 
         rcv_list.setAdapter(listAdapter);
     }
