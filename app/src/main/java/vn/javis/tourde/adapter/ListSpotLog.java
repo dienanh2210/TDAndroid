@@ -22,15 +22,16 @@ import butterknife.ButterKnife;
 import pl.droidsonroids.gif.GifImageView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.view.CircleTransform;
 
 public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder> {
-    List<Spot> listSpot = new ArrayList<Spot>();
+    List<SaveCourseRunning.CheckedSpot> listSpot = new ArrayList<SaveCourseRunning.CheckedSpot>();
     CourseListActivity activityContext;
     View mView;
-
-    public ListSpotLog(List<Spot> listSpot, CourseListActivity activityContext) {
+    int lastCheckedOrder=-1;
+    public ListSpotLog(List<SaveCourseRunning.CheckedSpot> listSpot, CourseListActivity activityContext) {
 
         this.listSpot = listSpot;
         this.activityContext = activityContext;
@@ -46,8 +47,8 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final ListSpotLog.SpotViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        final Spot model = listSpot.get(position);
-        int spotID = model.getOrderNumber() + 1;
+        final SaveCourseRunning.CheckedSpot model = listSpot.get(position);
+        int spotID = model.getOrder() + 1;
         holder.txt_spotName.setText(model.getTitle());
         holder.spot_id.setText("" + spotID);
         /*if (model.getTopImage() != null && model.getTopImage() !="")
@@ -65,31 +66,25 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
             holder.img_link_spot.setVisibility(View.GONE);
             holder.image_link_long.setVisibility(View.GONE);
         }
-        if (position == 0) {
+        if (model.isChecked()) {
+            lastCheckedOrder =position;
             holder.BG_spot.setImageResource(R.drawable.boder_white);
             holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
             holder.showInfoSpot.setVisibility(View.VISIBLE);
-            //holder.spotTime.setText(model.);
-            //holder.averageSpeed.setText(model.);
+
+            holder.spotTime.setText(model.getTime());
+            holder.averageSpeed.setText(model.getAvarageSpeed()+"km/h");
             //holder.img_link_spot.setVisibility(View.VISIBLE);
+
             holder.imgShowChecked.setVisibility(View.VISIBLE);
             holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
             holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
             holder.img_link_vitual.setVisibility(View.GONE);
         }
-        else if(position==1)
+        else if(position==lastCheckedOrder+1)
         {
-            holder.BG_spot.setImageResource(R.drawable.boder_white);
-            holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
-            //holder.showInfoSpot.setVisibility(View.VISIBLE);
-            holder.img_link_spot.setVisibility(View.VISIBLE);
-            holder.imgShowChecked.setVisibility(View.VISIBLE);
-            holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
-            holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
-            holder.img_link_vitual.setVisibility(View.GONE);
+
         }
-        else if(position==2)
-        {}
         else {
             holder.spot.setAlpha((float) 0.3);
         }

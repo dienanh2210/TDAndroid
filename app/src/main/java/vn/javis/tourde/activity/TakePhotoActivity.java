@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,7 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.CameraPreview;
+import vn.javis.tourde.utils.CameraUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.TimeUtil;
 
@@ -76,6 +79,8 @@ public class TakePhotoActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_custom_camera)
     LinearLayout activity_custom_camera;
+    @BindView(R.id.canvasLayout)
+    RelativeLayout canvasLayout;
 
     Camera camera;
     CameraPreview cameraPreview;
@@ -301,6 +306,11 @@ public class TakePhotoActivity extends AppCompatActivity {
 
             }
 
+            /*BitmapDrawable bmd = new BitmapDrawable(getResources(), bm);
+            canvasLayout.setBackground(bmd);*/
+            hideView();
+            bm =  CameraUtils.addView(bm,canvasLayout);
+
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 bm.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
@@ -308,11 +318,13 @@ public class TakePhotoActivity extends AppCompatActivity {
                 fileOutputStream.close();
                 MediaStore.Images.Media.insertImage(getContentResolver(),
                         bm, file.getAbsolutePath(), "" + new Date().getTime());
-                addImageToGallery(file.getAbsolutePath(), TakePhotoActivity.this);
+                CameraUtils.addImageToGallery(file.getAbsolutePath(), TakePhotoActivity.this);
                 Log.i("addImageToGallery", file.getAbsolutePath());
             } catch (Exception e) {
                 e.getMessage();
                 Log.d("getMessage", e.getMessage());
+            } finally {
+                resetView();
             }
             camera.startPreview();
             // btnCapture.setVisibility(View.GONE);
@@ -322,17 +334,21 @@ public class TakePhotoActivity extends AppCompatActivity {
 
     };
 
-    private void addImageToGallery(final String filePath, final Context context) {
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
-        values.put(MediaStore.MediaColumns.DATA, filePath);
-        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        camera.release();
+    }
+
+    private void resetView(){
+        canvasLayout.setBackground(null);
+        btnBack.setVisibility(View.VISIBLE);
+        frameCamera.setVisibility(View.VISIBLE);
+
+    }
+
+    private void hideView(){
+        btnBack.setVisibility(View.INVISIBLE);
+        frameCamera.setVisibility(View.INVISIBLE);
     }
 }

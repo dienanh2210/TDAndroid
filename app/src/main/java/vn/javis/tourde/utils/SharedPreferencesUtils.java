@@ -47,6 +47,7 @@ public class SharedPreferencesUtils {
         if (editor == null) {
             editor = prefs.edit();
         }
+
         editor.putInt(key, value);
         editor.commit();
     }
