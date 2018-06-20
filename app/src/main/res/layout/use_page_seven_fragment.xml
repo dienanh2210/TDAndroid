@@ -1,34 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/White"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroud"
     tools:context=".activity.MainActivity">
+
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
-            android:scaleX="1"
-            android:scaleY="1"
             android:src="@drawable/imageuse_07" />
 
 
     </RelativeLayout>
- <!-->   <Button
-        android:id="@+id/bt_usePage"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_65sdp"
-        android:layout_marginRight="@dimen/_65sdp"
-        android:background="@drawable/bt_use" /><!-->
 </RelativeLayout>
