@@ -352,7 +352,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
         txtArea.setText(model.getArea());
-        txtDistance.setText(model.getDistance());
+        txtDistance.setText(model.getDistance()+"km");
         String strMonths = model.getSeason();
         Log.i("Course Detail 255", "" + strMonths);
         try {
