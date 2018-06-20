@@ -158,7 +158,8 @@ public class FinishCourseFragment extends BaseFragment {
         btnShowLoging.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showFragmentTabLayoutRunning();
+//                mActivity.showFragmentTabLayoutRunning();
+                mActivity.onBackPressed();
             }
         });
         btnToDetail.setOnClickListener(new View.OnClickListener() {
