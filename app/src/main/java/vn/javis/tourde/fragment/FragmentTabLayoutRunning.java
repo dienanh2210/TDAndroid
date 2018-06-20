@@ -124,7 +124,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
         String savedString =SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
-        if (!savedString.isEmpty()) {
+        if (!TextUtils.isEmpty(savedString)) {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
             courseID = saveCourseRunning.getCourseID();
             mActivity.setmCourseID(courseID);
