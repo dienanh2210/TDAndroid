@@ -110,6 +110,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     SaveCourseRunning saveCourseRunning;
     FragmentLog fragmentLog;
+    FragmentMap fragmentMap;
     private boolean isSaveTime = true;// save when leave sreen this
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
@@ -173,8 +174,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         spotRecycler.setAdapter(listSpotCheckinAdapter);
         final int courseId = mActivity.getmCourseID();
         list_spot.clear();
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+//        setupViewPager(viewPager);
+//        tabLayout.setupWithViewPager(viewPager);
         ProcessDialog.showProgressDialog(mActivity, "Loading", false);
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
@@ -185,6 +186,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                 if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
                     courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
+                mActivity.setMapUrl(mCourseDetail.getmCourseData().getKmlFile());
+//                if(fragmentMap !=null)
+//                {
+//                    fragmentMap.onResume();
+//                }
                 list_spot = mCourseDetail.getSpot();
                 if (list_spot.size() > 0) {
 
@@ -201,10 +207,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             showCheckPointFragment(id);
                         }
                     });
-                    listSpotCheckinAdapter.notifyDataSetChanged();
+                    setupViewPager();
+                    tabLayout.setupWithViewPager(viewPager);
                     setListCheckedSpot();
-
-                     //set info recyler tab fragment
+                    listSpotCheckinAdapter.notifyDataSetChanged();
+                    //set info recyler tab fragment
 
                 }
                 ProcessDialog.hideProgressDialog();
@@ -554,9 +561,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         });
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new FragmentMap(), "MAP");
+        fragmentMap =new FragmentMap();
+        adapter.addFragment(fragmentMap, "MAP");
         fragmentLog = FragmentLog.intance(saveCourseRunning);
         adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
@@ -606,7 +614,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
         fragmentLog.updateCheckedSpot( saveCourseRunning);
     }
-
+    void saveCheckedSpot(){
+        String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
+        SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
+    }
     private boolean isSpotChecked(int spotId) {
         for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
             if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId &&  saveCourseRunning.getLstCheckedSpot().get(i).isChecked()) {
@@ -628,6 +639,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             }
         }
         fragmentLog.updateCheckedSpot( saveCourseRunning);
+        saveCheckedSpot();
     }
 
     private int getSizeCheckedSpot() {

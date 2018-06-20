@@ -62,6 +62,8 @@ public class TabSpotImages extends BaseFragment implements TabLayout.OnTabSelect
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setOnTabSelectedListener(this);
+
+
     }
 
     @Override

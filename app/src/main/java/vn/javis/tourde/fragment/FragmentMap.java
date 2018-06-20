@@ -66,10 +66,11 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity =(CourseListActivity)getActivity();
+        mapUrl = mActivity.getMapUrl();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.map, SupportMapFragment.newInstance(), "map");
         transaction.commit();
-        mapUrl = mActivity.getMapUrl();
+
     }
 
     @Override
@@ -79,7 +80,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
                 .findFragmentByTag("map");
         mapFragment.getMapAsync(this);
     }
-
+    
     @OnClick({R.id.navitime, R.id.googleMap})
     public void onClick(View view) {
         switch (view.getId()) {

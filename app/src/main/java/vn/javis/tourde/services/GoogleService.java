@@ -189,14 +189,12 @@ public class GoogleService extends Service implements LocationListener {
     private class TimerTaskToGetLocation extends TimerTask {
         @Override
         public void run() {
-
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     fn_getlocation();
                 }
             });
-
         }
     }
 
@@ -216,11 +214,11 @@ public class GoogleService extends Service implements LocationListener {
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
             Log.i("GPS_218,lat",lct.getSpotID() +"-"+ location.getLatitude() + "-"+lct.getLatitude() +",longitude"+location.getLongitude() + "-"+lct.getLongtitude() +",distance"+distance);
-            if (distance < 100000) {
+            if (distance < 100) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
              //   showNotification();
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
+            //    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
                 intent1.putExtra("arrived", lstLocationArrived);
 
                 //    stopService(new Intent(GoogleService.this, GoogleService.class));
