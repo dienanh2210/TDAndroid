@@ -42,6 +42,7 @@ public class ApiEndpoint {
     //post image
     public  static String POST_IMAGE ="/post/postImage/";
     public  static String POST_COURSE_IMAGE ="/post/postCourseImage/";
+    public  static String GET_CHECKED_STAMP ="/get/getCheckedStampList/";
 
 
 

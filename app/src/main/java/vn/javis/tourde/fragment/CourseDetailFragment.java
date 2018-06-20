@@ -152,11 +152,15 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     int indexTab;
     String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0\"> %s </body></Html>";
     int fontSize;
+    private boolean isNextScreen;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mActivity = (CourseListActivity) getActivity();
+       if( SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) != 0 && isNextScreen) {
+    mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), true, false);
+        }
     }
 
     @Override
@@ -165,19 +169,25 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         TourDeApplication.getInstance().trackScreenView("screen_course_id=" + mCourseID);
     }
 
+    public static CourseDetailFragment newInstance(boolean isNextScreen) {
+        CourseDetailFragment fragment = new CourseDetailFragment();
+        fragment.isNextScreen = isNextScreen;
+        return fragment;
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
 //        mCourseDetail =null;
-        mActivity = (CourseListActivity) getActivity();
 //        tabCourseFragment=null;
 //        tabCommentFragment=null;
 //        indexTab=0;
 //        pagerAdapter =null;
         ProcessDialog.showProgressDialog(mActivity, "Loading", false);
         // testAPI();
-        //     mCourseID = mActivity.getmCourseID();
-        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
+             mCourseID = mActivity.getmCourseID();
+//        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
+
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
         if (!savedString.isEmpty()) {
