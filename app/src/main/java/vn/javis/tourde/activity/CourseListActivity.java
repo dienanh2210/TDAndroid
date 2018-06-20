@@ -203,9 +203,10 @@ public class CourseListActivity extends BaseActivity {
             ProcessDialog.showDialogCheckLogging(CourseListActivity.this, "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
-                    if (fragmentTabLayoutRunning == null)
-                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
-                    openPage(fragmentTabLayoutRunning, true, false);
+//                    if (fragmentTabLayoutRunning == null)
+//                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
+//                    openPage(fragmentTabLayoutRunning, true, false);
+                    openPage(CourseDetailFragment.newInstance(true), true, false);
                 }
             });
         }
@@ -314,7 +315,7 @@ public class CourseListActivity extends BaseActivity {
     }
 
     public void showFragmentTabLayoutRunning() {
-        if (fragmentTabLayoutRunning == null)
+//        if (fragmentTabLayoutRunning == null)
             fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
         openPage(fragmentTabLayoutRunning, true, false);
     }
@@ -444,13 +445,24 @@ public class CourseListActivity extends BaseActivity {
             showSpotImages(mSpotID);
             return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
-//            ShowCourseDetail();
 
-            for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
-                fm.popBackStack();
+//            ShowCourseDetail();
+            if( SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0 ) {
+                if(((FragmentTabLayoutRunning) fragment).isFinishTime && ((FragmentTabLayoutRunning) fragment).isFromMain) {
+                    super.onBackPressed();
+                    return;
+                };
+                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
+            } else if(((FragmentTabLayoutRunning) fragment).isFinishTime && !((FragmentTabLayoutRunning) fragment).isFromMain) {
+                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
             }
-//
-            return;
+
         }
 
         super.onBackPressed();

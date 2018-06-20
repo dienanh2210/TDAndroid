@@ -110,11 +110,19 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     SaveCourseRunning saveCourseRunning;
     FragmentLog fragmentLog;
-    private boolean isSaveTime = true;// save when leave sreen this
+    public boolean isSaveTime = true;// save when leave sreen this
+    public boolean isFinishTime;
+    public boolean isFromMain;
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
 //        fragment.listener = (CheckPointFragment.OnFragmentInteractionListener) listener;
+        return fragment;
+    }
+
+    public static FragmentTabLayoutRunning newInstance(boolean isFromMain) {
+        FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
+        fragment.isFromMain = isFromMain;
         return fragment;
     }
 
@@ -453,6 +461,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 break;
             case R.id.stop_time:
                 isSaveTime = false;
+                isFinishTime = true;
                 pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
                 preferencesUtils.setLongValue(KEY_SHARED_BASETIME, pauseOffset);
                 chronometer.stop();
@@ -465,6 +474,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 break;
             case R.id.resume:
                 isSaveTime = true;
+                isFinishTime = true;
                 chronometer.setBase(SystemClock.elapsedRealtime() + pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);
@@ -479,7 +489,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     public void onOkClick() {
                         SharedPreferencesUtils.getInstance(getContext()).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
                         SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.SAVED_COURSE_RUNNING);
-                        mActivity.ShowCourseDetail();
+//                        mActivity.ShowCourseDetail();
+                        isFinishTime = true;
+                        mActivity.onBackPressed();
 
                     }
                 });
