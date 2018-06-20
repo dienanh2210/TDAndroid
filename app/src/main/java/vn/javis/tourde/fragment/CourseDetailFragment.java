@@ -159,7 +159,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
        if( SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) != 0 && isNextScreen) {
-    mActivity.openPage(new FragmentTabLayoutRunning(), true, false);
+    mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), true, false);
         }
     }
 

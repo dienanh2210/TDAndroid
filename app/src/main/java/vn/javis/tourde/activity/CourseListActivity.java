@@ -315,7 +315,7 @@ public class CourseListActivity extends BaseActivity {
     }
 
     public void showFragmentTabLayoutRunning() {
-        if (fragmentTabLayoutRunning == null)
+//        if (fragmentTabLayoutRunning == null)
             fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
         openPage(fragmentTabLayoutRunning, true, false);
     }
@@ -445,8 +445,18 @@ public class CourseListActivity extends BaseActivity {
             showSpotImages(mSpotID);
             return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
+
 //            ShowCourseDetail();
-            if( SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
+            if( SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0 ) {
+                if(((FragmentTabLayoutRunning) fragment).isFinishTime && ((FragmentTabLayoutRunning) fragment).isFromMain) {
+                    super.onBackPressed();
+                    return;
+                };
+                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
+            } else if(((FragmentTabLayoutRunning) fragment).isFinishTime && !((FragmentTabLayoutRunning) fragment).isFromMain) {
                 for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
                     fm.popBackStack();
                 }
