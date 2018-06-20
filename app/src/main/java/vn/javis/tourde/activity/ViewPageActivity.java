@@ -38,7 +38,6 @@ public class ViewPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_page);
         //Button skip
         btnSkip = findViewById(R.id.skip);
-        //button skip on click
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
