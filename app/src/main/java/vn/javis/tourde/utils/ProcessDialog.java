@@ -108,8 +108,8 @@ public class ProcessDialog {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesUtils.mInstance.removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
-                SharedPreferencesUtils.mInstance.removeKey(Constant.SAVED_COURSE_RUNNING);
+                SharedPreferencesUtils.getInstance(context).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                SharedPreferencesUtils.getInstance(context).removeKey(Constant.SAVED_COURSE_RUNNING);
                 dialog.hide();
             }
         });
