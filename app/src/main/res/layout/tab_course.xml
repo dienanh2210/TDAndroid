@@ -184,6 +184,7 @@
                     android:layout_height="@dimen/_200sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:contentDescription="@string/image_description"
+                    android:scaleType="fitXY"
                     android:src="@drawable/image_map" />
 
                 <LinearLayout
@@ -206,6 +207,7 @@
                             android:layout_marginStart="@dimen/_47sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:contentDescription="@string/image_description"
+
                             android:src="@drawable/icon_googlemap" />
 
                         <TextView

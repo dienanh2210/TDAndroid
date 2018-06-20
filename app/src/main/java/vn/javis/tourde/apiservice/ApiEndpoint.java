@@ -36,11 +36,13 @@ public class ApiEndpoint {
     public  static String GET_CHECK_SPOT_EQUIPMENT_REVIEW ="/get/checkSpotEquipmentReview/";
     public  static String POST_REVIEW_SPOT_EQUIPMENT ="/post/reviewSpotEquipment/";
     public  static String POST_SPOT_IMAGE ="/post/postSpotImage/";
+    public  static String GET_POSTED_SPOT_IMAGE ="/get/getPostedSpotImageList/";
 
 
     //post image
     public  static String POST_IMAGE ="/post/postImage/";
     public  static String POST_COURSE_IMAGE ="/post/postCourseImage/";
+    public  static String GET_CHECKED_STAMP ="/get/getCheckedStampList/";
 
 
 

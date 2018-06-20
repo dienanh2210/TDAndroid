@@ -17,6 +17,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,6 +34,9 @@ import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.adapter.ListBadgeAdapter;
 import vn.javis.tourde.apiservice.BadgeAPI;
 import vn.javis.tourde.model.Badge;
+import vn.javis.tourde.services.ServiceCallback;
+import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.GsonUtil;
 
 public class BadgeCollectionFragment extends BaseFragment implements TabLayout.OnTabSelectedListener   {
 
@@ -85,9 +95,21 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
     }
 
     void setBadgeData() {
-        List<Badge> listBadge = BadgeAPI.getInstance().getListBadge();
-        listBadgeAdapter = new ListBadgeAdapter(listBadge, mActivity);
-        badgeRecycler.setAdapter(listBadgeAdapter);
+//        List<Badge> listBadge = new ArrayList<>();
+        BadgeAPI.getBadgeData(LoginFragment.getmUserToken(), new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                List<Badge> listBadge = GsonUtil.stringToArray(response.toString(), Badge[].class);
+                listBadgeAdapter = new ListBadgeAdapter(listBadge, mActivity);
+                badgeRecycler.setAdapter(listBadgeAdapter);
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+
     }
 
     @Override

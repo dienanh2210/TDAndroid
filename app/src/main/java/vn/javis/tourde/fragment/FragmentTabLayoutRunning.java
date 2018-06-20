@@ -110,9 +110,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     SaveCourseRunning saveCourseRunning;
     FragmentLog fragmentLog;
-    public boolean isSaveTime = true;// save when leave sreen this
+
+    FragmentMap fragmentMap;
+    private boolean isSaveTime = true;// save when leave sreen this
     public boolean isFinishTime;
     public boolean isFromMain;
+
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -132,7 +135,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
         String savedString =SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
-        if (!savedString.isEmpty()) {
+        if (!TextUtils.isEmpty(savedString)) {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
             courseID = saveCourseRunning.getCourseID();
             mActivity.setmCourseID(courseID);
@@ -178,8 +181,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
         spotRecycler.setLayoutManager(layoutManager);
         show_select_spot.setVisibility(View.GONE);
+        spotRecycler.setAdapter(listSpotCheckinAdapter);
         final int courseId = mActivity.getmCourseID();
         list_spot.clear();
+//        setupViewPager(viewPager);
+//        tabLayout.setupWithViewPager(viewPager);
         ProcessDialog.showProgressDialog(mActivity, "Loading", false);
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
@@ -190,6 +196,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                 if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
                     courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
+                mActivity.setMapUrl(mCourseDetail.getmCourseData().getKmlFile());
+//                if(fragmentMap !=null)
+//                {
+//                    fragmentMap.onResume();
+//                }
                 list_spot = mCourseDetail.getSpot();
                 if (list_spot.size() > 0) {
 
@@ -206,12 +217,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             showCheckPointFragment(id);
                         }
                     });
-                    spotRecycler.setAdapter(listSpotCheckinAdapter);
-
-                    setListCheckedSpot();
-
-                    setupViewPager(viewPager); //set info recyler tab fragment
+                    setupViewPager();
                     tabLayout.setupWithViewPager(viewPager);
+                    setListCheckedSpot();
+                    listSpotCheckinAdapter.notifyDataSetChanged();
+                    //set info recyler tab fragment
+
                 }
                 ProcessDialog.hideProgressDialog();
             }
@@ -564,9 +575,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         });
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new FragmentMap(), "MAP");
+        fragmentMap =new FragmentMap();
+        adapter.addFragment(fragmentMap, "MAP");
         fragmentLog = FragmentLog.intance(saveCourseRunning);
         adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
@@ -610,13 +622,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             SaveCourseRunning.CheckedSpot checkedSpot = saveCourseRunning.new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
             saveCourseRunning.getLstCheckedSpot().add(checkedSpot);
             //saveCourseRunning.addCheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
-          //  checked = false;
+            checked = false;
         }
         String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
         SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
-
+        fragmentLog.updateCheckedSpot( saveCourseRunning);
     }
-
+    void saveCheckedSpot(){
+        String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
+        SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
+    }
     private boolean isSpotChecked(int spotId) {
         for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
             if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId &&  saveCourseRunning.getLstCheckedSpot().get(i).isChecked()) {
@@ -638,6 +653,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             }
         }
         fragmentLog.updateCheckedSpot( saveCourseRunning);
+        saveCheckedSpot();
     }
 
     private int getSizeCheckedSpot() {
