@@ -56,7 +56,7 @@ import vn.javis.tourde.utils.TimeUtil;
  * Created by QuanPham on 6/9/18.
  */
 
-public class TakePhotoActivity extends AppCompatActivity {
+public class TakePhotoActivity extends BaseActivity {
 
     @Nullable
     @BindView(R.id.txt_title)
@@ -90,15 +90,15 @@ public class TakePhotoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.take_photo);
-        ButterKnife.bind(this);
+        super.onCreate(savedInstanceState);
+//        ButterKnife.bind(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         View decorView = getWindow().getDecorView();
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-        ProcessDialog.showProgressDialog(this, "Loading", false);
+       showProgressDialog();
         spotId = getIntent().getIntExtra(CourseListActivity.SPOT_ID, 0);
         courseID = getIntent().getIntExtra(CourseListActivity.COURSE_DETAIL_ID, 0);
 
@@ -135,12 +135,12 @@ public class TakePhotoActivity extends AppCompatActivity {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                     courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
                     txtDistance.setText(mCourseDetail.getmCourseData().getDistance() + "km");
-                    ProcessDialog.hideProgressDialog();
+                    hideProgressDialog();
                 }
 
                 @Override
                 public void onError(VolleyError error) {
-                    ProcessDialog.hideProgressDialog();
+                    hideProgressDialog();
                 }
             });
         }

@@ -131,7 +131,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
                 }
                 if (!isLarge) {
                     //upload bitmap to server
-                    ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                   showProgressDialog();
                     PostImageAPI.postImage(mActivity, bitmapIcon, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -150,12 +150,12 @@ public class TabMySpotUploadedImages extends BaseFragment {
                                         if (jsonObject.has("success")) {
                                             Log.i("TabMyUploadImg1235", "upload success");
                                         }
-                                        ProcessDialog.hideProgressDialog();
+                                       hideProgressDialog();
                                     }
 
                                     @Override
                                     public void onError(VolleyError error) {
-                                        ProcessDialog.hideProgressDialog();
+                                        hideProgressDialog();
                                     }
                                 });
                             }
