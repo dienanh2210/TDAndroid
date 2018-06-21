@@ -102,6 +102,7 @@ public class CourseListActivity extends BaseActivity {
     public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
     public static final String STAMP_IMAGE = "stamp_img";
     public static final String STAMP_TITLE = "stamp_title";
+    public static final String STAMP_DISTANCE = "stamp_distance";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
 
@@ -162,7 +163,7 @@ public class CourseListActivity extends BaseActivity {
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-        onResume();
+
         fn_permission();
         //    showCourseFinish();hiện
         if (!token.equals("")) {
@@ -326,13 +327,14 @@ public class CourseListActivity extends BaseActivity {
         openPage(fragmentTabLayoutRunning, true, false);
     }
 
-    public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title) {
+    public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title, String distance) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putInt(SPOT_ID, idSpot);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
         dataBundle.putString(STAMP_TITLE, title);
+        dataBundle.putString(STAMP_DISTANCE, distance);
         if (goalFragment == null)
             goalFragment = new GoalFragment();
         openPage(goalFragment, true, false);
@@ -355,12 +357,14 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl, String title) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
         dataBundle.putString(STAMP_TITLE, title);
+        dataBundle.putString(TIME_FINISH, time);
+        dataBundle.putString(STAMP_DISTANCE, distance);
         if (checkPointFragment == null)
             checkPointFragment = new CheckPointFragment();
         openPage(checkPointFragment, true, false);
@@ -410,17 +414,21 @@ public class CourseListActivity extends BaseActivity {
     }
 
 
-    public void showTakePhoto(int spotID) {
+    public void showTakePhoto(int spotID, String time, String distance) {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
             mSpotID = spotID;
-            dataBundle.putInt(SPOT_ID, mSpotID);
-            dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+            //         dataBundle.putInt(SPOT_ID, mSpotID);
+            //        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+            //        dataBundle.putString(TIME_FINISH, time);
+            //        dataBundle.putString(STAMP_DISTANCE, distance);
 //            openPage(new TakePhotoFragment(), true, false);
             Intent intent = new Intent(this, TakePhotoActivity.class);
             intent.putExtra(SPOT_ID, mSpotID);
             intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+            intent.putExtra(TIME_FINISH, time);
+            intent.putExtra(STAMP_DISTANCE, distance);
             startActivity(intent);
 
         }
@@ -458,7 +466,6 @@ public class CourseListActivity extends BaseActivity {
                     super.onBackPressed();
                     return;
                 }
-                ;
                 for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
                     fm.popBackStack();
                 }
@@ -522,6 +529,8 @@ public class CourseListActivity extends BaseActivity {
                     Intent intent = new Intent(this, TakePhotoActivity.class);
                     intent.putExtra(SPOT_ID, mSpotID);
                     intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+                    intent.putExtra(TIME_FINISH, "00:00:00");
+                    intent.putExtra(STAMP_DISTANCE, "999");
                     startActivity(intent);
                 }
             }
@@ -571,6 +580,10 @@ public class CourseListActivity extends BaseActivity {
                                         lstLOcat.add(location1);
 
                                     // Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
+                                    //2 21.0182486,105.7818165
+                                    //21.0166412,105.780631
+                                    //21.0138755,105.7762314
+                                    //21.0143274,105.7741553
 
                                 }
                             }

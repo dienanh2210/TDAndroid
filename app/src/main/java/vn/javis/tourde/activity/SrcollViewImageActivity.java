@@ -23,9 +23,8 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.ProcessDialog;
 
-public class SrcollViewImage extends BaseActivity {
-    Button bt_rule;
-
+public class SrcollViewImageActivity extends BaseActivity {
+Button bt_rule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +42,7 @@ public class SrcollViewImage extends BaseActivity {
         Intent intent = new Intent(this, ViewPageActivity.class);
         //  Intent intent = new Intent(this, UsePageActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

@@ -83,19 +83,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void changeActivity() {
-        //   Intent intent = new Intent(this, ViewPageActivity.class);
-        Intent intent = new Intent(this, SrcollViewImage.class);
+     //   Intent intent = new Intent(this, ViewPageActivity.class);
+        Intent intent = new Intent(this, SrcollViewImageActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
     void changeCourseListPage() {
         Intent intent = new Intent(this, CourseListActivity.class);
         startActivity(intent);
+        finish();
     }
 
     void changeCourseListActivity() {
-        loginToApp();
+       loginToApp();
         //openPage(new LoginFragment());
     }
 
