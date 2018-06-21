@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import vn.javis.tourde.R;
 
-public class SrcollViewImage extends BaseActivity {
+public class SrcollViewImageActivity extends BaseActivity {
 Button bt_rule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +26,6 @@ Button bt_rule;
         Intent intent = new Intent(this, ViewPageActivity.class);
      //  Intent intent = new Intent(this, UsePageActivity.class);
         startActivity(intent);
+        finish();
     }
 }
