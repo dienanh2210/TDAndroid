@@ -42,13 +42,15 @@ public class ViewPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (viewPager.getCurrentItem() != 5) {
-                    viewPager.setCurrentItem(5, true);
-                } else {
-                    Intent intent = new Intent(ViewPageActivity.this, MenuEntryActivity.class);
-                    SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Tutorial", "finish");
-                    startActivity(intent);
-                }
+//                if (viewPager.getCurrentItem() != 5) {
+//                    viewPager.setCurrentItem(5, true);
+//                } else {
+//                    Intent intent = new Intent(ViewPageActivity.this, MenuEntryActivity.class);
+//                    SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Tutorial", "finish");
+//                    startActivity(intent);
+//                }
+                Intent intent = new Intent(ViewPageActivity.this, MenuEntryActivity.class);
+                startActivity(intent);
             }
         });
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -83,7 +85,10 @@ public class ViewPageActivity extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
     private void setupViewPager(ViewPager viewPager) {
         adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "One");
