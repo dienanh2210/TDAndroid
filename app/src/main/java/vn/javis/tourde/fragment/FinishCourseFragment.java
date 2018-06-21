@@ -121,7 +121,7 @@ public class FinishCourseFragment extends BaseFragment {
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
         final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
-        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
+       showProgressDialog();
         GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) {
@@ -145,7 +145,7 @@ public class FinishCourseFragment extends BaseFragment {
                     txtDate.setText(dateFormat.format(date));
                     txtTime.setText(time_finish);
                 }
-                ProcessDialog.hideProgressDialog();
+               hideProgressDialog();
             }
 
             @Override

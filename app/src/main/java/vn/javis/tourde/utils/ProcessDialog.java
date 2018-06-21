@@ -25,14 +25,19 @@ import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.model.Comment;
 
 public class ProcessDialog {
-    private static Dialog progressDialog;
+    private  Dialog progressDialog;
     public Context context;
     ProgressDialog dialog1;
     private static ProgressBar spinner;
 
     public ProcessDialog(final Context context) {
         this.context = context;
-        dialog1 = new ProgressDialog(context);
+//        dialog1 = new ProgressDialog(context);
+        progressDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
+        View view = LayoutInflater.from(context).inflate(R.layout.loading_progress, null);
+        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        progressDialog.setContentView(view);
     }
 
     public void showDialog() {
@@ -40,41 +45,51 @@ public class ProcessDialog {
     }
 
     public void showDialog(String message, boolean cancelable) {
-        if (dialog1 != null) {
-            dialog1.setMessage(message);
-            dialog1.setIndeterminate(false);
-            dialog1.setCancelable(cancelable);
-            dialog1.show();
+        if (progressDialog != null) {
+//            dialog1.setMessage(message);
+//            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(cancelable);
+            progressDialog.show();
         }
     }
+/*
 
     public static Dialog createProgressDialog(Context context) {
-        if (progressDialog == null) {
+//        if (progressDialog == null) {
             progressDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
             View view = LayoutInflater.from(context).inflate(R.layout.loading_progress, null);
             progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
             progressDialog.setContentView(view);
-        }
+//        }
         return progressDialog;
     }
+*/
 
-    public static void showProgressDialog(final Context context, final String message, final boolean cancelable) {
-        Dialog dlg = createProgressDialog(context);
-        if (!dlg.isShowing()) {
-            dlg.setCancelable(cancelable);
-            dlg.show();
-        }
-    }
+  /*  public static void showProgressDialog(final Context context, final String message, final boolean cancelable) {
+        ((Activity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (((Activity) context).isFinishing()) return;
+                Dialog dlg = createProgressDialog(context);
+                if (!dlg.isShowing()) {
+                    dlg.setCancelable(cancelable);
+                    dlg.show();
+                }
+            }
+        });
 
-    public static void hideProgressDialog() {
+    }*/
+
+
+  /*  public  void hideProgressDialog() {
         if (progressDialog != null)
             progressDialog.dismiss();
-    }
+    }*/
 
     public void close() {
-        if (dialog1 != null) {
-            dialog1.dismiss();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
         }
     }
 

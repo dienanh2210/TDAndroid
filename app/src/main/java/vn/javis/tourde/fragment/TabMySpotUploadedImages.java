@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +33,7 @@ import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListMySpotUploadedImageAdapter;
 import vn.javis.tourde.apiservice.PostImageAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
+import vn.javis.tourde.model.RunningCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.ProcessDialog;
@@ -62,31 +64,47 @@ public class TabMySpotUploadedImages extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        if (listSpotImg.size() > 0) {
-            Log.i("listSpot: ", "" + listSpotImg.size());
-            RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1) {
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-            };
-            rcvMySpotImage.setLayoutManager(layoutManager);
-            listSpotImageAdapter = new ListMySpotUploadedImageAdapter(listSpotImg, mActivity);
-            listSpotImageAdapter.setOnItemClickListener(new ListMySpotUploadedImageAdapter.OnItemClickedListener() {
-                @Override
-                public void onItemClick(int position) {
-                    if (position == 0) {
 
-                        //   startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-                        if (token != "")
-                            startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-                        else
-                            mActivity.showDialogWarning();
-                    }
+        Log.i("listSpot: ", "" + listSpotImg.size());
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(3, 1) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rcvMySpotImage.setLayoutManager(layoutManager);
+        listSpotImageAdapter = new ListMySpotUploadedImageAdapter(listSpotImg, mActivity);
+        listSpotImageAdapter.setOnItemClickListener(new ListMySpotUploadedImageAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0) {
+
+                    //   startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                    if (token != "")
+                        startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                    else
+                        mActivity.showDialogWarning();
                 }
-            });
-            rcvMySpotImage.setAdapter(listSpotImageAdapter);
-        }
+            }
+        });
+        rcvMySpotImage.setAdapter(listSpotImageAdapter);
+        String token =LoginFragment.getmUserToken();
+        SpotDataAPI.getPostedSpotImageList(token, spotId, new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONArray list = new JSONArray(response.toString());
+                for (int i = 0; i < list.length(); i++) {
+                   listSpotImg.add(list.get(i).toString());
+                }
+                listSpotImageAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+
 
     }
 
@@ -113,7 +131,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
                 }
                 if (!isLarge) {
                     //upload bitmap to server
-                    ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                   showProgressDialog();
                     PostImageAPI.postImage(mActivity, bitmapIcon, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -132,12 +150,12 @@ public class TabMySpotUploadedImages extends BaseFragment {
                                         if (jsonObject.has("success")) {
                                             Log.i("TabMyUploadImg1235", "upload success");
                                         }
-                                        ProcessDialog.hideProgressDialog();
+                                       hideProgressDialog();
                                     }
 
                                     @Override
                                     public void onError(VolleyError error) {
-                                        ProcessDialog.hideProgressDialog();
+                                        hideProgressDialog();
                                     }
                                 });
                             }

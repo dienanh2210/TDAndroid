@@ -183,7 +183,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCommentFragment=null;
 //        indexTab=0;
 //        pagerAdapter =null;
-        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+       showProgressDialog();
         // testAPI();
              mCourseID = mActivity.getmCourseID();
 //        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
@@ -191,7 +191,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
         if (!savedString.isEmpty()) {
-            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString,SaveCourseRunning.class);
+            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
             if (mCourseID == saveCourseRunning.getCourseID()) {
                 btn_bicyle_red.setVisibility(View.VISIBLE);
                 btn_bicyle.setVisibility(View.GONE);
@@ -352,7 +352,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
         txtArea.setText(model.getArea());
-        txtDistance.setText(model.getDistance());
+        txtDistance.setText(model.getDistance()+"km");
         String strMonths = model.getSeason();
         Log.i("Course Detail 255", "" + strMonths);
         try {
@@ -463,7 +463,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
-        ProcessDialog.hideProgressDialog();
+       hideProgressDialog();
 
     }
 
@@ -484,7 +484,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getSpot(), CourseDetailFragment.this);
+                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(),mCourseDetail.getmCourseData().getRouteImage(), mCourseDetail.getSpot(), CourseDetailFragment.this);
 //                    return TabSpotUploadedImages.intansce(listImgUrl);
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());

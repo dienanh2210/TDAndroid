@@ -146,8 +146,8 @@ public class MenuEntryActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
+     //   super.onBackPressed();
+     //   this.finish();
     }
 
     @Override

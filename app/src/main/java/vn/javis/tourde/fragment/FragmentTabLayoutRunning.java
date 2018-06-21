@@ -110,9 +110,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     SaveCourseRunning saveCourseRunning;
     FragmentLog fragmentLog;
-    public boolean isSaveTime = true;// save when leave sreen this
+
+    FragmentMap fragmentMap;
+    private boolean isSaveTime = true;// save when leave sreen this
     public boolean isFinishTime;
     public boolean isFromMain;
+
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -178,9 +181,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
         spotRecycler.setLayoutManager(layoutManager);
         show_select_spot.setVisibility(View.GONE);
+        spotRecycler.setAdapter(listSpotCheckinAdapter);
         final int courseId = mActivity.getmCourseID();
         list_spot.clear();
-        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+//        setupViewPager(viewPager);
+//        tabLayout.setupWithViewPager(viewPager);
+       showProgressDialog();
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -190,6 +196,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                 if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
                     courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
+                mActivity.setMapUrl(mCourseDetail.getmCourseData().getKmlFile());
+//                if(fragmentMap !=null)
+//                {
+//                    fragmentMap.onResume();
+//                }
                 list_spot = mCourseDetail.getSpot();
                 if (list_spot.size() > 0) {
 
@@ -206,19 +217,19 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             showCheckPointFragment(id);
                         }
                     });
-                    spotRecycler.setAdapter(listSpotCheckinAdapter);
-
-                    setListCheckedSpot();
-
-                    setupViewPager(viewPager); //set info recyler tab fragment
+                    setupViewPager();
                     tabLayout.setupWithViewPager(viewPager);
+                    setListCheckedSpot();
+                    listSpotCheckinAdapter.notifyDataSetChanged();
+                    //set info recyler tab fragment
+
                 }
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-                ProcessDialog.hideProgressDialog();
+               hideProgressDialog();
             }
         });
 
@@ -317,7 +328,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             if (getSizeCheckedSpot() == list_spot.size()) //complete all spot
             {
                 if (spotId == lastSpotId) {
-                    ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                  showProgressDialog();
                     CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -344,24 +355,24 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                                 if (jsonObject.has("success")) {
                                                     mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title);
                                                 }
-                                                ProcessDialog.hideProgressDialog();
+                                                hideProgressDialog();
                                             }
 
                                             @Override
                                             public void onError(VolleyError error) {
-                                                ProcessDialog.hideProgressDialog();
+                                               hideProgressDialog();
                                             }
                                         });
                                     }
                                 }
                             }
-                            ProcessDialog.hideProgressDialog();
+                           hideProgressDialog();
                         }
 
                         @Override
                         public void onError(VolleyError error) {
                             Log.i("VolleyError", "" + error.getMessage());
-                            ProcessDialog.hideProgressDialog();
+                            hideProgressDialog();
                         }
                     });
                 } else {
@@ -379,13 +390,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     mActivity.showCheckPointFragment(spotId, imgUrl, title);
                                 }
                             }
-                            ProcessDialog.hideProgressDialog();
+                           hideProgressDialog();
                         }
 
                         @Override
                         public void onError(VolleyError error) {
                             Log.i("VolleyError", "" + error.getMessage());
-                            ProcessDialog.hideProgressDialog();
+                            hideProgressDialog();
                         }
                     });
                 }
@@ -409,12 +420,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
                             mActivity.showGoalFragment(spotId, speed, finishTime, "", "");
                         }
-                        ProcessDialog.hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
-                        ProcessDialog.hideProgressDialog();
+                      hideProgressDialog();
                     }
                 });
             } else {
@@ -435,13 +446,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 mActivity.showCheckPointFragment(spotId, imgUrl, title);
                             }
                         }
-                        ProcessDialog.hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
                         Log.i("VolleyError", "" + error.getMessage());
-                        ProcessDialog.hideProgressDialog();
+                        hideProgressDialog();
                     }
                 });
             }
@@ -564,9 +575,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         });
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new FragmentMap(), "MAP");
+        fragmentMap =new FragmentMap();
+        adapter.addFragment(fragmentMap, "MAP");
         fragmentLog = FragmentLog.intance(saveCourseRunning);
         adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
@@ -610,13 +622,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             SaveCourseRunning.CheckedSpot checkedSpot = saveCourseRunning.new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
             saveCourseRunning.getLstCheckedSpot().add(checkedSpot);
             //saveCourseRunning.addCheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
-          //  checked = false;
+            checked = false;
         }
         String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
         SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
-
+        fragmentLog.updateCheckedSpot( saveCourseRunning);
     }
-
+    void saveCheckedSpot(){
+        String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
+        SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
+    }
     private boolean isSpotChecked(int spotId) {
         for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
             if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId &&  saveCourseRunning.getLstCheckedSpot().get(i).isChecked()) {
@@ -638,6 +653,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             }
         }
         fragmentLog.updateCheckedSpot( saveCourseRunning);
+        saveCheckedSpot();
     }
 
     private int getSizeCheckedSpot() {
