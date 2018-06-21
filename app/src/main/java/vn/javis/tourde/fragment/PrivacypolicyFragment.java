@@ -16,7 +16,8 @@ import vn.javis.tourde.activity.MenuPageActivity;
 public class PrivacypolicyFragment extends AppCompatActivity {
     TextView tv_back_privacy;
    private WebView webView;
-    String strUrl=" http://roots-sports.jp/privacypolicy.html " ;
+   // String strUrl=" http://roots-sports.jp/privacypolicy.html " ;
+     String strUrl=" https://www.tour-de-nippon.jp/series/privacy_policy/ " ;
 
 
     @Override

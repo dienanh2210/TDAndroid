@@ -15,7 +15,7 @@ import vn.javis.tourde.activity.MenuPageActivity;
 public class InquiryFragment extends AppCompatActivity {
     TextView tv_back_privacy;
     private WebView webView;
-    String strUrl=" http://www.app-tour-de-nippon.jp/test/contact_app/  " ;
+    String strUrl=" https://www.app-tour-de-nippon.jp/test/contact_app/  " ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
