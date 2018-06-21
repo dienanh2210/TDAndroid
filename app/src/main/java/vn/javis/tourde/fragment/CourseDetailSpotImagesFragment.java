@@ -146,7 +146,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
             }
         });
         Log.i("DetailSpotImages128",""+spotId);
-        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
+       showProgressDialog();
         SpotDataAPI.getSpotData(spotId, this);
     }
 
@@ -200,7 +200,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         view_pager.setAdapter(pagerAdapter);
         view_pager.setCurrentPageNumber(indexTab);
         view_pager.setCurrentItem(indexTab);
-        ProcessDialog.hideProgressDialog();
+       hideProgressDialog();
     }
 
     @Override

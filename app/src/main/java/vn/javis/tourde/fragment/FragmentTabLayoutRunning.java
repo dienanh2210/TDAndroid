@@ -186,7 +186,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         list_spot.clear();
 //        setupViewPager(viewPager);
 //        tabLayout.setupWithViewPager(viewPager);
-        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+       showProgressDialog();
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -224,12 +224,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     //set info recyler tab fragment
 
                 }
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-                ProcessDialog.hideProgressDialog();
+               hideProgressDialog();
             }
         });
 
@@ -328,7 +328,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             if (getSizeCheckedSpot() == list_spot.size()) //complete all spot
             {
                 if (spotId == lastSpotId) {
-                    ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                  showProgressDialog();
                     CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -355,24 +355,24 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                                 if (jsonObject.has("success")) {
                                                     mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title);
                                                 }
-                                                ProcessDialog.hideProgressDialog();
+                                                hideProgressDialog();
                                             }
 
                                             @Override
                                             public void onError(VolleyError error) {
-                                                ProcessDialog.hideProgressDialog();
+                                               hideProgressDialog();
                                             }
                                         });
                                     }
                                 }
                             }
-                            ProcessDialog.hideProgressDialog();
+                           hideProgressDialog();
                         }
 
                         @Override
                         public void onError(VolleyError error) {
                             Log.i("VolleyError", "" + error.getMessage());
-                            ProcessDialog.hideProgressDialog();
+                            hideProgressDialog();
                         }
                     });
                 } else {
@@ -390,13 +390,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     mActivity.showCheckPointFragment(spotId, imgUrl, title);
                                 }
                             }
-                            ProcessDialog.hideProgressDialog();
+                           hideProgressDialog();
                         }
 
                         @Override
                         public void onError(VolleyError error) {
                             Log.i("VolleyError", "" + error.getMessage());
-                            ProcessDialog.hideProgressDialog();
+                            hideProgressDialog();
                         }
                     });
                 }
@@ -420,12 +420,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
                             mActivity.showGoalFragment(spotId, speed, finishTime, "", "");
                         }
-                        ProcessDialog.hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
-                        ProcessDialog.hideProgressDialog();
+                      hideProgressDialog();
                     }
                 });
             } else {
@@ -446,13 +446,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 mActivity.showCheckPointFragment(spotId, imgUrl, title);
                             }
                         }
-                        ProcessDialog.hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
                         Log.i("VolleyError", "" + error.getMessage());
-                        ProcessDialog.hideProgressDialog();
+                        hideProgressDialog();
                     }
                 });
             }
