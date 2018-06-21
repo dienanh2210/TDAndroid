@@ -1,37 +1,79 @@
 package vn.javis.tourde.model;
+import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class Badge {
-    private String badgeName;
-    private String dateGet;
-    private String imageUrl;
+import java.io.Serializable;
 
-    public Badge(String badgeName, String dateGet, String imageUrl) {
-        this.badgeName = badgeName;
-        this.dateGet = dateGet;
-        this.imageUrl = imageUrl;
+public class Badge implements Serializable{
+
+    @SerializedName("stamp_id")
+    @Expose
+    private String stampId;
+    @SerializedName("course_id")
+    @Expose
+    private String courseId;
+    @SerializedName("spot_id")
+    @Expose
+    private String spotId;
+    @SerializedName("image")
+    @Expose
+    private String image;
+    @SerializedName("title")
+    @Expose
+    private String title;
+    @SerializedName("insert_datetime")
+    @Expose
+    private String insertDatetime;
+
+    public String getStampId() {
+        return stampId;
     }
 
-    public String getBadgeName() {
-        return badgeName;
+    public void setStampId(String stampId) {
+        this.stampId = stampId;
     }
 
-    public void setBadgeName(String badgeName) {
-        this.badgeName = badgeName;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public String getDateGet() {
-        return dateGet;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
-    public void setDateGet(String dateGet) {
-        this.dateGet = dateGet;
+    public String getSpotId() {
+        return spotId;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public void setSpotId(String spotId) {
+        this.spotId = spotId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public String getImage() {
+        return image;
     }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getInsertDatetime() {
+        return insertDatetime;
+    }
+
+    public void setInsertDatetime(String insertDatetime) {
+        this.insertDatetime = insertDatetime;
+    }
+
 }
+
+

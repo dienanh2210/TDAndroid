@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -47,6 +48,7 @@ import vn.javis.tourde.adapter.ListSpotDetailCircleAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -74,10 +76,12 @@ public class TabCourseFragment extends BaseFragment {
     RelativeLayout rlt_googlemap;
     @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
+    @BindView(R.id.img_map)
+    ImageView imgRoute;
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
-    String avagePace, finishTIme, startAddress;
+    String avagePace, finishTIme, startAddress,routeUrl;
     CourseDetailFragment parentFragment;
     String token = LoginFragment.getmUserToken();
 
@@ -88,13 +92,14 @@ public class TabCourseFragment extends BaseFragment {
         return fragment;
     }
 
-    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, List<Spot> lstSpot, CourseDetailFragment parentFragment) {
+    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress,String routeUrl, List<Spot> lstSpot, CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
         fragment.finishTIme = finishTime;
         fragment.avagePace = processAveragePace(averagePace);
         fragment.startAddress = startAddress;
         fragment.parentFragment = parentFragment;
+        fragment.routeUrl = routeUrl;
         return fragment;
     }
 
@@ -164,6 +169,7 @@ public class TabCourseFragment extends BaseFragment {
             }
         });
         txtStartAddress.setText(startAddress);
+        PicassoUtil.getSharedInstance(mActivity).load(routeUrl).resize(0, 400).onlyScaleDown().into(imgRoute);
         if(SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME)==0) {
             btnRunningApp.setOnClickListener(new View.OnClickListener() {
                 @Override

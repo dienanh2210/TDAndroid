@@ -31,5 +31,9 @@ public class TimeUtil {
         return outputDate;
 
     }
+    public static String formatDayFromString(String inputFormatString, String inputDate) {
+        return formatDateFromString(inputFormatString, "yyyy.MM.dd", inputDate);
+
+    }
 
 }

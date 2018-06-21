@@ -61,6 +61,7 @@ public class FragmentRunning extends BaseFragment {
                 Log.i("favorite", response.toString());
                 try {
                     JSONArray list = new JSONArray(response.toString());
+
                     for (int i = 0; i < list.length(); i++) {
                         RunningCourse model = RunningCourse.getData(list.get(i).toString());
                         // List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
