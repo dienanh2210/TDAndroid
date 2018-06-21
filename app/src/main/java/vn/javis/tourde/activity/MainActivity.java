@@ -3,6 +3,9 @@ package vn.javis.tourde.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,13 +27,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import vn.javis.tourde.R;
+import vn.javis.tourde.apiservice.ApplicationVersionAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.apiservice.MaintenanceAPI;
 import vn.javis.tourde.fragment.LoginFragment;
 import vn.javis.tourde.model.Account;
+import vn.javis.tourde.model.CheckAppVersion;
+import vn.javis.tourde.model.MaintenanceStatus;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
+        checkMaintenanceAndAppVersion();
         GrowthPush.getInstance().initialize(this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
                 BuildConfig.DEBUG ? Environment.development : Environment.production);
         GrowthPush.getInstance().requestRegistrationId("1079044899926");
@@ -60,32 +69,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    void checkServerDone() {
         if (SharedPreferencesUtils.getInstance(this).getStringValue("Email").equals("")) {
             if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals(""))
                 changeActivity();
             else
                 changeCourseListPage();
-        }
-        else
+        } else
             changeCourseListActivity();
-
-
     }
 
     void changeActivity() {
-     //   Intent intent = new Intent(this, ViewPageActivity.class);
+        //   Intent intent = new Intent(this, ViewPageActivity.class);
         Intent intent = new Intent(this, SrcollViewImage.class);
         startActivity(intent);
     }
 
 
-    void changeCourseListPage(){
+    void changeCourseListPage() {
         Intent intent = new Intent(this, CourseListActivity.class);
         startActivity(intent);
     }
 
     void changeCourseListActivity() {
-       loginToApp();
+        loginToApp();
         //openPage(new LoginFragment());
     }
 
@@ -101,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     if (jsonObject.has("success")) {
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
-                        Intent intent = new Intent(MainActivity.this,CourseListActivity.class);
+                        Intent intent = new Intent(MainActivity.this, CourseListActivity.class);
                         startActivity(intent);
                         intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                         MainActivity.this.setResult(Activity.RESULT_OK, intent);
@@ -195,6 +205,72 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    void checkMaintenanceAndAppVersion() {
+        MaintenanceAPI.getMaintenanceData(new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                if (!jsonObject.has("error")) {
+                    MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
+                    if (maintenanceStatus.getStatus().equals("1")) {
+                        Log.i("maintenance", "111111");
+                        //show title page(wait design)
+
+                    } else {
+                        Log.i("maintenance", "222222");
+                        try {
+                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                            String version = pInfo.versionName;
+                            ApplicationVersionAPI.checkAppVersion(version, "android", new ServiceCallback() {
+                                @Override
+                                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                    JSONObject jsonObject1 = (JSONObject) response;
+                                    if (jsonObject1.has("check")) {
+                                        switch (jsonObject1.getString("check")) {
+                                            case "1":
+                                            {
+                                                ProcessDialog.showDialogOk(getApplicationContext(),"","このアプリは最新バージョンにアップデート可能です。");
+                                                break;
+                                            }
+                                            case "2":
+                                            {
+                                                final String packageName = "com.navitime.local.navitime";
+                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                    @Override
+                                                    public void onOkClick() {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+                                                    }
+                                                });
+                                                break;
+                                            }
+                                            case "0":
+                                            default:
+
+
+                                        }
+                                    }
+                                    checkServerDone();
+                                }
+
+                                @Override
+                                public void onError(VolleyError error) {
+
+                                }
+                            });
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+    }
 
 }
 

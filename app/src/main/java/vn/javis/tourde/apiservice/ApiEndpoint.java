@@ -43,9 +43,9 @@ public class ApiEndpoint {
     public  static String POST_COURSE_IMAGE ="/post/postCourseImage/";
     public  static String GET_CHECKED_STAMP ="/get/getCheckedStampList/";
 
-
-
-
+    //maintenance
+    public static String GET_MAINTENANCE_STATUS = "/get/getMaintenanceStatus/";
+    public static String CHECK_APPLICATION_VERSION ="/post/checkApplicationVersion/";
 
     public static String SNS_ID = "sns_id";
     public static String SNS_KIND = "sns_kind";

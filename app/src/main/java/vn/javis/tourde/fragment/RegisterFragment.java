@@ -61,7 +61,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         AgeFragment.OnFragmentInteractionListener {
 
     private static final int GET_FROM_GALLERY = 1;
-    private static boolean isChangAccount;
+    public static boolean isChangAccount;
     @BindView(R.id.edt_username)
     EditText edt_username;
     @BindView(R.id.select_userIcon)
@@ -287,16 +287,15 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.changeInfo:
                 String token = LoginFragment.getmUserToken();
-
-               // ProcessDialog.showProgressDialog(activity,"Loading",false);
-             //   ProcessDialog.showloading( getContext() );
-                LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
-
-                ProcessDialog.showProgressDialog(activity,"Loading",false);
                 if(bitmapIcon==null)
+                {
+                    ProcessDialog.showProgressDialog(activity, "Loading", false);
                     LoginAPI.editAccount(token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, successListener(), errorListener());
-                else
+                }
+                else {
+                    ProcessDialog.showProgressDialog(activity, "Loading", false);
                     LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
+                }
                 break;
         }
     }
