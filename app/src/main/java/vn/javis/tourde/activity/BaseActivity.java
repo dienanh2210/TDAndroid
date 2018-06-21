@@ -38,12 +38,13 @@ import vn.javis.tourde.utils.ProcessDialog;
 public abstract class BaseActivity extends AppCompatActivity {
 
     Unbinder unbinder;
+    protected ProcessDialog mProgessDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         unbinder = ButterKnife.bind(this);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (Build.VERSION.SDK_INT >= 23) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -61,6 +62,32 @@ public abstract class BaseActivity extends AppCompatActivity {
             tx.addToBackStack(null);
         tx.commit();
 
+    }
+
+    // modified by quanpv
+    public void showProgressDialog() {
+        showProgressDialog("ローディング中...", false);
+    }
+
+    public void showProgressDialog(String message, boolean cancelable) {
+        if (mProgessDialog == null) {
+            mProgessDialog = new ProcessDialog(this);
+        }
+        try {
+            mProgessDialog.showDialog(message, cancelable);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void hideProgressDialog() {
+        if (mProgessDialog != null) {
+            try {
+                mProgessDialog.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override

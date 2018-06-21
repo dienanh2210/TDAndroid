@@ -66,7 +66,7 @@ public class CourseDriveFragment extends BaseFragment {
         mAcitivity = (CourseListActivity) getActivity();
         mCourseID = mAcitivity.getmCourseID();
         mAcitivity.turnOnGPS();
-        ProcessDialog.showProgressDialog(mAcitivity,"Loading",false);
+        showProgressDialog();
         getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
             @Override
@@ -83,12 +83,12 @@ public class CourseDriveFragment extends BaseFragment {
                         startLongtitude =Double.parseDouble(mCourseDetail.getSpot().get(0).getLongitude());
                     }
                 }
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
 

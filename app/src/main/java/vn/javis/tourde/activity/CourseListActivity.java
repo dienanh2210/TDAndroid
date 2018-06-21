@@ -460,7 +460,6 @@ public class CourseListActivity extends BaseActivity {
                     super.onBackPressed();
                     return;
                 }
-                ;
                 for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
                     fm.popBackStack();
                 }
