@@ -610,14 +610,14 @@ public class CourseListActivity extends BaseActivity {
 
             List<Address> addresses = null;
 
-            try {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                String cityName = addresses.get(0).getAddressLine(0);
-                String stateName = addresses.get(0).getAddressLine(1);
-                String countryName = addresses.get(0).getAddressLine(2);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+//            try {
+//                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+//                String cityName = addresses.get(0).getAddressLine(0);
+//                String stateName = addresses.get(0).getAddressLine(1);
+//                String countryName = addresses.get(0).getAddressLine(2);
+//            } catch (IOException e1) {
+//                e1.printStackTrace();
+//            }
         }
     };
 
