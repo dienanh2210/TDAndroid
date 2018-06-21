@@ -213,13 +213,13 @@ public class GoogleService extends Service implements LocationListener {
         Intent intent1 = new Intent(str_receiver_arrived);
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
-            Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
-            if (distance < 20000) {
+            Log.i("GPS_218,lat",lct.getSpotID() +"-"+ location.getLatitude() + "-"+lct.getLatitude() +",longitude"+location.getLongitude() + "-"+lct.getLongtitude() +",distance"+distance);
+            if (distance <= 100) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
-                //   showNotification();
+             //   showNotification();
 
-                //    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
+            //    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
 
                 intent1.putExtra("arrived", lstLocationArrived);
 
@@ -276,7 +276,7 @@ public class GoogleService extends Service implements LocationListener {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.i("googleservice", intent.getStringExtra("test"));
+            Log.i("googleservice",intent.getStringExtra("test"));
             //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
             //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
         }

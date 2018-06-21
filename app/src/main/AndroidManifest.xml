@@ -109,7 +109,7 @@
             android:name=".fragment.InquiryFragment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.SrcollViewImage"
+            android:name=".activity.SrcollViewImageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service

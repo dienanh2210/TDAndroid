@@ -119,6 +119,7 @@ public class MenuEntryActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MenuEntryActivity.this, RegisterActivity.class);
             startActivity(intent);
+
         }
     };
     View.OnClickListener onClickBackMenuPage = new View.OnClickListener() {
@@ -126,7 +127,7 @@ public class MenuEntryActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MenuEntryActivity.this, MenuPageActivity.class);
             startActivity(intent);
-            //finish();
+
         }
     };
     View.OnClickListener onClickLoginEntry = new View.OnClickListener() {
@@ -134,6 +135,7 @@ public class MenuEntryActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MenuEntryActivity.this, LoginSNSActivity.class);
             startActivity(intent);
+
         }
     };
     View.OnClickListener onClickSearchSkip = new View.OnClickListener() {
@@ -141,13 +143,14 @@ public class MenuEntryActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(MenuEntryActivity.this, CourseListActivity.class);
             startActivity(intent);
+
         }
     };
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
+     //   super.onBackPressed();
+     //   this.finish();
     }
 
     @Override

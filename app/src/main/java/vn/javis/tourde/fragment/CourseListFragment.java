@@ -320,8 +320,10 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
             if (thisCourse != null) {
 
                 List<String> lst1 =new ArrayList<>();
-                for (int a = 0; a < list1.get(a).getTag().size(); a++) {
-                    lst1.add( list1.get(a).getTag().get(a).getTag());
+             //   int ss =list1.get(a).getTag().size()
+                for (int a = 0; a < list1.get(i).getTag().size(); a++) {
+                    Log.i("abcxxx",a+""+list1.get(a).getTag().size());
+                    lst1.add( list1.get(i).getTag().get(a).getTag());
                 }
                 thisCourse.setListTag(lst1);
                 list_courses.add(list1.get(i).getData());

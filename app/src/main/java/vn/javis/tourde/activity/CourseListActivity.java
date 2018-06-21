@@ -321,7 +321,7 @@ public class CourseListActivity extends BaseActivity {
         openPage(fragmentTabLayoutRunning, true, false);
     }
 
-    public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title,String distance) {
+    public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title, String distance) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
@@ -351,7 +351,7 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl, String title,String time,String distance) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
@@ -625,14 +625,14 @@ public class CourseListActivity extends BaseActivity {
 
             List<Address> addresses = null;
 
-            try {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                String cityName = addresses.get(0).getAddressLine(0);
-                String stateName = addresses.get(0).getAddressLine(1);
-                String countryName = addresses.get(0).getAddressLine(2);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+//            try {
+//                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+//                String cityName = addresses.get(0).getAddressLine(0);
+//                String stateName = addresses.get(0).getAddressLine(1);
+//                String countryName = addresses.get(0).getAddressLine(2);
+//            } catch (IOException e1) {
+//                e1.printStackTrace();
+//            }
         }
     };
 
