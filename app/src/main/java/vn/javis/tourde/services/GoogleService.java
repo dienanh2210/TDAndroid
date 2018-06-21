@@ -201,25 +201,25 @@ public class GoogleService extends Service implements LocationListener {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void fn_update(Location location) {
 
-        intent.putExtra("latutide", location.getLatitude()+"" );
-        intent.putExtra("longitude", location.getLongitude()+"");
+        intent.putExtra("latutide", location.getLatitude() + "");
+        intent.putExtra("longitude", location.getLongitude() + "");
         intent.putExtra("arrived", false);
-        if(lstLocation.size()>0){
-            Log.i("latutide", location.getLatitude() + "-"+lstLocation.get(0).getLatitude());
-            Log.i("longitude", location.getLongitude() + "-"+lstLocation.get(0).getLongtitude());
+        if (lstLocation.size() > 0) {
+            Log.i("latutide", location.getLatitude() + "-" + lstLocation.get(0).getLatitude());
+            Log.i("longitude", location.getLongitude() + "-" + lstLocation.get(0).getLongtitude());
         }
         lstLocationArrived.clear();
         //double distance1 = DistanceLocation.getDistance(location.getLatitude(), location.getLongitude(),lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude());
         Intent intent1 = new Intent(str_receiver_arrived);
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
-            Log.i("GPS_218,lat",lct.getSpotID() +"-"+ location.getLatitude() + "-"+lct.getLatitude() +",longitude"+location.getLongitude() + "-"+lct.getLongtitude() +",distance"+distance);
-            if (distance < 100) {
+            Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
+            if (distance < 20000) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
-             //   showNotification();
+                //   showNotification();
 
-            //    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
+                //    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
 
                 intent1.putExtra("arrived", lstLocationArrived);
 
@@ -276,7 +276,7 @@ public class GoogleService extends Service implements LocationListener {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.i("googleservice",intent.getStringExtra("test"));
+            Log.i("googleservice", intent.getStringExtra("test"));
             //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
             //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
         }
