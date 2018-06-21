@@ -36,4 +36,10 @@ public class SpotDataAPI {
         }
         TourDeService.postWithAuth(ApiEndpoint.POST_SPOT_IMAGE, params, callback);
     }
+    public static void getPostedSpotImageList(String token,int spotId,ServiceCallback callback){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("token",""+token);
+        params.put("spot_id",""+spotId);
+        TourDeService.getWithAuthAray(ApiEndpoint.GET_POSTED_SPOT_IMAGE, params, callback);
+    }
 }

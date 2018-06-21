@@ -48,7 +48,7 @@ public class FragmentLog extends BaseFragment {
     public static FragmentLog intance(SaveCourseRunning saveCourseRunning) {
         FragmentLog frg = new FragmentLog();
         frg.saveCourseRunning = saveCourseRunning;
-        return  frg;
+        return frg;
     }
 
     @Override
@@ -56,7 +56,9 @@ public class FragmentLog extends BaseFragment {
         mView = inflater.inflate(R.layout.log_fragment, container, false);
         return mView;
     }
+
     int courseId;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,7 @@ public class FragmentLog extends BaseFragment {
         recyclerSpot.setLayoutManager(layoutManager);
         recyclerSpot.setNestedScrollingEnabled(false);
         ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -86,9 +89,10 @@ public class FragmentLog extends BaseFragment {
                     if (txtPrezent == null)
                         return;
                     txtPrezent.setText(mCourseDetail.getmCourseData().getTitle());
-                    setRecyclerSpot();
+
                 }
                 ProcessDialog.hideProgressDialog();
+                setRecyclerSpot();
             }
 
             @Override
@@ -98,18 +102,20 @@ public class FragmentLog extends BaseFragment {
         });
 
     }
-     void setRecyclerSpot(){
 
+    void setRecyclerSpot() {
+        if (saveCourseRunning == null)
+            return;
         listSpotLogAdapter = new ListSpotLog(saveCourseRunning.getLstCheckedSpot(), mActivity);
-        if(mView==null && recyclerSpot==null)
-        {
+        if (mView == null && recyclerSpot == null) {
             return;
         }
         if (recyclerSpot == null)
             recyclerSpot = mView.findViewById(R.id.recycler_spot);
         recyclerSpot.setAdapter(listSpotLogAdapter);
     }
-    public void updateCheckedSpot(SaveCourseRunning saveCourseRunning){
+
+    public void updateCheckedSpot(SaveCourseRunning saveCourseRunning) {
         this.saveCourseRunning = saveCourseRunning;
         setRecyclerSpot();
     }

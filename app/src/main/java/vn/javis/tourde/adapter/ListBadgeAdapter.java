@@ -17,6 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.Badge;
+import vn.javis.tourde.utils.PicassoUtil;
+import vn.javis.tourde.utils.TimeUtil;
+import vn.javis.tourde.view.CircleTransform;
 
 public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.BadgeViewHolder>{
 
@@ -39,10 +42,12 @@ public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.Badg
     public void onBindViewHolder(@NonNull BadgeViewHolder holder, int position) {
 
         Badge model = listBadge.get(position);
-        holder.txtBadgeName.setText(model.getBadgeName());
-        holder.txtBadgeDateGet.setText(model.getDateGet());
-        int idImgBadge = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());
-        holder.imgBadge.setImageResource(idImgBadge);
+        holder.txtBadgeName.setText(model.getTitle());
+        holder.txtBadgeDateGet.setText(TimeUtil.formatDayFromString(TimeUtil.DATE_FORMAT,model.getInsertDatetime()));
+     //   int idImgBadge = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());
+      //  holder.imgBadge.setImageResource(idImgBadge);
+        PicassoUtil.getSharedInstance(context).load(model.getImage()).resize(0, 300).onlyScaleDown().into(holder.imgBadge);
+
     }
 
     @Override

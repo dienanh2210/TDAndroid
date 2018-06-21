@@ -89,8 +89,6 @@ public class PostCommentFragment extends BaseFragment {
             }
 
         });
-
-
         btnPostComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,9 +101,23 @@ public class PostCommentFragment extends BaseFragment {
             public void onClick(View view) {
 //                mActivity.ShowCourseDetailByTab(1);
                 mActivity.onBackPressed();
+
+                hideKeybord(view);
             }
         });
     }
+
+    public void hideKeybord(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),
+                InputMethodManager.RESULT_UNCHANGED_SHOWN);
+
+    }
+//    private void closeKeyboard() {
+//        InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+//    }
+
 
     @Override
     public View getView(LayoutInflater inflater, ViewGroup container) {

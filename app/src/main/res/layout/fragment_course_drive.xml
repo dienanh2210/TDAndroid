@@ -103,6 +103,7 @@
                 android:layout_weight="1">
 
                 <ImageView
+
                     android:layout_width="@dimen/_38sdp"
                     android:layout_height="@dimen/_23sdp"
                     android:layout_marginStart="@dimen/_47sdp"
