@@ -102,10 +102,10 @@ public class ViewPageActivity extends AppCompatActivity {
             }
         });
     }
-//    @Override
-//    public void onBackPressed() {
-//        // Do Here what ever you want do on back press;
-//    }
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
     private void setupViewPager(ViewPager viewPager) {
         adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "One");

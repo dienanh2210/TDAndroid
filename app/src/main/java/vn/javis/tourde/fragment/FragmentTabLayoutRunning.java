@@ -115,6 +115,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     private boolean isSaveTime = true;// save when leave sreen this
     public boolean isFinishTime;
     public boolean isFromMain;
+    public boolean isTimeSaved;
 
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
@@ -388,6 +389,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 if (model.getSuccess()) {
                                     isSaveTime = false;
                                     preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
+                                    isTimeSaved = true;
                                     final String imgUrl = model.getImage() == null ? "" : model.getImage();
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     String finish_time = getTimeFormat(time);
@@ -420,14 +422,15 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                         if (jsonObject.has("success")) {
                             isSaveTime = false;
                             preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
-                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "", distance);
+                            isTimeSaved = true;
+                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "",distance);
                         }
-                        hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
-                        hideProgressDialog();
+                      hideProgressDialog();
                     }
                 });
             } else {
@@ -446,10 +449,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 String imgUrl = model.getImage() == null ? "" : model.getImage();
                                 String title = model.getTitle() == null ? "" : model.getTitle();
                                 String finish_time = getTimeFormat(time);
-                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance);
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title,finish_time,distance);
+                                isTimeSaved = true;
                             }
                         }
-                        hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
@@ -475,7 +479,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 break;
             case R.id.stop_time:
                 isSaveTime = false;
-                isFinishTime = true;
+                isTimeSaved = true;
                 pauseOffset = chronometer.getBase() - SystemClock.elapsedRealtime();
                 preferencesUtils.setLongValue(KEY_SHARED_BASETIME, pauseOffset);
                 chronometer.stop();
@@ -488,7 +492,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 break;
             case R.id.resume:
                 isSaveTime = true;
-                isFinishTime = true;
+//                isTimeSaved = true;
                 chronometer.setBase(SystemClock.elapsedRealtime() + pauseOffset);
                 chronometer.start();
                 stopTime.setVisibility(View.VISIBLE);

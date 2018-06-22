@@ -70,7 +70,8 @@ public class GoogleService extends Service implements LocationListener {
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
-    double distanceAllow=100;
+    private static final double DISTANCE_ALLOW = 100;
+
     public GoogleService() {
 
     }
@@ -220,7 +221,7 @@ public class GoogleService extends Service implements LocationListener {
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
             Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
-            if (distance <= distanceAllow) {
+            if (distance <= DISTANCE_ALLOW) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
                 //   showNotification();

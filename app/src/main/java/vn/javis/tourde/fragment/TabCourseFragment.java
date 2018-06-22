@@ -182,7 +182,7 @@ public class TabCourseFragment extends BaseFragment {
                             }
                         });
                     } else {
-                            mActivity.showCourseDrive();
+                        //    mActivity.showCourseDrive();
                     }
                     if (SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox") == "") {
                         String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +

@@ -126,8 +126,6 @@ public class CourseDriveFragment extends BaseFragment {
                                 });
                             }
                         });
-                        //show for test
-                      //  mAcitivity.ShowCountDown();
                     }
                 } else {
                     mAcitivity.fn_permission();
