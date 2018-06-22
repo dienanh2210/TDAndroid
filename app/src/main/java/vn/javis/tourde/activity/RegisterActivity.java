@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 import vn.javis.tourde.R;
@@ -15,37 +17,17 @@ import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 
 public class RegisterActivity extends BaseActivity {
+    JSONObject data;
     Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        String keyChangeInfo = getIntent().getStringExtra(Constant.KEY_CHANGE_INFO);
-        bundle = new Bundle();
-        if(keyChangeInfo!=null && keyChangeInfo.equals("1")) {
-                bundle.putString(Constant.KEY_CHANGE_INFO, keyChangeInfo);
-            }
-            else {
-                bundle.putString(Constant.KEY_CHANGE_INFO, "0");
-            }
+
         RegisterFragment ccl =new RegisterFragment();
-        ccl.setArguments(bundle);
         openPage(ccl, false);
     }
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.activity_register);
-//            String keyChangeInfo = getIntent().getStringExtra(Constant.KEY_CHANGE_INFO);
-//            bundle = new Bundle();
-//            if(keyChangeInfo=="1") {
-//                bundle.putString(Constant.KEY_CHANGE_INFO, keyChangeInfo);
-//            }
-//            else {
-//                bundle.putString(Constant.KEY_CHANGE_INFO, "0");
-//            }
-//            openPage(new RegisterFragment(), false);
-//        }
+
     public void openPage(Fragment fragment, boolean isBackStack, boolean isAnimation) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         if (isAnimation)

@@ -31,6 +31,7 @@ import vn.javis.tourde.model.Account;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -85,11 +86,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void changeCourseListActivity() {
-       loginToApp();
+            Intent intent = new Intent(MainActivity.this, CourseListActivity.class);
+            startActivity(intent);
+            intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+            MainActivity.this.setResult(Activity.RESULT_OK, intent);
+       //loginToApp();
         //openPage(new LoginFragment());
     }
 
-    public void loginToApp() {
+   /* public void loginToApp() {
         final boolean gender = false;
         String email = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue("Email");
         String password = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue("Pass");
@@ -128,11 +133,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-    }
+    }*/
 
-    public void getAccount() {
+    public static void getAccount(String token) {
 
-        LoginAPI.pushToken(LoginFragment.getmUserToken(), new ServiceCallback() {
+        LoginAPI.pushToken(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;

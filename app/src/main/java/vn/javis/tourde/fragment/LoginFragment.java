@@ -3,6 +3,7 @@ package vn.javis.tourde.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,11 +22,14 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -59,6 +63,7 @@ import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.LoginView;
 import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
@@ -67,6 +72,7 @@ import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
 public class LoginFragment extends BaseFragment implements LoginView, RenewPasswordPageFragment.OnFragmentInteractionListener {
+    private static final String TAG = LoginFragment.class.getSimpleName();
     @BindView(R.id.edt_emaillogin)
     EditText edt_emaillogin;
     @BindView(R.id.edt_passwordlogin)
@@ -96,7 +102,7 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
-    private static final String LINE_CHANEL_ID = "1574725654";
+    public static final String LINE_CHANEL_ID = "1573462307";
     public static final int RC_LN_SIGN_IN = 006;
     private static LineApiClient lineApiClient;
 
@@ -110,10 +116,15 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
     @Override
     public void onInit() {
         // facebook
-        mCallbackManager = CallbackManager.Factory.create();
+        //mCallbackManager = CallbackManager.Factory.create();
+        //Init API
+        LoginUtils.initAPI(getActivity());
 
         // Register a callback to respond to the user
-        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        mCallbackManager = LoginUtils.getmFaceBookCallbackManager();
+        twitterAuthClient = LoginUtils.getTwitterAuthClient();
+        LoginUtils.addFBCallback(getActivity(),mCallbackManager);
+       /* LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 GraphRequest request = GraphRequest.newMeRequest(
@@ -151,13 +162,12 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
                 // Handle exception
                 Toast.makeText(getContext(), "Login failure", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         //googlePlus
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);*/
     }
 
     @Override
@@ -199,13 +209,13 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
         mCallbackManager.onActivityResult(requestCode, resultCode, data);// facebook
         twitterAuthClient.onActivityResult(requestCode, resultCode, data);// twitter
         //googleplus
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == LoginUtils.RC_GOOGLE_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+            LoginUtils.handleGoogleSignIn(getActivity(), task);
         }
         //line
-        if (requestCode == RC_LN_SIGN_IN) {
-            handleLoginResult(data);
+        if (requestCode == LoginUtils.RC_LINE_SIGN_IN) {
+            LoginUtils.handleLineLoginResult(getActivity(), data);
         }
     }
 
@@ -217,7 +227,7 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
                 LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList(PUBLIC_PROFILE, EMAIL));
                 break;
             case R.id.rl_twitter:
-                twitterAuthClient.authorize(getActivity(), new Callback<TwitterSession>() {
+                /*twitterAuthClient.authorize(getActivity(), new Callback<TwitterSession>() {
                     @Override
                     public void success(Result<TwitterSession> twitterSessionResult) {
                         // Success
@@ -238,7 +248,8 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
                     public void failure(TwitterException e) {
                         e.printStackTrace();
                     }
-                });
+                });*/
+                LoginUtils.addTwCallback(getActivity());
                 break;
             case R.id.rl_googleplus:
                 signInGoogle();
@@ -266,14 +277,15 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
     }
 
     private void signInGoogle() {
+        mGoogleSignInClient = LoginUtils.getmGoogleSignInClient();
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, LoginUtils.RC_GOOGLE_SIGN_IN);
     }
 
     private void signInLine() {
         if (getActivity() != null) {
-            Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LINE_CHANEL_ID);
-            startActivityForResult(loginIntent, RC_LN_SIGN_IN);
+            Intent loginIntent = LineLoginApi.getLoginIntent(getActivity(), LoginUtils.LINE_CHANEL_ID);
+            startActivityForResult(loginIntent, LoginUtils.RC_LINE_SIGN_IN);
         }
 
     }
@@ -297,7 +309,7 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
         }
     }
 
-    private void handleLoginResult(Intent data) {
+    private void handleLineLoginResult(Intent data) {
 
 
         //Todo Handling the login result
@@ -381,8 +393,9 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
                 public void onSuccess(ServiceResult resultCode, Object response) {
                     JSONObject jsonObject = (JSONObject) response;
                     if (jsonObject.has("success")) {
-                        SharedPreferencesUtils.getInstance(getContext()).setStringValue("Email", edt_emaillogin.getText().toString());
-                        SharedPreferencesUtils.getInstance(getContext()).setStringValue("Pass", edt_passwordlogin.getText().toString());
+                        /*SharedPreferencesUtils.getInstance(getContext()).setStringValue("Email", edt_emaillogin.getText().toString());
+                        SharedPreferencesUtils.getInstance(getContext()).setStringValue("Pass", edt_passwordlogin.getText().toString());*/
+
                         Log.d(edt_emaillogin.getText().toString(), edt_passwordlogin.getText().toString() + "yes" + response.toString());
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
@@ -393,7 +406,9 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
                         //     getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
+                                //Save token to device
                                 mUserToken = jsonObject.getString("token");
+                                SharedPreferencesUtils.getInstance(getContext()).setStringValue(LoginUtils.TOKEN,mUserToken);
                                 getAccount();
 
                             } catch (JSONException e) {
@@ -444,6 +459,11 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
 
     @Override
     public void onClick(View v) {
+
+    }
+    //Todo handle Login Result from Api
+    public static void handleLoginResult(Activity activity){
+
 
     }
 
