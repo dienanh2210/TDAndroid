@@ -368,7 +368,9 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
     }
 
     void callPostAPISNS(String sns_id, String sns_kind) {
+
         LoginAPI.loginSNS(sns_id, sns_kind, new vn.javis.tourde.services.ServiceCallback() {
+            JSONObject jsonObject;
             @Override
             public void onSuccess(vn.javis.tourde.services.ServiceResult resultCode, Object response) {
                 Log.i("login sns", response.toString());
@@ -376,8 +378,13 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
 
             @Override
             public void onError(VolleyError error) {
-                //Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
-                ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
+                String error_message = null;
+                try {
+                    error_message = jsonObject.getString("error_message");
+                    ProcessDialog.showDialogOk(getContext(), "", error_message);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -418,8 +425,14 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
 
                     } else {
                         Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
-                        // Toast.makeText( getContext(),"エラーメッセージ",Toast.LENGTH_LONG ).show();
-                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
+                        String error_message = null;
+                        try {
+                            error_message = jsonObject.getString("error_message");
+                            ProcessDialog.showDialogOk(getContext(), "", error_message);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                 }

@@ -18,11 +18,13 @@ import butterknife.Unbinder;
 import vn.javis.tourde.activity.MainActivity;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.ProcessDialog;
 
 public abstract class BaseFragment extends Fragment {
     private View mView;
     private Unbinder mUnbind;
     protected MainActivity activity;
+    protected ProcessDialog mProgessDialog;
 
 
     @Nullable
@@ -47,6 +49,32 @@ public abstract class BaseFragment extends Fragment {
         }
         super.onDestroyView();
 
+    }
+
+    // modified by quanpv
+    public void showProgressDialog() {
+        showProgressDialog("ローディング中...", false);
+    }
+
+    public void showProgressDialog(String message, boolean cancelable) {
+        if (mProgessDialog == null) {
+            mProgessDialog = new ProcessDialog(getContext());
+        }
+        try {
+            mProgessDialog.showDialog(message, cancelable);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void hideProgressDialog() {
+        if (mProgessDialog != null) {
+            try {
+                mProgessDialog.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public abstract View getView(LayoutInflater inflater, @Nullable ViewGroup container);

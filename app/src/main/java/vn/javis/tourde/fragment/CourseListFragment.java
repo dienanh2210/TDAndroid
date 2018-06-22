@@ -189,7 +189,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     }
 
     void getData(boolean searching) {
-        ProcessDialog.showProgressDialog(mActivity,"Loading",false);
+       showProgressDialog();
         if (!searching) {
             ListCourseAPI.getJsonValues(this,mCurrentPage,NUMBER_COURSE_ON_PAGE);
         } else {
@@ -320,8 +320,10 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
             if (thisCourse != null) {
 
                 List<String> lst1 =new ArrayList<>();
-                for (int a = 0; a < list1.get(a).getTag().size(); a++) {
-                    lst1.add( list1.get(a).getTag().get(a).getTag());
+             //   int ss =list1.get(a).getTag().size()
+                for (int a = 0; a < list1.get(i).getTag().size(); a++) {
+                    Log.i("abcxxx",a+""+list1.get(a).getTag().size());
+                    lst1.add( list1.get(i).getTag().get(a).getTag());
                 }
                 thisCourse.setListTag(lst1);
                 list_courses.add(list1.get(i).getData());
@@ -350,12 +352,12 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         changePage(0);
         setAllCourses(listCourses.getList());
         setRecycle();
-        ProcessDialog.hideProgressDialog();
+        hideProgressDialog();
     }
 
     @Override
     public void onError(VolleyError error) {
-        ProcessDialog.hideProgressDialog();
+       hideProgressDialog();
     }
 
     @Override

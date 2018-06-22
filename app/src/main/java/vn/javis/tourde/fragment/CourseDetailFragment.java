@@ -183,7 +183,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCommentFragment=null;
 //        indexTab=0;
 //        pagerAdapter =null;
-        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+       showProgressDialog();
         // testAPI();
              mCourseID = mActivity.getmCourseID();
 //        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
@@ -463,7 +463,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
-        ProcessDialog.hideProgressDialog();
+       hideProgressDialog();
 
     }
 

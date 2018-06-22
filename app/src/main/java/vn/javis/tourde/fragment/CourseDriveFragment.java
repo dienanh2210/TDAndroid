@@ -24,7 +24,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonObject;
+import com.google.maps.android.SphericalUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,7 +68,7 @@ public class CourseDriveFragment extends BaseFragment {
         mAcitivity = (CourseListActivity) getActivity();
         mCourseID = mAcitivity.getmCourseID();
         mAcitivity.turnOnGPS();
-        ProcessDialog.showProgressDialog(mAcitivity,"Loading",false);
+        showProgressDialog();
         getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
             @Override
@@ -83,12 +85,12 @@ public class CourseDriveFragment extends BaseFragment {
                         startLongtitude =Double.parseDouble(mCourseDetail.getSpot().get(0).getLongitude());
                     }
                 }
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
 
@@ -100,7 +102,10 @@ public class CourseDriveFragment extends BaseFragment {
                 if (mAcitivity.isBoolean_permission()) {
                     double longtitude = mAcitivity.getLongitude();
                     double latitude = mAcitivity.getLatitude();
-                    double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
+                   // double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
+                    double distance =  SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(latitude, longtitude));
+
+                    Log.i("GPSStart",""+distance+ "-"+latitude + "-"+longtitude + "--"+startLatitude+"-"+startLongtitude);
                     if (distance <= 100) {
                         ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                             @Override

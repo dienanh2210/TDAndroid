@@ -139,6 +139,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
             courseID = saveCourseRunning.getCourseID();
             mActivity.setmCourseID(courseID);
+//            if(saveCourseRunning.isFinished())
+//            {
+//                saveCourseRunning.resetAllSpot();
+//                saveCourseRunning.setFinished(false);
+//            }
 
         }
         preferencesUtils = SharedPreferencesUtils.getInstance(mActivity);
@@ -186,7 +191,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         list_spot.clear();
 //        setupViewPager(viewPager);
 //        tabLayout.setupWithViewPager(viewPager);
-        ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+       showProgressDialog();
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -224,12 +229,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     //set info recyler tab fragment
 
                 }
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-                ProcessDialog.hideProgressDialog();
+               hideProgressDialog();
             }
         });
 
@@ -320,15 +325,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     void showCheckPointFragment(final int spotId) {
         if (isSpotChecked(spotId))
             return;
-
+        final String distance=  String.format("%.2f", getCurrentDistance());
         checkedSpot(spotId, getTimeFormat(time), calculateAvarageSpeed(time));
 
         if (spotId > 0 && courseID > 0) {
             final String token = LoginFragment.getmUserToken();
             if (getSizeCheckedSpot() == list_spot.size()) //complete all spot
             {
+                saveCourseRunning.setFinished(true);
                 if (spotId == lastSpotId) {
-                    ProcessDialog.showProgressDialog(mActivity, "Loading", false);
+                  showProgressDialog();
                     CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -340,10 +346,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     if (spotId == lastSpotId) {
                                         final float speed = courseDistance / ((float) time / 3600000);
-                                        int h = (int) (time / 3600000);
-                                        int m = (int) (time - h * 3600000) / 60000;
-                                        int s = (int) (time - h * 3600000 - m * 60000) / 1000;
-                                        final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+                                        final String finishTime = getTimeFormat(time);
                                         preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
                                         isSaveTime = false;
 
@@ -353,26 +356,26 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 JSONObject jsonObject = (JSONObject) response;
                                                 if (jsonObject.has("success")) {
-                                                    mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title);
+                                                    mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title,distance);
                                                 }
-                                                ProcessDialog.hideProgressDialog();
+                                                hideProgressDialog();
                                             }
 
                                             @Override
                                             public void onError(VolleyError error) {
-                                                ProcessDialog.hideProgressDialog();
+                                               hideProgressDialog();
                                             }
                                         });
                                     }
                                 }
                             }
-                            ProcessDialog.hideProgressDialog();
+                           hideProgressDialog();
                         }
 
                         @Override
                         public void onError(VolleyError error) {
                             Log.i("VolleyError", "" + error.getMessage());
-                            ProcessDialog.hideProgressDialog();
+                            hideProgressDialog();
                         }
                     });
                 } else {
@@ -387,26 +390,25 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
                                     final String imgUrl = model.getImage() == null ? "" : model.getImage();
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
-                                    mActivity.showCheckPointFragment(spotId, imgUrl, title);
+                                    String finish_time = getTimeFormat(time);
+
+                                    mActivity.showCheckPointFragment(spotId, imgUrl, title,finish_time,distance);
                                 }
                             }
-                            ProcessDialog.hideProgressDialog();
+                           hideProgressDialog();
                         }
 
                         @Override
                         public void onError(VolleyError error) {
                             Log.i("VolleyError", "" + error.getMessage());
-                            ProcessDialog.hideProgressDialog();
+                            hideProgressDialog();
                         }
                     });
                 }
 
             } else if (spotId == lastSpotId) {
                 final float speed = courseDistance / ((float) time / 3600000);
-                int h = (int) (time / 3600000);
-                int m = (int) (time - h * 3600000) / 60000;
-                int s = (int) (time - h * 3600000 - m * 60000) / 1000;
-                final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+                final String finishTime = getTimeFormat(time);
                 preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
                 isSaveTime = false;
                 //   mActivity.showGoalFragment(spotId, speed, finishTime,"","");
@@ -418,14 +420,14 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                         if (jsonObject.has("success")) {
                             isSaveTime = false;
                             preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
-                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "");
+                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "",distance);
                         }
-                        ProcessDialog.hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
-                        ProcessDialog.hideProgressDialog();
+                      hideProgressDialog();
                     }
                 });
             } else {
@@ -443,16 +445,17 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
                                 String imgUrl = model.getImage() == null ? "" : model.getImage();
                                 String title = model.getTitle() == null ? "" : model.getTitle();
-                                mActivity.showCheckPointFragment(spotId, imgUrl, title);
+                                String finish_time = getTimeFormat(time);
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title,finish_time,distance);
                             }
                         }
-                        ProcessDialog.hideProgressDialog();
+                       hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
                         Log.i("VolleyError", "" + error.getMessage());
-                        ProcessDialog.hideProgressDialog();
+                        hideProgressDialog();
                     }
                 });
             }
@@ -600,7 +603,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         lastLatitude = latitude;
         lastLongtitude = longtitude;
         DecimalFormat df = new DecimalFormat("#.##");
-        aSpeed = Double.valueOf(df.format(aSpeed));
+        aSpeed = Double.valueOf(df.format(aSpeed).replace(",", "."));
         return aSpeed;
     }
 
@@ -611,7 +614,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         return finishTime;
     }
-
+    double getCurrentDistance() {
+        double distance = SphericalUtil.computeDistanceBetween(new LatLng(lastLatitude, lastLongtitude), new LatLng(latitude, longtitude));
+        return distance;
+    }
     private void setListCheckedSpot() {
         if (saveCourseRunning != null)
             return;

@@ -65,6 +65,9 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     int courseID;
     String imgUrl;
     String title;
+    String time;
+    String distance;
+
     boolean finishedAnim;
     private OnFragmentInteractionListener listener;
     private String filePath;
@@ -85,13 +88,15 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 
         imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
         title = getArguments().getString(CourseListActivity.STAMP_TITLE);
+        time = getArguments().getString(CourseListActivity.TIME_FINISH);
+        distance = getArguments().getString(CourseListActivity.STAMP_DISTANCE);
         mActivity = (CourseListActivity) getActivity();
 
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (finishedAnim)
-                    mActivity.showTakePhoto(spotID);
+                    mActivity.showTakePhoto(spotID,time,distance);
             }
         });
 

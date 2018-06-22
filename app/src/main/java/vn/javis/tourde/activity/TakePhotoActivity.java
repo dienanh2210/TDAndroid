@@ -56,7 +56,7 @@ import vn.javis.tourde.utils.TimeUtil;
  * Created by QuanPham on 6/9/18.
  */
 
-public class TakePhotoActivity extends AppCompatActivity {
+public class TakePhotoActivity extends BaseActivity {
 
     @Nullable
     @BindView(R.id.txt_title)
@@ -87,21 +87,26 @@ public class TakePhotoActivity extends AppCompatActivity {
     int cameraType = 0;
     int spotId;
     int courseID;
+    String time;
+    String distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.take_photo);
-        ButterKnife.bind(this);
+        super.onCreate(savedInstanceState);
+//        ButterKnife.bind(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         View decorView = getWindow().getDecorView();
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-        ProcessDialog.showProgressDialog(this, "Loading", false);
+       showProgressDialog();
         spotId = getIntent().getIntExtra(CourseListActivity.SPOT_ID, 0);
         courseID = getIntent().getIntExtra(CourseListActivity.COURSE_DETAIL_ID, 0);
-
+        time  = getIntent().getStringExtra(CourseListActivity.TIME_FINISH);
+        txtTime.setText(time);
+        distance  = getIntent().getStringExtra(CourseListActivity.STAMP_DISTANCE);
+        txtDistance.setText(distance + "km");
         if (spotId > 0) {
             SpotDataAPI.getSpotData(spotId, new ServiceCallback() {
                 @Override
@@ -114,8 +119,7 @@ public class TakePhotoActivity extends AppCompatActivity {
                     if (spotData == null)
                         return;
                     spotTitle.setText(spotData.getData().getTitle());
-                    if (spotData.getData().getInsertDatetime() != null && spotData.getData().getInsertDatetime() != "")
-                        txtTime.setText(TimeUtil.formatDateFromString(TimeUtil.DATE_FORMAT, TimeUtil.DATE_FORMAT1, spotData.getData().getInsertDatetime()));
+
                 }
 
                 @Override
@@ -134,13 +138,13 @@ public class TakePhotoActivity extends AppCompatActivity {
                         return;
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                     courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
-                    txtDistance.setText(mCourseDetail.getmCourseData().getDistance() + "km");
-                    ProcessDialog.hideProgressDialog();
+
+                  hideProgressDialog();
                 }
 
                 @Override
                 public void onError(VolleyError error) {
-                    ProcessDialog.hideProgressDialog();
+                    hideProgressDialog();
                 }
             });
         }

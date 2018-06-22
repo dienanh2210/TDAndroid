@@ -101,7 +101,13 @@ public class GoogleService extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        if (!location.hasAccuracy()) {
+            return;
+        }
+        if (location.getAccuracy() > 5) {
 
+        }
+        Log.i("onLocationChanged", location.getAccuracy() + "");
     }
 
     @Override
@@ -153,10 +159,7 @@ public class GoogleService extends Service implements LocationListener {
                     }
                 }
 
-            }
-
-
-            if (isGPSEnable) {
+            } else if (isGPSEnable) {
                 location = null;
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -168,7 +171,7 @@ public class GoogleService extends Service implements LocationListener {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
                 if (locationManager != null) {
                     location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     if (location != null) {
@@ -201,25 +204,25 @@ public class GoogleService extends Service implements LocationListener {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void fn_update(Location location) {
 
-        intent.putExtra("latutide", location.getLatitude()+"" );
-        intent.putExtra("longitude", location.getLongitude()+"");
+        intent.putExtra("latutide", location.getLatitude() + "");
+        intent.putExtra("longitude", location.getLongitude() + "");
         intent.putExtra("arrived", false);
-        if(lstLocation.size()>0){
-            Log.i("latutide", location.getLatitude() + "-"+lstLocation.get(0).getLatitude());
-            Log.i("longitude", location.getLongitude() + "-"+lstLocation.get(0).getLongtitude());
+        if (lstLocation.size() > 0) {
+            Log.i("latutide", location.getLatitude() + "-" + lstLocation.get(0).getLatitude());
+            Log.i("longitude", location.getLongitude() + "-" + lstLocation.get(0).getLongtitude());
         }
         lstLocationArrived.clear();
         //double distance1 = DistanceLocation.getDistance(location.getLatitude(), location.getLongitude(),lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude());
         Intent intent1 = new Intent(str_receiver_arrived);
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
-            Log.i("GPS_218,lat",lct.getSpotID() +"-"+ location.getLatitude() + "-"+lct.getLatitude() +",longitude"+location.getLongitude() + "-"+lct.getLongtitude() +",distance"+distance);
-            if (distance < 200) {
+            Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
+            if (distance <= 350) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
-             //   showNotification();
+                //   showNotification();
 
-            //    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
+                //    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().commit();
 
                 intent1.putExtra("arrived", lstLocationArrived);
 
@@ -276,7 +279,7 @@ public class GoogleService extends Service implements LocationListener {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.i("googleservice",intent.getStringExtra("test"));
+            Log.i("googleservice", intent.getStringExtra("test"));
             //   latitude = Double.valueOf(intent.getStringExtra("latutide"));
             //     longtitude = Double.valueOf(intent.getStringExtra("longitude"));
         }
