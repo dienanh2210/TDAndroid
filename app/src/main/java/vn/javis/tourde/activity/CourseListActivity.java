@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import android.content.IntentFilter;
@@ -13,6 +14,7 @@ import android.location.Address;
 import android.location.Geocoder;
 
 import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -48,10 +50,12 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import vn.javis.tourde.apiservice.ApplicationVersionAPI;
 import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.apiservice.MaintenanceAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
 import vn.javis.tourde.fragment.BaseFragment;
 import vn.javis.tourde.fragment.CheckPointFragment;
@@ -69,10 +73,12 @@ import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.fragment.SpotFacilitiesFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
+import vn.javis.tourde.model.CheckAppVersion;
 import vn.javis.tourde.model.CourseData;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.Location;
+import vn.javis.tourde.model.MaintenanceStatus;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
@@ -639,6 +645,71 @@ public class CourseListActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
+        MaintenanceAPI.getMaintenanceData(new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                if (!jsonObject.has("error")) {
+                    MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
+                    if (maintenanceStatus.getStatus().equals("1")) {
+                        //show title page(wait design)
+                        Log.i("maintenance","11111");
+                    } else {
+                        Log.i("maintenance","22222");
+                        try {
+                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                            String version = pInfo.versionName;
+                            ApplicationVersionAPI.checkAppVersion(version, "android", new ServiceCallback() {
+                                @Override
+                                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                    JSONObject jsonObject1 = (JSONObject) response;
+                                    Log.i("maintenance", "onSuccess: "+response.toString());
+                                    if (jsonObject1.has("check")) {
+                                        switch (jsonObject1.getString("check")) {
+                                            case "1":
+                                            {
+                                                Log.i("maintenance","333333");
+                                                ProcessDialog.showDialogOk(getApplicationContext(),"","このアプリは最新バージョンにアップデート可能です。");
+                                                break;
+                                            }
+                                            case "2":
+                                            {
+                                                Log.i("maintenance","4444444");
+                                                final String packageName = "com.navitime.local.navitime";
+                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                    @Override
+                                                    public void onOkClick() {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+                                                    }
+                                                });
+                                                break;
+                                            }
+                                            case "0":
+                                                Log.i("maintenance","999999");
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onError(VolleyError error) {
+
+                                }
+                            });
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
 
     }
 

@@ -287,16 +287,15 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.changeInfo:
                 String token = LoginFragment.getmUserToken();
-
-               // ProcessDialog.showProgressDialog(activity,"Loading",false);
-             //   ProcessDialog.showloading( getContext() );
-                LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
-
-                showProgressDialog();
                 if(bitmapIcon==null)
+                {
+                   showProgressDialog();
                     LoginAPI.editAccount(token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, successListener(), errorListener());
-                else
+                }
+                else {
+                    showProgressDialog();
                     LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, this);
+                }
                 break;
         }
     }
