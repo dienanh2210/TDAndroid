@@ -470,7 +470,7 @@ public class CourseListActivity extends BaseActivity {
                     fm.popBackStack();
                 }
                 return;
-            } else if (((FragmentTabLayoutRunning) fragment).isFinishTime && !((FragmentTabLayoutRunning) fragment).isFromMain) {
+            } else if (((FragmentTabLayoutRunning) fragment).isTimeSaved && !((FragmentTabLayoutRunning) fragment).isFromMain) {
                 for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
                     fm.popBackStack();
                 }
