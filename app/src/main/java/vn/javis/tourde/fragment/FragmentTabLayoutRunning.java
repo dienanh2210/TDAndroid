@@ -603,7 +603,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         lastLatitude = latitude;
         lastLongtitude = longtitude;
         DecimalFormat df = new DecimalFormat("#.##");
-        aSpeed = Double.valueOf(df.format(aSpeed));
+        aSpeed = Double.valueOf(df.format(aSpeed).replace(",", "."));
         return aSpeed;
     }
 
