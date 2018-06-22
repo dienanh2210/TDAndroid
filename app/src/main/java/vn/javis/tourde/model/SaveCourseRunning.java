@@ -8,6 +8,16 @@ public class SaveCourseRunning {
     private double start_longtitude;
     private double start_latitude;
     private long timeRunning;
+    private boolean isFinished;
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        isFinished = finished;
+    }
+
     private List<CheckedSpot> lstCheckedSpot = new ArrayList<>();
 
     public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
@@ -58,6 +68,12 @@ public class SaveCourseRunning {
     public void addCheckedSpot(int spotID, String title, int order, String imgUrl,boolean isChecked){
         CheckedSpot model =new CheckedSpot(spotID,title,order,imgUrl,isChecked);
         lstCheckedSpot.add(model);
+    }
+    public void resetAllSpot(){
+        for(int i=1;i<lstCheckedSpot.size();i++)
+        {
+            lstCheckedSpot.get(i).setChecked(false);
+        }
     }
    public class CheckedSpot {
         private int spotID;

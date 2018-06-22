@@ -55,13 +55,13 @@ public class ProcessDialog {
 /*
 
     public static Dialog createProgressDialog(Context context) {
-//        if (progressDialog == null) {
-            progressDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
-            View view = LayoutInflater.from(context).inflate(R.layout.loading_progress, null);
-            progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-            progressDialog.setContentView(view);
-//        }
+        if (progressDialog == null) {
+        progressDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
+        View view = LayoutInflater.from(context).inflate(R.layout.loading_progress, null);
+        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        progressDialog.setContentView(view);
+        }
         return progressDialog;
     }
 */
@@ -278,7 +278,8 @@ public class ProcessDialog {
 
         dialog.show();
     }
-    public static void showDialogOk(final Context context, String title, String content,final OnActionDialogClickOk action) {
+
+    public static void showDialogOk(final Context context, String title, String content, final OnActionDialogClickOk action) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

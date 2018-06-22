@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import android.content.IntentFilter;
@@ -13,6 +14,7 @@ import android.location.Address;
 import android.location.Geocoder;
 
 import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -48,10 +50,12 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import vn.javis.tourde.apiservice.ApplicationVersionAPI;
 import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.LoginAPI;
+import vn.javis.tourde.apiservice.MaintenanceAPI;
 import vn.javis.tourde.fragment.BadgeCollectionFragment;
 import vn.javis.tourde.fragment.BaseFragment;
 import vn.javis.tourde.fragment.CheckPointFragment;
@@ -69,10 +73,12 @@ import vn.javis.tourde.fragment.PostCommentFragment;
 import vn.javis.tourde.fragment.SearchCourseFragment;
 import vn.javis.tourde.fragment.SpotFacilitiesFragment;
 import vn.javis.tourde.fragment.TakePhotoFragment;
+import vn.javis.tourde.model.CheckAppVersion;
 import vn.javis.tourde.model.CourseData;
 import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.Location;
+import vn.javis.tourde.model.MaintenanceStatus;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
@@ -96,6 +102,7 @@ public class CourseListActivity extends BaseActivity {
     public static final String COURSE_DETAIL_INDEX_TAB = "COURSE_INDEX_TAB";
     public static final String STAMP_IMAGE = "stamp_img";
     public static final String STAMP_TITLE = "stamp_title";
+    public static final String STAMP_DISTANCE = "stamp_distance";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
 
@@ -159,7 +166,7 @@ public class CourseListActivity extends BaseActivity {
 
         fn_permission();
         //    showCourseFinish();hiện
-        if (!token.equals("")){
+        if (!token.equals("")) {
             checkLogging();
         }
     }
@@ -316,17 +323,18 @@ public class CourseListActivity extends BaseActivity {
 
     public void showFragmentTabLayoutRunning() {
 //        if (fragmentTabLayoutRunning == null)
-            fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
+        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
         openPage(fragmentTabLayoutRunning, true, false);
     }
 
-    public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title) {
+    public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title, String distance) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putInt(SPOT_ID, idSpot);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
         dataBundle.putString(STAMP_TITLE, title);
+        dataBundle.putString(STAMP_DISTANCE, distance);
         if (goalFragment == null)
             goalFragment = new GoalFragment();
         openPage(goalFragment, true, false);
@@ -349,12 +357,14 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl, String title) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
         dataBundle.putString(STAMP_TITLE, title);
+        dataBundle.putString(TIME_FINISH, time);
+        dataBundle.putString(STAMP_DISTANCE, distance);
         if (checkPointFragment == null)
             checkPointFragment = new CheckPointFragment();
         openPage(checkPointFragment, true, false);
@@ -404,17 +414,21 @@ public class CourseListActivity extends BaseActivity {
     }
 
 
-    public void showTakePhoto(int spotID) {
+    public void showTakePhoto(int spotID, String time, String distance) {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
             mSpotID = spotID;
-            dataBundle.putInt(SPOT_ID, mSpotID);
-            dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+            //         dataBundle.putInt(SPOT_ID, mSpotID);
+            //        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+            //        dataBundle.putString(TIME_FINISH, time);
+            //        dataBundle.putString(STAMP_DISTANCE, distance);
 //            openPage(new TakePhotoFragment(), true, false);
             Intent intent = new Intent(this, TakePhotoActivity.class);
             intent.putExtra(SPOT_ID, mSpotID);
             intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+            intent.putExtra(TIME_FINISH, time);
+            intent.putExtra(STAMP_DISTANCE, distance);
             startActivity(intent);
 
         }
@@ -447,16 +461,16 @@ public class CourseListActivity extends BaseActivity {
         } else if (fragment instanceof FragmentTabLayoutRunning) {
 
 //            ShowCourseDetail();
-            if( SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0 ) {
-                if(((FragmentTabLayoutRunning) fragment).isFinishTime && ((FragmentTabLayoutRunning) fragment).isFromMain) {
+            if (SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
+                if (((FragmentTabLayoutRunning) fragment).isFinishTime && ((FragmentTabLayoutRunning) fragment).isFromMain) {
                     super.onBackPressed();
                     return;
-                };
+                }
                 for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
                     fm.popBackStack();
                 }
                 return;
-            } else if(((FragmentTabLayoutRunning) fragment).isFinishTime && !((FragmentTabLayoutRunning) fragment).isFromMain) {
+            } else if (((FragmentTabLayoutRunning) fragment).isFinishTime && !((FragmentTabLayoutRunning) fragment).isFromMain) {
                 for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
                     fm.popBackStack();
                 }
@@ -515,6 +529,8 @@ public class CourseListActivity extends BaseActivity {
                     Intent intent = new Intent(this, TakePhotoActivity.class);
                     intent.putExtra(SPOT_ID, mSpotID);
                     intent.putExtra(COURSE_DETAIL_ID, mCourseID);
+                    intent.putExtra(TIME_FINISH, "00:00:00");
+                    intent.putExtra(STAMP_DISTANCE, "999");
                     startActivity(intent);
                 }
             }
@@ -564,6 +580,10 @@ public class CourseListActivity extends BaseActivity {
                                         lstLOcat.add(location1);
 
                                     // Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
+                                    //2 21.0182486,105.7818165
+                                    //21.0166412,105.780631
+                                    //21.0138755,105.7762314
+                                    //21.0143274,105.7741553
 
                                 }
                             }
@@ -625,6 +645,71 @@ public class CourseListActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
+        MaintenanceAPI.getMaintenanceData(new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                if (!jsonObject.has("error")) {
+                    MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
+                    if (maintenanceStatus.getStatus().equals("1")) {
+                        //show title page(wait design)
+                        Log.i("maintenance","11111");
+                    } else {
+                        Log.i("maintenance","22222");
+                        try {
+                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                            String version = pInfo.versionName;
+                            ApplicationVersionAPI.checkAppVersion(version, "android", new ServiceCallback() {
+                                @Override
+                                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                    JSONObject jsonObject1 = (JSONObject) response;
+                                    Log.i("maintenance", "onSuccess: "+response.toString());
+                                    if (jsonObject1.has("check")) {
+                                        switch (jsonObject1.getString("check")) {
+                                            case "1":
+                                            {
+                                                Log.i("maintenance","333333");
+                                                ProcessDialog.showDialogOk(getApplicationContext(),"","このアプリは最新バージョンにアップデート可能です。");
+                                                break;
+                                            }
+                                            case "2":
+                                            {
+                                                Log.i("maintenance","4444444");
+                                                final String packageName = "com.navitime.local.navitime";
+                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                    @Override
+                                                    public void onOkClick() {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+                                                    }
+                                                });
+                                                break;
+                                            }
+                                            case "0":
+                                                Log.i("maintenance","999999");
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onError(VolleyError error) {
+
+                                }
+                            });
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
 
     }
 

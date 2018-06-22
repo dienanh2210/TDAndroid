@@ -38,6 +38,8 @@ public class GoalFragment extends BaseFragment {
     int mCourseId;
     String imgUrl;
     String title;
+    String time;
+    String distance;
     CourseListActivity mActivity;
 
     public static GoalFragment newInstance(View.OnClickListener listener) {
@@ -62,11 +64,13 @@ public class GoalFragment extends BaseFragment {
         mCourseId = mActivity.getmCourseID();
         imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
         title = getArguments().getString(CourseListActivity.STAMP_TITLE);
+        time = getArguments().getString(CourseListActivity.TIME_FINISH);
+        distance = getArguments().getString(CourseListActivity.STAMP_DISTANCE);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TourDeApplication.getInstance().trackEvent("tap_goal_logging_course_id=" + mCourseId, "tap", "tap_goal_logging_course_id=" + mCourseId);
-                mActivity.showTakePhoto(spotID);
+                mActivity.showTakePhoto(spotID,time,distance);
             }
         });
         btnToFinish.setOnClickListener(new View.OnClickListener() {
