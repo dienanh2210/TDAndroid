@@ -317,21 +317,17 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 startActivity(Intent.createChooser(myIntent, ""));
             }
         });
-
     }
 
     @Override
     public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.course_detail_fragment, container, false);
     }
-
     public CourseDetail getmCourseDetail() {
         return mCourseDetail;
     }
 
     private void setupViewPager(ViewPager viewPager) {
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -386,7 +382,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             }
             txtTag.setText(s);
         }
-
         isFavourite = false;
         FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
             @Override
@@ -409,7 +404,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
             @Override
             public void onError(VolleyError error) {
-
             }
         });
 
