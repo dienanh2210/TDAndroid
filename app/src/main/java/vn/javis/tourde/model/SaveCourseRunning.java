@@ -9,6 +9,23 @@ public class SaveCourseRunning {
     private double start_latitude;
     private long timeRunning;
     private boolean isFinished;
+    private int lastCheckedOrder;
+
+
+
+
+    public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
+        this.courseID = courseID;
+        this.start_longtitude = start_longtitude;
+        this.start_latitude = start_latitude;
+    }
+    public int getLastCheckedOrder() {
+        return lastCheckedOrder;
+    }
+
+    public void setLastCheckedOrder(int lastCheckedOrder) {
+        this.lastCheckedOrder = lastCheckedOrder;
+    }
 
     public boolean isFinished() {
         return isFinished;
@@ -20,11 +37,6 @@ public class SaveCourseRunning {
 
     private List<CheckedSpot> lstCheckedSpot = new ArrayList<>();
 
-    public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
-        this.courseID = courseID;
-        this.start_longtitude = start_longtitude;
-        this.start_latitude = start_latitude;
-    }
 
     public int getCourseID() {
         return courseID;
@@ -65,17 +77,19 @@ public class SaveCourseRunning {
     public void setLstCheckedSpot(List<CheckedSpot> lstCheckedSpot) {
         this.lstCheckedSpot = lstCheckedSpot;
     }
-    public void addCheckedSpot(int spotID, String title, int order, String imgUrl,boolean isChecked){
-        CheckedSpot model =new CheckedSpot(spotID,title,order,imgUrl,isChecked);
+
+    public void addCheckedSpot(int spotID, String title, int order, String imgUrl, boolean isChecked) {
+        CheckedSpot model = new CheckedSpot(spotID, title, order, imgUrl, isChecked);
         lstCheckedSpot.add(model);
     }
-    public void resetAllSpot(){
-        for(int i=1;i<lstCheckedSpot.size();i++)
-        {
+
+    public void resetAllSpot() {
+        for (int i = 1; i < lstCheckedSpot.size(); i++) {
             lstCheckedSpot.get(i).setChecked(false);
         }
     }
-   public class CheckedSpot {
+
+    public class CheckedSpot {
         private int spotID;
         private String title;
         private int orderNumber;
@@ -85,14 +99,21 @@ public class SaveCourseRunning {
         private double avarageSpeed;
 
 
-        public CheckedSpot(int spotID, String title, int order, String imgUrl,boolean isChecked) {
+        public CheckedSpot(int spotID, String title, int order, String imgUrl, boolean isChecked) {
             this.spotID = spotID;
             this.title = title;
             this.orderNumber = order;
             this.topImage = imgUrl;
-            checked =isChecked;
+            checked = isChecked;
+        }
+        private boolean turnOffAnim;
+        public boolean isTurnOffAnim() {
+            return turnOffAnim;
         }
 
+        public void setTurnOffAnim(boolean turnOffAnim) {
+            this.turnOffAnim = turnOffAnim;
+        }
         public int getSpotID() {
             return spotID;
         }

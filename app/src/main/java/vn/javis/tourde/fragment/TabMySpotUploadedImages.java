@@ -51,7 +51,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
     CourseListActivity mActivity;
     List<String> listSpotImg = new ArrayList<>();
     String avagePace, finishTIme, startAddress;
-    String token = LoginFragment.getmUserToken();
+    String token ="";
     int spotId;
 
     public static TabMySpotUploadedImages intansce(List<String> listSpotImg, int spotID) {
@@ -88,13 +88,20 @@ public class TabMySpotUploadedImages extends BaseFragment {
             }
         });
         rcvMySpotImage.setAdapter(listSpotImageAdapter);
-        String token =LoginFragment.getmUserToken();
-        SpotDataAPI.getPostedSpotImageList(token, spotId, new ServiceCallback() {
+
+        token =LoginFragment.getmUserToken();
+        getImages();
+
+    }
+    void getImages(){
+
+        SpotDataAPI.getPostedSpotImageList(token, spotId, new ServiceCallback()
+        {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONArray list = new JSONArray(response.toString());
                 for (int i = 0; i < list.length(); i++) {
-                   listSpotImg.add(list.get(i).toString());
+                    listSpotImg.add(list.get(i).toString());
                 }
                 listSpotImageAdapter.notifyDataSetChanged();
             }
@@ -104,10 +111,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
 
             }
         });
-
-
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -149,6 +153,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
                                         JSONObject jsonObject = (JSONObject) response;
                                         if (jsonObject.has("success")) {
                                             Log.i("TabMyUploadImg1235", "upload success");
+                                            getImages();
                                         }
                                        hideProgressDialog();
                                     }

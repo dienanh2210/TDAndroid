@@ -56,6 +56,8 @@ public class GoogleService extends Service implements LocationListener {
     double latitude, longitude;
     LocationManager locationManager;
     Location location;
+    Location location2;
+
     private Handler mHandler = new Handler();
     private Timer mTimer = null;
     long notify_interval = 10000;
@@ -68,6 +70,7 @@ public class GoogleService extends Service implements LocationListener {
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
+    private static final double DISTANCE_ALLOW = 100;
 
     public GoogleService() {
 
@@ -146,7 +149,7 @@ public class GoogleService extends Service implements LocationListener {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 10, this);
                 if (locationManager != null) {
                     location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     if (location != null) {
@@ -155,11 +158,12 @@ public class GoogleService extends Service implements LocationListener {
                         Log.i("GPSLOG: ", "latutide: " + location.getLatitude() + ", longitude: " + location.getLongitude());
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        fn_update(location);
+                        fn_update(location, true);
                     }
                 }
 
-            } else if (isGPSEnable) {
+            }
+            if (isGPSEnable) {
                 location = null;
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -179,7 +183,7 @@ public class GoogleService extends Service implements LocationListener {
                         Log.e("longitude", location.getLongitude() + "");
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        fn_update(location);
+                        fn_update(location, false);
                     }
                 }
             }
@@ -202,8 +206,8 @@ public class GoogleService extends Service implements LocationListener {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void fn_update(Location location) {
-
+    private void fn_update(Location location, boolean isLocationNetWork) {
+        intent.putExtra("location_network", isLocationNetWork);
         intent.putExtra("latutide", location.getLatitude() + "");
         intent.putExtra("longitude", location.getLongitude() + "");
         intent.putExtra("arrived", false);
@@ -217,7 +221,7 @@ public class GoogleService extends Service implements LocationListener {
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
             Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
-            if (distance <= 350) {
+            if (distance <= DISTANCE_ALLOW) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
                 //   showNotification();
