@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,8 +67,8 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         Log.i("response", position + "");
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
-
-        holder.txtTag.setText("# " + model.getTag());
+        if (!TextUtils.isEmpty(model.getTag()))
+            holder.txtTag.setText("# " + model.getTag());
         holder.txtDistance.setText(model.getDistance() + "km");
         holder.txtCatchPhrase.setText(model.getCatchPhrase());
         holder.txtReviewCount.setText(model.getReviewCount());
@@ -77,9 +78,9 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         PicassoUtil.getSharedInstance(context).load(model.getPostUserImage()).resize(0, 50).onlyScaleDown().transform(new CircleTransform()).into(holder.imgPostUser);
         List<String> listTag = model.getListTag();
 
-        if (listTag !=null && listTag.size() > 0) {
-            String s="";
-            if (model.getTag() !=null && model.getTag() !="")
+        if (listTag != null && listTag.size() > 0) {
+            String s = "";
+            if (model.getTag() != null && model.getTag() != "")
                 s = "#" + model.getTag() + " ";
             for (int i = 0; i < listTag.size(); i++) {
                 s += "#" + listTag.get(i) + " ";

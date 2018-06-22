@@ -30,7 +30,8 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
     List<SaveCourseRunning.CheckedSpot> listSpot = new ArrayList<SaveCourseRunning.CheckedSpot>();
     CourseListActivity activityContext;
     View mView;
-    int lastCheckedOrder=-1;
+    int lastCheckedOrder = -1;
+
     public ListSpotLog(List<SaveCourseRunning.CheckedSpot> listSpot, CourseListActivity activityContext) {
 
         this.listSpot = listSpot;
@@ -67,25 +68,35 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
             holder.image_link_long.setVisibility(View.GONE);
         }
         if (model.isChecked()) {
-            lastCheckedOrder =position;
+            lastCheckedOrder = position;
             holder.BG_spot.setImageResource(R.drawable.boder_white);
             holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
-            holder.showInfoSpot.setVisibility(View.VISIBLE);
 
-            holder.spotTime.setText(model.getTime());
-            holder.averageSpeed.setText(model.getAvarageSpeed()+"km/h");
-            //holder.img_link_spot.setVisibility(View.VISIBLE);
-
+            if (model.getAvarageSpeed() > 0) {
+                holder.showInfoSpot.setVisibility(View.VISIBLE);
+                holder.spotTime.setText(model.getTime());
+                holder.averageSpeed.setText(model.getAvarageSpeed() + "km/h");
+                //holder.img_link_spot.setVisibility(View.VISIBLE);
+                holder.img_link_vitual.setVisibility(View.GONE);
+            } else {
+                //  holder.img_link_spot.setVisibility(View.VISIBLE);
+                holder.img_link_vitual.setVisibility(View.VISIBLE);
+            }
+            if (!model.isTurnOffAnim()) {
+                holder.img_link_vitual.setVisibility(View.GONE);
+                holder.img_link_spot.setVisibility(View.VISIBLE);
+            } else {
+                holder.img_link_spot.setVisibility(View.GONE);
+            }
             holder.imgShowChecked.setVisibility(View.VISIBLE);
             holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
             holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
-            holder.img_link_vitual.setVisibility(View.GONE);
-        }
-        else if(position==lastCheckedOrder+1)
-        {
+            if(position ==listSpot.size()-1)
+                holder.img_link_spot.setVisibility(View.GONE);
 
-        }
-        else {
+        } else if (position == lastCheckedOrder + 1) {
+
+        } else {
             holder.spot.setAlpha((float) 0.3);
         }
 

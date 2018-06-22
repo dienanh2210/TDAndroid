@@ -134,7 +134,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
-        String savedString =SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+        String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
         if (!TextUtils.isEmpty(savedString)) {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
             courseID = saveCourseRunning.getCourseID();
@@ -191,7 +191,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         list_spot.clear();
 //        setupViewPager(viewPager);
 //        tabLayout.setupWithViewPager(viewPager);
-       showProgressDialog();
+        showProgressDialog();
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -234,7 +234,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
             @Override
             public void onError(VolleyError error) {
-               hideProgressDialog();
+                hideProgressDialog();
             }
         });
 
@@ -325,7 +325,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     void showCheckPointFragment(final int spotId) {
         if (isSpotChecked(spotId))
             return;
-        final String distance=  String.format("%.2f", getCurrentDistance());
+        final String distance = String.format("%.2f", getCurrentDistance());
         checkedSpot(spotId, getTimeFormat(time), calculateAvarageSpeed(time));
 
         if (spotId > 0 && courseID > 0) {
@@ -334,7 +334,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             {
                 saveCourseRunning.setFinished(true);
                 if (spotId == lastSpotId) {
-                  showProgressDialog();
+                    showProgressDialog();
                     CheckInStampAPI.postCheckInStamp(token, courseID, spotId, new ServiceCallback() { //call checkinstamp
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -356,20 +356,20 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 JSONObject jsonObject = (JSONObject) response;
                                                 if (jsonObject.has("success")) {
-                                                    mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title,distance);
+                                                    mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title, distance);
                                                 }
                                                 hideProgressDialog();
                                             }
 
                                             @Override
                                             public void onError(VolleyError error) {
-                                               hideProgressDialog();
+                                                hideProgressDialog();
                                             }
                                         });
                                     }
                                 }
                             }
-                           hideProgressDialog();
+                            hideProgressDialog();
                         }
 
                         @Override
@@ -392,10 +392,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     String finish_time = getTimeFormat(time);
 
-                                    mActivity.showCheckPointFragment(spotId, imgUrl, title,finish_time,distance);
+                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance);
                                 }
                             }
-                           hideProgressDialog();
+                            hideProgressDialog();
                         }
 
                         @Override
@@ -420,14 +420,14 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                         if (jsonObject.has("success")) {
                             isSaveTime = false;
                             preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
-                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "",distance);
+                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "", distance);
                         }
-                       hideProgressDialog();
+                        hideProgressDialog();
                     }
 
                     @Override
                     public void onError(VolleyError error) {
-                      hideProgressDialog();
+                        hideProgressDialog();
                     }
                 });
             } else {
@@ -446,10 +446,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 String imgUrl = model.getImage() == null ? "" : model.getImage();
                                 String title = model.getTitle() == null ? "" : model.getTitle();
                                 String finish_time = getTimeFormat(time);
-                                mActivity.showCheckPointFragment(spotId, imgUrl, title,finish_time,distance);
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance);
                             }
                         }
-                       hideProgressDialog();
+                        hideProgressDialog();
                     }
 
                     @Override
@@ -580,7 +580,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        fragmentMap =new FragmentMap();
+        fragmentMap = new FragmentMap();
         adapter.addFragment(fragmentMap, "MAP");
         fragmentLog = FragmentLog.intance(saveCourseRunning);
         adapter.addFragment(fragmentLog, "ログ");
@@ -614,10 +614,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         return finishTime;
     }
+
     double getCurrentDistance() {
         double distance = SphericalUtil.computeDistanceBetween(new LatLng(lastLatitude, lastLongtitude), new LatLng(latitude, longtitude));
         return distance;
     }
+
     private void setListCheckedSpot() {
         if (saveCourseRunning != null)
             return;
@@ -632,15 +634,17 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
         String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
         SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
-        fragmentLog.updateCheckedSpot( saveCourseRunning);
+        fragmentLog.updateCheckedSpot(saveCourseRunning);
     }
-    void saveCheckedSpot(){
+
+    void saveCheckedSpot() {
         String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
         SharedPreferencesUtils.getInstance(getContext()).setStringValue(Constant.SAVED_COURSE_RUNNING, s);
     }
+
     private boolean isSpotChecked(int spotId) {
         for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
-            if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId &&  saveCourseRunning.getLstCheckedSpot().get(i).isChecked()) {
+            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId && saveCourseRunning.getLstCheckedSpot().get(i).isChecked()) {
                 Log.i("running566", "" + spotId);
                 return true;
 
@@ -651,14 +655,21 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     }
 
     private void checkedSpot(int spotId, String finishTime, double averageSpeed) {
-        for (int i = 0; i <  saveCourseRunning.getLstCheckedSpot().size(); i++) {
-            if ( saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId) {
+        for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
+            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId) {
                 saveCourseRunning.getLstCheckedSpot().get(i).setChecked(true);
-                saveCourseRunning.getLstCheckedSpot().get(i).setAvarageSpeed(averageSpeed);
-                saveCourseRunning.getLstCheckedSpot().get(i).setTime(finishTime);
+                if(i == saveCourseRunning.getLastCheckedOrder() +1)
+                {
+                    saveCourseRunning.getLstCheckedSpot().get( saveCourseRunning.getLastCheckedOrder()).setAvarageSpeed(averageSpeed);
+                    saveCourseRunning.getLstCheckedSpot().get( saveCourseRunning.getLastCheckedOrder()).setTime(finishTime);
+                }
+                if(i>0){
+                    saveCourseRunning.getLstCheckedSpot().get(i-1).setTurnOffAnim(true);
+                }
+                saveCourseRunning.setLastCheckedOrder(i);
             }
         }
-        fragmentLog.updateCheckedSpot( saveCourseRunning);
+        fragmentLog.updateCheckedSpot(saveCourseRunning);
         saveCheckedSpot();
     }
 

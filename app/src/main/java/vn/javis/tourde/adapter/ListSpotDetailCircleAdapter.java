@@ -78,9 +78,11 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
         String tag = "";
 //        if (spot.getTag() != null)
 //            tag += "#" + spot.getTag();
+
         for (int i = 0; i < spot.getListTag().size(); i++) {
             tag += " #" + spot.getListTag().get(i);
         }
+        Log.i("tagDebugCircleSPot85",spot.getListTag().size() +"-"+tag);
         holder.txtTag.setText(tag);
 //
         if (spot.getTopImage() != null && spot.getTopImage() != "")

@@ -18,7 +18,8 @@ public class CourseDetail {
     private ReviewTotal reviewTotal;
     private List<String> listTag;
 
-    public CourseDetail(JSONObject jsonResponse) {
+    public CourseDetail(JSONObject jsonResponse)
+    {
 
         try {
 
@@ -26,12 +27,13 @@ public class CourseDetail {
             mCourseData = CourseData.getData(data.toString());
             spot = new ArrayList<Spot>();
             JSONArray listSpot = jsonResponse.getJSONArray("spot");
-            for (int i = 0; i < listSpot.length(); i++) {
+            for (int i = 0; i < listSpot.length(); i++)
+            {
                 JSONObject dtSpot = (JSONObject) listSpot.get(i);
                 Spot modelSpot = Spot.getData(dtSpot.getJSONObject("data").toString());
 
                 JSONArray listTagOb = dtSpot.getJSONArray("tag");
-                listTag = new ArrayList<String>();
+               List<String> listTag = new ArrayList<String>();
                 for (int a = 0; a < listTagOb.length(); a++) {
                     listTagOb.get(a);
                     listTag.add(listTagOb.get(a).toString());
@@ -39,7 +41,8 @@ public class CourseDetail {
                 modelSpot.setListTag(listTag);
                 spot.add(modelSpot);
             }
-            listTag.clear();
+
+//            listTag.clear();
             listTag = new ArrayList<String>();
             JSONArray listTagOb = jsonResponse.getJSONArray("tag");
             for (int i = 0; i < listTagOb.length(); i++) {
@@ -55,6 +58,7 @@ public class CourseDetail {
                 review.add(modelReview);
             }
             reviewTotal = ReviewTotal.getData(jsonResponse.getJSONObject("review_total").toString());
+            int i =spot.size();
         } catch (JSONException e) {
             e.printStackTrace();
         }
