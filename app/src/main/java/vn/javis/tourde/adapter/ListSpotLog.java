@@ -56,6 +56,7 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         holder.img_link_vitual.setVisibility(View.GONE);
         holder.img_link_spot.setVisibility(View.GONE);
         holder.img_link_short.setVisibility(View.GONE);
+        boolean showLong=false;
         /*if (model.getTopImage() != null && model.getTopImage() !="")
             Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);*/
 
@@ -82,6 +83,7 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 holder.averageSpeed.setText(model.getAvarageSpeed() + "km/h");
                 //holder.img_link_spot.setVisibility(View.VISIBLE);
                 holder.img_link_vitual.setVisibility(View.GONE);
+                showLong=true;
             } else {
                 //  holder.img_link_spot.setVisibility(View.VISIBLE);
                 holder.img_link_vitual.setVisibility(View.VISIBLE);
@@ -100,7 +102,11 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
             } else {
                 holder.img_link_vitual.setVisibility(View.GONE);
                 holder.img_link_spot.setVisibility(View.GONE);
-                holder.img_link_short.setVisibility(View.VISIBLE);
+                if(!showLong) {
+
+                    holder.img_link_short.setVisibility(View.VISIBLE);
+                }
+                else { holder.img_link_short.setVisibility(View.VISIBLE);}
             }
 
 
