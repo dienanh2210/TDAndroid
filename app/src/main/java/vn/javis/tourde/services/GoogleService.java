@@ -70,7 +70,7 @@ public class GoogleService extends Service implements LocationListener {
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
-    private static final double DISTANCE_ALLOW = 100;
+    private static final double DISTANCE_ALLOW = 10000;
 
     public GoogleService() {
 

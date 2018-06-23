@@ -84,6 +84,7 @@ import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -214,7 +215,11 @@ public class CourseListActivity extends BaseActivity {
 //                    if (fragmentTabLayoutRunning == null)
 //                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
 //                    openPage(fragmentTabLayoutRunning, true, false);
-                    openPage(CourseDetailFragment.newInstance(true), true, false);
+                    if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+                        showGoalFragment(0, 0, "00","", "", "12"); // test
+                    } else {
+                        openPage(CourseDetailFragment.newInstance(true), true, false);
+                    }
                 }
             });
         }
@@ -493,6 +498,8 @@ public class CourseListActivity extends BaseActivity {
                 return;
             }
 
+        } else if (fragment instanceof GoalFragment) {
+            return;
         }
 
         super.onBackPressed();
@@ -639,7 +646,7 @@ public class CourseListActivity extends BaseActivity {
             if (str1.isEmpty() && str2.isEmpty())
                 return;//location_network
             boolean isLocationNetWork = intent.getBooleanExtra("location_network", false);
-            if(isLocationNetWork) {
+            if (isLocationNetWork) {
                 latitudeNetWork = Double.valueOf(intent.getStringExtra("latutide"));
                 longitudeNetWork = Double.valueOf(intent.getStringExtra("longitude"));
             } else {
@@ -674,9 +681,9 @@ public class CourseListActivity extends BaseActivity {
                     MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
                     if (maintenanceStatus.getStatus().equals("1")) {
                         //show title page(wait design)
-                        Log.i("maintenance","11111");
+                        Log.i("maintenance", "11111");
                     } else {
-                        Log.i("maintenance","22222");
+                        Log.i("maintenance", "22222");
                         try {
                             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                             String version = pInfo.versionName;
@@ -684,18 +691,16 @@ public class CourseListActivity extends BaseActivity {
                                 @Override
                                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                     JSONObject jsonObject1 = (JSONObject) response;
-                                    Log.i("maintenance", "onSuccess: "+response.toString());
+                                    Log.i("maintenance", "onSuccess: " + response.toString());
                                     if (jsonObject1.has("check")) {
                                         switch (jsonObject1.getString("check")) {
-                                            case "1":
-                                            {
-                                                Log.i("maintenance","333333");
-                                                ProcessDialog.showDialogOk(getApplicationContext(),"","このアプリは最新バージョンにアップデート可能です。");
+                                            case "1": {
+                                                Log.i("maintenance", "333333");
+                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。");
                                                 break;
                                             }
-                                            case "2":
-                                            {
-                                                Log.i("maintenance","4444444");
+                                            case "2": {
+                                                Log.i("maintenance", "4444444");
                                                 final String packageName = "com.navitime.local.navitime";
                                                 ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
@@ -706,7 +711,7 @@ public class CourseListActivity extends BaseActivity {
                                                 break;
                                             }
                                             case "0":
-                                                Log.i("maintenance","999999");
+                                                Log.i("maintenance", "999999");
                                                 break;
                                             default:
                                                 break;

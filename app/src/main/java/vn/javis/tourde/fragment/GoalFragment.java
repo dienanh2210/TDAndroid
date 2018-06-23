@@ -19,7 +19,9 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -58,6 +60,7 @@ public class GoalFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
+        SharedPreferencesUtils.getInstance(getContext()).setBooleanValue(Constant.KEY_GOAL_PAGE, true);
         final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
         final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
         spotID = getArguments().getInt(CourseListActivity.SPOT_ID);
