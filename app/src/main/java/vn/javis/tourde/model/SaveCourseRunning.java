@@ -16,12 +16,21 @@ public class SaveCourseRunning {
     private String goal_title;
     private String allDistance;
     private float avarageSpeed;
+    private int highestCheckedSpot;
 
 
     public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
         this.courseID = courseID;
         this.start_longtitude = start_longtitude;
         this.start_latitude = start_latitude;
+    }
+
+    public int getHighestCheckedSpot() {
+        return highestCheckedSpot;
+    }
+
+    public void setHighestCheckedSpot(int highestCheckedSpot) {
+        this.highestCheckedSpot = highestCheckedSpot;
     }
 
     public String getImgUrlGoal() {
@@ -150,7 +159,7 @@ public class SaveCourseRunning {
         private String time;
         private boolean checked;
         private double avarageSpeed;
-
+        private boolean isHighestChecked;
 
         public CheckedSpot(int spotID, String title, int order, String imgUrl, boolean isChecked) {
             this.spotID = spotID;
@@ -160,7 +169,40 @@ public class SaveCourseRunning {
             checked = isChecked;
         }
 
+        public int getOrderNumber() {
+            return orderNumber;
+        }
+
+        public void setOrderNumber(int orderNumber) {
+            this.orderNumber = orderNumber;
+        }
+
+        public String getTopImage() {
+            return topImage;
+        }
+
+        public void setTopImage(String topImage) {
+            this.topImage = topImage;
+        }
+
+        public boolean isHighestChecked() {
+            return isHighestChecked;
+        }
+
+        public void setHighestChecked(boolean highestChecked) {
+            isHighestChecked = highestChecked;
+        }
+
+        public boolean isTurnOnShortLink() {
+            return turnOnShortLink;
+        }
+
+        public void setTurnOnShortLink(boolean turnOnShortLink) {
+            this.turnOnShortLink = turnOnShortLink;
+        }
+
         private boolean turnOffAnim;
+        private boolean turnOnShortLink;
 
         public boolean isTurnOffAnim() {
             return turnOffAnim;

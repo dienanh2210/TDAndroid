@@ -675,14 +675,21 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     private void checkedSpot(int spotId, String finishTime, double averageSpeed,long lastCheckTime) {
         for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
-            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId) {
+            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId)
+            {
                 saveCourseRunning.getLstCheckedSpot().get(i).setChecked(true);
+                if(spotId>saveCourseRunning.getHighestCheckedSpot())
+                {
+                    saveCourseRunning.setHighestCheckedSpot(spotId);
+                    saveCourseRunning.getLstCheckedSpot().get(i).setHighestChecked(true);
+                }
                 if (i == saveCourseRunning.getLastCheckedOrder() + 1) {
                     saveCourseRunning.getLstCheckedSpot().get(saveCourseRunning.getLastCheckedOrder()).setAvarageSpeed(averageSpeed);
                     saveCourseRunning.getLstCheckedSpot().get(saveCourseRunning.getLastCheckedOrder()).setTime(finishTime);
                 }
                 if (i > 0) {
                     saveCourseRunning.getLstCheckedSpot().get(i - 1).setTurnOffAnim(true);
+
                 }
                 saveCourseRunning.setLastCheckedOrder(i);
                 saveCourseRunning.setLastCheckedTime(lastCheckTime);

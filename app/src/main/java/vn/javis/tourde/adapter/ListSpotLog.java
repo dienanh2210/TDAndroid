@@ -53,6 +53,9 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         int spotID = model.getOrder() + 1;
         holder.txt_spotName.setText(model.getTitle());
         holder.spot_id.setText("" + spotID);
+        holder.img_link_vitual.setVisibility(View.GONE);
+        holder.img_link_spot.setVisibility(View.GONE);
+        holder.img_link_short.setVisibility(View.GONE);
         /*if (model.getTopImage() != null && model.getTopImage() !="")
             Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);*/
 
@@ -83,24 +86,24 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 //  holder.img_link_spot.setVisibility(View.VISIBLE);
                 holder.img_link_vitual.setVisibility(View.VISIBLE);
             }
-            if (!shownAnim) {
-                if (!model.isTurnOffAnim()) {
-                    holder.img_link_vitual.setVisibility(View.GONE);
-                    holder.img_link_spot.setVisibility(View.VISIBLE);
-                } else {
-                    holder.img_link_spot.setVisibility(View.GONE);
-                }
-                shownAnim = true;
-            } else {
 
-                if (!model.isTurnOffAnim()) {
-                    holder.img_link_vitual.setVisibility(View.GONE);
-                    holder.img_link_spot.setVisibility(View.GONE);
-                    holder.img_link_short.setVisibility(View.VISIBLE);
+
+            if (!model.isTurnOffAnim()) {
+                holder.img_link_vitual.setVisibility(View.GONE);
+                if (!shownAnim) {
+                    holder.img_link_spot.setVisibility(View.VISIBLE);
+                    shownAnim = true;
                 } else {
-                    holder.img_link_spot.setVisibility(View.GONE);
+                    holder.img_link_vitual.setVisibility(View.VISIBLE);
                 }
+
+            } else {
+                holder.img_link_vitual.setVisibility(View.GONE);
+                holder.img_link_spot.setVisibility(View.GONE);
+                holder.img_link_short.setVisibility(View.VISIBLE);
             }
+
+
             holder.imgShowChecked.setVisibility(View.VISIBLE);
             holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
             holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
@@ -108,8 +111,15 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 holder.img_link_spot.setVisibility(View.GONE);
 
         } else if (position == lastCheckedOrder + 1) {
-
+            if (model.isTurnOffAnim()) {
+                holder.img_link_vitual.setVisibility(View.GONE);
+                holder.img_link_spot.setVisibility(View.GONE);
+                holder.img_link_short.setVisibility(View.VISIBLE);
+            } else {
+                holder.img_link_vitual.setVisibility(View.VISIBLE);
+            }
         } else {
+            holder.img_link_vitual.setVisibility(View.VISIBLE);
             holder.spot.setAlpha((float) 0.3);
         }
 
