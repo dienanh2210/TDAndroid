@@ -1,6 +1,8 @@
 package vn.javis.tourde.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -51,6 +53,8 @@ public class MenuPageActivity extends BaseActivity {
     @BindView( R.id.inquiry )
      RelativeLayout inquiry;
     MenuPageActivity activity;
+    @BindView( R.id.tv_version )
+    TextView tv_version;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_menu_page);
@@ -99,6 +103,13 @@ privacy.setOnClickListener( new View.OnClickListener() {
                 startActivityForResult(intent, 1);
             }
         } );
+//show version app
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            tv_version.setText(packageInfo.versionName);
+        }
+        catch (PackageManager.NameNotFoundException e) {
+        }
     }
 
     View.OnClickListener onClicknippon = new View.OnClickListener() {

@@ -44,7 +44,10 @@ Button bt_rule;
         startActivity(intent);
         finish();
     }
-
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
     @Override
     protected void onResume() {
         super.onResume();

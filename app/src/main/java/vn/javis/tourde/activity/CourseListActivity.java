@@ -127,6 +127,7 @@ public class CourseListActivity extends BaseActivity {
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
     double latitude = 0, longitude = 0;
+    double latitudeNetWork = 0, longitudeNetWork = 0;
     Geocoder geocoder;
     Bundle dataBundle;
 
@@ -442,6 +443,21 @@ public class CourseListActivity extends BaseActivity {
         return longitude;
     }
 
+    public double getLatitudeNetWork() {
+        return latitudeNetWork;
+    }
+
+    public void setLatitudeNetWork(double latitudeNetWork) {
+        this.latitudeNetWork = latitudeNetWork;
+    }
+
+    public double getLongitudeNetWork() {
+        return longitudeNetWork;
+    }
+
+    public void setLongitudeNetWork(double longitudeNetWork) {
+        this.longitudeNetWork = longitudeNetWork;
+    }
 
     public void openLoginPage() {
         Intent intent = new Intent(this, LoginSNSActivity.class);
@@ -621,10 +637,15 @@ public class CourseListActivity extends BaseActivity {
             String str2 = intent.getStringExtra("longitude");
 
             if (str1.isEmpty() && str2.isEmpty())
-                return;
-
-            latitude = Double.valueOf(intent.getStringExtra("latutide"));
-            longitude = Double.valueOf(intent.getStringExtra("longitude"));
+                return;//location_network
+            boolean isLocationNetWork = intent.getBooleanExtra("location_network", false);
+            if(isLocationNetWork) {
+                latitudeNetWork = Double.valueOf(intent.getStringExtra("latutide"));
+                longitudeNetWork = Double.valueOf(intent.getStringExtra("longitude"));
+            } else {
+                latitude = Double.valueOf(intent.getStringExtra("latutide"));
+                longitude = Double.valueOf(intent.getStringExtra("longitude"));
+            }
             Log.i("latutide", "" + latitude);
             Log.i("longitude", "" + longitude);
 

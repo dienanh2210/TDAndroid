@@ -89,7 +89,7 @@ public class GoalFragment extends BaseFragment {
 
                 if (imgView.getTag() == null) {
                     ImageViewAnimatedChange(getApplicationContext(), txtView, title, imgView, imgUrl);
-                    //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+                     //   ImageViewAnimatedChange(mActivity, txtView, "バッジを獲得！", imgView, imgUrl);
                     handler.postDelayed(runnable, 1000);
 
                 }
