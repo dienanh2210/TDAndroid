@@ -30,6 +30,7 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
     List<SaveCourseRunning.CheckedSpot> listSpot = new ArrayList<SaveCourseRunning.CheckedSpot>();
     CourseListActivity activityContext;
     View mView;
+    boolean shownAnim = false;
     int lastCheckedOrder = -1;
 
     public ListSpotLog(List<SaveCourseRunning.CheckedSpot> listSpot, CourseListActivity activityContext) {
@@ -82,16 +83,28 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 //  holder.img_link_spot.setVisibility(View.VISIBLE);
                 holder.img_link_vitual.setVisibility(View.VISIBLE);
             }
-            if (!model.isTurnOffAnim()) {
-                holder.img_link_vitual.setVisibility(View.GONE);
-                holder.img_link_spot.setVisibility(View.VISIBLE);
+            if (!shownAnim) {
+                if (!model.isTurnOffAnim()) {
+                    holder.img_link_vitual.setVisibility(View.GONE);
+                    holder.img_link_spot.setVisibility(View.VISIBLE);
+                } else {
+                    holder.img_link_spot.setVisibility(View.GONE);
+                }
+                shownAnim = true;
             } else {
-                holder.img_link_spot.setVisibility(View.GONE);
+
+                if (!model.isTurnOffAnim()) {
+                    holder.img_link_vitual.setVisibility(View.GONE);
+                    holder.img_link_spot.setVisibility(View.GONE);
+                    holder.img_link_short.setVisibility(View.VISIBLE);
+                } else {
+                    holder.img_link_spot.setVisibility(View.GONE);
+                }
             }
             holder.imgShowChecked.setVisibility(View.VISIBLE);
             holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
             holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
-            if(position ==listSpot.size()-1)
+            if (position == listSpot.size() - 1)
                 holder.img_link_spot.setVisibility(View.GONE);
 
         } else if (position == lastCheckedOrder + 1) {
@@ -127,6 +140,8 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         RelativeLayout showInfoSpot;
         @BindView(R.id.image_link_long)
         ImageView image_link_long;
+        @BindView(R.id.img_link_short)
+        ImageView img_link_short;
         @BindView(R.id.spotTime)
         TextView spotTime;
         @BindView(R.id.averageSpeed)

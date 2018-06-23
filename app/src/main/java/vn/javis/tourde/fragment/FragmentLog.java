@@ -76,7 +76,7 @@ public class FragmentLog extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);
         recyclerSpot.setNestedScrollingEnabled(false);
-       showProgressDialog();
+        showProgressDialog();
 
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
             @Override
@@ -91,13 +91,13 @@ public class FragmentLog extends BaseFragment {
                     txtPrezent.setText(mCourseDetail.getmCourseData().getTitle());
 
                 }
-              hideProgressDialog();
+                hideProgressDialog();
                 setRecyclerSpot();
             }
 
             @Override
             public void onError(VolleyError error) {
-              hideProgressDialog();
+                hideProgressDialog();
             }
         });
 

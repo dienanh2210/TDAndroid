@@ -60,6 +60,7 @@ public class GoalFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
+        SharedPreferencesUtils.getInstance(getContext()).setBooleanValue(Constant.KEY_GOAL_PAGE, true);
         final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
         final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
         spotID = getArguments().getInt(CourseListActivity.SPOT_ID);
