@@ -36,4 +36,12 @@ public class TimeUtil {
 
     }
 
+  public static String getTimeFormat(long time) {
+        int h = (int) (time / 3600000);
+        int m = (int) (time - h * 3600000) / 60000;
+        int s = (int) (time - h * 3600000 - m * 60000) / 1000;
+        final String finishTime = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+        return finishTime;
+    }
+
 }
