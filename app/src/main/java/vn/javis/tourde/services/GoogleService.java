@@ -221,7 +221,7 @@ public class GoogleService extends Service implements LocationListener {
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
             Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
-            if (distance <= DISTANCE_ALLOW) {
+            if (distance <= 2000) {
                 if (!lstLocationArrived.contains(lct))
                     lstLocationArrived.add(lct);
                 //   showNotification();
