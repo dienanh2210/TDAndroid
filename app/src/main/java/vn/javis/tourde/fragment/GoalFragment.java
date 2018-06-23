@@ -19,7 +19,9 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 

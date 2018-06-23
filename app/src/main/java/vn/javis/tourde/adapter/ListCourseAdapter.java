@@ -81,9 +81,9 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         if (listTag != null && listTag.size() > 0) {
             String s = "";
             if (model.getTag() != null && model.getTag() != "")
-                s = "#" + model.getTag() + " ";
+                s = "#" + model.getTag() + "    ";
             for (int i = 0; i < listTag.size(); i++) {
-                s += "#" + listTag.get(i) + " ";
+                s += "#" + listTag.get(i) + "    ";
             }
             holder.txtTag.setText(s);
         }
