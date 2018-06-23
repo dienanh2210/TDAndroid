@@ -19,7 +19,9 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -95,7 +97,7 @@ public class GoalFragment extends BaseFragment {
 
         };
         handler.postDelayed(runnable, 1000);
-
+        SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.SAVED_COURSE_RUNNING);
     }
 
     public static void ImageViewAnimatedChange(Context c, final TextView textView, final String s, final ImageView v, final int new_image) {

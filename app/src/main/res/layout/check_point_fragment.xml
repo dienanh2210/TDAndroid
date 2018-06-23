@@ -7,12 +7,14 @@
     android:layout_height="match_parent"
     android:background="@color/search_course_color_title_background"
     tools:context="vn.javis.tourde.activity.BasicInfoActivity">
+
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/background_check"
         android:scaleType="fitXY" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -55,7 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backgroud">
-          <pl.droidsonroids.gif.GifImageView
+
+            <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/gifImageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,8 +66,7 @@
                 android:background="@drawable/background_check"
                 android:scaleType="fitXY"
                 android:scaleX="1.5"
-              android:scaleY="1.5" />
-
+                android:scaleY="1.5" />
 
 
             <RelativeLayout
@@ -77,20 +79,20 @@
                     android:layout_height="@dimen/_130sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_60sdp"
-                    />
+                    android:layout_marginTop="@dimen/_60sdp" />
 
 
                 <TextView
-                android:id="@+id/txtDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_225sdp"
-                android:text=""
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold" />
+                    android:id="@+id/txtDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_225sdp"
+                    android:text=""
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/_18sdp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtDesctwo"
                     android:layout_width="wrap_content"
@@ -99,8 +101,9 @@
                     android:layout_marginTop="@dimen/_210sdp"
                     android:text=""
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/_10ssp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtDescthree"
                     android:layout_width="wrap_content"
@@ -109,7 +112,7 @@
                     android:layout_marginTop="@dimen/_225sdp"
                     android:text=""
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />
 
                 <Button
@@ -124,6 +127,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/backgroud"
                     android:textSize="@dimen/_12sdp" />
+
                 <Button
                     android:id="@+id/bt_checkpointleft"
                     android:layout_width="@dimen/_140sdp"
@@ -136,6 +140,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/backgroud"
                     android:textSize="@dimen/_12sdp" />
+
                 <Button
                     android:id="@+id/bt_checkpointright"
                     android:layout_width="@dimen/_150sdp"
