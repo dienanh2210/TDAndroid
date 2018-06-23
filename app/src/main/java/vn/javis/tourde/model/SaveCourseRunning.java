@@ -8,10 +8,14 @@ public class SaveCourseRunning {
     private double start_longtitude;
     private double start_latitude;
     private long timeRunning;
+    private long lastCheckedTime;
     private boolean isFinished;
     private int lastCheckedOrder;
-
-
+    private String imgUrlGoal;
+    private int goalSpotId;
+    private String goal_title;
+    private String allDistance;
+    private float avarageSpeed;
 
 
     public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
@@ -19,6 +23,55 @@ public class SaveCourseRunning {
         this.start_longtitude = start_longtitude;
         this.start_latitude = start_latitude;
     }
+
+    public String getImgUrlGoal() {
+        return imgUrlGoal;
+    }
+
+    public void setImgUrlGoal(String imgUrlGoal) {
+        this.imgUrlGoal = imgUrlGoal;
+    }
+
+    public int getGoalSpotId() {
+        return goalSpotId;
+    }
+
+    public void setGoalSpotId(int goalSpotId) {
+        this.goalSpotId = goalSpotId;
+    }
+
+    public String getGoal_title() {
+        return goal_title;
+    }
+
+    public void setGoal_title(String goal_title) {
+        this.goal_title = goal_title;
+    }
+
+    public String getAllDistance() {
+        return allDistance;
+    }
+
+    public void setAllDistance(String allDistance) {
+        this.allDistance = allDistance;
+    }
+
+    public float getAvarageSpeed() {
+        return avarageSpeed;
+    }
+
+    public void setAvarageSpeed(float avarageSpeed) {
+        this.avarageSpeed = avarageSpeed;
+    }
+
+    public long getLastCheckedTime() {
+        return lastCheckedTime;
+    }
+
+    public void setLastCheckedTime(long lastCheckedTime) {
+        this.lastCheckedTime = lastCheckedTime;
+    }
+
     public int getLastCheckedOrder() {
         return lastCheckedOrder;
     }
@@ -106,7 +159,9 @@ public class SaveCourseRunning {
             this.topImage = imgUrl;
             checked = isChecked;
         }
+
         private boolean turnOffAnim;
+
         public boolean isTurnOffAnim() {
             return turnOffAnim;
         }
@@ -114,6 +169,7 @@ public class SaveCourseRunning {
         public void setTurnOffAnim(boolean turnOffAnim) {
             this.turnOffAnim = turnOffAnim;
         }
+
         public int getSpotID() {
             return spotID;
         }
