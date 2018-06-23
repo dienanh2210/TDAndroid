@@ -26,6 +26,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -79,13 +80,17 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.Location;
 import vn.javis.tourde.model.MaintenanceStatus;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
+import vn.javis.tourde.utils.ClassToJson;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
+import vn.javis.tourde.utils.TimeUtil;
 
 import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
 import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.newInstance;
@@ -214,7 +219,15 @@ public class CourseListActivity extends BaseActivity {
 //                    if (fragmentTabLayoutRunning == null)
 //                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
 //                    openPage(fragmentTabLayoutRunning, true, false);
-                    openPage(CourseDetailFragment.newInstance(true), true, false);
+                    if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+                        String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
+                        if (!TextUtils.isEmpty(savedString)) {
+                            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+                            showGoalFragment(saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getTimeRunning()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance());
+                        }
+                    } else {
+                        openPage(CourseDetailFragment.newInstance(true), true, false);
+                    }
                 }
             });
         }
@@ -493,6 +506,8 @@ public class CourseListActivity extends BaseActivity {
                 return;
             }
 
+        } else if (fragment instanceof GoalFragment) {
+            return;
         }
 
         super.onBackPressed();

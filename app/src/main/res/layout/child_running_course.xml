@@ -109,5 +109,9 @@
             android:textStyle="bold"
             android:textSize="@dimen/_11sdp"/>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height=".3dp"
+        android:background="@color/Gray"
+        />
 </LinearLayout>

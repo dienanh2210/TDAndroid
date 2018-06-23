@@ -68,8 +68,10 @@ import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.CameraUtils;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -168,7 +170,11 @@ public class FinishCourseFragment extends BaseFragment {
                 ProcessDialog.showDialogConfirm(mActivity, "", "終了してコース画面へ 戻りますが宜しいですか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-                        mActivity.ShowCourseDetailById(mCourseID);
+//                        mActivity.ShowCourseDetailById(mCourseID);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.SAVED_COURSE_RUNNING);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.KEY_GOAL_PAGE);
+                        mActivity.onBackPressed();
                     }
                 });
             }
