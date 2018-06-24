@@ -226,10 +226,11 @@ public class CourseListActivity extends BaseActivity {
                             SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
                             mCourseID = saveCourseRunning.getCourseID();
                             Log.i("getAvarageSpeed", saveCourseRunning.getAvarageSpeed() + "");
-                            openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance()), true, false);
+                            openPage(CourseDetailFragment.newInstance(true, saveCourseRunning), true, false);
+//                            openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance()), true, false);
                         }
                     } else {
-                        openPage(CourseDetailFragment.newInstance(true), true, false);
+                        openPage(CourseDetailFragment.newInstance(true, null), true, false);
                     }
                 }
             });
@@ -249,7 +250,7 @@ public class CourseListActivity extends BaseActivity {
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
 //        if (mCourseListFragment == null)
-            mCourseListFragment = new CourseListFragment();
+        mCourseListFragment = new CourseListFragment();
         openPage(mCourseListFragment, false, false);
     }
 
@@ -257,7 +258,7 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putSerializable("params", parram);
         dataBundle.putString("searching", "searching");
 //        if (mCourseListFragment == null)
-            mCourseListFragment = new CourseListFragment();
+        mCourseListFragment = new CourseListFragment();
         openPage(mCourseListFragment, false, true);
     }
 
@@ -266,7 +267,7 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
 //        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
@@ -275,14 +276,14 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
 //        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void ShowCourseDetail() {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
 //        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
@@ -290,7 +291,7 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
 //        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
 
     }
@@ -300,19 +301,19 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
 //        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void showMyCourse() {
 //        if (fragmentTabLayoutMyCourse == null)
-            fragmentTabLayoutMyCourse = new FragmentTabLayoutMyCourse();
+        fragmentTabLayoutMyCourse = new FragmentTabLayoutMyCourse();
         openPage(fragmentTabLayoutMyCourse, true, false);
     }
 
     public void showBadgeCollection() {
 //        if (badgeCollectionFragment == null)
-            badgeCollectionFragment = new BadgeCollectionFragment();
+        badgeCollectionFragment = new BadgeCollectionFragment();
         openPage(badgeCollectionFragment, true, false);
     }
 
@@ -326,7 +327,7 @@ public class CourseListActivity extends BaseActivity {
 
     public void showCourseDrive() {
 //        if (courseDriveFragment == null)
-            courseDriveFragment = new CourseDriveFragment();
+        courseDriveFragment = new CourseDriveFragment();
         openPage(courseDriveFragment, true, false);
     }
 
@@ -334,7 +335,7 @@ public class CourseListActivity extends BaseActivity {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
 //        if (spotFacilitiesFragment == null)
-            spotFacilitiesFragment = new SpotFacilitiesFragment();
+        spotFacilitiesFragment = new SpotFacilitiesFragment();
         openPage(spotFacilitiesFragment, true, false);
     }
 
@@ -353,16 +354,17 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putString(STAMP_TITLE, title);
         dataBundle.putString(STAMP_DISTANCE, distance);
 //        if (goalFragment == null)
-            goalFragment = new GoalFragment();
+        goalFragment = new GoalFragment();
         openPage(goalFragment, true, false);
     }
 
-    public void showCourseFinish(String speed, String time) {
+    public void showCourseFinish(String speed, String time, boolean isFromMain) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, speed);
         dataBundle.putString(TIME_FINISH, time);
 //        if (finishCourseFragment == null)
-            finishCourseFragment = new FinishCourseFragment();
+        finishCourseFragment = new FinishCourseFragment();
+        finishCourseFragment.isFromMain = isFromMain;
         openPage(finishCourseFragment, true, false);
     }
 
@@ -370,7 +372,7 @@ public class CourseListActivity extends BaseActivity {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
 //        if (courseDetailSpotImagesFragment == null)
-            courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
+        courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
@@ -383,13 +385,13 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putString(STAMP_DISTANCE, distance);
 //        if (checkPointFragment == null)
-            checkPointFragment = new CheckPointFragment();
+        checkPointFragment = new CheckPointFragment();
         openPage(checkPointFragment, true, false);
     }
 
     public void showSpotFacilities() {
 //        if (spotFacilitiesFragment == null)
-            spotFacilitiesFragment = new SpotFacilitiesFragment();
+        spotFacilitiesFragment = new SpotFacilitiesFragment();
         openPage(spotFacilitiesFragment, true, false);
     }
 
@@ -512,6 +514,24 @@ public class CourseListActivity extends BaseActivity {
 
         } else if (fragment instanceof GoalFragment) {
             return;
+        } else if (fragment instanceof FinishCourseFragment) {
+            FinishCourseFragment finishCourseFragment = (FinishCourseFragment) fragment;
+            if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+                super.onBackPressed();
+                return;
+            } else if (!finishCourseFragment.isFromMain) {
+                for (int i = 0; i < 4; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
+            } else {
+                for (int i = 0; i < 2; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
+            }
+
+
         }
 
         super.onBackPressed();
