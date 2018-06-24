@@ -45,8 +45,9 @@ public class GoalFragment extends BaseFragment {
     String time;
     String distance;
     CourseListActivity mActivity;
+  private boolean isFromMain = false;
 
-    public static GoalFragment newInstance(int courseId, int idSpot, float speed, String time, String imgUrl, String title, String distance) {
+    public static GoalFragment newInstance(int courseId, int idSpot, float speed, String time, String imgUrl, String title, String distance, boolean isFromMain) {
         GoalFragment fragment = new GoalFragment();
         Bundle dataBundle = new Bundle();
         dataBundle.putInt(CourseListActivity.COURSE_DETAIL_ID, courseId);
@@ -57,6 +58,7 @@ public class GoalFragment extends BaseFragment {
         dataBundle.putString(CourseListActivity.STAMP_TITLE, title);
         dataBundle.putString(CourseListActivity.STAMP_DISTANCE, distance);
         Log.i("speed", String.valueOf(speed));
+        fragment.isFromMain = isFromMain;
         fragment.setArguments(dataBundle);
         return fragment;
     }
@@ -95,7 +97,7 @@ public class GoalFragment extends BaseFragment {
         btnToFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showCourseFinish(avage_speed, time_finish);
+                mActivity.showCourseFinish(avage_speed, time_finish, isFromMain);
             }
         });
         imgView = view.findViewById(R.id.imgMain);

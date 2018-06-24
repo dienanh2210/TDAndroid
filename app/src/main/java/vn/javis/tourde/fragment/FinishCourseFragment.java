@@ -114,6 +114,7 @@ public class FinishCourseFragment extends BaseFragment {
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
     int indexTab;
     File photoFile;
+    public boolean isFromMain;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
