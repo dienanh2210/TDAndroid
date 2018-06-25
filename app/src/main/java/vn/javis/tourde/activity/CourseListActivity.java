@@ -26,6 +26,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -79,13 +80,17 @@ import vn.javis.tourde.model.CourseDetail;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.Location;
 import vn.javis.tourde.model.MaintenanceStatus;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
+import vn.javis.tourde.utils.ClassToJson;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
+import vn.javis.tourde.utils.TimeUtil;
 
 import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
 import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.newInstance;
@@ -127,6 +132,7 @@ public class CourseListActivity extends BaseActivity {
     SharedPreferences mPref;
     SharedPreferences.Editor medit;
     double latitude = 0, longitude = 0;
+    double latitudeNetWork = 0, longitudeNetWork = 0;
     Geocoder geocoder;
     Bundle dataBundle;
 
@@ -213,7 +219,19 @@ public class CourseListActivity extends BaseActivity {
 //                    if (fragmentTabLayoutRunning == null)
 //                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
 //                    openPage(fragmentTabLayoutRunning, true, false);
-                    openPage(CourseDetailFragment.newInstance(true), true, false);
+                    if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+                        String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
+                        Log.i("SAVED_COURSE_RUNNING", savedString);
+                        if (!TextUtils.isEmpty(savedString)) {
+                            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+                            mCourseID = saveCourseRunning.getCourseID();
+                            Log.i("getAvarageSpeed", saveCourseRunning.getAvarageSpeed() + "");
+                            openPage(CourseDetailFragment.newInstance(true, saveCourseRunning), true, false);
+//                            openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance()), true, false);
+                        }
+                    } else {
+                        openPage(CourseDetailFragment.newInstance(true, null), true, false);
+                    }
                 }
             });
         }
@@ -231,16 +249,16 @@ public class CourseListActivity extends BaseActivity {
 
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
-        if (mCourseListFragment == null)
-            mCourseListFragment = new CourseListFragment();
+//        if (mCourseListFragment == null)
+        mCourseListFragment = new CourseListFragment();
         openPage(mCourseListFragment, false, false);
     }
 
     public void showCourseListPage(HashMap<String, String> parram) {
         dataBundle.putSerializable("params", parram);
         dataBundle.putString("searching", "searching");
-        if (mCourseListFragment == null)
-            mCourseListFragment = new CourseListFragment();
+//        if (mCourseListFragment == null)
+        mCourseListFragment = new CourseListFragment();
         openPage(mCourseListFragment, false, true);
     }
 
@@ -248,8 +266,8 @@ public class CourseListActivity extends BaseActivity {
         mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
-        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+//        if (mCourseDetailFragment == null)
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
@@ -257,23 +275,23 @@ public class CourseListActivity extends BaseActivity {
         mCourseID = id;
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
-        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+//        if (mCourseDetailFragment == null)
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void ShowCourseDetail() {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+//        if (mCourseDetailFragment == null)
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void ShowCourseDetailByTab(int indexTab) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
-        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+//        if (mCourseDetailFragment == null)
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
 
     }
@@ -282,20 +300,20 @@ public class CourseListActivity extends BaseActivity {
 
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
-        if (mCourseDetailFragment == null)
-            mCourseDetailFragment = new CourseDetailFragment();
+//        if (mCourseDetailFragment == null)
+        mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
     }
 
     public void showMyCourse() {
-        if (fragmentTabLayoutMyCourse == null)
-            fragmentTabLayoutMyCourse = new FragmentTabLayoutMyCourse();
+//        if (fragmentTabLayoutMyCourse == null)
+        fragmentTabLayoutMyCourse = new FragmentTabLayoutMyCourse();
         openPage(fragmentTabLayoutMyCourse, true, false);
     }
 
     public void showBadgeCollection() {
-        if (badgeCollectionFragment == null)
-            badgeCollectionFragment = new BadgeCollectionFragment();
+//        if (badgeCollectionFragment == null)
+        badgeCollectionFragment = new BadgeCollectionFragment();
         openPage(badgeCollectionFragment, true, false);
     }
 
@@ -308,16 +326,16 @@ public class CourseListActivity extends BaseActivity {
     }
 
     public void showCourseDrive() {
-        if (courseDriveFragment == null)
-            courseDriveFragment = new CourseDriveFragment();
+//        if (courseDriveFragment == null)
+        courseDriveFragment = new CourseDriveFragment();
         openPage(courseDriveFragment, true, false);
     }
 
     public void showSpotFacilitiesFragment(int spotID) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
-        if (spotFacilitiesFragment == null)
-            spotFacilitiesFragment = new SpotFacilitiesFragment();
+//        if (spotFacilitiesFragment == null)
+        spotFacilitiesFragment = new SpotFacilitiesFragment();
         openPage(spotFacilitiesFragment, true, false);
     }
 
@@ -335,25 +353,26 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putString(STAMP_IMAGE, imgUrl);
         dataBundle.putString(STAMP_TITLE, title);
         dataBundle.putString(STAMP_DISTANCE, distance);
-        if (goalFragment == null)
-            goalFragment = new GoalFragment();
+//        if (goalFragment == null)
+        goalFragment = new GoalFragment();
         openPage(goalFragment, true, false);
     }
 
-    public void showCourseFinish(String speed, String time) {
+    public void showCourseFinish(String speed, String time, boolean isFromMain) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putString(AVARAGE_SPEED, speed);
         dataBundle.putString(TIME_FINISH, time);
-        if (finishCourseFragment == null)
-            finishCourseFragment = new FinishCourseFragment();
+//        if (finishCourseFragment == null)
+        finishCourseFragment = new FinishCourseFragment();
+        finishCourseFragment.isFromMain = isFromMain;
         openPage(finishCourseFragment, true, false);
     }
 
     public void showSpotImages(int spotID) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
-        if (courseDetailSpotImagesFragment == null)
-            courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
+//        if (courseDetailSpotImagesFragment == null)
+        courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
@@ -365,14 +384,14 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putString(STAMP_TITLE, title);
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putString(STAMP_DISTANCE, distance);
-        if (checkPointFragment == null)
-            checkPointFragment = new CheckPointFragment();
+//        if (checkPointFragment == null)
+        checkPointFragment = new CheckPointFragment();
         openPage(checkPointFragment, true, false);
     }
 
     public void showSpotFacilities() {
-        if (spotFacilitiesFragment == null)
-            spotFacilitiesFragment = new SpotFacilitiesFragment();
+//        if (spotFacilitiesFragment == null)
+        spotFacilitiesFragment = new SpotFacilitiesFragment();
         openPage(spotFacilitiesFragment, true, false);
     }
 
@@ -383,7 +402,8 @@ public class CourseListActivity extends BaseActivity {
     }
 
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
-        fragment.setArguments(dataBundle);
+        if (fragment.getArguments() == null)// quanpv
+            fragment.setArguments(dataBundle);
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         if (isAnimation)
             tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
@@ -442,6 +462,21 @@ public class CourseListActivity extends BaseActivity {
         return longitude;
     }
 
+    public double getLatitudeNetWork() {
+        return latitudeNetWork;
+    }
+
+    public void setLatitudeNetWork(double latitudeNetWork) {
+        this.latitudeNetWork = latitudeNetWork;
+    }
+
+    public double getLongitudeNetWork() {
+        return longitudeNetWork;
+    }
+
+    public void setLongitudeNetWork(double longitudeNetWork) {
+        this.longitudeNetWork = longitudeNetWork;
+    }
 
     public void openLoginPage() {
         Intent intent = new Intent(this, LoginSNSActivity.class);
@@ -476,6 +511,26 @@ public class CourseListActivity extends BaseActivity {
                 }
                 return;
             }
+
+        } else if (fragment instanceof GoalFragment) {
+            return;
+        } else if (fragment instanceof FinishCourseFragment) {
+            FinishCourseFragment finishCourseFragment = (FinishCourseFragment) fragment;
+            if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+                super.onBackPressed();
+                return;
+            } else if (!finishCourseFragment.isFromMain) {
+                for (int i = 0; i < 4; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
+            } else {
+                for (int i = 0; i < 2; i++) { // Back to CourseDetailFragment
+                    fm.popBackStack();
+                }
+                return;
+            }
+
 
         }
 
@@ -621,10 +676,15 @@ public class CourseListActivity extends BaseActivity {
             String str2 = intent.getStringExtra("longitude");
 
             if (str1.isEmpty() && str2.isEmpty())
-                return;
-
-            latitude = Double.valueOf(intent.getStringExtra("latutide"));
-            longitude = Double.valueOf(intent.getStringExtra("longitude"));
+                return;//location_network
+            boolean isLocationNetWork = intent.getBooleanExtra("location_network", false);
+            if (isLocationNetWork) {
+                latitudeNetWork = Double.valueOf(intent.getStringExtra("latutide"));
+                longitudeNetWork = Double.valueOf(intent.getStringExtra("longitude"));
+            } else {
+                latitude = Double.valueOf(intent.getStringExtra("latutide"));
+                longitude = Double.valueOf(intent.getStringExtra("longitude"));
+            }
             Log.i("latutide", "" + latitude);
             Log.i("longitude", "" + longitude);
 
@@ -653,9 +713,9 @@ public class CourseListActivity extends BaseActivity {
                     MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
                     if (maintenanceStatus.getStatus().equals("1")) {
                         //show title page(wait design)
-                        Log.i("maintenance","11111");
+                        Log.i("maintenance", "11111");
                     } else {
-                        Log.i("maintenance","22222");
+                        Log.i("maintenance", "22222");
                         try {
                             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                             String version = pInfo.versionName;
@@ -663,18 +723,16 @@ public class CourseListActivity extends BaseActivity {
                                 @Override
                                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                     JSONObject jsonObject1 = (JSONObject) response;
-                                    Log.i("maintenance", "onSuccess: "+response.toString());
+                                    Log.i("maintenance", "onSuccess: " + response.toString());
                                     if (jsonObject1.has("check")) {
                                         switch (jsonObject1.getString("check")) {
-                                            case "1":
-                                            {
-                                                Log.i("maintenance","333333");
-                                                ProcessDialog.showDialogOk(getApplicationContext(),"","このアプリは最新バージョンにアップデート可能です。");
+                                            case "1": {
+                                                Log.i("maintenance", "333333");
+                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。");
                                                 break;
                                             }
-                                            case "2":
-                                            {
-                                                Log.i("maintenance","4444444");
+                                            case "2": {
+                                                Log.i("maintenance", "4444444");
                                                 final String packageName = "com.navitime.local.navitime";
                                                 ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
@@ -685,7 +743,7 @@ public class CourseListActivity extends BaseActivity {
                                                 break;
                                             }
                                             case "0":
-                                                Log.i("maintenance","999999");
+                                                Log.i("maintenance", "999999");
                                                 break;
                                             default:
                                                 break;

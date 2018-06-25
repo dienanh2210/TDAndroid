@@ -125,6 +125,7 @@ public class ProcessDialog {
             public void onClick(View v) {
                 SharedPreferencesUtils.getInstance(context).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
                 SharedPreferencesUtils.getInstance(context).removeKey(Constant.SAVED_COURSE_RUNNING);
+                SharedPreferencesUtils.getInstance(context).removeKey(Constant.KEY_GOAL_PAGE);
                 dialog.hide();
             }
         });

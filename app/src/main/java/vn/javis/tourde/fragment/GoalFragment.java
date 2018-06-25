@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,9 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -41,10 +45,21 @@ public class GoalFragment extends BaseFragment {
     String time;
     String distance;
     CourseListActivity mActivity;
+  private boolean isFromMain = false;
 
-    public static GoalFragment newInstance(View.OnClickListener listener) {
+    public static GoalFragment newInstance(int courseId, int idSpot, float speed, String time, String imgUrl, String title, String distance, boolean isFromMain) {
         GoalFragment fragment = new GoalFragment();
-        //  fragment.listener = (RenewPasswordPageFragment.OnFragmentInteractionListener) listener;
+        Bundle dataBundle = new Bundle();
+        dataBundle.putInt(CourseListActivity.COURSE_DETAIL_ID, courseId);
+        dataBundle.putString(CourseListActivity.AVARAGE_SPEED, String.valueOf(speed));
+        dataBundle.putString(CourseListActivity.TIME_FINISH, time);
+        dataBundle.putInt(CourseListActivity.SPOT_ID, idSpot);
+        dataBundle.putString(CourseListActivity.STAMP_IMAGE, imgUrl);
+        dataBundle.putString(CourseListActivity.STAMP_TITLE, title);
+        dataBundle.putString(CourseListActivity.STAMP_DISTANCE, distance);
+        Log.i("speed", String.valueOf(speed));
+        fragment.isFromMain = isFromMain;
+        fragment.setArguments(dataBundle);
         return fragment;
     }
 
@@ -56,16 +71,22 @@ public class GoalFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SharedPreferencesUtils.getInstance(getContext()).setBooleanValue(Constant.KEY_GOAL_PAGE, true);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-        final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
-        final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
-        spotID = getArguments().getInt(CourseListActivity.SPOT_ID);
+        final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED, "");
+        final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH, "");
+        spotID = getArguments().getInt(CourseListActivity.SPOT_ID, 0);
         mCourseId = mActivity.getmCourseID();
-        imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE);
-        title = getArguments().getString(CourseListActivity.STAMP_TITLE);
-        time = getArguments().getString(CourseListActivity.TIME_FINISH);
-        distance = getArguments().getString(CourseListActivity.STAMP_DISTANCE);
+        imgUrl = getArguments().getString(CourseListActivity.STAMP_IMAGE, "");
+        title = getArguments().getString(CourseListActivity.STAMP_TITLE, "");
+        time = getArguments().getString(CourseListActivity.TIME_FINISH, "");
+        distance = getArguments().getString(CourseListActivity.STAMP_DISTANCE, "");
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +97,7 @@ public class GoalFragment extends BaseFragment {
         btnToFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showCourseFinish(avage_speed, time_finish);
+                mActivity.showCourseFinish(avage_speed, time_finish, isFromMain);
             }
         });
         imgView = view.findViewById(R.id.imgMain);
@@ -87,7 +108,7 @@ public class GoalFragment extends BaseFragment {
 
                 if (imgView.getTag() == null) {
                     ImageViewAnimatedChange(getApplicationContext(), txtView, title, imgView, imgUrl);
-                    //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+                     //   ImageViewAnimatedChange(mActivity, txtView, "バッジを獲得！", imgView, imgUrl);
                     handler.postDelayed(runnable, 1000);
 
                 }
@@ -115,9 +136,9 @@ public class GoalFragment extends BaseFragment {
         final Animation anim_img = AnimationUtils.loadAnimation(c, R.anim.rotate_up);
         final Animation anim_text = AnimationUtils.loadAnimation(c, R.anim.rotate_up_in);
         v.setTag(url);
-        if (!url.isEmpty())
+        if (!TextUtils.isEmpty(url))
             PicassoUtil.getSharedInstance(c).load(url).into(v);
-        if (!s.isEmpty())
+        if (!TextUtils.isEmpty(s))
             textView.setText(s);
         v.startAnimation(anim_img);
         textView.startAnimation(anim_text);

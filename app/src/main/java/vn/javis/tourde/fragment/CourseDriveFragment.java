@@ -100,9 +100,10 @@ public class CourseDriveFragment extends BaseFragment {
                     double latitude = mAcitivity.getLatitude();
                    // double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
                     double distance =  SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(latitude, longtitude));
+                    double distance2 =  SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(mAcitivity.getLatitudeNetWork(), mAcitivity.getLongitudeNetWork()));
 
                     Log.i("GPSStart",""+distance+ "-"+latitude + "-"+longtitude + "--"+startLatitude+"-"+startLongtitude);
-                    if (distance <= 100) {
+                    if (distance <= 100 || distance2 <=100) {
                         ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {

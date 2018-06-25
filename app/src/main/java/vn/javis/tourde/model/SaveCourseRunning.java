@@ -8,7 +8,77 @@ public class SaveCourseRunning {
     private double start_longtitude;
     private double start_latitude;
     private long timeRunning;
+    private long lastCheckedTime;
     private boolean isFinished;
+    private int lastCheckedOrder;
+    private String imgUrlGoal;
+    private int goalSpotId;
+    private String goal_title;
+    private String allDistance;
+    private float avarageSpeed;
+
+
+    public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
+        this.courseID = courseID;
+        this.start_longtitude = start_longtitude;
+        this.start_latitude = start_latitude;
+    }
+
+    public String getImgUrlGoal() {
+        return imgUrlGoal;
+    }
+
+    public void setImgUrlGoal(String imgUrlGoal) {
+        this.imgUrlGoal = imgUrlGoal;
+    }
+
+    public int getGoalSpotId() {
+        return goalSpotId;
+    }
+
+    public void setGoalSpotId(int goalSpotId) {
+        this.goalSpotId = goalSpotId;
+    }
+
+    public String getGoal_title() {
+        return goal_title;
+    }
+
+    public void setGoal_title(String goal_title) {
+        this.goal_title = goal_title;
+    }
+
+    public String getAllDistance() {
+        return allDistance;
+    }
+
+    public void setAllDistance(String allDistance) {
+        this.allDistance = allDistance;
+    }
+
+    public float getAvarageSpeed() {
+        return avarageSpeed;
+    }
+
+    public void setAvarageSpeed(float avarageSpeed) {
+        this.avarageSpeed = avarageSpeed;
+    }
+
+    public long getLastCheckedTime() {
+        return lastCheckedTime;
+    }
+
+    public void setLastCheckedTime(long lastCheckedTime) {
+        this.lastCheckedTime = lastCheckedTime;
+    }
+
+    public int getLastCheckedOrder() {
+        return lastCheckedOrder;
+    }
+
+    public void setLastCheckedOrder(int lastCheckedOrder) {
+        this.lastCheckedOrder = lastCheckedOrder;
+    }
 
     public boolean isFinished() {
         return isFinished;
@@ -20,11 +90,6 @@ public class SaveCourseRunning {
 
     private List<CheckedSpot> lstCheckedSpot = new ArrayList<>();
 
-    public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
-        this.courseID = courseID;
-        this.start_longtitude = start_longtitude;
-        this.start_latitude = start_latitude;
-    }
 
     public int getCourseID() {
         return courseID;
@@ -65,17 +130,19 @@ public class SaveCourseRunning {
     public void setLstCheckedSpot(List<CheckedSpot> lstCheckedSpot) {
         this.lstCheckedSpot = lstCheckedSpot;
     }
-    public void addCheckedSpot(int spotID, String title, int order, String imgUrl,boolean isChecked){
-        CheckedSpot model =new CheckedSpot(spotID,title,order,imgUrl,isChecked);
+
+    public void addCheckedSpot(int spotID, String title, int order, String imgUrl, boolean isChecked) {
+        CheckedSpot model = new CheckedSpot(spotID, title, order, imgUrl, isChecked);
         lstCheckedSpot.add(model);
     }
-    public void resetAllSpot(){
-        for(int i=1;i<lstCheckedSpot.size();i++)
-        {
+
+    public void resetAllSpot() {
+        for (int i = 1; i < lstCheckedSpot.size(); i++) {
             lstCheckedSpot.get(i).setChecked(false);
         }
     }
-   public class CheckedSpot {
+
+    public class CheckedSpot {
         private int spotID;
         private String title;
         private int orderNumber;
@@ -85,12 +152,22 @@ public class SaveCourseRunning {
         private double avarageSpeed;
 
 
-        public CheckedSpot(int spotID, String title, int order, String imgUrl,boolean isChecked) {
+        public CheckedSpot(int spotID, String title, int order, String imgUrl, boolean isChecked) {
             this.spotID = spotID;
             this.title = title;
             this.orderNumber = order;
             this.topImage = imgUrl;
-            checked =isChecked;
+            checked = isChecked;
+        }
+
+        private boolean turnOffAnim;
+
+        public boolean isTurnOffAnim() {
+            return turnOffAnim;
+        }
+
+        public void setTurnOffAnim(boolean turnOffAnim) {
+            this.turnOffAnim = turnOffAnim;
         }
 
         public int getSpotID() {
