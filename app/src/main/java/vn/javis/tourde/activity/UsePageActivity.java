@@ -43,7 +43,7 @@ public class UsePageActivity extends AppCompatActivity {
         bt_usePage.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UsePageActivity.this, MenuPageActivity.class);
+                Intent intent = new Intent(UsePageActivity.this, MenuEntryActivity.class);
                 startActivity(intent);
             }
         } );
@@ -88,7 +88,10 @@ public class UsePageActivity extends AppCompatActivity {
         } );
 
     }
-
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
     private void setupViewPager(ViewPager viewPager) {
 
         adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
