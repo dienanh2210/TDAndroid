@@ -64,6 +64,7 @@ public class LoginUtils {
 
     //
     public static final String TOKEN = "token";
+    public static final String TOKEN_SNS = "token_sns";
     public static LoginUtils newInstance() {
         if (sInstance == null) sInstance = new LoginUtils();
         return sInstance;
@@ -195,10 +196,9 @@ public class LoginUtils {
                     //Todo save token to device
                     Log.i(TAG, "onSuccess: " + sns_kind + response.toString());
                     String token = jsonObject.getString("token");
-                    if (token != null)
-                    {
-                        SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN,token);
-                    }
+
+                        SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN_SNS,token);
+
                     Intent intent = new Intent(activity,CourseListActivity.class);
                     activity.startActivity(intent);
                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);

@@ -1,5 +1,6 @@
 package vn.javis.tourde.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -156,7 +157,6 @@ public class CourseListActivity extends BaseActivity {
     private CheckPointFragment checkPointFragment;
     android.support.v4.app.FragmentTransaction frgTransaction;
     String token;
-//            = LoginFragment.getmUserToken();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -174,7 +174,7 @@ public class CourseListActivity extends BaseActivity {
         token = SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN);
         fn_permission();
         //    showCourseFinish();hiện
-        if (!token.equals("")) {
+        if (!TextUtils.isEmpty(token)) {
             checkLogging();
         }
     }

@@ -10,6 +10,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,14 +94,14 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
     int totalCourseSize =0;
-    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
+    String token ;
     HashMap<String, String> paramsSearch = new HashMap<String, String>();
     List<Course> list_courses = new ArrayList<>();
     boolean search = false;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
-
+        token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
         lstCourseRecycleView.setNestedScrollingEnabled(false);
@@ -138,7 +139,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (token != "")
+                if (!TextUtils.isEmpty(token))
                     mActivity.showBadgeCollection();
                 else
                     mActivity.showDialogWarning();
@@ -147,7 +148,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (token != "")
+                if (!TextUtils.isEmpty(token))
                     mActivity.showMyCourse();
                 else
                     mActivity.showDialogWarning();
@@ -157,7 +158,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         txtHomeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
         Intent intent = mActivity.getIntent();
         if (intent.hasExtra(Constant.KEY_LOGOUT_SUCCESS)) {
-            if (token == "" && intent.getIntExtra(Constant.KEY_LOGOUT_SUCCESS, 0) == 1) {
+            if (!TextUtils.isEmpty(token) && intent.getIntExtra(Constant.KEY_LOGOUT_SUCCESS, 0) == 1) {
                 ProcessDialog.showDialogOk(getContext(), "", "ログアウトしました。");
                 intent.removeExtra(Constant.KEY_LOGOUT_SUCCESS);
             }

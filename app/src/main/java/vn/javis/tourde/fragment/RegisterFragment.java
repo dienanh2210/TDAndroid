@@ -174,7 +174,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         select_userIcon.setImageBitmap(bitmapIcon);
         tv_prefecture.setText(txtArea);
         tv_age.setText(txtAge);
-        if (token != null) {
+        if (!TextUtils.isEmpty(token)) {
             setInfo();
             register_title.setVisibility(View.GONE);
             title_changeInfo.setVisibility(View.VISIBLE);
@@ -219,7 +219,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
                 else
                     tv_prefecture.setText(txtArea);
-                PicassoUtil.getSharedInstance(getContext()).load(jsonObject.getString("image")).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
+                if(!TextUtils.isEmpty(jsonObject.getString("image")))
+                    PicassoUtil.getSharedInstance(getContext()).load(jsonObject.getString("image")).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
                 isChooseAge = false;
                 isChooseArea = false;
                 hideProgressDialog();
@@ -389,7 +390,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     public void getAccount() {
 
-        LoginAPI.pushToken(LoginFragment.getmUserToken(), new ServiceCallback() {
+        LoginAPI.pushToken(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;

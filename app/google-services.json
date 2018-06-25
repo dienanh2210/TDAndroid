@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "1079044899926",
+    "firebase_url": "https://toude-1528272773328.firebaseio.com",
+    "project_id": "toude-1528272773328",
+    "storage_bucket": "toude-1528272773328.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079044899926:android:d1c1ac03d432de6c",
+        "android_client_info": {
+          "package_name": "com.yumesol.tourde.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079044899926-11k2samljhe9adbdoad8ho3irmfadkm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yumesol.tourde.dev",
+            "certificate_hash": "0545d31403b24b4fab05d41000fb0c036753ceaa"
+          }
+        },
+        {
+          "client_id": "1079044899926-33s6ka4npbto3r7j2s6gbj1c1531hf5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yumesol.tourde.dev",
+            "certificate_hash": "c40e6f2f5b0bd8bfb5a2a70ab0c1a98bc0d9fad8"
+          }
+        },
+        {
+          "client_id": "1079044899926-nqle7l101p5sa51pufq1mvr2mvunr792.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOusnqFLuMnHnNX2wRjLyG3CNDpN9mswY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079044899926-dkk8qnbck43bd20kb90eq1l4f9j1uct8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079044899926:android:4b99bb4fe60989d7",
+        "android_client_info": {
+          "package_name": "vn.javis.tourde"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079044899926-9cb9rgtnrpgduf4kbqp2fcbhi2q01n8q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.javis.tourde",
+            "certificate_hash": "0545d31403b24b4fab05d41000fb0c036753ceaa"
+          }
+        },
+        {
+          "client_id": "1079044899926-nqle7l101p5sa51pufq1mvr2mvunr792.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOusnqFLuMnHnNX2wRjLyG3CNDpN9mswY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079044899926-dkk8qnbck43bd20kb90eq1l4f9j1uct8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

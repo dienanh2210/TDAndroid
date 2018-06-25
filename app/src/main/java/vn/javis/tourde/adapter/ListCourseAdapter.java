@@ -90,7 +90,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             holder.txtTag.setText(s);
         }
         holder.isFavorite = false;
-        FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
+        FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 Log.i("response", response.toString());
@@ -154,7 +154,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if (token != "") {
+                if (!TextUtils.isEmpty(token)) {
                     holder.isFavorite = !holder.isFavorite;
                     int course_id = Integer.valueOf(model.getCourseId());
                     if (holder.isFavorite) {

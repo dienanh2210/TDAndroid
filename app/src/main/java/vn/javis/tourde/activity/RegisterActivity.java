@@ -25,14 +25,14 @@ public class RegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_register);
 
         RegisterFragment ccl =new RegisterFragment();
-        openPage(ccl, false);
+        openPage(ccl, false, false);
     }
 
     public void openPage(Fragment fragment, boolean isBackStack, boolean isAnimation) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         if (isAnimation)
             tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        tx.add(R.id.container, fragment, fragment.getClass().getSimpleName());
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
         if (isBackStack)

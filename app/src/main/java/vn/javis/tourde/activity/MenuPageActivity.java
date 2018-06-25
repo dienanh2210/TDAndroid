@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -57,6 +58,7 @@ public class MenuPageActivity extends BaseActivity {
     @BindView( R.id.tv_version )
     TextView tv_version;
     String token;
+    String token_sns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +87,19 @@ public class MenuPageActivity extends BaseActivity {
         //String token = LoginFragment.getmUserToken();
         //get token from device to check login or not
         token = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue(LoginUtils.TOKEN);
-        if(token != "" ){
+        token_sns = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue(LoginUtils.TOKEN_SNS);
+        if(!TextUtils.isEmpty(token)){
             ll_logout.setVisibility( View.VISIBLE );
             tv_login.setVisibility(View.GONE);
             rlt_register.setVisibility(View.GONE);
             lineRegister.setVisibility(View.GONE);
             basic_Info.setVisibility(View.VISIBLE);
+        } else if(!TextUtils.isEmpty(token_sns)){
+            ll_logout.setVisibility( View.VISIBLE );
+            tv_login.setVisibility(View.GONE);
+            rlt_register.setVisibility(View.GONE);
+            lineRegister.setVisibility(View.GONE);
+            basic_Info.setVisibility(View.GONE);
         }
    rlt_pippon.setOnClickListener( onClicknippon );
 privacy.setOnClickListener( new View.OnClickListener() {
@@ -220,8 +229,7 @@ privacy.setOnClickListener( new View.OnClickListener() {
                 boolean str = data.getBooleanExtra( Constant.KEY_LOGIN_SUCCESS, false);
                 rlt_newuserregisterl.setVisibility( View.GONE );
                 ll_logout.setVisibility( View.VISIBLE );
-                String token = LoginFragment.getmUserToken();
-                if(token != ""){
+                if(!TextUtils.isEmpty(token)){
                     ll_logout.setVisibility( View.VISIBLE );
                     tv_login.setVisibility(View.GONE);
                 }
