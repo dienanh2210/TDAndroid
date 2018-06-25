@@ -59,10 +59,8 @@ public class CourseDriveFragment extends BaseFragment {
     @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
     int mCourseID;
-
     double startLongtitude;
     double startLatitude;
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAcitivity = (CourseListActivity) getActivity();
@@ -92,8 +90,6 @@ public class CourseDriveFragment extends BaseFragment {
             public void onError(VolleyError error) {
                 hideProgressDialog();
             }
-
-
         });
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
