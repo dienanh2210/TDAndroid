@@ -31,7 +31,9 @@ import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.RunningCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class FragmentRunning extends BaseFragment {
     View mView;
@@ -47,14 +49,12 @@ public class FragmentRunning extends BaseFragment {
         mView = inflater.inflate(R.layout.tab_running_course, container, false);
         return mView;
     }
-
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerRunning.setLayoutManager(layoutManager);
-        final String token = LoginFragment.getmUserToken();
-
         RunningCourseAPI.getListRunningCourse(token, 1, 5, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {

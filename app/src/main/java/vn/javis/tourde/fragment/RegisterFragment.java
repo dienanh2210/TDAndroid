@@ -83,9 +83,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @BindView(R.id.title_changeInfo)
     TextView title_changeInfo;
     @BindView(R.id.appCompatButtonLogin)
-            Button appCompatButtonLogin;
+    Button appCompatButtonLogin;
     @BindView(R.id.changeInfo)
-            Button changeInfo;
+    Button changeInfo;
 
 
     int prefecture = 1;
@@ -102,6 +102,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     public static final long FILE_SIZE_8MB = 8 * 1024 * 1024;
     String token;
     JSONObject data;
+   private boolean isChooseAge, isChooseArea;
+
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -170,16 +172,16 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         tv_close.setOnClickListener(this);
         select_userIcon.setOnClickListener(this);
         select_userIcon.setImageBitmap(bitmapIcon);
+        tv_prefecture.setText(txtArea);
+        tv_age.setText(txtAge);
         if (token != null) {
             setInfo();
             register_title.setVisibility(View.GONE);
             title_changeInfo.setVisibility(View.VISIBLE);
             isChangAccount = true;
         } else {
-            tv_prefecture.setText(txtArea);
             register_title.setVisibility(View.VISIBLE);
             title_changeInfo.setVisibility(View.GONE);
-            tv_age.setText(txtAge);
             appCompatButtonLogin.setVisibility(View.VISIBLE);
             changeInfo.setVisibility(View.GONE);
         }
@@ -191,7 +193,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     }
 
     void setInfo() {
-        ProcessDialog.showProgressDialog(getContext(), "", false);
+        showProgressDialog();
         LoginAPI.pushToken(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -208,17 +210,25 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 }
 
                 age = jsonObject.getInt("age");
-                tv_age.setText(age + "代");
+                if (!isChooseAge)
+                    tv_age.setText(age + "代");
+                else
+                    tv_age.setText(txtAge);
                 prefecture = jsonObject.getInt("area");
-                tv_prefecture.setText(ListArea.getAreaName(prefecture -1));
+                if (!isChooseArea)
+                    tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
+                else
+                    tv_prefecture.setText(txtArea);
                 PicassoUtil.getSharedInstance(getContext()).load(jsonObject.getString("image")).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
-                ProcessDialog.hideProgressDialog();
+                isChooseAge = false;
+                isChooseArea = false;
+                hideProgressDialog();
             }
 
 
             @Override
             public void onError(VolleyError error) {
-                ProcessDialog.hideProgressDialog();
+                hideProgressDialog();
             }
 
         });
@@ -279,7 +289,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             case R.id.appCompatButtonLogin:
                 //   LoginAPI.register(edt_email.toString(), edt_password.toString(), gender, 10, "Tokyo", this);
                 if (bitmapIcon == null) {
-                   showProgressDialog();
+                    showProgressDialog();
                     LoginAPI.registerAccount(edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, successListener(), errorListener());
                 } else {
                     LoginAPI.registerAccount(activity, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, sex, age, prefecture, this);
@@ -300,12 +310,14 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 break;
             case R.id.changeInfo:
+                showProgressDialog();
                 LoginAPI.editAccount(activity, token, edt_email.getText().toString(), edt_password.getText().toString(), edt_username.getText().toString(), bitmapIcon, changeImage, sex, age, prefecture, new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         if (((JSONObject) response).has("success")) {
-                            Intent intent = new Intent(getActivity(), BasicInfoActivity.class);
+                            Intent intent = new Intent(getActivity(), CourseListActivity.class);
                             startActivity(intent);
+                            hideProgressDialog();
                             activity.finish();
                         }
                     }
@@ -326,7 +338,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            ProcessDialog.showProgressDialog(getContext(), "", false);
+            showProgressDialog();
             LoginAPI.loginEmail(email, password, new ServiceCallback() {
                 @Override
                 public void onSuccess(ServiceResult resultCode, Object response) {
@@ -364,12 +376,12 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         Log.d(edt_email.toString(), edt_password.toString() + "error");
                         //Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                     }
-                  hideProgressDialog();
+                    hideProgressDialog();
                 }
 
                 @Override
                 public void onError(VolleyError error) {
-                   hideProgressDialog();
+                    hideProgressDialog();
                 }
             });
         }
@@ -448,7 +460,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-               hideProgressDialog();
+                hideProgressDialog();
             }
 
         };
@@ -487,16 +499,17 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         } catch (JSONException e) {
             e.printStackTrace();
         }
-       hideProgressDialog();
+        hideProgressDialog();
     }
 
     @Override
     public void onError(VolleyError error) {
-       hideProgressDialog();
+        hideProgressDialog();
     }
 
     @Override
     public void onFragmentInteraction(int valueArea, String content) {
+        isChooseArea = true;
         prefecture = valueArea;
         txtArea = content;
         tv_prefecture.setText(content);
@@ -505,6 +518,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onAgeFragmentInteraction(int valueAge, String content) {
+        isChooseAge = true;
         age = valueAge;
         txtAge = content;
         tv_age.setText(content);

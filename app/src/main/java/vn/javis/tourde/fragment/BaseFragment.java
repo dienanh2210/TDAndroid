@@ -26,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
     protected MainActivity activity;
     protected ProcessDialog mProgessDialog;
 
+    public static BaseFragment mInstance;
 
     @Nullable
     @Override
@@ -33,6 +34,7 @@ public abstract class BaseFragment extends Fragment {
         mView = getView(inflater, container);
         mUnbind = ButterKnife.bind(this, mView);
         ButterKnife.setDebug(true);
+        mInstance=this;
         return mView;
     }
 

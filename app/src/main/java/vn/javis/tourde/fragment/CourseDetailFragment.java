@@ -64,6 +64,7 @@ import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
@@ -516,7 +517,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         }
     }
 
-    String token = LoginFragment.getmUserToken();
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
     public void btnFavoriteClick(boolean inChild) {
         if (inChild && isFavourite) {

@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 
 import vn.javis.tourde.apiservice.ApiEndpoint;
+import vn.javis.tourde.fragment.BaseFragment;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.volley.VolleyCustomRequest;
 import vn.javis.tourde.volley.VolleyMultipartRequest;
@@ -166,7 +167,7 @@ public abstract class TourDeService {
     }
 
     public static void uploadImageBitmap(final Activity activity, String api, final Bitmap bitmap, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
-        ProcessDialog.showProgressDialog(activity,"",false);
+        BaseFragment.mInstance.showProgressDialog();
         //our custom volley request
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ApiEndpoint.BASE_URL + api,
                 new Response.Listener<NetworkResponse>() {

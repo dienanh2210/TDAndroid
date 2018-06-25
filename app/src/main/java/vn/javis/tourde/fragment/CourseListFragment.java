@@ -52,7 +52,9 @@ import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
 public class CourseListFragment extends BaseFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
@@ -91,8 +93,8 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
     int totalCourseSize =0;
-    String token = LoginFragment.getmUserToken();
-    HashMap<String, String> paramsSearch = new HashMap<String, String>();;
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
+    HashMap<String, String> paramsSearch = new HashMap<String, String>();
     List<Course> list_courses = new ArrayList<>();
     boolean search = false;
     @Override

@@ -17,7 +17,9 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ViewPagerAdapter;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class FragmentTabLayoutMyCourse  extends BaseFragment{
 
@@ -38,7 +40,7 @@ public class FragmentTabLayoutMyCourse  extends BaseFragment{
     ImageView imgMyCourse;
     @BindView(R.id.txt_mycourse)
     TextView txtMyCourse;
-
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -48,7 +50,6 @@ public class FragmentTabLayoutMyCourse  extends BaseFragment{
               mActivity.showCourseListPage();
             }
         });
-        final String token = LoginFragment.getmUserToken();
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
