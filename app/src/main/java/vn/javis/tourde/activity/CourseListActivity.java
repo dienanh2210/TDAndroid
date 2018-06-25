@@ -121,7 +121,7 @@ public class CourseListActivity extends BaseActivity {
     private int mCourseID;
     private int mSpotID;
     private String mapUrl;
-
+    private String timeFinish, distanceSpot;
     public int getmSpotID() {
         return mSpotID;
     }
@@ -347,7 +347,7 @@ public class CourseListActivity extends BaseActivity {
 
     public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title, String distance) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
+        dataBundle.putString(AVARAGE_SPEED, String.format("%.2f", speed));
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putInt(SPOT_ID, idSpot);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
@@ -435,7 +435,11 @@ public class CourseListActivity extends BaseActivity {
 
 
     public void showTakePhoto(int spotID, String time, String distance) {
+
+        timeFinish =time;
+        distanceSpot =distance;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
             mSpotID = spotID;
@@ -584,8 +588,8 @@ public class CourseListActivity extends BaseActivity {
                     Intent intent = new Intent(this, TakePhotoActivity.class);
                     intent.putExtra(SPOT_ID, mSpotID);
                     intent.putExtra(COURSE_DETAIL_ID, mCourseID);
-                    intent.putExtra(TIME_FINISH, "00:00:00");
-                    intent.putExtra(STAMP_DISTANCE, "999");
+                    intent.putExtra(TIME_FINISH, timeFinish);
+                    intent.putExtra(STAMP_DISTANCE, distanceSpot);
                     startActivity(intent);
                 }
             }

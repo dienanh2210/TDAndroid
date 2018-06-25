@@ -7,6 +7,8 @@ public class SaveCourseRunning {
     private int courseID;
     private double start_longtitude;
     private double start_latitude;
+    private double last_longtitude;
+    private double last_latitude;
     private long timeRunning;
     private long lastCheckedTime;
     private boolean isFinished;
@@ -39,6 +41,22 @@ public class SaveCourseRunning {
 
     public void setImgUrlGoal(String imgUrlGoal) {
         this.imgUrlGoal = imgUrlGoal;
+    }
+
+    public double getLast_longtitude() {
+        return last_longtitude;
+    }
+
+    public void setLast_longtitude(double last_longtitude) {
+        this.last_longtitude = last_longtitude;
+    }
+
+    public double getLast_latitude() {
+        return last_latitude;
+    }
+
+    public void setLast_latitude(double last_latitude) {
+        this.last_latitude = last_latitude;
     }
 
     public int getGoalSpotId() {
