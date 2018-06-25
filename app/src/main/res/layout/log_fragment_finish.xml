@@ -80,7 +80,7 @@
         android:layout_marginStart="@dimen/_18sdp"
         android:src="@drawable/image_link_long"
         android:scaleType="fitXY"
-        android:visibility="visible" />
+        android:visibility="gone" />
     <RelativeLayout
         android:id="@+id/showInfoSpot"
         android:layout_width="wrap_content"

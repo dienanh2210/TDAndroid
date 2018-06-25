@@ -53,6 +53,10 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         int spotID = model.getOrder() + 1;
         holder.txt_spotName.setText(model.getTitle());
         holder.spot_id.setText("" + spotID);
+        holder.img_link_vitual.setVisibility(View.GONE);
+        holder.img_link_spot.setVisibility(View.GONE);
+        holder.img_link_short.setVisibility(View.GONE);
+        boolean showLong = false;
         /*if (model.getTopImage() != null && model.getTopImage() !="")
             Picasso.with(activityContext).load(model.getTopImage()).into(holder.imgShowSuccess);*/
 
@@ -72,6 +76,12 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
             lastCheckedOrder = position;
             holder.BG_spot.setImageResource(R.drawable.boder_white);
             holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
+            holder.imgShowChecked.setVisibility(View.VISIBLE);
+            holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
+            holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
+
+            if (position == listSpot.size() - 1)
+                holder.img_link_spot.setVisibility(View.GONE);
 
             if (model.getAvarageSpeed() > 0) {
                 holder.showInfoSpot.setVisibility(View.VISIBLE);
@@ -80,36 +90,47 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
                 //holder.img_link_spot.setVisibility(View.VISIBLE);
                 holder.img_link_vitual.setVisibility(View.GONE);
             } else {
-                //  holder.img_link_spot.setVisibility(View.VISIBLE);
-                holder.img_link_vitual.setVisibility(View.VISIBLE);
-            }
-            if (!shownAnim) {
-                if (!model.isTurnOffAnim()) {
-                    holder.img_link_vitual.setVisibility(View.GONE);
-                    holder.img_link_spot.setVisibility(View.VISIBLE);
-                } else {
-                    holder.img_link_spot.setVisibility(View.GONE);
-                }
-                shownAnim = true;
-            } else {
+                holder.showInfoSpot.setVisibility(View.GONE);
+                holder.img_link_spot.setVisibility(View.GONE);
+                holder.img_link_vitual.setVisibility(View.GONE);
+                holder.img_link_short.setVisibility(View.GONE);
 
                 if (!model.isTurnOffAnim()) {
+                    if (!shownAnim) {
+                        holder.img_link_spot.setVisibility(View.VISIBLE);
+                        shownAnim = true;
+                    } else {
+                        holder.img_link_vitual.setVisibility(View.VISIBLE);
+                    }
+
+                } else {
                     holder.img_link_vitual.setVisibility(View.GONE);
                     holder.img_link_spot.setVisibility(View.GONE);
                     holder.img_link_short.setVisibility(View.VISIBLE);
-                } else {
+
+                }
+                if (position == listSpot.size() - 1) {
+                    holder.showInfoSpot.setVisibility(View.GONE);
                     holder.img_link_spot.setVisibility(View.GONE);
+                    holder.img_link_vitual.setVisibility(View.VISIBLE);
+                    holder.img_link_short.setVisibility(View.GONE);
                 }
             }
-            holder.imgShowChecked.setVisibility(View.VISIBLE);
-            holder.txt_spotName.setTextColor(activityContext.getResources().getColor(R.color.Black));
-            holder.spot_id.setTextColor(activityContext.getResources().getColor(R.color.White));
-            if (position == listSpot.size() - 1)
-                holder.img_link_spot.setVisibility(View.GONE);
 
         } else if (position == lastCheckedOrder + 1) {
+            holder.showInfoSpot.setVisibility(View.GONE);
+            holder.img_link_spot.setVisibility(View.GONE);
+            holder.img_link_vitual.setVisibility(View.GONE);
+            holder.img_link_short.setVisibility(View.GONE);
+            if (model.isTurnOffAnim()) {
+                holder.img_link_short.setVisibility(View.VISIBLE);
+            } else {
+                holder.img_link_vitual.setVisibility(View.VISIBLE);
+            }
+        }
 
-        } else {
+        else {
+            holder.img_link_vitual.setVisibility(View.VISIBLE);
             holder.spot.setAlpha((float) 0.3);
         }
 

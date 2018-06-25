@@ -152,7 +152,7 @@ privacy.setOnClickListener( new View.OnClickListener() {
     View.OnClickListener onClickTutorial = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(MenuPageActivity.this, UsePageActivity.class);
+            Intent intent = new Intent(MenuPageActivity.this, ViewPageActivity.class);
             startActivity(intent);
         }
     };
