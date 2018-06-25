@@ -68,6 +68,7 @@ import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
+import vn.javis.tourde.utils.TimeUtil;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
@@ -154,13 +155,20 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0\"> %s </body></Html>";
     int fontSize;
     private boolean isNextScreen;
+    private SaveCourseRunning saveCourseRunning;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
-       if( SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) != 0 && isNextScreen) {
-    mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), true, false);
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) != 0 && isNextScreen) {
+            if (SharedPreferencesUtils.getInstance(mActivity).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+                if (saveCourseRunning != null) {
+                    mActivity.openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance(), true), true, false);
+                }
+            } else {
+                mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), true, false);
+            }
         }
     }
 
@@ -170,9 +178,10 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         TourDeApplication.getInstance().trackScreenView("screen_course_id=" + mCourseID);
     }
 
-    public static CourseDetailFragment newInstance(boolean isNextScreen) {
+    public static CourseDetailFragment newInstance(boolean isNextScreen, SaveCourseRunning saveCourseRunning) {
         CourseDetailFragment fragment = new CourseDetailFragment();
         fragment.isNextScreen = isNextScreen;
+        fragment.saveCourseRunning = saveCourseRunning;
         return fragment;
     }
 
@@ -184,9 +193,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCommentFragment=null;
 //        indexTab=0;
 //        pagerAdapter =null;
-       showProgressDialog();
+        showProgressDialog();
         // testAPI();
-             mCourseID = mActivity.getmCourseID();
+        mCourseID = mActivity.getmCourseID();
 //        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
 
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
@@ -324,6 +333,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.course_detail_fragment, container, false);
     }
+
     public CourseDetail getmCourseDetail() {
         return mCourseDetail;
     }
@@ -349,7 +359,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
         txtArea.setText(model.getArea());
-        txtDistance.setText(model.getDistance()+"km");
+        txtDistance.setText(model.getDistance() + "km");
         String strMonths = model.getSeason();
         Log.i("Course Detail 255", "" + strMonths);
         try {
@@ -458,7 +468,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //        tabCourseFragment.setData("tabCourseFragment");
 
         // tabCommentFragment = (TabCommentFragment) pagerAdapter.getItem(1);
-       hideProgressDialog();
+        hideProgressDialog();
 
     }
 
@@ -479,7 +489,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(),mCourseDetail.getmCourseData().getRouteImage(), mCourseDetail.getSpot(), CourseDetailFragment.this);
+                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getmCourseData().getRouteImage(), mCourseDetail.getSpot(), CourseDetailFragment.this);
 //                    return TabSpotUploadedImages.intansce(listImgUrl);
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());

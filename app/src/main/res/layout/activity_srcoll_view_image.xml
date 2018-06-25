@@ -52,9 +52,13 @@
 
         <Button
             android:id="@+id/bt_rule"
+            android:text="同意する"
+            android:textColor="@color/White"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_47sdp"
-            android:background="@drawable/btn_agree"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="normal"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/bgr_btn_blue"
             android:textAlignment="center" />
     </LinearLayout>
 

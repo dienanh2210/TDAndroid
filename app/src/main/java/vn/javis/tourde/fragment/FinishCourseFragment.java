@@ -114,6 +114,7 @@ public class FinishCourseFragment extends BaseFragment {
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
     int indexTab;
     File photoFile;
+    public boolean isFromMain;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -170,9 +171,11 @@ public class FinishCourseFragment extends BaseFragment {
                 ProcessDialog.showDialogConfirm(mActivity, "", "終了してコース画面へ 戻りますが宜しいですか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-                        SharedPreferencesUtils.getInstance(getContext()).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
-                        SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.SAVED_COURSE_RUNNING);
-                        mActivity.ShowCourseDetailById(mCourseID);
+//                        mActivity.ShowCourseDetailById(mCourseID);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.SAVED_COURSE_RUNNING);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.KEY_GOAL_PAGE);
+                        mActivity.onBackPressed();
                     }
                 });
             }
