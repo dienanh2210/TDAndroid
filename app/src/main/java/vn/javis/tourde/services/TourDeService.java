@@ -167,7 +167,6 @@ public abstract class TourDeService {
     }
 
     public static void uploadImageBitmap(final Activity activity, String api, final Bitmap bitmap, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
-        BaseFragment.mInstance.showProgressDialog();
         //our custom volley request
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ApiEndpoint.BASE_URL + api,
                 new Response.Listener<NetworkResponse>() {

@@ -65,6 +65,7 @@ import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
+import vn.javis.tourde.utils.TimeUtil;
 
 
 public class FragmentTabLayoutRunning extends BaseFragment {
@@ -139,6 +140,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
         if (!TextUtils.isEmpty(savedString)) {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+
+            if (SharedPreferencesUtils.getInstance(mActivity).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+                if (saveCourseRunning != null) {
+                    mActivity.openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance(), true), FragmentTabLayoutRunning.class.getSimpleName(), true, false);
+                }
+            }
             courseID = saveCourseRunning.getCourseID();
             mActivity.setmCourseID(courseID);
             lastLongtitude = saveCourseRunning.getLast_longtitude();
@@ -520,6 +527,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     public void onOkClick() {
                         SharedPreferencesUtils.getInstance(getContext()).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
                         SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.SAVED_COURSE_RUNNING);
+                        SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.KEY_GOAL_PAGE);
 //                        mActivity.ShowCourseDetail();
                         isFinishTime = true;
                         mActivity.onBackPressed();

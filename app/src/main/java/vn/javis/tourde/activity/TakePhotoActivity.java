@@ -323,8 +323,8 @@ public class TakePhotoActivity extends BaseActivity {
                 bm.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
                 fileOutputStream.flush();
                 fileOutputStream.close();
-                MediaStore.Images.Media.insertImage(getContentResolver(),
-                        bm, file.getAbsolutePath(), "" + new Date().getTime());
+//                MediaStore.Images.Media.insertImage(getContentResolver(),
+//                        bm, file.getAbsolutePath(), "" + new Date().getTime());
                 CameraUtils.addImageToGallery(file.getAbsolutePath(), TakePhotoActivity.this);
                 Log.i("addImageToGallery", file.getAbsolutePath());
             } catch (Exception e) {

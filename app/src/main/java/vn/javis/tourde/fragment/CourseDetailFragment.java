@@ -163,13 +163,15 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
         if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) != 0 && isNextScreen) {
-            if (SharedPreferencesUtils.getInstance(mActivity).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
-                if (saveCourseRunning != null) {
-                    mActivity.openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance(), true), true, false);
-                }
-            } else {
-                mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), true, false);
-            }
+            mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), CourseDetailFragment.class.getSimpleName(), true, false);
+
+//            if (SharedPreferencesUtils.getInstance(mActivity).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+//                if (saveCourseRunning != null) {
+//                    mActivity.openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance(), true), CourseDetailFragment.class.getSimpleName(), true, false);
+//                }
+//            } else {
+//                mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), CourseDetailFragment.class.getSimpleName(), true, false);
+//            }
         }
     }
 
