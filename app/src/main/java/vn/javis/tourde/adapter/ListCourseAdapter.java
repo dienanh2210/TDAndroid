@@ -34,8 +34,10 @@ import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 
 public class
@@ -59,7 +61,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         return new CourseViewHolder(mView);
     }
 
-    String token = LoginFragment.getmUserToken();
+    String token = SharedPreferencesUtils.getInstance(context).getStringValue(LoginUtils.TOKEN);
 
     @Override
     public void onBindViewHolder(@NonNull final CourseViewHolder holder, final int position) {
@@ -88,7 +90,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             holder.txtTag.setText(s);
         }
         holder.isFavorite = false;
-        FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
+        FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 Log.i("response", response.toString());
@@ -152,9 +154,8 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if (token != "") {
+                if (!TextUtils.isEmpty(token)) {
                     holder.isFavorite = !holder.isFavorite;
-                    String token = LoginFragment.getmUserToken();
                     int course_id = Integer.valueOf(model.getCourseId());
                     if (holder.isFavorite) {
                         FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {

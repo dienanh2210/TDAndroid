@@ -30,6 +30,8 @@ import vn.javis.tourde.model.Data;
 import vn.javis.tourde.adapter.ListRegisterAdapter;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.LoginUtils;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class SpotFacilitiesFragment extends Fragment {
 
@@ -43,7 +45,7 @@ public class SpotFacilitiesFragment extends Fragment {
     CourseListActivity activity;
     int spotId;
     String[] contentList2 = new String[]{"toilet", "parking", "accommodation", "bath", "shower", "locker", "dressing_room", "bicycle_delivery", "tourist_information", "cycle_rack", "bicycle_rental", "cycling_guide", "tool_rental", "floor_pump_rental", "mechanic_maintenance"};
-
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     public static SpotFacilitiesFragment newInstance(View.OnClickListener listener) {
         SpotFacilitiesFragment fragment = new SpotFacilitiesFragment();
         //  fragment.listener = (OnFragmentInteractionListener) listener;
@@ -57,7 +59,6 @@ public class SpotFacilitiesFragment extends Fragment {
         rcv_list = view.findViewById(R.id.rcv_list);
         btn_choose = view.findViewById(R.id.btn_choose);
         tv_back_sppot_faclities = view.findViewById(R.id.tv_back_sppot_faclities);
-        String token = LoginFragment.getmUserToken();
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
         params.put("token", token);
         params.put("spot_id", String.valueOf(spotId));

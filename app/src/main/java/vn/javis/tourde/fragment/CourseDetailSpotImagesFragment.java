@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +39,10 @@ import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
 public class CourseDetailSpotImagesFragment extends BaseFragment implements ServiceCallback {
@@ -72,7 +75,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     @BindView(R.id.btn_home_footer)
     RelativeLayout btnHome;
     int spotId=0,indexTab=0;
-    String token = LoginFragment.getmUserToken();
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     @BindView(R.id.img_home)
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
@@ -127,7 +130,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(token!="")
+                if(!TextUtils.isEmpty(token))
                     mActivity.showBadgeCollection();
                 else {
                     ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {

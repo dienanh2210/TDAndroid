@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,8 @@ import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.SpotEquipment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.LoginUtils;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class TabSpotFacility extends BaseFragment implements View.OnClickListener {
 
@@ -94,7 +97,7 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
     @BindView(R.id.mechanic_maintenance_2)
     TextView mechanic_maintenance_2;
 
-    String token = LoginFragment.getmUserToken();
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     CourseListActivity mActivity;
 
     @Override
@@ -102,7 +105,6 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
         mActivity = (CourseListActivity) getActivity();
         bt_spot_page.setOnClickListener(this);
         insertInfo();
-        token = LoginFragment.getmUserToken();
 
     }
 
@@ -180,7 +182,7 @@ public class TabSpotFacility extends BaseFragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.bt_spot_page:
-                if (token != "")
+                if (!TextUtils.isEmpty(token))
                     activity.showSpotFacilitiesFragment(spotId);
                 else
                     mActivity.showDialogWarning();

@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -40,7 +41,9 @@ import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class PostCommentFragment extends BaseFragment {
 
@@ -123,10 +126,9 @@ public class PostCommentFragment extends BaseFragment {
     public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.post_comment_fragment, container, false);
     }
-
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     void postComment() {
-        final String token = LoginFragment.getmUserToken();
-        if(token !="" && token !=null)
+        if(!TextUtils.isEmpty(token))
         {
             final int rating =(int) mRatingBar.getRating();
             final String comment = edt_text.getText().toString();

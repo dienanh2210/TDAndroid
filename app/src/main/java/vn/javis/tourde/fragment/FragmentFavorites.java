@@ -29,6 +29,8 @@ import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.model.Review;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.LoginUtils;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class FragmentFavorites extends BaseFragment {
     View mView;
@@ -44,13 +46,13 @@ public class FragmentFavorites extends BaseFragment {
         mView = inflater.inflate(R.layout.tab_favorites_course, container, false);
         return mView;
     }
-
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerFavorite.setLayoutManager(layoutManager);
-        String token = LoginFragment.getmUserToken();
+
         FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
