@@ -178,7 +178,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         txtTag.setText(tags);
         listSpotImage = spotData.getImages();
         if (spotData.getData().getTopImage() != null && spotData.getData().getTopImage() != "")
-            PicassoUtil.getSharedInstance(mActivity).load(spotData.getData().getTopImage()).resize(0, 400).onlyScaleDown().into(imgCourse);
+            PicassoUtil.getSharedInstance(mActivity).load(spotData.getData().getTopImage()).resize(0, 500).onlyScaleDown().into(imgCourse);
 
         PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager());
 
