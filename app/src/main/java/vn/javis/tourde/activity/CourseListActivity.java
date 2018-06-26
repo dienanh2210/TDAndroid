@@ -124,6 +124,7 @@ public class CourseListActivity extends BaseActivity {
     private int mSpotID;
     private String mapUrl;
     private String timeFinish, distanceSpot;
+
     public int getmSpotID() {
         return mSpotID;
     }
@@ -264,14 +265,6 @@ public class CourseListActivity extends BaseActivity {
         openPage(mCourseListFragment, false, true);
     }
 
-    public void ShowCourseDetail(int position) {
-        mCourseID = ListCourseAPI.getInstance().getCourseIdByPosition(position);
-        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
-//        if (mCourseDetailFragment == null)
-        mCourseDetailFragment = new CourseDetailFragment();
-        openPage(mCourseDetailFragment, true, false, true);
-    }
 
     public void ShowCourseDetailById(int id) {
         mCourseID = id;
@@ -279,23 +272,7 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
 //        if (mCourseDetailFragment == null)
         mCourseDetailFragment = new CourseDetailFragment();
-        openPage(mCourseDetailFragment, true, false, true);
-    }
-
-    public void ShowCourseDetail() {
-        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-//        if (mCourseDetailFragment == null)
-        mCourseDetailFragment = new CourseDetailFragment();
-        openPage(mCourseDetailFragment, true, false, true);
-    }
-
-    public void ShowCourseDetailByTab(int indexTab) {
-        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, indexTab);
-//        if (mCourseDetailFragment == null)
-        mCourseDetailFragment = new CourseDetailFragment();
-        openPage(mCourseDetailFragment, true, false, true);
-
+        openPage(mCourseDetailFragment, true, false);
     }
 
     public void ShowFavoriteCourseDetail(int courseId) {
@@ -330,7 +307,7 @@ public class CourseListActivity extends BaseActivity {
     public void showCourseDrive() {
 //        if (courseDriveFragment == null)
         courseDriveFragment = new CourseDriveFragment();
-        openPage(courseDriveFragment, true, false);
+        openPage(courseDriveFragment, CourseDetailFragment.class.getSimpleName(), true, false);
     }
 
     public void showSpotFacilitiesFragment(int spotID) {
@@ -357,7 +334,7 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putString(STAMP_DISTANCE, distance);
 //        if (goalFragment == null)
         goalFragment = new GoalFragment();
-        openPage(goalFragment, true, false);
+        openPage(goalFragment, FragmentTabLayoutRunning.class.getSimpleName(), true, false);
     }
 
     public void showCourseFinish(String speed, String time, boolean isFromMain) {
@@ -416,6 +393,19 @@ public class CourseListActivity extends BaseActivity {
         tx.commitAllowingStateLoss();
     }
 
+    public void openPage(android.support.v4.app.Fragment fragment, String tag, boolean isBackStack, boolean isAnimation) {
+        if (fragment.getArguments() == null)// quanpv
+            fragment.setArguments(dataBundle);
+        android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        if (isAnimation)
+            tx.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        tx.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (isBackStack)
+            tx.addToBackStack(tag);
+        tx.commitAllowingStateLoss();
+    }
+
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation, boolean isBack) {
         fragment.setArguments(dataBundle);
         frgTransaction = getSupportFragmentManager().beginTransaction();
@@ -438,8 +428,8 @@ public class CourseListActivity extends BaseActivity {
 
     public void showTakePhoto(int spotID, String time, String distance) {
 
-        timeFinish =time;
-        distanceSpot =distance;
+        timeFinish = time;
+        distanceSpot = distance;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
@@ -499,10 +489,12 @@ public class CourseListActivity extends BaseActivity {
             typeBackPress = 3;
             showSpotImages(mSpotID);
             return;
+        } else if (fragment instanceof CountDownTimesFragment) {
+            return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
 
 //            ShowCourseDetail();
-            if (SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
+           /* if (SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
                 if (((FragmentTabLayoutRunning) fragment).isFinishTime && ((FragmentTabLayoutRunning) fragment).isFromMain) {
                     super.onBackPressed();
                     return;
@@ -516,34 +508,46 @@ public class CourseListActivity extends BaseActivity {
                     fm.popBackStack();
                 }
                 return;
-            }
+            }*/
+            popBackStack(CourseDetailFragment.class.getSimpleName());
+            return;
 
         } else if (fragment instanceof GoalFragment) {
             return;
-        } else if (fragment instanceof FinishCourseFragment) {
+        } /*else if (fragment instanceof FinishCourseFragment) {
             FinishCourseFragment finishCourseFragment = (FinishCourseFragment) fragment;
             if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
                 super.onBackPressed();
                 return;
-            } else if (!finishCourseFragment.isFromMain) {
+            } *//*else if (!finishCourseFragment.isFromMain) {
                 for (int i = 0; i < 4; i++) { // Back to CourseDetailFragment
                     fm.popBackStack();
                 }
                 return;
-            } else {
-                for (int i = 0; i < 2; i++) { // Back to CourseDetailFragment
-                    fm.popBackStack();
-                }
+            }*//* else {
+                popBackStack(CourseDetailFragment.class.getSimpleName());
                 return;
             }
 
 
-        }
+        }*/
 
         super.onBackPressed();
         Log.i("onBackPressed", "true");
     }
 
+
+    public void popBackStack(String tag) {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    public void popBackStack(int count) {
+        FragmentManager fm = getSupportFragmentManager();
+        for (int i = 0; i < count; i++) {
+            fm.popBackStack();
+        }
+    }
 
     public void fn_permission() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {

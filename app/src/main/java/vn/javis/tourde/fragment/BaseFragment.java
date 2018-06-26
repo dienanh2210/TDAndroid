@@ -26,15 +26,12 @@ public abstract class BaseFragment extends Fragment {
     protected MainActivity activity;
     protected ProcessDialog mProgessDialog;
 
-    public static BaseFragment mInstance;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = getView(inflater, container);
         mUnbind = ButterKnife.bind(this, mView);
         ButterKnife.setDebug(true);
-        mInstance=this;
         return mView;
     }
 
@@ -45,10 +42,11 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        if (mUnbind != null) {
-            mUnbind.unbind();
-            mUnbind = null;
-        }
+        // tam thoi bo cai nay di, tranh crash (quanpv)
+//        if (mUnbind != null) {
+//            mUnbind.unbind();
+//            mUnbind = null;
+//        }
         super.onDestroyView();
 
     }
