@@ -427,7 +427,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         //        .networkPolicy(NetworkPolicy.NO_CACHE).into(imgCourse);
         PicassoUtil.getSharedInstance(activity)
                 .load(model.getTopImage())
-                .resize(0, 400).onlyScaleDown()
+                .resize(0, 600).onlyScaleDown()
                 .into(imgCourse);
         PicassoUtil.getSharedInstance(activity).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(imgPostUser);
         int rate = Math.round(courseDetail.getReviewTotal().getRatingAverage());

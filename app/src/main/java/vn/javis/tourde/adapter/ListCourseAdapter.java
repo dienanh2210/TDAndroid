@@ -76,8 +76,8 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.txtReviewCount.setText(model.getReviewCount());
         holder.txtSpotCount.setText(model.getSpotCount());
         holder.txtPostUser.setText(model.getPostUserName());
-        PicassoUtil.getSharedInstance(context).load(model.getTopImage()).resize(0, 400).onlyScaleDown().into(holder.imgCourse);
-        PicassoUtil.getSharedInstance(context).load(model.getPostUserImage()).resize(0, 50).onlyScaleDown().transform(new CircleTransform()).into(holder.imgPostUser);
+        PicassoUtil.getSharedInstance(context).load(model.getTopImage()).resize(0, 500).onlyScaleDown().into(holder.imgCourse);
+        PicassoUtil.getSharedInstance(context).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(holder.imgPostUser);
         List<String> listTag = model.getListTag();
 
         if (listTag != null && listTag.size() > 0) {
