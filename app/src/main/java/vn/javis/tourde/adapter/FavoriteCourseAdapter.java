@@ -56,7 +56,7 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
 
         holder.txtTitle.setText(model.getTitle());
         holder.txtPostUsername.setText(model.getPostUserName());
-        PicassoUtil.getSharedInstance(activityContext).load(model.getTopImage()).resize(0, 400).onlyScaleDown().into(holder.imgShow);
+        PicassoUtil.getSharedInstance(activityContext).load(model.getTopImage()).resize(0, 500).onlyScaleDown().into(holder.imgShow);
         PicassoUtil.getSharedInstance(activityContext).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(holder.imgPostUser);
         if (holder.isRunning) {
             //holder.txtRunning.setBackground(mView.getResources().getDrawable(R.drawable.icon_bicycle_blue));

@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
         android:orientation="vertical">
 
         <ImageView
@@ -17,7 +17,5 @@
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
             android:src="@drawable/imageuse_07" />
-
-
     </RelativeLayout>
 </RelativeLayout>

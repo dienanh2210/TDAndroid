@@ -100,12 +100,12 @@ public class TakePhotoActivity extends BaseActivity {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-       showProgressDialog();
+        showProgressDialog();
         spotId = getIntent().getIntExtra(CourseListActivity.SPOT_ID, 0);
         courseID = getIntent().getIntExtra(CourseListActivity.COURSE_DETAIL_ID, 0);
-        time  = getIntent().getStringExtra(CourseListActivity.TIME_FINISH);
+        time = getIntent().getStringExtra(CourseListActivity.TIME_FINISH);
         txtTime.setText(time);
-        distance  = getIntent().getStringExtra(CourseListActivity.STAMP_DISTANCE);
+        distance = getIntent().getStringExtra(CourseListActivity.STAMP_DISTANCE);
         txtDistance.setText(distance + "km");
 
         if (spotId > 0) {
@@ -125,12 +125,11 @@ public class TakePhotoActivity extends BaseActivity {
 
                 @Override
                 public void onError(VolleyError error) {
-                    spotTitle.setText("spotid not valid");
+
                 }
             });
-        }
-        else {
-            spotTitle.setText("spotid not valid");
+        } else {
+
         }
         if (courseID > 0) {
             GetCourseDataAPI.getCourseData(courseID, new ServiceCallback() {
@@ -143,7 +142,7 @@ public class TakePhotoActivity extends BaseActivity {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                     courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
 
-                  hideProgressDialog();
+                    hideProgressDialog();
                 }
 
                 @Override
@@ -170,7 +169,7 @@ public class TakePhotoActivity extends BaseActivity {
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TourDeApplication.getInstance().trackEvent("tap_photoframe_spot_id="+spotId,"tap","tap_photoframe_spot_id="+spotId);
+                TourDeApplication.getInstance().trackEvent("tap_photoframe_spot_id=" + spotId, "tap", "tap_photoframe_spot_id=" + spotId);
                 camera.takePicture(myShutterCallback, null, pictureCallback);
 
             }
@@ -317,15 +316,15 @@ public class TakePhotoActivity extends BaseActivity {
             /*BitmapDrawable bmd = new BitmapDrawable(getResources(), bm);
             canvasLayout.setBackground(bmd);*/
             hideView();
-            bm =  CameraUtils.addView(bm,canvasLayout);
+            bm = CameraUtils.addView(bm, canvasLayout);
 
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 bm.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
                 fileOutputStream.flush();
                 fileOutputStream.close();
-                MediaStore.Images.Media.insertImage(getContentResolver(),
-                        bm, file.getAbsolutePath(), "" + new Date().getTime());
+//                MediaStore.Images.Media.insertImage(getContentResolver(),
+//                        bm, file.getAbsolutePath(), "" + new Date().getTime());
                 CameraUtils.addImageToGallery(file.getAbsolutePath(), TakePhotoActivity.this);
                 Log.i("addImageToGallery", file.getAbsolutePath());
             } catch (Exception e) {
@@ -348,14 +347,14 @@ public class TakePhotoActivity extends BaseActivity {
         camera.release();
     }
 
-    private void resetView(){
+    private void resetView() {
         canvasLayout.setBackground(null);
         btnBack.setVisibility(View.VISIBLE);
         frameCamera.setVisibility(View.VISIBLE);
 
     }
 
-    private void hideView(){
+    private void hideView() {
         btnBack.setVisibility(View.INVISIBLE);
         frameCamera.setVisibility(View.INVISIBLE);
     }
