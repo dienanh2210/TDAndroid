@@ -250,7 +250,7 @@
                     android:layout_alignParentStart="true"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_12sdp" />
-                
+
                 <ImageView
                     android:id="@+id/im_how"
                     android:layout_width="@dimen/_9sdp"
