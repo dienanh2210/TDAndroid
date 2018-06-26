@@ -62,6 +62,7 @@ import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -116,7 +117,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public boolean isFinishTime;
     public boolean isFromMain;
     public boolean isTimeSaved;
-
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -140,8 +141,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
             courseID = saveCourseRunning.getCourseID();
             mActivity.setmCourseID(courseID);
-            lastLongtitude = saveCourseRunning.getStart_longtitude();
-            lastLatitude = saveCourseRunning.getStart_latitude();
+            lastLongtitude = saveCourseRunning.getLast_longtitude();
+            lastLatitude = saveCourseRunning.getLast_latitude();
             //    lastLongtitude = saveCourseRunning.la
 //            if(saveCourseRunning.isFinished())
 //            {
@@ -331,6 +332,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     void showCheckPointFragment(final int spotId) {
         if (isSpotChecked(spotId))
             return;
+
         final String distance = String.format("%.2f", getCurrentDistance());
         long lastCheckedTime =saveCourseRunning.getLastCheckedTime();
         long timeDiffer = time -lastCheckedTime;
@@ -338,7 +340,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         checkedSpot(spotId, getTimeFormat(timeDiffer), calculateAvarageSpeed(timeDiffer),time);
 
         if (spotId > 0 && courseID > 0) {
-            final String token = LoginFragment.getmUserToken();
             if (getSizeCheckedSpot() == list_spot.size()) //complete all spot
             {
                 saveCourseRunning.setFinished(true);
@@ -354,10 +355,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     final String imgUrl = model.getImage() == null ? "" : model.getImage();
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     if (spotId == lastSpotId) {
-                                        final float speed = courseDistance / ((float) time / 3600000);
+                                        final float speed = (float) getRealCourseDistance() / ((float) time / 3600000);
                                         final String finishTime = getTimeFormat(time);
-                                        preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
-                                        isSaveTime = false;
+//                                        preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
+//                                        isSaveTime = false;
 
                                         //
                                         PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() { //call postcourselog
@@ -419,10 +420,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 }
 
             } else if (spotId == lastSpotId) {
-                final float speed = courseDistance / ((float) time / 3600000);
+                final float speed = (float) getRealCourseDistance() / ((float) time / 3600000);
                 final String finishTime = getTimeFormat(time);
-                preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
-                isSaveTime = false;
+//                preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
+//                isSaveTime = false;
                 //   mActivity.showGoalFragment(spotId, speed, finishTime,"","");
                 //   ProcessDialog.showProgressDialog(mActivity, "Loading", false);
                 PostCourseLogAPI.postCourseLog(token, courseID, speed, finishTime, new ServiceCallback() {
@@ -615,12 +616,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     double calculateAvarageSpeed(long time) {
         double aSpeed = 0;
         double distance = SphericalUtil.computeDistanceBetween(new LatLng(lastLatitude, lastLongtitude), new LatLng(latitude, longtitude));
+        distance = distance/1000;
        //  aSpeed = courseDistance / ((double) time / 3600000);
         aSpeed = distance / ((double) time / 3600000);
         lastLatitude = latitude;
         lastLongtitude = longtitude;
-        saveCourseRunning.setStart_latitude(lastLatitude);
-        saveCourseRunning.setStart_longtitude(lastLongtitude);
+        saveCourseRunning.setLast_latitude(lastLatitude);
+        saveCourseRunning.setLast_longtitude(lastLongtitude);
         DecimalFormat df = new DecimalFormat("#.##");
         aSpeed = Double.valueOf(df.format(aSpeed).replace(",", "."));
         return aSpeed;
@@ -636,9 +638,14 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     double getCurrentDistance() {
         double distance = SphericalUtil.computeDistanceBetween(new LatLng(lastLatitude, lastLongtitude), new LatLng(latitude, longtitude));
+        distance = distance/1000;
         return distance;
     }
-
+    double getRealCourseDistance() {
+        double distance = SphericalUtil.computeDistanceBetween(new LatLng(saveCourseRunning.getStart_latitude(), saveCourseRunning.getStart_longtitude()), new LatLng(latitude, longtitude));
+        distance =distance/1000;
+        return distance;
+    }
     private void setListCheckedSpot() {
         if (saveCourseRunning != null)
             return;
@@ -675,14 +682,21 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     private void checkedSpot(int spotId, String finishTime, double averageSpeed,long lastCheckTime) {
         for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
-            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId) {
+            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId)
+            {
                 saveCourseRunning.getLstCheckedSpot().get(i).setChecked(true);
+                if(spotId>saveCourseRunning.getHighestCheckedSpot())
+                {
+                    saveCourseRunning.setHighestCheckedSpot(spotId);
+                    saveCourseRunning.getLstCheckedSpot().get(i).setHighestChecked(true);
+                }
                 if (i == saveCourseRunning.getLastCheckedOrder() + 1) {
                     saveCourseRunning.getLstCheckedSpot().get(saveCourseRunning.getLastCheckedOrder()).setAvarageSpeed(averageSpeed);
                     saveCourseRunning.getLstCheckedSpot().get(saveCourseRunning.getLastCheckedOrder()).setTime(finishTime);
                 }
                 if (i > 0) {
                     saveCourseRunning.getLstCheckedSpot().get(i - 1).setTurnOffAnim(true);
+
                 }
                 saveCourseRunning.setLastCheckedOrder(i);
                 saveCourseRunning.setLastCheckedTime(lastCheckTime);

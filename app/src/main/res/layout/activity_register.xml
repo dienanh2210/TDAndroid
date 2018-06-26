@@ -6,6 +6,7 @@
     tools:context=".activity.RegisterActivity">
     <FrameLayout
         android:id="@+id/container"
+        android:background="@color/White"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible" />

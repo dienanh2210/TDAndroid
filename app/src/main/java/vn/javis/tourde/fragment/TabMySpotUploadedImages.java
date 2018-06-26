@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,9 @@ import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.RunningCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import static vn.javis.tourde.fragment.RegisterFragment.FILE_SIZE_8MB;
 
@@ -51,7 +54,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
     CourseListActivity mActivity;
     List<String> listSpotImg = new ArrayList<>();
     String avagePace, finishTIme, startAddress;
-    String token ="";
+    String token;
     int spotId;
 
     public static TabMySpotUploadedImages intansce(List<String> listSpotImg, int spotID) {
@@ -80,7 +83,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
                 if (position == 0) {
 
                     //   startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-                    if (token != "")
+                    if (!TextUtils.isEmpty(token))
                         startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                     else
                         mActivity.showDialogWarning();
@@ -89,7 +92,7 @@ public class TabMySpotUploadedImages extends BaseFragment {
         });
         rcvMySpotImage.setAdapter(listSpotImageAdapter);
 
-        token =LoginFragment.getmUserToken();
+        token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
         getImages();
 
     }
@@ -143,7 +146,6 @@ public class TabMySpotUploadedImages extends BaseFragment {
                             if (jsonObject.has("success")) {
                                 String user_image_id = jsonObject.getString("user_image_id");
                                 //post image spot
-                                String token = LoginFragment.getmUserToken();
                                 ArrayList<String> arrayID = new ArrayList<>();
                                 arrayID.add(user_image_id);
 
