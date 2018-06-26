@@ -62,6 +62,7 @@ import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
 import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -116,7 +117,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public boolean isFinishTime;
     public boolean isFromMain;
     public boolean isTimeSaved;
-
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -339,7 +340,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         checkedSpot(spotId, getTimeFormat(timeDiffer), calculateAvarageSpeed(timeDiffer),time);
 
         if (spotId > 0 && courseID > 0) {
-            final String token = LoginFragment.getmUserToken();
             if (getSizeCheckedSpot() == list_spot.size()) //complete all spot
             {
                 saveCourseRunning.setFinished(true);

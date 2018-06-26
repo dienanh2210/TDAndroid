@@ -1,5 +1,6 @@
 package vn.javis.tourde.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -86,6 +87,7 @@ import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
@@ -154,7 +156,7 @@ public class CourseListActivity extends BaseActivity {
     private SpotFacilitiesFragment spotFacilitiesFragment;
     private CheckPointFragment checkPointFragment;
     android.support.v4.app.FragmentTransaction frgTransaction;
-    String token = LoginFragment.getmUserToken();
+    String token;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -169,10 +171,10 @@ public class CourseListActivity extends BaseActivity {
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-
+        token = SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN);
         fn_permission();
         //    showCourseFinish();hiện
-        if (!token.equals("")) {
+        if (!TextUtils.isEmpty(token)) {
             checkLogging();
         }
     }

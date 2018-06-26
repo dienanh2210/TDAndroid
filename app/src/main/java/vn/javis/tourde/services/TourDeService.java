@@ -33,6 +33,8 @@ import java.util.Map;
 import java.util.Set;
 
 import vn.javis.tourde.apiservice.ApiEndpoint;
+import vn.javis.tourde.fragment.BaseFragment;
+import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.volley.VolleyCustomRequest;
 import vn.javis.tourde.volley.VolleyMultipartRequest;
 import vn.javis.tourde.volley.VolleySingleton;
@@ -165,7 +167,7 @@ public abstract class TourDeService {
     }
 
     public static void uploadImageBitmap(final Activity activity, String api, final Bitmap bitmap, final HashMap<String, String> params, final ServiceCallback serviceCallback) {
-
+        BaseFragment.mInstance.showProgressDialog();
         //our custom volley request
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ApiEndpoint.BASE_URL + api,
                 new Response.Listener<NetworkResponse>() {
@@ -177,6 +179,7 @@ public abstract class TourDeService {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -207,6 +210,7 @@ public abstract class TourDeService {
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
+                if (bitmap != null)
                 params.put("image", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
                 return params;
             }

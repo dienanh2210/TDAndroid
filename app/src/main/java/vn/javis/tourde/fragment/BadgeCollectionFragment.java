@@ -37,6 +37,8 @@ import vn.javis.tourde.model.Badge;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.GsonUtil;
+import vn.javis.tourde.utils.LoginUtils;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class BadgeCollectionFragment extends BaseFragment implements TabLayout.OnTabSelectedListener   {
 
@@ -54,6 +56,7 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
     TextView txtBadgeBtn;
     @BindView(R.id.btn_my_course_footer)
     RelativeLayout btnMyCourse;
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -96,7 +99,7 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
 
     void setBadgeData() {
 //        List<Badge> listBadge = new ArrayList<>();
-        BadgeAPI.getBadgeData(LoginFragment.getmUserToken(), new ServiceCallback() {
+        BadgeAPI.getBadgeData(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 List<Badge> listBadge = GsonUtil.stringToArray(response.toString(), Badge[].class);

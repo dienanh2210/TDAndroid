@@ -15,6 +15,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ import vn.javis.tourde.adapter.ListSpotDetailCircleAdapter;
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
@@ -83,7 +85,7 @@ public class TabCourseFragment extends BaseFragment {
     List<Spot> listSpot = new ArrayList<>();
     String avagePace, finishTIme, startAddress,routeUrl;
     CourseDetailFragment parentFragment;
-    String token = LoginFragment.getmUserToken();
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
     public static TabCourseFragment instance(List<Spot> lstSpot, CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
@@ -154,7 +156,7 @@ public class TabCourseFragment extends BaseFragment {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (token.equals("")) {
+                if (TextUtils.isEmpty(token)) {
                     ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
                         @Override
                         public void onOkClick() {
@@ -174,7 +176,7 @@ public class TabCourseFragment extends BaseFragment {
             btnRunningApp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (token.equals("")) {
+                    if (TextUtils.isEmpty(token)) {
                         ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {
