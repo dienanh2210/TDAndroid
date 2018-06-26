@@ -124,6 +124,7 @@ public class CourseListActivity extends BaseActivity {
     private int mSpotID;
     private String mapUrl;
     private String timeFinish, distanceSpot;
+
     public int getmSpotID() {
         return mSpotID;
     }
@@ -228,7 +229,7 @@ public class CourseListActivity extends BaseActivity {
                             SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
                             mCourseID = saveCourseRunning.getCourseID();
                             Log.i("getAvarageSpeed", saveCourseRunning.getAvarageSpeed() + "");
-                            openPage(CourseDetailFragment.newInstance(true, saveCourseRunning), "CourseDetailFragment", true, false);
+                            openPage(CourseDetailFragment.newInstance(true, saveCourseRunning), true, false);
 //                            openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance()), true, false);
                         }
                     } else {
@@ -306,7 +307,7 @@ public class CourseListActivity extends BaseActivity {
     public void showCourseDrive() {
 //        if (courseDriveFragment == null)
         courseDriveFragment = new CourseDriveFragment();
-        openPage(courseDriveFragment,CourseDetailFragment.class.getSimpleName(), true, false);
+        openPage(courseDriveFragment, CourseDetailFragment.class.getSimpleName(), true, false);
     }
 
     public void showSpotFacilitiesFragment(int spotID) {
@@ -427,8 +428,8 @@ public class CourseListActivity extends BaseActivity {
 
     public void showTakePhoto(int spotID, String time, String distance) {
 
-        timeFinish =time;
-        distanceSpot =distance;
+        timeFinish = time;
+        distanceSpot = distance;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
@@ -488,6 +489,8 @@ public class CourseListActivity extends BaseActivity {
             typeBackPress = 3;
             showSpotImages(mSpotID);
             return;
+        } else if (fragment instanceof CountDownTimesFragment) {
+            return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
 
 //            ShowCourseDetail();
@@ -506,8 +509,8 @@ public class CourseListActivity extends BaseActivity {
                 }
                 return;
             }*/
-           popBackStack(CourseDetailFragment.class.getSimpleName());
-           return;
+            popBackStack(CourseDetailFragment.class.getSimpleName());
+            return;
 
         } else if (fragment instanceof GoalFragment) {
             return;
