@@ -196,8 +196,8 @@ public class LoginUtils {
                     //Todo save token to device
                     Log.i(TAG, "onSuccess: " + sns_kind + response.toString());
                     String token = jsonObject.getString("token");
-
-                        SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN_SNS,token);
+                    SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN,token);
+                    SharedPreferencesUtils.getInstance(activity).setBooleanValue(TOKEN_SNS,true);
 
                     Intent intent = new Intent(activity,CourseListActivity.class);
                     activity.startActivity(intent);

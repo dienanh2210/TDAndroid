@@ -58,7 +58,6 @@ public class MenuPageActivity extends BaseActivity {
     @BindView( R.id.tv_version )
     TextView tv_version;
     String token;
-    String token_sns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,19 +86,14 @@ public class MenuPageActivity extends BaseActivity {
         //String token = LoginFragment.getmUserToken();
         //get token from device to check login or not
         token = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue(LoginUtils.TOKEN);
-        token_sns = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue(LoginUtils.TOKEN_SNS);
         if(!TextUtils.isEmpty(token)){
             ll_logout.setVisibility( View.VISIBLE );
             tv_login.setVisibility(View.GONE);
             rlt_register.setVisibility(View.GONE);
             lineRegister.setVisibility(View.GONE);
-            basic_Info.setVisibility(View.VISIBLE);
-        } else if(!TextUtils.isEmpty(token_sns)){
-            ll_logout.setVisibility( View.VISIBLE );
-            tv_login.setVisibility(View.GONE);
-            rlt_register.setVisibility(View.GONE);
-            lineRegister.setVisibility(View.GONE);
-            basic_Info.setVisibility(View.GONE);
+            if(!SharedPreferencesUtils.getInstance(getApplicationContext()).getBooleanValue(LoginUtils.TOKEN_SNS))
+                basic_Info.setVisibility(View.VISIBLE);
+
         }
    rlt_pippon.setOnClickListener( onClicknippon );
 privacy.setOnClickListener( new View.OnClickListener() {
@@ -192,10 +186,12 @@ privacy.setOnClickListener( new View.OnClickListener() {
                                 LoginFragment.setmAccount(null);
                                 //LoginFragment.setmUserToken("");
                                 //Delete token from device when sign out
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
+                               /* SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN_SNS);
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");*/
                                 Intent intent = new Intent(MenuPageActivity.this,CourseListActivity.class);
                                 intent.putExtra(Constant.KEY_LOGOUT_SUCCESS,1);
                                 startActivity(intent);

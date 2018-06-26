@@ -1,6 +1,5 @@
 package vn.javis.tourde.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.android.volley.Response;
@@ -102,7 +100,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     public static final long FILE_SIZE_8MB = 8 * 1024 * 1024;
     String token;
     JSONObject data;
-   private boolean isChooseAge, isChooseArea;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -210,19 +207,12 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 }
 
                 age = jsonObject.getInt("age");
-                if (!isChooseAge)
-                    tv_age.setText(age + "代");
-                else
-                    tv_age.setText(txtAge);
+                tv_age.setText(age + "代");
                 prefecture = jsonObject.getInt("area");
-                if (!isChooseArea)
-                    tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
-                else
-                    tv_prefecture.setText(txtArea);
-                if(!TextUtils.isEmpty(jsonObject.getString("image")))
+
+                tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
+                if (!TextUtils.isEmpty(jsonObject.getString("image")))
                     PicassoUtil.getSharedInstance(getContext()).load(jsonObject.getString("image")).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
-                isChooseAge = false;
-                isChooseArea = false;
                 hideProgressDialog();
             }
 
@@ -510,7 +500,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onFragmentInteraction(int valueArea, String content) {
-        isChooseArea = true;
         prefecture = valueArea;
         txtArea = content;
         tv_prefecture.setText(content);
@@ -519,7 +508,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onAgeFragmentInteraction(int valueAge, String content) {
-        isChooseAge = true;
         age = valueAge;
         txtAge = content;
         tv_age.setText(content);
