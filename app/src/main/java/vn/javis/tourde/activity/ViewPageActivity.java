@@ -79,7 +79,7 @@ public class ViewPageActivity extends AppCompatActivity {
             dots[i] = new ImageView(this);
             dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), vn.javis.tourde.R.drawable.nonactive_dot));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(8, 0, 8, 0);
+            params.setMargins(15, 0, 15, 0);
             sliderDotspanel.addView(dots[i], params);
         }
         dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
@@ -102,10 +102,6 @@ public class ViewPageActivity extends AppCompatActivity {
             }
         });
     }
-//    @Override
-//    public void onBackPressed() {
-//        // Do Here what ever you want do on back press;
-//    }
     private void setupViewPager(ViewPager viewPager) {
         adapter = new MainActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "One");
