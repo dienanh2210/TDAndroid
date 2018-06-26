@@ -125,7 +125,7 @@ public class TakePhotoActivity extends BaseActivity {
 
                 @Override
                 public void onError(VolleyError error) {
-                    spotTitle.setText("spotid not valid");
+                    spotTitle.setText("spot_id not valid");
                 }
             });
         }

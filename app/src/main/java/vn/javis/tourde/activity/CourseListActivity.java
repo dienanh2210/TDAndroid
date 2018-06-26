@@ -438,11 +438,11 @@ public class CourseListActivity extends BaseActivity {
 
         timeFinish =time;
         distanceSpot =distance;
+        mSpotID = spotID;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
-            mSpotID = spotID;
             //         dataBundle.putInt(SPOT_ID, mSpotID);
             //        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
             //        dataBundle.putString(TIME_FINISH, time);
