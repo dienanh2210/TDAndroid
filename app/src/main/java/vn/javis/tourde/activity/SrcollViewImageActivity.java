@@ -39,8 +39,8 @@ Button bt_rule;
     }
 
     void Rule() {
-        Intent intent = new Intent(this, ViewPageActivity.class);
-        //  Intent intent = new Intent(this, UsePageActivity.class);
+      //  Intent intent = new Intent(this, ViewPageActivity.class);
+          Intent intent = new Intent(this, UsePageActivity.class);
         startActivity(intent);
         finish();
     }

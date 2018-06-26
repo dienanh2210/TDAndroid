@@ -107,6 +107,7 @@ public class TakePhotoActivity extends BaseActivity {
         txtTime.setText(time);
         distance  = getIntent().getStringExtra(CourseListActivity.STAMP_DISTANCE);
         txtDistance.setText(distance + "km");
+
         if (spotId > 0) {
             SpotDataAPI.getSpotData(spotId, new ServiceCallback() {
                 @Override
@@ -124,9 +125,12 @@ public class TakePhotoActivity extends BaseActivity {
 
                 @Override
                 public void onError(VolleyError error) {
-
+                    spotTitle.setText("spotid not valid");
                 }
             });
+        }
+        else {
+            spotTitle.setText("spotid not valid");
         }
         if (courseID > 0) {
             GetCourseDataAPI.getCourseData(courseID, new ServiceCallback() {

@@ -1,5 +1,6 @@
 package vn.javis.tourde.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -86,6 +87,7 @@ import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.fragment.CountDownTimesFragment;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.ProcessDialog;
@@ -121,7 +123,7 @@ public class CourseListActivity extends BaseActivity {
     private int mCourseID;
     private int mSpotID;
     private String mapUrl;
-
+    private String timeFinish, distanceSpot;
     public int getmSpotID() {
         return mSpotID;
     }
@@ -154,7 +156,7 @@ public class CourseListActivity extends BaseActivity {
     private SpotFacilitiesFragment spotFacilitiesFragment;
     private CheckPointFragment checkPointFragment;
     android.support.v4.app.FragmentTransaction frgTransaction;
-    String token = LoginFragment.getmUserToken();
+    String token;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -169,10 +171,10 @@ public class CourseListActivity extends BaseActivity {
         geocoder = new Geocoder(this, Locale.getDefault());
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
-
+        token = SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN);
         fn_permission();
         //    showCourseFinish();hiện
-        if (!token.equals("")) {
+        if (!TextUtils.isEmpty(token)) {
             checkLogging();
         }
     }
@@ -323,7 +325,7 @@ public class CourseListActivity extends BaseActivity {
 
     public void showGoalFragment(int idSpot, float speed, String time, String imgUrl, String title, String distance) {
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
-        dataBundle.putString(AVARAGE_SPEED, String.valueOf(speed));
+        dataBundle.putString(AVARAGE_SPEED, String.format("%.2f", speed));
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putInt(SPOT_ID, idSpot);
         dataBundle.putString(STAMP_IMAGE, imgUrl);
@@ -424,7 +426,11 @@ public class CourseListActivity extends BaseActivity {
 
 
     public void showTakePhoto(int spotID, String time, String distance) {
+
+        timeFinish =time;
+        distanceSpot =distance;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
         } else {
             mSpotID = spotID;
@@ -585,8 +591,8 @@ public class CourseListActivity extends BaseActivity {
                     Intent intent = new Intent(this, TakePhotoActivity.class);
                     intent.putExtra(SPOT_ID, mSpotID);
                     intent.putExtra(COURSE_DETAIL_ID, mCourseID);
-                    intent.putExtra(TIME_FINISH, "00:00:00");
-                    intent.putExtra(STAMP_DISTANCE, "999");
+                    intent.putExtra(TIME_FINISH, timeFinish);
+                    intent.putExtra(STAMP_DISTANCE, distanceSpot);
                     startActivity(intent);
                 }
             }

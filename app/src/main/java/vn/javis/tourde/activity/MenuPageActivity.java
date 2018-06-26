@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -33,6 +34,7 @@ import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
@@ -55,6 +57,8 @@ public class MenuPageActivity extends BaseActivity {
     MenuPageActivity activity;
     @BindView( R.id.tv_version )
     TextView tv_version;
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_menu_page);
@@ -79,13 +83,17 @@ public class MenuPageActivity extends BaseActivity {
         ll_logout.setOnClickListener( onClickLogout );
         basic_Info=findViewById(R.id.basic_Info);
         basic_Info.setVisibility(View.GONE);
-        String token = LoginFragment.getmUserToken();
-        if(token != "" ){
+        //String token = LoginFragment.getmUserToken();
+        //get token from device to check login or not
+        token = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue(LoginUtils.TOKEN);
+        if(!TextUtils.isEmpty(token)){
             ll_logout.setVisibility( View.VISIBLE );
             tv_login.setVisibility(View.GONE);
             rlt_register.setVisibility(View.GONE);
             lineRegister.setVisibility(View.GONE);
-            basic_Info.setVisibility(View.VISIBLE);
+            if(!SharedPreferencesUtils.getInstance(getApplicationContext()).getBooleanValue(LoginUtils.TOKEN_SNS))
+                basic_Info.setVisibility(View.VISIBLE);
+
         }
    rlt_pippon.setOnClickListener( onClicknippon );
 privacy.setOnClickListener( new View.OnClickListener() {
@@ -138,7 +146,7 @@ privacy.setOnClickListener( new View.OnClickListener() {
     View.OnClickListener onClickTutorial = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(MenuPageActivity.this, UsePageActivity.class);
+            Intent intent = new Intent(MenuPageActivity.this, ViewPageActivity.class);
             startActivity(intent);
         }
     };
@@ -162,7 +170,7 @@ privacy.setOnClickListener( new View.OnClickListener() {
             ProcessDialog.showDialogConfirm(MenuPageActivity.this, "", "ログアウトしますか？", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
-                    final String token = LoginFragment.getmUserToken();
+                    //final String token = LoginFragment.getmUserToken();
                     LogoutAccount.logOut( token, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -176,10 +184,14 @@ privacy.setOnClickListener( new View.OnClickListener() {
                                 ll_logout.setVisibility( View.GONE );
                                 basic_Info.setVisibility(View.GONE);
                                 LoginFragment.setmAccount(null);
-                                LoginFragment.setmUserToken("");
+                                //LoginFragment.setmUserToken("");
+                                //Delete token from device when sign out
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
+                               /* SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN_SNS);
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");*/
                                 Intent intent = new Intent(MenuPageActivity.this,CourseListActivity.class);
                                 intent.putExtra(Constant.KEY_LOGOUT_SUCCESS,1);
                                 startActivity(intent);
@@ -191,7 +203,7 @@ privacy.setOnClickListener( new View.OnClickListener() {
 
                         @Override
                         public void onError(VolleyError error) {
-
+                            Log.e("", "onError: ",error );
                         }
                     } );
                 }
@@ -213,8 +225,7 @@ privacy.setOnClickListener( new View.OnClickListener() {
                 boolean str = data.getBooleanExtra( Constant.KEY_LOGIN_SUCCESS, false);
                 rlt_newuserregisterl.setVisibility( View.GONE );
                 ll_logout.setVisibility( View.VISIBLE );
-                String token = LoginFragment.getmUserToken();
-                if(token != ""){
+                if(!TextUtils.isEmpty(token)){
                     ll_logout.setVisibility( View.VISIBLE );
                     tv_login.setVisibility(View.GONE);
                 }

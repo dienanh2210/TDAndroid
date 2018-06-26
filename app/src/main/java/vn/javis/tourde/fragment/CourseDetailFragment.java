@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,7 @@ import vn.javis.tourde.services.TourDeService;
 import vn.javis.tourde.utils.BinaryConvert;
 import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
+import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
@@ -270,7 +272,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnBadge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (token != "") {
+                if (!TextUtils.isEmpty(token)) {
                     mActivity.showBadgeCollection();
                 } else {
                     ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
@@ -285,7 +287,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (token != "")
+                if (!TextUtils.isEmpty(token))
                     mActivity.showMyCourse();
                 else {
                     ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
@@ -393,7 +395,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             txtTag.setText(s);
         }
         isFavourite = false;
-        FavoriteCourseAPI.getListFavoriteCourse(LoginFragment.getmUserToken(), new ServiceCallback() {
+        FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 List<FavoriteCourse> listFavorCourse = FavoriteCourseAPI.getFavorites(response);
@@ -526,7 +528,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         }
     }
 
-    String token = LoginFragment.getmUserToken();
+    String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
     public void btnFavoriteClick(boolean inChild) {
         if (inChild && isFavourite) {

@@ -7,6 +7,8 @@ public class SaveCourseRunning {
     private int courseID;
     private double start_longtitude;
     private double start_latitude;
+    private double last_longtitude;
+    private double last_latitude;
     private long timeRunning;
     private long lastCheckedTime;
     private boolean isFinished;
@@ -16,6 +18,7 @@ public class SaveCourseRunning {
     private String goal_title;
     private String allDistance;
     private float avarageSpeed;
+    private int highestCheckedSpot;
 
 
     public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
@@ -24,12 +27,36 @@ public class SaveCourseRunning {
         this.start_latitude = start_latitude;
     }
 
+    public int getHighestCheckedSpot() {
+        return highestCheckedSpot;
+    }
+
+    public void setHighestCheckedSpot(int highestCheckedSpot) {
+        this.highestCheckedSpot = highestCheckedSpot;
+    }
+
     public String getImgUrlGoal() {
         return imgUrlGoal;
     }
 
     public void setImgUrlGoal(String imgUrlGoal) {
         this.imgUrlGoal = imgUrlGoal;
+    }
+
+    public double getLast_longtitude() {
+        return last_longtitude;
+    }
+
+    public void setLast_longtitude(double last_longtitude) {
+        this.last_longtitude = last_longtitude;
+    }
+
+    public double getLast_latitude() {
+        return last_latitude;
+    }
+
+    public void setLast_latitude(double last_latitude) {
+        this.last_latitude = last_latitude;
     }
 
     public int getGoalSpotId() {
@@ -150,7 +177,7 @@ public class SaveCourseRunning {
         private String time;
         private boolean checked;
         private double avarageSpeed;
-
+        private boolean isHighestChecked;
 
         public CheckedSpot(int spotID, String title, int order, String imgUrl, boolean isChecked) {
             this.spotID = spotID;
@@ -160,7 +187,40 @@ public class SaveCourseRunning {
             checked = isChecked;
         }
 
+        public int getOrderNumber() {
+            return orderNumber;
+        }
+
+        public void setOrderNumber(int orderNumber) {
+            this.orderNumber = orderNumber;
+        }
+
+        public String getTopImage() {
+            return topImage;
+        }
+
+        public void setTopImage(String topImage) {
+            this.topImage = topImage;
+        }
+
+        public boolean isHighestChecked() {
+            return isHighestChecked;
+        }
+
+        public void setHighestChecked(boolean highestChecked) {
+            isHighestChecked = highestChecked;
+        }
+
+        public boolean isTurnOnShortLink() {
+            return turnOnShortLink;
+        }
+
+        public void setTurnOnShortLink(boolean turnOnShortLink) {
+            this.turnOnShortLink = turnOnShortLink;
+        }
+
         private boolean turnOffAnim;
+        private boolean turnOnShortLink;
 
         public boolean isTurnOffAnim() {
             return turnOffAnim;
