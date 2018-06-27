@@ -200,9 +200,10 @@ public class LoginUtils {
                     SharedPreferencesUtils.getInstance(activity).setBooleanValue(TOKEN_SNS,true);
 
                     Intent intent = new Intent(activity,CourseListActivity.class);
-                    activity.startActivity(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                     activity.setResult(Activity.RESULT_OK, intent);
+                    activity.startActivity(intent);
                 }
 
             }

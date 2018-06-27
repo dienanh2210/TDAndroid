@@ -306,7 +306,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                         if (((JSONObject) response).has("success")) {
-                            Intent intent = new Intent(getActivity(), CourseListActivity.class);
+                            Intent intent = new Intent(getActivity(), BasicInfoActivity.class);
                             startActivity(intent);
                             hideProgressDialog();
                             activity.finish();
@@ -340,20 +340,22 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                                 @Override
                                 public void onOkClick() {
                                     Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                                    startActivity(intent);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                                     getActivity().setResult(Activity.RESULT_OK, intent);
+                                    startActivity(intent);
                                     ProcessDialog.showloading(getContext(), true);
                                 }
                             });
                         } else {
                             Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                            startActivity(intent);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                             getActivity().setResult(Activity.RESULT_OK, intent);
+                            startActivity(intent);
                             ProcessDialog.showloading(getContext(), true);
                         }
-                        //     getActivity().finish();
+//                        getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
                                 LoginFragment.setmUserToken(jsonObject.getString("token"));

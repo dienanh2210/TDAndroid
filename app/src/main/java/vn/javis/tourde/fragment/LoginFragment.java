@@ -407,9 +407,10 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
 //                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
 //                        startActivity( intent );
                         Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                        startActivity(intent);
                         intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                         getActivity().setResult(Activity.RESULT_OK, intent);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                         //     getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
