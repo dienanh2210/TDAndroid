@@ -46,7 +46,7 @@ public class ListBadgeAdapter extends RecyclerView.Adapter<ListBadgeAdapter.Badg
         holder.txtBadgeDateGet.setText(TimeUtil.formatDayFromString(TimeUtil.DATE_FORMAT,model.getInsertDatetime()));
      //   int idImgBadge = mView.getResources().getIdentifier(model.getImageUrl(), "drawable", context.getPackageName());
       //  holder.imgBadge.setImageResource(idImgBadge);
-        PicassoUtil.getSharedInstance(context).load(model.getImage()).resize(0, 300).onlyScaleDown().into(holder.imgBadge);
+        PicassoUtil.getSharedInstance(context).load(model.getImage()).resize(0, 400).onlyScaleDown().into(holder.imgBadge);
 
     }
 

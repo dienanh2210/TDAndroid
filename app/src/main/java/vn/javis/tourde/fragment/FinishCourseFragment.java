@@ -162,7 +162,7 @@ public class FinishCourseFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 //                mActivity.showFragmentTabLayoutRunning();
-                mActivity.onBackPressed();
+                mActivity.popBackStack(FragmentTabLayoutRunning.class.getSimpleName());
             }
         });
         btnToDetail.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +175,7 @@ public class FinishCourseFragment extends BaseFragment {
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.SAVED_COURSE_RUNNING);
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.KEY_GOAL_PAGE);
-                        mActivity.onBackPressed();
+                        mActivity.popBackStack(CourseDetailFragment.class.getSimpleName());
                     }
                 });
             }
