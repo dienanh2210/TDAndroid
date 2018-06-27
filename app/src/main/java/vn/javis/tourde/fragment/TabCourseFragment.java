@@ -171,7 +171,7 @@ public class TabCourseFragment extends BaseFragment {
             }
         });
         txtStartAddress.setText(startAddress);
-        PicassoUtil.getSharedInstance(mActivity).load(routeUrl).resize(0, 400).onlyScaleDown().into(imgRoute);
+        PicassoUtil.getSharedInstance(mActivity).load(routeUrl).resize(0, 500).onlyScaleDown().into(imgRoute);
         if(SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME)==0) {
             btnRunningApp.setOnClickListener(new View.OnClickListener() {
                 @Override

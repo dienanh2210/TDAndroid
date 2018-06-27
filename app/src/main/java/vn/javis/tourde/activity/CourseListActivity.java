@@ -124,7 +124,6 @@ public class CourseListActivity extends BaseActivity {
     private int mSpotID;
     private String mapUrl;
     private String timeFinish, distanceSpot;
-
     public int getmSpotID() {
         return mSpotID;
     }
@@ -428,8 +427,9 @@ public class CourseListActivity extends BaseActivity {
 
     public void showTakePhoto(int spotID, String time, String distance) {
 
-        timeFinish = time;
-        distanceSpot = distance;
+        timeFinish =time;
+        distanceSpot =distance;
+        mSpotID = spotID;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_PERMISSION_CODE);
