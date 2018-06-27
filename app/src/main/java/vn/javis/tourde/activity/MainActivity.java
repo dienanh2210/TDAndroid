@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void checkServerDone() {
+        Log.i("Tutorial", "-------?"+SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial"));
         if (TextUtils.isEmpty(SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN))) {
             if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals(""))
                 changeActivity();

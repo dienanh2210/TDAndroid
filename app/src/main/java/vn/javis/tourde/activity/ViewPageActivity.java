@@ -66,7 +66,7 @@ public class ViewPageActivity extends AppCompatActivity {
 //                    startActivity(intent);
 //                }
                 Intent intent = new Intent(ViewPageActivity.this, MenuPageActivity.class);
-                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Tutorial", "finish");
+//                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Tutorial", "finish");
                 startActivity(intent);
             }
         });

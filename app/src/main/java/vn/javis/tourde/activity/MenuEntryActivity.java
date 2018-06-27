@@ -96,7 +96,10 @@ public class MenuEntryActivity extends BaseActivity {
         }
     };
 
-
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         mFaceBookCallbackManager.onActivityResult(requestCode, resultCode, data);
