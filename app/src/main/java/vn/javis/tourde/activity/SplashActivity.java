@@ -16,7 +16,6 @@ public class SplashActivity extends BaseActivity {
         setContentView( R.layout.activity_splash );
         startRun();
     }
-
     private void startRun() {
         runnable = new Runnable() {
             @Override
@@ -28,7 +27,6 @@ public class SplashActivity extends BaseActivity {
         };
         handler.postDelayed( runnable, 2000 );
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
