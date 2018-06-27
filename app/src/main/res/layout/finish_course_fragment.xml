@@ -64,7 +64,7 @@
                             android:layout_centerHorizontal="true"
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/image_description"
-                            android:scaleType="fitXY" />
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:layout_width="@dimen/_150sdp"
