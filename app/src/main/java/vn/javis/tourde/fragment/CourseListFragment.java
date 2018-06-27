@@ -245,6 +245,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
             public void openPage(Fragment fragment) {
                 Intent intent = new Intent(mActivity, LoginSNSActivity.class);
                 startActivity(intent);
+
             }
         });
     }

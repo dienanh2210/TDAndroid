@@ -36,5 +36,7 @@
         <item name="android:windowBackground">@drawable/splash_screenbackground</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:minHeight">@dimen/_350sdp</item>
+        <item name="android:maxHeight">@dimen/_350sdp</item>
     </style>
 </resources>
