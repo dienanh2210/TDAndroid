@@ -63,7 +63,7 @@ public class SpotFacilitiesFragment extends Fragment {
         params.put("token", token);
         params.put("spot_id", String.valueOf(spotId));
         for (int i = 0; i < contentList2.length; i++) {
-            params.put(contentList2[i], "2"); //change to 0 for no report, wait for api
+            params.put(contentList2[i], "-1"); //change to 0 for no report, wait for api
         }
         createData();
         btn_choose.setOnClickListener(new View.OnClickListener() {
