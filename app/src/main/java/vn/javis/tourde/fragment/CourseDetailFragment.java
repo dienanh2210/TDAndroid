@@ -556,7 +556,12 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         isFavourite = !isFavourite;
                         Log.i("is: ", "false");
                         //   Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
-                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
+                        ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mActivity.openLoginPage();
+                            }
+                        });
                     }
                 }
 
@@ -579,7 +584,12 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                         Log.i("is: ", "true");
                         isFavourite = !isFavourite;
                         // Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
-                        ProcessDialog.showDialogOk(getContext(), "", "エラーメッセージ");
+                        ProcessDialog.showDialogLogin(getContext(), "", "この機能を利用するにはログインをお願いいたします", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mActivity.openLoginPage();
+                            }
+                        });
                     }
                 }
 

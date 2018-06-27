@@ -72,7 +72,8 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
             holder.img_link_spot.setVisibility(View.GONE);
             holder.image_link_long.setVisibility(View.GONE);
         }
-        if (model.isChecked()) {
+        if (model.isChecked())
+        {
             lastCheckedOrder = position;
             holder.BG_spot.setImageResource(R.drawable.boder_white);
             holder.spot_id.setBackground(activityContext.getResources().getDrawable(R.drawable.blue_circle));
@@ -120,13 +121,13 @@ public class ListSpotLog extends RecyclerView.Adapter<ListSpotLog.SpotViewHolder
         } else if (position == lastCheckedOrder + 1) {
             holder.showInfoSpot.setVisibility(View.GONE);
             holder.img_link_spot.setVisibility(View.GONE);
-            holder.img_link_vitual.setVisibility(View.GONE);
+            holder.img_link_vitual.setVisibility(View.VISIBLE);
             holder.img_link_short.setVisibility(View.GONE);
-            if (model.isTurnOffAnim()) {
-                holder.img_link_short.setVisibility(View.VISIBLE);
-            } else {
-                holder.img_link_vitual.setVisibility(View.VISIBLE);
-            }
+//            if (model.isTurnOffAnim()) {
+//                holder.img_link_short.setVisibility(View.VISIBLE);
+//            } else {
+//                holder.img_link_vitual.setVisibility(View.VISIBLE);
+//            }
         }
 
         else {

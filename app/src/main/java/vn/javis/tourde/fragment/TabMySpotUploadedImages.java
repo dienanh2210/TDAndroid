@@ -97,7 +97,9 @@ public class TabMySpotUploadedImages extends BaseFragment {
 
     }
     void getImages(){
-
+        for (int i = 1; i < listSpotImg.size(); i++) {
+            listSpotImg.remove(i);
+        }
         SpotDataAPI.getPostedSpotImageList(token, spotId, new ServiceCallback()
         {
             @Override

@@ -41,21 +41,21 @@ import vn.javis.tourde.utils.SharedPreferencesUtils;
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
-    RelativeLayout tv_login,tv_tutorial,logout, rlt_register, basic_Info;
-    @BindView( R.id.rlt_newuserregister )
+    RelativeLayout tv_login, tv_tutorial, logout, rlt_register, basic_Info;
+    @BindView(R.id.rlt_newuserregister)
     View rlt_newuserregisterl;
-    @BindView( R.id.rlt_nippon )
+    @BindView(R.id.rlt_nippon)
     RelativeLayout rlt_pippon;
-    @BindView( R.id.ll_logout )
+    @BindView(R.id.ll_logout)
     View ll_logout;
     @BindView(R.id.line_register)
     ImageView lineRegister;
-    @BindView( R.id.privacy )
+    @BindView(R.id.privacy)
     RelativeLayout privacy;
-    @BindView( R.id.inquiry )
-     RelativeLayout inquiry;
+    @BindView(R.id.inquiry)
+    RelativeLayout inquiry;
     MenuPageActivity activity;
-    @BindView( R.id.tv_version )
+    @BindView(R.id.tv_version)
     TextView tv_version;
     String token;
 
@@ -66,7 +66,7 @@ public class MenuPageActivity extends BaseActivity {
         tv_login = findViewById(R.id.login);
         tv_login.setOnClickListener(onClickLogin);
 
-        rlt_register=findViewById(R.id.rlt_register);
+        rlt_register = findViewById(R.id.rlt_register);
         rlt_register.setOnClickListener(onClickNewUser);
         tv_close = findViewById(R.id.tv_close);
         tv_close.setOnClickListener(onClick);
@@ -80,43 +80,42 @@ public class MenuPageActivity extends BaseActivity {
         tv_userregistration = findViewById(R.id.tv_userregistration);
         tv_userregistration.setOnClickListener(onClickNewUser);
 
-        ll_logout.setOnClickListener( onClickLogout );
-        basic_Info=findViewById(R.id.basic_Info);
+        ll_logout.setOnClickListener(onClickLogout);
+        basic_Info = findViewById(R.id.basic_Info);
         basic_Info.setVisibility(View.GONE);
         //String token = LoginFragment.getmUserToken();
         //get token from device to check login or not
         token = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue(LoginUtils.TOKEN);
-        if(!TextUtils.isEmpty(token)){
-            ll_logout.setVisibility( View.VISIBLE );
+        if (!TextUtils.isEmpty(token)) {
+            ll_logout.setVisibility(View.VISIBLE);
             tv_login.setVisibility(View.GONE);
             rlt_register.setVisibility(View.GONE);
             lineRegister.setVisibility(View.GONE);
-            if(!SharedPreferencesUtils.getInstance(getApplicationContext()).getBooleanValue(LoginUtils.TOKEN_SNS))
+            if (!SharedPreferencesUtils.getInstance(getApplicationContext()).getBooleanValue(LoginUtils.TOKEN_SNS))
                 basic_Info.setVisibility(View.VISIBLE);
 
         }
-   rlt_pippon.setOnClickListener( onClicknippon );
-privacy.setOnClickListener( new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyFragment.class);
-        //Intent intent = new Intent(MenuPageActivity.this, UsePageActivity.class);
-        startActivity(intent);
-    }
-} );
-        inquiry.setOnClickListener( new View.OnClickListener() {
+        rlt_pippon.setOnClickListener(onClicknippon);
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyFragment.class);
+                //Intent intent = new Intent(MenuPageActivity.this, UsePageActivity.class);
+                startActivity(intent);
+            }
+        });
+        inquiry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPageActivity.this, InquiryFragment.class);
                 startActivityForResult(intent, 1);
             }
-        } );
+        });
 //show version app
         try {
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             tv_version.setText(packageInfo.versionName);
-        }
-        catch (PackageManager.NameNotFoundException e) {
+        } catch (PackageManager.NameNotFoundException e) {
         }
     }
 
@@ -170,32 +169,30 @@ privacy.setOnClickListener( new View.OnClickListener() {
             ProcessDialog.showDialogConfirm(MenuPageActivity.this, "", "ログアウトしますか？", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
-                    //final String token = LoginFragment.getmUserToken();
-                    LogoutAccount.logOut( token, new ServiceCallback() {
+                    LogoutAccount.logOut(token, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            JSONObject jsonObject = (JSONObject)response;
+                            JSONObject jsonObject = (JSONObject) response;
                             // Log.d("logout", jsonObject.toString());
-                            Log.d("logout", token+jsonObject);
+                            Log.d("logout", token + jsonObject);
                             if (jsonObject.has("success")) {
-                                rlt_register.setVisibility( View.VISIBLE );
+                                rlt_register.setVisibility(View.VISIBLE);
                                 lineRegister.setVisibility(View.VISIBLE);
                                 tv_login.setVisibility(View.VISIBLE);
-                                ll_logout.setVisibility( View.GONE );
+                                ll_logout.setVisibility(View.GONE);
                                 basic_Info.setVisibility(View.GONE);
                                 LoginFragment.setmAccount(null);
-                                //LoginFragment.setmUserToken("");
                                 //Delete token from device when sign out
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
-                               /* SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
+//                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN_SNS);
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");*/
-                                Intent intent = new Intent(MenuPageActivity.this,CourseListActivity.class);
-                                intent.putExtra(Constant.KEY_LOGOUT_SUCCESS,1);
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
+                                Intent intent = new Intent(MenuPageActivity.this, CourseListActivity.class);
+                                intent.putExtra(Constant.KEY_LOGOUT_SUCCESS, 1);
                                 startActivity(intent);
-                                RegisterFragment.bitmapIcon=null;
+                                RegisterFragment.bitmapIcon = null;
                             } else {
 
                             }
@@ -203,9 +200,9 @@ privacy.setOnClickListener( new View.OnClickListener() {
 
                         @Override
                         public void onError(VolleyError error) {
-                            Log.e("", "onError: ",error );
+                            Log.e("", "onError: ", error);
                         }
-                    } );
+                    });
                 }
             });
         }
@@ -221,15 +218,15 @@ privacy.setOnClickListener( new View.OnClickListener() {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                boolean str = data.getBooleanExtra( Constant.KEY_LOGIN_SUCCESS, false);
-                rlt_newuserregisterl.setVisibility( View.GONE );
-                ll_logout.setVisibility( View.VISIBLE );
-                if(!TextUtils.isEmpty(token)){
-                    ll_logout.setVisibility( View.VISIBLE );
+            if (resultCode == RESULT_OK) {
+                boolean str = data.getBooleanExtra(Constant.KEY_LOGIN_SUCCESS, false);
+                rlt_newuserregisterl.setVisibility(View.GONE);
+                ll_logout.setVisibility(View.VISIBLE);
+                if (!TextUtils.isEmpty(token)) {
+                    ll_logout.setVisibility(View.VISIBLE);
                     tv_login.setVisibility(View.GONE);
                 }
-                Log.i("onActivityResult",""+ str);
+                Log.i("onActivityResult", "" + str);
             }
         }
     }
