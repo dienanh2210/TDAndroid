@@ -132,11 +132,9 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-
                     } else {
                         //Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
                     }
-
                 }
 
                 @Override
