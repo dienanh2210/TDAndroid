@@ -69,6 +69,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     String distance;
 
     boolean finishedAnim;
+    boolean showSecondAnim;
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
@@ -90,6 +91,8 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         title = getArguments().getString(CourseListActivity.STAMP_TITLE);
         time = getArguments().getString(CourseListActivity.TIME_FINISH);
         distance = getArguments().getString(CourseListActivity.STAMP_DISTANCE);
+        showSecondAnim =getArguments().getBoolean(CourseListActivity.STAMP_GAIN,false);
+
         mActivity = (CourseListActivity) getActivity();
 
         takePhoto.setOnClickListener(new View.OnClickListener() {
@@ -147,23 +150,27 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                     @Override
                     public void run() {
 
-                        if (imgView.getTag() == null) {
-                            ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
-                            //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
-                            handler.postDelayed(runnable, 1000);
-                        } else {
-                            // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
-                            //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-                            //  .setVisibility( View.GONE );
-                            //  ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
-                            //  ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
+if(showSecondAnim){
+    if (imgView.getTag() == null) {
+        ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+        //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+        handler.postDelayed(runnable, 1000);
+    } else {
+        // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
+        //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
+        //  .setVisibility( View.GONE );
+        //  ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
+        //  ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
 
-                            ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+        ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
 
-                            ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
-                            finishedAnim = true;
+        ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
+        finishedAnim = true;
+    }
+                        }else {
 
-                        }
+    ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+}
                     }
 
 
