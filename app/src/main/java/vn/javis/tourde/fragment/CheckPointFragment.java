@@ -43,14 +43,12 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     ImageView imgView;
     @BindView(R.id.txtDesc)
     TextView txtView;
-
     @BindView(R.id.tv_back_password)
     ImageView tv_back_password;
     @BindView(R.id.txtDesctwo)
     TextView txtDesctwo;
     @BindView(R.id.txtDescthree)
     TextView txtDescthree;
-
     @BindView(R.id.take_photo)
     Button takePhoto;
     Runnable runnable, runnabletwo;
@@ -67,8 +65,6 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     String title;
     String time;
     String distance;
-
-
     boolean showSecondAnim;
     private OnFragmentInteractionListener listener;
     private String filePath;
