@@ -18,6 +18,7 @@ import vn.javis.tourde.fragment.usepage.UsePageSevenFragment;
 import vn.javis.tourde.fragment.usepage.UsePageSixFragment;
 import vn.javis.tourde.fragment.usepage.UsePageThreeFragment;
 import vn.javis.tourde.fragment.usepage.UsePageTwoFragment;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import android.view.Window;
 
@@ -44,6 +45,7 @@ public class UsePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UsePageActivity.this, MenuEntryActivity.class);
+                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Tutorial", "finish");
                 startActivity(intent);
             }
         } );

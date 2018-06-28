@@ -86,10 +86,12 @@ public class GoogleService extends Service implements LocationListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 //       data=(String) intent.getExtras().get("data");
-        latitude_des = intent.getDoubleExtra("ed_latitude", 0);
-        longitude_des = intent.getDoubleExtra("ed_longitude", 0);
-        lstLocation = (ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
-        Log.i("onBind", "" + latitude_des + "-" + longitude_des + lstLocation.size());
+        if(intent!=null) {
+            latitude_des = intent.getDoubleExtra("ed_latitude", 0);
+            longitude_des = intent.getDoubleExtra("ed_longitude", 0);
+            lstLocation = (ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
+            Log.i("onBind", "" + latitude_des + "-" + longitude_des + lstLocation.size());
+        }
         return START_STICKY_COMPATIBILITY;
     }
 

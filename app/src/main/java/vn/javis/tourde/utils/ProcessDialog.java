@@ -130,6 +130,7 @@ public class ProcessDialog {
             }
         });
 
+        if (!((Activity) context).isFinishing())
         dialog.show();
     }
 
@@ -167,6 +168,7 @@ public class ProcessDialog {
             }
         });
 
+        if (!((Activity) context).isFinishing())
         dialog.show();
     }
 
@@ -204,6 +206,7 @@ public class ProcessDialog {
             }
         });
 
+        if (!((Activity) context).isFinishing())
         dialog.show();
     }
 
@@ -245,6 +248,7 @@ public class ProcessDialog {
             }
         });
 
+        if (!((Activity) context).isFinishing())
         dialog.show();
     }
 
@@ -277,6 +281,7 @@ public class ProcessDialog {
             }
         });
 
+        if (!((Activity) context).isFinishing())
         dialog.show();
     }
 
@@ -310,6 +315,7 @@ public class ProcessDialog {
             }
         });
 
+        if (!((Activity) context).isFinishing())
         dialog.show();
     }
 
@@ -343,6 +349,7 @@ public class ProcessDialog {
             }
         });
 
+        if (!((Activity) context).isFinishing())
         dialog.show();
     }
 
@@ -384,6 +391,7 @@ public class ProcessDialog {
                 // SharedPreferencesUtils.getInstance(context).setStringValue("Checkbox", "1");
             }
         });
+        if (!((Activity) context).isFinishing())
         dialog.show();
 
         CheckBox checkBox;
