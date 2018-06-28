@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-//        ActionBar actionBar = getActionBar();
-//        actionBar.setDisplayShowTitleEnabled(false);
 
         checkMaintenanceAndAppVersion();
         GrowthPush.getInstance().initialize(this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
@@ -106,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
     void changeCourseListActivity() {
             Intent intent = new Intent(MainActivity.this, CourseListActivity.class);
             startActivity(intent);
+            finish();
             intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
             MainActivity.this.setResult(Activity.RESULT_OK, intent);
        //loginToApp();
