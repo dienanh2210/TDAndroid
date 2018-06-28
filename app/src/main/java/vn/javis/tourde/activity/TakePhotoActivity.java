@@ -119,7 +119,8 @@ public class TakePhotoActivity extends BaseActivity {
                     SpotData spotData = SpotData.getSpotData(response.toString());
                     if (spotData == null)
                         return;
-                    spotTitle.setText(spotData.getData().getTitle());
+                    if (spotTitle != null)
+                        spotTitle.setText(spotData.getData().getTitle());
 
                 }
 
@@ -140,7 +141,8 @@ public class TakePhotoActivity extends BaseActivity {
                     if (jsonObject.has("error"))
                         return;
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                    courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
+                    if (courseTitle != null)
+                        courseTitle.setText(mCourseDetail.getmCourseData().getTitle());
 
                     hideProgressDialog();
                 }
