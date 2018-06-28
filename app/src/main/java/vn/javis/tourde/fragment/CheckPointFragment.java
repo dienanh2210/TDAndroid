@@ -68,7 +68,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     String time;
     String distance;
 
-    boolean finishedAnim;
+
     boolean showSecondAnim;
     private OnFragmentInteractionListener listener;
     private String filePath;
@@ -98,7 +98,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (finishedAnim)
+
                     mActivity.showTakePhoto(spotID,time,distance);
             }
         });
@@ -106,31 +106,26 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         bt_checkpointleft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
-                        //  bt_checkpointleft.setEnabled(true);
-                        if (finishedAnim)
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+
                             mActivity.showSpotFacilities();
-                    }
-                }, 1000);
+                  //  }
+//                }, 1000);
 
             }
         });
         bt_checkpointright.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
 
-                        //    bt_checkpointright.setEnabled(true);
-                        if (finishedAnim)
                             mActivity.showSpotImages(spotID);
-                    }
-                }, 5000);
+//                    }
+//                }, 1000);
 
             }
         });
@@ -165,7 +160,7 @@ if(showSecondAnim){
         ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
 
         ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
-        finishedAnim = true;
+       // finishedAnim = true;
     }
                         }else {
 
