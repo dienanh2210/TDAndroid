@@ -110,6 +110,7 @@ public class CourseListActivity extends BaseActivity {
     public static final String STAMP_IMAGE = "stamp_img";
     public static final String STAMP_TITLE = "stamp_title";
     public static final String STAMP_DISTANCE = "stamp_distance";
+    public static final String STAMP_GAIN = "stamp_distance";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
 
@@ -354,7 +355,7 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance) {
+    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance,boolean showSecondAnim) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
@@ -362,6 +363,8 @@ public class CourseListActivity extends BaseActivity {
         dataBundle.putString(STAMP_TITLE, title);
         dataBundle.putString(TIME_FINISH, time);
         dataBundle.putString(STAMP_DISTANCE, distance);
+        dataBundle.putBoolean(STAMP_GAIN, showSecondAnim);
+
 //        if (checkPointFragment == null)
         checkPointFragment = new CheckPointFragment();
         openPage(checkPointFragment, true, false);

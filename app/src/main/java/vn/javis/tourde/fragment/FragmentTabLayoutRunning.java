@@ -412,7 +412,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     String finish_time = getTimeFormat(time);
 
-                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance);
+                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance,model.getGained());
                                 }
                             }
                             hideProgressDialog();
@@ -469,7 +469,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                 String imgUrl = model.getImage() == null ? "" : model.getImage();
                                 String title = model.getTitle() == null ? "" : model.getTitle();
                                 String finish_time = getTimeFormat(time);
-                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance);
+//                                for test animation
+//                                if(spotId==181) model.setGained( true );
+
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance,model.getGained());
                                 isTimeSaved = true;
                             }
                         }
