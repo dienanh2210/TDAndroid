@@ -124,7 +124,7 @@ public class FinishCourseFragment extends BaseFragment {
         mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         final String avage_speed = getArguments().getString(CourseListActivity.AVARAGE_SPEED);
         final String time_finish = getArguments().getString(CourseListActivity.TIME_FINISH);
-       showProgressDialog();
+        showProgressDialog();
         GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) {
@@ -148,7 +148,7 @@ public class FinishCourseFragment extends BaseFragment {
                     txtDate.setText(dateFormat.format(date));
                     txtTime.setText(time_finish);
                 }
-               hideProgressDialog();
+                hideProgressDialog();
             }
 
             @Override
@@ -171,11 +171,21 @@ public class FinishCourseFragment extends BaseFragment {
                 ProcessDialog.showDialogConfirm(mActivity, "", "終了してコース画面へ 戻りますが宜しいですか？", new ProcessDialog.OnActionDialogClickOk() {
                     @Override
                     public void onOkClick() {
-//                        mActivity.ShowCourseDetailById(mCourseID);
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.SAVED_COURSE_RUNNING);
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.KEY_GOAL_PAGE);
-                        mActivity.popBackStack(CourseDetailFragment.class.getSimpleName());
+                        ProcessDialog.showDialogConfirm(mActivity, "", getString(R.string.txt_title_post_comment), new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mActivity.typeBackPress = 1;
+                                mActivity.popBackStack(CourseDetailFragment.class.getSimpleName());
+                            }
+                        }, new ProcessDialog.OnActionDialogClickCancel() {
+                            @Override
+                            public void onCancelClick() {
+                                mActivity.popBackStack(CourseDetailFragment.class.getSimpleName());
+                            }
+                        });
                     }
                 });
             }
@@ -225,7 +235,7 @@ public class FinishCourseFragment extends BaseFragment {
             mActivity.startActivity(Intent.createChooser(shareIntent, "Share image using"));
         } else
             Toast.makeText(mActivity, "Please save the result before ", Toast.LENGTH_SHORT).show();
-        TourDeApplication.getInstance().trackEvent("tap_shared_course_id="+mCourseID,"tap","tap_shared_course_id="+mCourseID);
+        TourDeApplication.getInstance().trackEvent("tap_shared_course_id=" + mCourseID, "tap", "tap_shared_course_id=" + mCourseID);
     }
 
     private void requestPermission() {
