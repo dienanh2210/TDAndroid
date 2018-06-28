@@ -25,7 +25,7 @@ import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.model.Comment;
 
 public class ProcessDialog {
-    private  Dialog progressDialog;
+    private Dialog progressDialog;
     public Context context;
     ProgressDialog dialog1;
     private static ProgressBar spinner;
@@ -131,7 +131,7 @@ public class ProcessDialog {
         });
 
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
     }
 
     public static void showDialogConfirm(final Context context, String title, String content, final OnActionDialogClickOk action) {
@@ -169,7 +169,7 @@ public class ProcessDialog {
         });
 
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
     }
 
     public static void showDialogConfirm(final Context context, int viewLayout, String title, String content, final OnActionDialogClickOk action) {
@@ -207,7 +207,7 @@ public class ProcessDialog {
         });
 
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
     }
 
     public static void showDialogConfirm(final Context context, int viewLayout, int colorTitle, int colorMessage, String title, String content, final OnActionDialogClickOk action) {
@@ -237,7 +237,7 @@ public class ProcessDialog {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                action.onOkClick();
+                if (action != null) action.onOkClick();
                 dialog.hide();
             }
         });
@@ -249,7 +249,48 @@ public class ProcessDialog {
         });
 
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
+    }
+
+    public static void showDialogConfirm(final Context context, String title, String content, final OnActionDialogClickOk action, final OnActionDialogClickCancel actionCancel) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialog.setContentView(R.layout.dialog_confirm);
+        dialog.setCancelable(false);
+        TextView tvTitle = (TextView) dialog.findViewById(R.id.title_text_view);
+        // tvTitle.setVisibility(View.GONE);
+        tvTitle.setText(title);
+
+        TextView tvMessage = (TextView) dialog.findViewById(R.id.message_text_view);
+        tvMessage.setText(content);
+
+        //tuanpd
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
+        final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (action != null) action.onOkClick();
+                dialog.hide();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (actionCancel != null) actionCancel.onCancelClick();
+                dialog.hide();
+            }
+        });
+
+        if (!((Activity) context).isFinishing())
+            dialog.show();
     }
 
     public static void showDialogOk(final Context context, String title, String content) {
@@ -282,7 +323,7 @@ public class ProcessDialog {
         });
 
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
     }
 
     public static void showDialogOk(final Context context, String title, String content, final OnActionDialogClickOk action) {
@@ -316,7 +357,7 @@ public class ProcessDialog {
         });
 
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
     }
 
     public static void showDialogLogin(final Context context, String title, String content, final OnActionDialogClickOk action) {
@@ -350,7 +391,7 @@ public class ProcessDialog {
         });
 
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
     }
 
     public static void showDialogcheckbox(final Context context, String title, String content, final OnActionDialogClickOk onActionDialogClickOk) {
@@ -392,7 +433,7 @@ public class ProcessDialog {
             }
         });
         if (!((Activity) context).isFinishing())
-        dialog.show();
+            dialog.show();
 
         CheckBox checkBox;
         checkBox = dialog.findViewById(R.id.chkbox);
@@ -450,6 +491,10 @@ public class ProcessDialog {
 
     public interface OnActionDialogClickOk {
         void onOkClick();
+    }
+
+    public interface OnActionDialogClickCancel {
+        void onCancelClick();
     }
 
 }
