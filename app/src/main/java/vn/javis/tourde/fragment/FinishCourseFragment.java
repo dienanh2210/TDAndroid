@@ -198,7 +198,13 @@ public class FinishCourseFragment extends BaseFragment {
         Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
         CameraUtils.storeImage(bitmap, photoFile);
         if (CameraUtils.checkWriteToDiskPermissions(mActivity)) {
-            CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+            ProcessDialog.showDialogConfirm(getContext(), "", "走行結果画面を\n" + "端末に保存しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                @Override
+                public void onOkClick() {
+                    CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+                }
+            });
+
         } else {
             requestPermission();
         }
