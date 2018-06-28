@@ -65,7 +65,6 @@ public class GoogleService extends Service implements LocationListener {
     public static String str_receiver_arrived = "tourde.service.receiver.arrived";
     Intent intent;
 
-    private double latitude_des, longitude_des;
     int timeDelay = 5;
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
@@ -85,11 +84,9 @@ public class GoogleService extends Service implements LocationListener {
     @Nullable
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//       data=(String) intent.getExtras().get("data");
-        latitude_des = intent.getDoubleExtra("ed_latitude", 0);
-        longitude_des = intent.getDoubleExtra("ed_longitude", 0);
-        lstLocation = (ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
-        Log.i("onBind", "" + latitude_des + "-" + longitude_des + lstLocation.size());
+        if (intent != null) {
+            lstLocation = (ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
+        }
         return START_STICKY_COMPATIBILITY;
     }
 
@@ -104,13 +101,7 @@ public class GoogleService extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        if (!location.hasAccuracy()) {
-            return;
-        }
-        if (location.getAccuracy() > 5) {
 
-        }
-        Log.i("onLocationChanged", location.getAccuracy() + "");
     }
 
     @Override
