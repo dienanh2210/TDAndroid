@@ -374,5 +374,6 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         search = true;
 //        getData(true);
     }
+
 }
 
