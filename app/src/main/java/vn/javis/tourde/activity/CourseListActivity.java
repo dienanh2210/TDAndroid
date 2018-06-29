@@ -507,7 +507,6 @@ public class CourseListActivity extends BaseActivity {
             return;
         } else if (fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
-//            popBackStack(CourseDetailFragment.class.getSimpleName());
             showSpotImages(mSpotID);
             return;
         } else if (fragment instanceof CourseDetailSpotImagesFragment) {
@@ -516,45 +515,12 @@ public class CourseListActivity extends BaseActivity {
         } else if (fragment instanceof CountDownTimesFragment) {
             return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
-
-//            ShowCourseDetail();
-           /* if (SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
-                if (((FragmentTabLayoutRunning) fragment).isFinishTime && ((FragmentTabLayoutRunning) fragment).isFromMain) {
-                    super.onBackPressed();
-                    return;
-                }
-                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
-                    fm.popBackStack();
-                }
-                return;
-            } else if (((FragmentTabLayoutRunning) fragment).isTimeSaved && !((FragmentTabLayoutRunning) fragment).isFromMain) {
-                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
-                    fm.popBackStack();
-                }
-                return;
-            }*/
             popBackStack(CourseDetailFragment.class.getSimpleName());
             return;
 
         } else if (fragment instanceof GoalFragment) {
             return;
-        } /*else if (fragment instanceof FinishCourseFragment) {
-            FinishCourseFragment finishCourseFragment = (FinishCourseFragment) fragment;
-            if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
-                super.onBackPressed();
-                return;
-            } *//*else if (!finishCourseFragment.isFromMain) {
-                for (int i = 0; i < 4; i++) { // Back to CourseDetailFragment
-                    fm.popBackStack();
-                }
-                return;
-            }*//* else {
-                popBackStack(CourseDetailFragment.class.getSimpleName());
-                return;
-            }
-
-
-        }*/
+        }
 
         super.onBackPressed();
         Log.i("onBackPressed", "true");
