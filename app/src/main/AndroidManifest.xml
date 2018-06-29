@@ -59,7 +59,9 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/SplashTheme" />
+
+
         <activity
             android:name=".activity.MenuPageActivity"
             android:screenOrientation="portrait"

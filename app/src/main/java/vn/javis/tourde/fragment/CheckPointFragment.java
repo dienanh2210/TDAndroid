@@ -43,14 +43,12 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     ImageView imgView;
     @BindView(R.id.txtDesc)
     TextView txtView;
-
     @BindView(R.id.tv_back_password)
     ImageView tv_back_password;
     @BindView(R.id.txtDesctwo)
     TextView txtDesctwo;
     @BindView(R.id.txtDescthree)
     TextView txtDescthree;
-
     @BindView(R.id.take_photo)
     Button takePhoto;
     Runnable runnable, runnabletwo;
@@ -67,7 +65,6 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     String title;
     String time;
     String distance;
-
     boolean showSecondAnim;
     private OnFragmentInteractionListener listener;
     private String filePath;
@@ -97,6 +94,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                     mActivity.showTakePhoto(spotID,time,distance);
             }
         });
@@ -104,29 +102,26 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         bt_checkpointleft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
-                        //  bt_checkpointleft.setEnabled(true);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+
                             mActivity.showSpotFacilities();
-                    }
-                }, 1000);
+                  //  }
+//                }, 1000);
 
             }
         });
         bt_checkpointright.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
 
-                        //    bt_checkpointright.setEnabled(true);
                             mActivity.showSpotImages(spotID);
-                    }
-                }, 1000);
+//                    }
+//                }, 1000);
 
             }
         });
@@ -161,6 +156,7 @@ if(showSecondAnim){
         ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
 
         ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
+       // finishedAnim = true;
     }
                         }else {
 

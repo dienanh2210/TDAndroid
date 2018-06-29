@@ -159,6 +159,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
         }
         preferencesUtils = SharedPreferencesUtils.getInstance(mActivity);
+        //  mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
+        //   mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
     }
 
     @SuppressLint("SetTextI18n")
@@ -328,12 +330,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     };
 
     void onGetListSpotArrived(int numSpot, int spotId) {
-        if (numSpot == 1) {
-            showCheckPointFragment(spotId);
-        } else {
-            show_select_spot.setVisibility(View.VISIBLE);
-            changePaged = true;
-        }
+//        if (numSpot == 1) {
+//            showCheckPointFragment(spotId);
+//        } else {
+        show_select_spot.setVisibility(View.VISIBLE);
+        changePaged = true;
+        //  }
     }
 
     void showCheckPointFragment(final int spotId) {
@@ -341,10 +343,10 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             return;
 
         final String distance = String.format("%.2f", getCurrentDistance());
-        long lastCheckedTime =saveCourseRunning.getLastCheckedTime();
-        long timeDiffer = time -lastCheckedTime;
+        long lastCheckedTime = saveCourseRunning.getLastCheckedTime();
+        long timeDiffer = time - lastCheckedTime;
 
-        checkedSpot(spotId, getTimeFormat(timeDiffer), calculateAvarageSpeed(timeDiffer),time);
+        checkedSpot(spotId, getTimeFormat(timeDiffer), calculateAvarageSpeed(timeDiffer), time);
 
         if (spotId > 0 && courseID > 0) {
             if (getSizeCheckedSpot() == list_spot.size()) //complete all spot
@@ -412,7 +414,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     String finish_time = getTimeFormat(time);
 
-                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance,model.getGained());
+                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance, model.getGained());
                                 }
                             }
                             hideProgressDialog();
@@ -472,7 +474,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //                                for test animation
 //                                if(spotId==181) model.setGained( true );
 
-                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance,model.getGained());
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance, model.getGained());
                                 isTimeSaved = true;
                             }
                         }
@@ -556,7 +558,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         // time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
         mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
-
+        CourseListActivity.isRunningBackground = false;
     }
 
     @Override
@@ -569,14 +571,21 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //        }
         mActivity.unregisterReceiver(broadcastReceiver);
         mActivity.unregisterReceiver(broadcastReceiverArried);
+        CourseListActivity.isRunningBackground = true;
+        ArrayList<Location> lstUncheckedSpot = getListUncheckedSpot();
+        if(lstUncheckedSpot.size()>0){
+            mActivity.turnOnGps(lstUncheckedSpot);
+        }
     }
 
     @Override
     public void onDestroyView() {
+        CourseListActivity.isRunningBackground = false;
         if (isSaveTime) {
             preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
         }
         super.onDestroyView();
+
     }
 
     private void initTabControl() {
@@ -627,8 +636,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     double calculateAvarageSpeed(long time) {
         double aSpeed = 0;
         double distance = SphericalUtil.computeDistanceBetween(new LatLng(lastLatitude, lastLongtitude), new LatLng(latitude, longtitude));
-        distance = distance/1000;
-       //  aSpeed = courseDistance / ((double) time / 3600000);
+        distance = distance / 1000;
+        //  aSpeed = courseDistance / ((double) time / 3600000);
         aSpeed = distance / ((double) time / 3600000);
         lastLatitude = latitude;
         lastLongtitude = longtitude;
@@ -649,14 +658,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     double getCurrentDistance() {
         double distance = SphericalUtil.computeDistanceBetween(new LatLng(lastLatitude, lastLongtitude), new LatLng(latitude, longtitude));
-        distance = distance/1000;
+        distance = distance / 1000;
         return distance;
     }
+
     double getRealCourseDistance() {
         double distance = SphericalUtil.computeDistanceBetween(new LatLng(saveCourseRunning.getStart_latitude(), saveCourseRunning.getStart_longtitude()), new LatLng(latitude, longtitude));
-        distance =distance/1000;
+        distance = distance / 1000;
         return distance;
     }
+
     private void setListCheckedSpot() {
         if (saveCourseRunning != null)
             return;
@@ -691,13 +702,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         return false;
     }
 
-    private void checkedSpot(int spotId, String finishTime, double averageSpeed,long lastCheckTime) {
+    private void checkedSpot(int spotId, String finishTime, double averageSpeed, long lastCheckTime) {
         for (int i = 0; i < saveCourseRunning.getLstCheckedSpot().size(); i++) {
-            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId)
-            {
+            if (saveCourseRunning.getLstCheckedSpot().get(i).getSpotID() == spotId) {
                 saveCourseRunning.getLstCheckedSpot().get(i).setChecked(true);
-                if(spotId>saveCourseRunning.getHighestCheckedSpot())
-                {
+                if (spotId > saveCourseRunning.getHighestCheckedSpot()) {
                     saveCourseRunning.setHighestCheckedSpot(spotId);
                     saveCourseRunning.getLstCheckedSpot().get(i).setHighestChecked(true);
                 }
@@ -728,12 +737,26 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
         return num;
     }
-    void saveGoalValue(int idSpot, float speed, String time, String imgUrl, String title, String distance){
+
+    void saveGoalValue(int idSpot, float speed, String time, String imgUrl, String title, String distance) {
         saveCourseRunning.setGoalSpotId(idSpot);
         saveCourseRunning.setAvarageSpeed(speed);
         saveCourseRunning.setImgUrlGoal(imgUrl);
         saveCourseRunning.setGoal_title(title);
         saveCourseRunning.setAllDistance(distance);
         saveCheckedSpot();
+    }
+    ArrayList<Location> getListUncheckedSpot()
+    {
+        ArrayList<Location> newList= new ArrayList<>();
+        for (Spot spot : list_spot) {
+            int id = spot.getSpotId();
+            for (int i = 0; i < lstLocation.size(); i++) {
+                if (!isSpotChecked(id)) {
+                    newList.add(new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude())));
+                }
+            }
+        }
+        return newList;
     }
 }
