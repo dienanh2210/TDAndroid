@@ -125,6 +125,7 @@ public class CourseListActivity extends BaseActivity {
     private int mSpotID;
     private String mapUrl;
     private String timeFinish, distanceSpot;
+
     public int getmSpotID() {
         return mSpotID;
     }
@@ -355,7 +356,15 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance,boolean showSecondAnim) {
+    public void showSpotImages(int spotID, String tag) {
+        mSpotID = spotID;
+        dataBundle.putInt(SPOT_ID, mSpotID);
+//        if (courseDetailSpotImagesFragment == null)
+        courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
+        openPage(courseDetailSpotImagesFragment, tag, true, false);
+    }
+
+    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance, boolean showSecondAnim) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
@@ -430,8 +439,8 @@ public class CourseListActivity extends BaseActivity {
 
     public void showTakePhoto(int spotID, String time, String distance) {
 
-        timeFinish =time;
-        distanceSpot =distance;
+        timeFinish = time;
+        distanceSpot = distance;
         mSpotID = spotID;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
@@ -490,7 +499,11 @@ public class CourseListActivity extends BaseActivity {
             typeBackPress = 1;
         } else if (fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
+//            popBackStack(CourseDetailFragment.class.getSimpleName());
             showSpotImages(mSpotID);
+            return;
+        } else if (fragment instanceof CourseDetailSpotImagesFragment) {
+            popBackStack(CourseDetailFragment.class.getSimpleName());
             return;
         } else if (fragment instanceof CountDownTimesFragment) {
             return;

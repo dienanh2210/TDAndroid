@@ -83,7 +83,7 @@ public class TabCourseFragment extends BaseFragment {
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
-    String avagePace, finishTIme, startAddress,routeUrl;
+    String avagePace, finishTIme, startAddress, routeUrl;
     CourseDetailFragment parentFragment;
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
@@ -94,7 +94,7 @@ public class TabCourseFragment extends BaseFragment {
         return fragment;
     }
 
-    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress,String routeUrl, List<Spot> lstSpot, CourseDetailFragment parentFragment) {
+    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, String routeUrl, List<Spot> lstSpot, CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
         fragment.finishTIme = finishTime;
@@ -126,7 +126,8 @@ public class TabCourseFragment extends BaseFragment {
             listSpotAdapter.setOnItemClickListener(new ListSpotDetailCircleAdapter.OnItemClickedListener() {
                 @Override
                 public void onItemClick(int spotID) {
-                    mActivity.showSpotImages(spotID);
+//                    mActivity.showSpotImages(spotID);
+                    mActivity.showSpotImages(spotID, CourseDetailFragment.class.getSimpleName());
                 }
             });
             // rcllistspots.setOn
@@ -172,7 +173,7 @@ public class TabCourseFragment extends BaseFragment {
         });
         txtStartAddress.setText(startAddress);
         PicassoUtil.getSharedInstance(mActivity).load(routeUrl).resize(0, 500).onlyScaleDown().into(imgRoute);
-        if(SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME)==0) {
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
             btnRunningApp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -205,9 +206,7 @@ public class TabCourseFragment extends BaseFragment {
 
                 }
             });
-        }
-        else
-        {
+        } else {
             btnRunningApp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame_gray));
         }
         rlt_googlemap.setOnClickListener(new View.OnClickListener() {
