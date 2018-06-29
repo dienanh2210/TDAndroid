@@ -338,5 +338,6 @@
     //tutorial
     <string name="tutorialnew">使い方</string>
     <string name="txt_title_post_comment">走行したコースの評価やコメントを投稿してみましょう！</string>
+    <string name="txt_later">あとで</string>
 </resources>
 

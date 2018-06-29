@@ -125,6 +125,7 @@ public class CourseListActivity extends BaseActivity {
     private int mSpotID;
     private String mapUrl;
     private String timeFinish, distanceSpot;
+
     public int getmSpotID() {
         return mSpotID;
     }
@@ -219,22 +220,26 @@ public class CourseListActivity extends BaseActivity {
             ProcessDialog.showDialogCheckLogging(CourseListActivity.this, "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
-//                    if (fragmentTabLayoutRunning == null)
-//                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
-//                    openPage(fragmentTabLayoutRunning, true, false);
-                    if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
-                        String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
-                        Log.i("SAVED_COURSE_RUNNING", savedString);
-                        if (!TextUtils.isEmpty(savedString)) {
-                            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
-                            mCourseID = saveCourseRunning.getCourseID();
-                            Log.i("getAvarageSpeed", saveCourseRunning.getAvarageSpeed() + "");
-                            openPage(CourseDetailFragment.newInstance(true, saveCourseRunning), true, false);
-//                            openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance()), true, false);
-                        }
-                    } else {
-                        openPage(CourseDetailFragment.newInstance(true, null), true, false);
+
+                    String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
+                    Log.i("SAVED_COURSE_RUNNING", savedString);
+                    if (!TextUtils.isEmpty(savedString)) {
+                        SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+                        mCourseID = saveCourseRunning.getCourseID();
                     }
+                    openPage(CourseDetailFragment.newInstance(true), true, false);
+                    /*if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+//                        String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
+//                        Log.i("SAVED_COURSE_RUNNING", savedString);
+//                        if (!TextUtils.isEmpty(savedString)) {
+//                            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+//                            mCourseID = saveCourseRunning.getCourseID();
+//                            Log.i("getAvarageSpeed", saveCourseRunning.getAvarageSpeed() + "");
+                            openPage(CourseDetailFragment.newInstance(true), true, false);
+//                        }
+                    } else {
+                        openPage(CourseDetailFragment.newInstance(true), true, false);
+                    }*/
                 }
             });
         }
@@ -300,8 +305,10 @@ public class CourseListActivity extends BaseActivity {
         openPage(new CountDownTimesFragment(), false, false);
     }
 
-    public void showCommentPost() {
-        openPage(new PostCommentFragment(), true, false);
+    public void showCommentPost(String tagBackStack) {
+        PostCommentFragment postCommentFragment = new PostCommentFragment();
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        openPage(postCommentFragment, tagBackStack, true, false);
     }
 
     public void showCourseDrive() {
@@ -355,7 +362,15 @@ public class CourseListActivity extends BaseActivity {
         openPage(courseDetailSpotImagesFragment, true, false);
     }
 
-    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance,boolean showSecondAnim) {
+    public void showSpotImages(int spotID, String tag) {
+        mSpotID = spotID;
+        dataBundle.putInt(SPOT_ID, mSpotID);
+//        if (courseDetailSpotImagesFragment == null)
+        courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
+        openPage(courseDetailSpotImagesFragment, tag, true, false);
+    }
+
+    public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance, boolean showSecondAnim) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
@@ -430,8 +445,8 @@ public class CourseListActivity extends BaseActivity {
 
     public void showTakePhoto(int spotID, String time, String distance) {
 
-        timeFinish =time;
-        distanceSpot =distance;
+        timeFinish = time;
+        distanceSpot = distance;
         mSpotID = spotID;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
@@ -488,52 +503,24 @@ public class CourseListActivity extends BaseActivity {
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof PostCommentFragment) {
             typeBackPress = 1;
+            popBackStack(CourseDetailFragment.class.getSimpleName());
+            return;
         } else if (fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
             showSpotImages(mSpotID);
             return;
+        } else if (fragment instanceof CourseDetailSpotImagesFragment) {
+            popBackStack(CourseDetailFragment.class.getSimpleName());
+            return;
         } else if (fragment instanceof CountDownTimesFragment) {
             return;
         } else if (fragment instanceof FragmentTabLayoutRunning) {
-
-//            ShowCourseDetail();
-           /* if (SharedPreferencesUtils.getInstance(this).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
-                if (((FragmentTabLayoutRunning) fragment).isFinishTime && ((FragmentTabLayoutRunning) fragment).isFromMain) {
-                    super.onBackPressed();
-                    return;
-                }
-                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
-                    fm.popBackStack();
-                }
-                return;
-            } else if (((FragmentTabLayoutRunning) fragment).isTimeSaved && !((FragmentTabLayoutRunning) fragment).isFromMain) {
-                for (int i = 0; i < 3; i++) { // Back to CourseDetailFragment
-                    fm.popBackStack();
-                }
-                return;
-            }*/
             popBackStack(CourseDetailFragment.class.getSimpleName());
             return;
 
         } else if (fragment instanceof GoalFragment) {
             return;
-        } /*else if (fragment instanceof FinishCourseFragment) {
-            FinishCourseFragment finishCourseFragment = (FinishCourseFragment) fragment;
-            if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
-                super.onBackPressed();
-                return;
-            } *//*else if (!finishCourseFragment.isFromMain) {
-                for (int i = 0; i < 4; i++) { // Back to CourseDetailFragment
-                    fm.popBackStack();
-                }
-                return;
-            }*//* else {
-                popBackStack(CourseDetailFragment.class.getSimpleName());
-                return;
-            }
-
-
-        }*/
+        }
 
         super.onBackPressed();
         Log.i("onBackPressed", "true");
