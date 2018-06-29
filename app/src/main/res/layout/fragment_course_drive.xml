@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -8,25 +9,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/background_main"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_220sdp">
-
-            <ImageView
-                android:layout_marginTop="@dimen/_40sdp"
-                android:id="@+id/btn_start"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/image_description"
-                android:src="@drawable/btn_start" />
-
+            android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/btn_back_drive"
                 android:layout_width="@dimen/_14sdp"
@@ -38,6 +27,21 @@
                 android:background="@drawable/icon_back"
                 android:contentDescription="@string/image_description" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_220sdp">
+            <ImageView
+                android:layout_marginTop="@dimen/_40sdp"
+                android:id="@+id/btn_start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/btn_start" />
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/title_detail"
@@ -89,12 +93,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:layout_alignParentBottom="true"
             android:background="@color/White"
             android:orientation="horizontal"
             android:weightSum="2.1"
             android:paddingBottom="@dimen/_5sdp"
-            android:paddingTop="@dimen/_5sdp">
+            android:paddingTop="@dimen/_5sdp"
+            tools:ignore="ObsoleteLayoutParam">
 
             <RelativeLayout
                 android:id="@+id/rlt_googlemap"

@@ -110,13 +110,13 @@ public class CourseListActivity extends BaseActivity {
     public static final String STAMP_IMAGE = "stamp_img";
     public static final String STAMP_TITLE = "stamp_title";
     public static final String STAMP_DISTANCE = "stamp_distance";
-    public static final String STAMP_GAIN = "stamp_distance";
+    public static final String STAMP_GAIN = "stamp_gain";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
 
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
-
+    public static boolean isRunningBackground;
     public int getmCourseID() {
         return mCourseID;
     }
@@ -461,8 +461,8 @@ public class CourseListActivity extends BaseActivity {
             Intent intent = new Intent(this, TakePhotoActivity.class);
             intent.putExtra(SPOT_ID, mSpotID);
             intent.putExtra(COURSE_DETAIL_ID, mCourseID);
-            intent.putExtra(TIME_FINISH, time);
-            intent.putExtra(STAMP_DISTANCE, distance);
+            intent.putExtra(TIME_FINISH, timeFinish);
+            intent.putExtra(STAMP_DISTANCE, distanceSpot);
             startActivity(intent);
 
         }
@@ -668,7 +668,13 @@ public class CourseListActivity extends BaseActivity {
         Log.i("GPSLOG", "turn off \n");
 
     }
+    public void turnOnGps(ArrayList<Location> listLocate){
+        if(intentGPS!=null){
+            intentGPS.putExtra("location", listLocate);
+            startService(intentGPS);
+        }
 
+    }
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -704,6 +710,7 @@ public class CourseListActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         MaintenanceAPI.getMaintenanceData(new ServiceCallback() {
             @Override
@@ -775,6 +782,7 @@ public class CourseListActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         unregisterReceiver(broadcastReceiver);
+
 
     }
 

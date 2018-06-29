@@ -69,7 +69,7 @@ public class GoogleService extends Service implements LocationListener {
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
-    private static final double DISTANCE_ALLOW = 10000;
+    private static final double DISTANCE_ALLOW = 100;
 
     public GoogleService() {
 
@@ -225,7 +225,10 @@ public class GoogleService extends Service implements LocationListener {
             }
         }
         if (!lstLocationArrived.isEmpty()) {
-            sendBroadcast(intent1);
+            if (CourseListActivity.isRunningBackground)
+                showNotification();
+            else
+                sendBroadcast(intent1);
         }
 
         // intent.putExtra("arrived", lstLocationArrived);
@@ -240,8 +243,8 @@ public class GoogleService extends Service implements LocationListener {
         Intent intent = new Intent(this, CourseListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent localPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentTitle("Notification");
-        builder.setContentText("You have come here");
+        builder.setContentTitle("スポットに到達しました");
+        //builder.setContentText("");
         builder.setSmallIcon(R.mipmap.ic_launcher);
         long[] pattern = {500, 500, 500, 500, 500, 500, 500, 500, 500};
         builder.setVibrate(pattern);
@@ -249,7 +252,7 @@ public class GoogleService extends Service implements LocationListener {
         builder.setSound(alarmSound);
         builder.setContentIntent(localPendingIntent);
         builder.setAutoCancel(true);
-        builder.setContentInfo("You have come here!");
+    //    builder.setContentInfo("You have come here!");
 //        builder.build();
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
