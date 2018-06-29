@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-
     void changeCourseListPage() {
         Intent intent = new Intent( this, CourseListActivity.class );
         startActivity( intent );
