@@ -220,22 +220,26 @@ public class CourseListActivity extends BaseActivity {
             ProcessDialog.showDialogCheckLogging(CourseListActivity.this, "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
-//                    if (fragmentTabLayoutRunning == null)
-//                        fragmentTabLayoutRunning = new FragmentTabLayoutRunning();
-//                    openPage(fragmentTabLayoutRunning, true, false);
-                    if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
-                        String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
-                        Log.i("SAVED_COURSE_RUNNING", savedString);
-                        if (!TextUtils.isEmpty(savedString)) {
-                            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
-                            mCourseID = saveCourseRunning.getCourseID();
-                            Log.i("getAvarageSpeed", saveCourseRunning.getAvarageSpeed() + "");
-                            openPage(CourseDetailFragment.newInstance(true, saveCourseRunning), true, false);
-//                            openPage(GoalFragment.newInstance(saveCourseRunning.getCourseID(), saveCourseRunning.getGoalSpotId(), saveCourseRunning.getAvarageSpeed(), TimeUtil.getTimeFormat(saveCourseRunning.getLastCheckedTime()), saveCourseRunning.getImgUrlGoal(), saveCourseRunning.getGoal_title(), saveCourseRunning.getAllDistance()), true, false);
-                        }
-                    } else {
-                        openPage(CourseDetailFragment.newInstance(true, null), true, false);
+
+                    String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
+                    Log.i("SAVED_COURSE_RUNNING", savedString);
+                    if (!TextUtils.isEmpty(savedString)) {
+                        SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+                        mCourseID = saveCourseRunning.getCourseID();
                     }
+                    openPage(CourseDetailFragment.newInstance(true), true, false);
+                    /*if (SharedPreferencesUtils.getInstance(CourseListActivity.this).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
+//                        String savedString = SharedPreferencesUtils.getInstance(CourseListActivity.this).getStringValue(Constant.SAVED_COURSE_RUNNING);
+//                        Log.i("SAVED_COURSE_RUNNING", savedString);
+//                        if (!TextUtils.isEmpty(savedString)) {
+//                            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+//                            mCourseID = saveCourseRunning.getCourseID();
+//                            Log.i("getAvarageSpeed", saveCourseRunning.getAvarageSpeed() + "");
+                            openPage(CourseDetailFragment.newInstance(true), true, false);
+//                        }
+                    } else {
+                        openPage(CourseDetailFragment.newInstance(true), true, false);
+                    }*/
                 }
             });
         }
@@ -301,8 +305,10 @@ public class CourseListActivity extends BaseActivity {
         openPage(new CountDownTimesFragment(), false, false);
     }
 
-    public void showCommentPost() {
-        openPage(new PostCommentFragment(), true, false);
+    public void showCommentPost(String tagBackStack) {
+        PostCommentFragment postCommentFragment = new PostCommentFragment();
+        dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
+        openPage(postCommentFragment, tagBackStack, true, false);
     }
 
     public void showCourseDrive() {
@@ -497,6 +503,8 @@ public class CourseListActivity extends BaseActivity {
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof PostCommentFragment) {
             typeBackPress = 1;
+            popBackStack(CourseDetailFragment.class.getSimpleName());
+            return;
         } else if (fragment instanceof SpotFacilitiesFragment) {
             typeBackPress = 3;
 //            popBackStack(CourseDetailFragment.class.getSimpleName());

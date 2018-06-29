@@ -156,7 +156,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0\"> %s </body></Html>";
     int fontSize;
     private boolean isNextScreen;
-    private SaveCourseRunning saveCourseRunning;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -181,10 +180,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         TourDeApplication.getInstance().trackScreenView("screen_course_id=" + mCourseID);
     }
 
-    public static CourseDetailFragment newInstance(boolean isNextScreen, SaveCourseRunning saveCourseRunning) {
+    public static CourseDetailFragment newInstance(boolean isNextScreen) {
         CourseDetailFragment fragment = new CourseDetailFragment();
         fragment.isNextScreen = isNextScreen;
-        fragment.saveCourseRunning = saveCourseRunning;
         return fragment;
     }
 
