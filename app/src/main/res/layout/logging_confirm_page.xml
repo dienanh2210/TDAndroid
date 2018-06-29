@@ -7,6 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/ll_bottom"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
@@ -16,15 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
             android:background="@color/White">
-
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="@dimen/_13sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:src="@drawable/icon_back_black" />
 
             <TextView
                 android:id="@+id/txtRunning"
@@ -57,11 +49,11 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_50sdp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -71,30 +63,30 @@
         <Button
             android:id="@+id/confirm_logging"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/custom_frame_blue"
             android:gravity="center"
             android:text="@string/check_result"
             android:textColor="@color/White"
             android:textSize="@dimen/_15sdp"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_15sdp"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/end_running"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/custom_frame_gray"
             android:gravity="center"
             android:text="@string/end_running"
             android:textColor="@color/White"
             android:textSize="@dimen/_15sdp"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_15sdp"/>
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

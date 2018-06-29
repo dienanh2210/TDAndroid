@@ -56,7 +56,7 @@ public class TabCommentFragment extends BaseFragment {
         btnPostComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showCommentPost();
+                mActivity.showCommentPost(CourseDetailFragment.class.getSimpleName());
             }
         });
         setRecyler();

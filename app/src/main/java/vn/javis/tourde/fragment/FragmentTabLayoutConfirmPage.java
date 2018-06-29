@@ -68,20 +68,14 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
-    @BindView(R.id.show_select_spot)
-    RelativeLayout show_select_spot;
     CourseListActivity mActivity;
-    @BindView(R.id.select_spot)
-    RecyclerView spotRecycler;
     ListCheckInSpot listSpotCheckinAdapter;
     double latitude;
     double longtitude;
     int courseID;
     int lastSpotId;
     float courseDistance;
-    boolean changePaged;
 
-    private FragmentTabLayoutConfirmPage.OnFragmentInteractionListener listener;
     ArrayList<Location> lstLocation = new ArrayList<>();
     List<Spot> list_spot = new ArrayList<>();
     SaveCourseRunning saveCourseRunning;
@@ -103,11 +97,6 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
         initTabControl();
 
         // PicassoUtil.getSharedInstance(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
-        spotRecycler.setItemAnimator(new DefaultItemAnimator());
-        spotRecycler.setLayoutManager(layoutManager);
-        show_select_spot.setVisibility(View.GONE);
-        spotRecycler.setAdapter(listSpotCheckinAdapter);
         final int courseId = mActivity.getmCourseID();
         list_spot.clear();
         showProgressDialog();
@@ -150,39 +139,6 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
 
     }
 
-    private void startChronometerService() {
-        SharedPreferencesUtils pref = SharedPreferencesUtils.getInstance(mActivity);
-        if (TextUtils.isEmpty(pref.getStringValue("startChronometerService"))) {
-            pref.setStringValue("startChronometerService", "startChronometerService");
-            Intent intent = new Intent(getContext(), ChronometerService.class);
-            intent.putExtra(ChronometerService.KEY_TIME_BASE, SystemClock.elapsedRealtime());
-            mActivity.startService(intent);
-        }
-
-    }
-
-
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            latitude = Double.valueOf(intent.getStringExtra("latutide"));
-            longtitude = Double.valueOf(intent.getStringExtra("longitude"));
-        }
-    };
-
-    private BroadcastReceiver broadcastReceiverArried = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (changePaged)
-                return;
-            lstLocation.clear();
-            lstLocation = (ArrayList<Location>) intent.getSerializableExtra("arrived");
-        }
-    };
-
-
-
-
     @OnClick({R.id.confirm_logging, R.id.end_running})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -190,7 +146,25 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
                 mActivity.onBackPressed();
                 break;
             case R.id.end_running:
-
+                ProcessDialog.showDialogConfirm(mActivity, "", "終了してコース画面へ 戻りますが宜しいですか？", new ProcessDialog.OnActionDialogClickOk() {
+                    @Override
+                    public void onOkClick() {
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.SAVED_COURSE_RUNNING);
+                        SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.KEY_GOAL_PAGE);
+                        ProcessDialog.showDialogConfirmFinishCourse(mActivity, "", getString(R.string.txt_title_post_comment), new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                mActivity.showCommentPost(null);
+                            }
+                        }, new ProcessDialog.OnActionDialogClickCancel() {
+                            @Override
+                            public void onCancelClick() {
+                                mActivity.popBackStack(CourseDetailFragment.class.getSimpleName());
+                            }
+                        });
+                    }
+                });
                 break;
 
         }
@@ -199,25 +173,18 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
-        View mView = inflater.inflate(R.layout.running, container, false);
+        View mView = inflater.inflate(R.layout.logging_confirm_page, container, false);
         return mView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        changePaged = false;
-        // time = (preferencesUtils.getLongValue(KEY_SHARED_BASETIME) == 0) ? SystemClock.elapsedRealtime() : SystemClock.elapsedRealtime() + preferencesUtils.getLongValue(KEY_SHARED_BASETIME);
-        mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
-        mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
-
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mActivity.unregisterReceiver(broadcastReceiver);
-        mActivity.unregisterReceiver(broadcastReceiverArried);
     }
 
 

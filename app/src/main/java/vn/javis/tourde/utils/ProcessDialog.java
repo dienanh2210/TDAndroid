@@ -252,7 +252,7 @@ public class ProcessDialog {
             dialog.show();
     }
 
-    public static void showDialogConfirm(final Context context, String title, String content, final OnActionDialogClickOk action, final OnActionDialogClickCancel actionCancel) {
+    public static void showDialogConfirmFinishCourse(final Context context, String title, String content, final OnActionDialogClickOk action, final OnActionDialogClickCancel actionCancel) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -272,6 +272,7 @@ public class ProcessDialog {
         dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
         final Button btnCancel = (Button) dialog.findViewById(R.id.cancel_button);
+        btnCancel.setText(R.string.txt_later);
         final Button btnOk = (Button) dialog.findViewById(R.id.ok_button);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
