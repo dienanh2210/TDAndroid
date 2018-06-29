@@ -338,5 +338,10 @@
     //tutorial
     <string name="tutorialnew">使い方</string>
     <string name="txt_title_post_comment">走行したコースの評価やコメントを投稿してみましょう！</string>
+    
+    //Logging confirm page
+    <string name="confirm_page">走行記録 </string>
+    <string name="check_result">走行結果を確認</string>
+    
 </resources>
 
