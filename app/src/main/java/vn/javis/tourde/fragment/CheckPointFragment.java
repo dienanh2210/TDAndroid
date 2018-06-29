@@ -175,7 +175,6 @@ if(showSecondAnim){
             }
         });
 
-
     }
 
     @Override
