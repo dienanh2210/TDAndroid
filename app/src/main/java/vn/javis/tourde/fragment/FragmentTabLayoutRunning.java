@@ -118,6 +118,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public boolean isFinishTime;
     public boolean isFromMain;
     public boolean isTimeSaved;
+    boolean isPausing;
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
@@ -513,7 +514,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 //   show_select_spot.setVisibility(View.VISIBLE);
                 //   mActivity.unregisterReceiver(broadcastReceiverArried);
                 mActivity.turnOffGPS();
-
+                isPausing = true;
                 break;
             case R.id.resume:
                 isSaveTime = true;
@@ -525,6 +526,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 changePaged = false;
                 //   mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
                 mActivity.turnOnGPS();
+                isPausing = false;
                 break;
             case R.id.finish:
                 ProcessDialog.showDialogConfirm(getContext(), "", "終了しますか？", new ProcessDialog.OnActionDialogClickOk() {
@@ -571,10 +573,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //        }
         mActivity.unregisterReceiver(broadcastReceiver);
         mActivity.unregisterReceiver(broadcastReceiverArried);
-        CourseListActivity.isRunningBackground = true;
-        ArrayList<Location> lstUncheckedSpot = getListUncheckedSpot();
-        if(lstUncheckedSpot.size()>0){
-            mActivity.turnOnGps(lstUncheckedSpot);
+        if(!isPausing) {
+            CourseListActivity.isRunningBackground = true;
+            ArrayList<Location> lstUncheckedSpot = getListUncheckedSpot();
+            if (lstUncheckedSpot.size() > 0) {
+                mActivity.turnOnGps(lstUncheckedSpot);
+            }
         }
     }
 
@@ -746,9 +750,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         saveCourseRunning.setAllDistance(distance);
         saveCheckedSpot();
     }
-    ArrayList<Location> getListUncheckedSpot()
-    {
-        ArrayList<Location> newList= new ArrayList<>();
+
+    ArrayList<Location> getListUncheckedSpot() {
+        ArrayList<Location> newList = new ArrayList<>();
         for (Spot spot : list_spot) {
             int id = spot.getSpotId();
             for (int i = 0; i < lstLocation.size(); i++) {
