@@ -339,6 +339,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                             ProcessDialog.showDialogLogin(getContext(), "", "新規登録に成功しました", new ProcessDialog.OnActionDialogClickOk() {
                                 @Override
                                 public void onOkClick() {
+
                                     Intent intent = new Intent(getActivity(), CourseListActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
@@ -355,10 +356,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                             startActivity(intent);
                             ProcessDialog.showloading(getContext(), true);
                         }
-//                        getActivity().finish();
                         if (jsonObject.has("token")) {
                             try {
-                                LoginFragment.setmUserToken(jsonObject.getString("token"));
+                                SharedPreferencesUtils.getInstance(activity).setStringValue(LoginUtils.TOKEN,jsonObject.getString("token"));
                                 getAccount();
 
                             } catch (JSONException e) {
@@ -367,7 +367,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         }
                     } else {
                         Log.d(edt_email.toString(), edt_password.toString() + "error");
-                        //Toast.makeText(getContext(), "エラーメッセージ", Toast.LENGTH_LONG).show();
                     }
                     hideProgressDialog();
                 }

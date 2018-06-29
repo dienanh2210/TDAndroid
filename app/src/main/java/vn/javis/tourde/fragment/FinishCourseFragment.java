@@ -174,11 +174,12 @@ public class FinishCourseFragment extends BaseFragment {
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.SAVED_COURSE_RUNNING);
                         SharedPreferencesUtils.getInstance(mActivity).removeKey(Constant.KEY_GOAL_PAGE);
-                        ProcessDialog.showDialogConfirm(mActivity, "", getString(R.string.txt_title_post_comment), new ProcessDialog.OnActionDialogClickOk() {
+                        ProcessDialog.showDialogConfirmFinishCourse(mActivity, "", getString(R.string.txt_title_post_comment), new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {
-                                mActivity.typeBackPress = 1;
-                                mActivity.popBackStack(CourseDetailFragment.class.getSimpleName());
+//                                mActivity.typeBackPress = 1;
+//                                mActivity.popBackStack(CourseDetailFragment.class.getSimpleName());
+                                mActivity.showCommentPost(null);
                             }
                         }, new ProcessDialog.OnActionDialogClickCancel() {
                             @Override
@@ -208,7 +209,13 @@ public class FinishCourseFragment extends BaseFragment {
         Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
         CameraUtils.storeImage(bitmap, photoFile);
         if (CameraUtils.checkWriteToDiskPermissions(mActivity)) {
-            CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+            ProcessDialog.showDialogConfirm(getContext(), "", "走行結果画面を\n" + "端末に保存しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                @Override
+                public void onOkClick() {
+                    CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+                }
+            });
+
         } else {
             requestPermission();
         }
