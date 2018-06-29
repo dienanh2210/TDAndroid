@@ -14,8 +14,8 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-     //   setContentView( R.layout.activity_splash );
-       // startRun();
+      //  setContentView( R.layout.activity_splash );
+      //  startRun();
                 Intent intent = new Intent( SplashActivity.this, MainActivity.class );
                 startActivity( intent );
                 finish();
@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity {
                 finish();
             }
         };
-        handler.postDelayed( runnable, 2000 );
+        handler.postDelayed( runnable, 500 );
     }
     @Override
     protected void onDestroy() {
