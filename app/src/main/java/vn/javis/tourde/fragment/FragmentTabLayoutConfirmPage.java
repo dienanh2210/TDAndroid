@@ -98,44 +98,12 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
 
         // PicassoUtil.getSharedInstance(mActivity).load("").transform(new CircleTransform()).into(imageCheckinSport);
         final int courseId = mActivity.getmCourseID();
-        list_spot.clear();
-        showProgressDialog();
-        GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
-            @Override
-            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                JSONObject jsonObject = (JSONObject) response;
-                if (jsonObject.has("error"))
-                    return;
-                CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
-                    courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
-                mActivity.setMapUrl(mCourseDetail.getmCourseData().getKmlFile());
+        String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+        if (!TextUtils.isEmpty(savedString)) {
+            saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+            setupViewPager();
+        }
 
-                list_spot = mCourseDetail.getSpot();
-                if (list_spot.size() > 0) {
-
-                    longtitude = Double.parseDouble(list_spot.get(0).getLongitude());
-                    latitude = Double.parseDouble(list_spot.get(0).getLatitude());
-                    lastSpotId = list_spot.get(list_spot.size() - 1).getSpotId();
-
-                    listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
-                    setupViewPager();
-                    tabLayout.setupWithViewPager(viewPager);
-                    listSpotCheckinAdapter.notifyDataSetChanged();
-                    //set info recyler tab fragment
-
-                }
-                hideProgressDialog();
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                hideProgressDialog();
-            }
-        });
-
-        //   spotRecycler.setAdapter(listSpotCheckinAdapter);
-        mActivity.fn_permission();
 
     }
 
@@ -224,7 +192,7 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
-
+        tabLayout.setupWithViewPager(viewPager);
     }
 
 
