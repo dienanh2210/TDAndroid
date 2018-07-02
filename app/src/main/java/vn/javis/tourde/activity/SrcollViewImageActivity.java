@@ -22,9 +22,11 @@ import vn.javis.tourde.model.MaintenanceStatus;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class SrcollViewImageActivity extends BaseActivity {
-Button bt_rule;
+    Button bt_rule;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,21 +35,24 @@ Button bt_rule;
         bt_rule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Rule();
+                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("rule", "finish");
+                if (SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue("Tutorial").equals(""))
+                    Rule();
             }
         });
     }
 
     void Rule() {
-      //  Intent intent = new Intent(this, ViewPageActivity.class);
-          Intent intent = new Intent(this, UsePageActivity.class);
+        Intent intent = new Intent(this, UsePageActivity.class);
         startActivity(intent);
         finish();
     }
+
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -70,13 +75,11 @@ Button bt_rule;
                                     JSONObject jsonObject1 = (JSONObject) response;
                                     if (jsonObject1.has("check")) {
                                         switch (jsonObject1.getString("check")) {
-                                            case "1":
-                                            {
-                                                ProcessDialog.showDialogOk(getApplicationContext(),"","このアプリは最新バージョンにアップデート可能です。");
+                                            case "1": {
+                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。");
                                                 break;
                                             }
-                                            case "2":
-                                            {
+                                            case "2": {
                                                 final String packageName = "com.navitime.local.navitime";
                                                 ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
