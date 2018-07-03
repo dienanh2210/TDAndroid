@@ -74,7 +74,13 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
         holder.txtCatchPhrase.setText(spot.getCatchPhrase());
 //        holder.txtIntro.setText(spot.getIntroduction());
         holder.webViewIntro.loadData(String.format(htmlText, "" + fontSize, spot.getIntroduction()), "text/html; charset=utf-8", "utf-8");
+
         holder.txtSpotDistance.setText(spot.getSpotDistance() + "km");
+        if(position<listSpot.size()-1)
+        {
+            final Spot spot1 = listSpot.get(position+1);
+            holder.txtSpotDistance.setText(spot1.getSpotDistance() + "km");
+        }
         String tag = "";
 //        if (spot.getTag() != null)
 //            tag += "#" + spot.getTag();

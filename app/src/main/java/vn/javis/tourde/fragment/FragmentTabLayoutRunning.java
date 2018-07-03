@@ -682,6 +682,21 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             SaveCourseRunning.CheckedSpot checkedSpot = saveCourseRunning.new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
             saveCourseRunning.getLstCheckedSpot().add(checkedSpot);
             //saveCourseRunning.addCheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
+            if(checked)
+            {
+                //check in first spot
+                CheckInStampAPI.postCheckInStamp(token, spot.getSpotId(), new ServiceCallback() {
+                    @Override
+                    public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+
+                    }
+                });
+            }
             checked = false;
         }
         String s = new ClassToJson<SaveCourseRunning>().getStringClassJson(saveCourseRunning);
