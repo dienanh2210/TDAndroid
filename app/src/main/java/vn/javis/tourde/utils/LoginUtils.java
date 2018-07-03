@@ -3,10 +3,12 @@ package vn.javis.tourde.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -19,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.linecorp.linesdk.api.LineApiClient;
 import com.linecorp.linesdk.api.LineApiClientBuilder;
@@ -74,25 +77,18 @@ public class LoginUtils {
         return mFaceBookCallbackManager;
     }
 
-    public static void setmFaceBookCallbackManager(CallbackManager mFaceBookCallbackManager) {
-        LoginUtils.mFaceBookCallbackManager = mFaceBookCallbackManager;
-    }
+
 
     public static TwitterAuthClient getTwitterAuthClient() {
         return twitterAuthClient;
     }
 
-    public static void setTwitterAuthClient(TwitterAuthClient twitterAuthClient) {
-        LoginUtils.twitterAuthClient = twitterAuthClient;
-    }
 
     public static GoogleSignInClient getmGoogleSignInClient() {
         return mGoogleSignInClient;
     }
 
-    public static void setmGoogleSignInClient(GoogleSignInClient mGoogleSignInClient) {
-        LoginUtils.mGoogleSignInClient = mGoogleSignInClient;
-    }
+
 
     public static LineApiClient getLineApiClient() {
         return lineApiClient;
@@ -126,36 +122,47 @@ public class LoginUtils {
     }
 
     public static void addFBCallback(final Activity activity, CallbackManager callbackManager) {
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.i(TAG, "onSuccess: ");
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject me, GraphResponse response) {
-                                if (response.getError() != null) {
-                                    // handle error
-                                } else {
-                                    processApiResponse(activity, me.optString("id"), FACEBOOK_SNS_KIND);
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        if (!isLoggedIn) {
+            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    Log.i(TAG, "onSuccess: ");
+                    processApiResponse(activity, loginResult.getAccessToken().getUserId(), FACEBOOK_SNS_KIND);
 
+                    /*GraphRequest.newMeRequest(
+                            loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(JSONObject me, GraphResponse response) {
+                                    if (response.getError() != null) {
+                                        // handle error
+                                    } else {
+                                        processApiResponse(activity, me.optString("id"), FACEBOOK_SNS_KIND);
+
+                                    }
                                 }
-                            }
-                        });
+                            });*/
 
-            }
+                }
 
-            @Override
-            public void onCancel() {
+                @Override
+                public void onCancel() {
 
-            }
+                }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.i(TAG, "onError: " + error.toString());
-            }
+                @Override
+                public void onError(FacebookException error) {
+                    Log.i(TAG, "onError: " + error.toString());
+                }
 
-        });
+            });
+        }else {
+
+            processApiResponse(activity, accessToken.getUserId(), FACEBOOK_SNS_KIND);
+        }
+
+
 
     }
 
@@ -254,6 +261,18 @@ public class LoginUtils {
                 Toast.makeText(activity, "エラーメッセージ", Toast.LENGTH_LONG).show();
         }
 
+    }
+    public static void checkGoogleLastLogin(Activity activity) {
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(activity);
+        if (acct != null) {
+            mGoogleSignInClient.signOut()
+                    .addOnCompleteListener(activity, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // ...
+                        }
+                    });
+        }
     }
 
 }
