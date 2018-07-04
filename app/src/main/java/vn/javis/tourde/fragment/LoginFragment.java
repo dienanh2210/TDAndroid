@@ -3,7 +3,6 @@ package vn.javis.tourde.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,30 +15,15 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterConfig;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.linecorp.linesdk.api.LineApiClient;
 import com.linecorp.linesdk.api.LineApiClientBuilder;
@@ -57,15 +41,12 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.MenuEntryActivity;
-import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.model.Account;
-import vn.javis.tourde.model.Course;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.LoginView;
-import vn.javis.tourde.activity.MenuPageActivity;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
@@ -123,7 +104,7 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
         // Register a callback to respond to the user
         mCallbackManager = LoginUtils.getmFaceBookCallbackManager();
         twitterAuthClient = LoginUtils.getTwitterAuthClient();
-        LoginUtils.addFBCallback(getActivity(),mCallbackManager);
+
        /* LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -225,6 +206,7 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
         switch (view.getId()) {
             case R.id.rl_facebook:
                 LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList(PUBLIC_PROFILE, EMAIL));
+                LoginUtils.addFBCallback(getActivity(),mCallbackManager);
                 break;
             case R.id.rl_twitter:
                 /*twitterAuthClient.authorize(getActivity(), new Callback<TwitterSession>() {
@@ -278,6 +260,7 @@ public class LoginFragment extends BaseFragment implements LoginView, RenewPassw
 
     private void signInGoogle() {
         mGoogleSignInClient = LoginUtils.getmGoogleSignInClient();
+        LoginUtils.checkGoogleLastLogin(getActivity());
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, LoginUtils.RC_GOOGLE_SIGN_IN);
     }

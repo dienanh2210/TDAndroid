@@ -135,7 +135,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         Button appCompatButtonLogin = view.findViewById(R.id.appCompatButtonLogin);
         Button changeInfo = view.findViewById(R.id.changeInfo);
         View tv_back_resgister = view.findViewById(R.id.tv_back_resgister);
-        View tv_close = view.findViewById(R.id.tv_close);
 
         tv_prefecture = view.findViewById(R.id.tv_prefecture);
 
@@ -168,7 +167,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         appCompatButtonLogin.setOnClickListener(this);
         changeInfo.setOnClickListener(this);
         tv_back_resgister.setOnClickListener(this);
-        tv_close.setOnClickListener(this);
         select_userIcon.setOnClickListener(this);
         select_userIcon.setImageBitmap(bitmapIcon);
         tv_prefecture.setText(txtArea);
@@ -292,11 +290,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             case R.id.tv_back_resgister:
                 isChangAccount = false;
                 bitmapIcon = null;
-                activity.onBackPressed();
-                break;
-            case R.id.tv_close:
-                bitmapIcon = null;
-                isChangAccount = false;
                 activity.onBackPressed();
                 break;
             case R.id.select_userIcon:

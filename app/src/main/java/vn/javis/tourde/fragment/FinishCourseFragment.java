@@ -162,7 +162,8 @@ public class FinishCourseFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 //                mActivity.showFragmentTabLayoutRunning();
-                mActivity.popBackStack(FragmentTabLayoutRunning.class.getSimpleName());
+                //mActivity.popBackStack(FragmentTabLayoutRunning.class.getSimpleName());
+                mActivity.openPage(new FragmentTabLayoutConfirmPage(),true,false);
             }
         });
         btnToDetail.setOnClickListener(new View.OnClickListener() {
@@ -204,14 +205,14 @@ public class FinishCourseFragment extends BaseFragment {
 
     @OnClick(R.id.btn_save_image)
     void captureFinish() {
-        photoFile = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
-        imageStoragePath = photoFile.getAbsolutePath();
-        Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
-        CameraUtils.storeImage(bitmap, photoFile);
         if (CameraUtils.checkWriteToDiskPermissions(mActivity)) {
             ProcessDialog.showDialogConfirm(getContext(), "", "走行結果画面を\n" + "端末に保存しますか？", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
+                    photoFile = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
+                    imageStoragePath = photoFile.getAbsolutePath();
+                    Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
+                    CameraUtils.storeImage(bitmap, photoFile);
                     CameraUtils.addImageToGallery(imageStoragePath, mActivity);
                 }
             });

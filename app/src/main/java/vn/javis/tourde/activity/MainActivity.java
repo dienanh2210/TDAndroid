@@ -77,14 +77,20 @@ public class MainActivity extends AppCompatActivity {
     void checkServerDone() {
         Log.i( "Tutorial", "-------?" + SharedPreferencesUtils.getInstance( this ).getStringValue( "Tutorial" ) );
         if (TextUtils.isEmpty( SharedPreferencesUtils.getInstance( this ).getStringValue( LoginUtils.TOKEN ) )) {
-            if (SharedPreferencesUtils.getInstance( this ).getStringValue( "Tutorial" ).equals( "" ))
+            if (SharedPreferencesUtils.getInstance( this ).getStringValue( "rule" ).equals(""))
                 changeActivity();
+            else if (SharedPreferencesUtils.getInstance( this ).getStringValue( "Tutorial" ).equals(""))
+                Rule();
             else
                 changeCourseListPage();
         } else
             changeCourseListActivity();
     }
-
+    void Rule() {
+        Intent intent = new Intent(this, UsePageActivity.class);
+        startActivity(intent);
+        finish();
+    }
     void changeActivity() {
         //   Intent intent = new Intent(this, ViewPageActivity.class);
         Intent intent = new Intent( this, SrcollViewImageActivity.class );

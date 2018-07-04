@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ツール・ド・ニッポン</string>
-    <string name="facebook_app_id">201940590394167</string>
+    <string name="facebook_app_id">179202236101142</string>
     <string name="com.twitter.sdk.android.CONSUMER_KEY">E9SgLRW6z3YDe1tkZjA8gWNdu</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc</string>
 
@@ -35,6 +35,7 @@
     <string name="text_accounts">All Accounts</string>
     <string name="hint_name">Name</string>
     <string name="hint_email">xxxxxxx.co.jp</string>
+    <string name="hint_user">ツールドニッポン</string>
     <string name="hint_password">半角英数字◯文字以上</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="text_login">ログイン</string>
@@ -338,6 +339,11 @@
     //tutorial
     <string name="tutorialnew">使い方</string>
     <string name="txt_title_post_comment">走行したコースの評価やコメントを投稿してみましょう！</string>
+
+    //Logging confirm page
+    <string name="confirm_page">走行記録 </string>
+    <string name="check_result">走行結果を確認</string>
+
     <string name="txt_later">あとで</string>
 </resources>
 
