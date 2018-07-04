@@ -46,13 +46,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/SplashTheme">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.MenuPageActivity"
@@ -176,6 +177,9 @@
         </receiver>
 
         <activity android:name=".activity.UsePageActivity" />
+        <activity
+            android:name=".activity.CropperImageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
