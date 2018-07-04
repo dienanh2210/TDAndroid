@@ -63,5 +63,5 @@ dependencies {
     implementation "com.google.android.gms:play-services-gcm:11.2.2"
     implementation "com.google.android.gms:play-services-ads:11.2.2"
     implementation 'com.google.android.gms:play-services-analytics:10.2.4'
-
+    api project(':library:cropper')
 }
