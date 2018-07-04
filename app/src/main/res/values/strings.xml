@@ -35,6 +35,7 @@
     <string name="text_accounts">All Accounts</string>
     <string name="hint_name">Name</string>
     <string name="hint_email">xxxxxxx.co.jp</string>
+    <string name="hint_user">ツールドニッポン</string>
     <string name="hint_password">半角英数字◯文字以上</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="text_login">ログイン</string>
@@ -338,6 +339,11 @@
     //tutorial
     <string name="tutorialnew">使い方</string>
     <string name="txt_title_post_comment">走行したコースの評価やコメントを投稿してみましょう！</string>
+
+    //Logging confirm page
+    <string name="confirm_page">走行記録 </string>
+    <string name="check_result">走行結果を確認</string>
+
     <string name="txt_later">あとで</string>
 </resources>
 
