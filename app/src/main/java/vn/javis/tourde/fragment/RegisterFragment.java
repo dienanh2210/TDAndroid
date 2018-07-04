@@ -402,7 +402,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 File file = new File(getPath(selectedImage));
                 Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
                 if (file.length() < FILE_SIZE_8MB && bitmapIcon != null) {
-//                    select_userIcon.setImageBitmap(bitmapIcon);
+                    select_userIcon.setImageBitmap(bitmapIcon);
                     Intent intent = new Intent(getActivity(), CropperImageActivity.class);
                     intent.putExtra(Constant.KEY_IMAGE_URI, selectedImage);
                     getActivity().startActivityForResult(intent, CROPPER_IMAGE);
