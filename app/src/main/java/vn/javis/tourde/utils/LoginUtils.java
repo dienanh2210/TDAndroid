@@ -3,6 +3,7 @@ package vn.javis.tourde.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
@@ -60,7 +61,8 @@ public class LoginUtils {
     //Api key
     public static final String LINE_CHANEL_ID = "1573462307";
     private static LoginUtils sInstance;
-
+    public static final String TWITTER_API_KEY = "E9SgLRW6z3YDe1tkZjA8gWNdu";
+    public static final String TWITTER_API_SECRET = "Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc";
     //Request Code
     public static final int RC_GOOGLE_SIGN_IN = 9001;
     public static final int RC_LINE_SIGN_IN = 006;
@@ -68,6 +70,8 @@ public class LoginUtils {
     //
     public static final String TOKEN = "token";
     public static final String TOKEN_SNS = "token_sns";
+    public static final String LOGIN_TYPE = "login_type";
+
     public static LoginUtils newInstance() {
         if (sInstance == null) sInstance = new LoginUtils();
         return sInstance;
@@ -78,7 +82,6 @@ public class LoginUtils {
     }
 
 
-
     public static TwitterAuthClient getTwitterAuthClient() {
         return twitterAuthClient;
     }
@@ -87,7 +90,6 @@ public class LoginUtils {
     public static GoogleSignInClient getmGoogleSignInClient() {
         return mGoogleSignInClient;
     }
-
 
 
     public static LineApiClient getLineApiClient() {
@@ -103,8 +105,8 @@ public class LoginUtils {
         //Todo init FaceBook
         mFaceBookCallbackManager = CallbackManager.Factory.create();
         //Todo init Twitter
-        TwitterAuthConfig authConfig = new TwitterAuthConfig("E9SgLRW6z3YDe1tkZjA8gWNdu",
-                "Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc");
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_API_KEY,
+                TWITTER_API_SECRET);
         TwitterConfig.Builder builder = new TwitterConfig.Builder(activity);
         builder.twitterAuthConfig(authConfig);
         Twitter.initialize(builder.build());
@@ -131,18 +133,6 @@ public class LoginUtils {
                     Log.i(TAG, "onSuccess: ");
                     processApiResponse(activity, loginResult.getAccessToken().getUserId(), FACEBOOK_SNS_KIND);
 
-                    /*GraphRequest.newMeRequest(
-                            loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                                @Override
-                                public void onCompleted(JSONObject me, GraphResponse response) {
-                                    if (response.getError() != null) {
-                                        // handle error
-                                    } else {
-                                        processApiResponse(activity, me.optString("id"), FACEBOOK_SNS_KIND);
-
-                                    }
-                                }
-                            });*/
 
                 }
 
@@ -157,11 +147,10 @@ public class LoginUtils {
                 }
 
             });
-        }else {
+        } else {
 
             processApiResponse(activity, accessToken.getUserId(), FACEBOOK_SNS_KIND);
         }
-
 
 
     }
@@ -203,11 +192,12 @@ public class LoginUtils {
                     //Todo save token to device
                     Log.i(TAG, "onSuccess: " + sns_kind + response.toString());
                     String token = jsonObject.getString("token");
-                    SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN,token);
-                    SharedPreferencesUtils.getInstance(activity).setBooleanValue(TOKEN_SNS,true);
-
-                    Intent intent = new Intent(activity,CourseListActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN, token);
+                    SharedPreferencesUtils.getInstance(activity).setBooleanValue(TOKEN_SNS, true);
+                    //Add type of Login SNS
+                    SharedPreferencesUtils.getInstance(activity).setStringValue(LOGIN_TYPE, sns_kind);
+                    Intent intent = new Intent(activity, CourseListActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                     activity.setResult(Activity.RESULT_OK, intent);
                     activity.startActivity(intent);
@@ -262,6 +252,7 @@ public class LoginUtils {
         }
 
     }
+
     public static void checkGoogleLastLogin(Activity activity) {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(activity);
         if (acct != null) {
