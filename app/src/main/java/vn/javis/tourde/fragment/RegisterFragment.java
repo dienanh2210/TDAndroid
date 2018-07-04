@@ -40,6 +40,7 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.BasicInfoActivity;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.CropperImageActivity;
 import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListRegisterAdapter;
@@ -61,6 +62,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         AgeFragment.OnFragmentInteractionListener {
 
     private static final int GET_FROM_GALLERY = 1;
+    private static final int CROPPER_IMAGE = 500;
     private static boolean isChangAccount;
     @BindView(R.id.edt_username)
     EditText edt_username;
@@ -334,7 +336,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                                 public void onOkClick() {
 
                                     Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                                     getActivity().setResult(Activity.RESULT_OK, intent);
                                     startActivity(intent);
@@ -343,7 +345,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                             });
                         } else {
                             Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                             getActivity().setResult(Activity.RESULT_OK, intent);
                             startActivity(intent);
@@ -351,7 +353,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         }
                         if (jsonObject.has("token")) {
                             try {
-                                SharedPreferencesUtils.getInstance(activity).setStringValue(LoginUtils.TOKEN,jsonObject.getString("token"));
+                                SharedPreferencesUtils.getInstance(activity).setStringValue(LoginUtils.TOKEN, jsonObject.getString("token"));
                                 getAccount();
 
                             } catch (JSONException e) {
@@ -400,7 +402,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 File file = new File(getPath(selectedImage));
                 Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
                 if (file.length() < FILE_SIZE_8MB && bitmapIcon != null) {
-                    select_userIcon.setImageBitmap(bitmapIcon);
+//                    select_userIcon.setImageBitmap(bitmapIcon);
+                    Intent intent = new Intent(getActivity(), CropperImageActivity.class);
+                    intent.putExtra(Constant.KEY_IMAGE_URI, selectedImage);
+                    getActivity().startActivityForResult(intent, CROPPER_IMAGE);
                 } else
                     ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
             } catch (FileNotFoundException e) {
@@ -411,6 +416,19 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 e.printStackTrace();
             }
         }
+
+        if (requestCode == CROPPER_IMAGE && resultCode == Activity.RESULT_OK) {
+            Log.i("onActivityResult", "------------->>>>Fragment");
+            Uri uriCropper = data.getParcelableExtra(Constant.KEY_IMAGE_CROPPER);
+            try {
+                if (uriCropper != null)
+                    bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uriCropper);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            select_userIcon.setImageBitmap(bitmapIcon);
+        }
+
     }
 
     public String getPath(Uri uri) {
