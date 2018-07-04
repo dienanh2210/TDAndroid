@@ -80,10 +80,11 @@ public class TabCourseFragment extends BaseFragment {
     RelativeLayout rlt_Navitime;
     @BindView(R.id.img_map)
     ImageView imgRoute;
+
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
-    String avagePace, finishTIme, startAddress, routeUrl;
+    String avagePace, finishTIme, startAddress, routeUrl, routeImg;
     CourseDetailFragment parentFragment;
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
@@ -94,7 +95,7 @@ public class TabCourseFragment extends BaseFragment {
         return fragment;
     }
 
-    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, String routeUrl, List<Spot> lstSpot, CourseDetailFragment parentFragment) {
+    public static TabCourseFragment instance(String finishTime, String averagePace, String startAddress, String routeUrl, String routeImg, List<Spot> lstSpot, CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
         fragment.listSpot = lstSpot;
         fragment.finishTIme = finishTime;
@@ -102,6 +103,8 @@ public class TabCourseFragment extends BaseFragment {
         fragment.startAddress = startAddress;
         fragment.parentFragment = parentFragment;
         fragment.routeUrl = routeUrl;
+        fragment.routeImg = routeImg;
+
         return fragment;
     }
 
@@ -136,7 +139,7 @@ public class TabCourseFragment extends BaseFragment {
         btnStartPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showCourseDrive();
+                openGoogleMapAtStartSpot();
             }
         });
         txtAvaragePace.setText(avagePace + "km/h");
@@ -172,7 +175,19 @@ public class TabCourseFragment extends BaseFragment {
             }
         });
         txtStartAddress.setText(startAddress);
-        PicassoUtil.getSharedInstance(mActivity).load(routeUrl).resize(0, 500).onlyScaleDown().into(imgRoute);
+        if (listSpot.size() > 0) {
+            startAddress = listSpot.get(0).getAddress();
+            txtStartAddress.setText(startAddress);
+        }
+        imgRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(routeUrl));
+                startActivity(browserIntent);
+            }
+        });
+        PicassoUtil.getSharedInstance(mActivity).load(routeImg).resize(0, 500).onlyScaleDown().into(imgRoute);
+
         if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
             btnRunningApp.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -212,19 +227,7 @@ public class TabCourseFragment extends BaseFragment {
         rlt_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                intent.setPackage("com.google.android.apps.maps");
-                try {
-                    startActivity(intent);
-                } catch (ActivityNotFoundException ex) {
-                    try {
-                        Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                        startActivity(unrestrictedIntent);
-                    } catch (ActivityNotFoundException innerEx) {
-                        //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
-                    }
-                }
+                openGoogleMapAtStartSpot();
             }
         });
 
@@ -290,4 +293,26 @@ public class TabCourseFragment extends BaseFragment {
         return String.valueOf(df.format(Double.valueOf(s)));
     }
 
+    void openGoogleMapAtStartSpot() {
+        if(listSpot.size()>0){
+            float startSpotLatitude = Float.parseFloat(listSpot.get(0).getLatitude());
+            float startSpotLongtitude = Float.parseFloat(listSpot.get(0).getLongitude());
+
+            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&mode =w", startSpotLatitude, startSpotLongtitude, "");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
+            startActivity(intent);
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                try {
+                    Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                    startActivity(unrestrictedIntent);
+                } catch (ActivityNotFoundException innerEx) {
+                    //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
 }
