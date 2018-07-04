@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Black"
     android:gravity="bottom"
     android:orientation="vertical">
 
@@ -16,25 +17,25 @@
         android:layout_height="50dp">
 
         <TextView
-            android:id="@+id/btnCropper"
+            android:id="@+id/btnClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:text="CropImage"
-            android:textColor="@color/Black"
+            android:text="キャンセル"
+            android:textColor="@color/White"
             android:textSize="@dimen/_15ssp" />
 
         <TextView
-            android:id="@+id/btnClose"
+            android:id="@+id/btnCropper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:text="@string/Close"
-            android:textColor="@color/Black"
+            android:text="選択"
+            android:textColor="@color/White"
             android:textSize="@dimen/_15ssp" />
 
     </RelativeLayout>

@@ -48,7 +48,7 @@ public class CropperImageActivity extends BaseActivity implements CropImageView.
     /**
      * Set the image to show for cropping.
      */
-    public void setImageUri(Uri imageUri) {
+    private void setImageUri(Uri imageUri) {
         mCropImageView.setImageUriAsync(imageUri);
         //        CropImage.activity(imageUri)
         //                .start(getContext(), this);
