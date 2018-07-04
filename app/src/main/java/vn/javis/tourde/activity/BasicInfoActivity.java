@@ -111,12 +111,15 @@ public class BasicInfoActivity extends BaseActivity {
                 break;
             case "1":// User login by Twitter
                 getTwitterLoginInfo();
+                disableUpdateInfoButton();
                 break;
             case "2":  //User Login by Facebook
                 getFacebookLoginInfo();
+                disableUpdateInfoButton();
                 break;
             case "3":// User login by Google plus
                 getGoogleLoginInfo();
+                disableUpdateInfoButton();
                 break;
         }
     }
@@ -192,7 +195,6 @@ public class BasicInfoActivity extends BaseActivity {
             tv_UserEmail.setText(acct.getEmail());
             if (acct.getPhotoUrl() != null)
                 PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(acct.getPhotoUrl()).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
-
         }
         hideProgressDialog();
     }
@@ -224,6 +226,10 @@ public class BasicInfoActivity extends BaseActivity {
                 hideProgressDialog();
             }
         });
+    }
+    private void disableUpdateInfoButton(){
+        updateInfo.setBackgroundColor(getResources().getColor(R.color.lightGray));
+        updateInfo.setClickable(false);
     }
 
 }
