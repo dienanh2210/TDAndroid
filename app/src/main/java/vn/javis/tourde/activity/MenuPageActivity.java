@@ -91,8 +91,8 @@ public class MenuPageActivity extends BaseActivity {
             tv_login.setVisibility(View.GONE);
             rlt_register.setVisibility(View.GONE);
             lineRegister.setVisibility(View.GONE);
-            if (!SharedPreferencesUtils.getInstance(getApplicationContext()).getBooleanValue(LoginUtils.TOKEN_SNS))
-                basic_Info.setVisibility(View.VISIBLE);
+            //if (!SharedPreferencesUtils.getInstance(getApplicationContext()).getBooleanValue(LoginUtils.TOKEN_SNS))
+            basic_Info.setVisibility(View.VISIBLE);
 
         }
         rlt_pippon.setOnClickListener(onClicknippon);
@@ -186,6 +186,7 @@ public class MenuPageActivity extends BaseActivity {
 //                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN_SNS);
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.LOGIN_TYPE);
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
                                 SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");

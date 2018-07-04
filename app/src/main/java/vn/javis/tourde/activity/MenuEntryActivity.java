@@ -45,8 +45,6 @@ public class MenuEntryActivity extends BaseActivity {
         twitterAuthClient = LoginUtils.getTwitterAuthClient();
         //Todo init FaceBook
         mFaceBookCallbackManager = LoginUtils.getmFaceBookCallbackManager();
-        LoginUtils.addFBCallback(this, mFaceBookCallbackManager);
-
         rlt_usermailrigister = findViewById(R.id.rlt_usermailrigister);
         rlt_usermailrigister.setOnClickListener(onClickNewUserMail);
         tv_back_menu = findViewById(R.id.tv_back_menu);
@@ -116,7 +114,9 @@ public class MenuEntryActivity extends BaseActivity {
 
     @OnClick(R.id.rlt_facebook_login)
     void loginByFacebook() {
+
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList(PUBLIC_PROFILE, EMAIL));
+        LoginUtils.addFBCallback(this, mFaceBookCallbackManager);
     }
 
     @OnClick(R.id.rlt_twitter_login)
@@ -127,6 +127,7 @@ public class MenuEntryActivity extends BaseActivity {
     @OnClick(R.id.rlt_google_login)
     public void loginByGoogle() {
         mGoogleSignInClient = LoginUtils.getmGoogleSignInClient();
+        LoginUtils.checkGoogleLastLogin(this);
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, LoginUtils.RC_GOOGLE_SIGN_IN);
     }
