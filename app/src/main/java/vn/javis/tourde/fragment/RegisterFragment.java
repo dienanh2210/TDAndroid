@@ -264,7 +264,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
         switch (v.getId()) {
             case R.id.rlt_prefecture:
-                activity.openPage(PrefectureFragment.newInstance(this, prefecture), true, true);
+                activity.openPage(PrefectureFragment.newInstance(this, prefecture, tv_prefecture.getText().toString()), true, true);
                 break;
             case R.id.rlt_age:
                 activity.openPage(AgeFragment.newInstance(this, age), true, true);

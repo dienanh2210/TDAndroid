@@ -118,7 +118,7 @@ public class PrefectureOneFragment extends Fragment {
             }
         };
         rcv_list.setLayoutManager(linearLayoutManager);
-        listAdapter = new AreaAdapter(dataList, sAreaChosen);
+        listAdapter = new AreaAdapter(dataList, sAreaChosen, true);
 
         rcv_list.setAdapter(listAdapter);
     }

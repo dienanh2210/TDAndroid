@@ -15,14 +15,20 @@ import java.util.List;
 import vn.javis.tourde.R;
 import vn.javis.tourde.model.Data;
 import vn.javis.tourde.model.MultiCheckGenre;
+import vn.javis.tourde.utils.SearchCourseUtils;
 
 public class AreaAdapter extends CheckableChildRecyclerViewAdapter<TitleGroupViewHolder, AreaViewHolder> {
 
     private List<String> stringChosen;
+    private boolean isMultiChoose;
+    private int areaValue;
+    private SearchCourseUtils mSearchCourseUtils;
 
-    public AreaAdapter(List<MultiCheckGenre> groups, List<String> areaChosen) {
+    public AreaAdapter(List<MultiCheckGenre> groups, List<String> areaChosen, boolean multiChoose) {
         super(groups);
         stringChosen = areaChosen;
+        isMultiChoose = multiChoose;
+        mSearchCourseUtils = new SearchCourseUtils();
     }
 
     @Override
@@ -33,13 +39,28 @@ public class AreaAdapter extends CheckableChildRecyclerViewAdapter<TitleGroupVie
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CheckedTextView checkable = (CheckedTextView) areaViewHolder.getCheckable();
-                areaViewHolder.setChecked(!checkable.isChecked());
-                if (checkable.isChecked()) {
-                    stringChosen.add(checkable.getText().toString());
+                if (isMultiChoose) {
+                    CheckedTextView checkable = (CheckedTextView) areaViewHolder.getCheckable();
+                    areaViewHolder.setChecked(!checkable.isChecked());
+                    if (checkable.isChecked()) {
+                        stringChosen.add(checkable.getText().toString());
+                    } else {
+                        stringChosen.remove(checkable.getText().toString());
+                    }
                 } else {
-                    stringChosen.remove(checkable.getText().toString());
+                    stringChosen.clear();
+                    CheckedTextView checkable = (CheckedTextView) areaViewHolder.getCheckable();
+                    areaViewHolder.setChecked(!checkable.isChecked());
+                    if (checkable.isChecked()) {
+                        String value = checkable.getText().toString();
+                        stringChosen.add(value);
+                        areaValue = mSearchCourseUtils.getIndexPrefecture(value);
+                    } else {
+                        areaValue = 1;
+                    }
+                    notifyDataSetChanged();
                 }
+
             }
         });
         return areaViewHolder;
@@ -73,6 +94,18 @@ public class AreaAdapter extends CheckableChildRecyclerViewAdapter<TitleGroupVie
 
     public List<String> getListText() {
         return stringChosen;
+    }
+
+    public String getAreaContent() {
+        if (stringChosen.size() > 0) {
+            return stringChosen.get(0);
+        } else {
+            return "";
+        }
+    }
+
+    public int getAreaValue() {
+        return areaValue;
     }
 
 }
