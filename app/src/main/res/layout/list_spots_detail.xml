@@ -47,7 +47,7 @@
         <ImageView
             android:id="@+id/img_story_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/_160sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:adjustViewBounds="true"

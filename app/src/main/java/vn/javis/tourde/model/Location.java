@@ -9,6 +9,15 @@ public class Location implements Serializable{
    private double longtitude;
    private boolean arrived;
 
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    private int orderNumber;
     public boolean isArrived() {
         return arrived;
     }
@@ -17,10 +26,11 @@ public class Location implements Serializable{
         this.arrived = arrived;
     }
 
-    public Location(int spotID, double latitude, double longtitude) {
+    public Location(int spotID, double latitude, double longtitude,int orderNumber) {
         this.latitude = latitude;
         this.longtitude = longtitude;
         this.spotID =spotID;
+        this.orderNumber =orderNumber;
     }
 
     public int getSpotID() {

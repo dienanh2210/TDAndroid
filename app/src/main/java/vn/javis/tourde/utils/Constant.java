@@ -7,5 +7,6 @@ public class Constant {
     public static final String LIST_SPOT_IMAGE = "list_spot_image";
     public static final String SAVED_COURSE_RUNNING = "save_course_running";
     public static final String KEY_GOAL_PAGE = "is_goal_page";
-
+    public static final String KEY_IMAGE_URI = "uri_image";
+    public static final String KEY_IMAGE_CROPPER = "bmp_cropper";
 }

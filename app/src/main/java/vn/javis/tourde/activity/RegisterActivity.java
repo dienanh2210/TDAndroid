@@ -1,5 +1,7 @@
 package vn.javis.tourde.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -19,13 +21,15 @@ import vn.javis.tourde.utils.ProcessDialog;
 public class RegisterActivity extends BaseActivity {
     JSONObject data;
     Bundle bundle;
+    private RegisterFragment registerFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        RegisterFragment ccl =new RegisterFragment();
-        openPage(ccl, false, false);
+        registerFragment = new RegisterFragment();
+        openPage(registerFragment, false, false);
     }
 
     public void openPage(Fragment fragment, boolean isBackStack, boolean isAnimation) {
@@ -51,4 +55,9 @@ public class RegisterActivity extends BaseActivity {
         Log.i("onBackPressed", "true");
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        registerFragment.onActivityResult(requestCode, resultCode, data);
+    }
 }

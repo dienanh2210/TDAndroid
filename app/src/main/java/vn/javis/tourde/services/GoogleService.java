@@ -64,7 +64,7 @@ public class GoogleService extends Service implements LocationListener {
     public static String str_receiver = "tourde.service.receiver";
     public static String str_receiver_arrived = "tourde.service.receiver.arrived";
     Intent intent;
-
+    Intent intent1;
     int timeDelay = 5;
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
@@ -96,6 +96,7 @@ public class GoogleService extends Service implements LocationListener {
         mTimer = new Timer();
         mTimer.schedule(new TimerTaskToGetLocation(), timeDelay, notify_interval);
         intent = new Intent(str_receiver);
+        intent1 = new Intent(str_receiver_arrived);
 //        fn_getlocation();
     }
 
@@ -208,7 +209,7 @@ public class GoogleService extends Service implements LocationListener {
         }
         lstLocationArrived.clear();
         //double distance1 = DistanceLocation.getDistance(location.getLatitude(), location.getLongitude(),lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude());
-        Intent intent1 = new Intent(str_receiver_arrived);
+
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
             Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
