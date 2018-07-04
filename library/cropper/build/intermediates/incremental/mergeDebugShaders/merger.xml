@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/admin/Desktop/TourDeApp/tour-de-Android/library/cropper/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/admin/Desktop/TourDeApp/tour-de-Android/library/cropper/src/debug/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\work_space\projects\TourDe\tour-de-Android\library\cropper\src\main\shaders"/></dataSet><dataSet config="debug"><source path="E:\work_space\projects\TourDe\tour-de-Android\library\cropper\src\debug\shaders"/></dataSet></merger>
