@@ -215,8 +215,10 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                 txtNoCourse.setVisibility(View.GONE);
                 contentCourseList.setVisibility(View.VISIBLE);
 
+
                 mTotalPage = totalCourseSize / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourseSize / NUMBER_COURSE_ON_PAGE)+1;
-                if(mTotalPage==1)
+
+                if(mTotalPage==1 || totalCourseSize<=10)
                 {
                     layoutPager.setVisibility(View.GONE);
                 }

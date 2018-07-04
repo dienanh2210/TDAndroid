@@ -294,22 +294,25 @@ public class TabCourseFragment extends BaseFragment {
     }
 
     void openGoogleMapAtStartSpot() {
-        float startSpotLatitude = Float.parseFloat(listSpot.get(0).getLatitude());
-        float startSpotLongtitude = Float.parseFloat(listSpot.get(0).getLongitude());
+        if(listSpot.size()>0){
+            float startSpotLatitude = Float.parseFloat(listSpot.get(0).getLatitude());
+            float startSpotLongtitude = Float.parseFloat(listSpot.get(0).getLongitude());
 
-        String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&mode =w", startSpotLatitude, startSpotLongtitude, "");
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setPackage("com.google.android.apps.maps");
-        startActivity(intent);
-        try {
+            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&mode =w", startSpotLatitude, startSpotLongtitude, "");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
             startActivity(intent);
-        } catch (ActivityNotFoundException ex) {
             try {
-                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(unrestrictedIntent);
-            } catch (ActivityNotFoundException innerEx) {
-                //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                try {
+                    Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                    startActivity(unrestrictedIntent);
+                } catch (ActivityNotFoundException innerEx) {
+                    //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                }
             }
         }
+
     }
 }
