@@ -22,20 +22,6 @@
             android:textSize="@dimen/_12sdp" />
 
         <TextView
-            android:id="@+id/tv_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/register_title"
-            android:gravity="end"
-            android:paddingEnd="@dimen/_15sdp"
-            android:paddingStart="@dimen/_1sdp"
-            android:text="@string/search_course_close"
-            android:textColor="@color/search_course_color_close_text"
-            android:textSize="@dimen/_12sdp" />
-
-        <TextView
             android:id="@+id/register_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_47sdp"
                     android:background="@color/backgroud"
-                    android:hint="@string/hint_email"
+                    android:hint="@string/hint_user"
                     android:inputType="textEmailAddress"
                     android:paddingEnd="@dimen/_1sdp"
                     android:paddingStart="@dimen/_15sdp"
