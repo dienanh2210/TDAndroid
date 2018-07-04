@@ -228,11 +228,9 @@ public class MainActivity extends AppCompatActivity {
                 if (!jsonObject.has( "error" )) {
                     MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData( response.toString() );
                     if (maintenanceStatus.getStatus().equals( "1" )) {
-                        Log.i( "maintenance", "111111" );
                         //show title page(wait design)
 
                     } else {
-                        Log.i( "maintenance", "222222" );
                         try {
                             PackageInfo pInfo = getPackageManager().getPackageInfo( getPackageName(), 0 );
                             String version = pInfo.versionName;
@@ -240,15 +238,22 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                     JSONObject jsonObject1 = (JSONObject) response;
-                                    if (jsonObject1.has( "check" )) {
+                                    if (jsonObject1.has( "check" ))
+                                    {
+                                        Log.i("version---",jsonObject1.getString( "check" ));
                                         switch (jsonObject1.getString( "check" )) {
                                             case "1": {
-                                                ProcessDialog.showDialogOk( getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。" );
+                                                ProcessDialog.showDialogOk( MainActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                    @Override
+                                                    public void onOkClick() {
+                                                        checkServerDone();
+                                                    }
+                                                } );
                                                 break;
                                             }
                                             case "2": {
                                                 final String packageName = "com.navitime.local.navitime";
-                                                ProcessDialog.showDialogOk( getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                ProcessDialog.showDialogOk( MainActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
                                                     public void onOkClick() {
                                                         startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( "https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName ) ) );
@@ -257,23 +262,21 @@ public class MainActivity extends AppCompatActivity {
                                                 break;
                                             }
                                             case "0":
+                                                checkServerDone();
+                                                break;
                                             default:
-
-
                                         }
                                     }
-                                    checkServerDone();
                                 }
 
                                 @Override
                                 public void onError(VolleyError error) {
-
+                                    Log.e("", "onError: ",error );
                                 }
                             } );
                         } catch (PackageManager.NameNotFoundException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             }

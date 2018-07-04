@@ -735,13 +735,13 @@ public class CourseListActivity extends BaseActivity {
                                         switch (jsonObject1.getString("check")) {
                                             case "1": {
                                                 Log.i("maintenance", "333333");
-                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。");
+                                                ProcessDialog.showDialogOk(CourseListActivity.this, "", "このアプリは最新バージョンにアップデート可能です。");
                                                 break;
                                             }
                                             case "2": {
                                                 Log.i("maintenance", "4444444");
                                                 final String packageName = "com.navitime.local.navitime";
-                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                ProcessDialog.showDialogOk(CourseListActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
                                                     public void onOkClick() {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
