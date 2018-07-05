@@ -160,6 +160,7 @@
                 android:id="@+id/txt_post_user_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/Gray"
                 android:textSize="@dimen/_9sdp" />
         </LinearLayout>
 
@@ -167,11 +168,12 @@
             android:id="@+id/txt_catch_phrase_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_59sdp"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:textAlignment="gravity"
             android:textColor="@color/Black"
+            android:textStyle="bold"
             android:textSize="@dimen/_13sdp" />
 
         <TextView
@@ -182,7 +184,7 @@
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:textAlignment="gravity"
-            android:textColor="@color/Black"
+            android:textColor="@color/colorButton"
             android:visibility="gone"
             android:textSize="@dimen/_12sdp" />
 
@@ -471,8 +473,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_9sdp"
             android:textColor="@color/SkyBlue"
+            android:layout_marginBottom="@dimen/_14sdp"
             android:textSize="@dimen/_10sdp" />
 
         <!--<include layout="@layout/course_tab_container"></include>-->
@@ -486,7 +489,7 @@
             app:tabActiveColor="@android:color/white"
             app:tabHeight="@dimen/_45sdp"
             app:tabItems="@array/title_test"
-            app:tabNormalColor="#DCE0E2"
+            app:tabNormalColor="#E2E6E8"
             app:tabTextActiveColor="@color/color_text_tab"
             app:tabTextColor="@color/Black"
             app:tabTextSize="@dimen/_12sdp" />

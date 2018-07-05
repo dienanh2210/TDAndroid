@@ -6,8 +6,8 @@
     android:layout_marginTop="@dimen/_10sdp"
     >
     <RelativeLayout
-        android:layout_marginLeft="@dimen/_19sdp"
-        android:layout_marginRight="@dimen/_14sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_15sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.makeramen.roundedimageview.RoundedImageView
@@ -51,8 +51,8 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/Black"
         android:textSize="@dimen/_12sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_15sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView

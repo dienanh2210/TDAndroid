@@ -390,7 +390,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         if (listTag.size() > 0) {
             String s = "";
             for (int i = 0; i < listTag.size(); i++) {
-                s += "#" + listTag.get(i) + " ";
+                s += "#" + listTag.get(i) + "     ";
             }
             txtTag.setText(s);
         }
@@ -428,18 +428,30 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 .resize(0, 600).onlyScaleDown()
                 .into(imgCourse);
         PicassoUtil.getSharedInstance(activity).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(imgPostUser);
-        int rate = Math.round(courseDetail.getReviewTotal().getRatingAverage());
-        if (rate == 1) {
+        float rate = courseDetail.getReviewTotal().getRatingAverage();
+
+        if (rate >= 1 && rate<1.5)
             imgStarRate.setImageResource(R.drawable.icon_star1);
-        } else if (rate == 2) {
+        else if (rate >= 2 && rate<2.5)
             imgStarRate.setImageResource(R.drawable.icon_star2);
-        } else if (rate == 3) {
+        else if (rate >= 3 && rate<3.5)
             imgStarRate.setImageResource(R.drawable.icon_star3);
-        } else if (rate == 4) {
+        else if (rate >= 4 && rate<4.5)
             imgStarRate.setImageResource(R.drawable.icon_star4);
-        } else if (rate >= 5) {
+        else if (rate >= 5)
             imgStarRate.setImageResource(R.drawable.icon_star5);
-        }
+        else  if (rate >= 1.5 && rate<2)
+            imgStarRate.setImageResource(R.drawable.icon_star1_5);
+        else  if (rate >= 2.5 && rate<3)
+            imgStarRate.setImageResource(R.drawable.icon_star2_5);
+        else  if (rate >= 3.5 && rate<4)
+            imgStarRate.setImageResource(R.drawable.icon_star3_5);
+        else  if (rate >= 4.5 && rate<5)
+            imgStarRate.setImageResource(R.drawable.icon_star4_5);
+        else  if (rate >= 0 && rate<0.5)
+            imgStarRate.setImageResource(R.drawable.icon_star0_5);
+        else
+            imgStarRate.setImageResource(R.drawable.icon_star0);
 
         url = model.getRouteUrl();
     }

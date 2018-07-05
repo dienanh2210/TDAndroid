@@ -8,7 +8,7 @@ public class Review {
 
     @SerializedName("rating")
     @Expose
-    private int rating;
+    private float rating;
     @SerializedName("comment")
     @Expose
     private String comment;
@@ -25,11 +25,11 @@ public class Review {
     public static Review getData(String data) {
         return new Gson().fromJson(data, Review.class);
     }
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
