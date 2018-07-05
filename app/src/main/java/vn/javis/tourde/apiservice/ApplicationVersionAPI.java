@@ -10,6 +10,6 @@ public class ApplicationVersionAPI {
         HashMap<String, String> params = new HashMap<>();
         params.put("version", version);
         params.put("device", device);
-        TourDeService.getWithAuth(ApiEndpoint.CHECK_APPLICATION_VERSION, params, callback);
+        TourDeService.postWithAuth(ApiEndpoint.CHECK_APPLICATION_VERSION, params, callback);
     }
 }
