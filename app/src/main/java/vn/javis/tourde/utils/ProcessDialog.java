@@ -130,7 +130,7 @@ public class ProcessDialog {
             }
         });
 
-        if (!((Activity) context).isFinishing())
+        if ( !((Activity) context).isFinishing())
             dialog.show();
     }
 

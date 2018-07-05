@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ public class LoginUtils {
     public static final String TWITTER_SNS_KIND = "1";
     public static final String FACEBOOK_SNS_KIND = "2";
     public static final String GOOGLE_SNS_KIND = "3";
+    public static final String LINE_SNS_KIND = "4";
     //Api key
     public static final String LINE_CHANEL_ID = "1573462307";
     private static LoginUtils sInstance;
@@ -113,7 +115,7 @@ public class LoginUtils {
         twitterAuthClient = new TwitterAuthClient();
 
         //Todo init Line
-        LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(activity, LoginFragment.LINE_CHANEL_ID);
+        LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(activity, LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
 
         //Todo init Google
@@ -220,13 +222,8 @@ public class LoginUtils {
 
         switch (loginResult.getResponseCode()) {
             case SUCCESS: //Todo example Get Username
-                String accessToken = loginResult.getLineCredential().getAccessToken().getAccessToken();
-                Toast.makeText(activity, "Login success: " + accessToken, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent();
-                intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
-
-
+                String userId = loginResult.getLineProfile().getUserId();
+                if (!TextUtils.isEmpty(userId)) processApiResponse(activity, userId, LINE_SNS_KIND);
                 break;
             case SERVER_ERROR:
                 Log.e("ERROR", "SERVER ERROR!!");

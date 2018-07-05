@@ -397,24 +397,16 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-            try {
-                bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                File file = new File(getPath(selectedImage));
-                Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
-                if (file.length() < FILE_SIZE_8MB && bitmapIcon != null) {
-                    select_userIcon.setImageBitmap(bitmapIcon);
-                    Intent intent = new Intent(getActivity(), CropperImageActivity.class);
-                    intent.putExtra(Constant.KEY_IMAGE_URI, selectedImage);
-                    getActivity().startActivityForResult(intent, CROPPER_IMAGE);
-                } else
-                    ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            //        bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+            File file = new File(getPath(selectedImage));
+            Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
+            if (file.length() < FILE_SIZE_8MB /*&& bitmapIcon != null*/) {
+//                    select_userIcon.setImageBitmap(bitmapIcon);
+                Intent intent = new Intent(getActivity(), CropperImageActivity.class);
+                intent.putExtra(Constant.KEY_IMAGE_URI, selectedImage);
+                getActivity().startActivityForResult(intent, CROPPER_IMAGE);
+            } else
+                ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
         }
 
         if (requestCode == CROPPER_IMAGE && resultCode == Activity.RESULT_OK) {
@@ -431,7 +423,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     }
 
-    public String getPath(Uri uri) {
+    private String getPath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
         if (cursor == null) return null;
