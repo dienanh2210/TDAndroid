@@ -741,73 +741,10 @@ public class CourseListActivity extends BaseActivity {
     };
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
-        MaintenanceAPI.getMaintenanceData(new ServiceCallback() {
-            @Override
-            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                JSONObject jsonObject = (JSONObject) response;
-                if (!jsonObject.has("error")) {
-                    MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
-                    if (maintenanceStatus.getStatus().equals("1")) {
-                        //show title page(wait design)
-                        Log.i("maintenance", "11111");
-                    } else {
-                        Log.i("maintenance", "22222");
-                        try {
-                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                            String version = pInfo.versionName;
-                            ApplicationVersionAPI.checkAppVersion(version, "android", new ServiceCallback() {
-                                @Override
-                                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                                    JSONObject jsonObject1 = (JSONObject) response;
-                                    Log.i("maintenance", "onSuccess: " + response.toString());
-                                    if (jsonObject1.has("check")) {
-                                        switch (jsonObject1.getString("check")) {
-                                            case "1": {
-                                                Log.i("maintenance", "333333");
-                                                ProcessDialog.showDialogOk(CourseListActivity.this, "", "このアプリは最新バージョンにアップデート可能です。");
-                                                break;
-                                            }
-                                            case "2": {
-                                                Log.i("maintenance", "4444444");
-                                                final String packageName = "com.navitime.local.navitime";
-                                                ProcessDialog.showDialogOk(CourseListActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
-                                                    @Override
-                                                    public void onOkClick() {
-                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
-                                                    }
-                                                });
-                                                break;
-                                            }
-                                            case "0":
-                                                Log.i("maintenance", "999999");
-                                                break;
-                                            default:
-                                                break;
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onError(VolleyError error) {
-
-                                }
-                            });
-                        } catch (PackageManager.NameNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
-            }
-        });
 
     }
 

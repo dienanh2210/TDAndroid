@@ -45,8 +45,6 @@ import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -74,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void checkServerDone() {
+    public void checkServerDone() {
+
         Log.i( "Tutorial", "-------?" + SharedPreferencesUtils.getInstance( this ).getStringValue( "Tutorial" ) );
         if (TextUtils.isEmpty( SharedPreferencesUtils.getInstance( this ).getStringValue( LoginUtils.TOKEN ) )) {
             if (SharedPreferencesUtils.getInstance( this ).getStringValue( "rule" ).equals(""))
@@ -110,50 +109,8 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.setResult( Activity.RESULT_OK, intent );
         startActivity( intent );
         finish();
-        //loginToApp();
-        //openPage(new LoginFragment());
     }
 
-   /* public void loginToApp() {
-        final boolean gender = false;
-        String email = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue("Email");
-        String password = SharedPreferencesUtils.getInstance(getApplicationContext()).getStringValue("Pass");
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            LoginAPI.loginEmail(email, password, new ServiceCallback() {
-                @Override
-                public void onSuccess(ServiceResult resultCode, Object response) {
-                    JSONObject jsonObject = (JSONObject) response;
-                    if (jsonObject.has("success")) {
-//                        Intent intent = new Intent( getActivity(), MenuPageLoginActivity.class );
-//                        startActivity( intent );
-                        Intent intent = new Intent(MainActivity.this,CourseListActivity.class);
-                        startActivity(intent);
-                        intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
-                        MainActivity.this.setResult(Activity.RESULT_OK, intent);
-                        //     getActivity().finish();
-                        if (jsonObject.has("token")) {
-                            try {
-                                LoginFragment.setmUserToken(jsonObject.getString("token"));
-                                getAccount();
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    } else {
-                        //Log.d(edt_emaillogin.toString(), edt_passwordlogin.toString() + "error");
-                    }
-
-                }
-
-                @Override
-                public void onError(VolleyError error) {
-
-                }
-            });
-        }
-    }*/
 
     public static void getAccount(String token) {
 

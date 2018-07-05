@@ -290,7 +290,9 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:id="@+id/rcl_list_spots"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
 
 
                 <RelativeLayout
