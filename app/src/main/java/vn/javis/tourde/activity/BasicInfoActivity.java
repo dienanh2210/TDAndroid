@@ -2,6 +2,7 @@ package vn.javis.tourde.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +18,9 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.linecorp.linesdk.LineProfile;
+import com.linecorp.linesdk.api.LineApiClient;
+import com.linecorp.linesdk.api.LineApiClientBuilder;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
@@ -30,6 +34,8 @@ import com.twitter.sdk.android.core.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
+
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.services.ServiceCallback;
@@ -41,6 +47,7 @@ import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 
+import static vn.javis.tourde.utils.LoginUtils.LINE_CHANEL_ID;
 import static vn.javis.tourde.utils.LoginUtils.LOGIN_TYPE;
 import static vn.javis.tourde.utils.LoginUtils.TWITTER_API_KEY;
 import static vn.javis.tourde.utils.LoginUtils.TWITTER_API_SECRET;
@@ -121,8 +128,14 @@ public class BasicInfoActivity extends BaseActivity {
                 getGoogleLoginInfo();
                 disableUpdateInfoButton();
                 break;
+            case "4":// User login by Line
+                showProgressDialog();
+                new getLineLoginInfo(this).execute();
+                disableUpdateInfoButton();
+                break;
         }
     }
+
 
     private void getTwitterLoginInfo() {
 
@@ -174,9 +187,9 @@ public class BasicInfoActivity extends BaseActivity {
                                     if (data.has("picture")) {
                                         String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
                                         if (!TextUtils.isEmpty(profilePicUrl))
-                                            PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(profilePicUrl).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
+                                            PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(profilePicUrl).resize(200, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
                                     }
-                                hideProgressDialog();
+                                    hideProgressDialog();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     hideProgressDialog();
@@ -190,11 +203,12 @@ public class BasicInfoActivity extends BaseActivity {
     private void getGoogleLoginInfo() {
         showProgressDialog();
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+
         if (acct != null) {
             tv_Username.setText(acct.getDisplayName());
             tv_UserEmail.setText(acct.getEmail());
             if (acct.getPhotoUrl() != null)
-                PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(acct.getPhotoUrl()).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
+                PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(acct.getPhotoUrl()).resize(200, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
         }
         hideProgressDialog();
     }
@@ -217,7 +231,7 @@ public class BasicInfoActivity extends BaseActivity {
                 int area = jsonObject.getInt("area");
                 prefecture.setText(ListArea.getAreaName(area - 1));
                 if (!TextUtils.isEmpty(jsonObject.getString("image")))
-                    PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(jsonObject.getString("image")).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
+                    PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(jsonObject.getString("image")).resize(200, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
                 hideProgressDialog();
             }
 
@@ -227,9 +241,44 @@ public class BasicInfoActivity extends BaseActivity {
             }
         });
     }
-    private void disableUpdateInfoButton(){
+
+    private void disableUpdateInfoButton() {
         updateInfo.setBackgroundColor(getResources().getColor(R.color.lightGray));
         updateInfo.setClickable(false);
     }
+
+    private static class getLineLoginInfo extends AsyncTask<String, Integer, LineProfile> {
+        private WeakReference<BasicInfoActivity> activityReference;
+
+        // only retain a weak reference to the activity
+        getLineLoginInfo(BasicInfoActivity context) {
+            activityReference = new WeakReference<>(context);
+        }
+
+
+        @Override
+        protected LineProfile doInBackground(String... strings) {
+            BasicInfoActivity basicInfoActivity = activityReference.get();
+            LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(basicInfoActivity, LINE_CHANEL_ID);
+            LineApiClient lineApiClient = apiClientBuilder.build();
+            return lineApiClient.getProfile().getResponseData();
+        }
+
+        @Override
+        protected void onPostExecute(LineProfile lineProfile) {
+            BasicInfoActivity basicInfoActivity = activityReference.get();
+            TextView txtUserName = basicInfoActivity.findViewById(R.id.tv_Username);
+            TextView txtUserInfo = basicInfoActivity.findViewById(R.id.tv_UserEmail);
+            ImageView imageUserPicture = basicInfoActivity.findViewById(R.id.avatar);
+            txtUserName.setText(lineProfile.getDisplayName());
+            txtUserInfo.setText(lineProfile.getStatusMessage());
+            if (lineProfile.getPictureUrl() != null)
+                PicassoUtil.getSharedInstance(basicInfoActivity).load(lineProfile.getPictureUrl()).resize(200, 200).onlyScaleDown().transform(new CircleTransform()).into(imageUserPicture);
+            basicInfoActivity.hideProgressDialog();
+            super.onPostExecute(lineProfile);
+
+        }
+    }
+
 
 }
