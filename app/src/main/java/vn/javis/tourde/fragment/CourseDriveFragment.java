@@ -114,12 +114,12 @@ public class CourseDriveFragment extends BaseFragment {
                         ProcessDialog.showDialogOk(mAcitivity, "", "スタート地点を確認できませんでした。スタート地点付近に移動してください。", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {
-                                ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
-                                    @Override
-                                    public void onOkClick() {
-                                        mAcitivity.ShowCountDown();
-                                    }
-                                });
+//                                ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
+//                                    @Override
+//                                    public void onOkClick() {
+//                                        mAcitivity.ShowCountDown();
+//                                    }
+//                                });
                             }
                         });
                     }

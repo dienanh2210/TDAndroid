@@ -20,7 +20,7 @@ public class TourDeApplication extends Application {
     private final String CONSUMER_KEY = "o2Ixt07yGvkBoi1pfND1okRs3";
     private final String CONSUMER_SECRET = "dpS4plVCOqkHgxClbtzS1rZhk9IcnY0KTtZj6SUqojRdwzAIb6";
 
-    private  static final String PROPERTY_ID="UA-120902721-1";
+    private  static final String PROPERTY_ID="UA-76452397-13";
 
     private static TourDeApplication sInstance;
     private RequestQueue mRequestQueue;
