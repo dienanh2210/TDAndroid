@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView( R.layout.activity_main );
         checkMaintenanceAndAppVersion();
         GrowthPush.getInstance().initialize( this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
-                BuildConfig.DEBUG ? Environment.development : Environment.production );
+        BuildConfig.DEBUG ? Environment.development : Environment.production );
         GrowthPush.getInstance().requestRegistrationId( "1079044899926" );
         GrowthPush.getInstance().trackEvent( "Launch" );
         GrowthPush.getInstance().trackEvent( "AllowPushPermission", null, new ShowMessageHandler() {
