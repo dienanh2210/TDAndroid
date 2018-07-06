@@ -64,12 +64,12 @@ public class GoogleService extends Service implements LocationListener {
     public static String str_receiver = "tourde.service.receiver";
     public static String str_receiver_arrived = "tourde.service.receiver.arrived";
     Intent intent;
-
+    Intent intent1;
     int timeDelay = 5;
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
-    private static final double DISTANCE_ALLOW = 10000;
+    private static final double DISTANCE_ALLOW = 100;
 
     public GoogleService() {
 
@@ -96,6 +96,7 @@ public class GoogleService extends Service implements LocationListener {
         mTimer = new Timer();
         mTimer.schedule(new TimerTaskToGetLocation(), timeDelay, notify_interval);
         intent = new Intent(str_receiver);
+        intent1 = new Intent(str_receiver_arrived);
 //        fn_getlocation();
     }
 
@@ -208,7 +209,7 @@ public class GoogleService extends Service implements LocationListener {
         }
         lstLocationArrived.clear();
         //double distance1 = DistanceLocation.getDistance(location.getLatitude(), location.getLongitude(),lstLocation.get(0).getLatitude(), lstLocation.get(0).getLongtitude());
-        Intent intent1 = new Intent(str_receiver_arrived);
+
         for (vn.javis.tourde.model.Location lct : lstLocation) {
             double distance = SphericalUtil.computeDistanceBetween(new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(lct.getLatitude(), lct.getLongtitude()));
             Log.i("GPS_218,lat", lct.getSpotID() + "-" + location.getLatitude() + "-" + lct.getLatitude() + ",longitude" + location.getLongitude() + "-" + lct.getLongtitude() + ",distance" + distance);
@@ -225,7 +226,10 @@ public class GoogleService extends Service implements LocationListener {
             }
         }
         if (!lstLocationArrived.isEmpty()) {
-            sendBroadcast(intent1);
+            if (CourseListActivity.isRunningBackground)
+                showNotification();
+            else
+                sendBroadcast(intent1);
         }
 
         // intent.putExtra("arrived", lstLocationArrived);
@@ -240,8 +244,8 @@ public class GoogleService extends Service implements LocationListener {
         Intent intent = new Intent(this, CourseListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent localPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentTitle("Notification");
-        builder.setContentText("You have come here");
+        builder.setContentTitle("スポットに到達しました");
+        //builder.setContentText("");
         builder.setSmallIcon(R.mipmap.ic_launcher);
         long[] pattern = {500, 500, 500, 500, 500, 500, 500, 500, 500};
         builder.setVibrate(pattern);
@@ -249,7 +253,7 @@ public class GoogleService extends Service implements LocationListener {
         builder.setSound(alarmSound);
         builder.setContentIntent(localPendingIntent);
         builder.setAutoCancel(true);
-        builder.setContentInfo("You have come here!");
+    //    builder.setContentInfo("You have come here!");
 //        builder.build();
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

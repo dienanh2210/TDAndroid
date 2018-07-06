@@ -28,6 +28,8 @@ import vn.javis.tourde.model.FavoriteCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.utils.PicassoUtil;
+import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 
 public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAdapter.FavoriteCourseViewHolder> {
@@ -81,7 +83,22 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
             @Override
             public void onClick(View view) {
                 activityContext.setmCourseID(model.getCourseId());
-               activityContext.showCourseDrive();
+                if (SharedPreferencesUtils.getInstance(activityContext).getStringValue("Checkbox") == "") {
+                    String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
+                            "\n" +
+                            "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
+
+                    ProcessDialog.showDialogcheckbox(activityContext, "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
+                        @Override
+                        public void onOkClick() {
+                            activityContext.showCourseDrive();
+
+                        }
+                    });
+                } else {
+                    activityContext.showCourseDrive();
+                }
+
             }
         });
        /* holder.btnFavorite.setOnClickListener(new View.OnClickListener() {

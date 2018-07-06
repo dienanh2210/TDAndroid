@@ -3,10 +3,14 @@ package vn.javis.tourde.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -19,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.linecorp.linesdk.api.LineApiClient;
 import com.linecorp.linesdk.api.LineApiClientBuilder;
@@ -54,10 +59,12 @@ public class LoginUtils {
     public static final String TWITTER_SNS_KIND = "1";
     public static final String FACEBOOK_SNS_KIND = "2";
     public static final String GOOGLE_SNS_KIND = "3";
+    public static final String LINE_SNS_KIND = "4";
     //Api key
     public static final String LINE_CHANEL_ID = "1573462307";
     private static LoginUtils sInstance;
-
+    public static final String TWITTER_API_KEY = "E9SgLRW6z3YDe1tkZjA8gWNdu";
+    public static final String TWITTER_API_SECRET = "Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc";
     //Request Code
     public static final int RC_GOOGLE_SIGN_IN = 9001;
     public static final int RC_LINE_SIGN_IN = 006;
@@ -65,6 +72,8 @@ public class LoginUtils {
     //
     public static final String TOKEN = "token";
     public static final String TOKEN_SNS = "token_sns";
+    public static final String LOGIN_TYPE = "login_type";
+
     public static LoginUtils newInstance() {
         if (sInstance == null) sInstance = new LoginUtils();
         return sInstance;
@@ -74,25 +83,16 @@ public class LoginUtils {
         return mFaceBookCallbackManager;
     }
 
-    public static void setmFaceBookCallbackManager(CallbackManager mFaceBookCallbackManager) {
-        LoginUtils.mFaceBookCallbackManager = mFaceBookCallbackManager;
-    }
 
     public static TwitterAuthClient getTwitterAuthClient() {
         return twitterAuthClient;
     }
 
-    public static void setTwitterAuthClient(TwitterAuthClient twitterAuthClient) {
-        LoginUtils.twitterAuthClient = twitterAuthClient;
-    }
 
     public static GoogleSignInClient getmGoogleSignInClient() {
         return mGoogleSignInClient;
     }
 
-    public static void setmGoogleSignInClient(GoogleSignInClient mGoogleSignInClient) {
-        LoginUtils.mGoogleSignInClient = mGoogleSignInClient;
-    }
 
     public static LineApiClient getLineApiClient() {
         return lineApiClient;
@@ -107,15 +107,15 @@ public class LoginUtils {
         //Todo init FaceBook
         mFaceBookCallbackManager = CallbackManager.Factory.create();
         //Todo init Twitter
-        TwitterAuthConfig authConfig = new TwitterAuthConfig("E9SgLRW6z3YDe1tkZjA8gWNdu",
-                "Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc");
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_API_KEY,
+                TWITTER_API_SECRET);
         TwitterConfig.Builder builder = new TwitterConfig.Builder(activity);
         builder.twitterAuthConfig(authConfig);
         Twitter.initialize(builder.build());
         twitterAuthClient = new TwitterAuthClient();
 
         //Todo init Line
-        LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(activity, LoginFragment.LINE_CHANEL_ID);
+        LineApiClientBuilder apiClientBuilder = new LineApiClientBuilder(activity, LINE_CHANEL_ID);
         lineApiClient = apiClientBuilder.build();
 
         //Todo init Google
@@ -126,36 +126,34 @@ public class LoginUtils {
     }
 
     public static void addFBCallback(final Activity activity, CallbackManager callbackManager) {
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.i(TAG, "onSuccess: ");
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject me, GraphResponse response) {
-                                if (response.getError() != null) {
-                                    // handle error
-                                } else {
-                                    processApiResponse(activity, me.optString("id"), FACEBOOK_SNS_KIND);
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        if (!isLoggedIn) {
+            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    Log.i(TAG, "onSuccess: ");
+                    processApiResponse(activity, loginResult.getAccessToken().getUserId(), FACEBOOK_SNS_KIND);
 
-                                }
-                            }
-                        });
 
-            }
+                }
 
-            @Override
-            public void onCancel() {
+                @Override
+                public void onCancel() {
 
-            }
+                }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.i(TAG, "onError: " + error.toString());
-            }
+                @Override
+                public void onError(FacebookException error) {
+                    Log.i(TAG, "onError: " + error.toString());
+                }
 
-        });
+            });
+        } else {
+
+            processApiResponse(activity, accessToken.getUserId(), FACEBOOK_SNS_KIND);
+        }
+
 
     }
 
@@ -196,11 +194,12 @@ public class LoginUtils {
                     //Todo save token to device
                     Log.i(TAG, "onSuccess: " + sns_kind + response.toString());
                     String token = jsonObject.getString("token");
-                    SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN,token);
-                    SharedPreferencesUtils.getInstance(activity).setBooleanValue(TOKEN_SNS,true);
-
-                    Intent intent = new Intent(activity,CourseListActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN, token);
+                    SharedPreferencesUtils.getInstance(activity).setBooleanValue(TOKEN_SNS, true);
+                    //Add type of Login SNS
+                    SharedPreferencesUtils.getInstance(activity).setStringValue(LOGIN_TYPE, sns_kind);
+                    Intent intent = new Intent(activity, CourseListActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                     activity.setResult(Activity.RESULT_OK, intent);
                     activity.startActivity(intent);
@@ -223,13 +222,8 @@ public class LoginUtils {
 
         switch (loginResult.getResponseCode()) {
             case SUCCESS: //Todo example Get Username
-                String accessToken = loginResult.getLineCredential().getAccessToken().getAccessToken();
-                Toast.makeText(activity, "Login success: " + accessToken, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent();
-                intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
-
-
+                String userId = loginResult.getLineProfile().getUserId();
+                if (!TextUtils.isEmpty(userId)) processApiResponse(activity, userId, LINE_SNS_KIND);
                 break;
             case SERVER_ERROR:
                 Log.e("ERROR", "SERVER ERROR!!");
@@ -254,6 +248,19 @@ public class LoginUtils {
                 Toast.makeText(activity, "エラーメッセージ", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    public static void checkGoogleLastLogin(Activity activity) {
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(activity);
+        if (acct != null) {
+            mGoogleSignInClient.signOut()
+                    .addOnCompleteListener(activity, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // ...
+                        }
+                    });
+        }
     }
 
 }

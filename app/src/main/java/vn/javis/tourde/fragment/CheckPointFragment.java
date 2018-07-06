@@ -184,7 +184,7 @@ if(showSecondAnim){
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position,int order) {
 
     }
 

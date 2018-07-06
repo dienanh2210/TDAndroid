@@ -40,6 +40,7 @@ import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.BasicInfoActivity;
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.activity.CropperImageActivity;
 import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.RegisterActivity;
 import vn.javis.tourde.adapter.ListRegisterAdapter;
@@ -61,6 +62,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         AgeFragment.OnFragmentInteractionListener {
 
     private static final int GET_FROM_GALLERY = 1;
+    private static final int CROPPER_IMAGE = 500;
     private static boolean isChangAccount;
     @BindView(R.id.edt_username)
     EditText edt_username;
@@ -133,7 +135,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         Button appCompatButtonLogin = view.findViewById(R.id.appCompatButtonLogin);
         Button changeInfo = view.findViewById(R.id.changeInfo);
         View tv_back_resgister = view.findViewById(R.id.tv_back_resgister);
-        View tv_close = view.findViewById(R.id.tv_close);
 
         tv_prefecture = view.findViewById(R.id.tv_prefecture);
 
@@ -166,7 +167,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         appCompatButtonLogin.setOnClickListener(this);
         changeInfo.setOnClickListener(this);
         tv_back_resgister.setOnClickListener(this);
-        tv_close.setOnClickListener(this);
         select_userIcon.setOnClickListener(this);
         select_userIcon.setImageBitmap(bitmapIcon);
         tv_prefecture.setText(txtArea);
@@ -264,7 +264,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
         switch (v.getId()) {
             case R.id.rlt_prefecture:
-                activity.openPage(PrefectureFragment.newInstance(this, prefecture), true, true);
+                activity.openPage(PrefectureFragment.newInstance(this, prefecture, tv_prefecture.getText().toString()), true, true);
                 break;
             case R.id.rlt_age:
                 activity.openPage(AgeFragment.newInstance(this, age), true, true);
@@ -290,11 +290,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             case R.id.tv_back_resgister:
                 isChangAccount = false;
                 bitmapIcon = null;
-                activity.onBackPressed();
-                break;
-            case R.id.tv_close:
-                bitmapIcon = null;
-                isChangAccount = false;
                 activity.onBackPressed();
                 break;
             case R.id.select_userIcon:
@@ -341,7 +336,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                                 public void onOkClick() {
 
                                     Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                                     getActivity().setResult(Activity.RESULT_OK, intent);
                                     startActivity(intent);
@@ -350,7 +345,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                             });
                         } else {
                             Intent intent = new Intent(getActivity(), CourseListActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
                             getActivity().setResult(Activity.RESULT_OK, intent);
                             startActivity(intent);
@@ -358,7 +353,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                         }
                         if (jsonObject.has("token")) {
                             try {
-                                SharedPreferencesUtils.getInstance(activity).setStringValue(LoginUtils.TOKEN,jsonObject.getString("token"));
+                                SharedPreferencesUtils.getInstance(activity).setStringValue(LoginUtils.TOKEN, jsonObject.getString("token"));
                                 getAccount();
 
                             } catch (JSONException e) {
@@ -402,25 +397,33 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
+            //        bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+            File file = new File(getPath(selectedImage));
+            Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
+            if (file.length() < FILE_SIZE_8MB /*&& bitmapIcon != null*/) {
+//                    select_userIcon.setImageBitmap(bitmapIcon);
+                Intent intent = new Intent(getActivity(), CropperImageActivity.class);
+                intent.putExtra(Constant.KEY_IMAGE_URI, selectedImage);
+                getActivity().startActivityForResult(intent, CROPPER_IMAGE);
+            } else
+                ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
+        }
+
+        if (requestCode == CROPPER_IMAGE && resultCode == Activity.RESULT_OK) {
+            Log.i("onActivityResult", "------------->>>>Fragment");
+            Uri uriCropper = data.getParcelableExtra(Constant.KEY_IMAGE_CROPPER);
             try {
-                bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                File file = new File(getPath(selectedImage));
-                Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
-                if (file.length() < FILE_SIZE_8MB && bitmapIcon != null) {
-                    select_userIcon.setImageBitmap(bitmapIcon);
-                } else
-                    ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                if (uriCropper != null)
+                    bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uriCropper);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            select_userIcon.setImageBitmap(bitmapIcon);
         }
+
     }
 
-    public String getPath(Uri uri) {
+    private String getPath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
         if (cursor == null) return null;

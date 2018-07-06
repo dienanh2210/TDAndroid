@@ -39,6 +39,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/course_outline"
                         android:textColor="@color/Black"
+                        android:textStyle="bold"
                         android:textSize="@dimen/_16sdp" />
 
                     <View
@@ -46,6 +47,7 @@
                         android:layout_height=".3dp"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:textStyle="bold"
                         android:background="@color/Gray" />
 
                     <LinearLayout
@@ -60,6 +62,7 @@
                             android:layout_weight="1"
                             android:text="@string/finish_guide_time"
                             android:textColor="@color/Black"
+                            android:textStyle="bold"
                             android:textSize="@dimen/_12sdp" />
 
                         <TextView
@@ -91,6 +94,7 @@
                             android:layout_weight="1"
                             android:text="@string/average_pace"
                             android:textColor="@color/Black"
+                            android:textStyle="bold"
                             android:textSize="@dimen/_12sdp" />
 
                         <TextView
@@ -123,6 +127,7 @@
                             android:layout_weight="1"
                             android:text="@string/start_point"
                             android:textColor="@color/Black"
+                            android:textStyle="bold"
                             android:textSize="@dimen/_12sdp" />
 
                         <TextView
@@ -156,6 +161,7 @@
                             android:layout_weight="1.5"
                             android:text="@string/access_to_start"
                             android:textColor="@color/Black"
+                            android:textStyle="bold"
                             android:textSize="@dimen/_12sdp" />
 
                         <RelativeLayout
@@ -189,21 +195,20 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_64sdp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_10sdp"
                     android:weightSum="2.1">
 
                     <RelativeLayout
                         android:id="@+id/rlt_googlemap"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:layout_width="@dimen/_38sdp"
-                            android:layout_height="@dimen/_23sdp"
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_21sdp"
                             android:layout_marginStart="@dimen/_47sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:contentDescription="@string/image_description"
@@ -214,7 +219,7 @@
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_27sdp"
                             android:gravity="center"
                             android:text="@string/GoogleMap"
                             android:textSize="@dimen/_10sdp" />
@@ -236,13 +241,13 @@
                     <RelativeLayout
                         android:id="@+id/rlt_Navitime"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                       >
 
                         <ImageView
-                            android:layout_width="@dimen/_38sdp"
-                            android:layout_height="@dimen/_23sdp"
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_21sdp"
                             android:layout_marginStart="@dimen/_47sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:contentDescription="@string/image_description"
@@ -252,7 +257,7 @@
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_27sdp"
                             android:gravity="center"
                             android:text="@string/NAVITIME"
                             android:textSize="@dimen/_11sdp" />
@@ -290,7 +295,9 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:id="@+id/rcl_list_spots"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
 
 
                 <RelativeLayout

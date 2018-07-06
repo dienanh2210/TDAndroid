@@ -110,12 +110,13 @@ public class CourseListActivity extends BaseActivity {
     public static final String STAMP_IMAGE = "stamp_img";
     public static final String STAMP_TITLE = "stamp_title";
     public static final String STAMP_DISTANCE = "stamp_distance";
-    public static final String STAMP_GAIN = "stamp_distance";
+    public static final String STAMP_GAIN = "stamp_gain";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
 
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
+    public static boolean isRunningBackground;
 
     public int getmCourseID() {
         return mCourseID;
@@ -461,8 +462,8 @@ public class CourseListActivity extends BaseActivity {
             Intent intent = new Intent(this, TakePhotoActivity.class);
             intent.putExtra(SPOT_ID, mSpotID);
             intent.putExtra(COURSE_DETAIL_ID, mCourseID);
-            intent.putExtra(TIME_FINISH, time);
-            intent.putExtra(STAMP_DISTANCE, distance);
+            intent.putExtra(TIME_FINISH, timeFinish);
+            intent.putExtra(STAMP_DISTANCE, distanceSpot);
             startActivity(intent);
 
         }
@@ -626,11 +627,41 @@ public class CourseListActivity extends BaseActivity {
                         if (!jsonObjec.has("error")) {
                             CourseDetail courseData = new CourseDetail((JSONObject) response);
                             List<Spot> lstSpot = courseData.getSpot();
-
+                            double la1, long1;
                             for (Spot spot : lstSpot) {
                                 if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty()) {
-                                    Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
+
+                                    Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()), spot.getOrderNumber());
+                                    //for test id course 10 8 11
+//                                    if (spot.getSpotId() == 187 && spot.getOrderNumber() == 0)
+//                                        location1 = new Location(spot.getSpotId(), 20.989979, 105.794848, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 189 && spot.getOrderNumber() == 1)
+//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 190 && spot.getOrderNumber() == 2)
+//                                        location1 = new Location(spot.getSpotId(), 20.992992, 105.788366, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 189 && spot.getOrderNumber() == 3)
+//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 187 && spot.getOrderNumber() == 4)
+//                                        location1 = new Location(spot.getSpotId(), 20.991667, 105.796280, spot.getOrderNumber());
+//
+//                                    if (spot.getSpotId() == 185 && spot.getOrderNumber() == 0)
+//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 186 && spot.getOrderNumber() == 1)
+//                                        location1 = new Location(spot.getSpotId(), 20.991667, 105.796280, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 184 && spot.getOrderNumber() == 2)
+//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
+//
+//                                    if (spot.getSpotId() == 193 && spot.getOrderNumber() == 0)
+//                                        location1 = new Location(spot.getSpotId(), 20.991667, 105.796280, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 192 && spot.getOrderNumber() == 1)
+//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 191 && spot.getOrderNumber() == 2)
+//                                        location1 = new Location(spot.getSpotId(), 20.992992, 105.788366, spot.getOrderNumber());
+//                                    if (spot.getSpotId() == 193 && spot.getOrderNumber() == 3)
+//                                        location1 = new Location(spot.getSpotId(), 20.993782, 105.786375, spot.getOrderNumber());
+
                                     // location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
+
                                     if (!lstLOcat.contains(location1))
                                         lstLOcat.add(location1);
 
@@ -669,6 +700,14 @@ public class CourseListActivity extends BaseActivity {
 
     }
 
+    public void turnOnGps(ArrayList<Location> listLocate) {
+        if (intentGPS != null) {
+            intentGPS.putExtra("location", listLocate);
+            startService(intentGPS);
+        }
+
+    }
+
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -702,72 +741,10 @@ public class CourseListActivity extends BaseActivity {
     };
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
+
         registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
-        MaintenanceAPI.getMaintenanceData(new ServiceCallback() {
-            @Override
-            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                JSONObject jsonObject = (JSONObject) response;
-                if (!jsonObject.has("error")) {
-                    MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
-                    if (maintenanceStatus.getStatus().equals("1")) {
-                        //show title page(wait design)
-                        Log.i("maintenance", "11111");
-                    } else {
-                        Log.i("maintenance", "22222");
-                        try {
-                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                            String version = pInfo.versionName;
-                            ApplicationVersionAPI.checkAppVersion(version, "android", new ServiceCallback() {
-                                @Override
-                                public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                                    JSONObject jsonObject1 = (JSONObject) response;
-                                    Log.i("maintenance", "onSuccess: " + response.toString());
-                                    if (jsonObject1.has("check")) {
-                                        switch (jsonObject1.getString("check")) {
-                                            case "1": {
-                                                Log.i("maintenance", "333333");
-                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。");
-                                                break;
-                                            }
-                                            case "2": {
-                                                Log.i("maintenance", "4444444");
-                                                final String packageName = "com.navitime.local.navitime";
-                                                ProcessDialog.showDialogOk(getApplicationContext(), "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
-                                                    @Override
-                                                    public void onOkClick() {
-                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
-                                                    }
-                                                });
-                                                break;
-                                            }
-                                            case "0":
-                                                Log.i("maintenance", "999999");
-                                                break;
-                                            default:
-                                                break;
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onError(VolleyError error) {
-
-                                }
-                            });
-                        } catch (PackageManager.NameNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
-            }
-        });
 
     }
 
@@ -775,6 +752,7 @@ public class CourseListActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         unregisterReceiver(broadcastReceiver);
+
 
     }
 

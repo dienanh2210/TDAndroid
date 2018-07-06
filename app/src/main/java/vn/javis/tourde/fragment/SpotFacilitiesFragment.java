@@ -60,6 +60,7 @@ public class SpotFacilitiesFragment extends Fragment {
         btn_choose = view.findViewById(R.id.btn_choose);
         tv_back_sppot_faclities = view.findViewById(R.id.tv_back_sppot_faclities);
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+        Log.i("spotId","abccc"+spotId);
         params.put("token", token);
         params.put("spot_id", String.valueOf(spotId));
         for (int i = 0; i < contentList2.length; i++) {

@@ -89,7 +89,8 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     RelativeLayout btnMyCourse;
     @BindView(R.id.content_course_list)
     NestedScrollView contentCourseList;
-
+    @BindView(R.id.layout_pager)
+    RelativeLayout layoutPager;
     private int mTotalPage = 1;
     private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
@@ -202,7 +203,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     }
 
     void changePage(int nextPage) {
-
+        txtPageNumber.setText("1/1");
         try {
 
             Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
@@ -214,10 +215,20 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                 txtNoCourse.setVisibility(View.GONE);
                 contentCourseList.setVisibility(View.VISIBLE);
 
+
                 mTotalPage = totalCourseSize / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourseSize / NUMBER_COURSE_ON_PAGE)+1;
 
+                if(mTotalPage==1 || totalCourseSize<=10)
+                {
+                    layoutPager.setVisibility(View.GONE);
+                }
+                else {
+                    layoutPager.setVisibility(View.VISIBLE);
+                }
                 int currentValue = mCurrentPage;
                 mCurrentPage += nextPage;
+                txtPageNumber.setText(1 + "/" + mTotalPage);
+
                 if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
                 if (mCurrentPage < 1) mCurrentPage = 1;
                 if (mCurrentPage != currentValue) {
