@@ -295,7 +295,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 }
             });
             spotRecycler.setAdapter(listSpotCheckinAdapter);
-
             onGetListSpotArrived(newList.size(), newList.get(0).getSpotId());
         }
 

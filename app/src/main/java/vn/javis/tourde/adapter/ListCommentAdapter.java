@@ -64,17 +64,29 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
             } catch (ParseException e) {
             }
         }
-        int rate =model.getRating();
-        if (rate == 1)
+        float rate =model.getRating();
+        if (rate >= 1 && rate<1.5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star1);
-        else if (rate == 2)
+        else if (rate >= 2 && rate<2.5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star2);
-        else if (rate == 3)
+        else if (rate >= 3 && rate<3.5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star3);
-        else if (rate == 4)
+        else if (rate >= 4 && rate<4.5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star4);
-        else if (rate == 5)
+        else if (rate >= 5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star5);
+        else  if (rate >= 1.5 && rate<2)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star1_5);
+        else  if (rate >= 2.5 && rate<3)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star2_5);
+        else  if (rate >= 3.5 && rate<4)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star3_5);
+        else  if (rate >= 4.5 && rate<5)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star4_5);
+        else  if (rate >= 0 && rate<0.5)
+            holder.imgStarRate.setImageResource(R.drawable.icon_star0_5);
+        else
+            holder.imgStarRate.setImageResource(R.drawable.icon_star0);
         if (model.getImage() != null && model.getImage() != "") {
             String imgUrl = model.getImage();
             PicassoUtil.getSharedInstance(context).load(imgUrl).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(holder.imgUserAvata);

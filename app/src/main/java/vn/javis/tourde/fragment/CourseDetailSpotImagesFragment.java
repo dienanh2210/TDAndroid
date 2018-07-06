@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -60,7 +61,8 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     TextView txtTel;
     @BindView(R.id.tv_tag)
     TextView txtTag;
-
+@BindView( R.id.btn_share )
+        ImageButton btn_share;
     CourseListActivity mActivity;
 
     @BindView(R.id.btn_back_to_list)
@@ -151,13 +153,21 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         Log.i("DetailSpotImages128",""+spotId);
        showProgressDialog();
         SpotDataAPI.getSpotData(spotId, this);
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                //  myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
+                myIntent.putExtra(Intent.EXTRA_TEXT,"" );
+                startActivity(Intent.createChooser(myIntent, ""));
+            }
+        });
     }
-
-
+    
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         JSONObject jsonObject =(JSONObject)response;
-
         if(jsonObject.has("error"))
             return;
         SpotData spotData = SpotData.getSpotData(response.toString());

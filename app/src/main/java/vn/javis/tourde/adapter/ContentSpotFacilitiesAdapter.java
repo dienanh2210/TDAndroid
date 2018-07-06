@@ -44,35 +44,27 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
         holder.tv_mark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
-                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
-                if (onClickItem != null) onClickItem.onClick(position,2);
+                if (onClickItem != null) onClickItem.onClick(position, holder.changeValue(2));
             }
         });
 
         holder.tv_mark1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
-                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
-                if (onClickItem != null) onClickItem.onClick(position,1);
+                if (onClickItem != null) onClickItem.onClick(position, holder.changeValue(1));
             }
         });
         holder.imv_mark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
-                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
-                if (onClickItem != null) onClickItem.onClick(position,2);
+                if (onClickItem != null)onClickItem.onClick(position, holder.changeValue(2));
             }
         });
 
         holder.imv_mark1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.imv_mark.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
-                holder.imv_mark1.setBackground(holder.imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
-                if (onClickItem != null) onClickItem.onClick(position,1);
+                if (onClickItem != null) onClickItem.onClick(position, holder.changeValue(1));
             }
         });
         if (position == 0 && isShowMark()) holder.imv_mark.setVisibility(View.VISIBLE);
@@ -86,8 +78,9 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_content;
         ImageButton imv_mark, imv_mark1;
-        TextView tv_mark1,tv_mark;
+        TextView tv_mark1, tv_mark;
         RelativeLayout rlt_mark;
+        int value = 0;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -97,10 +90,6 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
             tv_mark1 = itemView.findViewById(R.id.tv_mark1);
             tv_mark = itemView.findViewById(R.id.tv_mark);
             rlt_mark = itemView.findViewById(R.id.rlt_mark);
-
-
-
-
         }
 
         @Override
@@ -108,10 +97,26 @@ public class ContentSpotFacilitiesAdapter extends RecyclerView.Adapter<ContentSp
 
             mapItemView.put(getAdapterPosition(), imv_mark);
         }
+
+        public int changeValue(int val) {
+            value = value==val?-1:val;
+            if (value == 1) {
+                imv_mark.setBackground(imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                imv_mark1.setBackground(imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+            } else if (value == 2) {
+                imv_mark1.setBackground(imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                imv_mark.setBackground(imv_mark.getResources().getDrawable(R.drawable.icon_check_circle_blue));
+            }
+            else if (value == -1) {
+                imv_mark1.setBackground(imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+                imv_mark.setBackground(imv_mark.getResources().getDrawable(R.drawable.icon_check_circle));
+            }
+            return value;
+        }
     }
 
     public interface OnClickItem {
-        void onClick(int pos,int value);
+        void onClick(int pos, int value);
     }
 
     public boolean isShowMark() {
