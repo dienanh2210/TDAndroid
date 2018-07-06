@@ -282,7 +282,7 @@ public class CourseListActivity extends BaseActivity {
     }
 
     public void ShowFavoriteCourseDetail(int courseId) {
-
+        mCourseID = courseId;
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
 //        if (mCourseDetailFragment == null)
@@ -520,6 +520,12 @@ public class CourseListActivity extends BaseActivity {
             return;
 
         } else if (fragment instanceof GoalFragment) {
+            return;
+        } else if (fragment instanceof CourseListFragment) {
+            finish();
+            return;
+        } else if (fragment instanceof CourseDetailFragment) {
+            showCourseListPage();
             return;
         }
 
