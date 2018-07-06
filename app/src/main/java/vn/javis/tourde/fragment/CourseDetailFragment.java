@@ -171,6 +171,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //            } else {
 //                mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), CourseDetailFragment.class.getSimpleName(), true, false);
 //            }
+        } else if (isNextScreen) {
+            mActivity.openPage(new CourseDriveFragment(), CourseDetailFragment.class.getSimpleName(), true, false);
         }
     }
 
@@ -490,7 +492,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(),mCourseDetail.getmCourseData().getRouteUrl(), mCourseDetail.getmCourseData().getRouteImage(), mCourseDetail.getSpot(), CourseDetailFragment.this);
+                    return tabCourseFragment = TabCourseFragment.instance(mCourseDetail.getmCourseData().getFinishTime(), mCourseDetail.getmCourseData().getAveragePace(), mCourseDetail.getmCourseData().getStartAddress(), mCourseDetail.getmCourseData().getRouteUrl(), mCourseDetail.getmCourseData().getRouteImage(), mCourseDetail.getSpot(), CourseDetailFragment.this);
 //                    return TabSpotUploadedImages.intansce(listImgUrl);
                 case 1:
                     return tabCommentFragment = TabCommentFragment.instance(mCourseDetail.getReview());

@@ -48,7 +48,10 @@ import vn.javis.tourde.adapter.ListSpotDetailCircleAdapter;
 
 import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.model.Course;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
+import vn.javis.tourde.utils.ClassToJson;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
@@ -80,7 +83,7 @@ public class TabCourseFragment extends BaseFragment {
     RelativeLayout rlt_Navitime;
     @BindView(R.id.img_map)
     ImageView imgRoute;
-
+    int mCourseID;
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
@@ -187,6 +190,7 @@ public class TabCourseFragment extends BaseFragment {
             }
         });
         PicassoUtil.getSharedInstance(mActivity).load(routeImg).resize(0, 500).onlyScaleDown().into(imgRoute);
+        mCourseID = mActivity.getmCourseID();
 
         if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
             btnRunningApp.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +227,17 @@ public class TabCourseFragment extends BaseFragment {
             });
         } else {
             btnRunningApp.setBackground(mActivity.getResources().getDrawable(R.drawable.custom_frame_gray));
+            String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+            final SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+            btnRunningApp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mCourseID == saveCourseRunning.getCourseID()) {
+//                        mActivity.showFragmentTabLayoutRunning();
+                        mActivity.openPage(new FragmentTabLayoutRunning(), CourseDetailFragment.class.getSimpleName(), true, false);
+                    }
+                }
+            });
         }
         rlt_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override

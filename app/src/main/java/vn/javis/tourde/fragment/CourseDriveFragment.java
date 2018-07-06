@@ -61,6 +61,14 @@ public class CourseDriveFragment extends BaseFragment {
     int mCourseID;
     double startLongtitude;
     double startLatitude;
+    public boolean isFromMain = true;
+
+    public static CourseDriveFragment newInstance(boolean isFromMain) {
+        CourseDriveFragment fragment = new CourseDriveFragment();
+        fragment.isFromMain = isFromMain;
+        return fragment;
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAcitivity = (CourseListActivity) getActivity();
@@ -76,11 +84,10 @@ public class CourseDriveFragment extends BaseFragment {
                     Log.i("Error course drive73", response.toString());
                 } else {
                     CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
-                    if (title_detail !=null && mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty())
-                    {
+                    if (title_detail != null && mCourseDetail.getmCourseData() != null && !mCourseDetail.getmCourseData().getTitle().isEmpty()) {
                         title_detail.setText(mCourseDetail.getmCourseData().getTitle());
-                        startLatitude =Double.parseDouble(mCourseDetail.getSpot().get(0).getLatitude());
-                        startLongtitude =Double.parseDouble(mCourseDetail.getSpot().get(0).getLongitude());
+                        startLatitude = Double.parseDouble(mCourseDetail.getSpot().get(0).getLatitude());
+                        startLongtitude = Double.parseDouble(mCourseDetail.getSpot().get(0).getLongitude());
                     }
                 }
                 hideProgressDialog();
@@ -94,16 +101,16 @@ public class CourseDriveFragment extends BaseFragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TourDeApplication.getInstance().trackEvent("tap_start_logging_course_id="+mCourseID,"tap","tap_start_logging_course_id="+mCourseID);
+                TourDeApplication.getInstance().trackEvent("tap_start_logging_course_id=" + mCourseID, "tap", "tap_start_logging_course_id=" + mCourseID);
                 if (mAcitivity.isBoolean_permission()) {
                     double longtitude = mAcitivity.getLongitude();
                     double latitude = mAcitivity.getLatitude();
-                   // double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
-                    double distance =  SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(latitude, longtitude));
-                    double distance2 =  SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(mAcitivity.getLatitudeNetWork(), mAcitivity.getLongitudeNetWork()));
+                    // double distance = DistanceLocation.getDistance(startLatitude, startLongtitude, latitude, longtitude);
+                    double distance = SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(latitude, longtitude));
+                    double distance2 = SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(mAcitivity.getLatitudeNetWork(), mAcitivity.getLongitudeNetWork()));
 
-                    Log.i("GPSStart",""+distance+ "-"+latitude + "-"+longtitude + "--"+startLatitude+"-"+startLongtitude);
-                    if (distance <= 100 || distance2 <=100) {
+                    Log.i("GPSStart", "" + distance + "-" + latitude + "-" + longtitude + "--" + startLatitude + "-" + startLongtitude);
+                    if (distance <= 100 || distance2 <= 100) {
                         ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {
