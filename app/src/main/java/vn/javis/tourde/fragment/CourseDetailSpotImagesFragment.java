@@ -164,12 +164,10 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
             }
         });
     }
-
-
+    
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         JSONObject jsonObject =(JSONObject)response;
-
         if(jsonObject.has("error"))
             return;
         SpotData spotData = SpotData.getSpotData(response.toString());
