@@ -246,7 +246,7 @@ public class GoogleService extends Service implements LocationListener {
         PendingIntent localPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentTitle("スポットに到達しました");
         //builder.setContentText("");
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.mipmap.ic_launcher_final);
         long[] pattern = {500, 500, 500, 500, 500, 500, 500, 500, 500};
         builder.setVibrate(pattern);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

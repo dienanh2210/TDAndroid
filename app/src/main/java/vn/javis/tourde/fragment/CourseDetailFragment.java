@@ -440,6 +440,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             imgStarRate.setImageResource(R.drawable.icon_star4);
         else if (rate >= 5)
             imgStarRate.setImageResource(R.drawable.icon_star5);
+        else  if (rate >= 0.5 && rate<1)
+            imgStarRate.setImageResource(R.drawable.icon_star0_5);
         else  if (rate >= 1.5 && rate<2)
             imgStarRate.setImageResource(R.drawable.icon_star1_5);
         else  if (rate >= 2.5 && rate<3)
@@ -448,8 +450,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             imgStarRate.setImageResource(R.drawable.icon_star3_5);
         else  if (rate >= 4.5 && rate<5)
             imgStarRate.setImageResource(R.drawable.icon_star4_5);
-        else  if (rate >= 0 && rate<0.5)
-            imgStarRate.setImageResource(R.drawable.icon_star0_5);
         else
             imgStarRate.setImageResource(R.drawable.icon_star0);
 

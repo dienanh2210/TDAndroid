@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/course_border"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/_10sdp"
-        android:paddingRight="@dimen/_10sdp">
+        android:paddingLeft="@dimen/_13sdp"
+        android:paddingRight="@dimen/_13sdp">
 
         <RelativeLayout
             android:layout_width="match_parent"
