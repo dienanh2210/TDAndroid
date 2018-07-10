@@ -9,13 +9,13 @@ public class Badge implements Serializable{
 
     @SerializedName("stamp_id")
     @Expose
-    private String stampId;
+    private int stampId;
     @SerializedName("course_id")
     @Expose
-    private String courseId;
+    private int courseId;
     @SerializedName("spot_id")
     @Expose
-    private String spotId;
+    private int spotId;
     @SerializedName("image")
     @Expose
     private String image;
@@ -26,27 +26,27 @@ public class Badge implements Serializable{
     @Expose
     private String insertDatetime;
 
-    public String getStampId() {
+    public int getStampId() {
         return stampId;
     }
 
-    public void setStampId(String stampId) {
+    public void setStampId(int stampId) {
         this.stampId = stampId;
     }
 
-    public String getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
-    public String getSpotId() {
+    public int getSpotId() {
         return spotId;
     }
 
-    public void setSpotId(String spotId) {
+    public void setSpotId(int spotId) {
         this.spotId = spotId;
     }
 

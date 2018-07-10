@@ -46,13 +46,15 @@ public class FragmentFavorites extends BaseFragment {
         mView = inflater.inflate(R.layout.tab_favorites_course, container, false);
         return mView;
     }
+
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
+
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerFavorite.setLayoutManager(layoutManager);
-
+        showProgressDialog();
         FavoriteCourseAPI.getListFavoriteCourse(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -73,11 +75,12 @@ public class FragmentFavorites extends BaseFragment {
                 } catch (Exception e) {
                     Log.i("Error frgFavor71", e.getMessage() + "-" + recyclerFavorite + "-" + favoriteCourseAdapter);
                 }
+                hideProgressDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
-
+                hideProgressDialog();
             }
         });
 

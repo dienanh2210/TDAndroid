@@ -51,7 +51,7 @@ public class ListMySpotUploadedImageAdapter extends RecyclerView.Adapter<ListMyS
 
         String model = listImgage.get(position);
         if (position == 0) {
-            holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.plus_button));
+            holder.imgSpot.setBackground(mView.getResources().getDrawable(R.drawable.select_image));
             holder.imgSpot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
