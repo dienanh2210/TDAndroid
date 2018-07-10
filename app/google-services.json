@@ -1,43 +1,43 @@
 {
   "project_info": {
-    "project_number": "1079044899926",
-    "firebase_url": "https://toude-1528272773328.firebaseio.com",
-    "project_id": "toude-1528272773328",
-    "storage_bucket": "toude-1528272773328.appspot.com"
+    "project_number": "939641759085",
+    "firebase_url": "https://tourdenippon-f1ea1.firebaseio.com",
+    "project_id": "tourdenippon-f1ea1",
+    "storage_bucket": "tourdenippon-f1ea1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1079044899926:android:d1c1ac03d432de6c",
+        "mobilesdk_app_id": "1:939641759085:android:f3ef1eb3db52dc1f",
         "android_client_info": {
-          "package_name": "com.yumesol.tourde.dev"
+          "package_name": "tour.de.nippon.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1079044899926-11k2samljhe9adbdoad8ho3irmfadkm5.apps.googleusercontent.com",
+          "client_id": "939641759085-q8a0570gov2iqtpt879864454ms35k63.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.yumesol.tourde.dev",
-            "certificate_hash": "0545d31403b24b4fab05d41000fb0c036753ceaa"
+            "package_name": "tour.de.nippon.app",
+            "certificate_hash": "cd815e4ff7eb2d7067bd1cd9e18df23e7003fecc"
           }
         },
         {
-          "client_id": "1079044899926-33s6ka4npbto3r7j2s6gbj1c1531hf5a.apps.googleusercontent.com",
+          "client_id": "939641759085-uv6g0ifi9e6u7l2c9n0mra8mbccjq8rk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.yumesol.tourde.dev",
-            "certificate_hash": "c40e6f2f5b0bd8bfb5a2a70ab0c1a98bc0d9fad8"
+            "package_name": "tour.de.nippon.app",
+            "certificate_hash": "a86e98ddf9fa9c42ba31b0998b30028a602069ef"
           }
         },
         {
-          "client_id": "1079044899926-nqle7l101p5sa51pufq1mvr2mvunr792.apps.googleusercontent.com",
+          "client_id": "939641759085-sjikhisspdnc39j1ppeqeg49ukefsihq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOusnqFLuMnHnNX2wRjLyG3CNDpN9mswY"
+          "current_key": "AIzaSyBb3YVN7X8f5sEpCyUePQz9a91sVc-mTwA"
         }
       ],
       "services": {
@@ -48,8 +48,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1079044899926-dkk8qnbck43bd20kb90eq1l4f9j1uct8.apps.googleusercontent.com",
+              "client_id": "939641759085-sjikhisspdnc39j1ppeqeg49ukefsihq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "939641759085-t07hvhiae6s6qg998nhcerfjcmehancc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yume-sol.tour-de.dev"
+              }
             }
           ]
         },
@@ -60,28 +67,36 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1079044899926:android:4b99bb4fe60989d7",
+        "mobilesdk_app_id": "1:939641759085:android:4b99bb4fe60989d7",
         "android_client_info": {
           "package_name": "vn.javis.tourde"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1079044899926-9cb9rgtnrpgduf4kbqp2fcbhi2q01n8q.apps.googleusercontent.com",
+          "client_id": "939641759085-aau1q00tdm1vdoikf5fmvo5tnvqohb90.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "vn.javis.tourde",
-            "certificate_hash": "0545d31403b24b4fab05d41000fb0c036753ceaa"
+            "certificate_hash": "cd815e4ff7eb2d7067bd1cd9e18df23e7003fecc"
           }
         },
         {
-          "client_id": "1079044899926-nqle7l101p5sa51pufq1mvr2mvunr792.apps.googleusercontent.com",
+          "client_id": "939641759085-o6ks4tk6hoegv57b0t2a5t93bng6okhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.javis.tourde",
+            "certificate_hash": "a86e98ddf9fa9c42ba31b0998b30028a602069ef"
+          }
+        },
+        {
+          "client_id": "939641759085-sjikhisspdnc39j1ppeqeg49ukefsihq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOusnqFLuMnHnNX2wRjLyG3CNDpN9mswY"
+          "current_key": "AIzaSyBb3YVN7X8f5sEpCyUePQz9a91sVc-mTwA"
         }
       ],
       "services": {
@@ -92,8 +107,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1079044899926-dkk8qnbck43bd20kb90eq1l4f9j1uct8.apps.googleusercontent.com",
+              "client_id": "939641759085-sjikhisspdnc39j1ppeqeg49ukefsihq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "939641759085-t07hvhiae6s6qg998nhcerfjcmehancc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yume-sol.tour-de.dev"
+              }
             }
           ]
         },
