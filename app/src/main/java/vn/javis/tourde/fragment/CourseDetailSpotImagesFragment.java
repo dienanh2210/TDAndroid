@@ -64,10 +64,9 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     TextView txtTel;
     @BindView(R.id.tv_tag)
     TextView txtTag;
-@BindView( R.id.btn_share )
-        ImageButton btn_share;
+    @BindView( R.id.btn_share )
+     ImageButton btn_share;
     CourseListActivity mActivity;
-
     @BindView(R.id.btn_back_to_list)
     ImageButton btnBack;
     @BindView(R.id.img_course_detail)
@@ -90,7 +89,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     @BindView( R.id.ln_browser )
     LinearLayout ln_browser;
     @BindView( R.id.ln_call )
-            LinearLayout ln_call;
+     LinearLayout ln_call;
     boolean istrue;
     List<String> listSpotImage= new ArrayList<>();
     @Nullable
@@ -191,9 +190,6 @@ ln_googlmap.setOnClickListener( new View.OnClickListener() {
         }
     }
 } );
-
-
-
     }
 
     @Override
@@ -275,8 +271,6 @@ ln_googlmap.setOnClickListener( new View.OnClickListener() {
                     }
                 }
             } );
-
-
     }
 
     @Override
