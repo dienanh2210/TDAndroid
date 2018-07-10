@@ -5,8 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,9 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import org.json.JSONException;
@@ -24,12 +20,8 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
-import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.apiservice.LogoutAccount;
-import vn.javis.tourde.fragment.CourseDetailSpotImagesFragment;
-import vn.javis.tourde.fragment.InquiryFragment;
 import vn.javis.tourde.fragment.LoginFragment;
-import vn.javis.tourde.fragment.PrivacypolicyFragment;
 import vn.javis.tourde.fragment.RegisterFragment;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -99,7 +91,7 @@ public class MenuPageActivity extends BaseActivity {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyFragment.class);
+                Intent intent = new Intent(MenuPageActivity.this, PrivacypolicyActivity.class);
                 //Intent intent = new Intent(MenuPageActivity.this, UsePageActivity.class);
                 startActivity(intent);
             }
@@ -107,7 +99,7 @@ public class MenuPageActivity extends BaseActivity {
         inquiry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPageActivity.this, InquiryFragment.class);
+                Intent intent = new Intent(MenuPageActivity.this, InquiryActivity.class);
                 startActivityForResult(intent, 1);
             }
         });
