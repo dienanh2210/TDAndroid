@@ -225,9 +225,10 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                 else {
                     layoutPager.setVisibility(View.VISIBLE);
                 }
+
                 int currentValue = mCurrentPage;
                 mCurrentPage += nextPage;
-                txtPageNumber.setText(1 + "/" + mTotalPage);
+
 
                 if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
                 if (mCurrentPage < 1) mCurrentPage = 1;
@@ -235,7 +236,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                     txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
                     getData(search);
                 }
-
+                txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
                 changeButtonBackground();
             }
         } catch (Exception e) {

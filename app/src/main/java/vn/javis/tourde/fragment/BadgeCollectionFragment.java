@@ -40,7 +40,7 @@ import vn.javis.tourde.utils.GsonUtil;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
-public class BadgeCollectionFragment extends BaseFragment implements TabLayout.OnTabSelectedListener   {
+public class BadgeCollectionFragment extends BaseFragment implements TabLayout.OnTabSelectedListener {
 
     CourseListActivity mActivity;
     @BindView(R.id.recycler_barge)
@@ -57,11 +57,15 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
     @BindView(R.id.btn_my_course_footer)
     RelativeLayout btnMyCourse;
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
+
+    List<Badge> listBadgeGoal = new ArrayList<>();
+    List<Badge> listBadgeSpot = new ArrayList<>();
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         // testAPI();
-        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1){
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1) {
             @Override
             public boolean canScrollVertically() {
                 return false;
@@ -78,7 +82,7 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              mActivity.showCourseListPage();
+                mActivity.showCourseListPage();
             }
         });
         btnMyCourse.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +93,7 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
         });
         imgBadgeBtn.setBackground(getResources().getDrawable(R.drawable.icon_badge_blue));
         txtBadgeBtn.setTextColor(getResources().getColor(R.color.SkyBlue));
-      //  onArchivementClick();
+        //  onArchivementClick();
     }
 
     void gotoMenuPage() {
@@ -103,7 +107,11 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 List<Badge> listBadge = GsonUtil.stringToArray(response.toString(), Badge[].class);
-                listBadgeAdapter = new ListBadgeAdapter(listBadge, mActivity);
+                for (Badge b : listBadge) {
+                    if (b.getCourseId() != 0) listBadgeGoal.add(b);
+                    else listBadgeSpot.add(b);
+                }
+                listBadgeAdapter = new ListBadgeAdapter(listBadgeGoal, mActivity);
                 badgeRecycler.setAdapter(listBadgeAdapter);
             }
 
@@ -122,7 +130,13 @@ public class BadgeCollectionFragment extends BaseFragment implements TabLayout.O
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-
+        if (tab.getPosition() == 0) {
+            listBadgeAdapter = new ListBadgeAdapter(listBadgeGoal, mActivity);
+            badgeRecycler.setAdapter(listBadgeAdapter);
+        } else {
+            listBadgeAdapter = new ListBadgeAdapter(listBadgeSpot, mActivity);
+            badgeRecycler.setAdapter(listBadgeAdapter);
+        }
     }
 
     @Override

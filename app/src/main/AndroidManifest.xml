@@ -36,10 +36,10 @@
     <application
         android:name=".services.TourDeApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_foreground"
+        android:icon="@mipmap/ic_launcher_final"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -133,7 +133,7 @@
             android:resource="@drawable/star_yellow" />
         <meta-data
             android:name="com.growthpush.notification.icon.large"
-            android:resource="@mipmap/ic_launcher" />
+            android:resource="@mipmap/ic_launcher_final" />
 
         <activity
             android:name="com.growthpush.view.AlertActivity"

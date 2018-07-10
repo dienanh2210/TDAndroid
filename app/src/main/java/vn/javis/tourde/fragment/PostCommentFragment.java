@@ -69,6 +69,8 @@ public class PostCommentFragment extends BaseFragment {
         mActivity = (CourseListActivity) getActivity();
         courseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
         Log.i("COURSE_DETAIL_ID", "===>" + courseID);
+        mRatingBar.setNumStars(5);
+        mRatingBar.setRating(0);
         mRatingBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

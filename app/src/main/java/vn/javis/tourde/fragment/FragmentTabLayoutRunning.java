@@ -201,9 +201,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         spotRecycler.setItemAnimator(new DefaultItemAnimator());
         spotRecycler.setLayoutManager(layoutManager);
         show_select_spot.setVisibility(View.GONE);
+        list_spot.clear();
+        listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
         spotRecycler.setAdapter(listSpotCheckinAdapter);
         final int courseId = mActivity.getmCourseID();
-        list_spot.clear();
+
 //        setupViewPager(viewPager);
 //        tabLayout.setupWithViewPager(viewPager);
         showProgressDialog();
