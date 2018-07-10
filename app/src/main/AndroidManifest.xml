@@ -16,7 +16,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        tools:ignore="ProtectedPermissions"></uses-permission>
     <!-- for Growth Push -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -49,6 +52,7 @@
 
         <activity
             android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -101,13 +105,16 @@
         <service android:name=".services.GoogleService" />
 
         <activity
-            android:name=".fragment.PrivacypolicyFragment"
+            android:name=".activity.PrivacypolicyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".fragment.InquiryFragment"
+            android:name=".activity.InquiryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.SrcollViewImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service
@@ -164,6 +171,7 @@
         <!-- for Growth Message -->
         <activity
             android:name="com.growthbeat.message.view.MessageActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" />
 
         <!-- for Growth Link -->
@@ -176,12 +184,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.UsePageActivity" />
+        <activity
+            android:name=".activity.UsePageActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.CropperImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    <uses-permission android:name="android.permission.CALL_PRIVILEGED"
-        tools:ignore="ProtectedPermissions"></uses-permission>
 </manifest>

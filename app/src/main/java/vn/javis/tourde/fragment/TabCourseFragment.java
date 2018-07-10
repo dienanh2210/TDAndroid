@@ -313,7 +313,7 @@ public class TabCourseFragment extends BaseFragment {
             float startSpotLatitude = Float.parseFloat(listSpot.get(0).getLatitude());
             float startSpotLongtitude = Float.parseFloat(listSpot.get(0).getLongitude());
 
-            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&mode =w", startSpotLatitude, startSpotLongtitude, "");
+            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&mode =c", startSpotLatitude, startSpotLongtitude, "");
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
             intent.setPackage("com.google.android.apps.maps");
             startActivity(intent);
