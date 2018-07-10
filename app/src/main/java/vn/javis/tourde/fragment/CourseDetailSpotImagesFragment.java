@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import vn.javis.tourde.R;
@@ -172,24 +173,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 startActivity(Intent.createChooser(myIntent, ""));
             }
         });
-ln_googlmap.setOnClickListener( new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setPackage("com.google.android.apps.maps");
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException ex) {
-            try {
-                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(unrestrictedIntent);
-            } catch (ActivityNotFoundException innerEx) {
-                //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-} );
+
     }
 
     @Override
@@ -197,7 +181,7 @@ ln_googlmap.setOnClickListener( new View.OnClickListener() {
         JSONObject jsonObject =(JSONObject)response;
         if(jsonObject.has("error"))
             return;
-        SpotData spotData = SpotData.getSpotData(response.toString());
+        final SpotData spotData = SpotData.getSpotData(response.toString());
         if(spotData==null)
             return;
         Log.i("detail spot img 130", response.toString());
@@ -208,6 +192,7 @@ ln_googlmap.setOnClickListener( new View.OnClickListener() {
         txtAddress.setText(spotData.getData().getAddress());
         txtSiteURL.setText(spotData.getData().getSiteUrl());
         txtTel.setText(spotData.getData().getTel());
+
         String tags = "";
         for (String s : spotData.getTag()) {
             tags += "#" + s + " ";
@@ -271,6 +256,33 @@ ln_googlmap.setOnClickListener( new View.OnClickListener() {
                     }
                 }
             } );
+        ln_googlmap.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
+              //  String uri =txtAddress.getText().toString();
+//                double latitude = Double.parseDouble(spotData.getData().getLatitude() );
+//                double longtitude = Double.parseDouble(spotData.getData().getLongitude() );
+
+                float latitude = Float.parseFloat(spotData.getData().getLatitude() );
+                float longtitude =  Float.parseFloat(spotData.getData().getLongitude() );
+
+                String url = spotData.getData().getGoogleMapUrl();
+                String uri = String.format( Locale.ENGLISH, url+"?daddr=", latitude, longtitude, "");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException ex) {
+                    try {
+                        Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        startActivity(unrestrictedIntent);
+                    } catch (ActivityNotFoundException innerEx) {
+                        //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        } );
     }
 
     @Override

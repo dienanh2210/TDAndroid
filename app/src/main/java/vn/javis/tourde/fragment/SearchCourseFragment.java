@@ -52,6 +52,7 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
     TextView tv_close;
     EditText edt_search;
     ImageView im_select_area, im_more_searching;
+    RelativeLayout rlt_prefecture,more_searching_layout;
     private CourseListActivity mActivity;
     ListSearchCourseAdapter listSearchCourseAdapter;
     List<String> listContent = new ArrayList<>();
@@ -81,6 +82,10 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         im_select_area = view.findViewById(R.id.im_select_area);
         im_select_area.setOnClickListener(this);
 
+        rlt_prefecture=view.findViewById( R.id.rlt_prefecture );
+        rlt_prefecture.setOnClickListener( this );
+        more_searching_layout=view.findViewById( R.id.more_searching_layout );
+        more_searching_layout.setOnClickListener( this );
         im_more_searching = view.findViewById(R.id.im_more_searching);
         im_more_searching.setOnClickListener(this);
         tv_prefecture = view.findViewById(R.id.tv_prefecture);
@@ -101,14 +106,14 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
 
         boolean gender = false;
         switch (v.getId()) {
-            case R.id.im_select_area:
+            case R.id.rlt_prefecture:
                 if (!prefecture.isEmpty()) {
                     prefecture = tv_prefecture.getText().toString().trim();
                 }
                 mActivity.openPage(PrefectureOneFragment.newInstance(this, prefecture), true, true);
                // mActivity.openPage(GoalFragment.newInstance(this), true, true);
                 break;
-            case R.id.im_more_searching:
+            case R.id.more_searching_layout:
                 if (!prefecturetext.isEmpty()) {
                     prefecturetext = tv_searchtwo.getText().toString().trim();
                 }
