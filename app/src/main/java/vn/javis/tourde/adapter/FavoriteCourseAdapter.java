@@ -23,10 +23,16 @@ import butterknife.ButterKnife;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.FavoriteCourseAPI;
+import vn.javis.tourde.fragment.CourseDetailFragment;
+import vn.javis.tourde.fragment.CourseDriveFragment;
+import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.FavoriteCourse;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ClassToJson;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
@@ -35,7 +41,7 @@ import vn.javis.tourde.view.CircleTransform;
 public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAdapter.FavoriteCourseViewHolder> {
 
     List<FavoriteCourse> listCourse = new ArrayList<FavoriteCourse>();
-    CourseListActivity activityContext;
+    private CourseListActivity activityContext;
     View mView;
 
     public FavoriteCourseAdapter(List<FavoriteCourse> listCourse, CourseListActivity activityContext) {
@@ -79,61 +85,47 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
                 }
             }
         });
-        holder.txtRunning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activityContext.setmCourseID(model.getCourseId());
-                if (SharedPreferencesUtils.getInstance(activityContext).getStringValue("Checkbox") == "") {
-                    String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
-                            "\n" +
-                            "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
 
-                    ProcessDialog.showDialogcheckbox(activityContext, "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
-                        @Override
-                        public void onOkClick() {
-                            activityContext.showCourseDrive();
+        if (SharedPreferencesUtils.getInstance(activityContext).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) == 0) {
+            holder.txtRunning.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activityContext.setmCourseID(model.getCourseId());
+                    if (SharedPreferencesUtils.getInstance(activityContext).getStringValue("Checkbox") == "") {
+                        String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
+                                "\n" +
+                                "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
 
-                        }
-                    });
-                } else {
-                    activityContext.showCourseDrive();
+                        ProcessDialog.showDialogcheckbox(activityContext, "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+//                                activityContext.showCourseDrive();
+                                activityContext.openPage(CourseDetailFragment.newInstance(true), true, false);
+
+                            }
+                        });
+                    } else {
+//                        activityContext.showCourseDrive();
+                        activityContext.openPage(CourseDetailFragment.newInstance(true), true, false);
+                    }
+
                 }
-
-            }
-        });
-       /* holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                holder.isFavorite = !holder.isFavorite;
-                String token = "";
-                int course_id = 1;
-                if (holder.isFavorite) {
-                    FavoriteCourseAPI.insertFavoriteCourse(token, course_id, new ServiceCallback() {
-                        @Override
-                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_blue));
-                        }
-
-                        @Override
-                        public void onError(VolleyError error) {
-
-                        }
-                    });
-                } else {
-                    FavoriteCourseAPI.deleteFavoriteCourse(token, course_id, new ServiceCallback() {
-                        @Override
-                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            holder.btnFavorite.setBackground(view.getResources().getDrawable(R.drawable.icon_bicycle_gray));
-                        }
-
-                        @Override
-                        public void onError(VolleyError error) {
-
-                        }
-                    });
+            });
+        } else {
+            holder.txtRunning.setBackground(activityContext.getResources().getDrawable(R.drawable.boder_gray_favorite));
+            String savedString = SharedPreferencesUtils.getInstance(activityContext).getStringValue(Constant.SAVED_COURSE_RUNNING);
+            final SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
+            holder.txtRunning.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (model.getCourseId() == saveCourseRunning.getCourseID()) {
+//                        activityContext.showFragmentTabLayoutRunning();
+//                        activityContext.openPage(new FragmentTabLayoutRunning(), CourseDetailFragment.class.getSimpleName(), true, false);
+                        activityContext.openPage(CourseDetailFragment.newInstance(true), true, false);
+                    }
                 }
-            }
-        });*/
+            });
+        }
 
     }
 
@@ -154,23 +146,6 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
         TextView txtPostUsername;
         @BindView(R.id.running)
         TextView txtRunning;
-
-       /* @BindView(R.id.txt_spot_count)
-        TextView txtSpotCount;
-        @BindView(R.id.txt_post_user)
-        TextView txtPostUser;
-        @BindView(R.id.img_course)
-        ImageView imgCourse;
-        @BindView(R.id.star_rate)
-        ImageView imgStarRate;
-
-        @BindView(R.id.txt_tags)
-        TextView txtTag;
-        @BindView(R.id.img_post_user)
-        ImageView imgPostUser;
-
-        @BindView(R.id.btn_favorite_list)
-        ImageButton btnFavorite;*/
 
         boolean isRunning;
 
