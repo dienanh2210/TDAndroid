@@ -94,7 +94,7 @@ public class SearchCourseUtils {
         dataList.add(new MultiCheckGenre("近畿地方", Arrays.asList(contentList5)));
         dataList.add(new MultiCheckGenre("中国地方", Arrays.asList(contentList6)));
         dataList.add(new MultiCheckGenre("四国地方", Arrays.asList(contentList7)));
-        dataList.add(new MultiCheckGenre("四国地方", Arrays.asList(contentList8)));
+        dataList.add(new MultiCheckGenre("九州地方", Arrays.asList(contentList8)));
         return dataList;
     }
 

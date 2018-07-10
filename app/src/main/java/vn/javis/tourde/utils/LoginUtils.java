@@ -61,10 +61,10 @@ public class LoginUtils {
     public static final String GOOGLE_SNS_KIND = "3";
     public static final String LINE_SNS_KIND = "4";
     //Api key
-    public static final String LINE_CHANEL_ID = "1573462307";
+    public static final String LINE_CHANEL_ID = "1590519133";
     private static LoginUtils sInstance;
-    public static final String TWITTER_API_KEY = "E9SgLRW6z3YDe1tkZjA8gWNdu";
-    public static final String TWITTER_API_SECRET = "Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc";
+    public static final String TWITTER_API_KEY = "ENT3zPPX1vuUX3UBK0kOrKRYJ";
+    public static final String TWITTER_API_SECRET = "XzF9MXhUhs9Ra8z9hBB6IoscT0tNkg4G3DwrJzhyQeJQNNKjMm";
     //Request Code
     public static final int RC_GOOGLE_SIGN_IN = 9001;
     public static final int RC_LINE_SIGN_IN = 006;
