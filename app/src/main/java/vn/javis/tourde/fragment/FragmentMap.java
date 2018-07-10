@@ -90,6 +90,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
                 launchNewActivity(getContext(), packageName);
                 break;
             case R.id.googleMap:
+
                 String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.setPackage("com.google.android.apps.maps");
