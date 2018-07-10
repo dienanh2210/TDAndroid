@@ -131,7 +131,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
             holder.imgStarRate.setImageResource(R.drawable.icon_star3_5);
         else  if (rate >= 4.5 && rate<5)
             holder.imgStarRate.setImageResource(R.drawable.icon_star4_5);
-        else  if (rate >= 0 && rate<0.5)
+        else  if (rate >= 0.5 && rate<1)
             holder.imgStarRate.setImageResource(R.drawable.icon_star0_5);
         else
             holder.imgStarRate.setImageResource(R.drawable.icon_star0);
