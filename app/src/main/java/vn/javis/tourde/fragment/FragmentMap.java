@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.LineString;
 import com.google.maps.android.data.kml.KmlContainer;
@@ -148,10 +150,12 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
         }
     }
     private void retrieveFileFromUrl() {
+      //  new DownloadKmlFile("https://www.app-tour-de-nippon.jp/test/post_data/course_kml_file/8803d35918ac447ec7aa.kml").execute();
         if(mapUrl!=null)
-             new DownloadKmlFile(mapUrl).execute();
+            new DownloadKmlFile(mapUrl).execute();
     }
 
+    @SuppressLint("MissingPermission")
     private void moveCameraToKml(KmlLayer kmlLayer) {
         try {
 
@@ -171,7 +175,11 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
 
             int width = getResources().getDisplayMetrics().widthPixels;
             int height = getResources().getDisplayMetrics().heightPixels;
+
             getMap().moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), width, height, 1));
+           // getMap().addMarker(new MarkerOptions().position(new LatLng(mActivity.getLatitude(),mActivity.getLongitude())).title("My location"));
+            getMap().setMyLocationEnabled(true);
+
         }
         catch (Exception e){
 

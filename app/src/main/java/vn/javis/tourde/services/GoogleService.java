@@ -152,6 +152,7 @@ public class GoogleService extends Service implements LocationListener {
                         longitude = location.getLongitude();
                         fn_update(location, true);
                     }
+                 //   locationManager.removeUpdates(this);
                 }
 
             }
@@ -168,16 +169,20 @@ public class GoogleService extends Service implements LocationListener {
                     return;
                 }
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
+
                 if (locationManager != null) {
                     location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    Log.i("location_gps", "---------->"+location);
                     if (location != null) {
-                        Log.e("latitude", location.getLatitude() + "");
-                        Log.e("longitude", location.getLongitude() + "");
+                        Log.e("latitude_gps", location.getLatitude() + "");
+                        Log.e("longitude_gps", location.getLongitude() + "");
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
                         fn_update(location, false);
+
                     }
                 }
+           //     locationManager.removeUpdates(this);
             }
 
 
