@@ -100,6 +100,7 @@
             android:layout_marginTop="@dimen/_9sdp"
             android:background="@color/search_course_color_divider_background"/>
         <LinearLayout
+            android:id="@+id/ln_googlemap"
             android:layout_width="match_parent"
             android:weightSum="1"
             android:layout_marginTop="@dimen/_15sdp"
@@ -143,6 +144,7 @@
             android:background="@color/search_course_color_divider_background"/>
 
         <LinearLayout
+            android:id="@+id/ln_browser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
@@ -186,6 +188,7 @@
             android:background="@color/search_course_color_divider_background"/>
 
         <LinearLayout
+            android:id="@+id/ln_call"
             android:layout_width="match_parent"
             android:weightSum="1"
             android:layout_marginTop="@dimen/_15sdp"

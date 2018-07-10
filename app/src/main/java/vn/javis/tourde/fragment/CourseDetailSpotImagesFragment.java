@@ -1,6 +1,8 @@
 package vn.javis.tourde.fragment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -82,6 +85,13 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     ImageView imgHomeBtn;
     @BindView(R.id.txt_home)
     TextView txtHomeBtn;
+    @BindView( R.id.ln_googlemap )
+   LinearLayout ln_googlmap;
+    @BindView( R.id.ln_browser )
+    LinearLayout ln_browser;
+    @BindView( R.id.ln_call )
+            LinearLayout ln_call;
+    boolean istrue;
     List<String> listSpotImage= new ArrayList<>();
     @Nullable
 
@@ -98,7 +108,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
 
         mActivity = (CourseListActivity) getActivity();
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
@@ -163,8 +173,29 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 startActivity(Intent.createChooser(myIntent, ""));
             }
         });
+ln_googlmap.setOnClickListener( new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        String uri = "http://maps.google.com/maps?daddr=" + 12f + "," + 2f + " (" + "Where the party is at" + ")";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+            try {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(unrestrictedIntent);
+            } catch (ActivityNotFoundException innerEx) {
+                //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
     }
-    
+} );
+
+
+
+    }
+
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
         JSONObject jsonObject =(JSONObject)response;
@@ -214,6 +245,38 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
         view_pager.setCurrentPageNumber(indexTab);
         view_pager.setCurrentItem(indexTab);
        hideProgressDialog();
+
+
+        ln_call.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                String phone = "+34666777888";
+//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+//                startActivity(intent);
+                String phone = txtTel.getText().toString();
+                if(!TextUtils.isEmpty( phone )) {
+                    Intent phoneIntent = new Intent( Intent.ACTION_DIAL, Uri.fromParts(
+                            "tel", phone, null ) );
+                    startActivity( phoneIntent );
+                }
+            }
+        } );
+
+            ln_browser.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String url=txtSiteURL.getText().toString();
+                    if(!TextUtils.isEmpty( url )) {
+                        Intent i = new Intent( Intent.ACTION_VIEW );
+                        i.setData( Uri.parse( url ) );
+                        startActivity( i );
+                    }
+                }
+            } );
+
+
     }
 
     @Override
