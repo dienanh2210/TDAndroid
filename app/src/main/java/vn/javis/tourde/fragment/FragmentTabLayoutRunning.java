@@ -627,7 +627,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        fragmentMap = new FragmentMap();
+        fragmentMap =  FragmentMap.instance(list_spot);
         adapter.addFragment(fragmentMap, "MAP");
         fragmentLog = FragmentLog.intance(saveCourseRunning);
         adapter.addFragment(fragmentLog, "ログ");
