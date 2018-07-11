@@ -125,8 +125,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
                 } catch (ActivityNotFoundException ex) {
                  //   Toast.makeText( getContext(), "Please install a maps application", Toast.LENGTH_LONG ).show();
                 }
-
-
+                
                 break;
             case R.id.resume:
 
