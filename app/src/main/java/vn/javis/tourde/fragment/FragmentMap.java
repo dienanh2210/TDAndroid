@@ -43,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,7 +60,8 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     CourseListActivity mActivity;
     private GoogleMap mMap;
     String mapUrl;
-    List<Spot> list_spot;
+    List<Spot> list_spot= new ArrayList<>(  );
+    RelativeLayout googlemaps;
 
     public static FragmentMap instance(List<Spot> list_spot) {
         FragmentMap frg = new FragmentMap();
@@ -108,24 +110,25 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
             case R.id.googleMap:
                 try {
                     String uri1 = "";
-                    String   uri = "" ;
-                    for (Spot spot : list_spot) {
-                        float latitude = Float.parseFloat( spot.getLatitude() );
-                        float longtitude = Float.parseFloat( spot.getLongitude() );
-                        uri1 += "/" + latitude + "," + longtitude;
+                    if(list_spot.size()>0) {
+                        for (Spot spot : list_spot) {
+                            float latitude = Float.parseFloat( spot.getLatitude() );
+                            float longtitude = Float.parseFloat( spot.getLongitude() );
+                            uri1 += "/" + latitude + "," + longtitude;
 //                        uri += "/" +  mActivity.getLatitudeNetWork() + "," + mActivity.getLongitudeNetWork();
-                        Log.i( "googlemap", uri1 );
-                    }
-                    Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1 ) );
+                            Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1 ) );
 //                   String uri = String.format( "geo:%f,%f?q=%f,%f(Quanpv+hehe))", 0f, 0f, mActivity.getLatitudeNetWork(), mActivity.getLongitudeNetWork() );
 //                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
-                    Log.i( "URI", "https://www.google.com/maps/dir" + uri1 );
-                    intent.setPackage( "com.google.android.apps.maps" );
-                    startActivity( intent );
+                            Log.i( "URI", "https://www.google.com/maps/dir" + uri1 );
+                            intent.setPackage( "com.google.android.apps.maps" );
+                            startActivity( intent );
+                        }
+                    }
+
                 } catch (ActivityNotFoundException ex) {
-                 //   Toast.makeText( getContext(), "Please install a maps application", Toast.LENGTH_LONG ).show();
+                    //   Toast.makeText( getContext(), "Please install a maps application", Toast.LENGTH_LONG ).show();
                 }
-                
+
                 break;
             case R.id.resume:
 
@@ -133,34 +136,6 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
         }
     }
 
-    private void navigate(List<Spot> list_spot) {
-        String uri = "";
-        for (Spot latLng : list_spot) {
-            if (TextUtils.isEmpty( uri )) {
-                uri = String.format(
-                        "http://maps.google.com/maps?saddr=%s, %s",
-                        String.valueOf( latLng.getLatitude() ).replace( ",", "." ),
-                        String.valueOf( latLng.getLongitude() ).replace( ",", "." )
-                );
-            } else {
-                if (!uri.contains( "&daddr" )) {
-                    uri += String.format(
-                            "&daddr=%s, %s",
-                            String.valueOf( latLng.getLatitude() ).replace( ",", "." ),
-                            String.valueOf( latLng.getLongitude() ).replace( ",", "." )
-                    );
-                } else {
-                    uri += String.format(
-                            "+to:%s, %s",
-                            String.valueOf( latLng.getLatitude() ).replace( ",", "." ),
-                            String.valueOf( latLng.getLongitude() ).replace( ",", "." )
-                    );
-                }
-            }
-        }
-        Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( uri ) );
-        startActivity( intent );
-    }
 
     public void launchNewActivity(Context context, String packageName) {
         Intent intent = null;

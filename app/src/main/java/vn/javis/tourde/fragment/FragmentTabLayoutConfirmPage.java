@@ -101,9 +101,24 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
         if (!TextUtils.isEmpty(savedString)) {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
-            setupViewPager();
-        }
 
+        }
+        GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {
+            @Override
+            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                JSONObject jsonObject = (JSONObject) response;
+                if (jsonObject.has("error"))
+                    return;
+                CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
+                list_spot = mCourseDetail.getSpot();
+                setupViewPager();
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                hideProgressDialog();
+            }
+        });
 
     }
 
@@ -185,7 +200,7 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        fragmentMap = new FragmentMap();
+        fragmentMap =  FragmentMap.instance(list_spot);
         adapter.addFragment(fragmentMap, "MAP");
         fragmentLog = FragmentLog.intance(saveCourseRunning);
         adapter.addFragment(fragmentLog, "ログ");
