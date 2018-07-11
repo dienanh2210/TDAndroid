@@ -48,85 +48,87 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        super.onCreate( savedInstanceState );
-        this.requestWindowFeature( Window.FEATURE_NO_TITLE );
-        setContentView( R.layout.activity_main );
+        super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_main);
         checkMaintenanceAndAppVersion();
-        GrowthPush.getInstance().initialize( this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
-        BuildConfig.DEBUG ? Environment.development : Environment.production );
-        GrowthPush.getInstance().requestRegistrationId( "1079044899926" );
-        GrowthPush.getInstance().trackEvent( "Launch" );
-        GrowthPush.getInstance().trackEvent( "AllowPushPermission", null, new ShowMessageHandler() {
+        GrowthPush.getInstance().initialize(this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
+                BuildConfig.DEBUG ? Environment.development : Environment.production);
+        GrowthPush.getInstance().requestRegistrationId("1079044899926");
+        GrowthPush.getInstance().trackEvent("Launch");
+        GrowthPush.getInstance().trackEvent("AllowPushPermission", null, new ShowMessageHandler() {
             @Override
             public void complete(MessageRenderHandler renderHandler) {
-                Log.i( "GrowthMessage", "run renderHandler, show message." );
+                Log.i("GrowthMessage", "run renderHandler, show message.");
                 renderHandler.render();
             }
 
             @Override
             public void error(String error) {
-                Log.d( "GrowthMessage", error );
+                Log.d("GrowthMessage", error);
             }
-        } );
+        });
 
 
     }
 
     public void checkServerDone() {
 
-        Log.i( "Tutorial", "-------?" + SharedPreferencesUtils.getInstance( this ).getStringValue( "Tutorial" ) );
-        if (TextUtils.isEmpty( SharedPreferencesUtils.getInstance( this ).getStringValue( LoginUtils.TOKEN ) )) {
-            if (SharedPreferencesUtils.getInstance( this ).getStringValue( "rule" ).equals(""))
+        Log.i("Tutorial", "-------?" + SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial"));
+        if (TextUtils.isEmpty(SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN))) {
+            if (SharedPreferencesUtils.getInstance(this).getStringValue("rule").equals("") || SharedPreferencesUtils.getInstance(this).getStringValue("rule") == null)
                 changeActivity();
-            else if (SharedPreferencesUtils.getInstance( this ).getStringValue( "Tutorial" ).equals(""))
+            else if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals("") || SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial") == null)
                 Rule();
             else
                 changeCourseListPage();
         } else
             changeCourseListActivity();
     }
+
     void Rule() {
         Intent intent = new Intent(this, UsePageActivity.class);
         startActivity(intent);
         finish();
     }
+
     void changeActivity() {
         //   Intent intent = new Intent(this, ViewPageActivity.class);
-        Intent intent = new Intent( this, SrcollViewImageActivity.class );
-        startActivity( intent );
+        Intent intent = new Intent(this, SrcollViewImageActivity.class);
+        startActivity(intent);
         finish();
     }
 
     void changeCourseListPage() {
-        Intent intent = new Intent( this, CourseListActivity.class );
-        startActivity( intent );
+        Intent intent = new Intent(this, CourseListActivity.class);
+        startActivity(intent);
         finish();
     }
 
     void changeCourseListActivity() {
-        Intent intent = new Intent( MainActivity.this, CourseListActivity.class );
-        intent.putExtra( Constant.KEY_LOGIN_SUCCESS, true );
-        MainActivity.this.setResult( Activity.RESULT_OK, intent );
-        startActivity( intent );
+        Intent intent = new Intent(MainActivity.this, CourseListActivity.class);
+        intent.putExtra(Constant.KEY_LOGIN_SUCCESS, true);
+        MainActivity.this.setResult(Activity.RESULT_OK, intent);
+        startActivity(intent);
         finish();
     }
 
 
     public static void getAccount(String token) {
 
-        LoginAPI.pushToken( token, new ServiceCallback() {
+        LoginAPI.pushToken(token, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;
-                if (jsonObject.has( "account_id" )) {
-                    setmAccount( Account.getData( jsonObject.toString() ) );
+                if (jsonObject.has("account_id")) {
+                    setmAccount(Account.getData(jsonObject.toString()));
                 }
             }
 
             @Override
             public void onError(VolleyError error) {
             }
-        } );
+        });
     }
 
     public static Account getmAccount() {
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void setmAccount(Account mAccount) {
-        LoginFragment.setmAccount( mAccount );
+        LoginFragment.setmAccount(mAccount);
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -143,12 +145,12 @@ public class MainActivity extends AppCompatActivity {
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
         public ViewPagerAdapter(FragmentManager manager) {
-            super( manager );
+            super(manager);
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get( position );
+            return mFragmentList.get(position);
         }
 
         @Override
@@ -157,80 +159,81 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add( fragment );
-            mFragmentTitleList.add( title );
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get( position );
+            return mFragmentTitleList.get(position);
         }
 
     }
 
     public void openPage(Fragment fragment) {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace( R.id.container, fragment, fragment.getClass().getSimpleName() );
-        tx.setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN );
-        tx.addToBackStack( null );
+        tx.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        tx.addToBackStack(null);
         tx.commit();
 
     }
 
     void checkMaintenanceAndAppVersion() {
-        MaintenanceAPI.getMaintenanceData( new ServiceCallback() {
+        MaintenanceAPI.getMaintenanceData(new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 JSONObject jsonObject = (JSONObject) response;
-                if (!jsonObject.has( "error" )) {
-                    MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData( response.toString() );
-                    if (maintenanceStatus.getStatus().equals( "1" )) {
+                if (!jsonObject.has("error")) {
+                    MaintenanceStatus maintenanceStatus = MaintenanceStatus.getData(response.toString());
+                    if (maintenanceStatus.getStatus().equals("1")) {
                         //show title page(wait design)
 
                     } else {
                         try {
-                            PackageInfo pInfo = getPackageManager().getPackageInfo( getPackageName(), 0 );
+                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                             String version = pInfo.versionName;
-                            ApplicationVersionAPI.checkAppVersion( version, "android", new ServiceCallback() {
+                            ApplicationVersionAPI.checkAppVersion(version, "android", new ServiceCallback() {
                                 @Override
                                 public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                     JSONObject jsonObject1 = (JSONObject) response;
-                                    if (jsonObject1.has( "check" ))
-                                    {
-                                        Log.i("version---",jsonObject1.getString( "check" ));
-                                        switch (jsonObject1.getString( "check" )) {
+                                    if (jsonObject1.has("check")) {
+                                        Log.i("version---", jsonObject1.getString("check"));
+                                        switch (jsonObject1.getString("check")) {
                                             case "1": {
-                                                ProcessDialog.showDialogOk( MainActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                ProcessDialog.showDialogOk(MainActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
                                                     public void onOkClick() {
                                                         checkServerDone();
                                                     }
-                                                } );
+                                                });
                                                 break;
                                             }
                                             case "2": {
                                                 final String packageName = "com.navitime.local.navitime";
-                                                ProcessDialog.showDialogOk( MainActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
+                                                ProcessDialog.showDialogOk(MainActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
                                                     public void onOkClick() {
-                                                        startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( "https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName ) ) );
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
                                                     }
-                                                } );
+                                                });
                                                 break;
                                             }
                                             case "0":
                                                 checkServerDone();
                                                 break;
                                             default:
+                                                checkServerDone();
+                                                break;
                                         }
                                     }
                                 }
 
                                 @Override
                                 public void onError(VolleyError error) {
-                                    Log.e("", "onError: ",error );
+                                    Log.e("", "onError: ", error);
                                 }
-                            } );
+                            });
                         } catch (PackageManager.NameNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -242,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
             public void onError(VolleyError error) {
 
             }
-        } );
+        });
     }
 
 }

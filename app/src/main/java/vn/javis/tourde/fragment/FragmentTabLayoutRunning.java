@@ -245,9 +245,11 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                         setListCheckedSpot();
                     }
                     listSpotCheckinAdapter.notifyDataSetChanged();
+
                     //set info recyler tab fragment
 
                 }
+
                 hideProgressDialog();
             }
 
