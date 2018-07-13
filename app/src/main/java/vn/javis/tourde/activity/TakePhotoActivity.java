@@ -174,6 +174,10 @@ public class TakePhotoActivity extends BaseActivity {
                 TourDeApplication.getInstance().trackEvent("tap_photoframe_spot_id=" + spotId, "tap", "tap_photoframe_spot_id=" + spotId);
                 camera.takePicture(myShutterCallback, null, pictureCallback);
 
+//                Camera.CameraInfo info = new Camera.CameraInfo();
+//                if (info.canDisableShutterSound) {
+//                    camera.enableShutterSound(true);
+//                }
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {

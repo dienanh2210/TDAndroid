@@ -117,6 +117,7 @@
                     android:layout_toStartOf="@+id/btn_next_page"
                     android:gravity="center"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:textSize="@dimen/_16sdp" />
 
                 <ImageButton
