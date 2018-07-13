@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,6 +104,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
+        contentCourseList.fullScroll(ScrollView.FOCUS_UP);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
         lstCourseRecycleView.setNestedScrollingEnabled(false);
@@ -203,7 +205,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     }
 
     void changePage(int nextPage) {
-        txtPageNumber.setText("1/1");
+        txtPageNumber.setText("1 / 1");
         try {
 
             Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
@@ -233,11 +235,12 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                 if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
                 if (mCurrentPage < 1) mCurrentPage = 1;
                 if (mCurrentPage != currentValue) {
-                    txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
+                    txtPageNumber.setText(mCurrentPage + " / " + mTotalPage);
                     getData(search);
                 }
-                txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
+                txtPageNumber.setText(mCurrentPage + " / " + mTotalPage);
                 changeButtonBackground();
+                contentCourseList.scrollTo(0,0);
             }
         } catch (Exception e) {
             Log.i("CourseListError 216", e.getMessage());
@@ -247,6 +250,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     void setRecycle() {
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
+      //  lstCourseRecycleView.setNestedScrollingEnabled(false);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
             @Override
             public void onItemClick(int id) {

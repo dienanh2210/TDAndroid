@@ -205,23 +205,22 @@ public class TabCourseFragment extends BaseFragment {
                         });
                     } else {
                         //    mActivity.showCourseDrive();
+                        if (SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox") == "") {
+                            String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
+                                    "\n" +
+                                    "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
+
+                            ProcessDialog.showDialogcheckbox(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
+                                @Override
+                                public void onOkClick() {
+                                    mActivity.showCourseDrive();
+
+                                }
+                            });
+                        } else {
+                            mActivity.showCourseDrive();
+                        }
                     }
-                    if (SharedPreferencesUtils.getInstance(getContext()).getStringValue("Checkbox") == "") {
-                        String content = "運転中の画面操作・注視は、道路交通法又は、道路交通規正法に違反する可能性があります。画面の注視/操作を行う場合は安全な場所に停車し、画面の注視や操作を行ってください。 \n" +
-                                "\n" +
-                                "道路標識などの交通規制情報が実際の道路状況と異なる場合は、すべて現地の通行規制や標識の指示に従って走行してください";
-
-                        ProcessDialog.showDialogcheckbox(getContext(), "ご利用にあたって", content, new ProcessDialog.OnActionDialogClickOk() {
-                            @Override
-                            public void onOkClick() {
-                                mActivity.showCourseDrive();
-
-                            }
-                        });
-                    } else {
-                        mActivity.showCourseDrive();
-                    }
-
 
                 }
             });
@@ -309,11 +308,11 @@ public class TabCourseFragment extends BaseFragment {
     }
 
     void openGoogleMapAtStartSpot() {
-        if(listSpot.size()>0){
+        if (listSpot.size() > 0) {
             float startSpotLatitude = Float.parseFloat(listSpot.get(0).getLatitude());
             float startSpotLongtitude = Float.parseFloat(listSpot.get(0).getLongitude());
 
-            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&mode =c", startSpotLatitude, startSpotLongtitude, "");
+            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&dirflg=d", startSpotLatitude, startSpotLongtitude, "");
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
             intent.setPackage("com.google.android.apps.maps");
             startActivity(intent);
