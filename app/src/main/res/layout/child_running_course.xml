@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_15sdp"
+    android:layout_marginRight="@dimen/_15sdp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_show"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/_15sdp"
+             />
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="@string/course_detail_phrase_detail"
+            android:textColor="@color/Black"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12sdp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/Gray"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/txt_travel_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/traveling_time"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"/>
+
+        <TextView
+            android:id="@+id/txt_average_speed"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/average_speed"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"/>
+
+        <TextView
+            android:id="@+id/txt_finish_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/finish_date"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/value_travel_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"/>
+
+        <TextView
+            android:id="@+id/value_average_speed"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"/>
+
+        <TextView
+            android:id="@+id/value_finish_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height=".3dp"
+        android:background="@color/Gray"
+        />
+</LinearLayout>

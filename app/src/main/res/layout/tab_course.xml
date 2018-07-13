@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/White"
+            android:fillViewport="true"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/course_overview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/course_outline"
+                        android:textColor="@color/Black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".3dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textStyle="bold"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/finish_guide_time"
+                            android:textColor="@color/Black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:id="@+id/txt_finish_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/course_1000"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".3dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/average_pace"
+                            android:textColor="@color/Black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+
+                            android:id="@+id/txt_average_pace"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/average_pace_txt"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".3dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/start_point"
+                            android:textColor="@color/Black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+
+                            android:id="@+id/txt_start_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/start_point_txt"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".3dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:id="@+id/course_access_start_point"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="@string/access_to_start"
+                            android:textColor="@color/Black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5">
+
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:background="@drawable/icon_goto"
+                                android:contentDescription="@string/image_description"
+                                android:gravity="end" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/img_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:contentDescription="@string/image_description"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_map" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:weightSum="2.1">
+
+                    <RelativeLayout
+                        android:id="@+id/rlt_googlemap"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_21sdp"
+                            android:layout_marginStart="@dimen/_47sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:contentDescription="@string/image_description"
+
+                            android:src="@drawable/icon_googlemap" />
+
+                        <TextView
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_27sdp"
+                            android:gravity="center"
+                            android:text="@string/GoogleMap"
+                            android:textSize="@dimen/_10sdp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".1">
+
+                        <View
+                            android:layout_width=".3dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/search_course_color_description_text" />
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlt_Navitime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                       >
+
+                        <ImageView
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_21sdp"
+                            android:layout_marginStart="@dimen/_47sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:contentDescription="@string/image_description"
+                            android:src="@drawable/icon_navitime" />
+
+                        <TextView
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_27sdp"
+                            android:gravity="center"
+                            android:text="@string/NAVITIME"
+                            android:textSize="@dimen/_11sdp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/BG_courseDetail"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_30sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:paddingTop="@dimen/_25sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/CourseStory"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+
+                <ListView
+                    android:id="@+id/lv_list_spots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:id="@+id/rcl_list_spots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+                <RelativeLayout
+                    android:id="@+id/btn_signup_favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_47sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/custom_frame">
+
+                    <TextView
+                        android:id="@+id/txt_btn_ping"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_47sdp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/txtRedButtonDetail"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_23sdp"
+                        android:layout_toStartOf="@id/txt_btn_ping"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:src="@drawable/icon_bicycle_white" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btn_running_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_47sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/custom_frame_blue">
+
+                    <TextView
+                        android:id="@+id/txt_btn_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_47sdp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/txtBlueButtonDetail"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_23sdp"
+                        android:layout_toStartOf="@id/txt_btn_blue"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:src="@drawable/icon_bicycle_white" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
+

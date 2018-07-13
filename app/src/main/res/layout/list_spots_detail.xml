@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/course_border"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_13sdp"
+        android:paddingRight="@dimen/_13sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:minHeight="@dimen/_30sdp">
+
+            <TextView
+                android:id="@+id/ic_story_1"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/blue_circle"
+                android:gravity="center"
+                android:text="@string/first_story_num"
+                android:textColor="@color/White"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:id="@+id/title_story_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@id/ic_story_1"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_story_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_description"
+            android:drawingCacheQuality="low"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/story_1_image_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Black"
+            android:textStyle="bold"
+            android:textSize="@dimen/_14sdp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/SkyBlue" />
+
+        <TextView
+            android:id="@+id/content_story_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill_horizontal"
+            android:textAlignment="gravity"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone" />
+
+        <WebView
+            android:id="@+id/webView_content_story"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:ignore="WebViewLayout" />
+
+        <TextView
+            android:id="@+id/tag_story_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/SkyBlue"
+            android:textSize="@dimen/_10sdp" />
+
+        <ImageView
+            android:id="@+id/btn_spot_images"
+            android:layout_width="@dimen/_179sdp"
+            android:layout_height="@dimen/_47sdp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_10sdp"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/bt_view_more" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_distance_between_spot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <View
+            android:layout_width="@dimen/_11sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_gravity="center"
+            android:background="@color/strong_gray"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/icon_bicycle_blue_1" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txt_spot_distance"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:text="@string/distance_story"
+                android:textColor="@color/SkyBlue"
+                android:textSize="@dimen/_14sdp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/_11sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_gravity="center"
+            android:background="@color/strong_gray"
+            android:gravity="center" />
+    </LinearLayout>
+</LinearLayout>

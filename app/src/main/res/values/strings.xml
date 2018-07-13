@@ -1,0 +1,349 @@
+<resources>
+    <string name="app_name">ツール・ド・ニッポン</string>
+    <string name="facebook_app_id">494349937688559</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">E9SgLRW6z3YDe1tkZjA8gWNdu</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">Esa5wkgYc4jjSKCGFb7QJlnLkOBlJkWI41Yixc318OP6p8ClJc</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDFX8jGSskWVd4VS2ehat5qH0vbIZSItms</string>
+
+    <string name="desc_google_icon">Google Logo</string>
+    <string name="title_text">Google Sign-In\nQuickstart</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="signed_in">Signed in</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="signed_out">Signed out</string>
+    <string name="signed_in_err">"Error: please check logs."</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_course_list">Course List</string>
+    <string name="line_description">Line</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <!--  login  -->
+    <string name="text_accounts">All Accounts</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">xxxxxxx.co.jp</string>
+    <string name="hint_user">ツールドニッポン</string>
+    <string name="hint_password">半角英数字◯文字以上</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="text_login">ログイン</string>
+    <string name="text_register">Register</string>
+    <string name="error_message_name">Enter Full Name</string>
+    <string name="error_message_email">Enter Valid Email</string>
+    <string name="error_message_age">Enter Age</string>
+    <string name="error_message_password">Enter Password</string>
+    <string name="success_message">Registration Successful</string>
+    <string name="text_not_member">No account yet? Create one</string>
+    <string name="text_already_member">Already a member? Login</string>
+    <string name="error_email_exists">Email Already Exists</string>
+    <string name="error_password_match">Password Does Not Matches</string>
+    <string name="error_valid_email_password">Wrong Email or Password</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_hello">Hello,</string>
+    <string name="text_title">Android Tutorials Hub</string>
+
+    <!--face-->
+    <string name="Facebook_app_id">201940590394167</string>
+    <string name="fb_login_protocol_scheme">fb333482987023021</string>
+    <string name="btnSkip">Skip</string>
+    <string name="TextOne">One</string>
+    <string name="TextTwo">Two</string>
+    <string name="TextThree">Three</string>
+    <string name="TextCheckIn">Sample spot 1</string>
+
+
+    <!--menulogin-->
+    <string name="Close">閉じる</string>
+    <string name="UserInfo">ユーザー情報</string>
+    <string name="BasicInfo">基本情報</string>
+    <string name="BadgeCollection">バッジコレクション</string>
+    <string name="NewUserRegisretion">新規登録</string>
+    <string name="Login">ログイン</string>
+    <string name="Logout">ログアウト</string>
+    <string name="AppInfo">アプリ情報</string>
+    <string name="HowToUse">使い方</string>
+    <string name="PrivacyPolicy">プライバシーポリシー</string>
+    <string name="Inquiry">お問い合わせ</string>
+    <string name="RateInApp">アプリを評価する</string>
+    <string name="Version">バージョン</string>
+    <string name="versiontwo">1.0</string>
+    <string name="MenuPage">メニュー</string>
+    <string name="MenuPageWeb">WEBサイト</string>
+    <string name="MenuPageWebText">ツール・ド・ニッポン</string>
+    <!--login-->
+    <string name="LoginGmail">メールアドレスでログイン</string>
+    <string name="PassWord">パスワード</string>
+    <string name="Back">戻る</string>
+    <string name="LoginView">ログイン</string>
+    <string name="SNS">SNSアカウントでログイン</string>
+    <string name="CreateOne">パスワードをお忘れの方</string>
+    <string name="LoginFacebook">Facebookアカウント</string>
+    <string name="LoginTwitter">Twitterアカウント</string>
+    <string name="LoginGoogle">Google+アカウント</string>
+    <string name="LoginLine">LINEアカウントで登録</string>
+    <string name="LoginFacebookMenuEntry">Facebookアカウントで登録</string>
+    <string name="LoginTwitterMenuEntry">Twitterアカウントで登録</string>
+    <string name="LoginGoogleMenuEntry">Google+アカウントで登録</string>
+    <string name="title_activity_course_search">CourseSearchActivity</string>
+
+    <!-- search course text -->
+    <string name="search_course_title">検索条件</string>
+    <string name="search_course_close">閉じる</string>
+    <string name="search_course_skip">スキップ</string>
+    <string name="search_course_area">エリア</string>
+    <string name="search_course_select_area">エリアを選択</string>
+    <string name="search_course_distance_type">距離</string>
+    <string name="search_course_km">km</string>
+    <string name="search_course_elevation">獲得標高</string>
+    <string name="search_course_elevation_over">激坂</string>
+    <string name="search_course_elevation_less">坂少</string>
+    <string name="search_course_course_type">コース形態</string>
+    <string name="search_course_course_type_one">片道</string>
+    <string name="search_course_course_type_two">往復</string>
+    <string name="search_course_course_type_three">1周</string>
+    <string name="search_course_more_searching">こだわり条件</string>
+    <string name="search_course_more_searching_description">こだわり条件を指定</string>
+    <string name="search_course_free_text">フリーワード</string>
+    <string name="search_course_free_text_description">例：初心者</string>
+    <string name="search_course_text_button">検索する</string>
+    <string name="search_course_text_row">&gt;</string>
+    <string name="search_course_20_km">〜20km</string>
+    <string name="search_course_50_km">〜50km</string>
+    <string name="search_course_100_km">〜100km</string>
+    <string name="search_course_over_100_km">100km〜</string>
+    <string name="search_course_divider_image_description">divider</string>
+    <string name="search_course_choose_image_description">choose</string>
+    <string name="button_description">image button</string>
+    <!-- end -->
+    <string name="TitleSearchPage">検索条件</string>
+    <string name="CloseSearchPage">閉じる</string>
+    <string name="Area">エリア</string>
+    <string name="DistanceType">距離</string>
+    <string name="Elevation">獲得標高</string>
+    <string name="CourseType">コース形態</string>
+    <string name="MoreSearching">こだわり条件</string>
+    <string name="FreeWord">フリーワード</string>
+    <string name="Home">ホーム</string>
+    <string name="Register">コース登録</string>
+    <string name="MyCourse">マイコース</string>
+    <string name="Season">旬の季節</string>
+    <string name="AvarageSlope">平均勾配</string>
+
+
+    <string name="AchivementBadges">達成バッジ</string>
+    <string name="SpotBadges">ご当地バッジ</string>
+    <string name="BadgeTitile">バッジコレクション</string>
+    <string name="BtnBackBadge">戻る</string>
+    <string name="BtnCloseBadge">閉じる</string>
+
+    <!--course detail -->
+    <string name="tabCourse">コース</string>
+    <string name="tabVideo">投稿動画</string>
+    <string name="tabComment">コメント</string>
+    <string name="course_detail_title">万田発酵Prezentsグランツールせとうち</string>
+    <string name="course_detail_user_detail">週末ライダー</string>
+    <string name="course_detail_phrase_detail">せとうちをぐるっとまるごと1周する達成感。せとうちをぐるっとまるごと1周する達成感</string>
+    <string name="course_detail_212">212</string>
+    <string name="course_detail_3">3</string>
+    <string name="course_detail_date">2018.01.16</string>
+    <!--BasicInfomation-->
+    <string name="basic_info_title">基本情報</string>
+    <string name="TextNameBasic">ユーザーネーム</string>
+    <string name="UserName">週末ライダー</string>
+    <string name="UserEmail">メールアドレス</string>
+    <string name="ButtonBasic">登録情報を変更</string>
+    <string name="hint_email_basicinfo">xxxxxxxxxxxxxxxxxxxxxxx.xxxxxx.co.jp</string>
+    <string name="hint_name_basicinfo">週末ライダー</string>
+    <string name="image_description">icon</string>
+    <!--UserRegistration-->
+    <string name="TextNewEntry">登録方法を選んでください</string>
+    <string name="TextMailNewEntry">メールアドレスで登録</string>
+    <string name="SignUp">新規登録</string>
+    <string name="changeInfo">登録情報変更</string>
+    <string name="TextHelpUser">アンケートにご協力ください</string>
+    <string name="TextGender">性別</string>
+    <string name="TextMan">男性</string>
+    <string name="TextWoman">女性</string>
+    <string name="TextAge">年齢</string>
+    <string name="Age">10代</string>
+    <string name="register_hok">北海道</string>
+    <string name="register_10t">10代</string>
+    <string name="TextPrefecture">お住いの地域</string>
+    <string name="TextShowSelected">北海道</string>
+    <string name="ButtonToRegister">新規登録</string>
+    <string name="TextEmailUser">メールアドレス</string>
+    <string name="TextUsername">ユーザー名</string>
+    <string name="TextUserIcon">ユーザーアイコン</string>
+    <string name="item_text">グルメが充実</string>
+    <string name="item_header_text">おすすめの月</string>
+    <string name="item_comment_text">comment</string>
+
+    <!--tab -->
+    <string name="video">video</string>
+    <string name="course_1000">1000</string>
+    <string name="course_outline">コース概要</string>
+    <string name="course_average">想定平均走行ペース</string>
+    <string name="course_start_point">想定平均走行ペース</string>
+    <string name="course_access_start_point">想定平均走行ペース</string>
+    <string name="selection_decision">選択決定</string>
+    <string name="tutorial">Tutorial</string>
+    <!--detailcomment-->
+    <string name="headercommet">コメント投稿</string>
+    <string name="item_text_header">コースを評価する</string>
+    <string name="item_text_detail">コメントを入力</string>
+    <string name="item_button_detail">コメントを投稿</string>
+    <string name="hint_detail">こちらにコメントを入力してください。</string>
+
+    <array name="title_test">
+        <item>コース</item>
+        <item>コメント</item>
+    </array>
+    <array name="title_coursedetail">
+        <item>スポット写真</item>
+        <item>スポット設備</item>
+    </array>
+    <string name="finish_guide_time">完走目安時間</string>
+    <string name="average_pace">想定平均走行ペース</string>
+    <string name="start_point">スタート地点</string>
+    <string name="access_to_start">スタート地点までのアクセス</string>
+
+    <!--detail course -->
+    <string name="GoogleMap">Google Mapで コース確認</string>
+    <string name="NAVITIME">NAVITIMEで コース確認</string>
+    <string name="CourseStory">コースストーリー</string>
+    <!--for detail view  test -->
+    <string name="finish_guide_time_txt">1時間30分</string>
+    <string name="average_pace_txt">10.00km/h</string>
+    <string name="start_point_txt">1時間30分</string>
+
+    <string name="StoryTitle1">鵜方駅</string>
+    <string name="Story1ImageDes">駅の目の前に公営の駐車場</string>
+    <string name="Story1Content">志摩周遊の拠点となる近鉄志摩線「鵜方」駅。特急電車の停車駅である、アクセスの上でも利便性が高いのに加え、観光案内所やコンビニも駅構内に設置されており、情報収集や補給物の調達にも</string>
+    <string name="Story1Tag"># 初心者向き　# グルメ豊富　# 女性向け</string>
+
+    <string name="distance_story">3km</string>
+
+    <string name="StoryTitle2">横山展望台</string>
+    <string name="Story2ImageDes">万田発酵Prezentsグランツールせとうち</string>
+    <string name="Story2Content">志摩周遊の拠点となる近鉄志摩線「鵜方」駅。特急電車の停車駅である、アクセスの上でも利便性が高いのに加え、観光案内所やコンビニも駅構内に設置されており、情報収集や補給物の調達にも</string>
+    <string name="Story2Tag"># 初心者向き　# グルメ豊富　# 女性向け</string>
+
+    <string name="searcharea_text">エリア選択</string>
+    <string name="searchkodawari">こだわり条件</string>
+    <string name="first_story_num">1</string>
+    <string name="second_story_num">2</string>
+
+    <!--my course-->
+    <string name="favorites_course">お気に入りコース</string>
+    <string name="running_course">走行済コース</string>
+    <string name="running_now">今すぐ走行</string>
+    <string name="traveling_time">走行時間</string>
+    <string name="average_speed">平均速度</string>
+    <string name="finish_date">コース完走日</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="txtRedButtonDetail">お気に入りに登録する</string>
+    <string name="txtBlueButtonDetail">このコースを走行する</string>
+
+    <!--running-->
+    <string name="txt_finish">走行結果</string>
+    <string name="txt_running">走行中</string>
+    <string name="txt_map">MAP</string>
+    <string name="txt_log">ログ</string>
+    <string name="txt_stop_at_one_time">一時停止</string>
+    <string name="resume">再開</string>
+    <string name="finish">終了</string>
+    <string name="select_age">年齢選択</string>
+
+    <!--course drive-->
+    <string name="txtRedCourseDrive">※スタート地点で『START』を押してください</string>
+    <string name="btnFirst">コース画面へ</string>
+    <string name="btnSecond">スタート地点までのアクセス</string>
+    <string name="cancel">いいえ</string>
+    <string name="yes">はい</string>
+    <string name="ok">OK</string>
+    <string name="noCourse">０件</string>
+
+    <string name="btn_add_contact"><u>ログイン</u></string>
+    //spot facilities
+    <string name="text_spot_facilities">スポット設備</string>
+    <string name="btn_spot_facilities">投稿</string>
+
+    //Renew Password Page
+    <string name="text_head">バスワード変更用サイトのURLをお送りいたしますので</string>
+    <string name="text_headtwo">アカウントのメールアドレスをご入力ください</string>
+    <string name="hint">xxxxxxx.co.jp</string>
+    <string name="text_button">メール送信 </string>
+    <string name="text_forget">メールアドレスを入力</string>
+
+    <!--course logging-->
+    <string name="prezents">万田発酵Prezentsグランツールせとうち</string>
+    <string name="timing">00:00:00</string>
+    <string name="one">1</string>
+    <string name="place1">鵜方駅</string>
+    <string name="two">2</string>
+    <string name="place2">横山展望台</string>
+    <string name="three">3</string>
+    <string name="place3">瀬戸田町観光案内所</string>
+    <string name="four">4</string>
+    <string name="place4">尾道港</string>
+    <string name="sumTime">走行時間</string>
+    <string name="averageSpeed">平均速度</string>
+    <string name="kmh">10.00km/h</string>
+
+    <string name="englishCourse">COURSE</string>
+    <string name="englishTime">TIME</string>
+    <string name="Spot">SPOT</string>
+    <string name="Distance">DISTANCE</string>
+
+    //checkpoint
+    <string name="text_head_checkpoint">チェックポイント通過</string>
+    <string name="text_bottom">チェックポイント通過！</string>
+    <string name="text_button_checkpoint">写真を撮影</string>
+    <string name="text_bottom_left">設備情報を投稿</string>
+    <string name="text_bottom_right">スポット詳細</string>
+    <string name="spotNumber">スポット</string>
+    <string name="spotName">瀬戸田町観光案内所</string>
+    <string name="selectSpotToCheckin">チェックインするスポットを 選択してください</string>
+    <string name="new_account"><u>新規登録</u></string>
+    //goal
+    <string name="textgoal">コースの最終目的地到着！</string>
+    <string name="text_button_up">走行結果を確認</string>
+    <string name="text_button_down">写真を撮影</string>
+    //checkbox
+    <string name="checkbox">次から表示しない</string>
+    <string name="textleftcheckbox">同意する</string>
+    <string name="textrightcheckbox">同意しない</string>
+
+    <!--finish -->
+    <string name="coursetime">コース完走日</string>
+    <string name="share_travel_log">走行結果をシェア</string>
+    <string name="confirm_log">ログを確認</string>
+    <string name="end_running">走行を終了</string>
+    //privacy
+    <string name="privacy">プライバシーポリシー </string>
+    <string name="inquiry">お問い合わせ </string>
+    //tutorial
+    <string name="tutorialnew">使い方</string>
+    <string name="txt_title_post_comment">走行したコースの評価やコメントを投稿してみましょう！</string>
+
+    //Logging confirm page
+    <string name="confirm_page">走行記録 </string>
+    <string name="check_result">走行結果を確認</string>
+
+    <string name="txt_later">あとで</string>
+</resources>
+

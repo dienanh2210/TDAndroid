@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="vn.javis.tourde.activity.PrivacypolicyActivity"
+    tools:ignore="Orientation">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:background="@color/White"
+        android:layout_height="@dimen/_38sdp">
+        <TextView
+            android:id="@+id/tv_back_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:text="@string/Back"
+            android:textColor="@color/search_course_color_close_text"
+            android:textSize="@dimen/_12sdp" />
+        <TextView
+            android:id="@+id/register_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/privacy "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginTop="@dimen/_38sdp">
+        <include layout="@layout/item_divider" />
+    </RelativeLayout>
+    <WebView
+
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_40sdp">
+
+    </WebView>
+
+
+</RelativeLayout>

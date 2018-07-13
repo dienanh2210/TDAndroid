@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/user_Info"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_38sdp"
+            android:background="@color/White">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="設備名"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_16sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text="なし"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_10sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_65sdp"
+                android:text="あり"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_10sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/basic_Info"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_47sdp">
+
+            <TextView
+                android:id="@+id/tv_basic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_toStartOf="@+id/im_basic_info"
+                android:layout_alignParentStart="true"
+                android:text="トイレ"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText,UnknownIdInLayout" />
+
+
+            <TextView
+                android:id="@+id/toilet_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/toilet_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rlt_newuserregister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:orientation="vertical">
+            <include layout="@layout/item_divider"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_47sdp">
+
+                <TextView
+                    android:id="@+id/tv_userregistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_toStartOf="@+id/register"
+                    android:layout_alignParentStart="true"
+                    android:text="駐車場"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/_12sdp"
+                    tools:ignore="HardcodedText,UnknownIdInLayout" />
+
+                <TextView
+                    android:id="@+id/parking_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/search_course_text_row"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:paddingStart="@dimen/_1sdp"
+                    android:text=""
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_12sdp"
+                    app:srcCompat="@drawable/icon_next"
+                    tools:ignore="RelativeOverlap" />
+                <TextView
+                    android:id="@+id/parking_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/search_course_text_row"
+                    android:paddingEnd="@dimen/_75sdp"
+                    android:text=""
+                    android:textColor="@color/search_course_color_row"
+                    android:textSize="@dimen/_12sdp"
+                    app:srcCompat="@drawable/icon_next"
+                    tools:ignore="RelativeOverlap,RtlSymmetry" />
+            </RelativeLayout></LinearLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/iv_login"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="宿泊設備"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText,UnknownIdInLayout" />
+
+            <TextView
+                android:id="@+id/accomodation_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/accomodation_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <include layout="@layout/item_divider"/>
+            <RelativeLayout
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen60">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@string/Logout"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_13sdp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/app_Info"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="入浴設備"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/bath_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/bath_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rlt_tutorial"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="シャワー"
+                android:layout_toStartOf="@+id/im_how"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText,UnknownIdInLayout" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/shower_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/shower_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/privacy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="ロッカー"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/locker_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/locker_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                app:srcCompat="@drawable/icon_next"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/inquiry"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="更衣室"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/dress_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/dress_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rateInApp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="自転車配送（受取/発送）"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/bike_delivey_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/bike_delivey_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="観光案内"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/tour_info_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/tour_info_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="サイクルラック"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/cycle_rack_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/cycle_rack_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+        </RelativeLayout>
+        <include layout="@layout/item_divider"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="レンタサイクル"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/bike_rented_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/bike_rented_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+        </RelativeLayout>
+        <include layout="@layout/item_divider"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="サイクリングガイド"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/cycling_guide_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/cycling_guide_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+        </RelativeLayout>
+        <include layout="@layout/item_divider"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="工具貸出"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/tool_rental_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/tool_rental_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+        </RelativeLayout>
+        <include layout="@layout/item_divider"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp"
+            tools:ignore="TooManyViews">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="フロアポンプ貸出"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/floor_pump_rental_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/floor_pump_rental_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+        </RelativeLayout>
+        <include layout="@layout/item_divider"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="メカニック/メンテナンス"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/mechanic_maintenance_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/mechanic_maintenance_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/search_course_text_row"
+                android:paddingEnd="@dimen/_75sdp"
+                android:text=""
+                android:textColor="@color/search_course_color_row"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+        </RelativeLayout>
+        <include layout="@layout/item_divider"/>
+        <Button
+            android:id="@+id/bt_spot_page"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/custom_frame"
+            android:text="設備情報を投稿"
+            android:textAlignment="center"
+            android:textColor="@color/backgroud"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="HardcodedText" />
+
+
+
+    </LinearLayout>
+</LinearLayout>

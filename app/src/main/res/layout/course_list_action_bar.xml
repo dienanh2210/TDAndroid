@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/course_list_actionbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/White"
+    >
+
+    <ImageButton
+        android:id="@+id/ic_left"
+        android:contentDescription="@string/image_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_toStartOf="@+id/ic_right"
+        android:layout_toEndOf="@+id/ic_left"
+        android:text="@string/title_course_list"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/ic_right"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:background="@drawable/icon_search"
+        android:maxHeight="40dp"
+        android:maxWidth="40dp"
+        android:contentDescription="@string/image_description"
+        android:layout_centerVertical="true"
+        />
+</RelativeLayout>

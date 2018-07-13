@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/search_course_color_title_background"
+    tools:context="vn.javis.tourde.activity.BasicInfoActivity">
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/search_course_color_title_background"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@color/backgroud">
+
+            <TextView
+                android:id="@+id/tv_back_basicInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:text="@string/Back"
+                android:textColor="@color/search_course_color_close_text"
+                android:textSize="@dimen/_12sdp"
+                />
+
+            <TextView
+                android:id="@+id/topic_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/headercommet"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@color/search_course_color_title_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/item_text_header"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:contentDescription="@string/image_description"
+            android:background="@color/Gray"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@color/backgroud">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:numStars="5"
+                        android:rating="5"
+                        style="@style/CustomRatingBar"
+                        android:stepSize="1" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider" />
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@color/search_course_color_title_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="@string/item_text_detail"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="SpUsage" />
+        </RelativeLayout>
+
+        <include layout="@layout/item_divider" />
+
+
+
+            <RelativeLayout
+                android:id="@+id/free_word_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:background="@android:color/white">
+
+                <EditText
+                    android:inputType="textMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:id="@+id/edt_text"
+                    android:padding="@dimen/_10sdp"
+                    android:hint="@string/hint_detail"
+                    android:lines="5"
+                    android:textColor="@color/colorText"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:background="@color/backgroud"
+                    android:minLines="5"
+                    android:gravity="top|left"
+                    android:scrollbars="vertical" />
+           <!-->     <EditText
+                    android:inputType="textMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:id="@+id/edt_text"
+                    android:padding="@dimen/_10sdp"
+                    android:hint="@string/hint_detail"
+                    android:lines="5"
+                    android:textColor="@color/colorText"
+                    android:imeOptions="actionDone"
+                    android:imeActionLabel="Done"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:background="@color/backgroud"
+                    android:minLines="5"
+                    android:gravity="top|left"
+                    android:scrollbars="vertical" /><!-->
+
+            </RelativeLayout>
+
+
+
+        <include layout="@layout/item_divider" />
+
+        <Button
+            android:id="@+id/btn_choose"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/btn_background"
+            android:text="@string/item_button_detail"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.design.widget.CoordinatorLayout>

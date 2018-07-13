@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_main">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/ll_map"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_50sdp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_220sdp">
+
+                <ImageView
+                    android:id="@+id/btn_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/btn_start" />
+
+                <ImageButton
+                    android:id="@+id/btn_back_drive"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/icon_back"
+                    android:contentDescription="@string/image_description" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/White"
+                android:textSize="@dimen/_18sdp" />
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:text="@string/txtRedCourseDrive"
+                android:textColor="@color/SoftRed"
+                android:textSize="@dimen/_13sdp" />
+
+            <Button
+                android:id="@+id/btn_back_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_47sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/custom_frame_blue"
+                android:text="@string/btnFirst"
+                android:textColor="@color/White"
+                android:textSize="@dimen/_12sdp" />
+
+            <Button
+                android:id="@+id/btn_show_map"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_47sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/custom_frame_blue"
+                android:text="@string/btnSecond"
+                android:textColor="@color/White"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/White"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:weightSum="2.1">
+
+        <RelativeLayout
+            android:id="@+id/rlt_googlemap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+
+                android:layout_width="@dimen/_38sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:layout_marginStart="@dimen/_47sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/icon_googlemap" />
+
+            <TextView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:gravity="center"
+                android:text="@string/GoogleMap"
+                android:textSize="@dimen/_10sdp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".1">
+
+            <View
+                android:layout_width=".3dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:background="@color/search_course_color_description_text" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rlt_Navitime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/_38sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:layout_marginStart="@dimen/_47sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/icon_navitime" />
+
+            <TextView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:gravity="center"
+                android:text="@string/NAVITIME"
+                android:textSize="@dimen/_11sdp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
+

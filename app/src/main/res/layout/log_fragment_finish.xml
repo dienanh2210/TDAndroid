@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/spot"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_68sdp"
+        >
+
+        <ImageView
+            android:id="@+id/BG_spot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_spot" />
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:text=""
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/SkyBlue"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/txt_spotName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/_60sdp"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_toEndOf="@+id/number"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/White"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/checked"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/circle_success"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/img_link"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:background="@drawable/log_animation"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/img_link_vitual"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:scaleType="fitXY"
+        android:visibility="visible" />
+    <ImageView
+        android:id="@+id/img_link_short"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:src="@drawable/image_link_long"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <RelativeLayout
+        android:id="@+id/showInfoSpot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/image_link_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:src="@drawable/image_link_long" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sumTime"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/spotTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timing"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_30sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/averageSpeed"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/averageSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kmh"
+                android:textColor="@color/SkyBlue"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
