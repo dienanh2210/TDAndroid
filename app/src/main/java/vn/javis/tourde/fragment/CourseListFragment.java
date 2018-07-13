@@ -205,7 +205,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     }
 
     void changePage(int nextPage) {
-        txtPageNumber.setText("1/1");
+        txtPageNumber.setText("1 / 1");
         try {
 
             Log.i("aaa", ListCourseAPI.getInstance().getCourseSize() + "");
@@ -235,10 +235,10 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                 if (mCurrentPage > mTotalPage) mCurrentPage = mTotalPage;
                 if (mCurrentPage < 1) mCurrentPage = 1;
                 if (mCurrentPage != currentValue) {
-                    txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
+                    txtPageNumber.setText(mCurrentPage + " / " + mTotalPage);
                     getData(search);
                 }
-                txtPageNumber.setText(mCurrentPage + "/" + mTotalPage);
+                txtPageNumber.setText(mCurrentPage + " / " + mTotalPage);
                 changeButtonBackground();
                 contentCourseList.scrollTo(0,0);
             }

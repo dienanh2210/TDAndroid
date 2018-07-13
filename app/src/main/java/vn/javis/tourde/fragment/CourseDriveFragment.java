@@ -36,6 +36,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
 import vn.javis.tourde.services.TourDeApplication;
@@ -109,8 +110,8 @@ public class CourseDriveFragment extends BaseFragment {
                     double distance = SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(latitude, longtitude));
                     double distance2 = SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(mAcitivity.getLatitudeNetWork(), mAcitivity.getLongitudeNetWork()));
 
-                    Log.i("GPSStart", "" + distance + "-" + latitude + "-" + longtitude + "--" + startLatitude + "-" + startLongtitude);
-                    if (distance <= 100 || distance2 <= 100) {
+                    Log.i("GPSStart", "" + distance + "-"+distance2+"-"+ latitude + "-" + longtitude + "--" + startLatitude + "-" + startLongtitude);
+                    if (distance <= GoogleService.DISTANCE_ALLOW || distance2 <= GoogleService.DISTANCE_ALLOW) {
                         ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
                             public void onOkClick() {

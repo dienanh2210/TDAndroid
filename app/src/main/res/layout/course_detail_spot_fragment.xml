@@ -19,8 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
             android:layout_alignParentTop="true"
-            android:background="@drawable/header_border">
-
+            >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height=".1dp"
+                android:background="@color/Gray"
+                />
             <ImageButton
                 android:id="@+id/btn_back_to_list"
                 android:layout_width="@dimen/_11sdp"
@@ -58,6 +62,11 @@
                 android:background="@drawable/icon_upload"
                 android:contentDescription="@string/image_description" />
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".1dp"
+            android:background="@color/Gray"
+            />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp">
@@ -89,7 +98,8 @@
                android:layout_marginTop="@dimen/_30sdp"
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/_16sdp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -103,7 +113,7 @@
             android:id="@+id/ln_googlemap"
             android:layout_width="match_parent"
             android:weightSum="1"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -116,7 +126,7 @@
                 android:id="@+id/tv_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
                 android:layout_weight="1"
@@ -127,7 +137,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_16sdp"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:paddingStart="@dimen/_1sdp"
                 android:contentDescription="@string/search_course_text_row"
                 android:textColor="@color/search_course_color_row"
@@ -138,16 +148,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1ssp"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_17sdp"
             android:layout_marginEnd="@dimen/_17sdp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@color/search_course_color_divider_background"/>
 
         <LinearLayout
             android:id="@+id/ln_browser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:weightSum="1">
 
             <ImageView
@@ -161,7 +171,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12sdp" />
@@ -171,7 +181,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_16sdp"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:paddingStart="@dimen/_1sdp"
                 android:contentDescription="@string/search_course_text_row"
                 android:textColor="@color/search_course_color_row"
@@ -183,7 +193,7 @@
             android:layout_height="@dimen/_1ssp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_17sdp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_17sdp"
             android:background="@color/search_course_color_divider_background"/>
 
@@ -191,7 +201,7 @@
             android:id="@+id/ln_call"
             android:layout_width="match_parent"
             android:weightSum="1"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -205,7 +215,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12sdp" />
@@ -216,7 +226,7 @@
             android:layout_height="@dimen/_1ssp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_17sdp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_17sdp"
             android:background="@color/search_course_color_divider_background"/>
 
@@ -242,7 +252,7 @@
             app:tabActiveColor="@android:color/white"
             app:tabHeight="@dimen/_50sdp"
             app:tabItems="@array/title_coursedetail"
-            app:tabNormalColor="#DCE0E2"
+            app:tabNormalColor="@color/colorTextF4F6F8"
             app:tabTextActiveColor="@color/color_text_tab"
             app:tabTextColor="@color/Black"
             app:tabTextSize="@dimen/_13ssp"/>

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
             android:layout_alignParentTop="true"
-            android:background="@drawable/header_border">
+            >
 
             <ImageButton
                 android:id="@+id/btn_back_to_list"
@@ -80,7 +80,11 @@
                 android:background="@drawable/icon_upload"
                 android:contentDescription="@string/image_description" />
         </RelativeLayout>
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height=".1dp"
+    android:background="@color/Gray"
+    />
 
 
         <RelativeLayout
@@ -136,7 +140,6 @@
                 android:layout_width="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_centerVertical="true"
-                app:riv_border_width=".5dp"
                 app:riv_mutate_background="true"
                 app:riv_oval="true"
                 app:riv_tile_mode="clamp" />
@@ -217,7 +220,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
-
             android:visibility="visible"/>
 
         <ImageView
@@ -513,7 +515,7 @@
             app:tabActiveColor="@android:color/white"
             app:tabHeight="@dimen/_45sdp"
             app:tabItems="@array/title_test"
-            app:tabNormalColor="#E2E6E8"
+            app:tabNormalColor="@color/colorTextF4F6F8"
             app:tabTextActiveColor="@color/color_text_tab"
             app:tabTextColor="@color/Black"
             app:tabTextSize="@dimen/_12sdp" />

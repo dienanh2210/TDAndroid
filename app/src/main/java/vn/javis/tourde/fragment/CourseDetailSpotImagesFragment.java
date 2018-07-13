@@ -195,7 +195,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
 
         String tags = "";
         for (String s : spotData.getTag()) {
-            tags += "#" + s + " ";
+            tags += "#" + s + "     ";
         }
         txtTag.setText(tags);
         listSpotImage = spotData.getImages();
