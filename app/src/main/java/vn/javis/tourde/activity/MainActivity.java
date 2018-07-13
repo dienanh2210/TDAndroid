@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("Tutorial", "-------?" + SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial"));
         if (TextUtils.isEmpty(SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN))) {
-            if (SharedPreferencesUtils.getInstance(this).getStringValue("rule").equals("") || SharedPreferencesUtils.getInstance(this).getStringValue("rule") == null)
+            if (TextUtils.isEmpty(SharedPreferencesUtils.getInstance(this).getStringValue("rule")))
                 changeActivity();
-            else if (SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial").equals("") || SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial") == null)
+            else if (TextUtils.isEmpty(SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial")))
                 Rule();
             else
                 changeCourseListPage();

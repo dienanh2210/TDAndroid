@@ -153,8 +153,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String url = "";
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
     int indexTab;
-    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0\"> %s </body></Html>";
+    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0; line-height: 1.5\"> %s </body></Html>";
     int fontSize;
+    int line;
     private boolean isNextScreen;
 
     @Override

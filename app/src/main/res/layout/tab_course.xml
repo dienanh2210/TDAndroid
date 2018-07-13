@@ -222,6 +222,7 @@
                             android:layout_marginTop="@dimen/_27sdp"
                             android:gravity="center"
                             android:text="@string/GoogleMap"
+                            android:textColor="@color/Black"
                             android:textSize="@dimen/_10sdp" />
                     </RelativeLayout>
 
@@ -259,6 +260,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_27sdp"
                             android:gravity="center"
+                            android:textColor="@color/Black"
                             android:text="@string/NAVITIME"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>

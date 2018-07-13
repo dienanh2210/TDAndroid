@@ -14,6 +14,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.utils.TypefaceUtil;
 
 public class TourDeApplication extends Application {
 
@@ -32,6 +33,7 @@ public class TourDeApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        TypefaceUtil.overrideFont(this, "SERIF","fonts/HiraKakuPro-W3.otf" );
 //        FacebookSdk.sdkInitialize(getApplicationContext());
 //
 //        TwitterConfig config = new TwitterConfig.Builder(this)

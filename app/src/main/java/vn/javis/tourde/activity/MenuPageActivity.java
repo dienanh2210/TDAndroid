@@ -175,13 +175,13 @@ public class MenuPageActivity extends BaseActivity {
                                 basic_Info.setVisibility(View.GONE);
                                 LoginFragment.setmAccount(null);
                                 //Delete token from device when sign out
-//                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN_SNS);
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.LOGIN_TYPE);
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
+//                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
+//                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN_SNS);
+//                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.LOGIN_TYPE);
+//                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
+//                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
+//                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
                                 Intent intent = new Intent(MenuPageActivity.this, CourseListActivity.class);
                                 intent.putExtra(Constant.KEY_LOGOUT_SUCCESS, 1);
                                 startActivity(intent);
