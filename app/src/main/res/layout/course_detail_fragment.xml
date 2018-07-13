@@ -136,7 +136,6 @@
                 android:layout_width="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_centerVertical="true"
-                app:riv_border_color="@color/SkyBlue"
                 app:riv_border_width=".5dp"
                 app:riv_mutate_background="true"
                 app:riv_oval="true"
@@ -218,6 +217,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
+
             android:visibility="visible"/>
 
         <ImageView
