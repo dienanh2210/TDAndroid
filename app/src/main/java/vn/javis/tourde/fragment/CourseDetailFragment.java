@@ -154,7 +154,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
     int indexTab;
     //String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0; line-height: 1.5\"> %s </body></Html>";
-    String htmlText="<style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/fonts/HiraKakuPro-W3.otf\")}body,* {font-family: MyFont;text-align: justify;line-height: 1.5}img{max-width:100%;height:auto; border-radius: 8px;}</style>";
+    String htmlText = "<style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/fonts/HiraKakuPro-W3.otf\")}body,* {font-family: MyFont;text-align: justify;line-height: 1.5}img{max-width:100%;height:auto; border-radius: 8px;}</style>";
 
     int fontSize;
     int line;
@@ -361,7 +361,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtCatchPhrase.setText(model.getCatchPhrase());
 //        txtIntroduction.setText(model.getIntroduction());
         //webView.loadData(String.format(htmlText, "" + fontSize, model.getIntroduction()), "text/html; charset=utf-8", "utf-8");
-        webView.loadDataWithBaseURL("", htmlText+"<div style=\"\">"+ fontSize +model.getIntroduction()+"</div>", "text/html", "utf-8", null);
+        webView.loadDataWithBaseURL("", htmlText + String.format("<div style=\"font-size:%spx;color: black; margin: 0; padding: 0\">", fontSize) + model.getIntroduction() + "</div>", "text/html", "utf-8", null);
 
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
@@ -436,25 +436,25 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         PicassoUtil.getSharedInstance(activity).load(model.getPostUserImage()).resize(0, 100).onlyScaleDown().transform(new CircleTransform()).into(imgPostUser);
         float rate = courseDetail.getReviewTotal().getRatingAverage();
 
-        if (rate >= 1 && rate<1.5)
+        if (rate >= 1 && rate < 1.5)
             imgStarRate.setImageResource(R.drawable.icon_star1);
-        else if (rate >= 2 && rate<2.5)
+        else if (rate >= 2 && rate < 2.5)
             imgStarRate.setImageResource(R.drawable.icon_star2);
-        else if (rate >= 3 && rate<3.5)
+        else if (rate >= 3 && rate < 3.5)
             imgStarRate.setImageResource(R.drawable.icon_star3);
-        else if (rate >= 4 && rate<4.5)
+        else if (rate >= 4 && rate < 4.5)
             imgStarRate.setImageResource(R.drawable.icon_star4);
         else if (rate >= 5)
             imgStarRate.setImageResource(R.drawable.icon_star5);
-        else  if (rate >= 0.5 && rate<1)
+        else if (rate >= 0.5 && rate < 1)
             imgStarRate.setImageResource(R.drawable.icon_star0_5);
-        else  if (rate >= 1.5 && rate<2)
+        else if (rate >= 1.5 && rate < 2)
             imgStarRate.setImageResource(R.drawable.icon_star1_5);
-        else  if (rate >= 2.5 && rate<3)
+        else if (rate >= 2.5 && rate < 3)
             imgStarRate.setImageResource(R.drawable.icon_star2_5);
-        else  if (rate >= 3.5 && rate<4)
+        else if (rate >= 3.5 && rate < 4)
             imgStarRate.setImageResource(R.drawable.icon_star3_5);
-        else  if (rate >= 4.5 && rate<5)
+        else if (rate >= 4.5 && rate < 5)
             imgStarRate.setImageResource(R.drawable.icon_star4_5);
         else
             imgStarRate.setImageResource(R.drawable.icon_star0);
