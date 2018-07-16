@@ -18,13 +18,9 @@
             android:id="@+id/course_list_header"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
+            android:background="@drawable/header_border"
             android:layout_alignParentTop="true"
             >
-            <View
-                android:layout_width="match_parent"
-                android:layout_height=".1dp"
-                android:background="@color/Gray"
-                />
             <ImageButton
                 android:id="@+id/btn_back_to_list"
                 android:layout_width="@dimen/_11sdp"
@@ -62,11 +58,7 @@
                 android:background="@drawable/icon_upload"
                 android:contentDescription="@string/image_description" />
         </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height=".1dp"
-            android:background="@color/Gray"
-            />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp">
