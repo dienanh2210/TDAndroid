@@ -171,9 +171,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //                }
 //            } else {
 //                mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), CourseDetailFragment.class.getSimpleName(), true, false);
-//            }
-        } else if (isNextScreen) {
-            mActivity.openPage(new CourseDriveFragment(), CourseDetailFragment.class.getSimpleName(), true, false);
+                    //            }
+                            } else if (isNextScreen) {
+                                mActivity.openPage(new CourseDriveFragment(), CourseDetailFragment.class.getSimpleName(), true, false);
         }
     }
 
@@ -359,6 +359,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtCatchPhrase.setText(model.getCatchPhrase());
 //        txtIntroduction.setText(model.getIntroduction());
         webView.loadData(String.format(htmlText, "" + fontSize, model.getIntroduction()), "text/html; charset=utf-8", "utf-8");
+
 
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());
         txtSpotCount.setText("" + courseDetail.getSpot().size());
