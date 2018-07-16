@@ -44,13 +44,13 @@
                 android:src="@drawable/icon_googlemap" />
 
             <TextView
-                android:layout_width="@dimen/_85sdp"
+                android:layout_width="@dimen/_80sdp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:text="@string/GoogleMap"
-                android:textColor="@color/Black"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/Black" />
         </RelativeLayout>
 
         <View
@@ -73,7 +73,7 @@
                 android:src="@drawable/icon_navitime" />
 
             <TextView
-                android:layout_width="107dp"
+                android:layout_width="@dimen/_80sdp"
                 android:layout_height="35dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_30sdp"

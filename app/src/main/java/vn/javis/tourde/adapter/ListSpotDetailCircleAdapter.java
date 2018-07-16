@@ -43,7 +43,7 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
     List<Spot> listSpot = new ArrayList<>();
     Context context;
     View mView;
-    String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0;line-height: 1.5;\"> %s </body></Html>";
+    String htmlText = "<style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/fonts/HiraKakuPro-W3.otf\")}body,* {font-family: MyFont;text-align: justify;line-height: 1.5}img{max-width:100%;height:auto; border-radius: 8px;}</style>";
     int fontSize;
 
     public ListSpotDetailCircleAdapter(List<Spot> listSpot, Context context) {
@@ -73,7 +73,7 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
         holder.txtIndex.setText(String.valueOf(order));
         holder.txtCatchPhrase.setText(spot.getCatchPhrase());
 //        holder.txtIntro.setText(spot.getIntroduction());
-        holder.webViewIntro.loadData(String.format(htmlText, "" + fontSize, spot.getIntroduction()), "text/html; charset=utf-8", "utf-8");
+        holder.webViewIntro.loadDataWithBaseURL("", htmlText + String.format("<div style=\"font-size:%spx;color: black; margin: 0; padding: 0\">", fontSize) + spot.getIntroduction() + "</div>", "text/html", "utf-8", null);
 
         holder.txtSpotDistance.setText(spot.getSpotDistance() + "km");
 //        if(position<listSpot.size()-1)
@@ -86,9 +86,9 @@ public class ListSpotDetailCircleAdapter extends RecyclerView.Adapter<ListSpotDe
 //            tag += "#" + spot.getTag();
 
         for (int i = 0; i < spot.getListTag().size(); i++) {
-            tag += "#" + spot.getListTag().get(i)+"     ";
+            tag += "#" + spot.getListTag().get(i) + "     ";
         }
-        Log.i("tagDebugCircleSPot85",spot.getListTag().size() +"-"+tag);
+        Log.i("tagDebugCircleSPot85", spot.getListTag().size() + "-" + tag);
         holder.txtTag.setText(tag);
 //
         if (spot.getTopImage() != null && spot.getTopImage() != "")
