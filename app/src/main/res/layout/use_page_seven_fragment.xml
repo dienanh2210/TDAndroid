@@ -20,6 +20,5 @@
             android:scaleType="centerCrop"
             android:src="@drawable/tutorial_7" />
 
-
     </RelativeLayout>
 </RelativeLayout>
