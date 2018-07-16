@@ -126,33 +126,27 @@ public class LoginUtils {
     }
 
     public static void addFBCallback(final Activity activity, CallbackManager callbackManager) {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        if (!isLoggedIn) {
-            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    Log.i(TAG, "onSuccess: ");
-                    processApiResponse(activity, loginResult.getAccessToken().getUserId(), FACEBOOK_SNS_KIND);
+        LoginManager.getInstance().logOut();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.i(TAG, "onSuccess: ");
+                processApiResponse(activity, loginResult.getAccessToken().getUserId(), FACEBOOK_SNS_KIND);
 
 
-                }
+            }
 
-                @Override
-                public void onCancel() {
+            @Override
+            public void onCancel() {
 
-                }
+            }
 
-                @Override
-                public void onError(FacebookException error) {
-                    Log.i(TAG, "onError: " + error.toString());
-                }
+            @Override
+            public void onError(FacebookException error) {
+                Log.i(TAG, "onError: " + error.toString());
+            }
 
-            });
-        } else {
-
-            processApiResponse(activity, accessToken.getUserId(), FACEBOOK_SNS_KIND);
-        }
+        });
 
 
     }
