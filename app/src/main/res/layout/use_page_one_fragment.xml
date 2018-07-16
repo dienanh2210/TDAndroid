@@ -19,8 +19,5 @@
            android:adjustViewBounds="true"
            android:scaleType="centerCrop"
            android:src="@drawable/tutorial_1" />
-
-
-
     </RelativeLayout>
 </RelativeLayout>

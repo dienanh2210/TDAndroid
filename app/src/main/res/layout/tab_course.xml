@@ -223,7 +223,7 @@
                             android:gravity="center"
                             android:text="@string/GoogleMap"
                             android:textColor="@color/Black"
-                            android:textSize="@dimen/_10sdp" />
+                            android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
 
                     <RelativeLayout

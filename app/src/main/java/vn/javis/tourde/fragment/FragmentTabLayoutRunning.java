@@ -350,6 +350,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             return;
 
         final String distance = String.format("%.2f", getCurrentDistance());
+        final String distanceSpot = String.format("%.2f", getSpotDitance(spotId));
+
         long lastCheckedTime = saveCourseRunning.getLastCheckedTime();
         long timeDiffer = time - lastCheckedTime;
 
@@ -382,8 +384,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 JSONObject jsonObject = (JSONObject) response;
                                                 if (jsonObject.has("success")) {
-                                                    saveGoalValue(spotId, speed, finishTime, imgUrl, title, distance);
-                                                    mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title, distance);
+                                                    saveGoalValue(spotId, speed, finishTime, imgUrl, title, distanceSpot);
+                                                    mActivity.showGoalFragment(spotId, speed, finishTime, imgUrl, title, distanceSpot);
 
                                                 }
                                                 hideProgressDialog();
@@ -421,7 +423,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     String finish_time = getTimeFormat(time);
 
-                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance, model.getGained());
+                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distanceSpot, model.getGained());
                                 }
                             }
                             hideProgressDialog();
@@ -450,8 +452,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             isSaveTime = false;
                             preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
                             isTimeSaved = true;
-                            saveGoalValue(spotId, speed, finishTime, "", "", distance);
-                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "", distance);
+                            saveGoalValue(spotId, speed, finishTime, "", "", distanceSpot);
+                            mActivity.showGoalFragment(spotId, speed, finishTime, "", "", distanceSpot);
 
                         }
                         hideProgressDialog();
@@ -481,7 +483,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //                                for test animation
 //                                if(spotId==181) model.setGained( true );
 
-                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distance, model.getGained());
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distanceSpot, model.getGained());
                                 isTimeSaved = true;
                             }
                         }
@@ -677,7 +679,16 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         distance = distance / 1000;
         return distance;
     }
-
+    double getSpotDitance(int spotId){
+        double distance=0;
+        for(Spot spot:list_spot)
+        {
+            if(spot.getSpotId() == spotId){
+                distance =Double.parseDouble(spot.getSpotDistance());
+            }
+        }
+        return distance;
+    }
     private void setListCheckedSpot() {
         if (saveCourseRunning != null)
             return;
