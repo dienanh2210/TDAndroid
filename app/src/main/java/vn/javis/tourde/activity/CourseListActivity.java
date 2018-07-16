@@ -635,47 +635,13 @@ public class CourseListActivity extends BaseActivity {
                             List<Spot> lstSpot = courseData.getSpot();
                             double la1, long1;
                             for (Spot spot : lstSpot) {
-                                if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty()) {
+                                if (!spot.getLatitude().isEmpty() && !spot.getLatitude().isEmpty() && spot.getOrderNumber()!=0) {
 
                                     Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()), spot.getOrderNumber());
-                                    //for test id course 10 8 11
-//                                    if (spot.getSpotId() == 187 && spot.getOrderNumber() == 0)
-//                                        location1 = new Location(spot.getSpotId(), 20.989979, 105.794848, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 189 && spot.getOrderNumber() == 1)
-//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 190 && spot.getOrderNumber() == 2)
-//                                        location1 = new Location(spot.getSpotId(), 20.992992, 105.788366, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 189 && spot.getOrderNumber() == 3)
-//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 187 && spot.getOrderNumber() == 4)
-//                                        location1 = new Location(spot.getSpotId(), 20.991667, 105.796280, spot.getOrderNumber());
-//
-//                                    if (spot.getSpotId() == 185 && spot.getOrderNumber() == 0)
-//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 186 && spot.getOrderNumber() == 1)
-//                                        location1 = new Location(spot.getSpotId(), 20.991667, 105.796280, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 184 && spot.getOrderNumber() == 2)
-//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
-//
-//                                    if (spot.getSpotId() == 193 && spot.getOrderNumber() == 0)
-//                                        location1 = new Location(spot.getSpotId(), 20.991667, 105.796280, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 192 && spot.getOrderNumber() == 1)
-//                                        location1 = new Location(spot.getSpotId(), 20.991646, 105.790708, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 191 && spot.getOrderNumber() == 2)
-//                                        location1 = new Location(spot.getSpotId(), 20.992992, 105.788366, spot.getOrderNumber());
-//                                    if (spot.getSpotId() == 193 && spot.getOrderNumber() == 3)
-//                                        location1 = new Location(spot.getSpotId(), 20.993782, 105.786375, spot.getOrderNumber());
-
-                                    // location1 = new Location(spot.getSpotId(), 21.0243063, 105.7848029);
 
                                     if (!lstLOcat.contains(location1))
                                         lstLOcat.add(location1);
 
-                                    // Location location1 = new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()));
-                                    //2 21.0182486,105.7818165
-                                    //21.0166412,105.780631
-                                    //21.0138755,105.7762314
-                                    //21.0143274,105.7741553
 
                                 }
                             }

@@ -27,7 +27,7 @@ public class ListCheckInSpot extends RecyclerView.Adapter<ListCheckInSpot.SpotVi
     View mView;
 
     public ListCheckInSpot(List<Spot> listSpot, CourseListActivity activityContext) {
-
+        this.listSpot.clear();
         this.listSpot = listSpot;
         this.activityContext = activityContext;
     }

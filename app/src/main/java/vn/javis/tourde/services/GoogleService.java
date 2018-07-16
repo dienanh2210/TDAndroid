@@ -34,15 +34,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import vn.javis.tourde.R;
+
 import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.utils.DistanceLocation;
 
 /**
@@ -61,6 +65,7 @@ public class GoogleService extends Service implements LocationListener {
     private Handler mHandler = new Handler();
     private Timer mTimer = null;
     long notify_interval = 10000;
+
     public static String str_receiver = "tourde.service.receiver";
     public static String str_receiver_arrived = "tourde.service.receiver.arrived";
     Intent intent;
@@ -70,6 +75,8 @@ public class GoogleService extends Service implements LocationListener {
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
     public static final double DISTANCE_ALLOW = 100;
+    List<Integer> spotPushedNoti = new ArrayList<>(); //add order of spot
+    Date lastTimePushNoti;
 
     public GoogleService() {
 
@@ -85,6 +92,7 @@ public class GoogleService extends Service implements LocationListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
+            lstLocation.clear();
             lstLocation = (ArrayList<vn.javis.tourde.model.Location>) intent.getSerializableExtra("location");
         }
         return START_STICKY_COMPATIBILITY;
@@ -95,6 +103,8 @@ public class GoogleService extends Service implements LocationListener {
         super.onCreate();
         mTimer = new Timer();
         mTimer.schedule(new TimerTaskToGetLocation(), timeDelay, notify_interval);
+        lastTimePushNoti = new Date();
+        lastTimePushNoti.setTime(-30000);
         intent = new Intent(str_receiver);
         intent1 = new Intent(str_receiver_arrived);
 //        fn_getlocation();
@@ -152,7 +162,7 @@ public class GoogleService extends Service implements LocationListener {
                         longitude = location.getLongitude();
                         fn_update(location, true);
                     }
-                 //   locationManager.removeUpdates(this);
+                    //   locationManager.removeUpdates(this);
                 }
 
             }
@@ -172,7 +182,7 @@ public class GoogleService extends Service implements LocationListener {
 
                 if (locationManager != null) {
                     location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    Log.i("location_gps", "---------->"+location);
+                    Log.i("location_gps", "---------->" + location);
                     if (location != null) {
                         Log.e("latitude_gps", location.getLatitude() + "");
                         Log.e("longitude_gps", location.getLongitude() + "");
@@ -182,7 +192,7 @@ public class GoogleService extends Service implements LocationListener {
 
                     }
                 }
-           //     locationManager.removeUpdates(this);
+                //     locationManager.removeUpdates(this);
             }
 
 
@@ -231,9 +241,41 @@ public class GoogleService extends Service implements LocationListener {
             }
         }
         if (!lstLocationArrived.isEmpty()) {
-            if (CourseListActivity.isRunningBackground)
-                showNotification();
-            else
+            if (CourseListActivity.isRunningBackground) {
+                try {
+                    boolean isSameOrder = false;
+                    for (vn.javis.tourde.model.Location location1 : lstLocationArrived) {
+                        int ord = location1.getOrderNumber();
+                        boolean isExisted = false;
+                        for (int i : spotPushedNoti) {
+                            if (ord == i) {
+                                isExisted = true;
+                            }
+                        }
+                        isSameOrder = isExisted;
+                        if (!isSameOrder) {
+                            break;
+                        }
+                    }
+                    Date timeNow = new Date();
+                    long diff = (timeNow.getTime() - lastTimePushNoti.getTime()) / 1000;
+                    Log.i("LogTest", lstLocationArrived.get(0).getOrderNumber() +"-"+ diff+"-"+isSameOrder);
+                    if (!isSameOrder || diff >= 300) {
+                        Log.i("LogTest", ""+isSameOrder);
+                        showNotification();
+                        lastTimePushNoti = timeNow;
+                        spotPushedNoti.clear();
+                        for (vn.javis.tourde.model.Location location1 : lstLocationArrived) {
+                            spotPushedNoti.add(location1.getOrderNumber());
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //   canPushNoti=false;
+                //  LogTest();
+            } else
                 sendBroadcast(intent1);
         }
 
@@ -245,6 +287,7 @@ public class GoogleService extends Service implements LocationListener {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void showNotification() {
+        Log.i("LogTest", "showNotification");
         Notification.Builder builder = new Notification.Builder(this);
         Intent intent = new Intent(this, CourseListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -258,7 +301,7 @@ public class GoogleService extends Service implements LocationListener {
         builder.setSound(alarmSound);
         builder.setContentIntent(localPendingIntent);
         builder.setAutoCancel(true);
-    //    builder.setContentInfo("You have come here!");
+        //    builder.setContentInfo("You have come here!");
 //        builder.build();
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
