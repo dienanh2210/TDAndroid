@@ -30,6 +30,8 @@ import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
+
 public class MenuPageActivity extends BaseActivity {
 
     TextView tv_close, tv_basic, tv_userregistration;
@@ -158,46 +160,48 @@ public class MenuPageActivity extends BaseActivity {
     View.OnClickListener onClickLogout = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ProcessDialog.showDialogConfirm(MenuPageActivity.this, "", "ログアウトしますか？", new ProcessDialog.OnActionDialogClickOk() {
-                @Override
-                public void onOkClick() {
-                    LogoutAccount.logOut(token, new ServiceCallback() {
-                        @Override
-                        public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-                            JSONObject jsonObject = (JSONObject) response;
-                            // Log.d("logout", jsonObject.toString());
-                            Log.d("logout", token + jsonObject);
-                            if (jsonObject.has("success")) {
-                                rlt_register.setVisibility(View.VISIBLE);
-                                lineRegister.setVisibility(View.VISIBLE);
-                                tv_login.setVisibility(View.VISIBLE);
-                                ll_logout.setVisibility(View.GONE);
-                                basic_Info.setVisibility(View.GONE);
-                                LoginFragment.setmAccount(null);
-                                //Delete token from device when sign out
-                                SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
-//                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN);
-//                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.TOKEN_SNS);
-//                                SharedPreferencesUtils.getInstance(getApplicationContext()).removeKey(LoginUtils.LOGIN_TYPE);
-//                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Email", "");
-//                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Pass", "");
-//                                SharedPreferencesUtils.getInstance(getApplicationContext()).setStringValue("Username", "");
-                                Intent intent = new Intent(MenuPageActivity.this, CourseListActivity.class);
-                                intent.putExtra(Constant.KEY_LOGOUT_SUCCESS, 1);
-                                startActivity(intent);
-                                RegisterFragment.bitmapIcon = null;
-                            } else {
+            if(SharedPreferencesUtils.getInstance(MenuPageActivity.this).getLongValue(KEY_SHARED_BASETIME) != 0)
+            {
+                ProcessDialog.showDialogOk(MenuPageActivity.this, "", "走行中はログアウトできません。走行を終了してください。");
+            }
+            else {
+                ProcessDialog.showDialogConfirm(MenuPageActivity.this, "", "ログアウトしますか？", new ProcessDialog.OnActionDialogClickOk() {
+                    @Override
+                    public void onOkClick() {
+                        LogoutAccount.logOut(token, new ServiceCallback() {
+                            @Override
+                            public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
+                                JSONObject jsonObject = (JSONObject) response;
+                                // Log.d("logout", jsonObject.toString());
+                                Log.d("logout", token + jsonObject);
+                                if (jsonObject.has("success")) {
+                                    rlt_register.setVisibility(View.VISIBLE);
+                                    lineRegister.setVisibility(View.VISIBLE);
+                                    tv_login.setVisibility(View.VISIBLE);
+                                    ll_logout.setVisibility(View.GONE);
+                                    basic_Info.setVisibility(View.GONE);
+                                    LoginFragment.setmAccount(null);
+                                    //Delete token from device when sign out
+                                    SharedPreferencesUtils.getInstance(getApplicationContext()).delete();
+                                    SharedPreferencesUtils.getInstance(MenuPageActivity.this).setStringValue("Tutorial","finish");
+                                    SharedPreferencesUtils.getInstance(MenuPageActivity.this).setStringValue("rule","finish");
+                                    Intent intent = new Intent(MenuPageActivity.this, CourseListActivity.class);
+                                    intent.putExtra(Constant.KEY_LOGOUT_SUCCESS, 1);
+                                    startActivity(intent);
+                                    RegisterFragment.bitmapIcon = null;
+                                } else {
 
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onError(VolleyError error) {
-                            Log.e("", "onError: ", error);
-                        }
-                    });
-                }
-            });
+                            @Override
+                            public void onError(VolleyError error) {
+                                Log.e("", "onError: ", error);
+                            }
+                        });
+                    }
+                });
+            }
         }
     };
 
