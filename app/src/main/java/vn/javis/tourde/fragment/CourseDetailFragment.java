@@ -154,7 +154,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     String[] strCourseType = new String[]{"片道", "往復", "1周"};
     int indexTab;
     //String htmlText = "<html><body style=\"font-size:%spx; text-align:justify; color: black; margin: 0; padding: 0; line-height: 1.5\"> %s </body></Html>";
-    String htmlText = "<style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/fonts/HiraKakuPro-W3.otf\")}body,* {font-family: MyFont;text-align: justify;line-height: 1.5}img{max-width:100%;height:auto; border-radius: 8px;}</style>";
+    String htmlText = "<style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/fonts/HiraKakuPro-W3.otf\")}body,* {font-family: MyFont;text-align: justify;line-height: 1.5;margin: 0; padding: 0}</style>";
 
     int fontSize;
     int line;
@@ -361,7 +361,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         txtCatchPhrase.setText(model.getCatchPhrase());
 //        txtIntroduction.setText(model.getIntroduction());
         //webView.loadData(String.format(htmlText, "" + fontSize, model.getIntroduction()), "text/html; charset=utf-8", "utf-8");
-        webView.loadDataWithBaseURL("", htmlText + String.format("<div style=\"font-size:%spx;color: black; margin: 0; padding: 0\">", fontSize) + model.getIntroduction() + "</div>", "text/html", "utf-8", null);
+        webView.loadDataWithBaseURL("", htmlText + String.format("<div style=\"font-size:%spx;color: black \">", fontSize) + model.getIntroduction() + "</div>", "text/html", "utf-8", null);
 
 
         txtReviewCount.setText(courseDetail.getReviewTotal().getReviewCount());

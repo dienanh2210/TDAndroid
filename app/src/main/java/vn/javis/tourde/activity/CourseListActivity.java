@@ -160,6 +160,7 @@ public class CourseListActivity extends BaseActivity {
     private CheckPointFragment checkPointFragment;
     android.support.v4.app.FragmentTransaction frgTransaction;
     String token;
+    boolean token_sns;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -175,9 +176,10 @@ public class CourseListActivity extends BaseActivity {
         mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         medit = mPref.edit();
         token = SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN);
+        token_sns = SharedPreferencesUtils.getInstance(this).getBooleanValue(LoginUtils.TOKEN_SNS);
         fn_permission();
         //    showCourseFinish();hiện
-        if (!TextUtils.isEmpty(token)) {
+        if (!TextUtils.isEmpty(token)&&token_sns) {
             checkLogging();
         }
     }
