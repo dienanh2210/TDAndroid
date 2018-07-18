@@ -202,8 +202,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         spotRecycler.setLayoutManager(layoutManager);
         show_select_spot.setVisibility(View.GONE);
         list_spot.clear();
-        listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
-        spotRecycler.setAdapter(listSpotCheckinAdapter);
+   //     listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
+     //   spotRecycler.setAdapter(listSpotCheckinAdapter);
         final int courseId = mActivity.getmCourseID();
 
 //        setupViewPager(viewPager);
@@ -223,6 +223,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //                {
 //                    fragmentMap.onResume();
 //                }
+                list_spot.clear();
                 list_spot = mCourseDetail.getSpot();
                 if (list_spot.size() > 0) {
 
@@ -230,13 +231,13 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     latitude = Double.parseDouble(list_spot.get(0).getLatitude());
                     lastSpotId = list_spot.get(list_spot.size() - 1).getSpotId();
 
-                    listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
-                    listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
-                        @Override
-                        public void onItemClick(int id,int order) {
-                            showCheckPointFragment(id,order);
-                        }
-                    });
+               //     listSpotCheckinAdapter = new ListCheckInSpot(list_spot, mActivity);
+//                    listSpotCheckinAdapter.setOnItemClickListener(new ListCheckInSpot.OnItemClickedListener() {
+//                        @Override
+//                        public void onItemClick(int id,int order) {
+//                            showCheckPointFragment(id,order);
+//                        }
+//                    });
                     setupViewPager();
                     tabLayout.setupWithViewPager(viewPager);
                     if (saveCourseRunning == null) {
@@ -244,7 +245,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                         lastLongtitude = longtitude;
                         setListCheckedSpot();
                     }
-                    listSpotCheckinAdapter.notifyDataSetChanged();
+                 //   listSpotCheckinAdapter.notifyDataSetChanged();
 
                     //set info recyler tab fragment
 
@@ -281,11 +282,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             int id = spot.getSpotId();
             int orderNumber = spot.getOrderNumber();
             for (int i = 0; i < lstLocation.size(); i++) {
-                if (!isSpotChecked(id,orderNumber) && lstLocation.get(i).getSpotID() == id && orderNumber == lstLocation.get(i).getOrderNumber()) {
-
+                if (!isSpotChecked(id,orderNumber) && lstLocation.get(i).getSpotID() == id && orderNumber == lstLocation.get(i).getOrderNumber() && !newList.contains(spot)) {
                         newList.add(spot);
-                        continue;
-
                 }
             }
         }
@@ -320,7 +318,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 return;
             lstLocation.clear();
             lstLocation = (ArrayList<Location>) intent.getSerializableExtra("arrived");
-            Log.i("latutide111", "sbcccc");
+            Log.i("lstLocation", "lstLocation"+lstLocation.size());
             if (!lstLocation.isEmpty()) {
                 changeListSpotCheckInData();
             }
@@ -787,12 +785,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         ArrayList<Location> newList = new ArrayList<>();
         for (Spot spot : list_spot) {
             int id = spot.getSpotId();
-            int order =spot.getSpotId();
-            for (int i = 0; i < lstLocation.size(); i++) {
-                if (!isSpotChecked(id,order)) {
+            int order =spot.getOrderNumber();
+
+                if (order>0 && !isSpotChecked(id,order)) {
                     newList.add(new Location(spot.getSpotId(), Double.parseDouble(spot.getLatitude()), Double.parseDouble(spot.getLongitude()),spot.getOrderNumber()));
                 }
-            }
+
         }
         return newList;
     }
