@@ -22,7 +22,7 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true" />
+            androidwrayout_alignParentTop="true" />
         <LinearLayout
             android:id="@+id/SliderDots"
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             <Button
                 android:id="@+id/bt_usePage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_37sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginLeft="@dimen/_70sdp"
