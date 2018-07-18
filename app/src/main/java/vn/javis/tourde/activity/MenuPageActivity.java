@@ -162,7 +162,7 @@ public class MenuPageActivity extends BaseActivity {
         public void onClick(View view) {
             if(SharedPreferencesUtils.getInstance(MenuPageActivity.this).getLongValue(KEY_SHARED_BASETIME) != 0)
             {
-                ProcessDialog.showDialogOk(MenuPageActivity.this, "", "走行中はログアウトできません。走行を終了してください。");
+                ProcessDialog.showDialogOk(MenuPageActivity.this, "", "走行中はログアウトできません。\n 走行を終了してください。");
             }
             else {
                 ProcessDialog.showDialogConfirm(MenuPageActivity.this, "", "ログアウトしますか？", new ProcessDialog.OnActionDialogClickOk() {

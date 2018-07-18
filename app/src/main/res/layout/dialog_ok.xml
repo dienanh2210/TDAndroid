@@ -38,6 +38,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/Black"
                 android:textSize="@dimen/_15sdp"
+
                 android:textStyle="bold" />
 
             <TextView
@@ -48,6 +49,7 @@
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:textColor="@color/Black"
+                android:lineSpacingExtra="@dimen/_5sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"/>
         </RelativeLayout>

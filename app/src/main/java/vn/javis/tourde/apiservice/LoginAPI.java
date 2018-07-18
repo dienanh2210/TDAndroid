@@ -101,8 +101,8 @@ public class LoginAPI {
     public static void editAccount(Activity activity, String token, String email, String password, String nickname, Bitmap bitmap, int delete_image, int sex, int age, int area, ServiceCallback callback) {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", token);
-        params.put("email", email);
-        params.put("password", password);
+        if (email != null)params.put("email", email);
+       if (password != null) params.put("password", password);
         params.put("nickname", nickname);
         params.put("delete_image", String.valueOf(delete_image));
         params.put("sex", String.valueOf(sex));
