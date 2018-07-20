@@ -326,7 +326,7 @@
                         android:layout_toStartOf="@id/txt_btn_ping"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/_5sdp"
-                        android:src="@drawable/icon_bicycle_white" />
+                        android:src="@drawable/icon_bicycle_white_s2" />
                 </RelativeLayout>
 
                 <RelativeLayout

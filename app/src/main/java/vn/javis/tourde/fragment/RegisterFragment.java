@@ -210,7 +210,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 tv_age.setText(age + "代");
                 prefecture = jsonObject.getInt("area");
 
-                tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
+                if(prefecture>0)tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
                 if (!TextUtils.isEmpty(jsonObject.getString("image")))
                     PicassoUtil.getSharedInstance(getContext()).load(jsonObject.getString("image")).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
                 hideProgressDialog();

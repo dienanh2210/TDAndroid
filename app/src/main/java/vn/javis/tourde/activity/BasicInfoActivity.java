@@ -85,8 +85,8 @@ public class BasicInfoActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getInfo(loginType);
-
+        //getInfo(loginType);
+        getBasicLoginInfo();
     }
 
     View.OnClickListener onClickCloseBasicInfo = new View.OnClickListener() {
@@ -111,30 +111,30 @@ public class BasicInfoActivity extends BaseActivity {
         }
     };
 
-    private void getInfo(String loginType) {
+    /*private void getInfo(String loginType) {
         switch (loginType) {
             case ""://User login by email
                 getBasicLoginInfo();
                 break;
             case "1":// User login by Twitter
                 getTwitterLoginInfo();
-                disableUpdateInfoButton();
+                //disableUpdateInfoButton();
                 break;
             case "2":  //User Login by Facebook
                 getFacebookLoginInfo();
-                disableUpdateInfoButton();
+                //disableUpdateInfoButton();
                 break;
             case "3":// User login by Google plus
                 getGoogleLoginInfo();
-                disableUpdateInfoButton();
+                //disableUpdateInfoButton();
                 break;
             case "4":// User login by Line
                 showProgressDialog();
                 new getLineLoginInfo(this).execute();
-                disableUpdateInfoButton();
+                //disableUpdateInfoButton();
                 break;
         }
-    }
+    }*/
 
 
     private void getTwitterLoginInfo() {
@@ -207,6 +207,9 @@ public class BasicInfoActivity extends BaseActivity {
         if (acct != null) {
             tv_Username.setText(acct.getDisplayName());
             tv_UserEmail.setText(acct.getEmail());
+            sex.setText("男性");
+            age.setText("10代");
+            prefecture.setText("北海道");
             if (acct.getPhotoUrl() != null)
                 PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(acct.getPhotoUrl()).resize(200, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
         }
@@ -229,7 +232,7 @@ public class BasicInfoActivity extends BaseActivity {
                 age.setText(jsonObject.getInt("age") + "代");
 
                 int area = jsonObject.getInt("area");
-                prefecture.setText(ListArea.getAreaName(area - 1));
+                if (area>0) prefecture.setText(ListArea.getAreaName(area - 1));
                 if (!TextUtils.isEmpty(jsonObject.getString("image")))
                     PicassoUtil.getSharedInstance(BasicInfoActivity.this).load(jsonObject.getString("image")).resize(200, 200).onlyScaleDown().transform(new CircleTransform()).into(img_avatar);
                 hideProgressDialog();
