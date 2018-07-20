@@ -120,19 +120,16 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
                             float longtitude = Float.parseFloat( spot.getLongitude() );
                             uri1 += "/" + latitude + "," + longtitude;
 //                        uri += "/" +  mActivity.getLatitudeNetWork() + "," + mActivity.getLongitudeNetWork();
-                            Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1 ) );
-//                   String uri = String.format( "geo:%f,%f?q=%f,%f(Quanpv+hehe))", 0f, 0f, mActivity.getLatitudeNetWork(), mActivity.getLongitudeNetWork() );
-//                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
                             Log.i( "URI", "https://www.google.com/maps/dir" + uri1 );
-                            intent.setPackage( "com.google.android.apps.maps" );
-                            startActivity( intent );
+
                         }
                     }
-
+                   Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1 ) );
+                    intent.setPackage( "com.google.android.apps.maps" );
+                    startActivity( intent );
                 } catch (ActivityNotFoundException ex) {
                     //   Toast.makeText( getContext(), "Please install a maps application", Toast.LENGTH_LONG ).show();
                 }
-
                 break;
             case R.id.resume:
 
