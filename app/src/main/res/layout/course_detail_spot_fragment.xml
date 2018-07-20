@@ -5,8 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true">
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/course_list_header"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/_38sdp"
+        android:background="@drawable/header_border"
+        android:layout_alignParentTop="true"
+        >
+        <ImageButton
+            android:id="@+id/btn_back_to_list"
+            android:layout_width="@dimen/_11sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/icon_back_black"
+            android:contentDescription="@string/image_description" />
+
+        <ImageView
+            android:id="@+id/actionbar_title"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_19sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/btn_back_to_list"
+            android:layout_toStartOf="@+id/btn_share"
+            android:gravity="center"
+            android:src="@drawable/course_list_title"
+            android:textAlignment="center"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_19ssp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btn_share"
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/icon_upload"
+            android:contentDescription="@string/image_description" />
+    </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/course_list_header"
         android:layout_marginBottom="@dimen/_45sdp"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -14,50 +59,7 @@
         android:layout_height="wrap_content"
         android:background="@color/White"
         android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/course_list_header"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_38sdp"
-            android:background="@drawable/header_border"
-            android:layout_alignParentTop="true"
-            >
-            <ImageButton
-                android:id="@+id/btn_back_to_list"
-                android:layout_width="@dimen/_11sdp"
-                android:layout_height="@dimen/_17sdp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/icon_back_black"
-                android:contentDescription="@string/image_description" />
 
-            <ImageView
-                android:id="@+id/actionbar_title"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_19sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                android:layout_toEndOf="@+id/btn_back_to_list"
-                android:layout_toStartOf="@+id/btn_share"
-                android:gravity="center"
-                android:src="@drawable/course_list_title"
-                android:textAlignment="center"
-                android:textColor="@color/Black"
-                android:textSize="@dimen/_19ssp"
-                android:textStyle="bold" />
-
-            <ImageButton
-                android:id="@+id/btn_share"
-                android:layout_width="@dimen/_17sdp"
-                android:layout_height="@dimen/_17sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/icon_upload"
-                android:contentDescription="@string/image_description" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -259,7 +261,7 @@
         </vn.javis.tourde.view.YourScrollableViewPager>
 
     </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
     <include layout="@layout/footer_layout" />
 </RelativeLayout>
 
