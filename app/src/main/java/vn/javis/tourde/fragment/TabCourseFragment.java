@@ -241,17 +241,30 @@ public class TabCourseFragment extends BaseFragment {
         rlt_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGoogleMapAtStartSpot();
+             //   openGoogleMapAtStartSpot();
+                try {
+                    String uri1 = "";
+                    if(listSpot.size()>0) {
+                        for (Spot spot : listSpot) {
+                            float latitude = Float.parseFloat( spot.getLatitude() );
+                            float longtitude = Float.parseFloat( spot.getLongitude() );
+                            uri1 += "/" + latitude + "," + longtitude;
+//                        uri += "/" +  mActivity.getLatitudeNetWork() + "," + mActivity.getLongitudeNetWork();
+                            Log.i( "URI", "https://www.google.com/maps/dir" + uri1 );
+
+                        }
+                    }
+                    Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1 ) );
+                    intent.setPackage( "com.google.android.apps.maps" );
+                    startActivity( intent );
+                } catch (ActivityNotFoundException ex) {
+                    //   Toast.makeText( getContext(), "Please install a maps application", Toast.LENGTH_LONG ).show();
+                }
             }
         });
-
-
         rlt_Navitime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//               Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja "));
-//                startActivity(browserIntent)
-
                 String packageName = "com.navitime.local.navitime";
                 // String packageName = "NAVITIME: 地図・ルート検索";
                 launchNewActivity(getContext(), packageName);
@@ -327,6 +340,7 @@ public class TabCourseFragment extends BaseFragment {
                 }
             }
         }
+
 
     }
 }
