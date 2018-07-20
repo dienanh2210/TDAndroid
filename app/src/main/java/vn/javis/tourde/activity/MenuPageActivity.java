@@ -48,6 +48,8 @@ public class MenuPageActivity extends BaseActivity {
     RelativeLayout privacy;
     @BindView(R.id.inquiry)
     RelativeLayout inquiry;
+    @BindView( R.id.rateInApp )
+    RelativeLayout rateInApp;
     MenuPageActivity activity;
     @BindView(R.id.tv_version)
     TextView tv_version;
@@ -90,6 +92,8 @@ public class MenuPageActivity extends BaseActivity {
 
         }
         rlt_pippon.setOnClickListener(onClicknippon);
+        rateInApp.setOnClickListener(onClickrate);
+
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,11 +116,17 @@ public class MenuPageActivity extends BaseActivity {
         } catch (PackageManager.NameNotFoundException e) {
         }
     }
-
     View.OnClickListener onClicknippon = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Uri uri = Uri.parse("http://www.tour-de-nippon.jp/series/");
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
+    };
+    View.OnClickListener onClickrate = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=tour.de.nippon.app&hl=ja");
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
     };
