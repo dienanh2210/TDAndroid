@@ -49,10 +49,10 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center_vertical"
                 android:text="@string/item_text_header"
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/_12sdp"
@@ -62,7 +62,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_3sdp"
             android:contentDescription="@string/image_description"
             android:background="@color/Gray"/>
 
@@ -107,6 +106,7 @@
                 android:text="@string/item_text_detail"
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
                 tools:ignore="SpUsage" />
         </RelativeLayout>
 

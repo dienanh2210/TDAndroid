@@ -198,7 +198,7 @@ public class LoginUtils {
         }
     }
 
-    private static void processApiResponse(final Activity activity, String sns_id, final String sns_kind) {
+    private static void processApiResponse(final Activity activity,final String sns_id, final String sns_kind) {
         ProcessDialog.showloading(activity,true);
         LoginAPI.loginSNS(sns_id, sns_kind, new vn.javis.tourde.services.ServiceCallback() {
             @Override
@@ -206,7 +206,7 @@ public class LoginUtils {
                 JSONObject jsonObject = (JSONObject) response;
                 if (jsonObject.has("success")) {
                     //Todo save token to device
-                    Log.i(TAG, "onSuccess: " + sns_kind + response.toString());
+                    Log.i(TAG, "sns_id: " + sns_id + response.toString());
                     String token = jsonObject.getString("token");
                     SharedPreferencesUtils.getInstance(activity).setStringValue(TOKEN, token);
                     SharedPreferencesUtils.getInstance(activity).setBooleanValue(TOKEN_SNS, true);
@@ -316,7 +316,7 @@ public class LoginUtils {
                                 .into(new Target() {
                                     @Override
                                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                                        LoginAPI.editAccount(activity, token, result.data.email, null, result.data.name, bitmap, 0, 1, 1, 1, new ServiceCallback() {
+                                        LoginAPI.editAccount(activity, token, result.data.email, null, result.data.name, bitmap, 0, -1, -1, -1, new ServiceCallback() {
                                             @Override
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 if (((JSONObject) response).has("success")) {
@@ -341,7 +341,7 @@ public class LoginUtils {
 
                                     @Override
                                     public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                                        LoginAPI.editAccount(activity, token, result.data.email, null, result.data.name, null, 0, 1, 1, 1, new ServiceCallback() {
+                                        LoginAPI.editAccount(activity, token, result.data.email, null, result.data.name, null, 0, -1, -1, -1, new ServiceCallback() {
                                             @Override
                                             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                                                 if (((JSONObject) response).has("success")) {

@@ -179,8 +179,8 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     private void retrieveFileFromUrl() {
 
-        if (!TextUtils.isEmpty(mapUrl))
-            new DownloadKmlFile( mapUrl ).execute();
+        if (!TextUtils.isEmpty("https://www.app-tour-de-nippon.jp/test/post_data/course_kml_file/8803d35918ac447ec7aa.kml"))
+            new DownloadKmlFile( "https://www.app-tour-de-nippon.jp/test/post_data/course_kml_file/8803d35918ac447ec7aa.kml" ).execute();
         else {
 
             mMap.setMyLocationEnabled(true);

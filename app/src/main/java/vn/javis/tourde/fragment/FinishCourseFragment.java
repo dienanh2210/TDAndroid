@@ -163,7 +163,7 @@ public class FinishCourseFragment extends BaseFragment {
             public void onClick(View view) {
 //                mActivity.showFragmentTabLayoutRunning();
                 //mActivity.popBackStack(FragmentTabLayoutRunning.class.getSimpleName());
-                mActivity.openPage(new FragmentTabLayoutConfirmPage(),true,false);
+                mActivity.openPage(new FragmentTabLayoutConfirmPage(), true, false);
             }
         });
         btnToDetail.setOnClickListener(new View.OnClickListener() {
@@ -203,12 +203,15 @@ public class FinishCourseFragment extends BaseFragment {
         return mCourseDetail;
     }
 
+    boolean check_save = false;
+
     @OnClick(R.id.btn_save_image)
     void captureFinish() {
         if (CameraUtils.checkWriteToDiskPermissions(mActivity)) {
             ProcessDialog.showDialogConfirm(getContext(), "", "走行結果画面を\n" + "端末に保存しますか？", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
+                    check_save = true;
                     photoFile = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
                     imageStoragePath = photoFile.getAbsolutePath();
                     Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
@@ -225,8 +228,13 @@ public class FinishCourseFragment extends BaseFragment {
 
     @OnClick(R.id.txt_btn_share)
     void shareSNS() {
-        captureFinish();
-
+        if (!check_save) {
+            photoFile = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
+            imageStoragePath = photoFile.getAbsolutePath();
+            Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
+            CameraUtils.storeImage(bitmap, photoFile);
+            CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+        }
         if (imageStoragePath != null) {
             final Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -235,8 +243,7 @@ public class FinishCourseFragment extends BaseFragment {
             Uri uri = Uri.fromFile(photoFile);
             shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
             mActivity.startActivity(Intent.createChooser(shareIntent, "Share image using"));
-        } else
-            Toast.makeText(mActivity, "Please save the result before ", Toast.LENGTH_SHORT).show();
+        }
         TourDeApplication.getInstance().trackEvent("tap_shared_course_id=" + mCourseID, "tap", "tap_shared_course_id=" + mCourseID);
     }
 

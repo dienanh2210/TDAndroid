@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -51,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        checkMaintenanceAndAppVersion();
+
+        if(!isNetworkAvailable())
+        {
+            ProcessDialog.showDialogOk(MainActivity.this, "", "サーバーに接続できません。");
+        }
+        else {
+            checkMaintenanceAndAppVersion();
+        }
         GrowthPush.getInstance().initialize(this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
                 BuildConfig.DEBUG ? Environment.development : Environment.production);
         GrowthPush.getInstance().requestRegistrationId("1079044899926");
@@ -71,7 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    private boolean isNetworkAvailable() {
+        // Using ConnectivityManager to check for Network Connection
+        ConnectivityManager connectivityManager = (ConnectivityManager) this
+                .getSystemService( MainActivity.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager
+                .getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
     public void checkServerDone() {
 
         Log.i("Tutorial", "-------?" + SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial"));
@@ -210,11 +226,11 @@ public class MainActivity extends AppCompatActivity {
                                                 break;
                                             }
                                             case "2": {
-                                                final String packageName = "com.navitime.local.navitime";
+                                                final String packageName = "tour.de.nippon.app";
                                                 ProcessDialog.showDialogOk(MainActivity.this, "", "このアプリは最新バージョンにアップデート可能です。", new ProcessDialog.OnActionDialogClickOk() {
                                                     @Override
                                                     public void onOkClick() {
-                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=tour.de.nippon.app&hl=ja" + packageName)));
                                                     }
                                                 });
                                                 break;

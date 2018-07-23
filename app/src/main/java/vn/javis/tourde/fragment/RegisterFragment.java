@@ -400,6 +400,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             //        bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
             File file = new File(getPath(selectedImage));
             Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
+            
             if (file.length() < FILE_SIZE_8MB /*&& bitmapIcon != null*/) {
 //                    select_userIcon.setImageBitmap(bitmapIcon);
                 Intent intent = new Intent(getActivity(), CropperImageActivity.class);

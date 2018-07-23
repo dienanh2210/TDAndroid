@@ -1,6 +1,7 @@
 package vn.javis.tourde.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SaveCourseRunning {
@@ -20,6 +21,15 @@ public class SaveCourseRunning {
     private float avarageSpeed;
     private int highestCheckedSpot;
 
+    public Date getLastTimeCheckin() {
+        return lastTimeCheckin;
+    }
+
+    public void setLastTimeCheckin(Date lastTimeCheckin) {
+        this.lastTimeCheckin = lastTimeCheckin;
+    }
+
+    private Date lastTimeCheckin;
 
     public SaveCourseRunning(int courseID, double start_latitude, double start_longtitude) {
         this.courseID = courseID;
