@@ -96,10 +96,7 @@ public class TakePhotoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 //        ButterKnife.bind(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        View decorView = getWindow().getDecorView();
-        // Hide the status bar.
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+        hideStatusBar();
         showProgressDialog();
         spotId = getIntent().getIntExtra(CourseListActivity.SPOT_ID, 0);
         courseID = getIntent().getIntExtra(CourseListActivity.COURSE_DETAIL_ID, 0);
@@ -197,6 +194,24 @@ public class TakePhotoActivity extends BaseActivity {
         layoutParams.height = height;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideStatusBar();
+    }
+
+    private void hideStatusBar() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
 
     public void setFocus() {
         Camera.Parameters params = camera.getParameters();

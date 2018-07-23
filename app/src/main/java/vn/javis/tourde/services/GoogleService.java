@@ -74,7 +74,7 @@ public class GoogleService extends Service implements LocationListener {
     private String filename = "logGPS.txt";
     ArrayList<vn.javis.tourde.model.Location> lstLocation = new ArrayList<>();
     ArrayList<vn.javis.tourde.model.Location> lstLocationArrived = new ArrayList<>();
-    public static final double DISTANCE_ALLOW = 1000000;
+    public static final double DISTANCE_ALLOW = 100;
     List<Integer> spotPushedNoti = new ArrayList<>(); //add order of spot
     Date lastTimePushNoti;
 
