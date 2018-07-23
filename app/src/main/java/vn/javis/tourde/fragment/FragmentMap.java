@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -86,6 +88,8 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         mapUrl = mActivity.getMapUrl();
+        //mapUrl = "https://www.app-tour-de-nippon.jp/test/post_data/course_kml_file/8803d35918ac447ec7aa.kml";
+
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace( R.id.map, SupportMapFragment.newInstance(), "map" );
         transaction.commit();
@@ -172,11 +176,23 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private void retrieveFileFromUrl() {
-        if (mapUrl != null)
+
+        if (!TextUtils.isEmpty(mapUrl))
             new DownloadKmlFile( mapUrl ).execute();
+        else {
+
+            mMap.setMyLocationEnabled(true);
+            LatLng currentLatLng = new LatLng(mActivity.getLatitudeNetWork(),
+                    mActivity.getLongitudeNetWork());
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(currentLatLng,13
+                    );
+        mMap.moveCamera(update);}
+
     }
 
+    @SuppressLint("MissingPermission")
     private void moveCameraToKml(KmlLayer kmlLayer) {
         try {
 
@@ -196,7 +212,14 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
 
             int width = getResources().getDisplayMetrics().widthPixels;
             int height = getResources().getDisplayMetrics().heightPixels;
-            getMap().moveCamera( CameraUpdateFactory.newLatLngBounds( builder.build(), width, height, 1 ) );
+            getMap().setMyLocationEnabled(true);
+            LatLng currentLatLng = new LatLng(mActivity.getLatitudeNetWork(),
+                    mActivity.getLatitudeNetWork());
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(currentLatLng,12
+            );
+            mMap.moveCamera(update);
+            //getMap().moveCamera( CameraUpdateFactory.newLatLngBounds( builder.build(), width, height, 1 ) );
+
         } catch (Exception e) {
 
         }
