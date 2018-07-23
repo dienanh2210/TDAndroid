@@ -102,12 +102,12 @@ public class LoginAPI {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", token);
         if (email != null)params.put("email", email);
-       if (password != null) params.put("password", password);
-        params.put("nickname", nickname);
-        params.put("delete_image", String.valueOf(delete_image));
-        params.put("sex", String.valueOf(sex));
-        params.put("age", String.valueOf(age));
-        params.put("area", String.valueOf(area));
+        if (password != null) params.put("password", password);
+        if (nickname != null)params.put("nickname", nickname);
+        if (String.valueOf(delete_image) != null)params.put("delete_image", String.valueOf(delete_image));
+        if (String.valueOf(sex) != null)params.put("sex", String.valueOf(sex));
+        if (String.valueOf(age) != null)params.put("age", String.valueOf(age));
+        if (String.valueOf(area) != null)params.put("area", String.valueOf(area));
         TourDeService.uploadImageBitmap(activity, ApiEndpoint.POST_EDIT_ACCOUNT, bitmap, params, callback);
     }
 
