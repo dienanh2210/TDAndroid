@@ -37,6 +37,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -120,6 +121,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public boolean isTimeSaved;
     boolean isPausing;
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
+    Date lastTimeCheckin;
 
     public static FragmentTabLayoutRunning newInstance(ListCheckInSpot.OnItemClickedListener listener) {
         FragmentTabLayoutRunning fragment = new FragmentTabLayoutRunning();
@@ -138,6 +140,8 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
         courseID = mActivity.getmCourseID();
+        lastTimeCheckin = new Date();
+        lastTimeCheckin.setTime(-30000);
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
         if (!TextUtils.isEmpty(savedString)) {
             saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
@@ -151,6 +155,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             mActivity.setmCourseID(courseID);
             lastLongtitude = saveCourseRunning.getLast_longtitude();
             lastLatitude = saveCourseRunning.getLast_latitude();
+            lastTimeCheckin = saveCourseRunning.getLastTimeCheckin();
             //    lastLongtitude = saveCourseRunning.la
 //            if(saveCourseRunning.isFinished())
 //            {
@@ -160,6 +165,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
         }
         preferencesUtils = SharedPreferencesUtils.getInstance(mActivity);
+
         //  mActivity.registerReceiver(broadcastReceiver, new IntentFilter(GoogleService.str_receiver));
         //   mActivity.registerReceiver(broadcastReceiverArried, new IntentFilter(GoogleService.str_receiver_arrived));
     }
@@ -316,11 +322,23 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             if (changePaged)
                 return;
-            lstLocation.clear();
-            lstLocation = (ArrayList<Location>) intent.getSerializableExtra("arrived");
-            Log.i("lstLocation", "lstLocation" + lstLocation.size());
-            if (!lstLocation.isEmpty()) {
-                changeListSpotCheckInData();
+            //check time here
+            try {
+                Date timeNow = new Date();
+                long diff = (timeNow.getTime() - lastTimeCheckin.getTime()) / 1000;
+
+                if (diff < 300) {
+                    return;
+                }
+                lstLocation.clear();
+                lstLocation = (ArrayList<Location>) intent.getSerializableExtra("arrived");
+                Log.i("lstLocation335", "lstLocation" + lstLocation.size());
+                if (!lstLocation.isEmpty()) {
+                    changeListSpotCheckInData();
+                }
+            } catch (Exception e) {
+
+
             }
         }
     };
@@ -352,7 +370,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
         long lastCheckedTime = saveCourseRunning.getLastCheckedTime();
         long timeDiffer = time - lastCheckedTime;
-
+        Date timeNow = new Date();
+        lastTimeCheckin = timeNow;
+        saveCourseRunning.setLastTimeCheckin(lastTimeCheckin);
         checkedSpot(spotId, order, getTimeFormat(timeDiffer), calculateAvarageSpeed(timeDiffer), time);
 
         if (spotId > 0 && courseID > 0) {
@@ -421,7 +441,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                                     final String title = model.getTitle() == null ? "" : model.getTitle();
                                     String finish_time = getTimeFormat(time);
 
-                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distanceSpot, model.getGained());
+                                    mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distanceSpot, model.getGained(),false);
                                 }
                             }
                             hideProgressDialog();
@@ -481,7 +501,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //                                for test animation
 //                                if(spotId==181) model.setGained( true );
 
-                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distanceSpot, model.getGained());
+                                mActivity.showCheckPointFragment(spotId, imgUrl, title, finish_time, distanceSpot, model.getGained(),false);
                                 isTimeSaved = true;
                             }
                         }
@@ -698,9 +718,12 @@ public class FragmentTabLayoutRunning extends BaseFragment {
             SaveCourseRunning.CheckedSpot checkedSpot = saveCourseRunning.new CheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
             saveCourseRunning.getLstCheckedSpot().add(checkedSpot);
             //saveCourseRunning.addCheckedSpot(spot.getSpotId(), spot.getTitle(), spot.getOrderNumber(), spot.getTopImage(), checked);
-           final int spotID = spot.getSpotId();
+            final int spotID = spot.getSpotId();
             if (checked) {
                 //check in first spot
+                Date timeNow = new Date();
+                lastTimeCheckin = timeNow;
+                saveCourseRunning.setLastTimeCheckin(lastTimeCheckin);
                 CheckInStampAPI.postCheckInStamp(token, spot.getSpotId(), new ServiceCallback() {
                     @Override
                     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
@@ -709,7 +732,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                             Stamp model = Stamp.getData(response.toString());
 
                             if (model.getSuccess()) {
-                                if(model.getGained()){
+                                if (model.getGained()) {
                                     isSaveTime = false;
                                     preferencesUtils.setLongValue(KEY_SHARED_BASETIME, chronometer.getBase());
                                     String imgUrl = model.getImage() == null ? "" : model.getImage();
@@ -718,7 +741,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //                                for test animation
 //                                if(spotId==181) model.setGained( true );
 
-                                    mActivity.showCheckPointFragment(spotID, imgUrl, title, "", "", model.getGained());
+                                    mActivity.showCheckPointFragment(spotID, imgUrl, title, "", "", model.getGained(),true);
                                     isTimeSaved = true;
                                 }
 
