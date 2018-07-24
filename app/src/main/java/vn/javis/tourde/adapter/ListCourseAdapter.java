@@ -70,7 +70,7 @@ ListCourseAdapter extends RecyclerView.Adapter<ListCourseAdapter.CourseViewHolde
         holder.txtTitle.setText(model.getTitle());
         holder.txtArea.setText(model.getArea());
         if (!TextUtils.isEmpty(model.getTag()))
-            holder.txtTag.setText("# " + model.getTag());
+            holder.txtTag.setText("#" + model.getTag());
         holder.txtDistance.setText(model.getDistance() + "km");
         holder.txtCatchPhrase.setText(model.getCatchPhrase());
         holder.txtReviewCount.setText(model.getReviewCount());

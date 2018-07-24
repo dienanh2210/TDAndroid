@@ -123,6 +123,20 @@ public class FavoriteCourseAdapter extends RecyclerView.Adapter<FavoriteCourseAd
 //                        activityContext.openPage(new FragmentTabLayoutRunning(), CourseDetailFragment.class.getSimpleName(), true, false);
                         activityContext.openPage(CourseDetailFragment.newInstance(true), true, false);
                     }
+                    else
+                    {
+                        ProcessDialog.showDialogConfirm(activityContext, "", "走行中のコースがあります。\n 終了しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+
+                                SharedPreferencesUtils.getInstance(activityContext).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                                SharedPreferencesUtils.getInstance(activityContext).removeKey(Constant.SAVED_COURSE_RUNNING);
+                                SharedPreferencesUtils.getInstance(activityContext).removeKey(Constant.KEY_GOAL_PAGE);
+                                activityContext.setmCourseID(model.getCourseId());
+                                activityContext.showCourseDrive();
+                            }
+                        });
+                    }
                 }
             });
         }
