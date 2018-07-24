@@ -52,6 +52,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import vn.javis.tourde.adapter.ListCheckInSpot;
 import vn.javis.tourde.apiservice.ApplicationVersionAPI;
 import vn.javis.tourde.apiservice.CommentsAPI;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
@@ -401,7 +402,6 @@ public class CourseListActivity extends BaseActivity {
         searchCourseFragment = SearchCourseFragment.newInstance(listener);
         openPage(searchCourseFragment, true, true);
     }
-
     public void openPage(android.support.v4.app.Fragment fragment, boolean isBackStack, boolean isAnimation) {
         if (fragment.getArguments() == null)// quanpv
             fragment.setArguments(dataBundle);
