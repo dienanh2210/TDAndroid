@@ -263,7 +263,6 @@ public class TabCourseFragment extends BaseFragment {
             }
         });
 
-
         rlt_Navitime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
