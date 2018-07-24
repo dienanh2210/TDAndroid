@@ -55,7 +55,7 @@ public class FragmentRunning extends BaseFragment {
         mActivity = (CourseListActivity) getActivity();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerRunning.setLayoutManager(layoutManager);
-        RunningCourseAPI.getListRunningCourse(token, 1, 5, new ServiceCallback() {
+        RunningCourseAPI.getListRunningCourse(token, 1, 15000, new ServiceCallback() {
             @Override
             public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
                 Log.i("favorite", response.toString());
