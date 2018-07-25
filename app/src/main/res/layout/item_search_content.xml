@@ -28,14 +28,14 @@
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_1sdp"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_14sdp"
                 android:text="@string/item_text"
                 android:textColor="@color/Black"/>
 
             <ImageView
                 android:id="@+id/imv_mark"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_15sdp"

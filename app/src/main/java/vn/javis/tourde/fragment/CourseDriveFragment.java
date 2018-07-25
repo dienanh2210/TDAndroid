@@ -31,11 +31,16 @@ import com.google.maps.android.SphericalUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.apiservice.GetCourseDataAPI;
 import vn.javis.tourde.model.CourseDetail;
+import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.services.GoogleService;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
@@ -48,8 +53,8 @@ public class CourseDriveFragment extends BaseFragment {
     ImageView btnStart;
     @BindView(R.id.btn_back_drive)
     ImageButton btnBack;
-    @BindView(R.id.btn_back_detail)
-    Button getBtnBackDetail;
+    @BindView(R.id.btn_drive)
+    Button btn_drive;
     @BindView(R.id.btn_show_map)
     Button btnMapWay;
     CourseListActivity mAcitivity;
@@ -63,7 +68,6 @@ public class CourseDriveFragment extends BaseFragment {
     double startLongtitude;
     double startLatitude;
     public boolean isFromMain = true;
-
     public static CourseDriveFragment newInstance(boolean isFromMain) {
         CourseDriveFragment fragment = new CourseDriveFragment();
         fragment.isFromMain = isFromMain;
@@ -142,10 +146,27 @@ public class CourseDriveFragment extends BaseFragment {
                 mAcitivity.onBackPressed();
             }
         });
-        getBtnBackDetail.setOnClickListener(new View.OnClickListener() {
+        btn_drive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAcitivity.onBackPressed();
+                //mAcitivity.onBackPressed();
+
+
+                    String uri = String.format( Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&dirflg=d", startLatitude, startLongtitude, "");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                    intent.setPackage("com.google.android.apps.maps");
+                    startActivity(intent);
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException ex) {
+                        try {
+                            Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                            startActivity(unrestrictedIntent);
+                        } catch (ActivityNotFoundException innerEx) {
+                            //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
             }
         });
 
@@ -177,7 +198,6 @@ public class CourseDriveFragment extends BaseFragment {
         });
 
     }
-
     private void getStartPosition() {
         GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
             @Override
@@ -212,10 +232,10 @@ public class CourseDriveFragment extends BaseFragment {
             try {
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
+                //intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
                 context.startActivity(intent);
             } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
 
             }
         } else {

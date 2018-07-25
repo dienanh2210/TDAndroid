@@ -108,8 +108,8 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.navitime:
-                String packageName = "com.navitime.local.navitime";
-                launchNewActivity( getContext(), packageName );
+               // String packageName = "com.navitime.local.navitime";
+                //launchNewActivity( getContext(), packageName );
                 break;
             case R.id.googleMap:
                 try {

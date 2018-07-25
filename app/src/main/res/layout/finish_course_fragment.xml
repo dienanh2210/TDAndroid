@@ -152,13 +152,11 @@
                     android:id="@+id/txt_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_15sdp"
-                    android:layout_marginRight="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
                     android:text="00:00:00"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_64sdp"
+                    android:textSize="@dimen/_60sdp"
                     android:textStyle="bold" />
 
                 <LinearLayout

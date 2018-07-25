@@ -328,7 +328,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 String shareSub = txtTitle.getText().toString();
                 String share = url;
                 //  myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody + "\n" + share);
+                myIntent.putExtra(Intent.EXTRA_TEXT, "#ツールド"+"\n"+"コース紹介："+shareBody + "\n" + share);
 
                 startActivity(Intent.createChooser(myIntent, ""));
             }
@@ -551,7 +551,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     public void btnFavoriteClick(boolean inChild) {
         if (inChild && isFavourite) {
-            return;
+           // return;
         }
         isFavourite = !isFavourite;
 
