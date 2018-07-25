@@ -130,7 +130,10 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActivity.showSearchPage(CourseListFragment.this);
+                  mActivity.showSearchPage(CourseListFragment.this);
+
+
+
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
