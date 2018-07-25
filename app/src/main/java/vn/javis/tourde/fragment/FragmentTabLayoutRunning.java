@@ -571,6 +571,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
                     }
                 });
+
                 break;
 
         }

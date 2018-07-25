@@ -232,9 +232,9 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         }
 
 
-        if (evelation.equals("激坂")) {
+        if (evelation.equals("1000m以上")) {
             isOver = "1";
-        } else if (evelation.equals("坂少"))
+        } else if (evelation.equals("200m以下"))
             isLess = "1";
 
         List<String> type = new ArrayList<>();

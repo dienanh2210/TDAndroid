@@ -1,12 +1,10 @@
 package vn.javis.tourde.fragment;
 
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,26 +12,26 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,11 +41,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.adapter.ListSpotDetailCircleAdapter;
 
-import vn.javis.tourde.apiservice.ListCourseAPI;
-import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.utils.ClassToJson;
@@ -82,14 +77,17 @@ public class TabCourseFragment extends BaseFragment {
     @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
     @BindView(R.id.img_map)
+
     ImageView imgRoute;
     int mCourseID;
+    private GoogleMap googleMap;
     ListSpotDetailCircleAdapter listSpotAdapter;
     CourseListActivity mActivity;
     List<Spot> listSpot = new ArrayList<>();
     String avagePace, finishTIme, startAddress, routeUrl, routeImg;
     CourseDetailFragment parentFragment;
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
+
 
     public static TabCourseFragment instance(List<Spot> lstSpot, CourseDetailFragment parentFragment) {
         TabCourseFragment fragment = new TabCourseFragment();
@@ -259,6 +257,8 @@ public class TabCourseFragment extends BaseFragment {
                     String uri1 = "";
                     if(listSpot.size()>0) {
                         for (Spot spot : listSpot) {
+//                            float latitude = Float.parseFloat( spot.getLatitude() );
+//                            float longtitude = Float.parseFloat( spot.getLongitude() );
                             float latitude = Float.parseFloat( spot.getLatitude() );
                             float longtitude = Float.parseFloat( spot.getLongitude() );
                             uri1 += "/" + latitude + "," + longtitude;
@@ -275,6 +275,7 @@ public class TabCourseFragment extends BaseFragment {
                 }
             }
         });
+
         rlt_Navitime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,10 +297,10 @@ public class TabCourseFragment extends BaseFragment {
             try {
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
+                //intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja" + packageName));
                 context.startActivity(intent);
             } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
+                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.navitime.local.navitime&hl=ja " + packageName)));
 
             }
         } else {

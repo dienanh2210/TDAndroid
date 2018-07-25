@@ -14,8 +14,8 @@
         >
         <ImageButton
             android:id="@+id/btn_back_to_list"
-            android:layout_width="@dimen/_11sdp"
-            android:layout_height="@dimen/_17sdp"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/_15sdp"
@@ -40,8 +40,8 @@
 
         <ImageButton
             android:id="@+id/btn_share"
-            android:layout_width="@dimen/_17sdp"
-            android:layout_height="@dimen/_17sdp"
+            android:layout_width="@dimen/_19sdp"
+            android:layout_height="@dimen/_19sdp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="@dimen/_15sdp"
