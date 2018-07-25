@@ -271,8 +271,8 @@
 
     <!--course drive-->
     <string name="txtRedCourseDrive">※スタート地点で『START』を押してください</string>
-    <string name="btnFirst">コース画面へ</string>
-    <string name="btnSecond">スタート地点までのアクセス</string>
+    <string name="btnFirst">スタート地点までのアクセス</string>
+    <string name="btnSecond">コース詳細をみる</string>
     <string name="cancel">いいえ</string>
     <string name="yes">はい</string>
     <string name="ok">OK</string>

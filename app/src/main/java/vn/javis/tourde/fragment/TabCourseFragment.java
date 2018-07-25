@@ -334,7 +334,7 @@ public class TabCourseFragment extends BaseFragment {
         return String.valueOf(df.format(Double.valueOf(s)));
     }
 
-    void openGoogleMapAtStartSpot() {
+  void openGoogleMapAtStartSpot() {
         if (listSpot.size() > 0) {
             float startSpotLatitude = Float.parseFloat(listSpot.get(0).getLatitude());
             float startSpotLongtitude = Float.parseFloat(listSpot.get(0).getLongitude());

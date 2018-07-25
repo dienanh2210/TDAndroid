@@ -91,6 +91,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
     LinearLayout ln_browser;
     @BindView( R.id.ln_call )
      LinearLayout ln_call;
+    String url = "";
     boolean istrue;
     List<String> listSpotImage= new ArrayList<>();
     @Nullable
@@ -112,6 +113,7 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
 
         mActivity = (CourseListActivity) getActivity();
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+        url="https://www.app-tour-de-nippon.jp/test/course/?course_id="+spotId;
         if(mActivity.typeBackPress==3)
         {
             indexTab=1;
@@ -168,8 +170,11 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                //  myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
-                myIntent.putExtra(Intent.EXTRA_TEXT,"" );
+                String shareBody = txtTitle.getText().toString();
+            //    String url=txtSiteURL.getText().toString();
+                String share = url;
+                myIntent.putExtra(Intent.EXTRA_TEXT, "#ツールド"+"\n"+"スポット紹介："+shareBody + "\n" + share);
+              //  myIntent.putExtra(Intent.EXTRA_TEXT,"" );
                 startActivity(Intent.createChooser(myIntent, ""));
             }
         });

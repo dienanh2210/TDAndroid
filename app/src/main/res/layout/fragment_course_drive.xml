@@ -71,7 +71,7 @@
                 android:textSize="@dimen/_13sdp" />
 
             <Button
-                android:id="@+id/btn_back_detail"
+                android:id="@+id/btn_drive"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
                 android:layout_marginLeft="@dimen/_10sdp"

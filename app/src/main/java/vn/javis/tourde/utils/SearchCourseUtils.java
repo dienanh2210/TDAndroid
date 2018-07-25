@@ -101,7 +101,7 @@ public class SearchCourseUtils {
     public List<MultiCheckGenre> createAdditionalConditionData() {
         List<MultiCheckGenre> dataList = new ArrayList<>();
         String[] contentList1 = new String[]{"1月"};
-        String[] contentList2 = new String[]{"グルメが充実", "絶景・景観が充実", "名所・観光地が充実", "フォトスポットが充実", "トレーニング要素が充実"};
+        String[] contentList2 = new String[]{"グルメが充実", "絶景・景観が充実", "名所・観光地が充実", "フォトスポットが充実", "トレーニング要素が充実","オールシーズン走れるコース", "推奨季節のあるコース"};
         String[] contentList3 = new String[]{"都会・街中", "田舎・村里", "森林・林間"};
         String[] contentList4 = new String[]{"グループライド向き", "ソロ向き", "女性向き", "ファミリー向き", "カップル向き"};
         String[] contentList5 = new String[]{"初級者向き", "中級者向き", "上級者向き"};
