@@ -256,19 +256,15 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     //set info recyler tab fragment
 
                 }
-
                 hideProgressDialog();
             }
-
             @Override
             public void onError(VolleyError error) {
                 hideProgressDialog();
             }
         });
-
         //   spotRecycler.setAdapter(listSpotCheckinAdapter);
         mActivity.fn_permission();
-
     }
 
     private void startChronometerService() {
