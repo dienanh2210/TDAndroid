@@ -218,6 +218,7 @@
     <string name="average_pace">想定平均走行ペース</string>
     <string name="start_point">スタート地点</string>
     <string name="access_to_start">スタート地点までのアクセス</string>
+    <string name="MAP">コースMAP</string>
 
     <!--detail course -->
     <string name="GoogleMap">Google Mapで コース確認</string>
