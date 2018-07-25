@@ -122,7 +122,9 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   mActivity.showSearchPage(CourseListFragment.this);
+                  mActivity.showSearchPage(CourseListFragment.this);
+
+
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {

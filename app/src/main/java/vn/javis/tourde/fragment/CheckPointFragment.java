@@ -66,6 +66,8 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
     String time;
     String distance;
     boolean showSecondAnim;
+    boolean isFirstSpot;
+
     private OnFragmentInteractionListener listener;
     private String filePath;
     //  TextView tv_back_password;
@@ -87,7 +89,9 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
         title = getArguments().getString(CourseListActivity.STAMP_TITLE);
         time = getArguments().getString(CourseListActivity.TIME_FINISH);
         distance = getArguments().getString(CourseListActivity.STAMP_DISTANCE);
-        showSecondAnim =getArguments().getBoolean(CourseListActivity.STAMP_GAIN,false);
+        showSecondAnim = getArguments().getBoolean(CourseListActivity.STAMP_GAIN, false);
+        isFirstSpot = getArguments().getBoolean(CourseListActivity.IS_FIRST_SPOT, false);
+
 
         mActivity = (CourseListActivity) getActivity();
 
@@ -95,7 +99,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
             @Override
             public void onClick(View view) {
 
-                    mActivity.showTakePhoto(spotID,time,distance);
+                mActivity.showTakePhoto(spotID, time, distance);
             }
         });
 
@@ -106,8 +110,8 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 //                    @Override
 //                    public void run() {
 
-                            mActivity.showSpotFacilities();
-                  //  }
+                mActivity.showSpotFacilities();
+                //  }
 //                }, 1000);
 
             }
@@ -119,7 +123,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 //                    @Override
 //                    public void run() {
 
-                            mActivity.showSpotImages(spotID);
+                mActivity.showSpotImages(spotID);
 //                    }
 //                }, 1000);
 
@@ -135,33 +139,38 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
                 SpotData spotData = SpotData.getSpotData(response.toString());
                 if (spotData == null)
                     return;
-               // final String spotTitle = spotData.getData().getTitle();
+                // final String spotTitle = spotData.getData().getTitle();
                 handler = new Handler();
                 runnable = new Runnable() {
                     @Override
                     public void run() {
+                        if(isFirstSpot)
+                        {
+                            ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
+                        }
+                        else {
+                            if (showSecondAnim) {
+                                if (imgView.getTag() == null) {
+                                    ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+                                    //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+                                    handler.postDelayed(runnable, 1000);
+                                } else {
+                                    // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
+                                    //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
+                                    //  .setVisibility( View.GONE );
+                                    //  ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
+                                    //  ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
 
-if(showSecondAnim){
-    if (imgView.getTag() == null) {
-        ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
-        //    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
-        handler.postDelayed(runnable, 1000);
-    } else {
-        // ImageViewAnimatedChange(getApplicationContext(),txtView,"バッジを獲得！\n" +
-        //   "『 琵 琶 湖 1 周 』",imgView,R.drawable.icon_fishing);
-        //  .setVisibility( View.GONE );
-        //  ImageViewAnimatedChange( getApplicationContext(), txtDesctwo, "バッジを獲得！", imgView, R.drawable.icon_fishing );
-        //  ImageViewAnimatedChange( getApplicationContext(), txtView, "『琵琶湖1周』", imgView, R.drawable.icon_fishing );
+                                    ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
 
-        ImageViewAnimatedChange(mActivity, txtDesctwo, "バッジを獲得！", imgView, imgUrl);
+                                    ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
+                                    // finishedAnim = true;
+                                }
+                            } else {
 
-        ImageViewAnimatedChange(mActivity, txtView, "『" + title + "』", imgView, imgUrl);
-       // finishedAnim = true;
-    }
-                        }else {
-
-    ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
-}
+                                ImageViewAnimatedChange(getApplicationContext(), txtView, "チェックポイント通過！", imgView, R.drawable.icon_check_star);
+                            }
+                        }
                     }
 
 
@@ -184,7 +193,7 @@ if(showSecondAnim){
     }
 
     @Override
-    public void onItemClick(int position,int order) {
+    public void onItemClick(int position, int order) {
 
     }
 
