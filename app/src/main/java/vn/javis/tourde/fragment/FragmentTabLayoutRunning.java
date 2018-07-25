@@ -120,6 +120,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public boolean isFromMain;
     public boolean isTimeSaved;
     boolean isPausing;
+    private int timeWaitForNext=5;
+
+
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     Date lastTimeCheckin;
 
@@ -303,6 +306,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 }
             });
             spotRecycler.setAdapter(listSpotCheckinAdapter);
+          //  listSpotCheckinAdapter.notifyDataSetChanged();
             onGetListSpotArrived(newList.size(), newList.get(0).getSpotId());
         }
 
@@ -327,7 +331,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 Date timeNow = new Date();
                 long diff = (timeNow.getTime() - lastTimeCheckin.getTime()) / 1000;
 
-                if (diff < 300) {
+                if (diff < timeWaitForNext) {
                     return;
                 }
                 lstLocation.clear();
@@ -357,7 +361,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 //            showCheckPointFragment(spotId);
 //        } else {
         show_select_spot.setVisibility(View.VISIBLE);
-        changePaged = true;
+  //      changePaged = true;
         //  }
     }
 
@@ -649,7 +653,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         fragmentMap = FragmentMap.instance(list_spot);
         adapter.addFragment(fragmentMap, "MAP");
-        fragmentLog = FragmentLog.intance(saveCourseRunning);
+        fragmentLog = FragmentLog.intance(saveCourseRunning,courseDistance);
         adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
@@ -837,4 +841,5 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
         return newList;
     }
+
 }
