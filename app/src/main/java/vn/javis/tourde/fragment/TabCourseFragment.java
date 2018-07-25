@@ -233,6 +233,19 @@ public class TabCourseFragment extends BaseFragment {
 //                        mActivity.showFragmentTabLayoutRunning();
                         mActivity.openPage(new FragmentTabLayoutRunning(), CourseDetailFragment.class.getSimpleName(), true, false);
                     }
+                    else
+                    {
+                        ProcessDialog.showDialogConfirm(getContext(), "", "走行中のコースがあります。\n 終了しますか？", new ProcessDialog.OnActionDialogClickOk() {
+                            @Override
+                            public void onOkClick() {
+                                SharedPreferencesUtils.getInstance(getContext()).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
+                                SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.SAVED_COURSE_RUNNING);
+                                SharedPreferencesUtils.getInstance(getContext()).removeKey(Constant.KEY_GOAL_PAGE);
+
+                                mActivity.showCourseDrive();
+                            }
+                        });
+                    }
                 }
             });
         }

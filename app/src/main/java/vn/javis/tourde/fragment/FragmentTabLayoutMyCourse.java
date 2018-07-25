@@ -124,7 +124,7 @@ public class FragmentTabLayoutMyCourse  extends BaseFragment{
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new FragmentFavorites(),"お気に入りコース");
-        adapter.addFragment(new FragmentRunning(),"走行済コース");
+        adapter.addFragment(new FragmentRunning(),"完走したコース");
 
         viewPager.setAdapter(adapter);
     }

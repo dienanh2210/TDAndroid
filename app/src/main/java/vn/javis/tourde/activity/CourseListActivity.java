@@ -181,7 +181,7 @@ public class CourseListActivity extends BaseActivity {
         token_sns = SharedPreferencesUtils.getInstance(this).getBooleanValue(LoginUtils.TOKEN_SNS);
         fn_permission();
         //    showCourseFinish();hiện
-        if (!TextUtils.isEmpty(token)&&token_sns) {
+        if (!TextUtils.isEmpty(token)) {
             checkLogging();
         }
     }
@@ -262,7 +262,7 @@ public class CourseListActivity extends BaseActivity {
 
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
-//        if (mCourseListFragment == null)
+        if (mCourseListFragment == null)
         mCourseListFragment = new CourseListFragment();
         openPage(mCourseListFragment, false, false);
     }

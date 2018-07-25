@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void checkServerDone() {
 
-        Log.i("Tutorial", "-------?" + SharedPreferencesUtils.getInstance(this).getStringValue("Tutorial"));
+        Log.i("Tutorial", "-------?" + SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN));
         if (TextUtils.isEmpty(SharedPreferencesUtils.getInstance(this).getStringValue(LoginUtils.TOKEN))) {
             if (TextUtils.isEmpty(SharedPreferencesUtils.getInstance(this).getStringValue("rule")))
                 changeActivity();
