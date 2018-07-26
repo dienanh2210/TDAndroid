@@ -83,7 +83,7 @@
         android:visibility="gone" />
     <RelativeLayout
         android:id="@+id/showInfoSpot"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
 
@@ -92,13 +92,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_18sdp"
+            android:visibility="gone"
             android:src="@drawable/image_link_long" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,6 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_30sdp">
 
             <TextView

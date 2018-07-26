@@ -134,7 +134,7 @@ public class GoogleService extends Service implements LocationListener {
         locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetworkEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
+///        Log.i("GPSLOG: ", "GPSLOG");
         if (!isGPSEnable && !isNetworkEnable) {
 
         } else {
