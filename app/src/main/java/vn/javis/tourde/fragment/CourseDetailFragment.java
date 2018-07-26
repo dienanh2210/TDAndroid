@@ -73,6 +73,8 @@ import vn.javis.tourde.utils.TimeUtil;
 import vn.javis.tourde.view.CircleTransform;
 import vn.javis.tourde.view.YourScrollableViewPager;
 
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
+
 public class CourseDetailFragment extends BaseFragment implements ServiceCallback {
     private int mCourseID;
 
@@ -164,7 +166,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (CourseListActivity) getActivity();
-        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(FragmentTabLayoutRunning.KEY_SHARED_BASETIME) != 0 && isNextScreen) {
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) != 0 && isNextScreen) {
             mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), CourseDetailFragment.class.getSimpleName(), true, false);
 
 //            if (SharedPreferencesUtils.getInstance(mActivity).getBooleanValue(Constant.KEY_GOAL_PAGE)) {
@@ -173,9 +175,9 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 //                }
 //            } else {
 //                mActivity.openPage(FragmentTabLayoutRunning.newInstance(true), CourseDetailFragment.class.getSimpleName(), true, false);
-                    //            }
-                            } else if (isNextScreen) {
-                                mActivity.openPage(new CourseDriveFragment(), CourseDetailFragment.class.getSimpleName(), true, false);
+            //            }
+        } else if (isNextScreen) {
+            mActivity.openPage(new CourseDriveFragment(), CourseDetailFragment.class.getSimpleName(), true, false);
         }
     }
 
@@ -202,21 +204,24 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         showProgressDialog();
         // testAPI();
         mCourseID = mActivity.getmCourseID();
+        url="https://www.app-tour-de-nippon.jp/test/course/?course_id="+mCourseID;
 //        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
-
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) != 0) {
+            btn_bicyle_red.setVisibility(View.VISIBLE);
+            btn_bicyle.setVisibility(View.GONE);
+        }else {
+            btn_bicyle_red.setVisibility(View.GONE);
+            btn_bicyle.setVisibility(View.VISIBLE);
+        }
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
-        if (!savedString.isEmpty()) {
-            SaveCourseRunning saveCourseRunning = new ClassToJson<SaveCourseRunning>().getClassFromJson(savedString, SaveCourseRunning.class);
-            if (mCourseID == saveCourseRunning.getCourseID()) {
-                btn_bicyle_red.setVisibility(View.VISIBLE);
-                btn_bicyle.setVisibility(View.GONE);
-            } else {
-                btn_bicyle_red.setVisibility(View.GONE);
-                btn_bicyle.setVisibility(View.VISIBLE);
-            }
 
-        }
+        btn_bicyle_red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.openPage(new FragmentTabLayoutRunning(), CourseDetailFragment.class.getSimpleName(), true, false);
+            }
+        });
 
 //        final WebSettings webSettings = webView.getSettings();
 //        webSettings.setUseWideViewPort(true);
@@ -328,7 +333,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
                 String shareSub = txtTitle.getText().toString();
                 String share = url;
                 //  myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub + "\n" + share);
-                myIntent.putExtra(Intent.EXTRA_TEXT, "#ツールド"+"\n"+"コース紹介："+shareBody + "\n" + share);
+                myIntent.putExtra(Intent.EXTRA_TEXT, "#ツールド" + "\n" + "コース紹介：" + shareBody + "\n" + share);
 
                 startActivity(Intent.createChooser(myIntent, ""));
             }
@@ -460,7 +465,6 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         else
             imgStarRate.setImageResource(R.drawable.icon_star0);
 
-        url = model.getRouteUrl();
     }
 
     @Override
@@ -551,7 +555,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     public void btnFavoriteClick(boolean inChild) {
         if (inChild && isFavourite) {
-           // return;
+            // return;
         }
         isFavourite = !isFavourite;
 
