@@ -259,9 +259,9 @@ public class GoogleService extends Service implements LocationListener {
                     }
                     Date timeNow = new Date();
                     long diff = (timeNow.getTime() - lastTimePushNoti.getTime()) / 1000;
-                    Log.i("LogTest", lstLocationArrived.get(0).getOrderNumber() +"-"+ diff+"-"+isSameOrder);
+                    Log.i("LogTest", lstLocationArrived.get(0).getOrderNumber() + "-" + diff + "-" + isSameOrder);
                     if (!isSameOrder || diff >= 300) {
-                        Log.i("LogTest", ""+isSameOrder);
+                        Log.i("LogTest", "" + isSameOrder);
                         showNotification();
                         lastTimePushNoti = timeNow;
                         spotPushedNoti.clear();

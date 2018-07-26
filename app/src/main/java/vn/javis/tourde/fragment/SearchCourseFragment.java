@@ -33,7 +33,7 @@ import vn.javis.tourde.model.Data;
 import vn.javis.tourde.utils.SearchCourseUtils;
 import vn.javis.tourde.view.WrappingLinearLayoutManager;
 
-public  class SearchCourseFragment extends Fragment implements View.OnClickListener, PrefectureSearchFragment.OnFragmentInteractionListener, PrefectureOneFragment.OnFragmentInteractionListener {
+public class SearchCourseFragment extends Fragment implements View.OnClickListener, PrefectureSearchFragment.OnFragmentInteractionListener, PrefectureOneFragment.OnFragmentInteractionListener {
 
 
     private RecyclerView rcv_list;
@@ -52,7 +52,7 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
     TextView tv_close;
     EditText edt_search;
     ImageView im_select_area, im_more_searching;
-    RelativeLayout rlt_prefecture,more_searching_layout;
+    RelativeLayout rlt_prefecture, more_searching_layout;
     private CourseListActivity mActivity;
     ListSearchCourseAdapter listSearchCourseAdapter;
     List<String> listContent = new ArrayList<>();
@@ -82,10 +82,10 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         im_select_area = view.findViewById(R.id.im_select_area);
         im_select_area.setOnClickListener(this);
 
-        rlt_prefecture=view.findViewById( R.id.rlt_prefecture );
-        rlt_prefecture.setOnClickListener( this );
-        more_searching_layout=view.findViewById( R.id.more_searching_layout );
-        more_searching_layout.setOnClickListener( this );
+        rlt_prefecture = view.findViewById(R.id.rlt_prefecture);
+        rlt_prefecture.setOnClickListener(this);
+        more_searching_layout = view.findViewById(R.id.more_searching_layout);
+        more_searching_layout.setOnClickListener(this);
         im_more_searching = view.findViewById(R.id.im_more_searching);
         im_more_searching.setOnClickListener(this);
         tv_prefecture = view.findViewById(R.id.tv_prefecture);
@@ -111,7 +111,7 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
                     prefecture = tv_prefecture.getText().toString().trim();
                 }
                 mActivity.openPage(PrefectureOneFragment.newInstance(this, prefecture), true, true);
-               // mActivity.openPage(GoalFragment.newInstance(this), true, true);
+                // mActivity.openPage(GoalFragment.newInstance(this), true, true);
                 break;
             case R.id.more_searching_layout:
                 if (!prefecturetext.isEmpty()) {
@@ -181,15 +181,13 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         }
 
 
-
-
     }
 
     @Override
     public void onFragment(String content) {
         prefecturetext = content;
         if (content.isEmpty()) {
-           tv_searchtwo.setText(mActivity.getResources().getString(R.string.search_course_more_searching_description));
+            tv_searchtwo.setText(mActivity.getResources().getString(R.string.search_course_more_searching_description));
         } else {
             tv_searchtwo.setText(content);
         }
@@ -299,16 +297,16 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
 
         for (int i = 0; i < lstSeasonValue.size(); i++) {
             map.put("season[" + i + "]", lstSeasonValue.get(i));
-            Log.i("", "getAllContent: "+i);
+            Log.i("", "getAllContent: " + i);
         }
         for (int i = 0; i < lstTagValue.size(); i++) {
             map.put("tag[" + i + "]", lstTagValue.get(i));
-            Log.i("", "getAllContent: "+i);
+            Log.i("", "getAllContent: " + i);
         }
         Log.i("search_frg_302", map.toString());
         //   mActivity.onBackCLickToList(map);
 
-     //   mActivity.showCourseListPage(map);
+        //   mActivity.showCourseListPage(map);
         listener.onFragmentInteraction(map);
     }
 
