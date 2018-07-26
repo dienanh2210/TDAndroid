@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -15,12 +16,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -103,7 +106,8 @@ public class FinishCourseFragment extends BaseFragment {
     TextView btnToDetail;
     @BindView(R.id.layout_to_capture)
     LinearLayout viewCapture;
-
+    @BindView(R.id.btn_save_image)
+    ImageButton btnSaveImage;
 
     boolean isFavourite;
     private CourseDetail mCourseDetail;
@@ -212,11 +216,14 @@ public class FinishCourseFragment extends BaseFragment {
                 @Override
                 public void onOkClick() {
                     check_save = true;
+                    btnSaveImage.setVisibility(View.INVISIBLE);
                     photoFile = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
                     imageStoragePath = photoFile.getAbsolutePath();
                     Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
+                    btnSaveImage.setVisibility(View.VISIBLE);
                     CameraUtils.storeImage(bitmap, photoFile);
                     CameraUtils.addImageToGallery(imageStoragePath, mActivity);
+
                 }
             });
 
@@ -231,7 +238,9 @@ public class FinishCourseFragment extends BaseFragment {
         if (!check_save) {
             photoFile = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + System.currentTimeMillis() + ".jpg");
             imageStoragePath = photoFile.getAbsolutePath();
+            btnSaveImage.setVisibility(View.INVISIBLE);
             Bitmap bitmap = CameraUtils.loadBitmapFromView(viewCapture);
+            btnSaveImage.setVisibility(View.VISIBLE);
             CameraUtils.storeImage(bitmap, photoFile);
             CameraUtils.addImageToGallery(imageStoragePath, mActivity);
         }
@@ -239,8 +248,13 @@ public class FinishCourseFragment extends BaseFragment {
             final Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             shareIntent.setType("image/*");
-
-            Uri uri = Uri.fromFile(photoFile);
+            //Todo get Uri use File Provider
+            Uri uri;
+            if (Build.VERSION.SDK_INT > 23) {
+                uri = FileProvider.getUriForFile(mActivity, mActivity.getPackageName() + ".provider", photoFile);
+            } else {
+                uri = Uri.fromFile(photoFile);
+            }
             shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
             mActivity.startActivity(Intent.createChooser(shareIntent, "Share image using"));
         }

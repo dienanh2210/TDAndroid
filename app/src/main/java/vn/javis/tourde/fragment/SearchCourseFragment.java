@@ -308,7 +308,7 @@ public  class SearchCourseFragment extends Fragment implements View.OnClickListe
         Log.i("search_frg_302", map.toString());
         //   mActivity.onBackCLickToList(map);
 
-//        mActivity.showCourseListPage(map);
+     //   mActivity.showCourseListPage(map);
         listener.onFragmentInteraction(map);
     }
 

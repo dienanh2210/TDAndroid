@@ -551,7 +551,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
 
     public void btnFavoriteClick(boolean inChild) {
         if (inChild && isFavourite) {
-            return;
+           // return;
         }
         isFavourite = !isFavourite;
 
