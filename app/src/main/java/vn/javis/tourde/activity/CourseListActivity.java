@@ -262,7 +262,7 @@ public class CourseListActivity extends BaseActivity {
 
     public void showCourseListPage() {
         dataBundle.putString("searching", "");
-//        if (mCourseListFragment == null)
+        if (mCourseListFragment == null)
         mCourseListFragment = new CourseListFragment();
         openPage(mCourseListFragment, false, false);
     }

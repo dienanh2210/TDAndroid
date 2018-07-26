@@ -59,7 +59,7 @@ import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 
-public class CourseListFragment extends BaseFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
+public class CourseListFragment extends BaseSaveStateFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.lst_courses_recycleview)
     RecyclerView lstCourseRecycleView;
@@ -95,22 +95,28 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     private int mTotalPage = 1;
     private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
-    int totalCourseSize =0;
-    String token ;
+    int totalCourseSize = 0;
+    String token;
     HashMap<String, String> paramsSearch = new HashMap<String, String>();
     List<Course> list_courses = new ArrayList<>();
     boolean search = false;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mActivity = (CourseListActivity) getActivity();
+        Log.i("isInitView:", isInitView+"");
+        if (!isInitView) return;
+        else isInitView = false;
+            mActivity = (CourseListActivity) getActivity();
         token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
-        contentCourseList.fullScroll(ScrollView.FOCUS_UP);
+
+        //  contentCourseList.fullScroll(ScrollView.FOCUS_UP);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
         lstCourseRecycleView.setNestedScrollingEnabled(false);
         setFooter();
         Bundle bundle = getArguments();
-        mCurrentPage=1;
+        mCurrentPage = 1;
         getData(search);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,9 +128,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  mActivity.showSearchPage(CourseListFragment.this);
-
-
+                   mActivity.showSearchPage(CourseListFragment.this);
             }
         });
         btnNextPage.setOnClickListener(new View.OnClickListener() {
@@ -197,11 +201,11 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     }
 
     void getData(boolean searching) {
-       showProgressDialog();
+        showProgressDialog();
         if (!searching) {
-            ListCourseAPI.getJsonValues(this,mCurrentPage,NUMBER_COURSE_ON_PAGE);
+            ListCourseAPI.getJsonValues(this, mCurrentPage, NUMBER_COURSE_ON_PAGE);
         } else {
-            ListCourseAPI.getJsonValueSearch(paramsSearch, this,mCurrentPage,NUMBER_COURSE_ON_PAGE);
+            ListCourseAPI.getJsonValueSearch(paramsSearch, this, mCurrentPage, NUMBER_COURSE_ON_PAGE);
         }
         Log.i("lst course 184", searching + "" + paramsSearch);
     }
@@ -214,19 +218,16 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
             if (totalCourseSize == 0) {
                 txtNoCourse.setVisibility(View.VISIBLE);
                 contentCourseList.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 txtNoCourse.setVisibility(View.GONE);
                 contentCourseList.setVisibility(View.VISIBLE);
 
 
-                mTotalPage = totalCourseSize / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourseSize / NUMBER_COURSE_ON_PAGE)+1;
+                mTotalPage = totalCourseSize / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourseSize / NUMBER_COURSE_ON_PAGE) + 1;
 
-                if(mTotalPage==1 || totalCourseSize<=10)
-                {
+                if (mTotalPage == 1 || totalCourseSize <= 10) {
                     layoutPager.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     layoutPager.setVisibility(View.VISIBLE);
                 }
 
@@ -242,7 +243,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
                 }
                 txtPageNumber.setText(mCurrentPage + " / " + mTotalPage);
                 changeButtonBackground();
-                contentCourseList.scrollTo(0,0);
+                   contentCourseList.scrollTo(0,0);
             }
         } catch (Exception e) {
             Log.i("CourseListError 216", e.getMessage());
@@ -252,7 +253,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
     void setRecycle() {
         listCourseAdapter = new ListCourseAdapter(list_courses, mActivity);
         lstCourseRecycleView.setAdapter(listCourseAdapter);
-      //  lstCourseRecycleView.setNestedScrollingEnabled(false);
+        //  lstCourseRecycleView.setNestedScrollingEnabled(false);
         listCourseAdapter.setOnItemClickListener(new ListCourseAdapter.OnItemClickedListener() {
             @Override
             public void onItemClick(int id) {
@@ -282,15 +283,15 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         }
 
     }
+
     void setAllCourses(JSONObject jsonObject) {
         list_courses.clear();
-        List<Course> list1 =new ArrayList<>();
+        List<Course> list1 = new ArrayList<>();
         try {
             int abc = 0;
             JSONObject allJsonObject = jsonObject.getJSONObject("list");
             Iterator<String> key = allJsonObject.keys();
-            while (key.hasNext())
-            {
+            while (key.hasNext()) {
                 abc++;
                 String id = key.next();
                 JSONObject singleJsonObject = allJsonObject.getJSONObject(id).getJSONObject("data");
@@ -318,11 +319,11 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
             Collections.sort(list1, new Comparator<Course>() {
                 @Override
                 public int compare(Course course, Course t1) {
-                    return course.getCourseId() -t1.getCourseId();
+                    return course.getCourseId() - t1.getCourseId();
                 }
             });
-            list_courses =list1;
-            Log.i("qa",""+abc+"s"+list1.size());
+            list_courses = list1;
+            Log.i("qa", "" + abc + "s" + list1.size());
 //            for(int i=list1.size()-1;i>=0;i--)
 //            {
 //                list_courses.add(list1.get(i));
@@ -332,19 +333,19 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
             System.out.println("error_" + e.getMessage());
         }
     }
+
     void setAllCourses(List<ListCourses.CourseArray> list1) {
         list_courses.clear();
 
-        for(int i=0;i<list1.size();i++)
-        {
-           Course thisCourse = list1.get(i).getData();
-           List<String> lstTag = new ArrayList<>();
+        for (int i = 0; i < list1.size(); i++) {
+            Course thisCourse = list1.get(i).getData();
+            List<String> lstTag = new ArrayList<>();
             if (thisCourse != null) {
 
-                List<String> lst1 =new ArrayList<>();
-             //   int ss =list1.get(a).getTag().size()
+                List<String> lst1 = new ArrayList<>();
+                //   int ss =list1.get(a).getTag().size()
                 for (int a = 0; a < list1.get(i).getTag().size(); a++) {
-                    lst1.add( list1.get(i).getTag().get(a).getTag());
+                    lst1.add(list1.get(i).getTag().get(a).getTag());
                 }
                 thisCourse.setListTag(lst1);
                 list_courses.add(list1.get(i).getData());
@@ -354,13 +355,14 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
         Collections.sort(list_courses, new Comparator<Course>() {
             @Override
             public int compare(Course course, Course t1) {
-                return   t1.getCourseId() - course.getCourseId();
+                return t1.getCourseId() - course.getCourseId();
             }
         });
     }
+
     @Override
     public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-       JSONObject jsonObject =(JSONObject) response;
+        JSONObject jsonObject = (JSONObject) response;
         ListCourses listCourses = ListCourses.getData(response.toString());
 
 //        totalCourseSize =Integer.parseInt(jsonObject.get("total_count").toString());
@@ -369,7 +371,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
 //        setRecycle();
 //        ProcessDialog.hideProgressDialog();
 
-        totalCourseSize =listCourses.getTotalCount();
+        totalCourseSize = listCourses.getTotalCount();
         changePage(0);
         setAllCourses(listCourses.getList());
         setRecycle();
@@ -378,7 +380,7 @@ public class CourseListFragment extends BaseFragment implements ServiceCallback,
 
     @Override
     public void onError(VolleyError error) {
-       hideProgressDialog();
+        hideProgressDialog();
     }
 
     @Override

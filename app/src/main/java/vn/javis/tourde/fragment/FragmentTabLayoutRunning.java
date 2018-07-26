@@ -256,19 +256,15 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                     //set info recyler tab fragment
 
                 }
-
                 hideProgressDialog();
             }
-
             @Override
             public void onError(VolleyError error) {
                 hideProgressDialog();
             }
         });
-
         //   spotRecycler.setAdapter(listSpotCheckinAdapter);
         mActivity.fn_permission();
-
     }
 
     private void startChronometerService() {
@@ -281,7 +277,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
 
     }
-
     void changeListSpotCheckInData() {
         List<Spot> newList = new ArrayList<>();
         for (Spot spot : list_spot) {
@@ -307,8 +302,6 @@ public class FragmentTabLayoutRunning extends BaseFragment {
         }
 
     }
-
-
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -328,7 +321,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 long diff = (timeNow.getTime() - lastTimeCheckin.getTime()) / 1000;
 
                 if (diff < 300) {
-                 //   return;
+                    return;
                 }
                 lstLocation.clear();
                 lstLocation = (ArrayList<Location>) intent.getSerializableExtra("arrived");
