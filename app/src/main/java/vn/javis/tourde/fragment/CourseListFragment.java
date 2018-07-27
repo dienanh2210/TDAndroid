@@ -407,6 +407,7 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
 //        ProcessDialog.hideProgressDialog();
 
         totalCourseSize = listCourses.getTotalCount();
+        Log.i("totalCourseSize",""+totalCourseSize);
         changePage(0);
         setAllCourses(listCourses.getList());
         setRecycle();
