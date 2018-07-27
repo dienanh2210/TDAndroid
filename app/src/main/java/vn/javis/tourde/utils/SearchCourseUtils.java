@@ -109,15 +109,15 @@ public class SearchCourseUtils {
         String[] contentList7 = new String[]{"信号が少ない", "交通量が少ない", "路面状態が良好", "オフロードあり"};
         String[] contentList8 = new String[]{"坂好き向き", "坂嫌い向き"};
         String[] contentList9 = new String[]{"サイクリング大会公式コース", "アプリ内イベント専用コース","季節限定コース"};
+        dataList.add(new MultiCheckGenre("コースの旬", Arrays.asList(contentList1), true));
         dataList.add(new MultiCheckGenre("コーステーマ", Arrays.asList(contentList2)));
-        dataList.add(new MultiCheckGenre("コースエリア", Arrays.asList(contentList3)));
-        dataList.add(new MultiCheckGenre("おすすめの月", Arrays.asList(contentList1), true));
-        dataList.add(new MultiCheckGenre("属性適正", Arrays.asList(contentList4)));
-        dataList.add(new MultiCheckGenre("特殊コース", Arrays.asList(contentList9)));
-        dataList.add(new MultiCheckGenre("レベル適正", Arrays.asList(contentList5)));
-        dataList.add(new MultiCheckGenre("登坂", Arrays.asList(contentList8)));
-        dataList.add(new MultiCheckGenre("所要時間", Arrays.asList(contentList6)));
+        dataList.add(new MultiCheckGenre("コースロケーション", Arrays.asList(contentList3)));
+        dataList.add(new MultiCheckGenre("コースの走り方タイプ", Arrays.asList(contentList4)));
+        dataList.add(new MultiCheckGenre("コースレベル", Arrays.asList(contentList5)));
+        dataList.add(new MultiCheckGenre("完走目安時間", Arrays.asList(contentList6)));
         dataList.add(new MultiCheckGenre("道路環境", Arrays.asList(contentList7)));
+        dataList.add(new MultiCheckGenre("登り坂", Arrays.asList(contentList8)));
+        dataList.add(new MultiCheckGenre("特殊コース", Arrays.asList(contentList9)));
 
 
         return dataList;
