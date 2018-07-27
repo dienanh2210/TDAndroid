@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -245,6 +246,11 @@ public class CourseListActivity extends BaseActivity {
                     } else {
                         openPage(CourseDetailFragment.newInstance(true), true, false);
                     }*/
+                }
+            }, new ProcessDialog.OnActionDialogClickCancel() {
+                @Override
+                public void onCancelClick() {
+                   mCourseListFragment.onResume();
                 }
             });
         }

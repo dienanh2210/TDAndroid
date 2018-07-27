@@ -51,7 +51,7 @@
             android:layout_width="192dp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_height="wrap_content"
-            android:textColor="@color/Gray"
+            android:textColor="@color/strong_gray"
             android:layout_toEndOf="@+id/img_post_user"
             android:gravity="start|center"
             android:textSize="@dimen/_10sdp"

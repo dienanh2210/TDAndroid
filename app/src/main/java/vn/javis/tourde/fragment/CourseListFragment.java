@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,13 +51,17 @@ import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.ListCourses;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
+
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
 
 
 public class CourseListFragment extends BaseSaveStateFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
@@ -92,6 +97,10 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
     NestedScrollView contentCourseList;
     @BindView(R.id.layout_pager)
     RelativeLayout layoutPager;
+    @BindView(R.id.btn_bicyle)
+    ImageButton btn_bicyle;
+    @BindView(R.id.btn_bicyle_red)
+    ImageButton btn_bicyle_red;
     private int mTotalPage = 1;
     private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
@@ -100,6 +109,7 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
     HashMap<String, String> paramsSearch = new HashMap<String, String>();
     List<Course> list_courses = new ArrayList<>();
     boolean search = false;
+    int mCourseID;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -112,6 +122,14 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
         token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
         //  contentCourseList.fullScroll(ScrollView.FOCUS_UP);
+        String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+
+        btn_bicyle_red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.openPage(new FragmentTabLayoutRunning(), CourseDetailFragment.class.getSimpleName(), true, false);
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
@@ -178,6 +196,18 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
             }
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) != 0) {
+            btn_bicyle_red.setVisibility(View.VISIBLE);
+            btn_bicyle.setVisibility(View.GONE);
+        }else {
+            btn_bicyle_red.setVisibility(View.GONE);
+            btn_bicyle.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

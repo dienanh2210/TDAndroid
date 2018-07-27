@@ -134,7 +134,7 @@ public class GoogleService extends Service implements LocationListener {
         locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetworkEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
+///        Log.i("GPSLOG: ", "GPSLOG");
         if (!isGPSEnable && !isNetworkEnable) {
 
         } else {
@@ -259,9 +259,9 @@ public class GoogleService extends Service implements LocationListener {
                     }
                     Date timeNow = new Date();
                     long diff = (timeNow.getTime() - lastTimePushNoti.getTime()) / 1000;
-                    Log.i("LogTest", lstLocationArrived.get(0).getOrderNumber() +"-"+ diff+"-"+isSameOrder);
+                    Log.i("LogTest", lstLocationArrived.get(0).getOrderNumber() + "-" + diff + "-" + isSameOrder);
                     if (!isSameOrder || diff >= 300) {
-                        Log.i("LogTest", ""+isSameOrder);
+                        Log.i("LogTest", "" + isSameOrder);
                         showNotification();
                         lastTimePushNoti = timeNow;
                         spotPushedNoti.clear();

@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import vn.javis.tourde.R;
+import vn.javis.tourde.activity.CourseListActivity;
+import vn.javis.tourde.fragment.CourseListFragment;
 import vn.javis.tourde.fragment.FragmentTabLayoutRunning;
 import vn.javis.tourde.model.Comment;
 
@@ -29,7 +31,6 @@ public class ProcessDialog {
     public Context context;
     ProgressDialog dialog1;
     private static ProgressBar spinner;
-
     public ProcessDialog(final Context context) {
         this.context = context;
 //        dialog1 = new ProgressDialog(context);
@@ -93,7 +94,7 @@ public class ProcessDialog {
         }
     }
 
-    public static void showDialogCheckLogging(final Context context, String title, String content, final OnActionDialogClickOk action) {
+    public static void showDialogCheckLogging(final Context context, String title, final String content, final OnActionDialogClickOk action, final  OnActionDialogClickCancel actionCancer) {
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -126,6 +127,7 @@ public class ProcessDialog {
                 SharedPreferencesUtils.getInstance(context).removeKey(FragmentTabLayoutRunning.KEY_SHARED_BASETIME);
                 SharedPreferencesUtils.getInstance(context).removeKey(Constant.SAVED_COURSE_RUNNING);
                 SharedPreferencesUtils.getInstance(context).removeKey(Constant.KEY_GOAL_PAGE);
+                actionCancer.onCancelClick();
                 dialog.hide();
             }
         });
@@ -133,7 +135,6 @@ public class ProcessDialog {
         if ( !((Activity) context).isFinishing())
             dialog.show();
     }
-
     public static void showDialogConfirm(final Context context, String title, String content, final OnActionDialogClickOk action) {
 
         final Dialog dialog = new Dialog(context);
