@@ -24,7 +24,7 @@
         android:name="android.permission.CALL_PRIVILEGED"
         tools:ignore="ProtectedPermissions">
     </uses-permission>
->>>>>>> bdef8e0f36e4939473a1963376332067ec76d57a
+
     <!-- for Growth Push -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
