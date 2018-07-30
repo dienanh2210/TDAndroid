@@ -1,8 +1,10 @@
 package vn.javis.tourde.activity;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -12,6 +14,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.MediaActionSound;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -52,12 +57,15 @@ import vn.javis.tourde.utils.CameraUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.TimeUtil;
 
+import static android.media.AudioManager.ADJUST_SAME;
+
 /**
  * Created by QuanPham on 6/9/18.
  */
 
 public class TakePhotoActivity extends BaseActivity {
 
+    private static final int ON_DO_NOT_DISTURB_CALLBACK_CODE = 001;
     @Nullable
     @BindView(R.id.txt_title)
     TextView txtTitle;
@@ -170,11 +178,8 @@ public class TakePhotoActivity extends BaseActivity {
             public void onClick(View v) {
                 TourDeApplication.getInstance().trackEvent("tap_photoframe_spot_id=" + spotId, "tap", "tap_photoframe_spot_id=" + spotId);
                 camera.takePicture(myShutterCallback, null, pictureCallback);
-
-//                Camera.CameraInfo info = new Camera.CameraInfo();
-//                if (info.canDisableShutterSound) {
-//                    camera.enableShutterSound(true);
-//                }
+                MediaActionSound sound = new MediaActionSound();
+                sound.play(MediaActionSound.SHUTTER_CLICK);
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -379,4 +384,5 @@ public class TakePhotoActivity extends BaseActivity {
         btnBack.setVisibility(View.INVISIBLE);
         frameCamera.setVisibility(View.INVISIBLE);
     }
+
 }
