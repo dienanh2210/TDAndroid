@@ -206,6 +206,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         mCourseID = mActivity.getmCourseID();
         url="https://www.app-tour-de-nippon.jp/test/course/?course_id="+mCourseID;
 //        mCourseID = getArguments().getInt(CourseListActivity.COURSE_DETAIL_ID);
+
         if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) != 0) {
             btn_bicyle_red.setVisibility(View.VISIBLE);
             btn_bicyle.setVisibility(View.GONE);
@@ -213,6 +214,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
             btn_bicyle_red.setVisibility(View.GONE);
             btn_bicyle.setVisibility(View.VISIBLE);
         }
+
         indexTab = getArguments().getInt(CourseListActivity.COURSE_DETAIL_INDEX_TAB);
         String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
 
@@ -465,6 +467,8 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         else
             imgStarRate.setImageResource(R.drawable.icon_star0);
 
+
+      //  url = model.getRouteUrl();
     }
 
     @Override

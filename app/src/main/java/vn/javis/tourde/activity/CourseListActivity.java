@@ -223,7 +223,7 @@ public class CourseListActivity extends BaseActivity {
 
     public void checkLogging() {
         if (SharedPreferencesUtils.getInstance(this).getLongValue(KEY_SHARED_BASETIME) != 0) {
-            ProcessDialog.showDialogCheckLogging(CourseListActivity.this, "", "前回のロギングを再開しますか?", new ProcessDialog.OnActionDialogClickOk() {
+            ProcessDialog.showDialogCheckLogging(CourseListActivity.this, "", "走行（計測）を再開しますか？", new ProcessDialog.OnActionDialogClickOk() {
                 @Override
                 public void onOkClick() {
 

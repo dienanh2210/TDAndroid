@@ -45,8 +45,9 @@ public class PrefectureSearchFragment extends Fragment {
     public static PrefectureSearchFragment newInstance(View.OnClickListener listener,  String txtSelected) {
         PrefectureSearchFragment fragment = new PrefectureSearchFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;
+        sMoreChosen.clear();
         if (!txtSelected.isEmpty()) {
-            sMoreChosen.clear();
+
             String[] strings = txtSelected.split(Pattern.quote(" 、"));
             sMoreChosen.addAll(Arrays.asList(strings));
         }

@@ -10,7 +10,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="UselessParent">
-
+        <Button
+            android:id="@+id/bt_spot_page"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47sdp"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/custom_frame"
+            android:text="設備情報を投稿"
+            android:textAlignment="center"
+            android:textColor="@color/backgroud"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="HardcodedText" />
         <include layout="@layout/item_divider"/>
 
         <RelativeLayout
@@ -752,20 +765,7 @@
 
         </RelativeLayout>
         <include layout="@layout/item_divider"/>
-        <Button
-            android:id="@+id/bt_spot_page"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_47sdp"
-            android:layout_marginLeft="@dimen/_50sdp"
-            android:layout_marginRight="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:background="@drawable/custom_frame"
-            android:text="設備情報を投稿"
-            android:textAlignment="center"
-            android:textColor="@color/backgroud"
-            android:layout_marginBottom="@dimen/_30sdp"
-            android:textSize="@dimen/_12sdp"
-            tools:ignore="HardcodedText" />
+
 
 
 
