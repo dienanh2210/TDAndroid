@@ -1,5 +1,6 @@
 package vn.javis.tourde.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,13 +51,17 @@ import vn.javis.tourde.apiservice.ListCourseAPI;
 import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.Course;
 import vn.javis.tourde.model.ListCourses;
+import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.SpotData;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.ClassToJson;
 import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
+
+import static vn.javis.tourde.fragment.FragmentTabLayoutRunning.KEY_SHARED_BASETIME;
 
 
 public class CourseListFragment extends BaseSaveStateFragment implements ServiceCallback, SearchCourseFragment.OnFragmentInteractionListener {
@@ -92,6 +97,10 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
     NestedScrollView contentCourseList;
     @BindView(R.id.layout_pager)
     RelativeLayout layoutPager;
+    @BindView(R.id.btn_bicyle)
+    ImageButton btn_bicyle;
+    @BindView(R.id.btn_bicyle_red)
+    ImageButton btn_bicyle_red;
     private int mTotalPage = 1;
     private static final int NUMBER_COURSE_ON_PAGE = 10;
     private static final int DEFAULT_PAGE = 1;
@@ -100,16 +109,27 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
     HashMap<String, String> paramsSearch = new HashMap<String, String>();
     List<Course> list_courses = new ArrayList<>();
     boolean search = false;
+    int mCourseID;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.i("isInitView:", isInitView+"");
-        if (!isInitView) return;
-        else isInitView = false;
-            mActivity = (CourseListActivity) getActivity();
+        Log.i("isInitView:", isInitView + "");
+        if (!isInitView) {
+            if (!search)
+                return;
+        } else isInitView = false;
+        mActivity = (CourseListActivity) getActivity();
         token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
 
         //  contentCourseList.fullScroll(ScrollView.FOCUS_UP);
+        String savedString = SharedPreferencesUtils.getInstance(getContext()).getStringValue(Constant.SAVED_COURSE_RUNNING);
+
+        btn_bicyle_red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.openPage(new FragmentTabLayoutRunning(), CourseDetailFragment.class.getSimpleName(), true, false);
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         lstCourseRecycleView.setLayoutManager(layoutManager);
@@ -179,6 +199,18 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (SharedPreferencesUtils.getInstance(getContext()).getLongValue(KEY_SHARED_BASETIME) != 0) {
+            btn_bicyle_red.setVisibility(View.VISIBLE);
+            btn_bicyle.setVisibility(View.GONE);
+        }else {
+            btn_bicyle_red.setVisibility(View.GONE);
+            btn_bicyle.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public View getView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_course_list_view, container, false);
     }
@@ -210,7 +242,7 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
         } else {
             ListCourseAPI.getJsonValueSearch(paramsSearch, this, mCurrentPage, NUMBER_COURSE_ON_PAGE);
         }
-        Log.i("lst course 184", searching + "" + paramsSearch);
+        Log.i("lst_course_184", searching + "" + paramsSearch);
     }
 
     void changePage(int nextPage) {
@@ -225,8 +257,8 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
                 txtNoCourse.setVisibility(View.GONE);
                 contentCourseList.setVisibility(View.VISIBLE);
 
-
-                mTotalPage = totalCourseSize / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourseSize / NUMBER_COURSE_ON_PAGE) + 1;
+                int plus = totalCourseSize % NUMBER_COURSE_ON_PAGE == 0 ? 0 : 1;
+                mTotalPage = totalCourseSize / NUMBER_COURSE_ON_PAGE == 0 ? 1 : (totalCourseSize / NUMBER_COURSE_ON_PAGE) + plus;
 
                 if (mTotalPage == 1 || totalCourseSize <= 10) {
                     layoutPager.setVisibility(View.GONE);
@@ -246,7 +278,7 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
                 }
                 txtPageNumber.setText(mCurrentPage + " / " + mTotalPage);
                 changeButtonBackground();
-                   contentCourseList.scrollTo(0,0);
+                contentCourseList.scrollTo(0, 0);
             }
         } catch (Exception e) {
             Log.i("CourseListError 216", e.getMessage());
@@ -375,6 +407,7 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
 //        ProcessDialog.hideProgressDialog();
 
         totalCourseSize = listCourses.getTotalCount();
+        Log.i("totalCourseSize",""+totalCourseSize);
         changePage(0);
         setAllCourses(listCourses.getList());
         setRecycle();
@@ -394,6 +427,7 @@ public class CourseListFragment extends BaseSaveStateFragment implements Service
     @Override
     public void onFragmentInteraction(HashMap<String, String> map) {
         paramsSearch = map;
+        Log.i("search_frg", map.toString());
         search = true;
 //        getData(true);
     }

@@ -113,7 +113,8 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
 
         mActivity = (CourseListActivity) getActivity();
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
-        url="https://www.app-tour-de-nippon.jp/test/course/spot/?spot_id"+spotId;
+
+        url="https://www.app-tour-de-nippon.jp/test/course/spot/?spot_id="+spotId;
         if(mActivity.typeBackPress==3)
         {
             indexTab=1;

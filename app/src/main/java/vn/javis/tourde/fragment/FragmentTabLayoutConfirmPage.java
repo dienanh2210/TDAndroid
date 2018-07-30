@@ -202,7 +202,7 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         fragmentMap =  FragmentMap.instance(list_spot);
         adapter.addFragment(fragmentMap, "MAP");
-        fragmentLog = FragmentLog.intance(saveCourseRunning);
+        fragmentLog = FragmentLog.intance(saveCourseRunning,courseDistance);
         adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);

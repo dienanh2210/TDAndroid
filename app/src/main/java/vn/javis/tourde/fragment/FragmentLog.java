@@ -38,16 +38,20 @@ public class FragmentLog extends BaseFragment {
     CourseListActivity mActivity;
     @BindView(R.id.txt_prezent)
     TextView txtPrezent;
+    @BindView(R.id.txt_course_distance)
+    TextView txtDistance;
     @BindView(R.id.recycler_spot)
     RecyclerView recyclerSpot;
     ListSpotLog listSpotLogAdapter;
     List<Spot> spotDataList;
     SaveCourseRunning saveCourseRunning;
+    float distance;
 
 
-    public static FragmentLog intance(SaveCourseRunning saveCourseRunning) {
+    public static FragmentLog intance(SaveCourseRunning saveCourseRunning,float distance) {
         FragmentLog frg = new FragmentLog();
         frg.saveCourseRunning = saveCourseRunning;
+        frg.distance =distance;
         return frg;
     }
 
@@ -76,6 +80,7 @@ public class FragmentLog extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mActivity);
         recyclerSpot.setLayoutManager(layoutManager);
         recyclerSpot.setNestedScrollingEnabled(false);
+        txtDistance.setText("走行距離 "+String.format("%.1f", distance) +"km");
         showProgressDialog();
 
         GetCourseDataAPI.getCourseData(courseId, new ServiceCallback() {

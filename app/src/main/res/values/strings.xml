@@ -222,7 +222,7 @@
 
     <!--detail course -->
     <string name="GoogleMap">Google Mapで コース確認</string>
-    <string name="NAVITIME">NAVITIMEで コース確認</string>
+    <string name="NAVITIME">ルートラボでコース確認</string>
     <string name="CourseStory">コースストーリー</string>
     <!--for detail view  test -->
     <string name="finish_guide_time_txt">1時間30分</string>

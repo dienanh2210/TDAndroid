@@ -118,6 +118,8 @@ public class SearchCourseUtils {
         dataList.add(new MultiCheckGenre("道路環境", Arrays.asList(contentList7)));
         dataList.add(new MultiCheckGenre("登り坂", Arrays.asList(contentList8)));
         dataList.add(new MultiCheckGenre("特殊コース", Arrays.asList(contentList9)));
+
+
         return dataList;
 
     }
