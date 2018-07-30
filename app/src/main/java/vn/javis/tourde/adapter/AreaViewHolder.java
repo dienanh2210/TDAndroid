@@ -29,7 +29,7 @@ public class AreaViewHolder extends CheckableChildViewHolder {
     public void setChecked(boolean checked) {
         childCheckedTextView.setChecked(checked);
         if (checked) {
-            childCheckedTextView.setCheckMarkDrawable(R.drawable.checked);
+            childCheckedTextView.setCheckMarkDrawable(R.drawable.ic_mark_red);
         } else {
             childCheckedTextView.setCheckMarkDrawable(null);
         }

@@ -7,10 +7,10 @@
     <CheckedTextView
         android:id="@+id/list_item_area_check"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_46sdp"
+        android:layout_height="@dimen/_47sdp"
         android:paddingStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_16sdp"
-        android:checkMark="@drawable/checked"
+        android:checkMark="@drawable/ic_mark_red"
         android:gravity="center"
         android:textSize="@dimen/_16sdp"
         android:textColor="@color/Black"
