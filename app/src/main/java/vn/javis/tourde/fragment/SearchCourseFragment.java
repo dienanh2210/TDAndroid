@@ -38,7 +38,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
     private RecyclerView rcv_list;
     private List<Data> dataList;
-    private Button bt_search_course;
+    private ImageView bt_search_course;
+    private ImageView btn_clear;
+
     private OnFragmentInteractionListener listener;
     private String contentArea = "北海道";
 
@@ -78,7 +80,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.search_course_fragment, container, false);
         rcv_list = view.findViewById(R.id.rcv_list);
         bt_search_course = view.findViewById(R.id.bt_search_course);
+        btn_clear = view.findViewById(R.id.btn_clear);
         bt_search_course.setOnClickListener(this);
+        btn_clear.setOnClickListener(this);
         im_select_area = view.findViewById(R.id.im_select_area);
         im_select_area.setOnClickListener(this);
 
@@ -99,6 +103,15 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         mSearchCourseUtils = new SearchCourseUtils();
         initData();
         return view;
+    }
+
+    void reset() {
+        prefecture = "";
+        prefecturetext = "";
+        tv_prefecture.setText(prefecture);
+        tv_searchtwo.setText(prefecturetext);
+        edt_search.setText("");
+        initData();
     }
 
     @Override
@@ -131,7 +144,12 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
                 getAllContent();
                 mActivity.onBackPressed();
-
+                break;
+            case R.id.btn_clear:
+                //  String tv_prefecture=getContext().toString();
+                //   String tv_searchtwo=getContext().toString();
+                //  String edt_search=getContext().toString();
+                reset();
                 break;
         }
     }
@@ -225,15 +243,15 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
                 distance = "4";
                 break;
             default:
-                distance = "4";
+                distance = "-1";
                 break;
         }
 
 
-        if (evelation.equals("1000m以上")) {
-            isOver = "1";
-        } else if (evelation.equals("200m以下"))
-            isLess = "1";
+        if (evelation.equals("1000m以上（坂多）")) {
+            isOver = "1000";
+        } else if (evelation.equals("200m以下（坂少）"))
+            isLess = "200";
 
         List<String> type = new ArrayList<>();
         List<String> typeValue = new ArrayList<>();
@@ -278,7 +296,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         for (int i = 0; i < type.size(); i++) {
 
         }
-        map.put("limit", "5");
+        map.put("limit", "10");
 
         if (distance != "-1")
             map.put("distance_type", distance);

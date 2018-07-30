@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,8 @@ public class PrefectureOneFragment extends Fragment {
     public static PrefectureOneFragment newInstance(View.OnClickListener listener, String txtSelected) {
         PrefectureOneFragment fragment = new PrefectureOneFragment();
         fragment.listener = (OnFragmentInteractionListener) listener;
-        if (!txtSelected.isEmpty()) {
-            sAreaChosen.clear();
+        sAreaChosen.clear();
+        if (!TextUtils.isEmpty(txtSelected)) {
             String[] strings = txtSelected.split(Pattern.quote(" 、"));
             sAreaChosen.addAll(Arrays.asList(strings));
         }
