@@ -1,6 +1,7 @@
 package vn.javis.tourde.fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -13,9 +14,12 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.MediaActionSound;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -50,6 +54,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -100,6 +106,7 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
     private static String imageStoragePath;
     Camera.PictureCallback pictureCallback;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
@@ -203,7 +210,6 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
             Toast.makeText(mActivity, "Device not support camera feature", Toast.LENGTH_SHORT).show();
         }
 
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -270,8 +276,6 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
         }
     }
 
-
-
     Camera.ShutterCallback myShutterCallback = new Camera.ShutterCallback() {
 
         @Override
@@ -279,6 +283,7 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
             // TODO Auto-generated method stub
 
         }
+
     };
 
     @Override
