@@ -249,7 +249,6 @@ public class CourseDetailSpotImagesFragment extends BaseFragment implements Serv
                 }
             }
         } );
-
             ln_browser.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
