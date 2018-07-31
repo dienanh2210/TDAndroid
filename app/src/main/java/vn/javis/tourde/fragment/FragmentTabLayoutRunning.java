@@ -120,7 +120,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public boolean isFromMain;
     public boolean isTimeSaved;
     boolean isPausing;
-    private int timeWaitForNext = 5;
+    private int timeWaitForNext = 300;
 
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     Date lastTimeCheckin;
