@@ -23,7 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +35,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
-import vn.javis.tourde.adapter.ListCourseAdapter;
 import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.customlayout.TourDeTabLayout;
 import vn.javis.tourde.model.SpotData;
