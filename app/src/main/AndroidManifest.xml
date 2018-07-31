@@ -17,12 +17,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.CALL_PHONE">
     </uses-permission>
     <uses-permission
         android:name="android.permission.CALL_PRIVILEGED"
         tools:ignore="ProtectedPermissions">
     </uses-permission>
+
     <!-- for Growth Push -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -40,9 +42,9 @@
         android:name=".services.TourDeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_final"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -59,6 +61,7 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -204,4 +207,5 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
     </application>
+
 </manifest>

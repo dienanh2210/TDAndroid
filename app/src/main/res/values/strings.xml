@@ -118,6 +118,7 @@
     <string name="search_course_free_text">フリーワード</string>
     <string name="search_course_free_text_description">例：初心者</string>
     <string name="search_course_text_button">検索する</string>
+    <string name="search_course_text_clear">クリア</string>
     <string name="search_course_text_row">&gt;</string>
     <string name="search_course_20_km">〜20km</string>
     <string name="search_course_50_km">〜50km</string>

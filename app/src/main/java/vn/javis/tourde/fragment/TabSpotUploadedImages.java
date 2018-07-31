@@ -3,14 +3,12 @@ package vn.javis.tourde.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,7 @@ public class TabSpotUploadedImages extends BaseFragment {
     CourseListActivity mActivity;
     List<String> listSpotImg = new ArrayList<>();
     String avagePace, finishTIme, startAddress;
-
+    private String fullScreenInd;
 
     public static TabSpotUploadedImages intansce(List<String> listSpotImg) {
         TabSpotUploadedImages instance = new TabSpotUploadedImages();
@@ -52,13 +50,14 @@ public class TabSpotUploadedImages extends BaseFragment {
             rcvSpotImage.setLayoutManager(layoutManager);
             listSpotImageAdapter = new ListSpotUploadedImageAdapter( listSpotImg,mActivity);
             rcvSpotImage.setAdapter(listSpotImageAdapter);
-        }
 
+        }
     }
 
     @Override
     public View getView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.tab_spot_uploaded_images, container, false);
+        
     }
     //Overriden method onCreateView
 

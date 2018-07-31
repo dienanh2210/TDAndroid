@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ln_course_search"
     android:layout_width="match_parent"
@@ -7,21 +7,11 @@
     android:orientation="vertical"
     tools:context=".fragment.SearchCourseFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_38sdp"
         android:background="@android:color/white">
-
-        <TextView
-            android:id="@+id/topic_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/search_course_title"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/_16sdp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_close"
@@ -34,10 +24,25 @@
             android:textColor="@color/search_course_color_close_text"
             android:textSize="@dimen/_12sdp"
             tools:ignore="RelativeOverlap,RtlHardcoded,RtlSymmetry" />
-    </RelativeLayout>
+
+        <TextView
+            android:id="@+id/topic_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_35sdp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="@string/search_course_title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_16sdp"
+            android:typeface="serif" />
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_38sdp"
+        android:layout_marginBottom="@dimen/_60sdp"
         android:layout_height="wrap_content">
 
         <RelativeLayout
@@ -241,8 +246,8 @@
 
                     <EditText
                         android:id="@+id/edt_search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_16sdp"
                         android:background="@android:color/transparent"
@@ -257,29 +262,62 @@
 
                 <include layout="@layout/item_divider" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/search_course_color_title_background">
 
-                    <Button
-                        android:id="@+id/bt_search_course"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_47sdp"
-                        android:layout_marginBottom="@dimen/_30sdp"
-                        android:layout_marginLeft="@dimen/_50sdp"
-                        android:layout_marginRight="@dimen/_50sdp"
-                        android:layout_marginTop="@dimen/_30sdp"
-                        android:background="@drawable/custom_frame"
-                        android:text="@string/search_course_text_button"
-                        android:textAlignment="center"
-                        android:textColor="@color/backgroud"
-                        android:textSize="@dimen/_12sdp" />
-
-                </RelativeLayout>
 
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/search_course_color_title_background"
+        tools:ignore="ObsoleteLayoutParam">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:weightSum="2">
+
+            <ImageButton
+                android:id="@+id/btn_clear"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_47sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_clear"
+                android:scaleType="fitCenter"
+                android:text="@string/search_course_text_clear"
+                android:textAlignment="center"
+                android:textColor="@color/backgroud"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/bt_search_course"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_47sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_serch"
+                android:scaleType="fitCenter"
+                android:text="@string/search_course_text_button"
+                android:textAlignment="center"
+                android:textColor="@color/backgroud"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</RelativeLayout>
