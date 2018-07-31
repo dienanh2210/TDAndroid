@@ -44,6 +44,7 @@ public class SpotFacilitiesFragment extends Fragment {
     HashMap<String,String> params = new HashMap<>();
     CourseListActivity activity;
     int spotId;
+    boolean isCheckingSpot=false;
     String[] contentList2 = new String[]{"toilet", "parking", "accommodation", "bath", "shower", "locker", "dressing_room", "bicycle_delivery", "tourist_information", "cycle_rack", "bicycle_rental", "cycling_guide", "tool_rental", "floor_pump_rental", "mechanic_maintenance"};
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     public static SpotFacilitiesFragment newInstance(View.OnClickListener listener) {
@@ -60,6 +61,7 @@ public class SpotFacilitiesFragment extends Fragment {
         btn_choose = view.findViewById(R.id.btn_choose);
         tv_back_sppot_faclities = view.findViewById(R.id.tv_back_sppot_faclities);
         spotId = getArguments().getInt(CourseListActivity.SPOT_ID);
+        isCheckingSpot = getArguments().getBoolean(CourseListActivity.IS_CHECKING_SPOT,false);
         Log.i("spotId","abccc"+spotId);
         params.put("token", token);
         params.put("spot_id", String.valueOf(spotId));
@@ -80,6 +82,9 @@ public class SpotFacilitiesFragment extends Fragment {
         tv_back_sppot_faclities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isCheckingSpot)
+                    ((CourseListActivity) getActivity()).showCheckPointFragment();
+                else
                 ((CourseListActivity) getActivity()).onBackPressed();
             }
         });
@@ -115,9 +120,10 @@ public class SpotFacilitiesFragment extends Fragment {
     ServiceCallback callback = new ServiceCallback() {
         @Override
         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {
-            Log.i("spotFacility111", response.toString());
-            ((CourseListActivity) getActivity()).onBackPressed();
+          //  Log.i("spotFacility111", response.toString());
+         //   ((CourseListActivity) getActivity()).onBackPressed();
             //    activity.openPage(CourseDetailSpotImagesFragment.newInstance(this), true, false);
+            ((CourseListActivity) getActivity()).showSpotImages(spotId);
         }
 
         @Override

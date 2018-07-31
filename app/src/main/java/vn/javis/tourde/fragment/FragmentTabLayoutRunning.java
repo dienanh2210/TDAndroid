@@ -174,6 +174,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     @SuppressLint("SetTextI18n")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        view.setKeepScreenOn(true);
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
