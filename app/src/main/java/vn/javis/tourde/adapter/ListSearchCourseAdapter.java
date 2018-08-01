@@ -33,11 +33,13 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
 
     private String txtElevation = "";
     private List<String> listCourseType = new ArrayList<>();
+    private List<String> saveSelected = new ArrayList<>();
 
-    public ListSearchCourseAdapter(Context context, List<Data> dataList, OnClickItem onClickItem) {
+    public ListSearchCourseAdapter(Context context, List<Data> dataList,List<String> saveSelected ,OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
         this.onClickItem = onClickItem;
+        this.saveSelected = saveSelected;
     }
 
     public String getTxtDistance() {
@@ -66,7 +68,7 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
 
 
-        holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(), new ArrayList<String>(), new ContentSearchCourseAdapter.OnClickItem() {
+        holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(),saveSelected, new ContentSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {
 
@@ -78,14 +80,16 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
                         if (!txtDistance.equals(s)) {
                             txtDistance = s;
                         } else txtDistance = "";
+                        onClickItem.onClick(mapContent);
                     }
-                    if ("獲得標高".equals(data.getTitle())) //area
+                    if ("獲得標高".equals(data.getTitle())) //elevation
                     {
                         if (!txtElevation.equals(s)) {
                             txtElevation = s;
                         } else txtElevation = "";
+                        onClickItem.onClick(mapContent);
                     }
-                    if ("コース形態".equals(data.getTitle())) //area
+                    if ("コース形態".equals(data.getTitle())) //type
                     {
                         if (!listCourseType.contains(s)) {
                             listCourseType.add(s);
@@ -95,6 +99,7 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
             }
         }));
     }
+
 
     @Override
     public int getItemCount() {
