@@ -62,6 +62,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     CourseListActivity mActivity;
     private GoogleMap mMap;
     String mapUrl;
+    String route_url;
     List<Spot> list_spot= new ArrayList<>(  );
     RelativeLayout googlemaps;
 
@@ -88,6 +89,7 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         mapUrl = mActivity.getMapUrl();
+        route_url =mActivity.getRoute_url();
         //mapUrl = "https://www.app-tour-de-nippon.jp/test/post_data/course_kml_file/8803d35918ac447ec7aa.kml";
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
@@ -110,6 +112,9 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
             case R.id.navitime:
                // String packageName = "com.navitime.local.navitime";
                 //launchNewActivity( getContext(), packageName );
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(route_url));
+                startActivity(i);
                 break;
             case R.id.googleMap:
                 try {

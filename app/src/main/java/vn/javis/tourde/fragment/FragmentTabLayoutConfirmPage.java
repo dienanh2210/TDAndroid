@@ -75,7 +75,7 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
     int courseID;
     int lastSpotId;
     float courseDistance;
-
+    String route_url;
     ArrayList<Location> lstLocation = new ArrayList<>();
     List<Spot> list_spot = new ArrayList<>();
     SaveCourseRunning saveCourseRunning;
@@ -111,6 +111,7 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
                     return;
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                 list_spot = mCourseDetail.getSpot();
+                route_url = mCourseDetail.getmCourseData().getRouteUrl();
                 setupViewPager();
             }
 
