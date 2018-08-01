@@ -128,6 +128,7 @@ public class CourseListActivity extends BaseActivity {
     private int mCourseID;
     private int mSpotID;
     private String mapUrl;
+    private String route_url;
     private String timeFinish, distanceSpot;
 
     public int getmSpotID() {
@@ -198,7 +199,13 @@ public class CourseListActivity extends BaseActivity {
     public void setMapUrl(String mapUrl) {
         this.mapUrl = mapUrl;
     }
+    public String getRoute_url() {
+        return route_url;
+    }
 
+    public void setRoute_url(String route_url) {
+        this.route_url = route_url;
+    }
     public void setmCourseID(int mCourseID) {
         this.mCourseID = mCourseID;
     }

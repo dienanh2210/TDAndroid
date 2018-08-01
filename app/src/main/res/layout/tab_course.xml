@@ -223,6 +223,7 @@
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/_10sdp"
                     android:weightSum="2.1">
+
                     <RelativeLayout
                         android:id="@+id/rlt_Navitime"
                         android:layout_width="0dp"
@@ -232,9 +233,10 @@
                         <ImageView
                             android:layout_width="@dimen/_36sdp"
                             android:layout_height="@dimen/_21sdp"
-                            android:layout_marginStart="@dimen/_47sdp"
+                            android:layout_marginStart="@dimen/_50sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:contentDescription="@string/image_description"
+
                             android:src="@drawable/icon_navitime" />
 
                         <TextView
@@ -243,11 +245,10 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_27sdp"
                             android:gravity="center"
-                            android:textColor="@color/Black"
                             android:text="@string/NAVITIME"
+                            android:textColor="@color/Black"
                             android:textSize="@dimen/_11sdp" />
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -269,7 +270,7 @@
                         <ImageView
                             android:layout_width="@dimen/_36sdp"
                             android:layout_height="@dimen/_21sdp"
-                            android:layout_marginStart="@dimen/_47sdp"
+                            android:layout_marginStart="@dimen/_50sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:contentDescription="@string/image_description"
 

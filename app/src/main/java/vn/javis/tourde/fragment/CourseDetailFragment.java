@@ -363,6 +363,7 @@ public class CourseDetailFragment extends BaseFragment implements ServiceCallbac
         if (txtTitle == null)
             return;
         mActivity.setMapUrl(model.getKmlFile());
+        mActivity.setRoute_url(model.getRouteUrl());
         txtTitle.setText(model.getTitle());
         txtPostUser.setText(model.getPostUserName());
         txtCatchPhrase.setText(model.getCatchPhrase());

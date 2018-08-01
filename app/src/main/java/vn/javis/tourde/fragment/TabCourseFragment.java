@@ -77,8 +77,8 @@ public class TabCourseFragment extends BaseFragment {
     @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
     @BindView(R.id.img_map)
-
     ImageView imgRoute;
+    String route_url;
     int mCourseID;
     private GoogleMap googleMap;
     ListSpotDetailCircleAdapter listSpotAdapter;
@@ -113,6 +113,7 @@ public class TabCourseFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         super.onCreate(savedInstanceState);
+        route_url=mActivity.getRoute_url();
     }
 
     @Override
@@ -281,7 +282,10 @@ public class TabCourseFragment extends BaseFragment {
             public void onClick(View v) {
                 String packageName = "com.navitime.local.navitime";
                 // String packageName = "NAVITIME: 地図・ルート検索";
-                launchNewActivity(getContext(), packageName);
+                //launchNewActivity(getContext(), packageName);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(route_url));
+                startActivity(i);
             }
         });
 
