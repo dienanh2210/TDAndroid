@@ -110,7 +110,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 //                    @Override
 //                    public void run() {
 
-                mActivity.showSpotFacilities();
+                mActivity.showSpotFacilities(true);
                 //  }
 //                }, 1000);
 
@@ -123,7 +123,7 @@ public class CheckPointFragment extends BaseFragment implements ListCheckInSpot.
 //                    @Override
 //                    public void run() {
 
-                mActivity.showSpotImages(spotID);
+                mActivity.showSpotImages(spotID,true);
 //                    }
 //                }, 1000);
 
