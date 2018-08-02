@@ -268,7 +268,7 @@ public class TabCourseFragment extends BaseFragment {
 
                         }
                     }
-                    Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1 ) );
+                    Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1) );
                     intent.setPackage( "com.google.android.apps.maps" );
                     startActivity( intent );
                 } catch (ActivityNotFoundException ex) {

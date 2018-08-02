@@ -258,7 +258,7 @@ void getInfoDistanceTypeElevation(){
         isOver = "1000";
     } else if (evelation.equals("200m以下（坂少）"))
         isLess = "200";
-
+    typeValue.clear();
     if (listCourseType.contains("片道")) {
         typeValue.add("1");
     }
@@ -279,7 +279,7 @@ void getInfoDistanceTypeElevation(){
         List<String> lstPrefectureValue = new ArrayList<String>();
         if (tv_prefecture.getText().toString() != "エリアを選択") {
 
-            String[] str = tv_prefecture.getText().toString().trim().split(",");
+            String[] str = tv_prefecture.getText().toString().trim().split(" 、");
 
             String preStr = "";
             for (int i = 0; i < str.length; i++) {
@@ -289,8 +289,8 @@ void getInfoDistanceTypeElevation(){
         }
         List<String> lstSeasonValue = new ArrayList<String>();
         List<String> lstTagValue = new ArrayList<String>();
-        if (tv_searchtwo.getText().toString() != prefecturetext) {
-            String[] str = tv_searchtwo.getText().toString().trim().split(",");
+
+            String[] str = tv_searchtwo.getText().toString().trim().split(" 、");
             for (int i = 0; i < str.length; i++) {
                 String s = mSearchCourseUtils.getIndexSeason(str[i]);
                 if (s != "-1") {
@@ -300,7 +300,7 @@ void getInfoDistanceTypeElevation(){
                 }
 
             }
-        }
+
 
         map.put("limit", "10");
 

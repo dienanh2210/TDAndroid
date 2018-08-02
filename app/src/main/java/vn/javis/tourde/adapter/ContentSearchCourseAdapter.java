@@ -24,18 +24,28 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
     private OnClickItem onClickItem;
     private HashMap<Integer, View> mapItemView = new HashMap<>();
     private List<String> mStringChosen;
+    int mCheckedPosition = -1;
+    private boolean singleClicked;
     View view;
+
     ContentSearchCourseAdapter(List<String> contentList, List<String> stringChosen, OnClickItem onClickItem) {
         this.contentList = contentList;
         this.onClickItem = onClickItem;
         mStringChosen = stringChosen;
     }
 
+    ContentSearchCourseAdapter(List<String> contentList, List<String> stringChosen, boolean singleClicked, OnClickItem onClickItem) {
+        this.contentList = contentList;
+        this.onClickItem = onClickItem;
+        mStringChosen = stringChosen;
+        this.singleClicked = singleClicked;
+    }
+
     @NonNull
     @Override
     public ContentSearchCourseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_content, parent, false);
-        return  new ViewHolder(view);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_content, parent, false);
+        return new ViewHolder(view);
 
     }
 
@@ -45,26 +55,32 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
 
         holder.tv_content.setText(content);
         mapItemView.put(position, holder.imv_mark);
-        Log.i("SearchCourseAdapter48", mStringChosen.toString() + "-"+content);
-        if(!TextUtils.isEmpty(content))
-        {
+        Log.i("SearchCourseAdapter58", mStringChosen.toString() + "-" + content);
+        if (!TextUtils.isEmpty(content)) {
 
-            if (mStringChosen.contains(content)) {
-                holder.imv_mark.setVisibility(View.VISIBLE);
-                if (onClickItem != null) onClickItem.onClick(position, true, view);
-                if(content.equals("1周"))
-                {
-                    Log.i("SearchCourseAdapter48", "111");
+            if (singleClicked)
+            {
+                if (mStringChosen.contains(content) || position == mCheckedPosition) {
+                    holder.imv_mark.setVisibility(View.VISIBLE);
+                    if(!holder.isClicked) {
+                        holder.isClicked = true;
+                        if (onClickItem != null) onClickItem.onClick(position, true, view);
+                    }
+                } else {
+                    // holder.onClick(view);
+                    holder.imv_mark.setVisibility(View.INVISIBLE);
+
                 }
-             //   holder.onClick(view);
             } else {
-               // holder.onClick(view);
-                holder.imv_mark.setVisibility(View.INVISIBLE);
-                if(content.equals("1周"))
-                {
-                    Log.i("SearchCourseAdapter48", "222");
-                }
+                if (mStringChosen.contains(content)) {
+                    holder.imv_mark.setVisibility(View.VISIBLE);
+                    holder.isClicked = true;
+                    if (onClickItem != null) onClickItem.onClick(position, true, view);
+                } else {
+                    // holder.onClick(view);
+                    holder.imv_mark.setVisibility(View.INVISIBLE);
 
+                }
             }
         }
     }
@@ -78,6 +94,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
         TextView tv_content;
         ImageView imv_mark;
         RelativeLayout rlt_mark;
+        boolean isClicked;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -90,16 +107,19 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
 
         @Override
         public void onClick(View v) {
-
-            if (imv_mark.getVisibility() == View.VISIBLE) {
+            isClicked = !isClicked;
+            if (!isClicked) {
                 imv_mark.setVisibility(View.INVISIBLE);
+                mCheckedPosition=-1;
                 if (onClickItem != null) onClickItem.onClick(getAdapterPosition(), false, v);
 
-            } else if (imv_mark.getVisibility() == View.INVISIBLE) {
+            }else  {
                 if (onClickItem != null) onClickItem.onClick(getAdapterPosition(), true, v);
                 imv_mark.setVisibility(View.VISIBLE);
+                mCheckedPosition = getAdapterPosition();
 
             }
+            if(singleClicked) notifyDataSetChanged();
         }
     }
 
