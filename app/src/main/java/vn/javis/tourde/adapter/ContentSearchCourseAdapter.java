@@ -2,6 +2,7 @@ package vn.javis.tourde.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
     private OnClickItem onClickItem;
     private HashMap<Integer, View> mapItemView = new HashMap<>();
     private List<String> mStringChosen;
-
+    View view;
     ContentSearchCourseAdapter(List<String> contentList, List<String> stringChosen, OnClickItem onClickItem) {
         this.contentList = contentList;
         this.onClickItem = onClickItem;
@@ -33,7 +34,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
     @NonNull
     @Override
     public ContentSearchCourseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_content, parent, false);
+         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_content, parent, false);
         return  new ViewHolder(view);
 
     }
@@ -44,10 +45,27 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
 
         holder.tv_content.setText(content);
         mapItemView.put(position, holder.imv_mark);
-        if (mStringChosen.contains(content)) {
-            holder.imv_mark.setVisibility(View.VISIBLE);
-        } else {
-            holder.imv_mark.setVisibility(View.INVISIBLE);
+        Log.i("SearchCourseAdapter48", mStringChosen.toString() + "-"+content);
+        if(!TextUtils.isEmpty(content))
+        {
+
+            if (mStringChosen.contains(content)) {
+                holder.imv_mark.setVisibility(View.VISIBLE);
+                if (onClickItem != null) onClickItem.onClick(position, true, view);
+                if(content.equals("1周"))
+                {
+                    Log.i("SearchCourseAdapter48", "111");
+                }
+             //   holder.onClick(view);
+            } else {
+               // holder.onClick(view);
+                holder.imv_mark.setVisibility(View.INVISIBLE);
+                if(content.equals("1周"))
+                {
+                    Log.i("SearchCourseAdapter48", "222");
+                }
+
+            }
         }
     }
 
@@ -66,6 +84,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
             tv_content = itemView.findViewById(R.id.tv_content);
             imv_mark = itemView.findViewById(R.id.imv_mark);
             rlt_mark = itemView.findViewById(R.id.rlt_mark);
+
             itemView.setOnClickListener(this);
         }
 
