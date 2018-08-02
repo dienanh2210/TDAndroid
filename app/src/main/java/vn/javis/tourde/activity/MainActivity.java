@@ -57,13 +57,7 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        if(!isNetworkAvailable())
-        {
-            ProcessDialog.showDialogOk(MainActivity.this, "", "サーバーに接続できません。");
-        }
-        else {
-            checkMaintenanceAndAppVersion();
-        }
+        showDialog();
         GrowthPush.getInstance().initialize(this, "Qv0VSxaiIeXNuJpg", "Ap0swMx7kBjvztfAp0pzQyWhwB3VIpYZ",
                 BuildConfig.DEBUG ? Environment.development : Environment.production);
         GrowthPush.getInstance().requestRegistrationId("1079044899926");
@@ -80,6 +74,21 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("GrowthMessage", error);
             }
         });
+
+    }
+    void showDialog(){
+        if(!isNetworkAvailable())
+        {
+            ProcessDialog.showDialogCheckInternet(MainActivity.this, "", "サーバーに接続できません。", new ProcessDialog.OnActionDialogClickCancel() {
+                @Override
+                public void onCancelClick() {
+                        showDialog();
+                }
+            });
+        }
+        else {
+            checkMaintenanceAndAppVersion();
+        }
 
     }
     private boolean isNetworkAvailable() {
