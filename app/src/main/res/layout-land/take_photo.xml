@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_12sdp"
             android:weightSum="10">
 
             <LinearLayout
@@ -75,7 +75,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/englishCourse"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"/>
 
                 <include layout="@layout/divider_custome" />
 
@@ -84,7 +85,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout
@@ -99,7 +101,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Spot"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"/>
 
                 <include layout="@layout/divider_custome" />
 
@@ -108,14 +111,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_weight="2"
+                android:layout_weight="1.9"
                 android:orientation="vertical">
 
                 <TextView
@@ -124,7 +128,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/englishTime"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"/>
 
                 <include layout="@layout/divider_custome" />
 
@@ -133,14 +138,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_weight="1.5"
+                android:layout_weight="1.6"
                 android:orientation="vertical">
 
                 <TextView
@@ -149,7 +155,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Distance"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"/>
 
                 <include layout="@layout/divider_custome" />
 
@@ -158,7 +165,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/White"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>
