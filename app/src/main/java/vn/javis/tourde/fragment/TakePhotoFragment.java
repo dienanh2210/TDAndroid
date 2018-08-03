@@ -341,7 +341,7 @@ public class TakePhotoFragment extends BaseFragment implements SurfaceHolder.Cal
         Paint painText = new Paint();  //set the look
         painText.setAntiAlias(true);
         painText.setColor(Color.WHITE);
-        painText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        painText.setTypeface(Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD_ITALIC));
         painText.setStyle(Paint.Style.FILL);
         painText.setShadowLayer(2.0f, 1.0f, 1.0f, Color.GRAY);
         painText.setTextSize(pictureHeight * .04629f);
