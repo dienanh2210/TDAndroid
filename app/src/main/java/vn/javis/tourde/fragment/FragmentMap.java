@@ -183,14 +183,14 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     private void retrieveFileFromUrl() {
-
         if (!TextUtils.isEmpty(mapUrl))
             new DownloadKmlFile(mapUrl ).execute();
         else {
 
             mMap.setMyLocationEnabled(true);
-            LatLng currentLatLng = new LatLng(mActivity.getLatitudeNetWork(),
-                    mActivity.getLongitudeNetWork());
+            double lat = mActivity.getLatitudeNetWork()==0?mActivity.getLatitude():mActivity.getLatitudeNetWork();
+            double longt = mActivity.getLongitudeNetWork()==0?mActivity.getLongitude():mActivity.getLongitudeNetWork();
+            LatLng currentLatLng = new LatLng(lat, longt);
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(currentLatLng,13
                     );
         mMap.moveCamera(update);}
@@ -218,8 +218,10 @@ public class FragmentMap extends BaseFragment implements OnMapReadyCallback {
             int width = getResources().getDisplayMetrics().widthPixels;
             int height = getResources().getDisplayMetrics().heightPixels;
             getMap().setMyLocationEnabled(true);
-            LatLng currentLatLng = new LatLng(mActivity.getLatitudeNetWork(),
-                    mActivity.getLatitudeNetWork());
+           double lat = mActivity.getLatitudeNetWork()==0?mActivity.getLatitude():mActivity.getLatitudeNetWork();
+           double longt = mActivity.getLongitudeNetWork()==0?mActivity.getLongitude():mActivity.getLongitudeNetWork();
+          //  LatLng currentLatLng = new LatLng(mActivity.getLatitudeNetWork(), mActivity.getLatitudeNetWork());
+            LatLng currentLatLng = new LatLng(lat,longt);
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(currentLatLng,12
             );
             mMap.moveCamera(update);

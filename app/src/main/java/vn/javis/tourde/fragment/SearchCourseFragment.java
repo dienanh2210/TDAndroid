@@ -117,6 +117,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         tv_prefecture.setText(prefecture);
         tv_searchtwo.setText(prefecturetext);
         edt_search.setText("");
+        savedSelect.clear();
         initData();
     }
 
@@ -256,7 +257,7 @@ void getInfoDistanceTypeElevation(){
 
     if (evelation.equals("1000m以上（坂多）")) {
         isOver = "1000";
-    } else if (evelation.equals("200m以下（坂少）"))
+    }  if (evelation.equals("200m以下（坂少）"))
         isLess = "200";
     typeValue.clear();
     if (listCourseType.contains("片道")) {

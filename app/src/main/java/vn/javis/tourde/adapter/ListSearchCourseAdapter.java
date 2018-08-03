@@ -68,6 +68,8 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
 
     boolean singleClick = "コース形態".equals(data.getTitle())?false:true;
+
+     //   boolean singleClick = "距離".equals(data.getTitle())?true:false;
         holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(),saveSelected,singleClick, new ContentSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {

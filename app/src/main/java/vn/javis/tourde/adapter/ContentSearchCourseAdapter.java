@@ -68,6 +68,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
                     }
                 } else {
                     // holder.onClick(view);
+                    holder.isClicked = false;
                     holder.imv_mark.setVisibility(View.INVISIBLE);
 
                 }
@@ -83,6 +84,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
                 }
             }
         }
+        else holder.nullContent=true;
     }
 
     @Override
@@ -95,7 +97,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
         ImageView imv_mark;
         RelativeLayout rlt_mark;
         boolean isClicked;
-
+        boolean nullContent;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_content = itemView.findViewById(R.id.tv_content);
@@ -107,6 +109,7 @@ public class ContentSearchCourseAdapter extends RecyclerView.Adapter<ContentSear
 
         @Override
         public void onClick(View v) {
+            if(nullContent) return;
             isClicked = !isClicked;
             if (!isClicked) {
                 imv_mark.setVisibility(View.INVISIBLE);

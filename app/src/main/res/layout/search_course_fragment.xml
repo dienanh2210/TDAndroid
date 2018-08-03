@@ -94,9 +94,8 @@
                         android:layout_marginStart="@dimen/_16sdp"
                         android:layout_toStartOf="@+id/im_choose"
                         android:hint="@string/search_course_select_area"
-                        android:singleLine="true"
                         android:ellipsize="end"
-                        android:maxLines="1"
+
                         android:textColorHint="@color/search_course_color_description_text"
                         android:textColor="@color/colorText"
                         android:textSize="@dimen/_12sdp"
@@ -187,7 +186,6 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_16sdp"
-                        android:singleLine="true"
                         android:ellipsize="end"
                         android:layout_toStartOf="@+id/im_more_searching"
                         android:hint="@string/search_course_more_searching_description"
