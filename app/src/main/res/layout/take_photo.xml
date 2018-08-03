@@ -81,7 +81,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/englishCourse"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold"/>
 
                     <include layout="@layout/divider_custome" />
 
@@ -90,7 +91,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -102,10 +104,11 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/englishTime"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold"/>
 
                     <include layout="@layout/divider_custome" />
 
@@ -114,7 +117,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -135,7 +139,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/Spot"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold"/>
 
                     <include layout="@layout/divider_custome" />
 
@@ -144,7 +149,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -156,10 +162,11 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/Distance"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold"/>
 
                     <include layout="@layout/divider_custome" />
 
@@ -168,7 +175,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/White"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
