@@ -33,9 +33,10 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
 
     private String txtElevation = "";
     private List<String> listCourseType = new ArrayList<>();
+    private List<String> listElevation = new ArrayList<>();
     private List<String> saveSelected = new ArrayList<>();
 
-    public ListSearchCourseAdapter(Context context, List<Data> dataList,List<String> saveSelected ,OnClickItem onClickItem) {
+    public ListSearchCourseAdapter(Context context, List<Data> dataList, List<String> saveSelected, OnClickItem onClickItem) {
         this.context = context;
         this.dataList = dataList;
         this.onClickItem = onClickItem;
@@ -54,6 +55,10 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         return listCourseType;
     }
 
+    public List<String> getListElevation() {
+        return listElevation;
+    }
+
     @Override
     @NonNull
     public ListSearchCourseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -67,10 +72,10 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
         holder.tv_header.setText(data.getTitle());
         holder.rcv_content.setLayoutManager(new GridLayoutManager(context, 2));
 
-    boolean singleClick = "コース形態".equals(data.getTitle())?false:true;
+        //  boolean singleClick = "コース形態".equals(data.getTitle())?false:true;
 
-     //   boolean singleClick = "距離".equals(data.getTitle())?true:false;
-        holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(),saveSelected,singleClick, new ContentSearchCourseAdapter.OnClickItem() {
+        boolean singleClick = "距離".equals(data.getTitle()) ? true : false;
+        holder.rcv_content.setAdapter(new ContentSearchCourseAdapter(data.getContent(), saveSelected, singleClick, new ContentSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(int position, boolean isPick, View view) {
 
@@ -87,10 +92,13 @@ public class ListSearchCourseAdapter extends RecyclerView.Adapter<ListSearchCour
                     }
                     if ("獲得標高".equals(data.getTitle())) //elevation
                     {
-                        if (!txtElevation.equals(s)) {
-                            txtElevation = s;
-                        } else txtElevation = "";
-                        onClickItem.onClick(mapContent);
+//                        if (!txtElevation.equals(s)) {
+//                            txtElevation = s;
+//                        } else txtElevation = "";
+//                        onClickItem.onClick(mapContent);
+                        if (!listElevation.contains(s)) {
+                            listElevation.add(s);
+                        } else listElevation.remove(s);
                     }
                     if ("コース形態".equals(data.getTitle())) //type
                     {

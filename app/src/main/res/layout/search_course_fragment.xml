@@ -239,18 +239,19 @@
                 <RelativeLayout
                     android:id="@+id/free_word_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_47sdp"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/white">
 
                     <EditText
                         android:id="@+id/edt_search"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/_47sdp"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_16sdp"
                         android:background="@android:color/transparent"
                         android:hint="@string/search_course_free_text_description"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
                         android:maxLines="@android:integer/config_mediumAnimTime"
                         android:textColor="@color/colorText"
                         android:textSize="@dimen/_12sdp"
