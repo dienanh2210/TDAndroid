@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +108,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
         mSearchCourseUtils = new SearchCourseUtils();
         initData();
-        Log.i("distance_search",distance.toString());
+        Log.i("distance_search", distance.toString());
         return view;
     }
 
@@ -164,7 +165,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     private void initData() {
         dataList = mSearchCourseUtils.createResearchCourseData();
         rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        listSearchCourseAdapter = new ListSearchCourseAdapter(getContext(), dataList,savedSelect, new ListSearchCourseAdapter.OnClickItem() {
+        listSearchCourseAdapter = new ListSearchCourseAdapter(getContext(), dataList, savedSelect, new ListSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(Map content) {
 
@@ -222,56 +223,67 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         seasonSelected = season;
         tagSelected = tag;
     }
-void getInfoDistanceTypeElevation(){
-    List<String> listCourseType = listSearchCourseAdapter.getListCourseType();
-    String evelation = listSearchCourseAdapter.getTxtElevation();
-    String dist = listSearchCourseAdapter.getTxtDistance();
-    savedSelect.clear();
-    for(String s:listCourseType){
-        savedSelect.add(s);
+
+    void getInfoDistanceTypeElevation() {
+        List<String> listCourseType = listSearchCourseAdapter.getListCourseType();
+        List<String> listElevetion = listSearchCourseAdapter.getListElevation();
+        String evelation = listSearchCourseAdapter.getTxtElevation();
+        String dist = listSearchCourseAdapter.getTxtDistance();
+        savedSelect.clear();
+        for (String s : listCourseType) {
+            savedSelect.add(s);
+        }
+        for (String s : listElevetion) {
+            savedSelect.add(s);
+        }
+       // savedSelect.add(evelation);
+        savedSelect.add(dist);
+
+
+        //check distance
+        switch (dist) {
+            case "〜20km":
+                distance = "1";
+                break;
+            case "〜50km":
+                distance = "2";
+                break;
+            case "〜100km":
+                distance = "3";
+                break;
+            case "100km〜":
+                distance = "4";
+                break;
+            default:
+                distance = "-1";
+                break;
+        }
+
+
+//        if (evelation.equals("1000m以上（坂多）")) {
+//            isOver = "1000";
+//        }
+//        if (evelation.equals("200m以下（坂少）"))
+//            isLess = "200";
+        if (listElevetion.contains("1000m以上（坂多）")) {
+            isOver = "1000";
+        }
+        if (listElevetion.contains("200m以下（坂少）"))
+            isLess = "200";
+        typeValue.clear();
+        if (listCourseType.contains("片道")) {
+            typeValue.add("1");
+        }
+        if (listCourseType.contains("往復")) {
+            typeValue.add("2");
+        }
+        if (listCourseType.contains("1周")) {
+            typeValue.add("3");
+
+            Log.i("SearchCourseAdapter48", typeValue.toString());
+        }
     }
 
-    savedSelect.add(evelation);
-    savedSelect.add(dist);
-
-
-    //check distance
-    switch (dist) {
-        case "〜20km":
-            distance = "1";
-            break;
-        case "〜50km":
-            distance = "2";
-            break;
-        case "〜100km":
-            distance = "3";
-            break;
-        case "100km〜":
-            distance = "4";
-            break;
-        default:
-            distance = "-1";
-            break;
-    }
-
-
-    if (evelation.equals("1000m以上（坂多）")) {
-        isOver = "1000";
-    }  if (evelation.equals("200m以下（坂少）"))
-        isLess = "200";
-    typeValue.clear();
-    if (listCourseType.contains("片道")) {
-        typeValue.add("1");
-    }
-    if (listCourseType.contains("往復")) {
-        typeValue.add("2");
-    }
-    if (listCourseType.contains("1周")) {
-        typeValue.add("3");
-
-        Log.i("SearchCourseAdapter48", typeValue.toString());
-    }
-}
     private void getAllContent() {
         HashMap<String, String> map = new HashMap<>();
 
@@ -291,16 +303,16 @@ void getInfoDistanceTypeElevation(){
         List<String> lstSeasonValue = new ArrayList<String>();
         List<String> lstTagValue = new ArrayList<String>();
 
-            String[] str = tv_searchtwo.getText().toString().trim().split(" 、");
-            for (int i = 0; i < str.length; i++) {
-                String s = mSearchCourseUtils.getIndexSeason(str[i]);
-                if (s != "-1") {
-                    lstSeasonValue.add(s);
-                } else {
-                    lstTagValue.add(str[i]);
-                }
-
+        String[] str = tv_searchtwo.getText().toString().trim().split(" 、");
+        for (int i = 0; i < str.length; i++) {
+            String s = mSearchCourseUtils.getIndexSeason(str[i]);
+            if (s != "-1") {
+                lstSeasonValue.add(s);
+            } else if (!TextUtils.isEmpty(str[i])) {
+                lstTagValue.add(str[i]);
             }
+
+        }
 
 
         map.put("limit", "10");
@@ -312,7 +324,8 @@ void getInfoDistanceTypeElevation(){
         if (isLess != "-1")
             map.put("less_elevation", isLess);
         for (int i = 0; i < lstPrefectureValue.size(); i++) {
-            map.put("prefecture[" + i + "]", lstPrefectureValue.get(i));
+            if (!TextUtils.isEmpty(lstPrefectureValue.get(i)) && !lstPrefectureValue.get(i).equals("0"))
+                map.put("prefecture[" + i + "]", lstPrefectureValue.get(i));
         }
         for (int i = 0; i < typeValue.size(); i++) {
             map.put("course_type[" + i + "]", typeValue.get(i));
