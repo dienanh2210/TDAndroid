@@ -43,6 +43,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.adapter.ListSpotDetailCircleAdapter;
 
+import vn.javis.tourde.model.Location;
 import vn.javis.tourde.model.SaveCourseRunning;
 import vn.javis.tourde.model.Spot;
 import vn.javis.tourde.utils.ClassToJson;
@@ -77,8 +78,8 @@ public class TabCourseFragment extends BaseFragment {
     @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
     @BindView(R.id.img_map)
-
     ImageView imgRoute;
+    String route_url;
     int mCourseID;
     private GoogleMap googleMap;
     ListSpotDetailCircleAdapter listSpotAdapter;
@@ -113,6 +114,7 @@ public class TabCourseFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mActivity = (CourseListActivity) getActivity();
         super.onCreate(savedInstanceState);
+        route_url=mActivity.getRoute_url();
     }
 
     @Override
@@ -254,22 +256,39 @@ public class TabCourseFragment extends BaseFragment {
             public void onClick(View v) {
              //   openGoogleMapAtStartSpot();
                 try {
+                    float cLat=0,cLong =0;
                     String uri1 = "";
+                    int num =0;
                     if(listSpot.size()>0) {
                         for (Spot spot : listSpot) {
 //                            float latitude = Float.parseFloat( spot.getLatitude() );
 //                            float longtitude = Float.parseFloat( spot.getLongitude() );
                             float latitude = Float.parseFloat( spot.getLatitude() );
                             float longtitude = Float.parseFloat( spot.getLongitude() );
-                            uri1 += "/" + latitude + "," + longtitude;
+                            if(cLat != latitude && cLong!=longtitude) {
+                                uri1 += "/" + latitude + "," + longtitude;
+                                cLat = latitude;
+                                cLong = longtitude;
+                                num++;
+                            }
 //                        uri += "/" +  mActivity.getLatitudeNetWork() + "," + mActivity.getLongitudeNetWork();
                             Log.i( "URI", "https://www.google.com/maps/dir" + uri1 );
 
                         }
                     }
-                    Intent intent = new Intent( android.content.Intent.ACTION_VIEW, Uri.parse( "https://www.google.com/maps/dir" + uri1 ) );
-                    intent.setPackage( "com.google.android.apps.maps" );
-                    startActivity( intent );
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/dir" + uri1));
+                    intent.setPackage("com.google.android.apps.maps");
+                    startActivity(intent);
+//                    if(num>1) {
+//                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/dir" + uri1));
+//                        intent.setPackage("com.google.android.apps.maps");
+//                        startActivity(intent);
+//                    }
+//                    else {
+//                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query="+ cLat+","+cLong));
+//                        intent.setPackage("com.google.android.apps.maps");
+//                        startActivity(intent);
+//                    }
                 } catch (ActivityNotFoundException ex) {
                     //   Toast.makeText( getContext(), "Please install a maps application", Toast.LENGTH_LONG ).show();
                 }
@@ -281,7 +300,10 @@ public class TabCourseFragment extends BaseFragment {
             public void onClick(View v) {
                 String packageName = "com.navitime.local.navitime";
                 // String packageName = "NAVITIME: 地図・ルート検索";
-                launchNewActivity(getContext(), packageName);
+                //launchNewActivity(getContext(), packageName);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(route_url));
+                startActivity(i);
             }
         });
 

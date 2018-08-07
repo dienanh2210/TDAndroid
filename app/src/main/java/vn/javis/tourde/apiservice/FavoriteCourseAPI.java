@@ -36,6 +36,7 @@ public class FavoriteCourseAPI {
     public static void getListFavoriteCourse(String token, ServiceCallback callback) {
         HashMap<String, String> map = new HashMap<>();
         map.put("token", token);
+        map.put("limit","1000");
         TourDeService.getWithAuth(ApiEndpoint.GET_FAVORITE_COURSE_APP, map, callback);
     }
 

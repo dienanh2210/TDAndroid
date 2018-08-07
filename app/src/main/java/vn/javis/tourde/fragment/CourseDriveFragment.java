@@ -64,6 +64,7 @@ public class CourseDriveFragment extends BaseFragment {
     RelativeLayout rlt_googlemap;
     @BindView(R.id.rlt_Navitime)
     RelativeLayout rlt_Navitime;
+    String route_url;
     int mCourseID;
     double startLongtitude;
     double startLatitude;
@@ -79,6 +80,7 @@ public class CourseDriveFragment extends BaseFragment {
         mAcitivity = (CourseListActivity) getActivity();
         mCourseID = mAcitivity.getmCourseID();
         mAcitivity.turnOnGPS();
+        route_url=mAcitivity.getRoute_url();
         showProgressDialog();
         getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
@@ -193,7 +195,10 @@ public class CourseDriveFragment extends BaseFragment {
             public void onClick(View v) {
                 String packageName = "com.navitime.local.navitime";
                 // String packageName = "NAVITIME: 地図・ルート検索";
-                launchNewActivity(getContext(), packageName);
+                //launchNewActivity(getContext(), packageName);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(route_url));
+                startActivity(i);
             }
         });
 

@@ -116,6 +116,7 @@ public class CourseListActivity extends BaseActivity {
     public static final String IS_FIRST_SPOT ="is_first_spot";
     public static final String AVARAGE_SPEED = "avarage_speed";
     public static final String TIME_FINISH = "time_finish";
+    public static final String IS_CHECKING_SPOT = "is_checking_spot";
 
     public static final String SPOT_ID = "SPOT_ID";
     private static final int REQUEST_PERMISSIONS = 50;
@@ -128,6 +129,7 @@ public class CourseListActivity extends BaseActivity {
     private int mCourseID;
     private int mSpotID;
     private String mapUrl;
+    private String route_url;
     private String timeFinish, distanceSpot;
 
     public int getmSpotID() {
@@ -141,6 +143,7 @@ public class CourseListActivity extends BaseActivity {
     SharedPreferences.Editor medit;
     double latitude = 0, longitude = 0;
     double latitudeNetWork = 0, longitudeNetWork = 0;
+    boolean isCheckingSpot=false;
     Geocoder geocoder;
     Bundle dataBundle;
 
@@ -198,7 +201,13 @@ public class CourseListActivity extends BaseActivity {
     public void setMapUrl(String mapUrl) {
         this.mapUrl = mapUrl;
     }
+    public String getRoute_url() {
+        return route_url;
+    }
 
+    public void setRoute_url(String route_url) {
+        this.route_url = route_url;
+    }
     public void setmCourseID(int mCourseID) {
         this.mCourseID = mCourseID;
     }
@@ -286,6 +295,8 @@ public class CourseListActivity extends BaseActivity {
         mCourseID = id;
         dataBundle.putInt(COURSE_DETAIL_ID, mCourseID);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
+        isCheckingSpot=false;
+        dataBundle.putBoolean(IS_CHECKING_SPOT, isCheckingSpot);
 //        if (mCourseDetailFragment == null)
         mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false);
@@ -295,6 +306,8 @@ public class CourseListActivity extends BaseActivity {
         mCourseID = courseId;
         dataBundle.putInt(COURSE_DETAIL_ID, courseId);
         dataBundle.putInt(COURSE_DETAIL_INDEX_TAB, 0);
+        isCheckingSpot=false;
+        dataBundle.putBoolean(IS_CHECKING_SPOT, isCheckingSpot);
 //        if (mCourseDetailFragment == null)
         mCourseDetailFragment = new CourseDetailFragment();
         openPage(mCourseDetailFragment, true, false, true);
@@ -372,7 +385,16 @@ public class CourseListActivity extends BaseActivity {
         courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
         openPage(courseDetailSpotImagesFragment, true, false);
     }
+    public void showSpotImages(int spotID,boolean isCheckingSpot) {
+        mSpotID = spotID;
+        this.isCheckingSpot =isCheckingSpot;
+        dataBundle.putBoolean(IS_CHECKING_SPOT, isCheckingSpot);
+        dataBundle.putInt(SPOT_ID, mSpotID);
 
+//        if (courseDetailSpotImagesFragment == null)
+        courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
+        openPage(courseDetailSpotImagesFragment, true, false);
+    }
     public void showSpotImages(int spotID, String tag) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
@@ -380,7 +402,13 @@ public class CourseListActivity extends BaseActivity {
         courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
         openPage(courseDetailSpotImagesFragment, tag, true, false);
     }
+    public void showCheckPointFragment() {
 
+        isCheckingSpot=false;
+        dataBundle.putBoolean(IS_CHECKING_SPOT, isCheckingSpot);
+        checkPointFragment = new CheckPointFragment();
+        openPage(checkPointFragment, true, false);
+    }
     public void showCheckPointFragment(int mSpotID, String imgUrl, String title, String time, String distance, boolean showSecondAnim,boolean isFirstSpot) {
         this.mSpotID = mSpotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
@@ -397,9 +425,11 @@ public class CourseListActivity extends BaseActivity {
         openPage(checkPointFragment, true, false);
     }
 
-    public void showSpotFacilities() {
+    public void showSpotFacilities(boolean isCheckingSpot) {
 //        if (spotFacilitiesFragment == null)
+        this.isCheckingSpot =isCheckingSpot;
         spotFacilitiesFragment = new SpotFacilitiesFragment();
+        dataBundle.putBoolean(IS_CHECKING_SPOT, isCheckingSpot);
         openPage(spotFacilitiesFragment, true, false);
     }
 
@@ -517,15 +547,29 @@ public class CourseListActivity extends BaseActivity {
             popBackStack(CourseDetailFragment.class.getSimpleName());
             return;
         } else if (fragment instanceof SpotFacilitiesFragment) {
-            typeBackPress = 3;
-            showSpotImages(mSpotID);
+            if(isCheckingSpot)
+            {
+                showCheckPointFragment();
+            }
+            else {
+                typeBackPress = 3;
+                showSpotImages(mSpotID);
+            }
             return;
         } else if (fragment instanceof CourseDetailSpotImagesFragment) {
-            popBackStack(CourseDetailFragment.class.getSimpleName());
-            return;
+            if(isCheckingSpot) {
+                // popBackStack(CourseDetailFragment.class.getSimpleName());
+                showCheckPointFragment();
+                return;
+            }
+
         } else if (fragment instanceof CountDownTimesFragment) {
             return;
-        } else if (fragment instanceof FragmentTabLayoutRunning) {
+        }
+        else if (fragment instanceof CheckPointFragment) {
+            showFragmentTabLayoutRunning();
+            return;
+        }else if (fragment instanceof FragmentTabLayoutRunning) {
             popBackStack(CourseDetailFragment.class.getSimpleName());
             return;
 

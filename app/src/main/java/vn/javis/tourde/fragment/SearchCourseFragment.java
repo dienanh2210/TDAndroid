@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,11 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     private CourseListActivity mActivity;
     ListSearchCourseAdapter listSearchCourseAdapter;
     List<String> listContent = new ArrayList<>();
+    String distance = "-1";
+    String isOver = "-1";
+    String isLess = "-1";
+    List<String> typeValue = new ArrayList<>();
+    List<String> savedSelect = new ArrayList<>(); //distance, elevation, type
 
     private SearchCourseUtils mSearchCourseUtils;
 
@@ -102,6 +108,7 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
 
         mSearchCourseUtils = new SearchCourseUtils();
         initData();
+        Log.i("distance_search", distance.toString());
         return view;
     }
 
@@ -111,12 +118,13 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         tv_prefecture.setText(prefecture);
         tv_searchtwo.setText(prefecturetext);
         edt_search.setText("");
+        savedSelect.clear();
         initData();
     }
 
     @Override
     public void onClick(View v) {
-
+        getInfoDistanceTypeElevation();
         boolean gender = false;
         switch (v.getId()) {
             case R.id.rlt_prefecture:
@@ -157,10 +165,9 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
     private void initData() {
         dataList = mSearchCourseUtils.createResearchCourseData();
         rcv_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        listSearchCourseAdapter = new ListSearchCourseAdapter(getContext(), dataList, new ListSearchCourseAdapter.OnClickItem() {
+        listSearchCourseAdapter = new ListSearchCourseAdapter(getContext(), dataList, savedSelect, new ListSearchCourseAdapter.OnClickItem() {
             @Override
             public void onClick(Map content) {
-
 
             }
         });
@@ -217,17 +224,22 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         tagSelected = tag;
     }
 
-    private void getAllContent() {
-
-        String listCourseType = listSearchCourseAdapter.getListCourseType().toString();
+    void getInfoDistanceTypeElevation() {
+        List<String> listCourseType = listSearchCourseAdapter.getListCourseType();
+        List<String> listElevetion = listSearchCourseAdapter.getListElevation();
         String evelation = listSearchCourseAdapter.getTxtElevation();
         String dist = listSearchCourseAdapter.getTxtDistance();
-        String distance = "-1";
-        String isOver = "-1";
-        String isLess = "-1";
-        String strTag = "-1";
-        String strSeason = "-1";
-        HashMap<String, String> map = new HashMap<>();
+        savedSelect.clear();
+        for (String s : listCourseType) {
+            savedSelect.add(s);
+        }
+        for (String s : listElevetion) {
+            savedSelect.add(s);
+        }
+       // savedSelect.add(evelation);
+        savedSelect.add(dist);
+
+
         //check distance
         switch (dist) {
             case "〜20km":
@@ -248,13 +260,17 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         }
 
 
-        if (evelation.equals("1000m以上（坂多）")) {
+//        if (evelation.equals("1000m以上（坂多）")) {
+//            isOver = "1000";
+//        }
+//        if (evelation.equals("200m以下（坂少）"))
+//            isLess = "200";
+        if (listElevetion.contains("1000m以上（坂多）")) {
             isOver = "1000";
-        } else if (evelation.equals("200m以下（坂少）"))
+        }
+        if (listElevetion.contains("200m以下（坂少）"))
             isLess = "200";
-
-        List<String> type = new ArrayList<>();
-        List<String> typeValue = new ArrayList<>();
+        typeValue.clear();
         if (listCourseType.contains("片道")) {
             typeValue.add("1");
         }
@@ -263,13 +279,20 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         }
         if (listCourseType.contains("1周")) {
             typeValue.add("3");
-        }
 
+            Log.i("SearchCourseAdapter48", typeValue.toString());
+        }
+    }
+
+    private void getAllContent() {
+        HashMap<String, String> map = new HashMap<>();
+
+        getInfoDistanceTypeElevation();
 
         List<String> lstPrefectureValue = new ArrayList<String>();
         if (tv_prefecture.getText().toString() != "エリアを選択") {
 
-            String[] str = tv_prefecture.getText().toString().trim().split(",");
+            String[] str = tv_prefecture.getText().toString().trim().split(" 、");
 
             String preStr = "";
             for (int i = 0; i < str.length; i++) {
@@ -279,23 +302,19 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         }
         List<String> lstSeasonValue = new ArrayList<String>();
         List<String> lstTagValue = new ArrayList<String>();
-        if (tv_searchtwo.getText().toString() != prefecturetext) {
-            String[] str = tv_searchtwo.getText().toString().trim().split(",");
-            for (int i = 0; i < str.length; i++) {
-                String s = mSearchCourseUtils.getIndexSeason(str[i]);
-                if (s != "-1") {
-                    lstSeasonValue.add(s);
-                } else {
-                    lstTagValue.add(str[i]);
-                }
 
+        String[] str = tv_searchtwo.getText().toString().trim().split(" 、");
+        for (int i = 0; i < str.length; i++) {
+            String s = mSearchCourseUtils.getIndexSeason(str[i]);
+            if (s != "-1") {
+                lstSeasonValue.add(s);
+            } else if (!TextUtils.isEmpty(str[i])) {
+                lstTagValue.add(str[i]);
             }
-        }
-
-
-        for (int i = 0; i < type.size(); i++) {
 
         }
+
+
         map.put("limit", "10");
 
         if (distance != "-1")
@@ -305,7 +324,8 @@ public class SearchCourseFragment extends Fragment implements View.OnClickListen
         if (isLess != "-1")
             map.put("less_elevation", isLess);
         for (int i = 0; i < lstPrefectureValue.size(); i++) {
-            map.put("prefecture[" + i + "]", lstPrefectureValue.get(i));
+            if (!TextUtils.isEmpty(lstPrefectureValue.get(i)) && !lstPrefectureValue.get(i).equals("0"))
+                map.put("prefecture[" + i + "]", lstPrefectureValue.get(i));
         }
         for (int i = 0; i < typeValue.size(); i++) {
             map.put("course_type[" + i + "]", typeValue.get(i));

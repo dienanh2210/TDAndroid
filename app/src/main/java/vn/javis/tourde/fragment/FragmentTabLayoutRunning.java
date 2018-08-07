@@ -121,7 +121,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
     public boolean isTimeSaved;
     boolean isPausing;
     private int timeWaitForNext = 300;
-
+    String route_url;
     String token = SharedPreferencesUtils.getInstance(getContext()).getStringValue(LoginUtils.TOKEN);
     Date lastTimeCheckin;
 
@@ -174,6 +174,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
 
     @SuppressLint("SetTextI18n")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        view.setKeepScreenOn(true);
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
@@ -226,7 +227,9 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                 if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
                     courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
+                route_url = mCourseDetail.getmCourseData().getRouteUrl();
                 mActivity.setMapUrl(mCourseDetail.getmCourseData().getKmlFile());
+                mActivity.setRoute_url(mCourseDetail.getmCourseData().getRouteUrl());
 //                if(fragmentMap !=null)
 //                {
 //                    fragmentMap.onResume();
