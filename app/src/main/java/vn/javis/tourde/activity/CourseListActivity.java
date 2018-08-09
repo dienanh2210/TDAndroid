@@ -381,6 +381,7 @@ public class CourseListActivity extends BaseActivity {
     public void showSpotImages(int spotID) {
         mSpotID = spotID;
         dataBundle.putInt(SPOT_ID, mSpotID);
+        typeBackPress = 3;
 //        if (courseDetailSpotImagesFragment == null)
         courseDetailSpotImagesFragment = new CourseDetailSpotImagesFragment();
         openPage(courseDetailSpotImagesFragment, true, false);
