@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,15 +28,14 @@ import android.widget.TextView;
 import com.android.volley.Response;
 
 import com.android.volley.VolleyError;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -41,9 +43,7 @@ import vn.javis.tourde.R;
 import vn.javis.tourde.activity.BasicInfoActivity;
 import vn.javis.tourde.activity.CourseListActivity;
 import vn.javis.tourde.activity.CropperImageActivity;
-import vn.javis.tourde.activity.LoginSNSActivity;
 import vn.javis.tourde.activity.RegisterActivity;
-import vn.javis.tourde.adapter.ListRegisterAdapter;
 import vn.javis.tourde.apiservice.LoginAPI;
 import vn.javis.tourde.model.Account;
 import vn.javis.tourde.services.ServiceCallback;
@@ -53,6 +53,7 @@ import vn.javis.tourde.utils.ListArea;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.PicassoUtil;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.ResizeImage;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 import vn.javis.tourde.view.CircleTransform;
 
@@ -210,7 +211,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 tv_age.setText(age + "代");
                 prefecture = jsonObject.getInt("area");
 
-                if(prefecture>0)tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
+                if (prefecture > 0) tv_prefecture.setText(ListArea.getAreaName(prefecture - 1));
                 if (!TextUtils.isEmpty(jsonObject.getString("image")))
                     PicassoUtil.getSharedInstance(getContext()).load(jsonObject.getString("image")).resize(0, 200).onlyScaleDown().transform(new CircleTransform()).into(select_userIcon);
                 hideProgressDialog();
@@ -391,20 +392,32 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         });
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-            //        bitmapIcon = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+//            try {
+//               Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+//                Log.i("bitmapIcon", "" + bitmap.getWidth() + "---" + bitmap.getHeight());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
             File file = new File(getPath(selectedImage));
             Log.i("File size: ", "size" + file.length() + getPath(selectedImage));
-            
+
             if (file.length() < FILE_SIZE_8MB /*&& bitmapIcon != null*/) {
 //                    select_userIcon.setImageBitmap(bitmapIcon);
+                String filePath = ResizeImage.resizeFile(getContext(), getPath(selectedImage));
+//                BitmapFactory.Options options = new BitmapFactory.Options();
+//                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//                Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+//                Log.i("bitmapEdit", "" + bitmap.getWidth() + "---" + bitmap.getHeight());
+                Log.i("path", "onActivityResult: " + filePath);
                 Intent intent = new Intent(getActivity(), CropperImageActivity.class);
-                intent.putExtra(Constant.KEY_IMAGE_URI, selectedImage);
+                intent.putExtra(Constant.KEY_IMAGE_URI, Uri.fromFile(new File(filePath)));
                 getActivity().startActivityForResult(intent, CROPPER_IMAGE);
             } else
                 ProcessDialog.showDialogOk(getContext(), "", "容量が大きすぎるため投稿できません。");
