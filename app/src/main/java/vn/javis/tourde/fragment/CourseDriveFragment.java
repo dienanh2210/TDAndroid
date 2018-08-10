@@ -54,9 +54,11 @@ public class CourseDriveFragment extends BaseFragment {
     @BindView(R.id.btn_back_drive)
     ImageButton btnBack;
     @BindView(R.id.btn_drive)
+
     Button btn_drive;
-    @BindView(R.id.btn_show_map)
-    Button btnMapWay;
+
+    @BindView(R.id.btn_course_detail)
+    Button btnCourseDetail;
     CourseListActivity mAcitivity;
     @BindView(R.id.title_detail)
     TextView title_detail;
@@ -69,6 +71,7 @@ public class CourseDriveFragment extends BaseFragment {
     double startLongtitude;
     double startLatitude;
     public boolean isFromMain = true;
+
     public static CourseDriveFragment newInstance(boolean isFromMain) {
         CourseDriveFragment fragment = new CourseDriveFragment();
         fragment.isFromMain = isFromMain;
@@ -80,7 +83,7 @@ public class CourseDriveFragment extends BaseFragment {
         mAcitivity = (CourseListActivity) getActivity();
         mCourseID = mAcitivity.getmCourseID();
         mAcitivity.turnOnGPS();
-        route_url=mAcitivity.getRoute_url();
+        route_url = mAcitivity.getRoute_url();
         showProgressDialog();
         getStartPosition();
         GetCourseDataAPI.getCourseData(mAcitivity.getmCourseID(), new ServiceCallback() {
@@ -116,7 +119,7 @@ public class CourseDriveFragment extends BaseFragment {
                     double distance = SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(latitude, longtitude));
                     double distance2 = SphericalUtil.computeDistanceBetween(new LatLng(startLatitude, startLongtitude), new LatLng(mAcitivity.getLatitudeNetWork(), mAcitivity.getLongitudeNetWork()));
 
-                    Log.i("GPSStart", "" + distance + "-"+distance2+"-"+ latitude + "-" + longtitude + "--" + startLatitude + "-" + startLongtitude);
+                    Log.i("GPSStart", "" + distance + "-" + distance2 + "-" + latitude + "-" + longtitude + "--" + startLatitude + "-" + startLongtitude);
                     if (distance <= GoogleService.DISTANCE_ALLOW || distance2 <= GoogleService.DISTANCE_ALLOW) {
                         ProcessDialog.showDialogConfirm(getContext(), "", "走行開始しますか？", new ProcessDialog.OnActionDialogClickOk() {
                             @Override
@@ -154,24 +157,29 @@ public class CourseDriveFragment extends BaseFragment {
                 //mAcitivity.onBackPressed();
 
 
-                    String uri = String.format( Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&dirflg=d", startLatitude, startLongtitude, "");
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                    intent.setPackage("com.google.android.apps.maps");
+                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)&dirflg=d", startLatitude, startLongtitude, "");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                startActivity(intent);
+                try {
                     startActivity(intent);
+                } catch (ActivityNotFoundException ex) {
                     try {
-                        startActivity(intent);
-                    } catch (ActivityNotFoundException ex) {
-                        try {
-                            Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                            startActivity(unrestrictedIntent);
-                        } catch (ActivityNotFoundException innerEx) {
-                            //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
-                        }
+                        Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        startActivity(unrestrictedIntent);
+                    } catch (ActivityNotFoundException innerEx) {
+                        //Toast.makeText(getContext(), "Please install a maps application", Toast.LENGTH_LONG).show();
                     }
+                }
 
             }
         });
-
+        btnCourseDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAcitivity.onBackPressed();
+            }
+        });
         rlt_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,6 +211,7 @@ public class CourseDriveFragment extends BaseFragment {
         });
 
     }
+
     private void getStartPosition() {
         GetCourseDataAPI.getCourseData(mCourseID, new ServiceCallback() {
             @Override
