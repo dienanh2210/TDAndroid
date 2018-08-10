@@ -459,7 +459,7 @@ public class FragmentTabLayoutRunning extends BaseFragment {
                 }
 
             } else if (spotId == lastSpotId) {
-                final float speed = (float) getRealCourseDistance() / ((float) time / 3600000);
+                final float speed =  courseDistance / ((float) time / 3600000);
                 final String finishTime = getTimeFormat(time);
 //                preferencesUtils.setLongValue(KEY_SHARED_BASETIME, 0);
 //                isSaveTime = false;

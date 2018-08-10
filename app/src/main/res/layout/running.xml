@@ -71,8 +71,8 @@
 
         <ImageView
             android:id="@+id/icon_clock"
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_15sdp"
             android:src="@drawable/icon_clock" />
@@ -85,7 +85,7 @@
             android:gravity="center"
             android:text="@string/timing"
             android:textColor="@color/Black"
-            android:textSize="@dimen/_32sdp"
+            android:textSize="@dimen/_30sdp"
             android:textStyle="bold"
             android:format="00:00:00">
 

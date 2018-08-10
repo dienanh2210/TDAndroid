@@ -265,12 +265,12 @@ public class TabCourseFragment extends BaseFragment {
 //                            float longtitude = Float.parseFloat( spot.getLongitude() );
                             float latitude = Float.parseFloat( spot.getLatitude() );
                             float longtitude = Float.parseFloat( spot.getLongitude() );
-                            if(cLat != latitude && cLong!=longtitude) {
+                          //  if(cLat != latitude && cLong!=longtitude) {
                                 uri1 += "/" + latitude + "," + longtitude;
                                 cLat = latitude;
                                 cLong = longtitude;
                                 num++;
-                            }
+                        //    }
 //                        uri += "/" +  mActivity.getLatitudeNetWork() + "," + mActivity.getLongitudeNetWork();
                             Log.i( "URI", "https://www.google.com/maps/dir" + uri1 );
 
