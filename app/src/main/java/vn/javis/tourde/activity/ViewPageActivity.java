@@ -16,8 +16,11 @@ import android.widget.LinearLayout;
 import vn.javis.tourde.R;
 import vn.javis.tourde.apiservice.ApplicationVersionAPI;
 import vn.javis.tourde.apiservice.MaintenanceAPI;
+import vn.javis.tourde.fragment.tutorial.EightTutorial;
 import vn.javis.tourde.fragment.tutorial.FireFragment;
 import vn.javis.tourde.fragment.tutorial.FourFragment;
+import vn.javis.tourde.fragment.tutorial.NightTutorial;
+import vn.javis.tourde.fragment.tutorial.SevenTutorial;
 import vn.javis.tourde.fragment.tutorial.SixFragment;
 import vn.javis.tourde.fragment.tutorial.TwoFragment;
 import vn.javis.tourde.fragment.tutorial.OneFragment;
@@ -110,8 +113,11 @@ public class ViewPageActivity extends AppCompatActivity {
         adapter.addFragment(new FourFragment(), "four");
         adapter.addFragment(new FireFragment(), "fire");
         adapter.addFragment(new SixFragment(), "six");
+        adapter.addFragment(new SevenTutorial(), "seven");
+        adapter.addFragment(new EightTutorial(), "eight");
+        adapter.addFragment(new NightTutorial(), "night");
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(6);
+        viewPager.setOffscreenPageLimit(9);
     }
     @Override
     protected void onResume() {
