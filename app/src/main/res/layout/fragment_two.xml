@@ -16,7 +16,7 @@
             android:scaleType="fitCenter"
             android:layout_marginBottom="@dimen/_15sdp"
             android:adjustViewBounds="true"
-            android:src="@drawable/image_02" />
+            android:src="@drawable/_002_htu" />
 
 
     </LinearLayout>
