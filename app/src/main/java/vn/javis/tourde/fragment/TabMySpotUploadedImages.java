@@ -2,7 +2,9 @@ package vn.javis.tourde.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -37,8 +39,10 @@ import vn.javis.tourde.apiservice.SpotDataAPI;
 import vn.javis.tourde.model.RunningCourse;
 import vn.javis.tourde.services.ServiceCallback;
 import vn.javis.tourde.services.ServiceResult;
+import vn.javis.tourde.utils.Constant;
 import vn.javis.tourde.utils.LoginUtils;
 import vn.javis.tourde.utils.ProcessDialog;
+import vn.javis.tourde.utils.ResizeImage;
 import vn.javis.tourde.utils.SharedPreferencesUtils;
 
 import static vn.javis.tourde.fragment.RegisterFragment.FILE_SIZE_8MB;
@@ -125,7 +129,16 @@ public class TabMySpotUploadedImages extends BaseFragment {
 
     Bitmap bitmapIcon;
     private static final int GET_FROM_GALLERY = 1;
-
+    private String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s = cursor.getString(column_index);
+        cursor.close();
+        return s;
+    }
     private void uploadMyImage(int requestCode, int resultCode, Intent data) {
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
@@ -133,14 +146,15 @@ public class TabMySpotUploadedImages extends BaseFragment {
                 bitmapIcon = MediaStore.Images.Media.getBitmap(mActivity.getContentResolver(), selectedImage);
                 File file = new File("android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI");
                 boolean isLarge = false;
-
-                Log.i("File size: ", "" + file.length());
                 if (file.length() > FILE_SIZE_8MB) {
                     isLarge = true;
                 }
                 if (!isLarge) {
                     //upload bitmap to server
-                   showProgressDialog();
+                    showProgressDialog();
+                    String filePath = ResizeImage.resizeFile(getContext(), getPath(selectedImage));
+                    Intent intent = new Intent(getActivity(), TabMySpotUploadedImages.class);
+                    intent.putExtra(Constant.KEY_IMAGE_URI, Uri.fromFile(new File(filePath)));
                     PostImageAPI.postImage(mActivity, bitmapIcon, new ServiceCallback() {
                         @Override
                         public void onSuccess(ServiceResult resultCode, Object response) throws JSONException {

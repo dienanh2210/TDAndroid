@@ -112,6 +112,8 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
                 CourseDetail mCourseDetail = new CourseDetail((JSONObject) response);
                 list_spot = mCourseDetail.getSpot();
                 route_url = mCourseDetail.getmCourseData().getRouteUrl();
+                if (!mCourseDetail.getmCourseData().getDistance().isEmpty())
+                    courseDistance = Float.parseFloat(mCourseDetail.getmCourseData().getDistance());
                 setupViewPager();
             }
 
@@ -201,9 +203,9 @@ public class FragmentTabLayoutConfirmPage extends BaseFragment {
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        fragmentMap =  FragmentMap.instance(list_spot);
+        fragmentMap = FragmentMap.instance(list_spot);
         adapter.addFragment(fragmentMap, "MAP");
-        fragmentLog = FragmentLog.intance(saveCourseRunning,courseDistance);
+        fragmentLog = FragmentLog.intance(saveCourseRunning, courseDistance);
         adapter.addFragment(fragmentLog, "ログ");
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);

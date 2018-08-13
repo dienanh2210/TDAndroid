@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:src="@drawable/image_01" />
+            android:src="@drawable/_001_htu" />
 
 
     </LinearLayout>

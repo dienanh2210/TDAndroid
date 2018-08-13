@@ -82,7 +82,8 @@
                 <RelativeLayout
                     android:id="@+id/rlt_prefecture"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_47sdp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_47sdp"
                     android:background="@android:color/white">
 
                     <TextView
@@ -162,7 +163,8 @@
                 <RelativeLayout
                     android:id="@+id/more_searching_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_47sdp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_47sdp"
                     android:background="@android:color/white">
                     <TextView
                         android:id="@+id/tv_searchtwo"
